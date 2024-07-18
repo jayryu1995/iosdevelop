@@ -1,0 +1,108 @@
+/* 
+  Localizable.strings
+  ByahtColor
+
+  Created by jaem on 2023/07/14.
+  
+*/
+
+// MainViewController
+"success_copy" = "Sao chép thành công.";
+"access_str1" = "Yêu cầu quyền truy cập";
+"access_str2" = "Sử dụng chức năng này cần quyền truy cập trong cài đặt.";
+"access_str3" = "Đi tới cài đặt";
+"access_str4" = "Huỷ";
+"update_str" = "Cập nhật";
+"update_str1" = "Yêu cầu cập nhật";
+"update_str2" = "Bạn không thể tải phiên bản trong App store.";
+"image_str" = "Hình ảnh";
+"camera_str" = "Camera";
+
+// SelectColorView
+"spring" = "Xuân";
+"info_spring" = "MÙA XUÂN";
+"info_text" = "Tìm hiểu về tông da";
+"info_summer" = "MÙA HÈ";
+"info_fall" = "MÙA THU";
+"info_winter" = "MÙA ĐÔNG";
+
+"warm_cool" = "Tông ấm / Tông lạnh";
+"summer" = "Hè";
+"fall" = "Thu";
+"winter" = "Đông";
+"spring_1" = "Pastel";
+"spring_2" = "Tràn đầy sức sống";
+"summer_1" = "Mát mẻ";
+"summer_2" = "Sặc sỡ";
+"fall_1" = "Điềm đạm";
+"fall_2" = "Ấm áp";
+"winter_1" = "Lạnh";
+"winter_2" = "Đơn giản";
+
+//CameraView
+"multicolor" = "Bạn đã chọn đủ 4 màu";
+"save_str" = "Lưu thành công";
+
+// FilterViewController //
+"coolTon_str" = "Tông lạnh";
+"warmTon_str" = "Tông ấm";
+"original_str" = "Ảnh gốc";
+"filter_str" = "Hiệu ứng";
+"not_find_str" = "Không thể nhận dạng được khuôn mặt. Vui lòng chọn ảnh khác";
+
+// LipFilterView //
+"warning_str" = "Kết quả sau đây có thể cho ra những kết quả khác nhau tuỳ thuộc vào các yếu tố xung quanh như ánh sáng,... . Nên chỉ sử dụng để tham khảo.";
+
+// ChromaViewController //
+"Brightness_str" = "Độ sáng"; //명도
+"Saturation_str" = "Độ bão hoà"; //채도
+"ChromaTitle_str" = "Độ sáng /\nĐộ bão hoà";
+
+// ColorTestController2 //
+"label_str1" = "1. Dịu dàng,\n nữ tính";
+"label_str2"= "2. Hiện đại,\n cá tính, sắc xảo";
+"label_str3"= "3. Trẻ hơn so \n với tuổi";
+"label_str4"= "4. Trưởng thành,\n đáng tin cậy";
+"title_str1" = "MÀU NÀO DƯỚI ĐÂY \n GẦN VỚI MÀU TÓC CỦA BẠN NHẤT?";
+"title_str2" = "MÀU NÀO DƯỚI ĐÂY \n GẦN VỚI MÀU CON NGƯƠI CỦA BẠN NHẤT?";
+"title_str3" = "MÀU NÀO DƯỚI ĐÂY \n GẦN VỚI MÀU DA CỦA BẠN NHẤT?";
+"title_str4" = "MÀU NÀO DƯỚI ĐÂY \n GẦN VỚI MÀU MÔI CỦA BẠN NHẤT? ";
+"title_str5" = "LỜI KHEN BẠN ĐƯỢC NGHE \n TỪ NHỮNG NGƯỜI XUNG QUANH?";
+"content_str" = "Bạn nên sử dụng hình ảnh như sau\nđể đạt được hiệu quả tốt nhất.\n
+1. Ảnh có kích thước 3*4 hoặc 16*9.\n
+2. Khuôn mặt có vị trí nằm chính giữa ảnh.";
+
+
+// SelectColorController
+"ColorTestController_str" = "Xác định /\nPesonal Color";
+
+
+// remaster
+// NicknameView
+"nicknameView_label_en" = "Tell me your nickname";
+"nicknameView_label_kr" = "닉네임을 입력해주세요";
+"nicknameView_label_vn" = "Nhập nickname của bạn";
+"nicknameView_label2_kr" = "여기에 입력하세요";
+"nicknameView_label2_en" = "enter here";
+"nicknameView_label2_vn" = "Nhập vào đây";
+"nicknameView_button_en" = "Done";
+"nicknameView_button_vn" = "Hoàn thành";
+"nicknameView_button_kr" = "완료";
+
+//LoginView
+"loginView_label_vn" = "Liên kết với mạng xã hội của bạn";
+"loginView_label_kr" = "SNS 계정으로 간편 이용하기";
+
+//CollabWriteVC
+"collabWriteVC_contentLabel_vn" = "Miêu tả bản thân bạn nào\n#Đang đi ăn với khứa bạn thân. Vui quá chời!!!";
+"collabWriteVC_contentLabel_kr" = "이벤트 내용\n- 일정\n- 제공내역\n- 제품/브랜드 설명\n";
+
+"collabWriteVC_link_kr" = "쇼피 링크";
+
+"collabWriteVC_condition_kr" = "이벤트 조건\n- 조건\n- 주의사항\n";
+
+"collabWriteVC_title_kr" = "제목";
+"collabWriteVC_people_label_kr" = "선정 인원수";
+"collabWriteVC_people_field_kr" = "선정 인원수";
+"collabWriteVC_code_label_kr" = "쇼피 코드(선택)";
+"collabWriteVC_code_field_kr" = "코드 입력";
