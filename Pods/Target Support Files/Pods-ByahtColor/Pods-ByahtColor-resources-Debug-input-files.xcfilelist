@@ -1,0 +1,6 @@
+${PODS_ROOT}/Target Support Files/Pods-ByahtColor/Pods-ByahtColor-resources.sh
+${BUILT_PRODUCTS_DIR}/DropDown/DropDown.framework/DropDownCell.nib
+${PODS_CONFIGURATION_BUILD_DIR}/MLKitFaceDetection/GoogleMVFaceDetectorResources.bundle
+${PODS_CONFIGURATION_BUILD_DIR}/MLKitSegmentationCommon/MLKitSegmentationCommonResources.bundle
+${PODS_CONFIGURATION_BUILD_DIR}/MLKitSegmentationSelfie/MLKitSegmentationSelfieResources.bundle
+${PODS_CONFIGURATION_BUILD_DIR}/MLKitXenoCommon/MLKitXenoResources.bundle

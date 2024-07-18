@@ -1,0 +1,22 @@
+<svg width="132" height="80" viewBox="0 0 132 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="mdi:arrow-up-bold" clip-path="url(#clip0_3831_24522)">
+<g id="Vector" filter="url(#filter0_b_3831_24522)">
+<path d="M22.3333 30V50H66V66.1333L108.793 40L66 13.8666V30L22.3333 30Z" fill="url(#paint0_linear_3831_24522)"/>
+</g>
+</g>
+<defs>
+<filter id="filter0_b_3831_24522" x="-17.6667" y="-26.1333" width="166.46" height="132.267" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feGaussianBlur in="BackgroundImageFix" stdDeviation="20"/>
+<feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_3831_24522"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_3831_24522" result="shape"/>
+</filter>
+<linearGradient id="paint0_linear_3831_24522" x1="108.5" y1="40" x2="0.000367107" y2="40" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="1" stop-color="white" stop-opacity="0"/>
+</linearGradient>
+<clipPath id="clip0_3831_24522">
+<rect width="80" height="131" fill="white" transform="matrix(0 -1 -1 0 131.5 80)"/>
+</clipPath>
+</defs>
+</svg>

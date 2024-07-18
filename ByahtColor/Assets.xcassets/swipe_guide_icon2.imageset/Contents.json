@@ -1,0 +1,12 @@
+{
+  "images" : [
+    {
+      "filename" : "swipe_guide_icon2.svg",
+      "idiom" : "universal"
+    }
+  ],
+  "info" : {
+    "author" : "xcode",
+    "version" : 1
+  }
+}

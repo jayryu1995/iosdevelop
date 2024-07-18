@@ -1,0 +1,554 @@
+/* 
+  Localizable.strings
+  ByahtColor
+
+  Created by jaem on 2023/07/14.
+  
+*/
+
+"server_error_title" = "Dịch vụ bảo trì";
+"server_error_message" = "Hiện tại dịch vụ đang bảo trì, vui lòng thử lại sau.";
+
+
+// AlertUpaate
+"update_str" = "Cập nhật";
+"update_str1" = "Yêu cầu cập nhật";
+
+
+
+// InfluenceSampleVC
+"influence_sample_label" = "Gạt sang hai bên để xem thêm nhiều doanh nghiệp hơn.";
+
+// BusinessSampleVC
+"business_sample_label" = "Gạt sang hai bên để xem thêm nhiều influenecer hơn.";
+
+// 인플루언서 프로필 작성 Alert창
+"alert_regist_button" = "Tạo trang cá nhân";
+"alert_regist_str" = "Tạo trang cá nhân để gây ấn tượng với nhãn hàng";
+"alert_regist_str2" = "Tìm kiếm các thương hiệu muốn hợp tác miễn phí.";
+
+// 기업 프로필 작성 Alert창
+"alert_regist_business_str" = "Đăng ký hồ sơ và tìm kiếm influencer miễn phí";
+"alert_regist_business_str2" = "Chỉ cần đăng ký công ty\n có thể xem hồ sơ influencer miễn phí.";
+
+// AgreementVC
+"agree" = "Đồng ý";
+"agree_1" = "Privacy Policy";
+"agree_2" = "Terms of Service";
+
+// 타겟오디언스
+"categories_beauty" = "Làm đẹp";
+"categories_fasion" = "Thời trang";
+"categories_daily" = "Đời sống";
+"categories_travel" = "Du lịch";
+"categories_baby" = "Mẹ và bé";
+"categories_food" = "Ẩm thực";
+"categories_etc" = "Khác";
+"ages_10" = "10tuổi";
+"ages_20" = "20tuổi";
+"ages_30" = "30tuổi";
+"ages_40" = "40tuổi";
+"ages_50" = "50tuổi";
+"gender_male" = "Nam";
+"gender_female" = "Nữ";
+
+//LoginVC
+"login_str" = "Đăng nhập với tài khoản mạng xã hội";
+"login_str2" = "Inquiry about Enrollment for Non-Korean Companies : \nbkim@byaht.com";
+"login_str3" = "Nhập tên đăng nhập và mật khẩu";
+"login_str4" = "Thông tin đăng nhập không chính xác";
+
+//FindAccountVC
+"find_account_id" = "Tìm tên đăng nhập";
+"find_account_password" = "Tìm mật khẩu";
+
+//FindIdVC
+"findid_label" = "Xác minh danh tính tìm tên đăng nhập.";
+"findid_name" = "Nhập họ và tên";
+"tel_certification" = "Xác minh số điện thoại";
+
+//FindPasswordVC
+"findpassword_id" = "Nhập tên đăng nhập";
+"findpassword_name" = "Nhập họ và tên";
+
+//BusinessLoginVC
+"login_join" = "Đăng ký thành viên";
+"login_find_account" = "Tìm tên đăng nhập/ mật khẩu";
+
+//BusinessJoinVC
+"signup_business" = "Doanh nghiệp đăng ký thành viên";
+"signup_business_info" = "Thông tin đoành nghiệp";
+"signup_business_name" = "Tên công ty";
+"signup_business_name_hint" = "Chức vụ";
+"signup_business_address" = "Địa chỉ công ty";
+"signup_business_address_hint" = "Nhập địa chỉ công ty";
+"signup_business_address_detail" = "Địa chỉ chi tiết";
+"signup_business_address_detail_hint" = "Nhập địa chỉ chi tiết";
+"signup_business_num" = "Số đăng ký kinh doanh";
+"signup_business_num_hint" = "Nhập số đăng ký kinh doanh (không có '-')";
+"signup_business_license" = "Giấy phép đăng ký kinh doanh";
+"signup_business_license_hint" = "Tải tệp đính kèm";
+"signup_business_upload" = "Chọn";
+"signup_manager_info" = "Thông tin quản lý nhân sự";
+"signup_manager_name" = "Tên người đăng ký";
+"signup_manager_name_hint" = "Nhập họ và tên khai sinh";
+"signup_manager_phone" = "Số điện thoại";
+"signup_manager_phone_hint" = "Nhập số điện thoại (không có '-')";
+"signup_manager_email" = "Email";
+"signup_manager_email_hint" = "email@ nhập trực tiếp";
+"signup_manager_id" = "Tên đăng nhập";
+"signup_manager_id_hint" = "Chữ cái, số bao gồm 8 - 20 kí tự";
+"signup_manager_id_check" = "Kiểm tra trùng lặp";
+"signup_manager_pwd" = "Mật khẩu";
+"signup_manager_pwd_hint" = "Chữ cái, số bao gồm 8 - 20 kí tự";
+"signup_manager_pwd_check" = "Xác nhận mật khẩu";
+"signup_manager_pwd_check_hint" = "Nhập lại mật khẩu";
+"signup_agreement" = "Đồng ý thu thập và sử dụng thông tin cá nhân";
+"signup_submit" = "Đăng ký";
+"signup_check_id_message" = "Nhập tên đăng nhập.";
+"signup_check_id_message2" = "Tên đăng nhập đã tồn tại.";
+"signup_check_id_message3" = "Tên đăng nhập khả dụng.";
+"signup_check_password_message" = "Nhập mật khẩu.";
+"signup_check_password_message2" = "Mật khẩu không trùng khớp.";
+"signup_double_check" = "Check";
+
+
+// InfluenceHomeVC
+"influencehome_label1" = "Nhanh Chóng và Tiện Lợi, Không Mất Phí";
+"influencehome_label2" = "Sự Kiện Đang Diễn Ra";
+"influencehome_label3" = "Thông Tin Doanh Nghiệp";
+"influencehome_button" = "Xem thêm";
+
+// InfluenceProfileVC
+"influence_profile_subtitle1" = "Thông tin tham khảo";
+"influence_profile_subtitle2" = "Báo giá";
+"influence_profile_subtitle3" = "Phân Khúc khách hàng";
+"influence_profile_target" = "Chủ đề";
+"influence_profile_target2" = "Độ tuổi";
+"influence_profile_target3" = "Giới tính";
+"influence_profile_negotiable" = "Có thể thương lượng";
+"influence_profile_non_negotiable" = "Không thể thương lượng";
+"influence_profile_video" = "Video";
+"influence_profile_photo" = "Bài viết hình ảnh";
+
+// InfluenceProfileWriteVC
+"influence_profile_write_thumbnail" = "Tải video/hình ảnh";
+"influence_profile_write_thumbnail2" = "Hãy tải lên các video đánh giá để thu hút các doanh nghiệp/ Video hiệu quả hơn hình ảnh";
+"influence_profile_write_intro" = "Giới thiệu";
+"influence_profile_write_intro2" = "Giới thiệu ngắn gọn về ưu điểm hoặc phong cách làm video.";
+"influence_profile_write_intro_hint" = "Nhập thông tin giới thiệu";
+"influence_profile_write_experience" = "Thông tin tham Khảo";
+"influence_profile_write_pay" = "Báo giá";
+"influence_profile_write_target" = "Phân khúc khách hàng";
+"influence_profile_write_target2" = "Nhập số lượng người theo dõi";
+"influence_profile_write_add" = "Thêm";
+"influence_profile_write_sns" = "Tài khoản MXH";
+"influence_profile_write_negotiable" = "Có thể thương lượng";
+"influence_profile_write_non_negotiable" = "Không thể thương lượng";
+"influence_profile_write_video" = "Video";
+"influence_profile_write_photo" = "Bài viết hình ảnh";
+"influence_profile_write_category" = "Chủ đề";
+"influence_profile_write_ages" = "Độ tuổi";
+"influence_profile_write_gender" = "Giới tính";
+"influence_profile_write_message1" = "Vui lòng nhập giới thiệu ngắn gọn.";
+"influence_profile_write_message2" = "Vui lòng tải lên ảnh hoặc video.";
+"influence_profile_write_message3" = "Nhập ít nhất một báo giá.";
+"influence_profile_write_message4" = "Chọn ít nhất một chủ đề.";
+"influence_profile_write_message5" = "Chọn ít nhất một độ tuổi.";
+"influence_profile_write_message6" = "Chọn ít nhất một giới tính.";
+"influence_profile_write_message7" = "Nhập ít nhất một liên kết cá nhân.";
+
+// AddSnsVC
+"add_sns_title" = "Thêm tài khoản MXH";
+"add_sns_platform" = "Nền tảng MXH";
+"add_sns_link" = "Liên kết tài khoản";
+"add_sns_link_hint" = "Nhập liên kết";
+"add" = "Thêm";
+"add_sns_message1" = "Chọn nền tảng MXH.";
+"add_sns_message2" = "Nhập liên kết nền tảng.";
+"add_sns_message3" = "Vui lòng nhập lại liên kết nền tảng.";
+
+// AddPayVC
+"add_pay_title" = "Thêm báo giá";
+"add_pay_contents" = "Nội dung cơ bản";
+"add_pay_contents_media" = "Video";
+"add_pay_contents_photo" = "Hình ảnh";
+"add_pay_hope" = "Báo giá";
+"add_pay_hope_hint" = "Báo giá";
+"add_pay_negotiable" = "Có thể thương lượng giá";
+"add_pay_message1" = "Chọn nền tảng MXH.";
+"add_pay_message2" = "Chọn nội dung cơ bản.";
+"add_pay_message3" = "Nhập báo giá.";
+
+// AddExperienceVC
+"add_experience_title" = "Thêm dữ liệu tham khảo";
+"add_experience_business" = "Thương hiệu đã hợp tác";
+"add_experience_business_hint" = "Nhập tên thương hiệu";
+"add_experience_content" = "Nội dung hợp tác";
+"add_experience_content_hint" = "Kinh nghiệm hợp tác";
+"add_experience_link" = "Liên kết nội dung";
+"add_experience_link_hint" = "Liên kết nội dung đã hợp tác";
+"add_experience_message1" = "Nhập tên thương hiệu từng cộng tác.";
+"add_experience_message2" = "Chọn nền tảng.";
+"add_experience_message3" = "Nhập nội dung hợp tác.";
+"add_experience_message4" = "Nhập link nội dung hợp tác.";
+"add_experience_message5" = "Vui lòng nhập lại liên kết đúng.";
+
+// Influence_MyPage
+"influence_mypage_name_info" = "Nhập họ và tên";
+"influence_mypage_profile_label" = "Chỉnh sửa trang cá nhân";
+"influence_mypage_profile_label2" = "Tăng tỷ lệ đề xuất doanh nghiệp";
+"influence_mypage_diagnosis_label" = "Tư vấn với 1 triệu đồng";
+"influence_mypage_diagnosis_label2" = "Đăng ký phân tích profile miễn phí";
+"influence_mypage_account_label" = "Thông tin của tôi";
+"influence_mypage_event_label" = "Sự kiện đã đăng ký";
+
+// InfluenceMypageWrite
+"influence_mypage_write_info" = "Nhập thông tin hợp tác.";
+"influence_mypage_write_info2" = "Để cung cấp tính năng tốt hơn ứng dụng sẽ update liên tục";
+"influence_mypage_write_name" = "Họ và tên khai sinh";
+"influence_mypage_write_name2" = "Nhập tên chính xác giúp việc hợp tác thuận lợi hơn";
+"influence_mypage_write_tel" = "Số điện thoại";
+"influence_mypage_write_tel2" = "Nhập số điện thoại liên lạc công việc.";
+"influence_mypage_write_address" = "Địa chỉ";
+"influence_mypage_write_address2" = "Nhập địa chỉ chính xác để nhận sản phẩm sự kiện.";
+"influence_mypage_write_address_hint" = "Nhập địa chỉ";
+"influence_mypage_write_account" = "Số tài khoản";
+"influence_mypage_write_account2" = "Nhập số tài khoản chính xác để nhận thanh toán.";
+"influence_mypage_write_account_hint" = "Nhập số tài khoản";
+"influence_mypage_write_logout" = "Đăng xuất";
+"influence_mypage_write_secession" = "Huỷ tài khoản";
+"influence_profile_write_alert" = "Không thể tải lên tệp có dung lượng trên 200MB.";
+
+// BusinessHomeVC
+"businesshome_label" = "Influencer marketing ngoài nước\nnhanh chóng và dễ dàng";
+"businesshome_label2" = "Thông báo tuyển dụng hiện tại";
+"businesshome_label3" = "Trung bình thông báo tuyển dụng";
+"businesshome_label4" = "người đã đăng ký";
+"businesshome_button_label" = "Glow.B uỷ thác tuyển dụng";
+"businesshome_button_label2" = "Từ tuyển dụng đến quản lý mà không gặp vấn đề về ngôn ngữ";
+
+// Business_MyPage
+"business_mypage_profile_label" = "Chỉnh sửa trang cá nhân doanh nghiệp";
+"business_mypage_profile_label2" = "Tăng tỷ lệ đề xuất influencer";
+"business_mypage_maketing_label" = "Uỷ thác marketing influencer";
+"business_mypage_maketing_label2" = "Giải quyết vấn đề quản lý đánh giá và dịch thuật trong một lần.";
+"business_mypage_global_label" = "Được tư vấn miễn phí về marketing tại nước ngoài";
+"business_mypage_global_label2" = "Giúp sản phẩm của bạn tiến ra thị trường quốc tế dễ dàng hơn";
+
+// BusinessProfileVC
+"business_profile_target" = "Phân khúc khách hàng";
+"business_profile_pay" = "Mức giá đề xuất";
+"business_profile_subtitle1" = "Chủ đề";
+"business_profile_subtitle2" = "Độ tuổi";
+"business_profile_subtitle3" = "Giới tính";
+
+// BusinessProfileWriteVC
+"business_profile_write_thumbnail" = "Tải lên tài liệu tham khảo";
+"business_profile_write_thumbnail2" = "Chọn những hình ảnh đại diện cho công ty như logo. Điều này sẽ tăng tỷ lệ đề xuất từ các influencer.";
+"business_profile_write_intro" = "Giới thiệu";
+"business_profile_write_intro2" = "Một dòng giới thiệu về công ty bằng tiếng Anh.";
+"business_profile_write_intro_hint" = "Nhập";
+"business_profile_write_experience" = "Thông tin hợp tác";
+"business_profile_write_pay" = "Báo giá";
+"business_profile_write_target" = "Phân khúc khách hàng";
+"business_profile_write_target2" = "Nhập mục tiêu sản phẩm";
+"business_profile_write_add" = "Thêm";
+"business_profile_write_target_age" = "Độ tuổi";
+"business_profile_write_target_gender" = "Giới tính";
+"business_profile_write_target_category" = "Chủ đề";
+"business_profile_write_negotiable" = "Có thể thương lượng";
+"business_profile_write_non_negotiable" = "Không thể thương lượng";
+"business_profile_write_video" = "Video";
+"business_profile_write_photo" = "Hình ảnh";
+
+// BusinessLogoutVC
+"business_profile_title" = "Tài khoản của tôi";
+"business_profile_label" = "Ứng dụng update liên tục\n để tiếp cận influencer dễ dàng hơn";
+"business_profile_logout" = "Đăng xuất";
+"business_profile_secession" = "Huỷ tài khoản";
+
+
+//CollabWriteVC
+"collabWriteVC_contentLabel" = "Nội dung sự kiện\n Thời gian \nNội dung \nMô tả sản phẩm/thương hiệu";
+"collabWriteVC_link" = "Liên kết shopee";
+"collabWriteVC_condition" = "Điều kiện sự kiện\n điều kiện\n Lưu ý";
+"collabWriteVC_title" = "Tiêu đề";
+"collabWriteVC_people_label" = "Số lượng người tham gia";
+"collabWriteVC_people_field" = "Số lượng người tham gia";
+"collabWriteVC_code_label" = "Mã giảm giá Shopee (lựa chọn)";
+"collabWriteVC_code_field" = "Nhập mã";
+
+//CollabVC 
+"collabVC_filter_recent" = "Mới nhất";
+"collabVC_filter_deadline" = "Sắp hết hạn";
+"collabVC_filter_update" = "Áp dụng nào";
+
+
+//TalkWriteVC 게시판 쓰기
+"talk_write_navigation" = "Soạn";
+"talk_write_title" = "Tiêu đề";
+"talk_write_content" = "Nhập nội dung";
+"talk_write_anonymous" = "Người ẩn danh";
+
+//TalkReadVC 게시판 상세
+"talk_read_comment" = "Nhập bình luận.";
+
+//RequestCollabVC 이벤트 신청
+"request_collab_platform_label" = "Nền tảng MXH của bạn";
+"request_collab_email_label" = "Địa chỉ email";
+"request_collab_email_placeholder" = "Nhập địa chỉ email";
+"request_collab_link_label" = "Link tài khoản MXH";
+"request_collab_link_placeholder" = "Nhập địa chỉ Link";
+"request_collab_name_label" = "Họ và tên";
+"request_collab_name_placeholder" = "Nhập tên đầy đủ";
+"request_collab_bank_label" = "Ngân hàng";
+"request_collab_bank_button" = "Chọn ngân hành";
+"request_collab_account_label" = "Số tài khoản";
+"request_collab_account_placeholder" = "Nhập số tài khoản ngân hàng";
+"request_collab_phone_label" = "Số điện thoại";
+"request_collab_phone_placeholder" = "Nhập số điện thoại có thể liên lạc được với chủ tài khoản";
+"request_collab_address_label" = "Địa chỉ";
+"request_collab_address_placeholder" = "Nhập địa chỉ chủ tài khoản";
+"request_collab_submit_button" = "ĐĂNG KÝ";
+
+// ApplicationStateVC 신청한 이벤트
+"application_state_title" = "Tình trạng đăng ký";
+"tab1_title" = "Đăng ký";
+"tab2_title" = "Kết quả";
+"tab3_title" = "Đánh giá";
+"tab4_title" = "Kết thúc";
+"miniTab1_title" = "Kết quả";
+"miniTab2_title" = "Không được lựa chọn";
+"empty_data_view" = "Không có event đang tham gia";
+
+//CollabDetailVC
+"collab_detail_subtitle" = "Nội dung Event";
+"collab_detail_subtitle2" = "Điều khoản Event";
+"collab_detail_link" = "Liên kết shopee";
+"collab_detail_button" = "Tham gia thành công";
+"collab_detail_button2" = "Gửi đánh giá";
+"collab_detail_submit" = "ĐĂNG KÝ";
+
+//ReviewWriteVC
+"review_write_image" = "Tải ảnh chụp tài khoản";
+"review_write_image2" = "Tài khoản để liên hệ hướng dẫn nhận sản phẩm";
+"review_write_email" = "Địa chỉ email";
+"review_write_email_hint" = "Nhập địa chỉ email";
+"review_write_link" = "Link tài khoản MXH";
+"review_write_link_hint" = "Nhập địa chỉ Link";
+"review_write_name" = "Tên thật";
+"review_write_name_hint" = "Nhập tên thật";
+"review_write_sns" = "Tên tài khoản MXH đã tham gia event";
+"review_write_sns_hint" = "Nhập tên tài khoản MXH đã tham gia event";
+"review_write_button" = "ĐĂNG KÝ";
+"review_write_navigation" = "Gửi đánh giá";
+
+
+//CollabVC
+"collab_navigation_title" = "Event";
+
+
+// 탈퇴 Alert
+"alert_exit_label" = "Xoá tài khoản";
+"alert_exit_label2" = "Bạn có chắc là muốn xoá tài khoản không?";
+"alert_exit_label3" = "Tiếp tục";
+"alert_exit_label4" = "Không";
+
+// 게시물 삭제 alert
+"delete_alert_yes" = "Xoá";
+"delete_alert_no" = "Không";
+"delete_alert_title" = "Bạn có muốn xoá không?";
+
+// 개인정보처리방침
+"agree_1_1" = 
+"Privacy Policy
+BYAHT Inc. (hereinafter referred to as the “Company“) complies with the Personal Information Protection Act, the Act on Promotion of Information and Communications Network Utilization and Information Protection, and other relevant laws that information and communication service providers must observe to protect personal information. The Company is committed to protecting the rights and interests of members by establishing a personal information handling policy in accordance with relevant laws. The Company's Privacy Policy contains the following:
+Personal information collected from members
+Purpose of collecting and using personal information
+Methods of collecting personal information
+Outsourcing of personal information processing
+Retention and usage period of personal information
+Dormant processing of personal information
+Procedures and methods for destroying personal information
+Ensuring the accuracy of members' personal information
+Temporary suspension measures to ensure the safety of members' personal information
+Information sharing and provision with third parties
+Measures to maintain the confidentiality of members' personal information
+Handling of complaints regarding members' personal information and other issues
+Restrictions on personal information handlers
+Rights of members and legal representatives and how to exercise them
+Contact information of the personal information manager and responsible personnel
+1. Personal Information Collected from Members
+a. Items of personal information collected
+Mandatory items: Account ID, password, name, gender, birth year, nationality, native language, and country of activity are collected with the information subject's consent.
+Optional items: Information such as personal introductions and photos provided by the user are collected with the information subject's consent.
+Additional services and surveys may collect SNS account, followers, likes, and existing collaboration brands with the information subject's consent.
+Additionally, the following items may be collected through legal procedures and with the member's consent for the provision of stable services:
+Visit date and time, service usage records, improper usage records
+Conversation content: content of mutual conversations, etc.
+b. Methods of collecting personal informationThe Company collects personal information in the following ways:
+Website, mobile app, written forms, fax, phone, consultation board, email, event application
+Information collected through joint alliances and cooperation with partner companies
+Information collected through generated information collection tools
+2. Purpose of Collecting and Using Personal Information
+a. To perform contracts related to service provision and for billing
+Providing content, specific customized services, user authentication, purchase and payment, debt collection
+b. To use some member information for member management
+User identification for member services and authentication services, personal identification, prevention of fraudulent use by bad members and unauthorized use, confirmation of membership intention, membership and frequency restriction, record retention for dispute resolution, complaint handling, notification delivery
+c. To use for new service development and marketing and advertising
+Developing new services and authentication services, providing customized services, providing services and advertising based on statistical characteristics, providing event and promotional information and participation opportunities, identifying access frequency, statistics on members' service usage, verifying service effectiveness
+3. Methods of Collecting Personal Information
+All members need to provide personal information to receive services from the Company. Personal information is collected through the member's consent during the membership registration process.
+4. Outsourcing of Personal Information Processing
+The Company does not outsource the processing of personal information to external parties without the user's consent. However, for service improvement and stable personal information handling, the Company may outsource personal information processing to external parties.a. If personal information processing is outsourced, the Company will notify the user in advance.b. When outsourcing personal information processing, the Company will clearly define compliance with personal information protection instructions, confidentiality, prohibition of third-party provision, and responsibility for incidents through contracts, and will store the contract contents in writing or electronically.
+Currently, the Company outsources personal information processing as follows, only with prior consent from members for providing high-quality services:
+Consignee: Amazon.com, Inc. (Server location: Singapore)
+Outsourced work: Storage of account information
+Retention and usage period: Until membership withdrawal or the end of the outsourcing contract
+5. Retention and Usage Period of Personal Information
+Personal information of members is processed so that it cannot be viewed or used by third parties once the service usage period ends or if the member requests deletion due to contract termination or withdrawal via email or in writing. The information is retained and managed for the period specified in the 'Act on the Consumer Protection in Electronic Commerce, etc.':
+a. Records related to contracts, cancellations, and member service provision: 5 yearsb. Records related to payment and supply of goods: 5 yearsc. Records related to consumer complaints or dispute resolution: 3 years
+6. Dormant Processing of Personal Information
+In accordance with the Act on Promotion of Information and Communications Network Utilization and Information Protection, if there has been no service usage for one year, the member's personal information will be separated and stored. Email, SMS, and other services will be suspended until reapplication, and unused points may be forfeited. Personal information will be destroyed once the legally required retention period has passed.
+7. Procedures and Methods for Destroying Personal Information
+The Company promptly destroys personal information when the retention period has elapsed or the purpose of collecting and using personal information has been achieved. The procedures and methods for destroying personal information are as follows:a. Destruction procedure
+Information entered for membership registration is moved to a separate database (DB) after the purpose is achieved (stored in a separate locked document cabinet for paper records) and retained for a certain period according to internal policies and related laws before destruction.
+This personal information is not used for any other purpose than retention unless required by law.
+b. Destruction method
+Personal information printed on paper is shredded or incinerated.
+Personal information stored electronically is deleted using technical methods that prevent record reproduction.
+8. Ensuring the Accuracy of Members' Personal Information
+The Company regularly encourages members to keep their personal information up-to-date. Periodic checks are conducted for certain information. Inaccurate personal information may cause inconvenience to users, and the personal information manager may delete clearly inaccurate personal information.
+9. Temporary Suspension Measures for Member Personal Information Safety
+The Company strives to ensure the safe use of services for members. However, if the Company's services are compromised by unwanted methods, services using members' personal information may be temporarily suspended until the issue is completely resolved.
+10. Information Sharing and Provision with Third Parties
+In accordance with Article 24-2 (Provision of Personal Information) of the Act on Promotion of Information and Communications Network Utilization and Information Protection, the Company does not use or provide personal information beyond the scope notified or specified without the member's consent or special provisions of the law. Additionally, in accordance with Article 59 (Prohibited Acts) of the Personal Information Protection Act, those who handle or have handled personal information for the provision of the Company's services must not engage in the following acts:
+a. Acquiring or obtaining consent for personal information processing through false or other improper meansb. Disclosing personal information learned in the course of duties or providing it to others for use without authorizationc. Damaging, losing, altering, forging, or leaking personal information without legitimate authority or exceeding allowed authority
+11. Measures to Maintain the Confidentiality of Members' Personal Information
+The Company does not disclose members' personal information to third parties without the members' consent to maintain the confidentiality of their personal information. Even with members' consent, the Company does not disclose personal information to third parties who are likely to re-disclose it. The Company does not provide members' personal information to various government agencies unless they follow formal procedures stipulated by law. The Company only uses members' personal information for the basic services and other service activities defined by the Company. When members' information is required for the above activities, personal information is collected and used through separate forms and consent procedures.
+12. Handling of Complaints Regarding Members' Personal Information and Other Issues
+The Company assigns a manager to handle complaints related to members' personal information and other issues promptly and continuously. Complaints are processed quickly, and the results are immediately responded to.
+13. Restrictions on Personal Information Handlers
+The Company grants authority to handle members' personal information to a limited number of employees. Employees with handling authority are given personal IDs and passwords, which are changed frequently to protect members' personal information.
+14. Rights of Members and Legal Representatives and How to Exercise Them
+Members and legal representatives can view or modify their personal information at any time and request termination of membership.
+To view or modify personal information, click “Edit Personal Information“ (or “Edit Member Information“). To terminate membership (withdraw consent), click “Withdraw“.
+Alternatively, contact customer service or the personal information manager in writing, by phone, or by email, and action will be taken without delay.
+If a member requests correction of personal information errors, the information will not be used or provided until the correction is completed. If incorrect personal information has already been provided to a third party, the correction results will be promptly notified to the third party to ensure the correction is made.
+The Company handles personal information terminated or deleted upon the request of a member or legal representative as specified in “5. Retention and Usage Period of Personal Information“ and ensures it cannot be viewed or used for any other purpose.
+15. Contact Information of the Personal Information Manager and Responsible Personnel
+Members can report any privacy-related complaints arising from using the Company's services to the personal information manager or the responsible department. The Company will provide prompt and sufficient responses to members' reports.
+Personal Information Manager
+Name: Dong kyu Kim
+Position: Representative
+Email: bkim@byaht.com
+For further privacy violation reports or consultations, please contact the following organizations:
+Personal Information Infringement Report Center (www.118.or.kr/ 118)
+Korea Information Security Agency (www.eprivacy.or.kr/ 02-580-0533~4)
+Supreme Prosecutors' Office High-Tech Crime Investigation Division (www.spo.go.kr/ 02-3480-2000)
+National Police Agency Cyber Terror Response Center (www.ctrc.go.kr/ 02-392-0330)
+Addendum
+This Privacy Policy will take effect from July 8, 2024.";
+
+// 서비스 이용약관
+"agree_2_1" = "Terms of Service
+
+The Glow.B Terms of Service reflect the provisions of relevant laws and regulations as follows. These Terms of Service apply to the 'Glow.B' service provided by BYAHT Inc. (hereinafter referred to as the “Company“) through websites and mobile applications and apply to the relationship between members and the Company. Therefore, please read the entire content carefully before signing up and using the service. The Company can provide normal services only to members who agree to the following content. If you do not agree to the content, you will not be able to use any services provided by Glow.B.
+Article 1 Purpose
+The purpose of these Terms of Service is to stipulate the rights and obligations of the Company and members and other necessary matters regarding the use of services provided by the Company.
+Article 2 Definitions
+a. Member: A person who signs up to use the Company's services, owns a member account, and has rights and obligations according to these Terms.
+b. Member Account: A unique identifier based on the email set by the member to use the Glow.B service.
+Notifications and changes from the Company will be sent to the email of the member account, and any disadvantages resulting from registering an email that is unusable or uncheckable by the member are entirely the member's responsibility.
+c. Service: The term “Service“ refers to the Glow.B and related services that members can use regardless of the implemented device (including various wired and wireless devices such as PC, TV, portable devices) and the provided form (website, mobile application, etc.).
+d. Email Verification: When a member signs up for Glow.B, the Company has an obligation to verify the basic information of the member through an entrusted agency, but it is not credible. Therefore, if a member receives email verification by entering false or fraudulent information, the Company is not legally responsible for the email verification.
+Article 3 Effectiveness of the Terms
+a. Effective Date: These Terms become effective as soon as the user signs up as a member. They may be amended within the scope not violating related laws, and this will be recognized as effective by notifying through service notices and emails.
+b. The member's agreement to these Terms includes consent to check for changes to the Terms by visiting the Glow.B website or mobile application.
+c. If a member does not agree to the amended Terms, they may request termination and withdrawal from Glow.B. If they continue to use the service, it is deemed that they agree to the changed Terms.
+Article 4 Governing Law
+Matters not specified in these Terms shall be governed by the Framework Act on Electronic Commerce, the Act on the Consumer Protection in Electronic Commerce, the Act on Regulation of Terms and Conditions, the Act on Promotion of Information and Communications Network Utilization and Information Protection, and other related laws and regulations.
+Article 5 Membership Registration
+a. Those who wish to become members can apply for membership by agreeing to the Terms and completing the email verification and entering the basic information of the member.
+b. The information entered by the member is considered to be true. If the information entered by the member is found to be false (e.g., using an alias, not using a real name, entering false information) or suspected to be the information of another person, the Company may request the member to submit evidence and an explanation to confirm the truth. If it is clearly confirmed that the information is false, Glow.B may deprive the member of their rights and refuse the use of the service entirely, and the Company is not responsible for any disadvantages that arise as a result.
+c. The Company may differentiate the scope of services based on reasonable criteria such as the member's status, usage period, usage frequency, and service access method, and the member may face restrictions on service use according to these criteria.
+d. The Company may reserve or refuse membership approval for those who apply for membership according to the following criteria:
+If there is a history of falsifying registration information such as using another person's real-name authentication information or photos
+If the applicant has lost membership status due to violations of Glow.B terms and related laws
+Those who disturb public order and morals
+Those who seek to join Glow.B for profit-seeking purposes
+Incompetent persons and quasi-incompetent persons and other similar persons
+Those for whom it is difficult to accept use due to the Company's circumstances or who fall under the disqualification reasons for membership.** According to the amended “Resident Registration Act,“ those who illegally use another person's resident registration number may be sentenced to imprisonment for up to 3 years or a fine of up to 10 million won. Related law: Article 37 (Penal Provisions) No. 10 of the Resident Registration Act (Effective Date: April 1, 2009)
+e. The time when the membership registration contract is established is based on the time when the Company's approval reaches the applicant.
+Article 6 Member Monitoring
+a. Glow.B primarily serves members who have completed email verification. Therefore, members who have not completed email verification are in the preparation stage to receive the services prepared by Glow.B and may face restrictions on service use. The Company will assist such members through means such as email.
+b. Even after membership registration, the member's profile is monitored, and if necessary for profile management purposes, the content of the profile may be modified or deleted by the review personnel during the review and monitoring process.
+c. The Company may restrict the use of a nickname created by a member if it 1) poses a risk of personal information leakage, 2) is antisocial or contrary to public morals, 3) is likely to be mistaken for the Company or its operator, or 4) is not properly entered due to problems in the creation process. The administrator may modify or delete such nicknames.
+Article 7 Types and Scope of Services
+a. Members can join the Glow.B service for free and become general members. However, if new membership conditions such as premium services are created, paid membership may also be possible.
+b. After completing the operational procedures, members can be introduced to others who match their search options for free.
+c. The service is available 24 hours a day, year-round.
+d. The Company may request members to modify or supplement their profiles to provide high-quality services. Members who create inappropriate profiles according to the Company's internal regulations may face restrictions on service use.
+e. The Company may request identity verification for the profile information entered by the member. Identity verification for profile information is carried out by submitting identity verification documents specified by the Company or by re-confirming and agreeing to the entered profile information. A separate identity verification fee may be requested from the member according to the method and procedure of identity verification. The Company does not know the accuracy of personal information from the date of identity verification to the current date of service use. It is the member's responsibility to maintain and update their personal information to be current and accurate. The member is responsible for any problems arising from this, and the Company is not liable. The Company may hold the member legally responsible for any internal or external losses resulting from related problems.
+f. The Glow.B service provided by the Company includes viewing profiles and providing chat room services on the Glow.B website and mobile application.
+g. The responsibility for actions (contact and meetings) between members after connecting through Glow.B lies with the parties involved. Therefore, the actual place and time of contact or meetings should be carefully decided.
+h. The Company operates a reporting menu to restrict service use by members who misuse the service or violate the terms or legal restrictions after connecting through Glow.B. Although the responsibility for actions during meetings between members lies with the members involved according to Article 7, Paragraph g, if a report is received and the reported member's actions are judged to cause additional harm to other members, the Company may take follow-up measures such as usage restrictions, withdrawal, permanent deletion of the account, and legal responsibility.
+Article 9 Company's Obligations
+a. The Company shall do its best to provide continuous and stable services.
+b. The Company has an obligation to take forced withdrawal measures against members who violate the Company's terms, operating policies, or laws or to proceed with legal procedures according to related laws.
+c. The Company shall protect the personal information recorded by the member during membership application, additionally recorded afterward, and generated during service use in accordance with the Act on Promotion of Information and Communications Network Utilization and Information Protection and other related laws.
+d. The Company's employees shall not disclose or distribute members' personal information related to service provision to third parties other than Glow.B members, and if they violate this, it may be grounds for dismissal.
+e. The Company regularly sends members regular correspondence regarding the content and usage guide of the Company's services (notices, emails, etc.).
+f. The Company shall do its best to provide convenience to users regarding the procedures and contents related to the conclusion, change, and termination of the usage contract with the member.
+g. The Company does not conduct a preliminary document review (regarding marital status, education, employment information) for members when joining Glow.B. However, to maintain service reliability and protect numerous good members, the Company will verify and take legally possible measures if there is suspicion that the information provided by the member is different from the actual facts.
+Article 10 Member's Obligations
+The personal information and profile (photos and keywords, etc.) created during membership registration must be truthful. Additionally, personal information that changes after a certain period must be continuously updated by the member. The member is responsible for any disadvantages arising from failure to fulfill this obligation.
+a. Personal information directly entered by the member must be true. If a member enters false or fraudulent information and causes harm to other Glow.B members, the member is solely responsible for any civil or criminal liability, including all related responsibilities.
+b. The Company does not guarantee member information. Additionally, the member is solely responsible for any issues arising from meetings between members, so they must carefully review and use the service.
+c. Members must always be aware of Glow.B notices. The member is responsible for any issues arising from failure to fulfill this obligation.
+d. Members shall not engage in the following acts:
+Illegally obtaining member information from the Glow.B site
+Engaging in activities that make normal operation difficult by using hacking or similar programs on the Glow.B website or application (e.g., hacking, virus distribution, DDoS attacks, etc.)
+Stealing another person's resident registration number, account, or password
+Registering false or other people's personal information
+Slandering or defaming others or creating and distributing such content
+Registering or distributing works that undermine public order and morals
+Illegally selling goods or engaging in commercial activities on the site
+Posting obscene materials and videos
+Unauthorized capturing (saving) and leaking profile and personal information (keywords, photos, names, contact information, etc.) provided by Glow.B and posting it externally
+Spreading false information about Glow.B or interfering with its operations by other means
+Committing crimes or illegal acts using Glow.B services and facilities
+Members who violate any of the above items in Paragraph d may face forced withdrawal and civil or criminal liability.
+e. Glow.B member rights cannot be transferred or sold to others.
+f. Violations of these Terms or other related laws of the Republic of Korea will result in the deprivation of member rights without warning, and the Company will not compensate the member.
+Article 11 Termination of Contract
+Glow.B recognizes the following conditions as grounds for contract termination:
+a. Voluntary withdrawal application by the member (withdrawal from the website and expressing the intention to the Company)
+b. Members who do not faithfully fulfill their obligations or engage in acts that violate the terms and policies set forth may face forced withdrawal without prior notice.
+c. If continuous contract performance is deemed difficult due to member circumstances, the Company may suspend or terminate the account at its discretion (e.g., death or disappearance, inactive members for a certain period, etc.).
+d. The Company may terminate the contract if the member engages in acts corresponding to Paragraph d of Article 5.
+Article 12 Disclaimer
+a. The Company may change the services provided for operational or technical reasons. The Company will notify members of the content and provision date of the changed services through the website or email. However, if there are unavoidable circumstances such as critical bugs, server equipment defects, or urgent security issues, the Company may notify afterward.
+b. The Company may restrict or suspend all or part of the services in the following cases:
+In case of force majeure such as war, incident, natural disaster, or national emergency
+In case of normal service disruption due to power outage, facility failure, or surge in usage
+In case of unavoidable reasons such as maintenance or construction of service facilities
+In case the Company cannot provide services due to various circumstances
+c. If it is necessary to suspend all or part of the services due to service reorganization, operational reasons, or the Company's urgent situation, the Company may notify the members on the website 30 days in advance and suspend the provision of services.
+d. The Company is not responsible for problems caused by the suspension or failure of telecommunication services provided by telecommunications carriers.
+e. The Company is not responsible for service use disruptions caused by the member's fault.
+f. The Company is not responsible for any damages caused by the member's failure to achieve the expected benefits from the Company's service provision or for damages caused by not being aware of the service content.
+g. The Company is not responsible for the reliability and accuracy of the profiles created by members unless the Company has separately certified them and is exempt from liability for any mental or material damages caused by this.
+h. The copyright of the articles posted by members on the Company's bulletin board belongs to the member, and the member is responsible for any civil or criminal liability arising from problems such as defamation or copyright infringement.
+i. The Company is exempt from liability for service interruptions caused by server maintenance, replacement, temporary suspension, or reorganization work necessary for service use.
+j. Members are responsible for issues arising from neglecting the obligation to check announcements on the website and not being aware of the content.
+k. The Company does not guarantee the identity of members. If a member causes economic, mental, or material harm to another member, the responsible member is liable.
+l. The Company has no control over third-party sites linked through banner ads on the Company's site, and the policies of the linked site apply. The member and the linked site are responsible for any issues arising from this.
+m. The Company is not responsible for losses caused by violations of these Terms by the member.
+n. The Company is exempt from liability for any issues arising from materials disclosed by the member.
+o. If the member sells or transfers their account or member rights to a third party without the Company's consent, the member's qualification may be revoked, and civil or criminal charges may be pursued. All damages resulting from this are attributed to the member who illegally sold or transferred the member rights.
+p. The member is responsible for damages caused by using an email that is not accessible by the member or not updating contact information, resulting in the Company's notices not being delivered through email.
+q. Members are responsible for interactions between members or between members and third parties both online and offline. Therefore, actual contracts or collaborations should be carefully considered and appropriately decided.
+Addendum
+These Terms will be applied from July 8, 2024.";
