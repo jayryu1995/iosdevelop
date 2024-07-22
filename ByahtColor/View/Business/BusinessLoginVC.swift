@@ -146,11 +146,11 @@ class BusinessLoginVC: UIViewController {
                 case .success(let business):
                     User.shared.id = business.memberId
                     User.shared.auth = 2
-                    User.shared.name = business.business_name ?? nil
+                    User.shared.name = business.businessName ?? nil
 
                     UserDefaults.standard.setValue(business.memberId, forKey: "businessId")
                     UserDefaults.standard.setValue(2, forKey: "auth")
-                    UserDefaults.standard.setValue(business.business_name, forKey: "name")
+                    UserDefaults.standard.setValue(business.businessName, forKey: "name")
 
                     let vc = TabBarViewController()
                     self?.navigationController?.pushViewController(vc, animated: false)
@@ -266,12 +266,16 @@ extension BusinessLoginVC: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         // 제한할 텍스트 길이
         let maxLength = 20
-        // 새로운 텍스트 길이 계산
+
+        // 현재 텍스트 필드의 텍스트
         let currentString: NSString = (textField.text ?? "") as NSString
-        let newString: NSString =
-            currentString.replacingCharacters(in: range, with: string) as NSString
+        // 변경된 후의 새로운 텍스트
+        let newString: NSString = currentString.replacingCharacters(in: range, with: string) as NSString
+
         return newString.length <= maxLength
+
     }
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
            if textField == tf_id {
                tf_passwd.becomeFirstResponder()

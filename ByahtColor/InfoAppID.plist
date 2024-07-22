@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>SendbirdAppID</key>
+	<string>68512DA8-3A78-4E3A-837E-160D4762AF8A</string>
 	<key>APP_ID</key>
 	<string>6450734094</string>
 	<key>TEST_URL0</key>

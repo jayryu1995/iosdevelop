@@ -13,7 +13,6 @@ class ExperienceCell: UITableViewCell {
     private let containerView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(hex: "#F4F5F8")
-        view.layer.cornerRadius = 8
         return view
     }()
 
@@ -78,6 +77,17 @@ class ExperienceCell: UITableViewCell {
             let experienceView = createExperienceView(for: experience)
             stackView.addArrangedSubview(experienceView)
         }
+
+        if experiences.isEmpty {
+            let nullView = UILabel()
+            nullView.text = " - "
+            nullView.font = UIFont(name: "Pretendard-SemiBold", size: 20)
+            stackView.addArrangedSubview(nullView)
+            nullView.snp.makeConstraints {
+                $0.leading.equalToSuperview()
+                $0.height.equalTo(40)
+            }
+        }
     }
 
     private func createExperienceView(for experience: Experience) -> UIView {
@@ -114,9 +124,19 @@ class ExperienceCell: UITableViewCell {
             return label
         }()
 
+        let button = UIButton()
+        button.isUserInteractionEnabled = true
+        if let image = UIImage(named: "arrow_right")?.withRenderingMode(.alwaysTemplate) {
+            button.setImage(image, for: .normal)
+        }
+        button.tintColor = UIColor(hex: "#4E505B")
+        button.addTarget(self, action: #selector(iconTapped), for: .touchUpInside)
+        button.accessibilityHint = experience.link
+
         view.addSubview(iconImageView)
         view.addSubview(contentLabel)
         view.addSubview(businessLabel)
+        view.addSubview(button)
 
         iconImageView.snp.makeConstraints {
             $0.top.leading.equalToSuperview()
@@ -126,14 +146,33 @@ class ExperienceCell: UITableViewCell {
         contentLabel.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.leading.equalTo(iconImageView.snp.trailing).offset(8)
+            $0.trailing.equalTo(button.snp.leading)
         }
 
         businessLabel.snp.makeConstraints {
             $0.top.equalTo(contentLabel.snp.bottom).offset(4)
             $0.leading.equalToSuperview()
+            $0.trailing.equalTo(button.snp.leading)
             $0.bottom.equalToSuperview().offset(-20)
         }
 
+        button.snp.makeConstraints {
+            $0.width.height.equalTo(16)
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalToSuperview()
+        }
+
         return view
+    }
+
+    @objc private func iconTapped(_ sender: UIButton) {
+        if let urlString = sender.accessibilityHint, let url = URL(string: urlString) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+
+    func addTopRadius() {
+        containerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner] // 상단 좌우 코너에만 반경을 적용
+        containerView.layer.cornerRadius = 8
     }
 }

@@ -14,7 +14,7 @@ open class BackdropView: UIView {
 
     public init() {
         dismissalTapGestureRecognizer = UITapGestureRecognizer()
-        dismissalTapGestureRecognizer.isEnabled = true
+        dismissalTapGestureRecognizer.isEnabled = false
         super.init(frame: .zero)
         addGestureRecognizer(dismissalTapGestureRecognizer)
     }

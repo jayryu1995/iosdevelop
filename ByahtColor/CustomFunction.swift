@@ -7,8 +7,6 @@
 
 import UIKit
 import Alamofire
-import MLKit
-import MLImage
 class CustomFunction {
     // 날짜로 자르기
     func formatDate(_ dateString: String) -> String {
@@ -40,38 +38,6 @@ class CustomFunction {
 
         guard let croppedImage = UIGraphicsGetImageFromCurrentImageContext() else { return nil }
         return croppedImage
-    }
-
-    // 배경 제거
-    func detectSegmentationMask(segmenter: Segmenter, image: UIImage, completion: @escaping (UIImage?) -> Void) {
-
-        // Initialize a `VisionImage` object with the given `UIImage`.
-
-        let visionImage = VisionImage(image: image)
-        visionImage.orientation = image.imageOrientation
-
-        segmenter.process(visionImage) { mask, error in
-            if let error = error {
-                print("Error processing the image: \(error)")
-                completion(nil)
-                return
-            }
-
-            guard let mask = mask, let imageBuffer = UIUtilities.createImageBuffer(from: image) else {
-                print("Failed to process the image or create an image buffer.")
-                completion(nil)
-                return
-            }
-
-            UIUtilities.applySegmentationMask(
-                mask: mask, to: imageBuffer,
-                backgroundColor: UIColor.white,
-                foregroundColor: nil)
-
-            let maskedImage = UIUtilities.createUIImage(from: imageBuffer, orientation: .up)
-            completion(maskedImage)
-
-        }
     }
 
     // 하단 모서리 Radious

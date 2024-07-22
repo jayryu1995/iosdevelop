@@ -31,6 +31,7 @@ class BusinessProfileWriteVC: UIViewController {
         let label = UILabel()
         label.text = "business_profile_write_target".localized
         label.font = UIFont(name: "Pretendard-SemiBold", size: 16)
+        label.appendRedStar()
         return label
     }()
     private let targetLabel2: UILabel = {
@@ -258,6 +259,18 @@ class BusinessProfileWriteVC: UIViewController {
 
             // 이미지 너비와 여백을 더함
             totalWidth += buttonWidth + 20
+
+            // 지우기 버튼
+            let closeButton = UIButton()
+            closeButton.setImage(UIImage(named: "icon_close"), for: .normal)
+            closeButton.tag = imageView.tag
+            closeButton.addTarget(self, action: #selector(removeImage(_:)), for: .touchUpInside)
+            imageView.addSubview(closeButton)
+            closeButton.snp.makeConstraints { make in
+                make.width.height.equalTo(24)
+                make.top.equalToSuperview().offset(10)
+                make.trailing.equalToSuperview().offset(-10)
+            }
         }
 
         // 스크롤뷰의 contentSize 업데이트
@@ -276,9 +289,11 @@ class BusinessProfileWriteVC: UIViewController {
         contentView.addSubview(infoView)
         infoView.isUserInteractionEnabled = true
         et_intro.delegate = self
+
         let label = UILabel()
         label.text = "business_profile_write_intro".localized
         label.font = UIFont(name: "Pretendard-SemiBold", size: 16)
+        label.appendRedStar()
 
         let label2 = UILabel()
         label2.text = "business_profile_write_intro2".localized
@@ -316,6 +331,7 @@ class BusinessProfileWriteVC: UIViewController {
         let label = UILabel()
         label.text = "business_profile_write_pay".localized
         label.font = UIFont(name: "Pretendard-SemiBold", size: 16)
+        label.appendRedStar()
 
         let button = UIButton()
         button.setTitle("business_profile_write_add".localized, for: .normal)
@@ -747,6 +763,11 @@ class BusinessProfileWriteVC: UIViewController {
 
     private func validateForm() -> Bool {
         // 각 필드의 유효성 검사
+        if et_intro.text.isEmpty {
+            showAlert(message: "influence_profile_write_message1".localized)
+            return false
+        }
+
         if payArray.isEmpty {
             showAlert(message: "influence_profile_write_message3".localized)
             return false
@@ -769,6 +790,20 @@ class BusinessProfileWriteVC: UIViewController {
 
         // 모든 유효성 검사를 통과하면 true를 반환
         return true
+    }
+
+    // 추가된 이미지 제거
+    @objc private func removeImage(_ sender: UIButton) {
+        guard let imageView = sender.superview as? UIImageView else { return }
+
+        // 이미지뷰 제거
+        imageView.removeFromSuperview()
+
+        // 선택된 이미지 목록에서 해당 이미지 제거
+        selectedImages.removeLast()
+
+        // 스크롤뷰에 남아있는 이미지뷰들의 레이아웃을 다시 조정
+        resetHorizonScrollView()
     }
 
     private func setupConstraints() {

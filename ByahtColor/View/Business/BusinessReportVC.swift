@@ -651,6 +651,7 @@ class BusinessReportVC: UIViewController {
             } else {
                 icon = UIImageView(image: UIImage(named: "naver"))
             }
+
             let lbl = UILabel()
             lbl.text = i.contents
             lbl.font = UIFont(name: "Pretendard-Medium", size: 16)
@@ -660,10 +661,19 @@ class BusinessReportVC: UIViewController {
             lbl2.font = UIFont(name: "Pretendard-Regular", size: 12)
             lbl2.textColor = UIColor(hex: "#4E505B")
 
+            let button = UIButton()
+            button.isUserInteractionEnabled = true
+            if let image = UIImage(named: "arrow_right")?.withRenderingMode(.alwaysTemplate) {
+                button.setImage(image, for: .normal)
+            }
+            button.tintColor = UIColor(hex: "#4E505B")
+            button.addTarget(self, action: #selector(iconTapped), for: .touchUpInside)
+            button.accessibilityHint = i.link
+
             view.addSubview(icon)
             view.addSubview(lbl)
             view.addSubview(lbl2)
-
+            view.addSubview(button)
             icon.snp.makeConstraints {
                 $0.top.leading.equalToSuperview()
                 $0.width.height.equalTo(20)
@@ -672,15 +682,40 @@ class BusinessReportVC: UIViewController {
             lbl.snp.makeConstraints {
                 $0.top.equalToSuperview()
                 $0.leading.equalTo(icon.snp.trailing).offset(4)
+                $0.trailing.equalTo(button.snp.leading)
             }
 
             lbl2.snp.makeConstraints {
                 $0.top.equalTo(icon.snp.bottom).offset(4)
                 $0.leading.equalToSuperview()
+                $0.trailing.equalTo(button.snp.leading)
+            }
+
+            button.snp.makeConstraints {
+                $0.width.height.equalTo(16)
+                $0.centerY.equalToSuperview()
+                $0.trailing.equalToSuperview()
+            }
+        }
+
+        if list.isEmpty {
+            let nullView = UILabel()
+            nullView.text = " - "
+            nullView.font = UIFont(name: "Pretendard-SemiBold", size: 20)
+            stackView.addArrangedSubview(nullView)
+            nullView.snp.makeConstraints {
+                $0.leading.equalToSuperview()
+                $0.height.equalTo(40)
             }
         }
 
         return stackView
+    }
+
+    @objc private func iconTapped(_ sender: UIButton) {
+        if let urlString = sender.accessibilityHint, let url = URL(string: urlString) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
     }
 
     @objc private func playerDidFinishPlaying(notification: Notification) {

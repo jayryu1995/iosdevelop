@@ -124,6 +124,7 @@ class LoginVC: UIViewController {
         if let id = UserDefaults.standard.string(forKey: "businessId") {
             User.shared.id = id
             User.shared.auth = 2
+
             let vc = TabBarViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         }

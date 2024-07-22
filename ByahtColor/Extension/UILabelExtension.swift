@@ -61,4 +61,16 @@ extension UILabel {
 
         return numberOfLines
     }
+
+    // 텍스트 뒤에 * 추가
+    func appendRedStar() {
+        let star = "*"
+        guard let currentText = self.text else { return }
+        let fullText = "\(currentText) \(star)"
+        let attributedString = NSMutableAttributedString(string: fullText)
+        let starRange = (fullText as NSString).range(of: star)
+        attributedString.addAttribute(.foregroundColor, value: UIColor.red, range: starRange)
+        self.attributedText = attributedString
+    }
+
 }

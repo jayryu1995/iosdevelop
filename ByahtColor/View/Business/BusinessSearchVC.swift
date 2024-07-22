@@ -171,7 +171,7 @@ class BusinessSearchVC: UIViewController {
             if str == "jpg" {
                 mediaPath = "\(Bundle.main.TEST_URL)/img\( profile?.imagePath ?? "" )"
                 print(mediaPath)
-            } else if str == "mp4"{
+            } else if str == "mp4" {
                 mediaPath = "\(Bundle.main.TEST_URL)\( profile?.imagePath ?? "" )"
                 print(mediaPath)
             }
@@ -206,8 +206,8 @@ class BusinessSearchVC: UIViewController {
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "status" {
-            if let player = player {
-                switch player.status {
+            if let playerItem = object as? AVPlayerItem {
+                switch playerItem.status {
                 case .readyToPlay:
                     loadingIndicator?.stopAnimating()
                     loadingIndicator?.removeFromSuperview()
@@ -234,7 +234,7 @@ class BusinessSearchVC: UIViewController {
         reportView.addSubview(targetView)
 
     }
-
+    var playerItem: AVPlayerItem?
     private func setupTempletView() {
         contentView.addSubview(imageView)
         setupLoadingIndicator()
@@ -245,7 +245,7 @@ class BusinessSearchVC: UIViewController {
             let width = UIScreen.main.bounds.width - 40
             let height = width * (525.0 / 350.0)
             if let videoURL = URL(string: mediaPath) {
-                player = AVPlayer(url: videoURL)
+                player = AVPlayer(playerItem: playerItem)
                 playerLayer = AVPlayerLayer(player: player)
                 playerLayer?.frame = CGRect(origin: .zero, size: CGSize(width: width, height: height))
                 playerLayer?.videoGravity = .resizeAspectFill
@@ -255,6 +255,7 @@ class BusinessSearchVC: UIViewController {
                 }
                 imageView.bringGradientLayerToFront()
                 player?.addObserver(self, forKeyPath: "status", options: [.new, .initial], context: nil)
+                playerItem?.addObserver(self, forKeyPath: "status", options: [.new, .initial], context: nil)
                 player?.play()
             }
 
@@ -654,6 +655,16 @@ class BusinessSearchVC: UIViewController {
             } else {
                 icon = UIImageView(image: UIImage(named: "naver"))
             }
+
+            let button = UIButton()
+            button.isUserInteractionEnabled = true
+            if let image = UIImage(named: "arrow_right")?.withRenderingMode(.alwaysTemplate) {
+                button.setImage(image, for: .normal)
+            }
+            button.tintColor = UIColor(hex: "#4E505B")
+            button.addTarget(self, action: #selector(iconTapped), for: .touchUpInside)
+            button.accessibilityHint = i.link
+
             let lbl = UILabel()
             lbl.text = i.contents
             lbl.font = UIFont(name: "Pretendard-Medium", size: 16)
@@ -666,6 +677,7 @@ class BusinessSearchVC: UIViewController {
             view.addSubview(icon)
             view.addSubview(lbl)
             view.addSubview(lbl2)
+            view.addSubview(button)
 
             icon.snp.makeConstraints {
                 $0.top.leading.equalToSuperview()
@@ -675,19 +687,44 @@ class BusinessSearchVC: UIViewController {
             lbl.snp.makeConstraints {
                 $0.top.equalToSuperview()
                 $0.leading.equalTo(icon.snp.trailing).offset(4)
+                $0.trailing.equalTo(button.snp.leading)
             }
 
             lbl2.snp.makeConstraints {
                 $0.top.equalTo(icon.snp.bottom).offset(4)
                 $0.leading.equalToSuperview()
+                $0.trailing.equalTo(button.snp.leading)
+            }
+
+            button.snp.makeConstraints {
+                $0.width.height.equalTo(16)
+                $0.centerY.equalToSuperview()
+                $0.trailing.equalToSuperview()
             }
         }
 
+        if list.isEmpty {
+            let nullView = UILabel()
+            nullView.text = " - "
+            nullView.font = UIFont(name: "Pretendard-SemiBold", size: 20)
+            stackView.addArrangedSubview(nullView)
+            nullView.snp.makeConstraints {
+                $0.leading.equalToSuperview()
+                $0.height.equalTo(40)
+            }
+        }
         return stackView
     }
 
     @objc private func playerDidFinishPlaying(notification: Notification) {
         replayButton.isHidden = false
+    }
+
+    @objc private func iconTapped(_ sender: UIButton) {
+        print("sender.accessibilityHint \(sender.accessibilityHint)")
+        if let urlString = sender.accessibilityHint, let url = URL(string: urlString) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
     }
 
     @objc private func replayButtonTapped() {

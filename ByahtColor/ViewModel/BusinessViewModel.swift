@@ -42,6 +42,7 @@ class BusinessViewModel: ObservableObject {
                     completion(.success(data))
                 case .failure(let error):
                     completion(.failure(error))
+
                 }
             }
     }

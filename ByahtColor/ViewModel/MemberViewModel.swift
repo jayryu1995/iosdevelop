@@ -37,7 +37,7 @@ class MemberViewModel: ObservableObject {
     }
 
     // 기업 로그인
-    func loginBusiness(userid: String, password: String, completion: @escaping (Result<Business, Error>) -> Void) {
+    func loginBusiness(userid: String, password: String, completion: @escaping (Result<BusinessDto, Error>) -> Void) {
         let url = "\(Bundle.main.TEST_URL)/business/login"
         let parameters: [String: Any] = [
             "id": userid,
@@ -45,7 +45,7 @@ class MemberViewModel: ObservableObject {
         ]
         AF.request(url, method: .post, parameters: parameters)
             .validate()
-            .responseDecodable(of: Business.self) { response in
+            .responseDecodable(of: BusinessDto.self) { response in
                 switch response.result {
                 case .success(let business):
                     completion(.success(business))
@@ -53,6 +53,24 @@ class MemberViewModel: ObservableObject {
                     completion(.failure(error))
                 }
             }
+    }
+
+    // 기업 자동로그인
+    func loginAutoBusiness(userid: String, completion: @escaping (Result<BusinessDataDto, Error>) -> Void) {
+        let url = "\(Bundle.main.TEST_URL)/member/data/\(userid)"
+        AF.request(url).validate().response { response in
+            switch response.result {
+            case .success(let value):
+                if let exists = value as? BusinessDataDto {
+                    print(exists)
+                    completion(.success(exists))
+                } else {
+                    completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid response"])))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
     }
 
     // 중복확인

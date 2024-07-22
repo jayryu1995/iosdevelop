@@ -18,4 +18,5 @@ struct InfluenceProfileDto: Codable {
     let intro: String?
     let name: String?
     let imagePath: String?
+    let code: String?
 }

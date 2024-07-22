@@ -143,6 +143,7 @@
 "influence_profile_write_message5" = "Please select at least one age group.";
 "influence_profile_write_message6" = "Please select at least one primary gender group.";
 "influence_profile_write_message7" = "Please enter at least one SNS link.";
+"influence_profile_write_code" = "Invite code";
 
 // AddSnsVC
 "add_sns_title" = "Add SNS Account";

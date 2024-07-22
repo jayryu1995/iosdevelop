@@ -163,7 +163,6 @@
 		1FAF63A02C3FA6EC00D0FFEE /* Globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAF639F2C3FA6EC00D0FFEE /* Globals.swift */; };
 		1FAF63A22C46554000D0FFEE /* GradientImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAF63A12C46554000D0FFEE /* GradientImageView.swift */; };
 		1FAF63A42C46853900D0FFEE /* BusinessDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FAF63A32C46853900D0FFEE /* BusinessDto.swift */; };
-		1FB6D2692AB1E0C200D8818A /* UIUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB6D2682AB1E0C200D8818A /* UIUtilities.swift */; };
 		1FB97D652B5FD5290060AF73 /* CollabDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB97D642B5FD5290060AF73 /* CollabDetailVC.swift */; };
 		1FB97D672B5FD9780060AF73 /* CollabDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB97D662B5FD9780060AF73 /* CollabDetailTableViewCell.swift */; };
 		1FB97D692B60ACB10060AF73 /* LikeDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FB97D682B60ACB10060AF73 /* LikeDto.swift */; };
@@ -175,6 +174,7 @@
 		1FD750E62B86E8570062F882 /* CustomErrorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD750E52B86E8570062F882 /* CustomErrorVC.swift */; };
 		1FDA83A22ABC201E003CB0DA /* .swiftlint.yml in Resources */ = {isa = PBXBuildFile; fileRef = 1FDA83A12ABC201E003CB0DA /* .swiftlint.yml */; };
 		1FDA83A42ABD6673003CB0DA /* PermissionClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FDA83A32ABD6673003CB0DA /* PermissionClass.swift */; };
+		1FE26D2D2C4916930009C76E /* BusinessDataDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE26D2C2C4916930009C76E /* BusinessDataDto.swift */; };
 		1FE6100B2B7DDDB400F903E5 /* DeleteAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE6100A2B7DDDB400F903E5 /* DeleteAlertVC.swift */; };
 		1FFD63A82BB51566005BDFFE /* ApplicationStateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFD63A72BB51566005BDFFE /* ApplicationStateVC.swift */; };
 		1FFD63AA2BB515EA005BDFFE /* MyPageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFD63A92BB515EA005BDFFE /* MyPageVC.swift */; };
@@ -355,7 +355,6 @@
 		1FAF639F2C3FA6EC00D0FFEE /* Globals.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Globals.swift; sourceTree = "<group>"; };
 		1FAF63A12C46554000D0FFEE /* GradientImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientImageView.swift; sourceTree = "<group>"; };
 		1FAF63A32C46853900D0FFEE /* BusinessDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessDto.swift; sourceTree = "<group>"; };
-		1FB6D2682AB1E0C200D8818A /* UIUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIUtilities.swift; sourceTree = "<group>"; };
 		1FB97D642B5FD5290060AF73 /* CollabDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollabDetailVC.swift; sourceTree = "<group>"; };
 		1FB97D662B5FD9780060AF73 /* CollabDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollabDetailTableViewCell.swift; sourceTree = "<group>"; };
 		1FB97D682B60ACB10060AF73 /* LikeDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeDto.swift; sourceTree = "<group>"; };
@@ -367,6 +366,7 @@
 		1FD750E52B86E8570062F882 /* CustomErrorVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomErrorVC.swift; sourceTree = "<group>"; };
 		1FDA83A12ABC201E003CB0DA /* .swiftlint.yml */ = {isa = PBXFileReference; lastKnownFileType = text.yaml; path = .swiftlint.yml; sourceTree = "<group>"; };
 		1FDA83A32ABD6673003CB0DA /* PermissionClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionClass.swift; sourceTree = "<group>"; };
+		1FE26D2C2C4916930009C76E /* BusinessDataDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessDataDto.swift; sourceTree = "<group>"; };
 		1FE6100A2B7DDDB400F903E5 /* DeleteAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAlertVC.swift; sourceTree = "<group>"; };
 		1FF2F4742B723C4400479515 /* ByahtColorRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ByahtColorRelease.entitlements; sourceTree = "<group>"; };
 		1FF2F4792B731A2300479515 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
@@ -424,7 +424,6 @@
 		1F0F857D2A1F51F200882245 /* modules */ = {
 			isa = PBXGroup;
 			children = (
-				1FB6D2682AB1E0C200D8818A /* UIUtilities.swift */,
 				1F0F857E2A1F520300882245 /* CreateBackgroundImage.swift */,
 				1FFD904E2A3850DD005CE509 /* CustomFunction.swift */,
 				1FFD90502A39BD58005CE509 /* UploaderClass.swift */,
@@ -643,10 +642,10 @@
 		1F8AFD8A2B71DD63005A6491 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				1F515E942B57CE1D001A9364 /* Home */,
 				1F0A77FC2B67D54000DBB97D /* InitalViewController.swift */,
 				1F08AFA92B352C4D0062FAF4 /* TabBarViewController.swift */,
 				1F0A77FD2B67D54100DBB97D /* LoginVC.swift */,
+				1F515E942B57CE1D001A9364 /* Home */,
 				1F301EE42C17DA7400E3E478 /* Influence */,
 				1F301EE52C17DA8600E3E478 /* Business */,
 				1F301EE32C17DA6B00E3E478 /* admin */,
@@ -671,6 +670,7 @@
 				1F5964022C34078400FD8419 /* InfluenceHomeDto.swift */,
 				1F5964062C35498E00FD8419 /* BusinessHomeDto.swift */,
 				1FAF63A32C46853900D0FFEE /* BusinessDto.swift */,
+				1FE26D2C2C4916930009C76E /* BusinessDataDto.swift */,
 			);
 			path = Dto;
 			sourceTree = "<group>";
@@ -1075,8 +1075,8 @@
 				1FA41D4D2C297A6D003FE382 /* AddExperienceVC.swift in Sources */,
 				1F0A78012B67F38300DBB97D /* ProfileAlertVC.swift in Sources */,
 				1F5963F12C2EC9F600FD8419 /* InfluenceSearchVC.swift in Sources */,
-				1FB6D2692AB1E0C200D8818A /* UIUtilities.swift in Sources */,
 				1FAF63952C3E8DD500D0FFEE /* RegistAlertInfluenceVC.swift in Sources */,
+				1FE26D2D2C4916930009C76E /* BusinessDataDto.swift in Sources */,
 				1F415C792A7910EA00FBA354 /* CAGradientLayerExtension.swift in Sources */,
 				1FFD63B32BBCEF58005BDFFE /* AdminCollabReadVC.swift in Sources */,
 				1FA41D552C2ABA10003FE382 /* Pay.swift in Sources */,
@@ -1285,7 +1285,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ByahtColor/ByahtColor.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2024.07.18;
+				CURRENT_PROJECT_VERSION = 2024.07.19;
 				DEVELOPMENT_TEAM = CS98CK3779;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1308,7 +1308,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.3;
+				MARKETING_VERSION = 3.0.4;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.byaht.ByahtColor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1330,7 +1330,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ByahtColor/ByahtColorRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2024.07.18;
+				CURRENT_PROJECT_VERSION = 2024.07.19;
 				DEVELOPMENT_TEAM = CS98CK3779;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1353,7 +1353,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.0.3;
+				MARKETING_VERSION = 3.0.4;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.byaht.ByahtColor;
 				PRODUCT_NAME = "$(TARGET_NAME)";

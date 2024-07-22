@@ -112,12 +112,14 @@ extension BusinessProfileVC: UITableViewDelegate, UITableViewDataSource {
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "PayCell", for: indexPath) as! PayCell
+            cell.addTopRadius()
             cell.configure(with: payArray)
             cell.selectionStyle = .none
             return cell
         case 2:
             let cell = tableView.dequeueReusableCell(withIdentifier: "TargetCell", for: indexPath) as! TargetCell
             if let data = profileDto {
+                cell.addBottomRadius()
                 var strArray: [String] = []
                 if let category = data.category { strArray.append(category)}
                 if let age = data.age { strArray.append(age)}

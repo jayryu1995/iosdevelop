@@ -19,6 +19,7 @@ class TabBarViewController: UITabBarController {
         self.tabBar.layer.borderColor = UIColor(hex: "#F7F7F7").cgColor
         setupTapbar()
 
+        print("User.shared.auth \(User.shared.auth)")
         if User.shared.auth ?? 0 < 2 {
             let homeVC = InfluenceHomeVC()
             let profileVC = InfluenceProfileVC()
@@ -33,8 +34,8 @@ class TabBarViewController: UITabBarController {
             homeVC.tabBarItem.selectedImage = UIImage(named: "icon_home")?.withRenderingMode(.alwaysOriginal)
             homeVC.tabBarItem.image = UIImage(named: "icon_home")
 
-            communityVC.tabBarItem.image = UIImage(named: "icon_talk")
-            communityVC.tabBarItem.selectedImage = UIImage(named: "icon_talk2")?.withRenderingMode(.alwaysOriginal)
+            communityVC.tabBarItem.image = UIImage(named: "icon_community")
+            communityVC.tabBarItem.selectedImage = UIImage(named: "icon_community")?.withRenderingMode(.alwaysOriginal)
 
             myPageVC.tabBarItem.image = UIImage(named: "icon_mypage")
             myPageVC.tabBarItem.selectedImage = UIImage(named: "icon_mypage")?.withRenderingMode(.alwaysOriginal)
@@ -49,7 +50,7 @@ class TabBarViewController: UITabBarController {
             let navigationTab4 = UINavigationController(rootViewController: myPageVC)
 
             setViewControllers([navigationTab, navigationTab2, navigationTab3, navigationTab4], animated: false)
-        } else if User.shared.auth ?? 0 < 4 {
+        } else if User.shared.auth ?? 0 < 5 {
             let homeVC = BusinessHomeVC()
             let searchVC = BusinessSwipeVC()
             let myPageVC = BusinessMypageVC()
@@ -72,8 +73,6 @@ class TabBarViewController: UITabBarController {
             let navigationTab3 = UINavigationController(rootViewController: myPageVC)
 
             setViewControllers([navigationTab, navigationTab2, navigationTab3], animated: false)
-
-        } else {
 
         }
 

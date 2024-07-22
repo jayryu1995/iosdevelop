@@ -12,7 +12,6 @@ class TargetCell: UITableViewCell {
     private let containerView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(hex: "#F4F5F8")
-        view.layer.cornerRadius = 8
         return view
     }()
 
@@ -73,6 +72,11 @@ class TargetCell: UITableViewCell {
         }
 
         makeTargetStackView()
+    }
+
+    func addBottomRadius() {
+        containerView.layer.maskedCorners = [.layerMinXMaxYCorner, .layerMaxXMaxYCorner]
+        containerView.layer.cornerRadius = 8
     }
 
     private func makeTargetStackView() {

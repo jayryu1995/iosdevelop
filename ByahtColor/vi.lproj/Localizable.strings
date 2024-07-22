@@ -157,6 +157,7 @@
 "influence_profile_write_message5" = "Chọn ít nhất một độ tuổi.";
 "influence_profile_write_message6" = "Chọn ít nhất một giới tính.";
 "influence_profile_write_message7" = "Nhập ít nhất một liên kết cá nhân.";
+"influence_profile_write_code" = "Mã giới thiệu";
 
 // AddSnsVC
 "add_sns_title" = "Thêm tài khoản MXH";

@@ -105,6 +105,7 @@ extension InfluenceProfileVC: UITableViewDataSource, UITableViewDelegate {
                 if let profile = viewModel.profileData, let experience = profile.experienceList {
                     cell.selectionStyle = .none
                     cell.configure(with: experience)
+                    cell.addTopRadius()
                 }
                 return cell
             case 2:
@@ -124,6 +125,7 @@ extension InfluenceProfileVC: UITableViewDataSource, UITableViewDelegate {
 
                     cell.selectionStyle = .none
                     cell.configure(with: strArray)
+                    cell.addBottomRadius()
                 }
                 return cell
             default:

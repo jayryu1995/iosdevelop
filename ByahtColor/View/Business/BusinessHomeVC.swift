@@ -59,6 +59,7 @@ class BusinessHomeVC: UIViewController, UIScrollViewDelegate {
         let alertVC = RegistAlertBusinessVC()
         alertVC.onConfirm = {
             let vc = BusinessProfileWriteVC()
+            vc.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(vc, animated: false)
         }
         alertVC.modalPresentationStyle = .overFullScreen
@@ -75,6 +76,7 @@ class BusinessHomeVC: UIViewController, UIScrollViewDelegate {
 
                         self?.collabList = data.snapDtoList ?? []
                         self?.influenceList = data.influenceProfileDtos ?? []
+                        print("influenceList : \(self?.influenceList.count)")
                         self?.setupUI()
                         self?.setupConstraints()
 
@@ -201,8 +203,15 @@ class BusinessHomeVC: UIViewController, UIScrollViewDelegate {
     }
 
     @objc private func snapButtonTapped() {
-        let vc = CollabVC()
-        self.navigationController?.pushViewController(vc, animated: true)
+
+        if User.shared.id == "byaht" {
+            let vc = AdminCollabVC()
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            let vc = CollabVC()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+
     }
 
     @objc private func influenceButtonTapped() {

@@ -1,4 +1,5 @@
 import Foundation
+import AVFoundation
 import UIKit
 import SnapKit
 
@@ -53,6 +54,14 @@ class BusinessSwipeVC: UIViewController, UIPageViewControllerDataSource, UIPageV
         // profileList의 각 요소에 대해 페이지 생성
         for profile in profileList {
             let page = BusinessSearchVC()
+            if let path = profile.imagePath {
+                let str = path.split(separator: ".").last ?? ""
+                if str.contains("mp4") {
+                    let mediaPath = URL(string: "\(Bundle.main.TEST_URL)\( profile.imagePath ?? "" )")
+                    page.playerItem = AVPlayerItem(url: mediaPath!)
+                }
+            }
+
             page.profile = profile
             pages.append(page)
         }

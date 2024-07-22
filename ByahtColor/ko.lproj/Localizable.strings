@@ -155,6 +155,7 @@
 "influence_profile_write_message5" = "최소 한가지의 연령층을 선택해주세요.";
 "influence_profile_write_message6" = "최소 한가지의 주요 성별군을 선택해주세요.";
 "influence_profile_write_message7" = "최소 한가지의 SNS Link를 입력해주세요.";
+"influence_profile_write_code" = "추천인 코드";
 
 // AddSnsVC
 "add_sns_title" = "SNS 계정 추가";
