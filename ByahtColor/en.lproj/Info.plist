@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>fb295913122812550</string>
+            </array>
+        </dict>
+    </array>
+    <key>FacebookAppID</key>
+    <string>295913122812550</string>
+    <key>FacebookClientToken</key>
+    <string>6ba4435b6590d19235e16f0a597f370a</string>
+    <key>FacebookDisplayName</key>
+    <string>GlowB</string>
+    <key>ITSAppUsesNonExemptEncryption</key>
+    <false/>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>fbapi</string>
+        <string>fb-messenger-share-api</string>
+        <string>itms-apps</string>
+    </array>
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <true/>
+    </dict>
+    <key>UIAppFonts</key>
+    <array>
+        <string>Roboto-Black.ttf</string>
+        <string>Roboto-Bold.ttf</string>
+        <string>Roboto-Thin.ttf</string>
+        <string>Roboto-Regularttf</string>
+        <string>Pretendard-SemiBold.otf</string>
+        <string>Pretendard-Medium.otf</string>
+        <string>Pretendard-Bold.otf</string>
+        <string>Pretendard-ExtraBold.otf</string>
+        <string>Pretendard-Regular.otf</string>
+    </array>
+    <key>UIApplicationSceneManifest</key>
+    <dict>
+        <key>UIApplicationSupportsMultipleScenes</key>
+        <false/>
+        <key>UISceneConfigurations</key>
+        <dict>
+            <key>UIWindowSceneSessionRoleApplication</key>
+            <array>
+                <dict>
+                    <key>UISceneConfigurationName</key>
+                    <string>Default Configuration</string>
+                    <key>UISceneDelegateClassName</key>
+                    <string>$(PRODUCT_MODULE_NAME).SceneDelegate</string>
+                    <key>UISceneStoryboardFile</key>
+                    <string>Main</string>
+                </dict>
+            </array>
+        </dict>
+    </dict>
+    <key>UIBackgroundModes</key>
+    <array>
+        <string>remote-notification</string>
+    </array>
+    <key>UIFileSharingEnabled</key>
+    <true/>
+    <!-- 앱 추적 권한 요구 -->
+    <key>NSUserTrackingUsageDescription</key>
+    <string>사용자의 맞춤형 광고를 위해 추적 권한이 필요합니다.</string>
+    
+    <!-- 앱 음성녹음 권한 요구 -->
+    <key>NSMicrophoneUsageDescription</key>
+    <string>이 앱은 음성 녹음 기능을 사용하기 위해 마이크 접근이 필요합니다.</string>
+</dict>
+</plist>
