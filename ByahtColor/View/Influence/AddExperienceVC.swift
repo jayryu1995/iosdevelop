@@ -114,8 +114,8 @@ class AddExperienceVC: UIViewController {
 
     private func setupScrollView() {
         view.addSubview(scrollView)
+        view.addSubview(selectButton)
         scrollView.addSubview(contentView)
-
         scrollView.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(24)
             make.width.equalTo(view.safeAreaLayoutGuide)
@@ -134,11 +134,12 @@ class AddExperienceVC: UIViewController {
     }
 
     private func setupUI() {
-        let snsTags = ["TikTok", "Instagram", "Facebook", "Naver"]
-        let snsButtons = createHorizontalStackView(tags: snsTags)
+        let snsTags = Globals.shared.sns
+        let snsButtons = createCategoryView(tags: snsTags)
+        snsButtons.isUserInteractionEnabled = true
         selectButton.addTarget(self, action: #selector(selectButtonTapped), for: .touchUpInside)
+        contentView.isUserInteractionEnabled = true
 
-        contentView.addSubview(selectButton)
         contentView.addSubview(snsLabel)
         contentView.addSubview(snsButtons)
         contentView.addSubview(contentsLabel)
@@ -166,7 +167,7 @@ class AddExperienceVC: UIViewController {
 
         snsButtons.snp.makeConstraints {
             $0.top.equalTo(snsLabel.snp.bottom).offset(8)
-            $0.leading.equalToSuperview().inset(20)
+            $0.leading.trailing.equalToSuperview().inset(20)
         }
 
         contentsLabel.snp.makeConstraints {
@@ -189,14 +190,14 @@ class AddExperienceVC: UIViewController {
             $0.top.equalTo(linkLabel.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview().inset(20)
             $0.height.equalTo(42)
+            $0.bottom.equalToSuperview()
         }
 
         selectButton.snp.makeConstraints {
-            $0.top.equalTo(linkField.snp.bottom).offset(20)
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
             $0.height.equalTo(60)
-            $0.bottom.equalTo(contentView.snp.bottom).offset(-20)
+            $0.bottom.equalToSuperview().offset(-48)
         }
     }
 
@@ -218,11 +219,14 @@ class AddExperienceVC: UIViewController {
     }
 
     // 이 함수는 태그 이름의 배열을 받아서 수평 스택뷰를 생성하고 반환합니다.
-    private func createHorizontalStackView(tags: [String]) -> UIStackView {
-        let horizontalStackView = UIStackView()
-        horizontalStackView.axis = .horizontal
-        horizontalStackView.spacing = 8
-        horizontalStackView.isUserInteractionEnabled = true
+    private func createCategoryView(tags: [String]) -> UIView {
+        let containerView = UIView()
+        containerView.isUserInteractionEnabled = true
+        let maxWidth = UIScreen.main.bounds.width - 40
+        var currentRowView = UIView()
+        currentRowView.isUserInteractionEnabled = true
+        var currentRowWidth: CGFloat = 0
+        var rowIndex = 0
 
         for tagName in tags {
             let tagButton = UIButton()
@@ -230,26 +234,58 @@ class AddExperienceVC: UIViewController {
             tagButton.backgroundColor = .white
             tagButton.setTitleColor(UIColor(hex: "#4E505B"), for: .normal)
             tagButton.addTarget(self, action: #selector(snsButtonTapped), for: .touchUpInside)
-            snsButtons.append(tagButton)
-            tagButton.sizeToFit()
             tagButton.isUserInteractionEnabled = true
             tagButton.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 14)
             tagButton.layer.cornerRadius = 16
             tagButton.layer.borderWidth = 1
             tagButton.layer.borderColor = UIColor(hex: "#D3D4DA").cgColor
+            tagButton.contentEdgeInsets = UIEdgeInsets(top: 6, left: 5, bottom: 6, right: 5)
 
-            // 텍스트의 inset 설정
-            tagButton.contentEdgeInsets = UIEdgeInsets(top: 6, left: 10, bottom: 6, right: 10)
+            snsButtons.append(tagButton)
 
-            horizontalStackView.addArrangedSubview(tagButton)
+            // Calculate button size
+            tagButton.sizeToFit()
+            let buttonWidth = tagButton.frame.width + tagButton.contentEdgeInsets.left + tagButton.contentEdgeInsets.right
+            if currentRowWidth + buttonWidth + 8 > maxWidth {
+                // Add the current row view to the container view
+                containerView.addSubview(currentRowView)
+                currentRowView.snp.makeConstraints { make in
+                    make.top.equalTo(containerView).offset(rowIndex * (Int(32) + 8))
+                    make.left.equalTo(containerView)
+                    make.right.lessThanOrEqualTo(containerView)
+                    make.height.equalTo(32)
+                }
 
+                // Start a new row
+                currentRowView = UIView()
+                currentRowWidth = 0
+                rowIndex += 1
+            }
+
+            // Add the button to the current row view
+            currentRowView.addSubview(tagButton)
             tagButton.snp.makeConstraints { make in
-                make.width.greaterThanOrEqualTo(60)
+                make.left.equalTo(currentRowView).offset(currentRowWidth)
+                make.centerY.equalTo(currentRowView)
+                make.width.equalTo(buttonWidth)
                 make.height.equalTo(32)
+            }
+
+            currentRowWidth += buttonWidth + 8
+        }
+
+        if !currentRowView.subviews.isEmpty {
+            containerView.addSubview(currentRowView)
+            currentRowView.snp.makeConstraints { make in
+                make.top.equalTo(containerView).offset(rowIndex * 40)
+                make.left.equalTo(containerView)
+                make.right.lessThanOrEqualTo(containerView)
+                make.height.equalTo(32)
+                make.bottom.equalToSuperview().offset(-8) // 마지막 줄일 경우
             }
         }
 
-        return horizontalStackView
+        return containerView
     }
 
     @objc func snsButtonTapped(_ sender: UIButton) {
@@ -269,17 +305,20 @@ class AddExperienceVC: UIViewController {
 
         // 선택된 SNS 업데이트
         selectedSns = filter
+
     }
 
     @objc private func selectButtonTapped() {
         guard validateForm() else { return }
 
         var sns = 0
+
         switch selectedSns {
-        case "TikTok": sns = 0
-        case "Instagram": sns = 1
-        case "Facebook": sns = 2
-        case "Naver": sns = 3
+        case "TikTok".localized: sns = 0
+        case "Instagram".localized: sns = 1
+        case "Facebook".localized: sns = 2
+        case "Naver".localized: sns = 3
+        case "Youtube".localized: sns = 4
         default: sns = 0
         }
 

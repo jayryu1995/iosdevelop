@@ -20,15 +20,15 @@ class CollabFilterVC: UIViewController {
 
     let containLabel: UILabel = {
        let label = UILabel()
-        label.text = "CATEGORY"
-        label.font = UIFont(name: "Pretendard-SemiBold", size: 20)
+        label.text = "business_profile_subtitle1".localized
+        label.font = UIFont(name: "Pretendard-SemiBold", size: 14)
         return label
     }()
 
     let containLabel2: UILabel = {
        let label = UILabel()
-        label.text = "SNS"
-        label.font = UIFont(name: "Pretendard-SemiBold", size: 20)
+        label.text = "add_sns_platform".localized
+        label.font = UIFont(name: "Pretendard-SemiBold", size: 14)
         return label
     }()
 
@@ -42,6 +42,9 @@ class CollabFilterVC: UIViewController {
         button.setTitleColor(UIColor.white, for: .normal)
         return button
     }()
+
+    private var styleFilterViewContainer = UIView()
+    private var snsFilterViewContainer = UIView()
 
     // 선택된 버튼들을 저장할 배열
     private var selectedButtons = [String]()
@@ -72,30 +75,113 @@ class CollabFilterVC: UIViewController {
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
             $0.height.equalTo(60)
-            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-100)
+            $0.bottom.equalToSuperview().offset(-68)
         }
     }
 
     private func setFilterView() {
-        let styleTags = ["Beauty", "Fashion", "Etc"]
-        let styleFilterViewContainer = styleFilterView(tags: styleTags)
+        let styleTags = ["Beauty", "Fashion", "Travel", "Etc"]
+        styleFilterViewContainer = createCategoryView(titles: styleTags, type: 0)
         view.addSubview(styleFilterViewContainer)
-        styleFilterViewContainer.snp.makeConstraints {
+        view.addSubview(containLabel)
+
+        containLabel.snp.makeConstraints {
             $0.top.equalTo(viewLayer.snp.bottom).offset(10)
-            $0.leading.equalToSuperview()
-            $0.trailing.equalToSuperview()
-            $0.height.equalTo(80)
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.height.equalTo(24)
         }
 
-        let snsTags = ["TikTok", "Instagram", "Facebook", "Shopee"]
-        let snsFilterViewContainer = snsFilterView(tags: snsTags)
-        view.addSubview(snsFilterViewContainer)
-        snsFilterViewContainer.snp.makeConstraints {
-            $0.top.equalTo(styleFilterViewContainer.snp.bottom)
-            $0.bottom.equalToSuperview()
-            $0.leading.equalToSuperview()
-            $0.trailing.equalToSuperview()
+        styleFilterViewContainer.snp.makeConstraints {
+            $0.top.equalTo(containLabel.snp.bottom).offset(10)
+            $0.leading.trailing.equalToSuperview().inset(20)
         }
+
+        let snsTags = ["TikTok".localized, "Instagram".localized, "Facebook".localized, "Shopee".localized, "Naver".localized, "Youtube".localized]
+        snsFilterViewContainer = createCategoryView(titles: snsTags, type: 1)
+        view.addSubview(containLabel2)
+        view.addSubview(snsFilterViewContainer)
+
+        containLabel2.snp.makeConstraints {
+            $0.top.equalTo(styleFilterViewContainer.snp.bottom).offset(10)
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.height.equalTo(24)
+        }
+
+        snsFilterViewContainer.snp.makeConstraints {
+            $0.top.equalTo(containLabel2.snp.bottom).offset(10)
+            $0.leading.trailing.equalToSuperview().inset(20)
+            // $0.bottom.equalToSuperview()
+        }
+    }
+
+    private func createCategoryView(titles: [String], type: Int) -> UIView {
+        let view = UIView()
+        let maxWidth = UIScreen.main.bounds.width - 40
+        var currentRowView = UIView()
+        var currentRowWidth: CGFloat = 0
+        var rowIndex = 0
+        for (index, title) in titles.enumerated() {
+            let button = UIButton()
+            button.setTitleColor(UIColor(hex: "#4E505B"), for: .normal)
+            button.backgroundColor = .white
+            button.setTitle(title, for: .normal)
+            button.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 14)
+            button.layer.cornerRadius = 16
+            button.layer.borderWidth = 1
+            button.layer.borderColor = UIColor(hex: "#D3D4DA").cgColor
+            button.titleEdgeInsets = UIEdgeInsets(top: 6, left: 8, bottom: 6, right: 8)
+            button.titleLabel?.adjustsFontSizeToFitWidth = true
+            button.titleLabel?.minimumScaleFactor = 0.5
+            button.titleLabel?.lineBreakMode = .byTruncatingTail
+            button.tag = index
+
+            if type == 0 {
+                button.addTarget(self, action: #selector(tagButtonTapped), for: .touchUpInside)
+            } else if type == 1 {
+                button.addTarget(self, action: #selector(snsButtonTapped), for: .touchUpInside)
+            }
+
+            let buttonWidth: CGFloat = max(48, (title as NSString).size(withAttributes: [.font: UIFont(name: "Pretendard-Regular", size: 14)!]).width + 16) // 16 for padding
+
+            if currentRowWidth + buttonWidth + 4 > maxWidth { // 4 for spacing
+                view.addSubview(currentRowView)
+
+                currentRowView.snp.makeConstraints { make in
+                    make.top.equalTo(view).offset(rowIndex * 36) // Adjust the top offset for each row
+                    make.left.equalTo(view)
+                    make.right.equalTo(view)
+                    make.height.equalTo(36)
+
+                }
+
+                currentRowView = UIView()
+                currentRowWidth = 0
+                rowIndex += 1
+            }
+
+            currentRowView.addSubview(button)
+            button.snp.makeConstraints { make in
+                make.left.equalTo(currentRowView).offset(currentRowWidth)
+                make.centerY.equalTo(currentRowView)
+                make.width.equalTo(buttonWidth)
+                make.height.equalTo(32)
+            }
+
+            currentRowWidth += buttonWidth + 4
+        }
+
+        if !currentRowView.subviews.isEmpty {
+            view.addSubview(currentRowView)
+            currentRowView.snp.makeConstraints { make in
+                make.top.equalTo(view).offset(rowIndex * 36) // Adjust the top offset for each row
+                make.left.equalTo(view)
+                make.right.equalTo(view)
+                make.height.equalTo(36)
+                make.bottom.equalToSuperview()
+            }
+        }
+
+        return view
     }
 
     private func setTitleLabel() {
@@ -105,106 +191,8 @@ class CollabFilterVC: UIViewController {
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide).offset(20)
             make.centerX.equalToSuperview()
+            make.height.equalTo(27)
         }
-    }
-
-    // 이 함수는 태그 이름의 배열을 받아서 수평 스택뷰를 생성하고 반환합니다.
-    private func createHorizontalStackView(tags: [String]) -> UIStackView {
-        let horizontalStackView = UIStackView()
-        horizontalStackView.axis = .horizontal
-        horizontalStackView.distribution = .fillProportionally
-        horizontalStackView.alignment = .fill
-        horizontalStackView.spacing = 10
-        horizontalStackView.isUserInteractionEnabled = true
-
-        for tagName in tags {
-            let tagButton = UIButton()
-            tagButton.setTitle(tagName, for: .normal)
-            tagButton.backgroundColor = .white
-            tagButton.setTitleColor(.black, for: .normal)
-            if tags.count > 3 {
-                tagButton.addTarget(self, action: #selector(snsButtonTapped), for: .touchUpInside)
-            } else {
-                tagButton.addTarget(self, action: #selector(tagButtonTapped), for: .touchUpInside)
-            }
-
-            tagButton.isUserInteractionEnabled = true
-            tagButton.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 14)
-            tagButton.layer.cornerRadius = 16
-            tagButton.layer.borderWidth = 1
-            tagButton.layer.borderColor = UIColor.darkGray.cgColor
-            horizontalStackView.addArrangedSubview(tagButton)
-
-        }
-
-        return horizontalStackView
-    }
-
-    // 이 함수는 전체 스타일 필터 뷰를 생성하고 반환합니다.
-    private func styleFilterView(tags: [String]) -> UIView {
-        let container = UIView()
-        container.isUserInteractionEnabled = true
-
-        container.addSubview(containLabel)
-        containLabel.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(20)
-            make.top.equalToSuperview()
-        }
-
-        let verticalStackView = UIStackView()
-
-        verticalStackView.axis = .vertical
-        verticalStackView.distribution = .equalSpacing
-        verticalStackView.alignment = .fill
-        verticalStackView.spacing = 10
-        verticalStackView.isUserInteractionEnabled = true
-
-        let firstRowStackView = createHorizontalStackView(tags: Array(tags.prefix(4)))
-
-        firstRowStackView.isUserInteractionEnabled = true
-        verticalStackView.addArrangedSubview(firstRowStackView)
-        container.addSubview(verticalStackView)
-
-        verticalStackView.snp.makeConstraints {
-            $0.top.equalTo(containLabel.snp.bottom).offset(10)
-            $0.height.equalTo(32)
-            $0.leading.equalToSuperview().offset(20)
-            $0.trailing.equalToSuperview().offset(-20)
-        }
-        return container
-    }
-
-    private func snsFilterView(tags: [String]) -> UIView {
-        let container = UIView()
-        container.isUserInteractionEnabled = true
-
-        container.addSubview(containLabel2)
-        containLabel2.snp.makeConstraints { make in
-            make.top.equalToSuperview().offset(16)
-            make.leading.equalToSuperview().offset(20)
-        }
-
-        let verticalStackView = UIStackView()
-
-        verticalStackView.axis = .vertical
-        verticalStackView.distribution = .equalSpacing
-        verticalStackView.alignment = .fill
-        verticalStackView.spacing = 10
-        verticalStackView.isUserInteractionEnabled = true
-
-        let firstRowStackView = createHorizontalStackView(tags: Array(tags.prefix(4)))
-
-        firstRowStackView.isUserInteractionEnabled = true
-        verticalStackView.addArrangedSubview(firstRowStackView)
-        container.addSubview(verticalStackView)
-
-        verticalStackView.snp.makeConstraints {
-            $0.top.equalTo(containLabel2.snp.bottom).offset(10)
-            $0.height.equalTo(32)
-            $0.leading.equalToSuperview().offset(20)
-            $0.trailing.equalToSuperview().offset(-20)
-        }
-        return container
     }
 
     @objc func tagButtonTapped(_ sender: UIButton) {
@@ -251,7 +239,6 @@ class CollabFilterVC: UIViewController {
     }
 
     @objc private func selectButtonTapped() {
-
         delegate?.didTapButton(self, WithArray: selectedButtons, WithArray2: selectedSns)
         dismiss(animated: true)
     }

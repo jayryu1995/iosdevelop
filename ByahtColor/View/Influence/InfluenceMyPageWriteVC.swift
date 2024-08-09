@@ -454,6 +454,10 @@ class InfluenceMyPageWriteVC: UIViewController {
                         // data변경 알림
                         NotificationCenter.default.post(name: .dataChanged, object: nil)
                         User.shared.name = "\(dto.name ?? "")"
+                        if let id = User.shared.id {
+                            let url = "\(Bundle.main.TEST_URL)/img/profile/\(id).jpg"
+                            ImageCacheManager.shared.removeImage(for: url)
+                        }
                         self?.navigationController?.popViewController(animated: false)
                     case .failure(let error):
                         print("통신 에러 : \(error)")

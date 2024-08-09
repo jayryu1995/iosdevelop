@@ -18,4 +18,7 @@ target 'ByahtColor' do
  pod 'FirebaseStorage'
  pod 'SkeletonView'
  pod 'DropDown'
+ pod 'SendBirdUIKit'
+ pod 'FLAnimatedImage'
+ pod 'Gifu'
 end

@@ -15,6 +15,7 @@ import AuthenticationServices
 import FirebaseMessaging
 import AdSupport
 import AppTrackingTransparency
+import SendbirdChatSDK
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -51,7 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         Messaging.messaging().delegate = self
 
-        self.registerForRemoteNotifications(application)
+        registerForPushNotifications()
 
         return true
     }
@@ -83,22 +84,46 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ImageCacheManager.shared.clearCache()
     }
 
-    func registerForRemoteNotifications(_ application: UIApplication) {
-        UNUserNotificationCenter.current().delegate = self
-        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-        UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { granted, _ in
-            if granted {
-                print("알림 등록이 완료되었습니다.")
-            }
+    private func registerForPushNotifications() {
+      UNUserNotificationCenter.current()
+        .requestAuthorization(options: [.alert, .sound, .badge]) { [weak self] granted, _ in
+            guard granted else { return }
+            self?.getNotificationSettings()
         }
-        application.registerForRemoteNotifications()
+    }
+
+    private func getNotificationSettings() {
+      UNUserNotificationCenter.current().getNotificationSettings { settings in
+          guard settings.authorizationStatus == .authorized else { return }
+          DispatchQueue.main.async {
+            UIApplication.shared.registerForRemoteNotifications()
+          }
+      }
     }
 }
 
 extension AppDelegate: MessagingDelegate, UNUserNotificationCenterDelegate {
 
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        let alertMsg = (userInfo["aps"] as! NSDictionary)["alert"] as! NSDictionary
+        print("Alert Message:", alertMsg)
+        let payload = userInfo["sendbird"] as! NSDictionary
+        print("User Info payload:", payload)
+        let count = payload.value(forKey: "unread_message_count") as! Int
+        // Implement your custom way to parse payload
+        if application.applicationState == .inactive {
+            // Receiving a notification while your app is inactive.
+        } else {
+            // Receiving a notification while your app is in either foreground or background.
+
+        }
+        UIApplication.shared.applicationIconBadgeNumber = count
+        completionHandler(UIBackgroundFetchResult.newData)
+    }
+
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         Messaging.messaging().apnsToken = deviceToken
+        PushNotificationUseCase().registerPushToken(deviceToken: deviceToken)
     }
 
     // foreground 상에서 알림이 보이게끔 해준다.

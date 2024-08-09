@@ -106,7 +106,7 @@ open class GroupChannelListCell: UITableViewCell {
                 nameLabel.text = it.nickname
                 name = it.nickname
                 if let url = it.profileURL {
-                    profileImage.loadImage2(from: url)
+                    profileImage.loadProfileImage(from: url)
                 }
             }
         }

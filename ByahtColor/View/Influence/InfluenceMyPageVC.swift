@@ -100,9 +100,11 @@ class InfluenceMyPageVC: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] data in
                 guard let data = data else { return }
-                let url = "\(Bundle.main.TEST_URL)/img\(data.imagePath ?? "")"
-                print(url)
-                self?.profileImage.loadImage2(from: url)
+                if let id = User.shared.id {
+                    let url = "\(Bundle.main.TEST_URL)/img/profile/\(id).jpg"
+                    self?.profileImage.loadImage(from: url)
+                }
+
                 self?.name.text = data.name ?? "influence_mypage_name_info".localized
             }
             .store(in: &cancellables)

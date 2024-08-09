@@ -1,5 +1,5 @@
 //
-//  BusinessSample2VC.swift
+//  BusinessGuideVC.swift
 //  ByahtColor
 //
 //  Created by jaem on 7/30/24.
@@ -9,19 +9,18 @@ import Foundation
 
 import UIKit
 import SnapKit
-class BusinessSampleVC: UIViewController {
+class BusinessGuideVC: UIViewController {
 
-    private let containView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .white
-        view.layer.cornerRadius = 8
+    private let containImage: UIImageView = {
+        let view = UIImageView(image: UIImage(named: "background_label"))
         view.clipsToBounds = true
+        view.contentMode = .scaleAspectFill
         return view
     }()
 
     private let label = {
         let label = UILabel()
-        label.text = "business_sample_label".localized
+        label.text = "business_sample_chat".localized
         label.textColor = .black
         label.font = UIFont(name: "Pretendard-SemiBold", size: 16)
         label.numberOfLines = 0
@@ -29,57 +28,48 @@ class BusinessSampleVC: UIViewController {
     }()
 
     private let icon: UIImageView = {
-        let image = UIImageView(image: UIImage(named: "swipe_guide_icon"))
+        let image = UIImageView(image: UIImage(named: "chat_button"))
         image.contentMode = .scaleAspectFit
         return image
     }()
 
-    private let icon2: UIImageView = {
-        let image = UIImageView(image: UIImage(named: "swipe_guide_icon2"))
-        image.contentMode = .scaleAspectFit
-        return image
-    }()
+    var onDismiss: (() -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         view.backgroundColor = UIColor.black.withAlphaComponent(0.5)
+
         setupUI()
         setupConstraints()
         setupTapGesture()
     }
 
     private func setupUI() {
-        view.addSubview(containView)
-        containView.addSubview(label)
+        view.addSubview(containImage)
+        containImage.addSubview(label)
         view.addSubview(icon)
-        view.addSubview(icon2)
 
     }
 
     private func setupConstraints() {
-        containView.snp.makeConstraints {
-            $0.center.equalToSuperview()
-            $0.leading.trailing.equalToSuperview().inset(52)
+        containImage.snp.makeConstraints {
+            $0.width.equalTo(264)
+            $0.height.equalTo(83)
+            $0.bottom.equalTo(icon.snp.top).offset(-10)
+            $0.trailing.equalToSuperview().inset(32)
         }
 
         label.snp.makeConstraints {
-            $0.edges.equalToSuperview().inset(20)
+            $0.leading.top.equalToSuperview().inset(20)
         }
 
         icon.snp.makeConstraints {
-            $0.bottom.equalTo(containView.snp.top).offset(-20)
-            $0.width.equalTo(130)
-            $0.height.equalTo(80)
-            $0.centerX.equalToSuperview()
+            $0.trailing.equalToSuperview().inset(20)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(69)
+            $0.width.height.equalTo(80)
         }
 
-        icon2.snp.makeConstraints {
-            $0.top.equalTo(containView.snp.bottom).offset(20)
-            $0.centerX.equalToSuperview()
-            $0.width.equalTo(130)
-            $0.height.equalTo(80)
-        }
     }
 
     private func setupTapGesture() {
@@ -88,7 +78,8 @@ class BusinessSampleVC: UIViewController {
     }
 
     @objc private func handleTap() {
-        UserDefaults.standard.setValue(1, forKey: "sample")
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: false) { [weak self] in
+            self?.onDismiss?()
+        }
     }
 }

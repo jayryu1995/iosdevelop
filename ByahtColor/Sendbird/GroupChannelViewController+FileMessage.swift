@@ -7,19 +7,19 @@
 
 import UIKit
 import SendbirdChatSDK
-extension BusinessChatsVC: ImagePickerRouterDelegate {
+extension ChatsVC: ImagePickerRouterDelegate {
 
     func presentAttachFileAlert() {
         imagePickerRouter.presentAlert()
     }
-    
+
     func imagePickerRouter(_ imagePickerRouter: ImagePickerRouter, didFinishPickingMediaFile mediaFile: ImagePickerMediaFile) {
         targetMessageForScrolling = fileMessageUseCase.sendFile(.init(data: mediaFile.data, name: mediaFile.name, mimeType: mediaFile.mimeType)) { [weak self] result in
             switch result {
             case .success(let sendedMessage):
                 self?.targetMessageForScrolling = sendedMessage
             case .failure(let error):
-                self?.presentAlert(error: error)
+                print(error)
             }
         }
     }

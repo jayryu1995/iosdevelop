@@ -274,7 +274,7 @@ class CollabDetailTableViewCell: UITableViewCell, UIScrollViewDelegate {
             let imageView = UIImageView()
             let widthSize = UIScreen.main.bounds.width
             let url = "\(Bundle.main.TEST_URL)/image\( resource )"
-            imageView.loadImage(from: url, resizedToWidth: widthSize)
+            imageView.loadImage(from: url)
             imageView.contentMode = .scaleAspectFill
             imageView.clipsToBounds = true
             imageScrollView.addSubview(imageView)

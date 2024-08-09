@@ -103,8 +103,10 @@ class ExperienceCell: UITableViewCell {
                 iv.image = UIImage(named: "instagram")
             case 2:
                 iv.image = UIImage(named: "facebook")
-            default:
+            case 3:
                 iv.image = UIImage(named: "naver")
+            default:
+                iv.image = UIImage(named: "youtube")
             }
             return iv
         }()

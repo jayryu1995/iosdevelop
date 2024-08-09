@@ -8,11 +8,11 @@
 import UIKit
 
 class PaddingLabel: UILabel {
-    @IBInspectable var topInset: CGFloat = 8.0
-    @IBInspectable var bottomInset: CGFloat = 8.0
-    @IBInspectable var leftInset: CGFloat = 16.0
-    @IBInspectable var rightInset: CGFloat = 16.0
- 
+    private let topInset: CGFloat = 10.0
+    private let bottomInset: CGFloat = 10.0
+    private let leftInset: CGFloat = 10.0
+    private let rightInset: CGFloat = 10.0
+
     override func drawText(in rect: CGRect) {
         let insets = UIEdgeInsets(top: topInset, left: leftInset, bottom: bottomInset, right: rightInset)
         super.drawText(in: rect.inset(by: insets))

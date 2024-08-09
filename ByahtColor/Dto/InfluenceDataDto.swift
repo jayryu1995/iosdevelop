@@ -6,3 +6,9 @@
 //
 
 import Foundation
+
+struct InfluenceDataDto: Codable {
+    let memberId: String?
+    let name: String?
+    let auth: Int?
+}

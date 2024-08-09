@@ -75,8 +75,10 @@ class PayCell: UITableViewCell {
                     icon = UIImageView(image: UIImage(named: "instagram"))
                 } else if i.sns == 2 {
                     icon = UIImageView(image: UIImage(named: "facebook"))
-                } else {
+                } else if i.sns == 3 {
                     icon = UIImageView(image: UIImage(named: "naver"))
+                } else {
+                    icon = UIImageView(image: UIImage(named: "youtube"))
                 }
 
                 let lbl = UILabel()

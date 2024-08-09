@@ -11,6 +11,7 @@ import SnapKit
 import AVKit
 import AVFoundation
 import Combine
+import SendbirdChatSDK
 
 class BusinessSearchVC: UIViewController {
 
@@ -56,6 +57,13 @@ class BusinessSearchVC: UIViewController {
 
     private let icon_naver: UIImageView = {
         let iv = UIImageView(image: UIImage(named: "naver"))
+        iv.contentMode = .scaleAspectFit
+        iv.isHidden = true
+        return iv
+    }()
+
+    private let icon_youtube: UIImageView = {
+        let iv = UIImageView(image: UIImage(named: "youtube"))
         iv.contentMode = .scaleAspectFit
         iv.isHidden = true
         return iv
@@ -109,9 +117,18 @@ class BusinessSearchVC: UIViewController {
         view.layer.cornerRadius = 8
         return view
     }()
+
+    private let chatButton: UIButton = {
+        let button = UIButton()
+        button.isUserInteractionEnabled = true
+        button.setImage(UIImage(named: "chat_button"), for: .normal)
+        return button
+    }()
+    private let nationIcon = UIImageView()
     private var genderView = UIView()
     private var categoryView = UIView()
     private var ageView = UIView()
+    private var nationView = UIView()
     private let scrollView = UIScrollView()
     private let contentView = UIView()
     private let iconView = UIStackView()
@@ -123,6 +140,7 @@ class BusinessSearchVC: UIViewController {
     private var experienceList: [Experience] = []
     private var payList: [Pay] = []
     private var selectedGender: [String] = []
+    private var selectedNation: [String] = []
     private var selectedCategory: [String] = []
     private var selectedAge: [String] = []
     private var mediaPath: String = ""
@@ -134,7 +152,9 @@ class BusinessSearchVC: UIViewController {
     private var facebookLink = ""
     private var instaLink = ""
     private var naverLink = ""
+    private var youtubeLink = ""
     var profile: InfluenceProfileDto?
+    var playerItem: AVPlayerItem?
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -164,17 +184,19 @@ class BusinessSearchVC: UIViewController {
         nameLabel.text = "\(profile?.name ?? "")"
         introLabel.text = "\(profile?.intro ?? "")"
         selectedGender = profile?.gender?.components(separatedBy: ",") ?? []
+        selectedNation = profile?.nation?.components(separatedBy: ",") ?? []
         selectedAge = profile?.age?.components(separatedBy: ",") ?? []
         selectedCategory = profile?.category?.components(separatedBy: ",") ?? []
         if let path = profile?.imagePath {
             let str = path.split(separator: ".").last ?? ""
             if str == "jpg" {
                 mediaPath = "\(Bundle.main.TEST_URL)/img\( profile?.imagePath ?? "" )"
-                print(mediaPath)
-            } else if str == "mp4" {
-                mediaPath = "\(Bundle.main.TEST_URL)\( profile?.imagePath ?? "" )"
-                print(mediaPath)
             }
+        }
+        // 국가 아이콘설정
+        if let nation = profile?.nation {
+            setupNationIcon(nation: nation)
+            nationIcon.contentMode = .scaleAspectFit
         }
         setupUI()
         setupConstraints()
@@ -197,6 +219,8 @@ class BusinessSearchVC: UIViewController {
 
     private func setupUI() {
         view.addSubview(scrollView)
+        view.addSubview(chatButton)
+        chatButton.addTarget(self, action: #selector(navigationToChats), for: .touchUpInside)
         scrollView.addSubview(contentView)
         scrollView.showsVerticalScrollIndicator = false
         setupTempletView()
@@ -206,8 +230,8 @@ class BusinessSearchVC: UIViewController {
 
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "status" {
-            if let playerItem = object as? AVPlayerItem {
-                switch playerItem.status {
+            if let player = player {
+                switch player.status {
                 case .readyToPlay:
                     loadingIndicator?.stopAnimating()
                     loadingIndicator?.removeFromSuperview()
@@ -234,40 +258,37 @@ class BusinessSearchVC: UIViewController {
         reportView.addSubview(targetView)
 
     }
-    var playerItem: AVPlayerItem?
+
     private func setupTempletView() {
         contentView.addSubview(imageView)
         setupLoadingIndicator()
 
-        replayButton.addTarget(self, action: #selector(replayButtonTapped), for: .touchUpInside)
-
-        if mediaPath.contains("video") {
+        if let item = playerItem {
             let width = UIScreen.main.bounds.width - 40
             let height = width * (525.0 / 350.0)
-            if let videoURL = URL(string: mediaPath) {
-                player = AVPlayer(playerItem: playerItem)
-                playerLayer = AVPlayerLayer(player: player)
-                playerLayer?.frame = CGRect(origin: .zero, size: CGSize(width: width, height: height))
-                playerLayer?.videoGravity = .resizeAspectFill
+            player = AVPlayer(playerItem: item)
+            playerLayer = AVPlayerLayer(player: player)
+            playerLayer?.frame = CGRect(origin: .zero, size: CGSize(width: width, height: height))
+            playerLayer?.videoGravity = .resizeAspectFill
 
-                if let playerLayer = playerLayer {
-                    imageView.layer.addSublayer(playerLayer)
-                }
-                imageView.bringGradientLayerToFront()
-                player?.addObserver(self, forKeyPath: "status", options: [.new, .initial], context: nil)
-                playerItem?.addObserver(self, forKeyPath: "status", options: [.new, .initial], context: nil)
-                player?.play()
+            if let playerLayer = playerLayer {
+                imageView.layer.addSublayer(playerLayer)
             }
 
-            NotificationCenter.default.addObserver(
-                self,
-                selector: #selector(playerDidFinishPlaying),
-                name: .AVPlayerItemDidPlayToEndTime,
-                object: player?.currentItem
-            )
+            imageView.bringGradientLayerToFront()
+
+            player?.addObserver(self, forKeyPath: "status", options: [.new, .initial], context: nil)
+            player?.play()
+
+            // replayButton 액션 추가
             imageView.addSubview(replayButton)
+            replayButton.addTarget(self, action: #selector(replayButtonTapped), for: .touchUpInside)
+            replayButton.snp.makeConstraints {
+                $0.width.height.equalTo(60)
+                $0.center.equalToSuperview()
+            }
         } else if mediaPath.contains("jpg") {
-            imageView.loadImage(from: mediaPath, resizedToWidth: 0)
+            imageView.loadImage(from: mediaPath)
             loadingIndicator?.stopAnimating()
             loadingIndicator?.removeFromSuperview()
         } else {
@@ -275,10 +296,17 @@ class BusinessSearchVC: UIViewController {
             loadingIndicator?.stopAnimating()
             loadingIndicator?.removeFromSuperview()
         }
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(playerDidFinishPlaying),
+            name: .AVPlayerItemDidPlayToEndTime,
+            object: player?.currentItem
+        )
 
         // 아이콘 스택뷰 설정
         imageView.addSubview(nameLabel)
         imageView.addSubview(introLabel)
+        imageView.addSubview(nationIcon)
 
         iconView.axis = .horizontal
         iconView.distribution = .equalSpacing
@@ -288,7 +316,15 @@ class BusinessSearchVC: UIViewController {
         iconView.addArrangedSubview(icon_facebook)
         iconView.addArrangedSubview(icon_tiktok)
         iconView.addArrangedSubview(icon_naver)
+        iconView.addArrangedSubview(icon_youtube)
         imageView.addSubview(iconView)
+
+        nationIcon.snp.makeConstraints {
+            $0.centerY.equalTo(nameLabel.snp.centerY)
+            $0.leading.equalTo(nameLabel.snp.trailing).offset(8)
+            $0.top.bottom.equalTo(nameLabel)
+        }
+
         icon_instagram.snp.makeConstraints {
             $0.width.height.equalTo(20)
         }
@@ -304,9 +340,13 @@ class BusinessSearchVC: UIViewController {
         icon_naver.snp.makeConstraints {
             $0.width.height.equalTo(20)
         }
+
+        icon_youtube.snp.makeConstraints {
+            $0.width.height.equalTo(20)
+        }
     }
 
-    // 0: 틱톡 1: 인스타그램 2: 페이스북
+    // 0: 틱톡 1: 인스타그램 2: 페이스북 3: 네이버 4: 유튜브
     private func setupIconView(list: [Sns]) {
         list.forEach { it in
             var iconView: UIImageView?
@@ -324,6 +364,9 @@ class BusinessSearchVC: UIViewController {
             case 3:
                 iconView = icon_naver
                 naverLink = it.link ?? ""
+            case 4:
+                iconView = icon_youtube
+                youtubeLink = it.link ?? ""
             default:
                 break
             }
@@ -344,17 +387,19 @@ class BusinessSearchVC: UIViewController {
         var urlString: String?
         let tag = sender.view?.tag
         switch tag {
-            case 0:
-                urlString = tiktokLink
-            case 1:
-                urlString = instaLink
-            case 2:
-                urlString = facebookLink
-            case 3:
-                urlString = naverLink
-            default:
-                break
-            }
+        case 0:
+            urlString = tiktokLink
+        case 1:
+            urlString = instaLink
+        case 2:
+            urlString = facebookLink
+        case 3:
+            urlString = naverLink
+        case 4:
+            urlString = youtubeLink
+        default:
+            break
+        }
 
         if let urlString = urlString, let url = URL(string: urlString) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
@@ -362,6 +407,12 @@ class BusinessSearchVC: UIViewController {
     }
 
     private func setupConstraints() {
+        chatButton.snp.makeConstraints {
+            $0.trailing.equalToSuperview().inset(20)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(20)
+            $0.width.height.equalTo(80)
+        }
+
         scrollView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
@@ -432,13 +483,6 @@ class BusinessSearchVC: UIViewController {
             $0.bottom.equalToSuperview().offset(-20)
         }
 
-        if mediaPath.contains(".mp4") {
-            replayButton.snp.makeConstraints {
-                $0.width.height.equalTo(60)
-                $0.center.equalToSuperview()
-            }
-        }
-
     }
 
     private func makeTargetStackView() {
@@ -455,16 +499,23 @@ class BusinessSearchVC: UIViewController {
         label3.text = "influence_profile_target3".localized
         label3.font = UIFont(name: "Pretendard-Medium", size: 16)
 
+        let label4 = UILabel()
+        label4.text = "influence_profile_target4".localized
+        label4.font = UIFont(name: "Pretendard-Medium", size: 16)
+
         categoryView = createCategoryView(titles: Globals.shared.categories, selected: selectedCategory)
         ageView = createCategoryView(titles: Globals.shared.ages, selected: selectedAge)
         genderView = createCategoryView(titles: Globals.shared.genders, selected: selectedGender)
+        nationView = createCategoryView(titles: Globals.shared.nations, selected: selectedNation)
 
         targetView.addSubview(label)
         targetView.addSubview(label2)
         targetView.addSubview(label3)
+        targetView.addSubview(label4)
         targetView.addSubview(categoryView)
         targetView.addSubview(ageView)
         targetView.addSubview(genderView)
+        targetView.addSubview(nationView)
 
         label.snp.makeConstraints {
             $0.top.equalToSuperview()
@@ -496,6 +547,17 @@ class BusinessSearchVC: UIViewController {
 
         genderView.snp.makeConstraints {
             $0.top.equalTo(label3.snp.bottom).offset(8)
+            $0.leading.trailing.equalToSuperview()
+        }
+
+        label4.snp.makeConstraints {
+            $0.top.equalTo(genderView.snp.bottom).offset(16)
+            $0.leading.equalToSuperview()
+            $0.height.equalTo(24)
+        }
+
+        nationView.snp.makeConstraints {
+            $0.top.equalTo(label4.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
         }
@@ -589,8 +651,10 @@ class BusinessSearchVC: UIViewController {
                 icon = UIImageView(image: UIImage(named: "instagram"))
             } else if i.sns == 2 {
                 icon = UIImageView(image: UIImage(named: "facebook"))
-            } else {
+            } else if i.sns == 3 {
                 icon = UIImageView(image: UIImage(named: "naver"))
+            } else {
+                icon = UIImageView(image: UIImage(named: "youtube"))
             }
 
             let lbl = UILabel()
@@ -716,12 +780,25 @@ class BusinessSearchVC: UIViewController {
         return stackView
     }
 
+    private func setupNationIcon(nation: String) {
+        switch nation {
+        case "0": nationIcon.image = UIImage(named: "icon_ko")
+        case "1": nationIcon.image = UIImage(named: "icon_jp")
+        case "2": nationIcon.image = UIImage(named: "icon_th")
+        case "3": nationIcon.image = UIImage(named: "icon_ph")
+        case "4": nationIcon.image = UIImage(named: "icon_vi")
+        case "5": nationIcon.image = UIImage(named: "icon_sg")
+        default:
+            nationIcon.image = nil
+        }
+    }
+
     @objc private func playerDidFinishPlaying(notification: Notification) {
+        print("영상종료")
         replayButton.isHidden = false
     }
 
     @objc private func iconTapped(_ sender: UIButton) {
-        print("sender.accessibilityHint \(sender.accessibilityHint)")
         if let urlString = sender.accessibilityHint, let url = URL(string: urlString) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
@@ -733,4 +810,26 @@ class BusinessSearchVC: UIViewController {
         player?.play()
     }
 
+    @objc private func navigationToChats(_ sender: UIButton) {
+        let params = GroupChannelCreateParams()
+        params.name = "test Chat"
+
+        let server: String = User.shared.id ?? ""
+        let client: String = profile?.memberId ?? ""
+        params.userIds = [server, client]
+        params.isDistinct = true
+
+        GroupChannel.createChannel(params: params) { channel, error in
+            guard error == nil else {
+                // Handle error.
+                return
+            }
+            var timestampStorage = TimestampStorage()
+
+            let vc = ChatsVC(channel: channel!, timestampStorage: timestampStorage)
+            vc.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+
+    }
 }

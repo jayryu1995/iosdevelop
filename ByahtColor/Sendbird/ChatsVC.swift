@@ -106,16 +106,19 @@ class ChatsVC: UIViewController {
             make.bottom.equalTo(messageInputView.snp.top)
         }
 
-        // 탭 제스처 인식기 추가
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        view.addGestureRecognizer(tapGesture)
-
-        self.hideKeyboard()
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(removeKeyboard))
+                tapGesture.cancelsTouchesInView = false
+                tableView.addGestureRecognizer(tapGesture)
 
         // 메시지가 로드된 후 스크롤을 가장 아래로 이동
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
             self.scrollToBottom(animated: false)
         }
+    }
+
+    @objc private func removeKeyboard() {
+        view.endEditing(true)
+        self.scrollToBottom(animated: false)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -128,6 +131,7 @@ class ChatsVC: UIViewController {
         super.viewDidAppear(animated)
 
         messageListUseCase.markAsRead()
+
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -169,11 +173,16 @@ extension ChatsVC: UITableViewDataSource {
         let message = messageListUseCase.messages[indexPath.row]
 
         let cell: BasicMessageCell = tableView.dequeueReusableCell(for: indexPath)
+        cell.selectionStyle = .none
+
+        if let url = message.sender?.profileURL {
+            cell.confingImage(url: url)
+        }
+
         if indexPath.row != 0 {
             let firstMessage = messageListUseCase.messages[indexPath.row - 1]
 
             if Date.sbu_from(message.createdAt).sbu_toString(format: .yyyyMMdd) != Date.sbu_from(firstMessage.createdAt).sbu_toString(format: .yyyyMMdd ) {
-
                 cell.addHeader(date: Date.sbu_from(message.createdAt).sbu_toString(format: .yyyyMMdd))
             }
 
@@ -181,7 +190,6 @@ extension ChatsVC: UITableViewDataSource {
             cell.addHeader(date: Date.sbu_from(message.createdAt).sbu_toString(format: .yyyyMMdd))
         }
 
-        cell.selectionStyle = .none
         if let fileMessage = message as? FileMessage {
             cell.configure(with: fileMessage)
         } else {
@@ -190,12 +198,11 @@ extension ChatsVC: UITableViewDataSource {
 
         let unreadCount = channel.getUnreadMemberCount(message)
         if unreadCount == 0 {
-            print(unreadCount)
             cell.checked(check: true)
         } else {
-            print(unreadCount)
             cell.checked(check: false)
         }
+
         return cell
     }
 
@@ -245,7 +252,6 @@ extension ChatsVC: GroupChannelMessageListUseCaseDelegate {
     }
 
     func groupChannelMessageListUseCase(_ useCase: GroupChannelMessageListUseCase, didUpdateChannel channel: GroupChannel) {
-
         title = name
     }
 

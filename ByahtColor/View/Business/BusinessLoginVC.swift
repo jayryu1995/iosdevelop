@@ -131,10 +131,10 @@ class BusinessLoginVC: UIViewController {
     }
 
     @objc private func submitButtonTapped() {
-
+        print("id: \(tf_id.text), password : \(tf_passwd.text)")
         guard let username = tf_id.text, !username.isEmpty,
               let password = tf_passwd.text, !password.isEmpty else {
-            print("Please enter valid credentials")
+
             errorLabel.text = "login_str3".localized
             errorLabel.isHidden = false
             return

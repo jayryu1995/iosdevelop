@@ -9,9 +9,9 @@ import Foundation
 import SendbirdChatSDK
 
 struct MessageSendingStatus {
-    
+
     let description: String
-    
+
     init(_ rawValue: BaseMessage) {
         switch rawValue.sendingStatus {
         case .pending:
@@ -26,5 +26,5 @@ struct MessageSendingStatus {
             description = ""
         }
     }
-    
+
 }

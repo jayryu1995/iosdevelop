@@ -281,9 +281,10 @@ class AdminCollabVC: UIViewController, CollabFilterVCDelegate {
         let contentVC = CollabFilterVC() // 패널에 표시할 컨텐츠 뷰 컨트롤러
         contentVC.delegate = self
         fpc.set(contentViewController: contentVC)
-        fpc.layout = CustomFloatingPanel()
+        fpc.layout = CollabFloatingPanel()
         fpc.move(to: .half, animated: true) // 패널을 반 정도의 높이로 이동
         fpc.isRemovalInteractionEnabled = true
+        fpc.surfaceView.appearance.cornerRadius = 20
         fpc.addPanel(toParent: self)
     }
 
@@ -397,7 +398,7 @@ extension AdminCollabVC: UITableViewDataSource, UITableViewDelegate, FloatingPan
     }
 
     func floatingPanelWillBeginAttracting(_ fpc: FloatingPanelController, to state: FloatingPanelState) {
-        if state == FloatingPanelState.tip {
+        if state == FloatingPanelState.half {
             fpc.removePanelFromParent(animated: true)
         }
     }

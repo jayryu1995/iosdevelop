@@ -9,6 +9,41 @@
 "server_error_title" = "Server Maintenance";
 "server_error_message" = "The server is currently undergoing maintenance. Please try again later.";
 
+//온보딩
+"onboarding_button" = "Next";
+"onboarding_first_label" = "Register your\nsocial media account";
+"onboarding_second_label" = "and get noticed by companies looking for creators.";
+"onboarding_second_label2" = "Propose direct collaborations.";
+"onboarding_third_label" = "Send and receive proposals\nthrough my profile.";
+"onboarding_third_label2" = "Monetize your account\nwithout having to wait anymore.";
+"onboarding_third_label3" = "Hello! If our company is a good fit,\nhow about collaborating together?";
+"onboarding_third_label4" = "I’d like advertise in both of your blog and Instagram at once.\nCould you schedule an upload as soon as possible?";
+"onboarding_third_label5" = "Do you accept this type of advertising?\nI’d like to entrust you with our service ads!";
+"onboarding_fourth_label" = "I’ll recommend you\nto the right advertisers.";
+"onboarding_fourth_label2" = "Please provide the name\nof creator for collaboration.";
+"onboarding_fourth_hint" = "Please enter your real name.";
+"onboarding_fourth_button" = "Go to profile setup";
+
+//Sns
+"TikTok" = "TikTok";
+"Instagram" = "Instagram";
+"Facebook" = "Facebook";
+"Naver" = "Naver";
+"Youtube" = "Youtube";
+"Shopee" = "Shopee";
+
+// 국가
+"nation_ko" = "South Korea";
+"nation_vi" = "Vietnam";
+"nation_global" = "Global";
+"nation_th" = "Thailand";
+"nation_ph" = "Philippines";
+"nation_sg" = "Singapore";
+"nation_jp" = "Japan";
+
+// MessageInputView
+"messageInputView_placeholder" = "Send Message";
+
 // AlertUpaate
 "update_str" = "Update";
 "update_str1" = "An update is required to continue using this app.";
@@ -18,6 +53,7 @@
 
 // BusinessSampleVC
 "business_sample_label" = "Swipe left or right to check the creators.";
+"business_sample_chat" = "Suggest collaboration quickly via chat.";
 
 // 인플루언서 프로필 작성 Alert창
 "alert_regist_button" = "Register Profile";
@@ -59,6 +95,14 @@
 "findid_label" = "You can find your ID after identity verification.";
 "findid_name" = "Enter Name";
 "tel_certification" = "Mobile Phone Verification";
+
+//FindPasswordVC
+"findpassword_id" = "Enter ID";
+"findpassword_name" = "Enter FullName";
+
+//BusinessLoginVC
+"login_join" = "SignUp";
+"login_find_account" = "Find Account";
 
 // AgreementVC
 "agree" = "Đồng ý";
@@ -115,6 +159,11 @@
 "influence_profile_target" = "Topic";
 "influence_profile_target2" = "Age Range";
 "influence_profile_target3" = "Gender";
+"influence_profile_target4" = "Target Country";
+"influence_profile_negotiable" = "Negotiable";
+"influence_profile_non_negotiable" = "Non Negotiable";
+"influence_profile_video" = "Video";
+"influence_profile_photo" = "Photo";
 
 // InfluenceProfileWriteVC
 "influence_profile_write_thumbnail" = "Upload a thumbnail.";
@@ -142,8 +191,10 @@
 "influence_profile_write_message4" = "Please select at least one topic.";
 "influence_profile_write_message5" = "Please select at least one age group.";
 "influence_profile_write_message6" = "Please select at least one primary gender group.";
-"influence_profile_write_message7" = "Please enter at least one SNS link.";
+"influence_profile_write_message7" = "Please select the country where you are active as an influencer.";
+"influence_profile_write_message8" = "Please enter at least one SNS link.";
 "influence_profile_write_code" = "Invite code";
+"influence_profile_write_nation" = "Target Country";
 
 // AddSnsVC
 "add_sns_title" = "Add SNS Account";
@@ -260,7 +311,7 @@
 
 //CollabWriteVC
 "collabWriteVC_contentLabel" = "Event Details\n- Schedule\n- Provided Items\n- Product/Brand Description\n";
-"collabWriteVC_link" = "Shopee Link";
+"collabWriteVC_link" = "Product/Service Link";
 "collabWriteVC_condition" = "Event Conditions\n- Requirements\n- Precautions\n";
 "collabWriteVC_title" = "Title";
 "collabWriteVC_people_label" = "Number of Selected Participants";
@@ -313,7 +364,7 @@
 //CollabDetailVC
 "collab_detail_subtitle" = "Event Details";
 "collab_detail_subtitle2" = "Event Conditions";
-"collab_detail_link" = "Shopee Link";
+"collab_detail_link" = "Content Link";
 "collab_detail_button" = "Completed";
 "collab_detail_button2" = "Write Review";
 "collab_detail_submit" = "Application";

@@ -7,8 +7,10 @@
 
 import Foundation
 import UIKit
+import SendbirdChatSDK
 
 class TabBarViewController: UITabBarController {
+    let chatVC = ChatsListVC()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -18,8 +20,12 @@ class TabBarViewController: UITabBarController {
         self.tabBar.layer.borderWidth = 1
         self.tabBar.layer.borderColor = UIColor(hex: "#F7F7F7").cgColor
         setupTapbar()
+        initSendBird()
 
-        print("User.shared.auth \(User.shared.auth)")
+        chatVC.title = "Chats"
+        chatVC.tabBarItem.image = UIImage(named: "icon_chat")
+        chatVC.tabBarItem.selectedImage = UIImage(named: "icon_chat2")?.withRenderingMode(.alwaysOriginal)
+
         if User.shared.auth ?? 0 < 2 {
             let homeVC = InfluenceHomeVC()
             let profileVC = InfluenceProfileVC()
@@ -28,6 +34,7 @@ class TabBarViewController: UITabBarController {
 
             homeVC.title = "Home"
             profileVC.title = "Profile"
+
             communityVC.title = "Community"
             myPageVC.title = "My Page"
 
@@ -46,13 +53,15 @@ class TabBarViewController: UITabBarController {
             // navigationController의 root view 설정
             let navigationTab = UINavigationController(rootViewController: homeVC)
             let navigationTab2 = UINavigationController(rootViewController: profileVC)
-            let navigationTab3 = UINavigationController(rootViewController: communityVC)
-            let navigationTab4 = UINavigationController(rootViewController: myPageVC)
+            let navigationTab3 = UINavigationController(rootViewController: chatVC)
+            let navigationTab4 = UINavigationController(rootViewController: communityVC)
+            let navigationTab5 = UINavigationController(rootViewController: myPageVC)
 
-            setViewControllers([navigationTab, navigationTab2, navigationTab3, navigationTab4], animated: false)
+            setViewControllers([navigationTab, navigationTab2, navigationTab3, navigationTab4, navigationTab5], animated: false)
         } else if User.shared.auth ?? 0 < 5 {
             let homeVC = BusinessHomeVC()
             let searchVC = BusinessSwipeVC()
+
             let myPageVC = BusinessMypageVC()
             homeVC.title = "Home"
             searchVC.title = "Search"
@@ -70,9 +79,10 @@ class TabBarViewController: UITabBarController {
             // navigationController의 root view 설정
             let navigationTab = UINavigationController(rootViewController: homeVC)
             let navigationTab2 = UINavigationController(rootViewController: searchVC)
-            let navigationTab3 = UINavigationController(rootViewController: myPageVC)
+            let navigationTab3 = UINavigationController(rootViewController: chatVC)
+            let navigationTab4 = UINavigationController(rootViewController: myPageVC)
 
-            setViewControllers([navigationTab, navigationTab2, navigationTab3], animated: false)
+            setViewControllers([navigationTab, navigationTab2, navigationTab3, navigationTab4], animated: false)
 
         }
 
@@ -116,4 +126,53 @@ class TabBarViewController: UITabBarController {
 
     }
 
+    private func initSendBird() {
+        SendbirdConfig.initializeSendbirdSDK()
+        if let id = User.shared.id {
+            SendbirdUser.shared.login(userId: id) { result in
+                switch result {
+                case .success(let user):
+                    print("로그인성공 \(user.nickname)")
+                    self.updateReadState()
+                    self.updateChatProfile()
+                    NotificationCenter.default.post(name: NSNotification.Name("LoginSuccess"), object: nil)
+                case .failure(let error):
+                    print("error : \(error)")
+                }
+            }
+
+        }
+    }
+
+    private func updateReadState() {
+        SendbirdUser.shared.unReadMessages { result in
+            switch result {
+            case .success(let count):
+                print("count : \(count)")
+                if count > 0 {
+                    self.chatVC.tabBarItem.image = UIImage(named: "icon_chat3")?.withRenderingMode(.alwaysOriginal)
+                    self.chatVC.tabBarItem.selectedImage = UIImage(named: "icon_chat4")?.withRenderingMode(.alwaysOriginal)
+                } else {
+                    self.chatVC.tabBarItem.image = UIImage(named: "icon_chat")
+                    self.chatVC.tabBarItem.selectedImage = UIImage(named: "icon_chat2")?.withRenderingMode(.alwaysOriginal)
+                }
+            case .failure(let error):
+                print("error : \(error)")
+            }
+        }
+    }
+
+    private func updateChatProfile() {
+        let imagePath = "\(Bundle.main.TEST_URL)/img/account/\(User.shared.id ?? "").jpg"
+        if let name = User.shared.name {
+            SendbirdUser.shared.updateUserInfo(nickname: name, profileImage: nil) { result in
+                switch result {
+                case .success(let user):
+                    print("업데이트 성공")
+                case .failure(let error):
+                    print("error : \(error)")
+                }
+            }
+        }
+    }
 }

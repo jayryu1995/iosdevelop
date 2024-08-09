@@ -23,9 +23,7 @@ class InfluenceSwipeVC: UIViewController, UIPageViewControllerDataSource, UIPage
         self.navigationController?.navigationBar.isHidden = false
         setupBackButton()
         getProfileList()
-
-        if UserDefaults.standard.integer(forKey: "sample") != 1 {
-            print("setupSampleView")
+        if UserDefaults.standard.integer(forKey: "sample") == 0 {
             setupSampleView()
         }
 
@@ -43,11 +41,11 @@ class InfluenceSwipeVC: UIViewController, UIPageViewControllerDataSource, UIPage
             DispatchQueue.main.async {
                 switch result {
                 case .success(let data):
-                    print(data.count)
+                    self?.log(message: "\(data.count)")
                     self?.businessList = data
                     self?.setupPageViewController()
                 case .failure(let error):
-                    print("통신 에러 : \(error)")
+                    self?.log(message: "통신 에러 : \(error)")
                 }
             }
         }

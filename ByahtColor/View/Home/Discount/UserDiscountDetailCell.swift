@@ -149,7 +149,7 @@ class UserDiscountDetailCell: UITableViewCell, UIScrollViewDelegate {
             let imageView = UIImageView()
             let widthSize = UIScreen.main.bounds.width
             let url = "\(Bundle.main.TEST_URL)\( resource )"
-            imageView.loadImage(from: url, resizedToWidth: widthSize)
+            imageView.loadImage(from: url)
             imageView.contentMode = .scaleAspectFit
             imageView.clipsToBounds = true
             imageView.backgroundColor = .black

@@ -538,7 +538,7 @@ extension ReviewWriteVC: FloatingPanelControllerDelegate, UIImagePickerControlle
     }
 
     func floatingPanelWillBeginAttracting(_ fpc: FloatingPanelController, to state: FloatingPanelState) {
-        if state == FloatingPanelState.tip {
+        if state == FloatingPanelState.half {
             fpc.removePanelFromParent(animated: true)
         }
     }

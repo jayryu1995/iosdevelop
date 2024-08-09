@@ -5,12 +5,12 @@
 //  Created by jaem on 6/29/24.
 //
 
-import Foundation
 import Alamofire
 import Combine
 import UIKit
 import AVFoundation
 import SkeletonView
+import SendbirdChatSDK
 
 class BusinessHomeVC: UIViewController, UIScrollViewDelegate {
 
@@ -48,7 +48,7 @@ class BusinessHomeVC: UIViewController, UIScrollViewDelegate {
         view.backgroundColor = .white
         self.navigationController?.navigationBar.isHidden = true
         setupHomeData()
-
+        initSendBird()
         if UserDefaults.standard.integer(forKey: "home") == 0 {
             setupAlertView()
         }
@@ -132,7 +132,7 @@ class BusinessHomeVC: UIViewController, UIScrollViewDelegate {
             let imageView = UIImageView()
             if let resource = collab.imageList?.first {
                 let url = "\(Bundle.main.TEST_URL)/image\( resource )"
-                imageView.loadImage(from: url, resizedToWidth: 0)
+                imageView.loadImage(from: url)
             } else {
                 DispatchQueue.main.async {
                     imageView.backgroundColor = .lightGray
@@ -257,7 +257,7 @@ class BusinessHomeVC: UIViewController, UIScrollViewDelegate {
                 let str = resource.split(separator: ".").last ?? ""
                 if str == "jpg" {
                     let url = "\(Bundle.main.TEST_URL)/img\(resource)"
-                    imageView.loadImage(from: url, resizedToWidth: 0)
+                    imageView.loadImage(from: url)
                 } else {
                     let path = "\(Bundle.main.TEST_URL)\(resource)"
                     loadVideoThumbnail(imageView: imageView, path: path)
@@ -406,6 +406,36 @@ class BusinessHomeVC: UIViewController, UIScrollViewDelegate {
         } else {
             loadingIndicator.stopAnimating()
             loadingIndicator.removeFromSuperview()
+        }
+    }
+
+    private func initSendBird() {
+        SendbirdConfig.initializeSendbirdSDK()
+        if let id = User.shared.id {
+            SendbirdUser.shared.login(userId: id) { result in
+                switch result {
+                case .success(let user):
+                    print("로그인성공 \(user.nickname)")
+
+                    self.updateChatProfile()
+                    NotificationCenter.default.post(name: NSNotification.Name("LoginSuccess"), object: nil)
+                case .failure(let error):
+                    print("error : \(error)")
+                }
+            }
+        }
+    }
+
+    private func updateChatProfile() {
+        if let name = User.shared.name {
+            SendbirdUser.shared.updateUserInfo(nickname: name, profileImage: nil) { result in
+                switch result {
+                case .success(let user):
+                    print("업데이트 성공")
+                case .failure(let error):
+                    print("error : \(error)")
+                }
+            }
         }
     }
 }

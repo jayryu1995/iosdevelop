@@ -1,5 +1,5 @@
 //
-//  BusinessSampleVC.swift
+//  BusinessGuide2VC.swift
 //  ByahtColor
 //
 //  Created by jaem on 7/10/24.
@@ -7,7 +7,7 @@
 
 import UIKit
 import SnapKit
-class BusinessSampleVC: UIViewController {
+class BusinessGuide2VC: UIViewController {
 
     private let containView: UIView = {
         let view = UIView()

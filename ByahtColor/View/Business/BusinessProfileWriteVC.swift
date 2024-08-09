@@ -656,7 +656,7 @@ class BusinessProfileWriteVC: UIViewController {
         }
     }
 
-    @objc func categoryButtonTapped(_ sender: UIButton) {
+    @objc private func categoryButtonTapped(_ sender: UIButton) {
         let selector = sender.tag.toString()
 
         if sender.isSelected {
@@ -677,7 +677,7 @@ class BusinessProfileWriteVC: UIViewController {
 
     }
 
-    @objc func ageButtonTapped(_ sender: UIButton) {
+    @objc private func ageButtonTapped(_ sender: UIButton) {
         let selector = sender.tag.toString()
         if sender.isSelected {
             // 버튼이 이미 선택된 상태라면, 선택 해제
@@ -696,7 +696,7 @@ class BusinessProfileWriteVC: UIViewController {
         }
     }
 
-    @objc func genderButtonTapped(_ sender: UIButton) {
+    @objc private func genderButtonTapped(_ sender: UIButton) {
         let selector = sender.tag.toString()
         if sender.isSelected {
             // 버튼이 이미 선택된 상태라면, 선택 해제

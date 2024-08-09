@@ -23,30 +23,6 @@ class CustomFunction {
             return ""
         }
     }
-    // 원 영역 자르기 //
-    func cropImageToCircle(image: UIImage, cropRect: CGRect) -> UIImage? {
-        let imageSize = image.size
-        let circleSize = CGSize(width: cropRect.height, height: cropRect.width)
-
-        UIGraphicsBeginImageContextWithOptions(circleSize, false, image.scale)
-        defer { UIGraphicsEndImageContext() }
-
-        let circlePath = UIBezierPath(ovalIn: CGRect(origin: .zero, size: circleSize))
-        circlePath.addClip()
-
-        image.draw(in: CGRect(origin: CGPoint(x: (circleSize.width - imageSize.width) / 2, y: (circleSize.height - imageSize.height) / 2), size: imageSize))
-
-        guard let croppedImage = UIGraphicsGetImageFromCurrentImageContext() else { return nil }
-        return croppedImage
-    }
-
-    // 하단 모서리 Radious
-    func roundCorners(view: UIView, corners: UIRectCorner, radius: CGFloat) {
-        let path = UIBezierPath(roundedRect: view.bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-        let mask = CAShapeLayer()
-        mask.path = path.cgPath
-        view.layer.mask = mask
-    }
 
     // toastMessage
     func showToast(message: String, font: UIFont, view: UIView) {
@@ -65,37 +41,6 @@ class CustomFunction {
         }, completion: {(_) in
             toastLabel.removeFromSuperview()
         })
-    }
-
-    func showToastLong(message: String, font: UIFont, view: UIView) {
-        let toastLabel = UILabel(frame: CGRect(x: view.frame.size.width/2 - 125, y: view.frame.size.height-100, width: 250, height: 35))
-        toastLabel.backgroundColor = UIColor.systemGray
-        toastLabel.textColor = UIColor.white
-        toastLabel.font = font
-        toastLabel.textAlignment = .center
-        toastLabel.text = message
-        toastLabel.alpha = 1.0
-        toastLabel.layer.cornerRadius = 10
-        toastLabel.clipsToBounds  =  true
-        view.addSubview(toastLabel)
-        UIView.animate(withDuration: 3.0, delay: 0.5, options: .curveEaseOut, animations: {
-            toastLabel.alpha = 0.0
-        }, completion: {(_) in
-            toastLabel.removeFromSuperview()
-        })
-    }
-
-    // customButton
-    func showButton(title: String, font: UIFont, view: UIView) -> UIButton {
-        let button = UIButton(frame: CGRect(x: view.frame.size.width/2 - 40, y: view.frame.size.height-60, width: 80, height: 35))
-        button.backgroundColor = UIColor.black.withAlphaComponent(0.6)
-        button.setTitleColor(UIColor.white, for: .normal)
-        button.setTitle(title, for: .normal)
-        button.alpha = 1.0
-        button.layer.cornerRadius = 10
-        button.clipsToBounds  =  true
-
-        return button
     }
 
 }

@@ -6,3 +6,8 @@
 //
 
 import Foundation
+
+struct InfluenceAccountNameDto: Codable {
+    let memberId: String?
+    let name: String?
+}

@@ -40,6 +40,8 @@ class InfluenceProfileCell: UITableViewCell {
         return label
     }()
 
+    private let nationIcon = UIImageView()
+
     private let iconView: UIStackView = {
         let iconView = UIStackView()
         iconView.axis = .horizontal
@@ -83,6 +85,12 @@ class InfluenceProfileCell: UITableViewCell {
         iv.isUserInteractionEnabled = true
         return iv
     }()
+    private let icon_youtube: UIImageView = {
+        let iv = UIImageView(image: UIImage(named: "youtube"))
+        iv.contentMode = .scaleAspectFit
+        iv.isUserInteractionEnabled = true
+        return iv
+    }()
     private let viewModel = BusinessViewModel()
     private var videoURL: URL?
     private var player: AVPlayer?
@@ -91,6 +99,7 @@ class InfluenceProfileCell: UITableViewCell {
     private var instaLink = ""
     private var facebookLink = ""
     private var naverLink = ""
+    private var youtubeLink = ""
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -116,10 +125,12 @@ class InfluenceProfileCell: UITableViewCell {
         image.addSubview(nameLabel)
         image.addSubview(infoLabel)
         image.addSubview(iconView)
+        image.addSubview(nationIcon)
         iconView.addArrangedSubview(icon_instagram)
         iconView.addArrangedSubview(icon_facebook)
         iconView.addArrangedSubview(icon_naver)
         iconView.addArrangedSubview(icon_tiktok)
+        iconView.addArrangedSubview(icon_youtube)
 
         // 제스처 인식기 추가
         let tapGestureInstagram = UITapGestureRecognizer(target: self, action: #selector(tappedIcon(_:)))
@@ -151,7 +162,13 @@ class InfluenceProfileCell: UITableViewCell {
 
         nameLabel.snp.makeConstraints {
             $0.bottom.equalTo(iconView.snp.top).offset(-8)
-            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.leading.equalToSuperview().inset(20)
+        }
+
+        nationIcon.snp.makeConstraints {
+            $0.centerY.equalTo(nameLabel.snp.centerY)
+            $0.leading.equalTo(nameLabel.snp.trailing).offset(8)
+            $0.top.bottom.equalTo(nameLabel)
         }
 
         icon_instagram.snp.makeConstraints {
@@ -170,6 +187,9 @@ class InfluenceProfileCell: UITableViewCell {
             $0.width.height.equalTo(20)
         }
 
+        icon_youtube.snp.makeConstraints {
+            $0.width.height.equalTo(20)
+        }
     }
 
     @objc private func playerDidFinishPlaying(_ notification: Notification) {
@@ -191,6 +211,7 @@ class InfluenceProfileCell: UITableViewCell {
         var hasInstaLink = false
         var hasFacebookLink = false
         var hasNaverLink = false
+        var hasYoutubeLink = false
 
         list.forEach { it in
             switch it.sns {
@@ -206,6 +227,9 @@ class InfluenceProfileCell: UITableViewCell {
             case 3:
                 naverLink = it.link ?? ""
                 hasNaverLink = !naverLink.isEmpty
+            case 4:
+                youtubeLink = it.link ?? ""
+                hasYoutubeLink = !youtubeLink.isEmpty
             default:
                 break
             }
@@ -216,6 +240,7 @@ class InfluenceProfileCell: UITableViewCell {
             self.icon_instagram.isHidden = !hasInstaLink
             self.icon_facebook.isHidden = !hasFacebookLink
             self.icon_naver.isHidden = !hasNaverLink
+            self.icon_youtube.isHidden = !hasYoutubeLink
         }
     }
 
@@ -230,6 +255,8 @@ class InfluenceProfileCell: UITableViewCell {
             urlString = facebookLink
         case icon_naver:
             urlString = naverLink
+        case icon_youtube:
+            urlString = youtubeLink
         default:
             break
         }
@@ -304,9 +331,17 @@ class InfluenceProfileCell: UITableViewCell {
                 let url = "\(Bundle.main.TEST_URL)/img\( path )"
                 image.loadImage2(from: url)
             }
+
+            // 국가 아이콘설정
+            if let nation = profile?.nation {
+                setupNationIcon(nation: nation)
+                nationIcon.contentMode = .scaleAspectFit
+            }
+
             // 아이콘과 라벨들을 다시 최상위 레이어로 올리기
             image.bringGradientLayerToFront()
             image.bringSubviewToFront(nameLabel)
+            image.bringSubviewToFront(nationIcon)
             image.bringSubviewToFront(infoLabel)
             image.bringSubviewToFront(iconView)
         } else {
@@ -316,6 +351,19 @@ class InfluenceProfileCell: UITableViewCell {
             playerLayer?.removeFromSuperlayer()
             playerLayer = nil
             image.image = UIImage(named: "defaultImage") // 기본 이미지 설정
+        }
+    }
+
+    private func setupNationIcon(nation: String) {
+        switch nation {
+        case "0": nationIcon.image = UIImage(named: "icon_ko")
+        case "1": nationIcon.image = UIImage(named: "icon_jp")
+        case "2": nationIcon.image = UIImage(named: "icon_th")
+        case "3": nationIcon.image = UIImage(named: "icon_ph")
+        case "4": nationIcon.image = UIImage(named: "icon_vi")
+        case "5": nationIcon.image = UIImage(named: "icon_sg")
+        default:
+            nationIcon.image = nil
         }
     }
 

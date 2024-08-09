@@ -54,11 +54,11 @@ class InitialViewController: UIViewController {
         let alertVC = UIAlertController(title: "update_str".localized, message: "update_str1".localized, preferredStyle: .alert)
         let alertAtion = UIAlertAction(title: "update_str".localized, style: .default) { _ in
             guard let url = URL(string: "itms-apps://itunes.apple.com/app/\(appID)") else { return }
-
-                        // canOpenURL(_:) - 앱이 URL Scheme 처리할 수 있는지 여부를 나타내는 Boolean 값을 리턴한다.
-                        if UIApplication.shared.canOpenURL(url) {
-                            UIApplication.shared.open(url)
-                        }        }
+            // canOpenURL(_:) - 앱이 URL Scheme 처리할 수 있는지 여부를 나타내는 Boolean 값을 리턴한다.
+            if UIApplication.shared.canOpenURL(url) {
+                UIApplication.shared.open(url)
+            }
+        }
         alertVC.addAction(alertAtion)
 
         DispatchQueue.main.async {

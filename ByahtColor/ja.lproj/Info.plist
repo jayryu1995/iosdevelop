@@ -68,8 +68,8 @@
 	<key>UIFileSharingEnabled</key>
 	<true/>
 	<key>NSUserTrackingUsageDescription</key>
-	<string>We need permission to track you for personalized advertising.</string>
+	<string>お客様にパーソナライズされた広告を提供するために追跡許可が必要です。</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>This app requires access to the microphone to enable voice recording features.</string>
+	<string>このアプリは音声録音機能を有効にするためにマイクへのアクセスが必要です。</string>
 </dict>
 </plist>

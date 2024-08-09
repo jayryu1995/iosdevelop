@@ -119,14 +119,20 @@ class InfluenceSearchVC: UIViewController {
         selectedAge = business.age?.components(separatedBy: ",") ?? []
         selectedCategory = business.category?.components(separatedBy: ",") ?? []
 
-        let path = "\(Bundle.main.TEST_URL)/business\( business.imagePath ?? "" )"
-        loadImageFromURL(path) { [weak self] image in
-            DispatchQueue.main.async {
-                if let image = image {
-                    self?.imageView.image = image
+        if let image = business.imagePath {
+            let path = "\(Bundle.main.TEST_URL)/business\( business.imagePath ?? "" )"
+            loadImageFromURL(path) { [weak self] image in
+                DispatchQueue.main.async {
+                    if let image = image {
+                        self?.imageView.image = image
+                    }
                 }
             }
+
+        } else {
+            imageView.image = UIImage(named: "sample_business_image")
         }
+
     }
 
     private func setupUI() {
@@ -390,8 +396,10 @@ class InfluenceSearchVC: UIViewController {
                 icon = UIImageView(image: UIImage(named: "instagram"))
             } else if i.sns == 2 {
                 icon = UIImageView(image: UIImage(named: "facebook"))
-            } else {
+            } else if i.sns == 3 {
                 icon = UIImageView(image: UIImage(named: "naver"))
+            } else {
+                icon = UIImageView(image: UIImage(named: "youtube"))
             }
 
             let lbl = UILabel()

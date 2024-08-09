@@ -8,6 +8,7 @@
 import UIKit
 
 class ImageCacheManager {
+
     static let shared = ImageCacheManager()
     private init() {
         imageCache.countLimit = 50 // 캐시할 수 있는 최대 객체 수
@@ -31,4 +32,5 @@ class ImageCacheManager {
     func clearCache() {
         imageCache.removeAllObjects()
     }
+
 }

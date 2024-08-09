@@ -180,12 +180,16 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${PODS_XCFRAMEWORKS_BUILD_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework"
   install_framework "${PODS_XCFRAMEWORKS_BUILD_DIR}/FBSDKCoreKit_Basics/FBSDKCoreKit_Basics.framework"
   install_framework "${PODS_XCFRAMEWORKS_BUILD_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework"
+  install_framework "${PODS_XCFRAMEWORKS_BUILD_DIR}/SendBirdUIKit/SendbirdUIKit.framework"
+  install_framework "${PODS_XCFRAMEWORKS_BUILD_DIR}/SendbirdChatSDK/SendbirdChatSDK.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${PODS_XCFRAMEWORKS_BUILD_DIR}/FBAEMKit/FBAEMKit.framework"
   install_framework "${PODS_XCFRAMEWORKS_BUILD_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework"
   install_framework "${PODS_XCFRAMEWORKS_BUILD_DIR}/FBSDKCoreKit_Basics/FBSDKCoreKit_Basics.framework"
   install_framework "${PODS_XCFRAMEWORKS_BUILD_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework"
+  install_framework "${PODS_XCFRAMEWORKS_BUILD_DIR}/SendBirdUIKit/SendbirdUIKit.framework"
+  install_framework "${PODS_XCFRAMEWORKS_BUILD_DIR}/SendbirdChatSDK/SendbirdChatSDK.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait

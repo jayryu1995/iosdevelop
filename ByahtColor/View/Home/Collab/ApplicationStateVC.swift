@@ -105,7 +105,7 @@ class ApplicationStateVC: UIViewController {
         view.font = UIFont(name: "Pretendard-Regular", size: 16)
         return view
     }()
-    private var selectedMiniTabIndex: Int = 0
+    private var selectedMiniTabIndex: Int = 1
     private var stackView = UIStackView()
     private var tableView = UITableView()
     private var snapList: [CollabDto] = []

@@ -91,6 +91,29 @@ class MemberViewModel: ObservableObject {
         }
     }
 
+    // 로그인 데이터
+    func getLoginData(member_id: String, completion: @escaping (Result<InfluenceDataDto, Error>) -> Void) {
+        let url = "\(Bundle.main.TEST_URL)/member/data/\(member_id)"
+        AF.request(url, method: .get)
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of: InfluenceDataDto.self) { response in
+                switch response.result {
+                case .success(let data):
+                    DispatchQueue.main.async {
+                        User.shared.id = data.memberId
+                        User.shared.name = data.name
+                        User.shared.auth = data.auth
+                    }
+                    print("success: \(data)")
+                    completion(.success(data))
+                case .failure(let error):
+                    print("Error: \(error)")
+                    completion(.failure(error))
+                }
+            }
+
+    }
+
     // 인플루언서 로그인 및 권한조회
     func login(id: String, completion: @escaping (Result<Int, Error>) -> Void) {
         let url = "\(Bundle.main.TEST_URL)/member/login/\(id)"
@@ -107,6 +130,7 @@ class MemberViewModel: ObservableObject {
                 completion(.failure(error))
             }
         }
+
     }
 
     // 회원 탈퇴

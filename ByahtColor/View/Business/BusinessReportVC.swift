@@ -72,6 +72,13 @@ class BusinessReportVC: UIViewController {
         return iv
     }()
 
+    private let icon_youtube: UIImageView = {
+        let iv = UIImageView(image: UIImage(named: "youtube"))
+        iv.contentMode = .scaleAspectFit
+        iv.isHidden = true
+        return iv
+    }()
+
     private let introLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
@@ -110,7 +117,15 @@ class BusinessReportVC: UIViewController {
         view.layer.cornerRadius = 8
         return view
     }()
+    private let chatButton: UIButton = {
+        let button = UIButton()
+        button.isUserInteractionEnabled = true
+        button.setImage(UIImage(named: "chat_button"), for: .normal)
+        return button
+    }()
+    private let nationIcon = UIImageView()
     private var genderView = UIView()
+    private var nationView = UIView()
     private var categoryView = UIView()
     private var ageView = UIView()
     private let scrollView = UIScrollView()
@@ -126,6 +141,7 @@ class BusinessReportVC: UIViewController {
     private var selectedGender: [String] = []
     private var selectedCategory: [String] = []
     private var selectedAge: [String] = []
+    private var selectedNation: [String] = []
     private var mediaPath: String = ""
     private var videoURL: URL?
     private var player: AVPlayer?
@@ -135,6 +151,7 @@ class BusinessReportVC: UIViewController {
     private var facebookLink = ""
     private var instaLink = ""
     private var naverLink = ""
+    private var youtubeLink = ""
     var profile: InfluenceProfileDto?
 
     override func viewWillAppear(_ animated: Bool) {
@@ -167,7 +184,6 @@ class BusinessReportVC: UIViewController {
     }
 
     private func setupProfile() {
-
         snsList = profile?.snsList ?? []
         experienceList = profile?.experienceList ?? []
         payList = profile?.payList ?? []
@@ -184,6 +200,12 @@ class BusinessReportVC: UIViewController {
                 mediaPath = "\(Bundle.main.TEST_URL)\( profile?.imagePath ?? "" )"
             }
         }
+
+        // 국가 아이콘설정
+        if let nation = profile?.nation {
+            setupNationIcon(nation: nation)
+            nationIcon.contentMode = .scaleAspectFit
+        }
         setupUI()
         setupConstraints()
         if let list = profile?.snsList {
@@ -197,7 +219,6 @@ class BusinessReportVC: UIViewController {
         list.forEach { it in
             var iconView: UIImageView?
 
-            print("it : \(it.sns)")
             switch it.sns {
             case 0:
                 iconView = icon_tiktok
@@ -211,6 +232,9 @@ class BusinessReportVC: UIViewController {
             case 3:
                 iconView = icon_naver
                 naverLink = it.link ?? ""
+            case 4:
+                iconView = icon_youtube
+                youtubeLink = it.link ?? ""
             default:
                 break
             }
@@ -239,6 +263,8 @@ class BusinessReportVC: UIViewController {
             urlString = facebookLink
         case 3:
             urlString = naverLink
+        case 4:
+            urlString = youtubeLink
         default:
             break
         }
@@ -261,11 +287,11 @@ class BusinessReportVC: UIViewController {
 
     private func setupUI() {
         view.addSubview(scrollView)
+        view.addSubview(chatButton)
         scrollView.addSubview(contentView)
         scrollView.showsVerticalScrollIndicator = false
         setupTempletView()
         setupReportView()
-
     }
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "status" {
@@ -305,19 +331,24 @@ class BusinessReportVC: UIViewController {
             let width = UIScreen.main.bounds.width - 40
             let height = width * (525.0 / 350.0)
             if let videoURL = URL(string: mediaPath) {
-                player = AVPlayer(url: videoURL)
-                playerLayer = AVPlayerLayer(player: player)
-                playerLayer?.frame = CGRect(origin: .zero, size: CGSize(width: width, height: height))
-                playerLayer?.videoGravity = .resizeAspectFill
+                VideoCacheManager.shared.cacheVideo(from: videoURL) { [weak self] cachedURL in
+                    guard let self = self, let cachedURL = cachedURL else { return }
 
-                if let playerLayer = playerLayer {
-                    imageView.layer.addSublayer(playerLayer)
+                    DispatchQueue.main.async {
+                        self.player = AVPlayer(url: cachedURL)
+                        self.playerLayer = AVPlayerLayer(player: self.player)
+                        self.playerLayer?.frame = CGRect(origin: .zero, size: CGSize(width: width, height: height))
+                        self.playerLayer?.videoGravity = .resizeAspectFill
+
+                        if let playerLayer = self.playerLayer {
+                            self.imageView.layer.addSublayer(playerLayer)
+                        }
+                        self.imageView.bringSubviewToFront(self.replayButton)
+                        self.player?.addObserver(self, forKeyPath: "status", options: [.new, .initial], context: nil)
+                        self.player?.play()
+                    }
                 }
-                imageView.bringGradientLayerToFront()
-                player?.addObserver(self, forKeyPath: "status", options: [.new, .initial], context: nil)
-                player?.play()
             }
-
             NotificationCenter.default.addObserver(
                 self,
                 selector: #selector(playerDidFinishPlaying),
@@ -331,13 +362,16 @@ class BusinessReportVC: UIViewController {
                 $0.center.equalTo(imageView)
                 $0.width.height.equalTo(50)
             }
+
         } else {
-            imageView.loadImage(from: mediaPath, resizedToWidth: 0)
+            imageView.loadImage(from: mediaPath)
             loadingIndicator?.stopAnimating()
             loadingIndicator?.removeFromSuperview()
         }
+
         imageView.addSubview(nameLabel)
         imageView.addSubview(introLabel)
+        imageView.addSubview(nationIcon)
 
         iconView.axis = .horizontal
         iconView.distribution = .equalSpacing
@@ -346,7 +380,15 @@ class BusinessReportVC: UIViewController {
         iconView.addArrangedSubview(icon_facebook)
         iconView.addArrangedSubview(icon_tiktok)
         iconView.addArrangedSubview(icon_naver)
+        iconView.addArrangedSubview(icon_youtube)
         imageView.addSubview(iconView)
+
+        nationIcon.snp.makeConstraints {
+            $0.centerY.equalTo(nameLabel.snp.centerY)
+            $0.leading.equalTo(nameLabel.snp.trailing).offset(8)
+            $0.top.bottom.equalTo(nameLabel)
+        }
+
         icon_instagram.snp.makeConstraints {
             $0.width.height.equalTo(20)
         }
@@ -362,9 +404,19 @@ class BusinessReportVC: UIViewController {
         icon_naver.snp.makeConstraints {
             $0.width.height.equalTo(20)
         }
+
+        icon_youtube.snp.makeConstraints {
+            $0.width.height.equalTo(20)
+        }
     }
 
     private func setupConstraints() {
+        chatButton.snp.makeConstraints {
+            $0.width.height.equalTo(80)
+            $0.trailing.equalToSuperview().inset(20)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(20)
+        }
+
         scrollView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
@@ -451,16 +503,23 @@ class BusinessReportVC: UIViewController {
         label3.text = "influence_profile_target3".localized
         label3.font = UIFont(name: "Pretendard-Medium", size: 16)
 
+        let label4 = UILabel()
+        label4.text = "influence_profile_target4".localized
+        label4.font = UIFont(name: "Pretendard-Medium", size: 16)
+
         categoryView = createCategoryView(titles: Globals.shared.categories, selected: selectedCategory)
         ageView = createCategoryView(titles: Globals.shared.ages, selected: selectedAge)
         genderView = createCategoryView(titles: Globals.shared.genders, selected: selectedGender)
+        nationView = createCategoryView(titles: Globals.shared.nations, selected: selectedNation)
 
         targetView.addSubview(label)
         targetView.addSubview(label2)
         targetView.addSubview(label3)
+        targetView.addSubview(label4)
         targetView.addSubview(categoryView)
         targetView.addSubview(ageView)
         targetView.addSubview(genderView)
+        targetView.addSubview(nationView)
 
         label.snp.makeConstraints {
             $0.top.equalToSuperview()
@@ -492,6 +551,17 @@ class BusinessReportVC: UIViewController {
 
         genderView.snp.makeConstraints {
             $0.top.equalTo(label3.snp.bottom).offset(8)
+            $0.leading.trailing.equalToSuperview()
+        }
+
+        label4.snp.makeConstraints {
+            $0.top.equalTo(genderView.snp.bottom).offset(16)
+            $0.leading.equalToSuperview()
+            $0.height.equalTo(24)
+        }
+
+        nationView.snp.makeConstraints {
+            $0.top.equalTo(label4.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
         }
@@ -585,8 +655,10 @@ class BusinessReportVC: UIViewController {
                 icon = UIImageView(image: UIImage(named: "instagram"))
             } else if i.sns == 2 {
                 icon = UIImageView(image: UIImage(named: "facebook"))
-            } else {
+            } else if i.sns == 3 {
                 icon = UIImageView(image: UIImage(named: "naver"))
+            } else {
+                icon = UIImageView(image: UIImage(named: "youtube"))
             }
 
             let lbl = UILabel()
@@ -648,8 +720,10 @@ class BusinessReportVC: UIViewController {
                 icon = UIImageView(image: UIImage(named: "instagram"))
             } else if i.sns == 2 {
                 icon = UIImageView(image: UIImage(named: "facebook"))
-            } else {
+            } else if i.sns == 3 {
                 icon = UIImageView(image: UIImage(named: "naver"))
+            } else {
+                icon = UIImageView(image: UIImage(named: "youtube"))
             }
 
             let lbl = UILabel()
@@ -710,6 +784,19 @@ class BusinessReportVC: UIViewController {
         }
 
         return stackView
+    }
+
+    private func setupNationIcon(nation: String) {
+        switch nation {
+        case "0": nationIcon.image = UIImage(named: "icon_ko")
+        case "1": nationIcon.image = UIImage(named: "icon_jp")
+        case "2": nationIcon.image = UIImage(named: "icon_th")
+        case "3": nationIcon.image = UIImage(named: "icon_ph")
+        case "4": nationIcon.image = UIImage(named: "icon_vi")
+        case "5": nationIcon.image = UIImage(named: "icon_sg")
+        default:
+            nationIcon.image = nil
+        }
     }
 
     @objc private func iconTapped(_ sender: UIButton) {
