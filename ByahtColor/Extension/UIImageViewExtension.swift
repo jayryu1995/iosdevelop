@@ -60,19 +60,18 @@ extension UIImageView {
     }
 
     func loadProfileImage(from url: String, completion: @escaping (UIImage?) -> Void) {
-        self.isSkeletonable = true
-        self.showAnimatedGradientSkeleton()
 
         if let cachedImage = ImageCacheManager.shared.image(for: url) {
             DispatchQueue.main.async {
                 print("캐싱이미지 사용")
                 completion(cachedImage)
-                self.hideSkeleton()
             }
             return
         }
 
         URLSession.shared.dataTask(with: URL(string: url)!) { data, _, error in
+            self.isSkeletonable = true
+            self.showAnimatedGradientSkeleton()
             guard let data = data, error == nil else {
                 DispatchQueue.main.async {
                     completion(nil)

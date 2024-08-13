@@ -70,7 +70,7 @@ open class BasicMessageCell: UITableViewCell {
     open override func prepareForReuse() {
         super.prepareForReuse()
         profileImageView.isHidden = false
-        profileImageView.image = UIImage(named: "icon_profile2")
+        // profileImageView.image = UIImage(named: "icon_profile2")
         messageBox.text = nil
         timeLabel.text = nil
         dateLabel.isHidden = true
@@ -80,7 +80,7 @@ open class BasicMessageCell: UITableViewCell {
         icon.snp.removeConstraints()
         timeLabel.snp.removeConstraints()
         messageBox.snp.removeConstraints()
-        profileImageView.snp.removeConstraints()
+        // profileImageView.snp.removeConstraints()
 
         sender = ""
     }
@@ -125,7 +125,6 @@ open class BasicMessageCell: UITableViewCell {
 
         } else {
             profileImageView.isHidden = false
-            profileImageView.image = UIImage(named: "icon_profile2")
             messageBox.backgroundColor = UIColor(hex: "#F4F5F8")
             messageBox.textColor = .black
 
@@ -171,11 +170,7 @@ open class BasicMessageCell: UITableViewCell {
         timeLabel.text = Date.sbu_from(message.createdAt).sbu_toString(format: .hhmma)
 
         if message.sender?.nickname != User.shared.name {
-            print("message.sender?.profileURL : \(message.sender?.profileURL)")
-            print("message.sender?.nickname : \(message.sender?.nickname)")
             if let url = message.sender?.profileURL, !url.isEmpty {
-                let currentProfileURL = url
-
                 profileImageView.loadProfileImage(from: url) { [weak self] image in
                     // 현재 셀이 해당 taskID를 가지고 있는지 확인
                     self?.profileImageView.image = image
@@ -184,12 +179,7 @@ open class BasicMessageCell: UITableViewCell {
                 profileImageView.image = UIImage(named: "icon_profile2") // 기본 이미지 설정
             }
         }
-        setNeedsUpdateConstraints()
-    }
-
-    private func confingImage(url: String) {
-        print(url)
-        profileImageView.loadImage(from: url)
+        // setNeedsUpdateConstraints()
     }
 
     open func checked(check: Bool) {
