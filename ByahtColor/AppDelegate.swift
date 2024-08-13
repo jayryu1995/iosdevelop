@@ -15,13 +15,14 @@ import AuthenticationServices
 import FirebaseMessaging
 import AdSupport
 import AppTrackingTransparency
+import SendbirdChatSDK
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
     let viewControllerName = String(describing: type(of: AppDelegate.self))
     let device = UIDevice.current
     let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
-
+    var window: UIWindow?
     // 앱 시작 시 기기 정보 기록
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -50,8 +51,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
 
         Messaging.messaging().delegate = self
-
-        self.registerForRemoteNotifications(application)
+        UNUserNotificationCenter.current().delegate = self
+        requestNotificationAuthorization()
+        registerForPushNotifications()
 
         return true
     }
@@ -83,26 +85,56 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ImageCacheManager.shared.clearCache()
     }
 
-    func registerForRemoteNotifications(_ application: UIApplication) {
-        UNUserNotificationCenter.current().delegate = self
-        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-        UNUserNotificationCenter.current().requestAuthorization(options: authOptions) { granted, _ in
-            if granted {
-                print("알림 등록이 완료되었습니다.")
-            }
-        }
-        application.registerForRemoteNotifications()
-    }
 }
 
 extension AppDelegate: MessagingDelegate, UNUserNotificationCenterDelegate {
+    private func requestNotificationAuthorization() {
+           let center = UNUserNotificationCenter.current()
+           center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, _ in
+               if granted {
+                   print("Notification permission granted.")
+               } else {
+                   print("Notification permission denied.")
+               }
+           }
+       }
+
+    private func registerForPushNotifications() {
+      UNUserNotificationCenter.current()
+        .requestAuthorization(options: [.alert, .sound, .badge]) { [weak self] granted, _ in
+            guard granted else { return }
+            self?.getNotificationSettings()
+        }
+    }
+
+    private func getNotificationSettings() {
+      UNUserNotificationCenter.current().getNotificationSettings { settings in
+          guard settings.authorizationStatus == .authorized else { return }
+          DispatchQueue.main.async {
+            UIApplication.shared.registerForRemoteNotifications()
+          }
+      }
+    }
+
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+        let alertMsg = (userInfo["aps"] as! NSDictionary)["alert"] as! NSDictionary
+        let payload = userInfo["sendbird"] as! NSDictionary
+        let count = payload.value(forKey: "unread_message_count") as! Int
+        print("didReceiveRemoteNotification: ", count)
+        UIApplication.shared.applicationIconBadgeNumber = count
+
+        completionHandler(UIBackgroundFetchResult.newData)
+    }
 
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         Messaging.messaging().apnsToken = deviceToken
+        PushNotificationUseCase().registerPushToken(deviceToken: deviceToken)
     }
 
     // foreground 상에서 알림이 보이게끔 해준다.
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        NotificationCenter.default.post(name: NSNotification.Name("SendbirdPushNotificationReceived"), object: nil)
         completionHandler([.banner, .sound, .badge])
     }
+
 }

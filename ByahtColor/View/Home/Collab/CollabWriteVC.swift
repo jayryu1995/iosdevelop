@@ -241,7 +241,7 @@ class CollabWriteVC: UIViewController, UIScrollViewDelegate, UINavigationControl
             $0.height.equalTo(48)
         }
         // 스타일 필터 뷰 추가
-        let styleFilterView = styleFilterView(tags: ["Beauty", "Fashion", "Etc"])
+        let styleFilterView = styleFilterView(tags: ["Beauty", "Fashion", "Travel", "Etc"])
         contentView.addSubview(styleFilterView)
         styleFilterView.snp.makeConstraints { make in
             make.top.equalTo(tf_people.snp.bottom).offset(20)
@@ -250,7 +250,8 @@ class CollabWriteVC: UIViewController, UIScrollViewDelegate, UINavigationControl
         }
 
         // SNS 필터 뷰 추가
-        let snsFilterView = snsFilterView(tags: ["TikTok", "Instagram", "Facebook", "Shopee"])
+        let snsFilterView =
+        snsFilterView(tags: ["TikTok".localized, "Instagram".localized, "Facebook".localized, "Shopee".localized, "Naver".localized, "Youtube".localized])
         contentView.addSubview(snsFilterView)
         snsFilterView.snp.makeConstraints { make in
             make.top.equalTo(styleFilterView.snp.bottom).offset(20)
@@ -620,6 +621,8 @@ class CollabWriteVC: UIViewController, UIScrollViewDelegate, UINavigationControl
         let tiktokValue = selectedSNS.contains("TikTok") ? "true" : "false"
         let instagramValue = selectedSNS.contains("Instagram") ? "true" : "false"
         let shopeeValue = selectedSNS.contains("Shopee") ? "true" : "false"
+        let youtubeValue = selectedSNS.contains("Youtube") ? "true" : "false"
+        let naverValue = selectedSNS.contains("Naver") ? "true" : "false"
 
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd 00:00:00"
@@ -649,6 +652,8 @@ class CollabWriteVC: UIViewController, UIScrollViewDelegate, UINavigationControl
             multipartFormData.append(Data(tiktokValue.utf8), withName: "tiktok")
             multipartFormData.append(Data(instagramValue.utf8), withName: "instagram")
             multipartFormData.append(Data(shopeeValue.utf8), withName: "shopee")
+            multipartFormData.append(Data(naverValue.utf8), withName: "naver")
+            multipartFormData.append(Data(youtubeValue.utf8), withName: "youtube")
             multipartFormData.append(Data(start_date.utf8), withName: "start_date")
             multipartFormData.append(Data(end_date.utf8), withName: "end_date")
             multipartFormData.append(Data(notification.utf8), withName: "notification")

@@ -76,7 +76,6 @@ class BusinessMypageVC: UIViewController {
 
     private let introLabel: UILabel = {
         let label = UILabel()
-        label.text = "회사소개"
         label.font = UIFont(name: "Pretendard-Regular", size: 14)
         return label
     }()
@@ -86,6 +85,12 @@ class BusinessMypageVC: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         profileImage.layer.cornerRadius = profileImage.frame.size.width / 2
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        setupProfile()
     }
 
     override func viewDidLoad() {
@@ -132,8 +137,6 @@ class BusinessMypageVC: UIViewController {
         view.addSubview(marketingButton)
         view.addSubview(accountLabel)
         view.addSubview(accountButton)
-
-        name.text = "Bonton"
 
         setupProfileButton()
         setupGlobalButton()

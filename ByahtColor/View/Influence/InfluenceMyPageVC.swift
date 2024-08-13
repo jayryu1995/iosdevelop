@@ -100,9 +100,18 @@ class InfluenceMyPageVC: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] data in
                 guard let data = data else { return }
-                let url = "\(Bundle.main.TEST_URL)/img\(data.imagePath ?? "")"
-                print(url)
-                self?.profileImage.loadImage2(from: url)
+                if let id = User.shared.id {
+                    let url = "\(Bundle.main.TEST_URL)/img/profile/\(id).jpg"
+                    let currentProfileURL = url
+
+                    self?.profileImage.loadProfileImage(from: currentProfileURL) { [weak self] image in
+                        // 현재 셀이 해당 taskID를 가지고 있는지 확인
+                        self?.profileImage.image = image
+                        self?.profileImage.layer.cornerRadius = (self?.profileImage.frame.size.width ?? 80) / 2
+                    }
+
+                }
+
                 self?.name.text = data.name ?? "influence_mypage_name_info".localized
             }
             .store(in: &cancellables)

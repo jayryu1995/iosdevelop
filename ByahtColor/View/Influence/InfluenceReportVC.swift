@@ -52,6 +52,12 @@ class InfluenceReportVC: UIViewController {
         return iv
     }()
 
+    private let icon_yotube: UIImageView = {
+        let iv = UIImageView(image: UIImage(named: "youtube"))
+        iv.contentMode = .scaleAspectFit
+        return iv
+    }()
+
     private let infoLabel: UILabel = {
         let label = UILabel()
         label.textColor = .white
@@ -177,6 +183,7 @@ class InfluenceReportVC: UIViewController {
         iconView.addArrangedSubview(icon_facebook)
         iconView.addArrangedSubview(icon_tiktok)
         iconView.addArrangedSubview(icon_naver)
+        iconView.addArrangedSubview(icon_yotube)
         imageView.addSubview(iconView)
         icon_instagram.snp.makeConstraints {
             $0.width.height.equalTo(20)
@@ -187,6 +194,10 @@ class InfluenceReportVC: UIViewController {
         }
 
         icon_facebook.snp.makeConstraints {
+            $0.width.height.equalTo(20)
+        }
+
+        icon_naver.snp.makeConstraints {
             $0.width.height.equalTo(20)
         }
 
@@ -405,8 +416,12 @@ class InfluenceReportVC: UIViewController {
                 icon = UIImageView(image: UIImage(named: "tiktok"))
             } else if i.sns == 1 {
                 icon = UIImageView(image: UIImage(named: "instagram"))
-            } else {
+            } else if i.sns == 2 {
                 icon = UIImageView(image: UIImage(named: "facebook"))
+            } else if i.sns == 3 {
+                icon = UIImageView(image: UIImage(named: "naver"))
+            } else {
+                icon = UIImageView(image: UIImage(named: "youtube"))
             }
 
             let lbl = UILabel()

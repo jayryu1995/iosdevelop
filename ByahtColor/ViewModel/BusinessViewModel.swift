@@ -17,9 +17,23 @@ class BusinessViewModel: ObservableObject {
     var error: String?
 
     // 인플루언서 리스트(스와이프)
-    func getSearchProfile( completion: @escaping (Result<[InfluenceProfileDto], Error>) -> Void) {
+    func getSearchProfile(sns: [String]?, category: [String]?, nation: [String]?, completion: @escaping (Result<[InfluenceProfileDto], Error>) -> Void) {
         let url = "\(Bundle.main.TEST_URL)/business/search"
-        AF.request(url, method: .get)
+
+        // 파라미터 딕셔너리 생성
+        var parameters: [String: String] = [:]
+
+        if let sns = sns {
+            parameters["platform"] = sns.joined(separator: ",")
+        }
+        if let category = category {
+            parameters["category"] = category.joined(separator: ",")
+        }
+        if let nation = nation {
+            parameters["nation"] = nation.joined(separator: ",")
+        }
+
+        AF.request(url, method: .get, parameters: parameters, encoding: URLEncoding.queryString)
             .validate(statusCode: 200..<300)
             .responseDecodable(of: [InfluenceProfileDto].self) { response in
                 switch response.result {
@@ -42,6 +56,7 @@ class BusinessViewModel: ObservableObject {
                     completion(.success(data))
                 case .failure(let error):
                     completion(.failure(error))
+
                 }
             }
     }

@@ -43,13 +43,13 @@ class RegistAlertInfluenceVC: UIViewController {
         alertView.layer.cornerRadius = 8
 
         // titleLabel 설정
-        titleLabel.text = "alert_regist_business_str".localized
+        titleLabel.text = "alert_regist_str".localized
         titleLabel.font = UIFont(name: "Pretendard-SemiBold", size: 20)
         titleLabel.textAlignment = .left
         titleLabel.numberOfLines = 0
 
         // messageLabel 설정
-        messageLabel.text = "alert_regist_business_str2".localized
+        messageLabel.text = "alert_regist_str2".localized
         messageLabel.font = UIFont(name: "Pretendard-Regular", size: 14)
         messageLabel.textAlignment = .left
         messageLabel.numberOfLines = 0

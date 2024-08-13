@@ -9,18 +9,51 @@
 "server_error_title" = "Dịch vụ bảo trì";
 "server_error_message" = "Hiện tại dịch vụ đang bảo trì, vui lòng thử lại sau.";
 
+//온보딩
+"onboarding_button" = "Tiếp";
+"onboarding_first_label" = "Đăng ký hồ sơ cá nhân\n mà bạn đã xây dựng";
+"onboarding_second_label" = "Gửi tới các doanh nghiệp đang chờ đợi các nhà sáng tạo nội dung";
+"onboarding_second_label2" = "Tự đề xuất hợp tác với doanh nghiệp.";
+"onboarding_third_label" = "Nhận và tự đề xuất \nprofile cá nhân";
+"onboarding_third_label2" = "Lợi ích hoá tài khoản cá nhân\nTừ bây giờ không cần chờ đợi nữa.";
+"onboarding_third_label3" = "Xin chào! Chúng tôi nhận thấy bạn phù hợp với đề án\nbạn có muốn hợp tác với chúng tôi không?";
+"onboarding_third_label4" = "Chúng tôi muốn tiến hành trên cả tiktok và facebook\n bạn có thể lên bài nhanh nhất là khi nào?";
+"onboarding_third_label5" = "Bạn có nhận quảng cáo như thế này không?\n Chúng tôi muốn đặt bài như thế này!";
+"onboarding_fourth_label" = "Đề xuất cho bạn\n nhà quảng cáo đúng với kênh.";
+"onboarding_fourth_label2" = "Để lại tên của nhà sáng tạo nội dung\nđể phục vụ cho đề xuất hợp tác.";
+"onboarding_fourth_hint" = "Nhập họ và tên khai sinh.";
+"onboarding_fourth_button" = "Đăng ký hồ sơ cá nhân";
+
+// 국가
+"nation_ko" = "Hàn Quốc";
+"nation_vi" = "Việt Nam";
+"nation_global" = "Thế giới";
+"nation_th" = "Thái Lan";
+"nation_ph" = "Philippine";
+"nation_sg" = "Singapore";
+"nation_jp" = "Nhật Bản";
+
+//Sns
+"TikTok" = "TikTok";
+"Instagram" = "Instagram";
+"Facebook" = "Facebook";
+"Naver" = "Naver";
+"Youtube" = "Youtube";
+"Shopee" = "Shopee";
+
+// MessageInputView
+"messageInputView_placeholder" = "Gửi tin nhắn";
 
 // AlertUpaate
 "update_str" = "Cập nhật";
 "update_str1" = "Yêu cầu cập nhật";
-
-
 
 // InfluenceSampleVC
 "influence_sample_label" = "Gạt sang hai bên để xem thêm nhiều doanh nghiệp hơn.";
 
 // BusinessSampleVC
 "business_sample_label" = "Gạt sang hai bên để xem thêm nhiều influenecer hơn.";
+"business_sample_chat" = "Nhắn qua Chat để đền xuất hợp tác nhanh hơn.";
 
 // 인플루언서 프로필 작성 Alert창
 "alert_regist_button" = "Tạo trang cá nhân";
@@ -38,7 +71,7 @@
 
 // 타겟오디언스
 "categories_beauty" = "Làm đẹp";
-"categories_fasion" = "Thời trang";
+"categories_fashion" = "Thời trang";
 "categories_daily" = "Đời sống";
 "categories_travel" = "Du lịch";
 "categories_baby" = "Mẹ và bé";
@@ -126,6 +159,7 @@
 "influence_profile_target" = "Chủ đề";
 "influence_profile_target2" = "Độ tuổi";
 "influence_profile_target3" = "Giới tính";
+"influence_profile_target4" = "Quốc gia hoạt động";
 "influence_profile_negotiable" = "Có thể thương lượng";
 "influence_profile_non_negotiable" = "Không thể thương lượng";
 "influence_profile_video" = "Video";
@@ -156,7 +190,11 @@
 "influence_profile_write_message4" = "Chọn ít nhất một chủ đề.";
 "influence_profile_write_message5" = "Chọn ít nhất một độ tuổi.";
 "influence_profile_write_message6" = "Chọn ít nhất một giới tính.";
-"influence_profile_write_message7" = "Nhập ít nhất một liên kết cá nhân.";
+"influence_profile_write_message7" = "Chọn quốc gia mà kênh của bạn hoạt động chính.";
+"influence_profile_write_message8" = "Nhập ít nhất một liên kết cá nhân.";
+
+"influence_profile_write_code" = "Mã giới thiệu";
+"influence_profile_write_nation" = "Quốc gia hoạt động";
 
 // AddSnsVC
 "add_sns_title" = "Thêm tài khoản MXH";
@@ -250,7 +288,7 @@
 "business_profile_write_intro2" = "Một dòng giới thiệu về công ty bằng tiếng Anh.";
 "business_profile_write_intro_hint" = "Nhập";
 "business_profile_write_experience" = "Thông tin hợp tác";
-"business_profile_write_pay" = "Báo giá";
+"business_profile_write_pay" = "Báo giá(nếu không có ghi là 0)";
 "business_profile_write_target" = "Phân khúc khách hàng";
 "business_profile_write_target2" = "Nhập mục tiêu sản phẩm";
 "business_profile_write_add" = "Thêm";
@@ -271,7 +309,7 @@
 
 //CollabWriteVC
 "collabWriteVC_contentLabel" = "Nội dung sự kiện\n Thời gian \nNội dung \nMô tả sản phẩm/thương hiệu";
-"collabWriteVC_link" = "Liên kết shopee";
+"collabWriteVC_link" = "Liên kết sản phẩm liên quan";
 "collabWriteVC_condition" = "Điều kiện sự kiện\n điều kiện\n Lưu ý";
 "collabWriteVC_title" = "Tiêu đề";
 "collabWriteVC_people_label" = "Số lượng người tham gia";
@@ -325,7 +363,7 @@
 //CollabDetailVC
 "collab_detail_subtitle" = "Nội dung Event";
 "collab_detail_subtitle2" = "Điều khoản Event";
-"collab_detail_link" = "Liên kết shopee";
+"collab_detail_link" = "Liên kết sản phẩm liên quan";
 "collab_detail_button" = "Tham gia thành công";
 "collab_detail_button2" = "Gửi đánh giá";
 "collab_detail_submit" = "ĐĂNG KÝ";
@@ -344,6 +382,9 @@
 "review_write_button" = "ĐĂNG KÝ";
 "review_write_navigation" = "Gửi đánh giá";
 
+
+//LoginView
+"login_tv" = "Đăng nhập dễ dàng  với tài khoản mạng xã hội";
 
 //CollabVC
 "collab_navigation_title" = "Event";

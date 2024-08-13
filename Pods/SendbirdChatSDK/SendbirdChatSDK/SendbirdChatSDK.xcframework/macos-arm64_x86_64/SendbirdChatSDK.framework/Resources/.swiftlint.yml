@@ -1,0 +1,4 @@
+disabled_rules:
+  - missing_docs
+  - implicit_getter
+  - unused_setter_value

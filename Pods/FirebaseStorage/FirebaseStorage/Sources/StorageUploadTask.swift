@@ -14,6 +14,12 @@
 
 import Foundation
 
+#if SWIFT_PACKAGE
+  @_implementationOnly import GoogleUtilities_Environment
+#else
+  @_implementationOnly import GoogleUtilities
+#endif // SWIFT_PACKAGE
+
 #if COCOAPODS
   import GTMSessionFetcher
 #else
@@ -22,10 +28,13 @@ import Foundation
 
 /**
  * `StorageUploadTask` implements resumable uploads to a file in Firebase Storage.
+ *
  * Uploads can be returned on completion with a completion callback, and can be monitored
  * by attaching observers, or controlled by calling `pause()`, `resume()`,
  * or `cancel()`.
+ *
  * Uploads can be initialized from `Data` in memory, or a URL to a file on disk.
+ *
  * Uploads are performed on a background queue, and callbacks are raised on the developer
  * specified `callbackQueue` in Storage, or the main queue if unspecified.
  */
@@ -78,12 +87,16 @@ import Foundation
         chunkSize: self.reference.storage.uploadChunkSizeBytes,
         fetcherService: self.fetcherService
       )
-      if let data = self.uploadData {
-        uploadFetcher.uploadData = data
+      if let uploadData {
+        uploadFetcher.uploadData = uploadData
         uploadFetcher.comment = "Data UploadTask"
-      } else if let fileURL = self.fileURL {
+      } else if let fileURL {
         uploadFetcher.uploadFileURL = fileURL
         uploadFetcher.comment = "File UploadTask"
+
+        if GULAppEnvironmentUtil.isAppExtension() {
+          uploadFetcher.useBackgroundSession = false
+        }
       }
       uploadFetcher.maxRetryInterval = self.reference.storage.maxUploadRetryInterval
 
@@ -107,7 +120,7 @@ import Foundation
         self.fire(for: .progress, snapshot: self.snapshot)
 
         // Handle potential issues with upload
-        if let error = error {
+        if let error {
           self.state = .failed
           self.error = StorageErrorCode.error(withServerError: error, ref: self.reference)
           self.metadata = self.uploadMetadata

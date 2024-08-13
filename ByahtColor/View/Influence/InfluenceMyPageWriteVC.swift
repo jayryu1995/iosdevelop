@@ -454,11 +454,37 @@ class InfluenceMyPageWriteVC: UIViewController {
                         // data변경 알림
                         NotificationCenter.default.post(name: .dataChanged, object: nil)
                         User.shared.name = "\(dto.name ?? "")"
+                        if let id = User.shared.id {
+                            let url = "\(Bundle.main.TEST_URL)/img/profile/\(id).jpg"
+                            ImageCacheManager.shared.removeImage(for: url)
+                        }
+                        self?.updateChatProfile()
+
                         self?.navigationController?.popViewController(animated: false)
                     case .failure(let error):
                         print("통신 에러 : \(error)")
 
                     }
+                }
+            }
+        }
+    }
+
+    private func updateChatProfile() {
+        var imagePath: String?
+        if User.shared.auth ?? 0 < 2 {
+            imagePath = "\(Bundle.main.TEST_URL)/img/profile/\(User.shared.id ?? "").jpg"
+        } else {
+            imagePath = "\(Bundle.main.TEST_URL)/business/profile/\(User.shared.id ?? "").jpg"
+        }
+
+        if let name = User.shared.name {
+            SendbirdUser.shared.updateUserInfo(nickname: name, profileImage: imagePath) { result in
+                switch result {
+                case .success(let user):
+                    print("업데이트 성공")
+                case .failure(let error):
+                    print("error : \(error)")
                 }
             }
         }

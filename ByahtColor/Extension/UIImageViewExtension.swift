@@ -24,15 +24,18 @@ extension UIImageView {
         }.resume()
     }
 
-    func loadImage(from urlString: String, resizedToWidth width: CGFloat) {
+    func loadImage(from urlString: String) {
 
         self.isSkeletonable = true
         self.showAnimatedGradientSkeleton()
         if let cachedImage = ImageCacheManager.shared.image(for: urlString) {
-            self.image = cachedImage
-            self.hideSkeleton()
-            self.layer.cornerRadius = 4
-            return
+            DispatchQueue.main.async {
+                print("캐싱이미지 사용")
+                self.image = cachedImage
+                self.hideSkeleton()
+                self.layer.cornerRadius = 4
+                return
+            }
         }
 
         guard let url = URL(string: urlString) else { return }
@@ -53,6 +56,45 @@ extension UIImageView {
             }
 
         }.resume()
-        self.hideSkeleton()
+         self.hideSkeleton()
     }
+
+    func loadProfileImage(from url: String, completion: @escaping (UIImage?) -> Void) {
+        self.isSkeletonable = true
+        self.showAnimatedGradientSkeleton()
+
+        if let cachedImage = ImageCacheManager.shared.image(for: url) {
+            DispatchQueue.main.async {
+                print("캐싱이미지 사용")
+                completion(cachedImage)
+                self.hideSkeleton()
+            }
+            return
+        }
+
+        URLSession.shared.dataTask(with: URL(string: url)!) { data, _, error in
+            guard let data = data, error == nil else {
+                DispatchQueue.main.async {
+                    completion(nil)
+                    self.hideSkeleton()
+                }
+                return
+            }
+
+            if let image = UIImage(data: data) {
+                DispatchQueue.main.async {
+                    // 이미지를 캐시에 추가
+                    ImageCacheManager.shared.setImage(image, for: url)
+                    completion(image)
+                    self.hideSkeleton()
+                }
+            } else {
+                DispatchQueue.main.async {
+                    completion(nil)
+                    self.hideSkeleton()
+                }
+            }
+        }.resume()
+    }
+
 }

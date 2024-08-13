@@ -22,10 +22,13 @@ import Foundation
 
 /**
  * `StorageDownloadTask` implements resumable downloads from an object in Firebase Storage.
+ *
  * Downloads can be returned on completion with a completion handler, and can be monitored
  * by attaching observers, or controlled by calling `pause()`, `resume()`,
  * or `cancel()`.
+ *
  * Downloads can currently be returned as `Data` in memory, or as a `URL` to a file on disk.
+ *
  * Downloads are performed on a background queue, and callbacks are raised on the developer
  * specified `callbackQueue` in Storage, or the main queue if left unspecified.
  */
@@ -113,7 +116,7 @@ open class StorageDownloadTask: StorageObservableTask, StorageTaskManagement {
       request.url = components?.url
 
       var fetcher: GTMSessionFetcher
-      if let resumeData = resumeData {
+      if let resumeData {
         fetcher = GTMSessionFetcher(downloadResumeData: resumeData)
         fetcher.comment = "Resuming DownloadTask"
       } else {
@@ -122,7 +125,7 @@ open class StorageDownloadTask: StorageObservableTask, StorageTaskManagement {
       }
       fetcher.maxRetryInterval = self.reference.storage.maxDownloadRetryInterval
 
-      if let fileURL = self.fileURL {
+      if let fileURL {
         // Handle file downloads
         fetcher.destinationFileURL = fileURL
         fetcher.downloadProgressBlock = { [weak self] (bytesWritten: Int64,
@@ -160,7 +163,7 @@ open class StorageDownloadTask: StorageObservableTask, StorageTaskManagement {
         self.fire(for: .progress, snapshot: self.snapshot)
 
         // Handle potential issues with download
-        if let error = error {
+        if let error {
           self.state = .failed
           self.error = StorageErrorCode.error(withServerError: error, ref: self.reference)
           self.fire(for: .failure, snapshot: self.snapshot)
@@ -168,7 +171,7 @@ open class StorageDownloadTask: StorageObservableTask, StorageTaskManagement {
         }
         // Download completed successfully, fire completion callbacks
         self.state = .success
-        if let data = data {
+        if let data {
           self.downloadData = data
         }
         self.fire(for: .success, snapshot: self.snapshot)

@@ -196,7 +196,7 @@ class TalkTableCell: UITableViewCell, UIScrollViewDelegate {
         image.isHidden = false
         image.contentMode = .scaleAspectFill
         let url = "\(Bundle.main.TEST_URL)/board\(imagePath)"
-        image.loadImage(from: url, resizedToWidth: 480)
+        image.loadImage(from: url)
         print(url)
         titleLabel.snp.remakeConstraints {
             $0.top.equalToSuperview().offset(16)

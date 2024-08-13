@@ -68,7 +68,7 @@ class CollabTableViewCell2: UITableViewCell {
             imageView.isUserInteractionEnabled = true
             let url = "\(Bundle.main.TEST_URL)/image\( list[i].imageList?.first ?? "" )"
 
-            imageView.loadImage(from: url, resizedToWidth: widthSize)
+            imageView.loadImage(from: url)
             imageView.contentMode = .scaleAspectFill
             imageView.layer.cornerRadius = 4
             imageView.clipsToBounds = true

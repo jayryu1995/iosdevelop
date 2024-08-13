@@ -37,7 +37,7 @@ class MemberViewModel: ObservableObject {
     }
 
     // 기업 로그인
-    func loginBusiness(userid: String, password: String, completion: @escaping (Result<Business, Error>) -> Void) {
+    func loginBusiness(userid: String, password: String, completion: @escaping (Result<BusinessDto, Error>) -> Void) {
         let url = "\(Bundle.main.TEST_URL)/business/login"
         let parameters: [String: Any] = [
             "id": userid,
@@ -45,7 +45,7 @@ class MemberViewModel: ObservableObject {
         ]
         AF.request(url, method: .post, parameters: parameters)
             .validate()
-            .responseDecodable(of: Business.self) { response in
+            .responseDecodable(of: BusinessDto.self) { response in
                 switch response.result {
                 case .success(let business):
                     completion(.success(business))
@@ -53,6 +53,24 @@ class MemberViewModel: ObservableObject {
                     completion(.failure(error))
                 }
             }
+    }
+
+    // 기업 자동로그인
+    func loginAutoBusiness(userid: String, completion: @escaping (Result<BusinessDataDto, Error>) -> Void) {
+        let url = "\(Bundle.main.TEST_URL)/member/data/\(userid)"
+        AF.request(url).validate().response { response in
+            switch response.result {
+            case .success(let value):
+                if let exists = value as? BusinessDataDto {
+                    print(exists)
+                    completion(.success(exists))
+                } else {
+                    completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid response"])))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
     }
 
     // 중복확인
@@ -73,6 +91,29 @@ class MemberViewModel: ObservableObject {
         }
     }
 
+    // 로그인 데이터
+    func getLoginData(member_id: String, completion: @escaping (Result<InfluenceDataDto, Error>) -> Void) {
+        let url = "\(Bundle.main.TEST_URL)/member/data/\(member_id)"
+        AF.request(url, method: .get)
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of: InfluenceDataDto.self) { response in
+                switch response.result {
+                case .success(let data):
+                    DispatchQueue.main.async {
+                        User.shared.id = data.memberId
+                        User.shared.name = data.name
+                        User.shared.auth = data.auth
+                    }
+                    print("success: \(data)")
+                    completion(.success(data))
+                case .failure(let error):
+                    print("Error: \(error)")
+                    completion(.failure(error))
+                }
+            }
+
+    }
+
     // 인플루언서 로그인 및 권한조회
     func login(id: String, completion: @escaping (Result<Int, Error>) -> Void) {
         let url = "\(Bundle.main.TEST_URL)/member/login/\(id)"
@@ -89,6 +130,7 @@ class MemberViewModel: ObservableObject {
                 completion(.failure(error))
             }
         }
+
     }
 
     // 회원 탈퇴

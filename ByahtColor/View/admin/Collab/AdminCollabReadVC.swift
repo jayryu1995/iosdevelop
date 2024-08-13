@@ -193,7 +193,7 @@ class AdminCollabReadVC: UIViewController {
     @objc private func deleteButtonTapped() {
 
         guard let no = collab?.no else { return }
-        let url = "\(Bundle.main.TEST_URL)/snap/del/\(no)" // 실제 요청할 서버의 URL로 변경해주세요.
+        let url = "\(Bundle.main.TEST_URL)/snap/del/\(no)"
 
         AF.request(url, method: .delete).response { response in
             switch response.result {

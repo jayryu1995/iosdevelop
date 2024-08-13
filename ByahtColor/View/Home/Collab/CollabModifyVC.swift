@@ -218,7 +218,7 @@ class CollabModifyVC: UIViewController, UIScrollViewDelegate, UINavigationContro
         }
 
         // 스타일 필터 뷰 추가
-        let styleFilterView = styleFilterView(tags: ["Beauty", "Fashion", "Etc"])
+        let styleFilterView = styleFilterView(tags: ["Beauty", "Fashion", "Travel", "Etc"])
         contentView.addSubview(styleFilterView)
         styleFilterView.snp.makeConstraints { make in
             make.top.equalTo(dateButton.snp.bottom).offset(20)
@@ -227,7 +227,8 @@ class CollabModifyVC: UIViewController, UIScrollViewDelegate, UINavigationContro
         }
 
         // SNS 필터 뷰 추가
-        let snsFilterView = snsFilterView(tags: ["TikTok", "Instagram", "Facebook", "Shopee"])
+        let snsFilterView =
+        snsFilterView(tags: ["TikTok".localized, "Instagram".localized, "Facebook".localized, "Shopee".localized, "Naver".localized, "Youtube".localized])
         contentView.addSubview(snsFilterView)
         snsFilterView.snp.makeConstraints { make in
             make.top.equalTo(styleFilterView.snp.bottom).offset(20)
@@ -542,14 +543,22 @@ class CollabModifyVC: UIViewController, UIScrollViewDelegate, UINavigationContro
             switch button.titleLabel?.text {
             case "TikTok":
                 button.isSelected = collab?.tiktok ?? false
+
             case "Instagram":
                 button.isSelected = collab?.instagram ?? false
+
             case "Facebook":
                 button.isSelected = collab?.facebook ?? false
+
             case "Shopee":
                 button.isSelected = collab?.shopee ?? false
+
             default:
                 break
+            }
+            if button.isSelected {
+                selectedSNS.append(String(describing: button.titleLabel?.text))
+                print("실행")
             }
             button.backgroundColor = button.isSelected ? .black : .white
             button.setTitleColor(button.isSelected ? .white : .black, for: .normal)
@@ -625,6 +634,8 @@ class CollabModifyVC: UIViewController, UIScrollViewDelegate, UINavigationContro
         let tiktokValue = selectedSNS.contains("TikTok") ? "true" : "false"
         let instagramValue = selectedSNS.contains("Instagram") ? "true" : "false"
         let shopeeValue = selectedSNS.contains("Shopee") ? "true" : "false"
+        let youtubeValue = selectedSNS.contains("Youtube") ? "true" : "false"
+        let naverValue = selectedSNS.contains("Naver") ? "true" : "false"
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
 
@@ -646,6 +657,8 @@ class CollabModifyVC: UIViewController, UIScrollViewDelegate, UINavigationContro
             multipartFormData.append(Data(tiktokValue.utf8), withName: "tiktok")
             multipartFormData.append(Data(instagramValue.utf8), withName: "instagram")
             multipartFormData.append(Data(shopeeValue.utf8), withName: "shopee")
+            multipartFormData.append(Data(naverValue.utf8), withName: "naver")
+            multipartFormData.append(Data(youtubeValue.utf8), withName: "youtube")
             multipartFormData.append(Data(startDateString.utf8), withName: "start_date")
             multipartFormData.append(Data(endDateString.utf8), withName: "end_date")
 

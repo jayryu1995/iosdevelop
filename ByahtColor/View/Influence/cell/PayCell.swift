@@ -11,7 +11,6 @@ class PayCell: UITableViewCell {
     private let containerView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor(hex: "#F4F5F8")
-        view.layer.cornerRadius = 8
         return view
     }()
     private let payLabel: UILabel = {
@@ -76,8 +75,10 @@ class PayCell: UITableViewCell {
                     icon = UIImageView(image: UIImage(named: "instagram"))
                 } else if i.sns == 2 {
                     icon = UIImageView(image: UIImage(named: "facebook"))
-                } else {
+                } else if i.sns == 3 {
                     icon = UIImageView(image: UIImage(named: "naver"))
+                } else {
+                    icon = UIImageView(image: UIImage(named: "youtube"))
                 }
 
                 let lbl = UILabel()
@@ -129,4 +130,12 @@ class PayCell: UITableViewCell {
         let newViews = makePayStackView(index: payArray)
         newViews.forEach { payStackView.addArrangedSubview($0) }
     }
+
+    func addTopRadius() {
+        containerView.layer.maskedCorners = [.layerMinXMinYCorner, .layerMaxXMinYCorner] // 상단 좌우 코너에만 반경을 적용
+        containerView.layer.cornerRadius = 8
+
+     //   self.layoutIfNeeded()
+    }
+
 }

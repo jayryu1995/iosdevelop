@@ -5,12 +5,12 @@
 //  Created by jaem on 6/29/24.
 //
 
-import Foundation
 import Alamofire
 import Combine
 import UIKit
 import AVFoundation
 import SkeletonView
+import SendbirdChatSDK
 
 class BusinessHomeVC: UIViewController, UIScrollViewDelegate {
 
@@ -59,6 +59,7 @@ class BusinessHomeVC: UIViewController, UIScrollViewDelegate {
         let alertVC = RegistAlertBusinessVC()
         alertVC.onConfirm = {
             let vc = BusinessProfileWriteVC()
+            vc.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(vc, animated: false)
         }
         alertVC.modalPresentationStyle = .overFullScreen
@@ -75,6 +76,7 @@ class BusinessHomeVC: UIViewController, UIScrollViewDelegate {
 
                         self?.collabList = data.snapDtoList ?? []
                         self?.influenceList = data.influenceProfileDtos ?? []
+                        print("influenceList : \(self?.influenceList.count)")
                         self?.setupUI()
                         self?.setupConstraints()
 
@@ -130,7 +132,7 @@ class BusinessHomeVC: UIViewController, UIScrollViewDelegate {
             let imageView = UIImageView()
             if let resource = collab.imageList?.first {
                 let url = "\(Bundle.main.TEST_URL)/image\( resource )"
-                imageView.loadImage(from: url, resizedToWidth: 0)
+                imageView.loadImage(from: url)
             } else {
                 DispatchQueue.main.async {
                     imageView.backgroundColor = .lightGray
@@ -201,8 +203,15 @@ class BusinessHomeVC: UIViewController, UIScrollViewDelegate {
     }
 
     @objc private func snapButtonTapped() {
-        let vc = CollabVC()
-        self.navigationController?.pushViewController(vc, animated: true)
+
+        if User.shared.id == "byaht" {
+            let vc = AdminCollabVC()
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            let vc = CollabVC()
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
+
     }
 
     @objc private func influenceButtonTapped() {
@@ -248,7 +257,7 @@ class BusinessHomeVC: UIViewController, UIScrollViewDelegate {
                 let str = resource.split(separator: ".").last ?? ""
                 if str == "jpg" {
                     let url = "\(Bundle.main.TEST_URL)/img\(resource)"
-                    imageView.loadImage(from: url, resizedToWidth: 0)
+                    imageView.loadImage(from: url)
                 } else {
                     let path = "\(Bundle.main.TEST_URL)\(resource)"
                     loadVideoThumbnail(imageView: imageView, path: path)
@@ -399,4 +408,5 @@ class BusinessHomeVC: UIViewController, UIScrollViewDelegate {
             loadingIndicator.removeFromSuperview()
         }
     }
+
 }

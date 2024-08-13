@@ -6,8 +6,6 @@ target 'ByahtColor' do
   use_frameworks!:linkage => :static
 
   # Pods for ByahtColor
- pod 'GoogleMLKit/FaceDetection', '4.0.0'
- pod 'GoogleMLKit/SegmentationSelfie','4.0.0'
  pod 'SnapKit', '~> 5.6.0'
  pod 'SwiftLint'
  pod 'FBSDKLoginKit'
@@ -20,4 +18,7 @@ target 'ByahtColor' do
  pod 'FirebaseStorage'
  pod 'SkeletonView'
  pod 'DropDown'
+ pod 'SendBirdUIKit'
+ pod 'FLAnimatedImage'
+ pod 'Gifu'
 end

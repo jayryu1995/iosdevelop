@@ -110,13 +110,7 @@ class LoginVC: UIViewController {
     }
 
     private func setupAutoLogin() {
-        if let token = AccessToken.current,
-           !token.isExpired {
-            // 토큰 확인 후 계정 정보 수집
-            getUserProfile()
-        }
-
-        appleUserGet()
+        checkedUser()
         businessGet()
     }
 
@@ -124,34 +118,9 @@ class LoginVC: UIViewController {
         if let id = UserDefaults.standard.string(forKey: "businessId") {
             User.shared.id = id
             User.shared.auth = 2
+            User.shared.name = UserDefaults.standard.string(forKey: "name")
             let vc = TabBarViewController()
             self.navigationController?.pushViewController(vc, animated: true)
-        }
-    }
-
-    private func appleUserGet() {
-        let appleIDProvider = ASAuthorizationAppleIDProvider()
-        appleIDProvider.getCredentialState(forUserID: UserDefaults.standard.string(forKey: "userID") ?? "") { (credentialState, _) in
-            switch credentialState {
-            case .authorized:
-
-                DispatchQueue.main.async {
-                    let id = UserDefaults.standard.string(forKey: "userID") ?? ""
-                    let name = UserDefaults.standard.string(forKey: "name") ?? ""
-                    let email = UserDefaults.standard.string(forKey: "email") ?? ""
-                    User.shared.updateUserData(id: id, email: email, name: name)
-                    self.checkedUser()
-                }
-
-            case .revoked:
-                self.log(message: "apple login : revoked")
-
-            case .notFound:
-                self.log(message: "apple login : notFound")
-
-            default:
-                break
-            }
         }
     }
 
@@ -256,54 +225,39 @@ class LoginVC: UIViewController {
         [userButton, businessButton].forEach { button in
             // 버튼의 타이틀 라벨 크기를 조정
 
-                // 타이틀 라벨의 너비를 바탕으로 바텀 레이어의 프레임 설정
-                let layerWidth = button.frame.width
-                let layer = button.tag == 0 ? layer1 : layer2
-                let layerYPosition = button.frame.height - 3 // 레이어의 y 위치
-                layer.frame = CGRect(x: (button.frame.width - layerWidth) / 2, y: layerYPosition, width: layerWidth, height: 3)
+            // 타이틀 라벨의 너비를 바탕으로 바텀 레이어의 프레임 설정
+            let layerWidth = button.frame.width
+            let layer = button.tag == 0 ? layer1 : layer2
+            let layerYPosition = button.frame.height - 3 // 레이어의 y 위치
+            layer.frame = CGRect(x: (button.frame.width - layerWidth) / 2, y: layerYPosition, width: layerWidth, height: 3)
 
         }
     }
 
-    // 토큰으로 유저정보 가져오기
-    private func getUserProfile() {
-        GraphRequest.init(graphPath: "me", parameters: ["fields": "id, name, email"])
-            .start(completion: {(_, result, _) in
-                guard let fb = result as? [String: AnyObject] else { return }
-
-                let name = fb["name"] as? String
-                let email = fb["email"] as? String
-
-                if let idString = fb["id"] as? String {
-                    // 변환에 성공한 경우, id를 Int로 사용할 수 있습니다.
-                    User.shared.updateUserData(id: idString, email: email, name: name)
-                } else {
-                    // 변환에 실패한 경우 또는 id가 없는 경우
-                    self.log(message: "getUserProfile : 유효하지 않은 id 값 또는 id가 없습니다.")
-                }
-
-                self.checkedUser()
-            })
-    }
-
     private func checkedUser() {
-        if let id = User.shared.id {
-            viewModel.login(id: id) { [weak self] result in
-                DispatchQueue.main.async {
-                    switch result {
-                    case .success(let message):
-                        print(message)
-                        User.shared.updateAuth(auth: message)
-                        let vc = TabBarViewController()
-                        self?.navigationController?.pushViewController(vc, animated: true)
 
-                    case .failure(let error):
-                        print("데이터 없음")
-                        self?.signUpInfluence()
+        if let id = UserDefaults.standard.string(forKey: "userID") {
+            let name = UserDefaults.standard.string(forKey: "name") ?? ""
+            let email = UserDefaults.standard.string(forKey: "email") ?? ""
+            User.shared.updateUserData(id: id, email: email, name: name)
+            if let id = User.shared.id {
+                viewModel.getLoginData(member_id: id) { [weak self] result in
+                    DispatchQueue.main.async {
+                        switch result {
+                        case .success(let data):
+                            print("data: \(data)")
+                            let vc = TabBarViewController()
+                            self?.navigationController?.pushViewController(vc, animated: true)
+
+                        case .failure(let error):
+                            print("error : \(error)")
+                            // self?.signUpInfluence()
+                        }
                     }
                 }
             }
         }
+
     }
 
     private func signUpInfluence() {

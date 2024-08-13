@@ -9,6 +9,40 @@
 "server_error_title" = "서버 점검 중";
 "server_error_message" = "현재 서버 점검 중입니다. 잠시 후 다시 시도해주세요.";
 
+// MessageInputView
+"messageInputView_placeholder" = "메세지 보내기";
+
+//온보딩
+"onboarding_button" = "다음";
+"onboarding_first_label" = "잘 키운 내 SNS 계정\n프로필 등록하고";
+"onboarding_second_label" = "크리에이터를 기다리는 기업들에게";
+"onboarding_second_label2" = "직접 협업을 제안하세요.";
+"onboarding_third_label" = "내 프로필로\n제안 보내고, 또 받고.";
+"onboarding_third_label2" = "내 계정 수익화\n이젠 기다리지 않아도 됩니다.";
+"onboarding_third_label3" = "안녕하세요! 회사와 핏이 잘 맞는데,\n같이 협업 해보시는 거 어떠세요?";
+"onboarding_third_label4" = "블로그랑 인스타그램 두 계정 한 번에 진행하고 싶은데\n업로드 가능한 일정 ASAP로 될까요?";
+"onboarding_third_label5" = "혹시 이런 광고도 받으시나요?\n저희 서비스 광고 맡기고 싶어서요!";
+"onboarding_fourth_label" = "맞는 광고주에게\n추천해 드릴게요.";
+"onboarding_fourth_label2" = "협업 시 필요한\n크리에이터님 성함을 알려주세요.";
+"onboarding_fourth_hint" = "본명으로 입력해주세요.";
+"onboarding_fourth_button" = "프로필 작성하러 가기";
+
+//Sns
+"TikTok" = "틱톡";
+"Instagram" = "인스타그램";
+"Facebook" = "페이스북";
+"Naver" = "네이버";
+"Youtube" = "유튜브";
+"Shopee" = "쇼피";
+
+// 국가
+"nation_ko" = "한국";
+"nation_vi" = "베트남";
+"nation_global" = "글로벌";
+"nation_th" = "태국";
+"nation_ph" = "필리핀";
+"nation_sg" = "싱가폴";
+"nation_jp" = "일본";
 
 // AlertUpaate
 "update_str" = "업데이트";
@@ -19,6 +53,7 @@
 
 // BusinessSampleVC
 "business_sample_label" = "양 옆으로 넘겨 이전이나 다음 크리에이터를 만나보세요.";
+"business_sample_chat" = "채팅으로 빠르게 협업을 제안하세요.";
 
 // 인플루언서 프로필 작성 Alert창
 "alert_regist_button" = "프로필 등록하기";
@@ -31,12 +66,12 @@
 
 // 타겟오디언스
 "categories_beauty" = "뷰티";
-"categories_fasion" = "패션";
+"categories_fashion" = "패션";
 "categories_daily" = "일상";
 "categories_travel" = "여행";
 "categories_baby" = "육아";
 "categories_food" = "음식";
-"categories_etc" = "기타";
+"categories_etc" = "그외";
 "ages_10" = "10대";
 "ages_20" = "20대";
 "ages_30" = "30대";
@@ -123,6 +158,7 @@
 "influence_profile_target" = "영역";
 "influence_profile_target2" = "나이대";
 "influence_profile_target3" = "성별";
+"influence_profile_target4" = "활동 국가";
 "influence_profile_negotiable" = "협의가능";
 "influence_profile_non_negotiable" = "협의불가능";
 "influence_profile_video" = "동영상";
@@ -147,6 +183,7 @@
 "influence_profile_write_category" = "주제";
 "influence_profile_write_ages" = "나이대";
 "influence_profile_write_gender" = "성별";
+"influence_profile_write_nation" = "활동 국가";
 "influence_profile_write_alert" = "200MB 이상의 파일은 업로드 하실 수 없습니다.";
 "influence_profile_write_message1" = "간단한 소개를 입력해주세요.";
 "influence_profile_write_message2" = "이미지 또는 릴스를 업로드해주세요.";
@@ -154,7 +191,9 @@
 "influence_profile_write_message4" = "최소 한가지의 주제를 선택해주세요.";
 "influence_profile_write_message5" = "최소 한가지의 연령층을 선택해주세요.";
 "influence_profile_write_message6" = "최소 한가지의 주요 성별군을 선택해주세요.";
-"influence_profile_write_message7" = "최소 한가지의 SNS Link를 입력해주세요.";
+"influence_profile_write_message7" = "인플루언서로 활동중인 국가를 선택해주세요.";
+"influence_profile_write_message8" = "최소 한가지의 SNS 링크를 입력해주세요.";
+"influence_profile_write_code" = "추천인 코드";
 
 // AddSnsVC
 "add_sns_title" = "SNS 계정 추가";
@@ -271,7 +310,7 @@
 
 //CollabWriteVC
 "collabWriteVC_contentLabel" = "이벤트 내용\n- 일정\n- 제공내역\n- 제품/브랜드 설명\n";
-"collabWriteVC_link" = "쇼피 링크";
+"collabWriteVC_link" = "관련 링크";
 "collabWriteVC_condition" = "이벤트 조건\n- 조건\n- 주의사항\n";
 "collabWriteVC_title" = "제목";
 "collabWriteVC_people_label" = "선정 인원수";
@@ -324,7 +363,7 @@
 //CollabDetailVC
 "collab_detail_subtitle" = "이벤트 내용";
 "collab_detail_subtitle2" = "이벤트 조건";
-"collab_detail_link" = "쇼피 링크";
+"collab_detail_link" = "링크";
 "collab_detail_button" = "참여 완료";
 "collab_detail_button2" = "리뷰 작성";
 "collab_detail_submit" = "신청하기";

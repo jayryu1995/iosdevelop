@@ -30,7 +30,19 @@ class InfluenceHomeVC: UIViewController, UIScrollViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
+        NotificationCenter.default.addObserver(self, selector: #selector(handleAccountUpdatedInHome), name: .dataChanged, object: nil)
     }
+
+    @objc private func handleAccountUpdatedInHome(notification: NSNotification) {
+        // 프로필 작성 뷰로 전환
+        let profileWriteVC = InfluenceProfileWriteVC()
+        profileWriteVC.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(profileWriteVC, animated: false)
+    }
+
+        deinit {
+            NotificationCenter.default.removeObserver(self, name: .dataChanged, object: nil)
+        }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,11 +50,17 @@ class InfluenceHomeVC: UIViewController, UIScrollViewDelegate {
 
         setupHomeData()
         setupUI()
-
-        if UserDefaults.standard.integer(forKey: "home") == 0 {
-            setupAlertView()
+        if User.shared.name == nil || User.shared.name == "" {
+            setupOnboardingView()
         }
 
+    }
+
+    private func setupOnboardingView() {
+        let exampleVC = InfluenceOnboardingVC()
+        exampleVC.modalPresentationStyle = .overFullScreen
+        exampleVC.modalTransitionStyle = .crossDissolve
+        present(exampleVC, animated: true, completion: nil)
     }
 
     private func setupAlertView() {
@@ -126,7 +144,7 @@ class InfluenceHomeVC: UIViewController, UIScrollViewDelegate {
             let imageView = UIImageView()
             if let resource = collab.imageList?.first {
                 let url = "\(Bundle.main.TEST_URL)/image\( resource )"
-                imageView.loadImage(from: url, resizedToWidth: 0)
+                imageView.loadImage(from: url)
             } else {
                 DispatchQueue.main.async {
                     imageView.backgroundColor = .lightGray
@@ -236,7 +254,7 @@ class InfluenceHomeVC: UIViewController, UIScrollViewDelegate {
                 let imageView = GradientImageView(frame: .zero)
                 if let resource = business.imagePath {
                     let url = "\(Bundle.main.TEST_URL)/business\( resource )"
-                    imageView.loadImage(from: url, resizedToWidth: 0)
+                    imageView.loadImage(from: url)
                 } else {
                     imageView.image = UIImage(named: "sample_business_image")
                 }
@@ -349,4 +367,5 @@ class InfluenceHomeVC: UIViewController, UIScrollViewDelegate {
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.pushViewController(vc, animated: true)
     }
+
 }

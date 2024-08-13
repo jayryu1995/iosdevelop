@@ -34,18 +34,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             if #available(iOS 14, *) {
                 ATTrackingManager.requestTrackingAuthorization { status in
                     switch status {
-                        case .authorized:
-                            print("enable tracking")
-                        case .denied:
-                            print("disable tracking")
-                        default:
-                            print("default tracking")
+                    case .authorized:
+                        print("enable tracking")
+                    case .denied:
+                        print("disable tracking")
+                    default:
+                        print("default tracking")
                     }
                 }
             }
 
         })
-       }
+    }
 
     // 상단 네비게이션 바 설정
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {

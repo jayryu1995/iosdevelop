@@ -43,7 +43,6 @@ class InfluenceViewModel: ObservableObject {
         }
 
         let method: HTTPMethod = getProfile ? .patch : .post
-
         func uploadRequest(videoFileURL: URL?) {
             AF.upload(multipartFormData: { multipartFormData in
                 // 텍스트 데이터 추가
@@ -153,7 +152,6 @@ class InfluenceViewModel: ObservableObject {
             .responseDecodable(of: InfluenceProfileDto.self) { response in
                 switch response.result {
                 case .success(let data):
-
                     completion(.success(data))
                 case .failure(let error):
                     completion(.failure(error))
@@ -206,6 +204,37 @@ class InfluenceViewModel: ObservableObject {
                 completion(.failure(error))
             }
 
+        }
+    }
+
+    // onboarding 계정 이름 등록
+    func updateAccountName(newName: String, completion: @escaping (Result<String, Error>) -> Void) {
+        // 서버 URL 설정
+        let url = "\(Bundle.main.TEST_URL)/influence/account/name"
+        let influenceAccountNameDto = InfluenceAccountNameDto(memberId: User.shared.id, name: newName)
+
+        // JSON 인코딩
+        guard let jsonData = try? JSONEncoder().encode(influenceAccountNameDto) else {
+            let encodingError = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Failed to encode JSON"])
+            completion(.failure(encodingError))
+            return
+        }
+
+        // JSON 데이터를 딕셔너리로 변환
+        guard let jsonObject = try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers) as? [String: Any] else {
+            let jsonConversionError = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Failed to convert JSON to Dictionary"])
+            completion(.failure(jsonConversionError))
+            return
+        }
+
+        // 요청 보내기
+        AF.request(url, method: .patch, parameters: jsonObject, encoding: JSONEncoding.default, headers: ["Content-Type": "application/json"]).responseString { response in
+            switch response.result {
+            case .success(let responseString):
+                completion(.success(responseString))
+            case .failure(let error):
+                completion(.failure(error))
+            }
         }
     }
 }

@@ -504,7 +504,7 @@ extension RequestCollabVC: FloatingPanelControllerDelegate, UIImagePickerControl
 
     func floatingPanelWillBeginAttracting(_ fpc: FloatingPanelController, to state: FloatingPanelState) {
 
-        if state == FloatingPanelState.tip {
+        if state == FloatingPanelState.half {
             fpc.removePanelFromParent(animated: true)
         }
     }

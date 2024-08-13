@@ -71,7 +71,7 @@ class UserDiscountTableViewCell: UITableViewCell {
             let url = "\(Bundle.main.TEST_URL)\( list[i].imageList?.first ?? "" )"
             let imageView = UIImageView()
 
-            imageView.loadImage(from: url, resizedToWidth: widthSize)
+            imageView.loadImage(from: url)
             imageView.contentMode = .scaleAspectFill
             imageView.layer.cornerRadius = 4
             imageView.clipsToBounds = true

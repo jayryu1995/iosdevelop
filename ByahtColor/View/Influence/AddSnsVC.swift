@@ -78,9 +78,9 @@ class AddSnsVC: UIViewController {
     }
 
     private func setupUI() {
-        let snsTags = ["TikTok", "Instagram", "Facebook", "Naver"]
+        let snsTags = Globals.shared.sns
 
-        let snsButtons = createHorizontalStackView(tags: snsTags)
+        let snsButtons = createCategoryView(tags: snsTags)
         selectButton.addTarget(self, action: #selector(selectButtonTapped), for: .touchUpInside)
         view.addSubview(selectButton)
         view.addSubview(snsLabel)
@@ -95,7 +95,7 @@ class AddSnsVC: UIViewController {
 
         snsButtons.snp.makeConstraints {
             $0.top.equalTo(snsLabel.snp.bottom).offset(8)
-            $0.leading.equalToSuperview().inset(20)
+            $0.leading.trailing.equalToSuperview().inset(20)
         }
 
         linkLabel.snp.makeConstraints {
@@ -128,11 +128,12 @@ class AddSnsVC: UIViewController {
     }
 
     // 이 함수는 태그 이름의 배열을 받아서 수평 스택뷰를 생성하고 반환합니다.
-    private func createHorizontalStackView(tags: [String]) -> UIStackView {
-        let horizontalStackView = UIStackView()
-        horizontalStackView.axis = .horizontal
-        horizontalStackView.spacing = 8
-        horizontalStackView.isUserInteractionEnabled = true
+    private func createCategoryView(tags: [String]) -> UIView {
+        let containerView = UIView()
+        let maxWidth = UIScreen.main.bounds.width - 40
+        var currentRowView = UIView()
+        var currentRowWidth: CGFloat = 0
+        var rowIndex = 0
 
         for tagName in tags {
             let tagButton = UIButton()
@@ -140,25 +141,58 @@ class AddSnsVC: UIViewController {
             tagButton.backgroundColor = .white
             tagButton.setTitleColor(UIColor(hex: "#4E505B"), for: .normal)
             tagButton.addTarget(self, action: #selector(snsButtonTapped), for: .touchUpInside)
-            tagButton.sizeToFit()
             tagButton.isUserInteractionEnabled = true
             tagButton.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 14)
             tagButton.layer.cornerRadius = 16
             tagButton.layer.borderWidth = 1
             tagButton.layer.borderColor = UIColor(hex: "#D3D4DA").cgColor
+            tagButton.contentEdgeInsets = UIEdgeInsets(top: 6, left: 5, bottom: 6, right: 5)
 
-            // 텍스트의 inset 설정
-            tagButton.contentEdgeInsets = UIEdgeInsets(top: 6, left: 10, bottom: 6, right: 10)
             snsButtons.append(tagButton)
-            horizontalStackView.addArrangedSubview(tagButton)
 
+            // Calculate button size
+            tagButton.sizeToFit()
+            let buttonWidth = tagButton.frame.width + tagButton.contentEdgeInsets.left + tagButton.contentEdgeInsets.right
+            if currentRowWidth + buttonWidth + 8 > maxWidth {
+                // Add the current row view to the container view
+                containerView.addSubview(currentRowView)
+                currentRowView.snp.makeConstraints { make in
+                    make.top.equalTo(containerView).offset(rowIndex * (Int(32) + 8))
+                    make.left.equalTo(containerView)
+                    make.right.lessThanOrEqualTo(containerView)
+                    make.height.equalTo(32)
+                }
+
+                // Start a new row
+                currentRowView = UIView()
+                currentRowWidth = 0
+                rowIndex += 1
+            }
+
+            // Add the button to the current row view
+            currentRowView.addSubview(tagButton)
             tagButton.snp.makeConstraints { make in
-                make.width.greaterThanOrEqualTo(60)
+                make.left.equalTo(currentRowView).offset(currentRowWidth)
+                make.centerY.equalTo(currentRowView)
+                make.width.equalTo(buttonWidth)
                 make.height.equalTo(32)
+            }
+
+            currentRowWidth += buttonWidth + 8
+        }
+
+        if !currentRowView.subviews.isEmpty {
+            containerView.addSubview(currentRowView)
+            currentRowView.snp.makeConstraints { make in
+                make.top.equalTo(containerView).offset(rowIndex * 40)
+                make.left.equalTo(containerView)
+                make.right.lessThanOrEqualTo(containerView)
+                make.height.equalTo(32)
+                make.bottom.equalToSuperview().offset(-8) // 마지막 줄일 경우
             }
         }
 
-        return horizontalStackView
+        return containerView
     }
 
     @objc func snsButtonTapped(_ sender: UIButton) {
@@ -185,10 +219,11 @@ class AddSnsVC: UIViewController {
 
         var type = 0
         switch selectedSns {
-        case "TikTok": type = 0
-        case "Instagram": type = 1
-        case "Facebook": type = 2
-        case "Naver": type = 3
+        case "TikTok".localized: type = 0
+        case "Instagram".localized: type = 1
+        case "Facebook".localized: type = 2
+        case "Naver".localized: type = 3
+        case "Youtube".localized: type = 4
         default: type = 0
         }
 

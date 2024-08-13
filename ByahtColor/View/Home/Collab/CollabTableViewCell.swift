@@ -70,7 +70,7 @@ class CollabTableViewCell: UITableViewCell {
             // URL 문자열을 URL 객체로 변환
             let url = "\(Bundle.main.TEST_URL)/image\( list[i].imageList?.first ?? "" )"
             let imageView = UIImageView()
-            imageView.loadImage(from: url, resizedToWidth: widthSize)
+            imageView.loadImage(from: url)
             imageView.contentMode = .scaleAspectFill
             imageView.layer.cornerRadius = 4
             imageView.clipsToBounds = true
@@ -102,7 +102,7 @@ class CollabTableViewCell: UITableViewCell {
                     let paragraphStyle = NSMutableParagraphStyle()
                     paragraphStyle.lineSpacing = 8 // 원하는 행간격 설정
 
-                    let attributedString = NSMutableAttributedString(string: "Event\nHết hạn", attributes: [
+                    let attributedString = NSMutableAttributedString(string: "Closed", attributes: [
                         .paragraphStyle: paragraphStyle,
                         .font: UIFont(name: "Pretendard-Medium", size: 16)!,
                         .foregroundColor: UIColor.white
@@ -119,6 +119,19 @@ class CollabTableViewCell: UITableViewCell {
                 print("Invalid date format or nil end_date")
             }
 
+            let dDayLabel = UILabel()
+            dDayLabel.font = UIFont(name: "Pretendard-Regular", size: 12)
+            dDayLabel.textColor = UIColor(hex: "#009BF2")
+
+            updateDDayLabel(label: dDayLabel, startDateString: list[i].start_date!, endDateString: list[i].end_date!)
+
+            collectionCell.addSubview(dDayLabel)
+            dDayLabel.snp.makeConstraints { make in
+                make.top.equalTo(imageView.snp.bottom).offset(2)
+                make.leading.trailing.equalToSuperview()
+                make.height.equalTo(14)
+            }
+
             let tagView = UILabel()
             tagView.text = list[i].title
             tagView.font = UIFont(name: "Pretendard-Regular", size: 12)
@@ -126,23 +139,8 @@ class CollabTableViewCell: UITableViewCell {
             tagView.numberOfLines = 2
             collectionCell.addSubview(tagView)
             tagView.snp.makeConstraints { make in
-                make.top.equalTo(imageView.snp.bottom).offset(5)
-                make.leading.equalToSuperview()
-                make.trailing.equalToSuperview()
-                make.height.equalTo(30)
-            }
-
-            let dDayLabel = UILabel()
-            dDayLabel.font = UIFont(name: "Pretendard-Regular", size: 12)
-            dDayLabel.textColor = UIColor(hex: "#535358")
-
-            updateDDayLabel(label: dDayLabel, startDateString: list[i].start_date!, endDateString: list[i].end_date!)
-
-            collectionCell.addSubview(dDayLabel)
-            dDayLabel.snp.makeConstraints { make in
-                make.top.equalTo(tagView.snp.bottom)
-                make.leading.equalToSuperview()
-                make.trailing.equalToSuperview()
+                make.top.equalTo(dDayLabel.snp.bottom).offset(2)
+                make.leading.trailing.equalToSuperview()
                 make.height.equalTo(30)
             }
 

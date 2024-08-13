@@ -14,8 +14,7 @@ class TalkReadTableCell: UITableViewCell, UIScrollViewDelegate {
     private let profileImageView: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "icon_profile2")
-        image.contentMode = .scaleAspectFit
-        image.layer.cornerRadius = 17.5
+        image.contentMode = .scaleAspectFill
         image.clipsToBounds = true
         return image
     }()
@@ -115,6 +114,7 @@ class TalkReadTableCell: UITableViewCell, UIScrollViewDelegate {
     override func layoutSubviews() {
         super.layoutSubviews()
         contentView.layoutIfNeeded()  // 뷰가 자신의 크기를 다시 계산하도록 함
+
     }
 
     private func setupViews() {
@@ -203,9 +203,12 @@ class TalkReadTableCell: UITableViewCell, UIScrollViewDelegate {
 
     // 데이터 입력
     func configure(with board: Talk) {
-        let url = "\(Bundle.main.TEST_URL)/profile\( String(describing: board.profileImage) )"
-        profileImageView.loadImage(from: url, resizedToWidth: 35)
-        profileImageView.contentMode = .scaleAspectFit
+
+        if let id = board.id {
+            let url = "\(Bundle.main.TEST_URL)/img/profile/\(id).jpg"
+             profileImageView.loadImage(from: url)
+            profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2
+        }
         nicknameLabel.text = board.nickname
         dateLabel.text = CustomFunction().formatDate(board.regi_date ?? "")
         titleLabel.text = board.title
@@ -238,7 +241,7 @@ class TalkReadTableCell: UITableViewCell, UIScrollViewDelegate {
             let imageView = UIImageView()
             let widthSize = UIScreen.main.bounds.width
             let url = "\(Bundle.main.TEST_URL)/board\( resource )"
-            imageView.loadImage(from: url, resizedToWidth: widthSize)
+            imageView.loadImage(from: url)
             imageView.contentMode = .scaleAspectFill
             imageView.clipsToBounds = true
             imageScrollView.addSubview(imageView)

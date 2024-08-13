@@ -57,12 +57,8 @@ class CollabVC: UIViewController, CollabFilterVCDelegate {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        clearAndReloadTableView()
-    }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.navigationController?.navigationBar.isHidden = true
+        clearAndReloadTableView()
     }
 
     override func viewDidLoad() {
@@ -201,20 +197,24 @@ class CollabVC: UIViewController, CollabFilterVCDelegate {
     }
 
     @objc private func showFilter() {
+        self.navigationController?.navigationBar.isHidden = false
         showFloatingPanel()
     }
 
     // 필터
     private func showFloatingPanel() {
+        self.navigationController?.navigationBar.isHidden = true
         let fpc = FloatingPanelController()
         fpc.delegate = self
 
         let contentVC = CollabFilterVC() // 패널에 표시할 컨텐츠 뷰 컨트롤러
         contentVC.delegate = self
         fpc.set(contentViewController: contentVC)
-        fpc.layout = CustomFloatingPanel()
+        fpc.layout = CollabFloatingPanel()
         fpc.move(to: .half, animated: true) // 패널을 반 정도의 높이로 이동
         fpc.isRemovalInteractionEnabled = true
+        fpc.backdropView.dismissalTapGestureRecognizer.isEnabled = true
+        fpc.surfaceView.appearance.cornerRadius = 20
         fpc.addPanel(toParent: self)
     }
 
@@ -246,43 +246,6 @@ extension CollabVC: UITableViewDataSource, UITableViewDelegate, FloatingPanelCon
             self.navigationController?.pushViewController(detailVC, animated: true)
         }
     }
-
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        let yOffset = scrollView.contentOffset.y
-//
-//        // 스크롤이 아래로 내려갈 때와 위로 올라갈 때 topView의 높이를 조정합니다.
-//        if yOffset > 0 {
-//
-//            self.imageLabel.isHidden = true
-//
-//            // yOffset이 0보다 클 때, 즉 사용자가 아래로 스크롤할 때 topView를 숨깁니다.
-//            if topView.frame.height > 0 { // topView가 이미 숨겨진 상태가 아니라면
-//                UIView.animate(withDuration: 0.3, animations: {
-//                    // topView의 높이를 0으로 조정하여 숨깁니다.
-//                    self.topView.snp.updateConstraints { make in
-//                        make.height.equalTo(0)
-//                    }
-//
-//                    self.view.layoutIfNeeded() // 이 변경사항을 즉시 반영합니다.
-//
-//                })
-//            }
-//        } else {
-//
-//            // yOffset이 0보다 작거나 같을 때, 즉 사용자가 위로 스크롤할 때 topView를 다시 보여줍니다.
-//            if topView.frame.height < 102 { // topView가 이미 전체 높이로 표시된 상태가 아니라면
-//                UIView.animate(withDuration: 0.3, animations: {
-//                    // topView의 높이를 원래 높이(예: 102)로 조정합니다.
-//                    self.topView.snp.updateConstraints { make in
-//                        make.height.equalTo(102)
-//                    }
-//
-//                    self.imageLabel.isHidden = false
-//                    self.view.layoutIfNeeded() // 이 변경사항을 즉시 반영합니다.
-//                })
-//            }
-//        }
-//    }
 
     // 테이블 뷰 데이터 소스 메서드: 섹션당 행의 개수 반환
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -336,14 +299,22 @@ extension CollabVC: UITableViewDataSource, UITableViewDelegate, FloatingPanelCon
     }
 
     func floatingPanelWillBeginAttracting(_ fpc: FloatingPanelController, to state: FloatingPanelState) {
-        if state == FloatingPanelState.tip {
+
+        if state == FloatingPanelState.half {
+            self.navigationController?.navigationBar.isHidden = false
             fpc.removePanelFromParent(animated: true)
         }
     }
 
+    func floatingPanelDidRemove(_ vc: FloatingPanelController) {
+        self.navigationController?.navigationBar.isHidden = false
+        }
+
     func floatingPanel(_ fpc: FloatingPanelController, didTapBackdrop backdropView: UIView) {
         // 패널 제거
+        self.navigationController?.navigationBar.isHidden = false
         fpc.removePanelFromParent(animated: true)
+
     }
 
 }

@@ -48,8 +48,6 @@ class UserLoginVC: UIViewController {
         activityIndicator.center = self.view.center
         view.addSubview(activityIndicator)
 
-        // appleUserGet()
-
         view.backgroundColor = .white
 
         configureUIComponents()
@@ -271,36 +269,41 @@ extension UserLoginVC: ASAuthorizationControllerDelegate, ASAuthorizationControl
 
     @objc private func facebookLogin(_ sender: Any) {
         let loginManager = LoginManager()
-        loginManager.logIn(permissions: ["public_profile", "email"], from: self) {(result, error) in
-            guard error == nil else {
-                print(error!.localizedDescription)
-                return
-            }
-
-            guard let result = result, !result.isCancelled else {
-                print("User cancelled login")
-                return
-            }
-
-            GraphRequest.init(graphPath: "me", parameters: ["fields": "id, name, email"])
-                .start(completion: {(_, result, error) in
-                    print("error: ", error ?? "No error")
-                    guard let fb = result as? [String: AnyObject] else { return }
-
-                    var name = fb["name"] as? String ?? ""
-                    let email = fb["email"] as? String ?? ""
-                    let idString = fb["id"] as? String ?? ""
-
-                    if name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                        name = "user\(self.generateRandomNumber(digits: 8))"
-                    }
-
-                    User.shared.updateUserData(id: idString, email: email, name: name)
-                    self.getNickname()
-                })
-
+        guard let configuration = LoginConfiguration(
+            permissions: ["email"],
+            tracking: .limited,
+            nonce: "123"
+        )
+        else {
+            return
         }
 
+        loginManager.logIn(configuration: configuration) { result in
+            switch result {
+            case .cancelled, .failed:
+                // Handle error
+                break
+            case .success:
+                // getting user ID
+                let userID = Profile.current?.userID
+
+                // getting pre-populated email
+                let email = Profile.current?.email
+                var name = Profile.current?.name
+
+                // getting id token string
+                let tokenString = AuthenticationToken.current?.tokenString
+                if name?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == true {
+                    name = "user\(self.generateRandomNumber(digits: 8))"
+                }
+                UserDefaults.standard.set(name, forKey: "name")
+                UserDefaults.standard.set(userID, forKey: "userID")
+                UserDefaults.standard.set(email, forKey: "email")
+                User.shared.updateUserData(id: userID, email: email, name: name)
+
+                self.getNickname()
+            }
+        }
     }
 
     private func generateRandomNumber(digits: Int) -> String {
