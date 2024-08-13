@@ -100,7 +100,7 @@
 		1F5964092C355A7D00FD8419 /* BusinessReportVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5964082C355A7D00FD8419 /* BusinessReportVC.swift */; };
 		1F59640B2C3668D700FD8419 /* BusinessDetailDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F59640A2C3668D700FD8419 /* BusinessDetailDto.swift */; };
 		1F5A06782B7DB546005E6193 /* TalkModifyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5A06772B7DB546005E6193 /* TalkModifyVC.swift */; };
-		1F6154812C64C4D7001A9285 /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F6154802C64C4D7001A9285 /* splash.png */; };
+		1F61548F2C65EAB4001A9285 /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F61548E2C65EAB4001A9285 /* splash.png */; };
 		1F6F46ED2B98110A00E63548 /* UnderlinedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6F46EC2B98110A00E63548 /* UnderlinedTextField.swift */; };
 		1F6F46F12B98172A00E63548 /* BankVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6F46F02B98172A00E63548 /* BankVC.swift */; };
 		1F6F46F32B9817E700E63548 /* BankTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6F46F22B9817E700E63548 /* BankTableViewCell.swift */; };
@@ -324,7 +324,7 @@
 		1F6154762C649642001A9285 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
 		1F6154772C649643001A9285 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = ja; path = ja.lproj/Info.plist; sourceTree = "<group>"; };
 		1F6154782C649644001A9285 /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
-		1F6154802C64C4D7001A9285 /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash.png; sourceTree = "<group>"; };
+		1F61548E2C65EAB4001A9285 /* splash.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = splash.png; sourceTree = "<group>"; };
 		1F6F46EC2B98110A00E63548 /* UnderlinedTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnderlinedTextField.swift; sourceTree = "<group>"; };
 		1F6F46F02B98172A00E63548 /* BankVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankVC.swift; sourceTree = "<group>"; };
 		1F6F46F22B9817E700E63548 /* BankTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankTableViewCell.swift; sourceTree = "<group>"; };
@@ -682,7 +682,7 @@
 		1F61547D2C64C42F001A9285 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				1F6154802C64C4D7001A9285 /* splash.png */,
+				1F61548E2C65EAB4001A9285 /* splash.png */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -981,7 +981,6 @@
 				1F08AFA62B32C4E20062FAF4 /* Pretendard-ExtraBold.otf in Resources */,
 				1F415BF42A6FC84600FBA354 /* Roboto-Condensed.ttf in Resources */,
 				1F415C002A6FC84600FBA354 /* Roboto-BlackItalic.ttf in Resources */,
-				1F6154812C64C4D7001A9285 /* splash.png in Resources */,
 				1F08AF9F2B32C4E20062FAF4 /* Pretendard-SemiBold.otf in Resources */,
 				1F415BF62A6FC84600FBA354 /* Roboto-ThinItalic.ttf in Resources */,
 				1F08AF9E2B32C4E20062FAF4 /* Pretendard-Regular.otf in Resources */,
@@ -996,6 +995,7 @@
 				1F08AFA42B32C4E20062FAF4 /* Pretendard-Light.otf in Resources */,
 				1F08AFA22B32C4E20062FAF4 /* Pretendard-Thin.otf in Resources */,
 				1F415BFF2A6FC84600FBA354 /* Roboto-Italic.ttf in Resources */,
+				1F61548F2C65EAB4001A9285 /* splash.png in Resources */,
 				1F08AFA52B32C4E20062FAF4 /* Pretendard-Black.otf in Resources */,
 				1FDA83A22ABC201E003CB0DA /* .swiftlint.yml in Resources */,
 				1F08AFA32B32C4E20062FAF4 /* Pretendard-Medium.otf in Resources */,
@@ -1446,7 +1446,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ByahtColor/ByahtColor.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2024.08.08;
+				CURRENT_PROJECT_VERSION = 2024.08.12;
 				DEVELOPMENT_TEAM = CS98CK3779;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1455,8 +1455,9 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Bạn có muốn cho phép sử dụng máy ảnh để tạo bài đăng (đăng ảnh, lưu hoặc chia sẻ ảnh) không?";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This app requires access to the microphone to enable voice recording features.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Bạn có muốn cho phép sử dụng album để tạo bài đăng (đăng ảnh, lưu hoặc chia sẻ ảnh) không?";
-				INFOPLIST_KEY_NSUserTrackingUsageDescription = "Chúng tôi thu thập dữ liệu hành động và thông tin hoạt động quảng cáo của người sử dụng để cung cấp dịch vụ và quảng cáo tối ưu cho người dùng.";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "We need permission to track you for personalized advertising.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
@@ -1491,7 +1492,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ByahtColor/ByahtColorRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2024.08.08;
+				CURRENT_PROJECT_VERSION = 2024.08.12;
 				DEVELOPMENT_TEAM = CS98CK3779;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1500,8 +1501,9 @@
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.lifestyle";
 				INFOPLIST_KEY_LSSupportsOpeningDocumentsInPlace = YES;
 				INFOPLIST_KEY_NSCameraUsageDescription = "Bạn có muốn cho phép sử dụng máy ảnh để tạo bài đăng (đăng ảnh, lưu hoặc chia sẻ ảnh) không?";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "This app requires access to the microphone to enable voice recording features.";
 				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Bạn có muốn cho phép sử dụng album để tạo bài đăng (đăng ảnh, lưu hoặc chia sẻ ảnh) không?";
-				INFOPLIST_KEY_NSUserTrackingUsageDescription = "Chúng tôi thu thập dữ liệu hành động và thông tin hoạt động quảng cáo của người sử dụng để cung cấp dịch vụ và quảng cáo tối ưu cho người dùng.";
+				INFOPLIST_KEY_NSUserTrackingUsageDescription = "We need permission to track you for personalized advertising.";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;

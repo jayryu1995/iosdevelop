@@ -638,12 +638,34 @@ class BusinessProfileWriteVC: UIViewController {
                 DispatchQueue.main.async {
                     switch result {
                     case .success(let responseString):
-                        self?.navigationController?.popViewController(animated: true)
+                        self?.updateChatProfile()
                         UserDefaults.standard.set(1, forKey: "home")
+                        self?.navigationController?.popViewController(animated: true)
+
                     case .failure(let error):
                         print("에러가 발생했습니다")
                         print( "Error: \(error.localizedDescription)")
                     }
+                }
+            }
+        }
+    }
+
+    private func updateChatProfile() {
+        var imagePath: String?
+        if User.shared.auth ?? 0 < 2 {
+            imagePath = "\(Bundle.main.TEST_URL)/img/profile/\(User.shared.id ?? "").jpg"
+        } else {
+            imagePath = "\(Bundle.main.TEST_URL)/business/profile/\(User.shared.id ?? "").jpg"
+        }
+
+        if let name = User.shared.name {
+            SendbirdUser.shared.updateUserInfo(nickname: name, profileImage: imagePath) { result in
+                switch result {
+                case .success(let user):
+                    print("업데이트 성공")
+                case .failure(let error):
+                    print("error : \(error)")
                 }
             }
         }
@@ -943,10 +965,11 @@ extension BusinessProfileWriteVC: UIImagePickerControllerDelegate, UIScrollViewD
         contentVC.delegate = self
         fpc.set(contentViewController: contentVC)
         fpc.layout = CustomFloatingPanel()
-        fpc.move(to: .half, animated: true) // 패널을 반 정도의 높이로 이동
         fpc.isRemovalInteractionEnabled = true
         fpc.surfaceView.appearance.cornerRadius = 20
         fpc.addPanel(toParent: self)
+        fpc.addPanel(toParent: self)
+        fpc.move(to: .full, animated: true)
     }
 
 }

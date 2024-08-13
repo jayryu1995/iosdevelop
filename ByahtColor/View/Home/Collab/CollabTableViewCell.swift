@@ -102,7 +102,7 @@ class CollabTableViewCell: UITableViewCell {
                     let paragraphStyle = NSMutableParagraphStyle()
                     paragraphStyle.lineSpacing = 8 // 원하는 행간격 설정
 
-                    let attributedString = NSMutableAttributedString(string: "Event\nHết hạn", attributes: [
+                    let attributedString = NSMutableAttributedString(string: "Closed", attributes: [
                         .paragraphStyle: paragraphStyle,
                         .font: UIFont(name: "Pretendard-Medium", size: 16)!,
                         .foregroundColor: UIColor.white

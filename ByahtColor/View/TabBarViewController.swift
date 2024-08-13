@@ -11,6 +11,7 @@ import SendbirdChatSDK
 
 class TabBarViewController: UITabBarController {
     let chatVC = ChatsListVC()
+    static let shared = TabBarViewController()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +26,7 @@ class TabBarViewController: UITabBarController {
         chatVC.title = "Chats"
         chatVC.tabBarItem.image = UIImage(named: "icon_chat")
         chatVC.tabBarItem.selectedImage = UIImage(named: "icon_chat2")?.withRenderingMode(.alwaysOriginal)
+        NotificationCenter.default.addObserver(self, selector: #selector(handlePushNotification), name: NSNotification.Name("SendbirdPushNotificationReceived"), object: nil)
 
         if User.shared.auth ?? 0 < 2 {
             let homeVC = InfluenceHomeVC()
@@ -61,7 +63,6 @@ class TabBarViewController: UITabBarController {
         } else if User.shared.auth ?? 0 < 5 {
             let homeVC = BusinessHomeVC()
             let searchVC = BusinessSwipeVC()
-
             let myPageVC = BusinessMypageVC()
             homeVC.title = "Home"
             searchVC.title = "Search"
@@ -135,6 +136,7 @@ class TabBarViewController: UITabBarController {
                     print("로그인성공 \(user.nickname)")
                     self.updateReadState()
                     self.updateChatProfile()
+                    self.setNotification()
                     NotificationCenter.default.post(name: NSNotification.Name("LoginSuccess"), object: nil)
                 case .failure(let error):
                     print("error : \(error)")
@@ -144,17 +146,26 @@ class TabBarViewController: UITabBarController {
         }
     }
 
-    private func updateReadState() {
+    @objc private func handlePushNotification() {
+        updateReadState()
+    }
+
+    func updateReadState() {
+        print("updateReadState() 실행")
         SendbirdUser.shared.unReadMessages { result in
             switch result {
             case .success(let count):
                 print("count : \(count)")
-                if count > 0 {
-                    self.chatVC.tabBarItem.image = UIImage(named: "icon_chat3")?.withRenderingMode(.alwaysOriginal)
-                    self.chatVC.tabBarItem.selectedImage = UIImage(named: "icon_chat4")?.withRenderingMode(.alwaysOriginal)
-                } else {
-                    self.chatVC.tabBarItem.image = UIImage(named: "icon_chat")
-                    self.chatVC.tabBarItem.selectedImage = UIImage(named: "icon_chat2")?.withRenderingMode(.alwaysOriginal)
+                DispatchQueue.main.async {
+                    if count > 0 {
+                        self.chatVC.tabBarItem.image = UIImage(named: "icon_chat3")?.withRenderingMode(.alwaysOriginal)
+                        self.chatVC.tabBarItem.selectedImage = UIImage(named: "icon_chat4")?.withRenderingMode(.alwaysOriginal)
+                    } else {
+                        self.chatVC.tabBarItem.image = UIImage(named: "icon_chat")
+                        self.chatVC.tabBarItem.selectedImage = UIImage(named: "icon_chat2")?.withRenderingMode(.alwaysOriginal)
+                    }
+                    self.tabBar.setNeedsLayout()
+                    self.tabBar.layoutIfNeeded()
                 }
             case .failure(let error):
                 print("error : \(error)")
@@ -163,9 +174,15 @@ class TabBarViewController: UITabBarController {
     }
 
     private func updateChatProfile() {
-        let imagePath = "\(Bundle.main.TEST_URL)/img/account/\(User.shared.id ?? "").jpg"
+        var imagePath: String?
+        if User.shared.auth ?? 0 < 2 {
+            imagePath = "\(Bundle.main.TEST_URL)/img/profile/\(User.shared.id ?? "").jpg"
+        } else {
+            imagePath = "\(Bundle.main.TEST_URL)/business/profile/\(User.shared.id ?? "").jpg"
+        }
+
         if let name = User.shared.name {
-            SendbirdUser.shared.updateUserInfo(nickname: name, profileImage: nil) { result in
+            SendbirdUser.shared.updateUserInfo(nickname: name, profileImage: imagePath) { result in
                 switch result {
                 case .success(let user):
                     print("업데이트 성공")
@@ -175,4 +192,14 @@ class TabBarViewController: UITabBarController {
             }
         }
     }
+
+    private func setNotification() {
+        let notificationSettings = UIUserNotificationSettings(types: [UIUserNotificationType.alert, UIUserNotificationType.badge, UIUserNotificationType.sound], categories: nil)
+        UIApplication.shared.registerUserNotificationSettings(notificationSettings)
+        UIApplication.shared.registerForRemoteNotifications()
+    }
+
+    deinit {
+           NotificationCenter.default.removeObserver(self)
+       }
 }

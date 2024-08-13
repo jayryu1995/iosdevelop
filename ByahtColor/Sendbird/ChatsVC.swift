@@ -107,8 +107,8 @@ class ChatsVC: UIViewController {
         }
 
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(removeKeyboard))
-                tapGesture.cancelsTouchesInView = false
-                tableView.addGestureRecognizer(tapGesture)
+        tapGesture.cancelsTouchesInView = false
+        tableView.addGestureRecognizer(tapGesture)
 
         // 메시지가 로드된 후 스크롤을 가장 아래로 이동
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
@@ -175,19 +175,19 @@ extension ChatsVC: UITableViewDataSource {
         let cell: BasicMessageCell = tableView.dequeueReusableCell(for: indexPath)
         cell.selectionStyle = .none
 
-        if let url = message.sender?.profileURL {
-            cell.confingImage(url: url)
-        }
+//        if let url = message.sender?.profileURL {
+//            cell.confingImage(url: url)
+//        }
 
         if indexPath.row != 0 {
             let firstMessage = messageListUseCase.messages[indexPath.row - 1]
 
             if Date.sbu_from(message.createdAt).sbu_toString(format: .yyyyMMdd) != Date.sbu_from(firstMessage.createdAt).sbu_toString(format: .yyyyMMdd ) {
-                cell.addHeader(date: Date.sbu_from(message.createdAt).sbu_toString(format: .yyyyMMdd))
+                cell.addHeader(date: Date.sbu_from(message.createdAt).sbu_toString(format: .yyyyMMdd, localizedFormat: true))
             }
 
         } else if indexPath.row ==  0 {
-            cell.addHeader(date: Date.sbu_from(message.createdAt).sbu_toString(format: .yyyyMMdd))
+            cell.addHeader(date: Date.sbu_from(message.createdAt).sbu_toString(format: .yyyyMMdd, localizedFormat: true))
         }
 
         if let fileMessage = message as? FileMessage {

@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let viewControllerName = String(describing: type(of: AppDelegate.self))
     let device = UIDevice.current
     let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
-
+    var window: UIWindow?
     // 앱 시작 시 기기 정보 기록
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -51,7 +51,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
 
         Messaging.messaging().delegate = self
-
+        UNUserNotificationCenter.current().delegate = self
+        requestNotificationAuthorization()
         registerForPushNotifications()
 
         return true
@@ -84,6 +85,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ImageCacheManager.shared.clearCache()
     }
 
+}
+
+extension AppDelegate: MessagingDelegate, UNUserNotificationCenterDelegate {
+    private func requestNotificationAuthorization() {
+           let center = UNUserNotificationCenter.current()
+           center.requestAuthorization(options: [.alert, .sound, .badge]) { granted, _ in
+               if granted {
+                   print("Notification permission granted.")
+               } else {
+                   print("Notification permission denied.")
+               }
+           }
+       }
+
     private func registerForPushNotifications() {
       UNUserNotificationCenter.current()
         .requestAuthorization(options: [.alert, .sound, .badge]) { [weak self] granted, _ in
@@ -100,24 +115,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
           }
       }
     }
-}
-
-extension AppDelegate: MessagingDelegate, UNUserNotificationCenterDelegate {
 
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         let alertMsg = (userInfo["aps"] as! NSDictionary)["alert"] as! NSDictionary
-        print("Alert Message:", alertMsg)
         let payload = userInfo["sendbird"] as! NSDictionary
-        print("User Info payload:", payload)
         let count = payload.value(forKey: "unread_message_count") as! Int
-        // Implement your custom way to parse payload
-        if application.applicationState == .inactive {
-            // Receiving a notification while your app is inactive.
-        } else {
-            // Receiving a notification while your app is in either foreground or background.
-
-        }
+        print("didReceiveRemoteNotification: ", count)
         UIApplication.shared.applicationIconBadgeNumber = count
+
         completionHandler(UIBackgroundFetchResult.newData)
     }
 
@@ -128,6 +133,7 @@ extension AppDelegate: MessagingDelegate, UNUserNotificationCenterDelegate {
 
     // foreground 상에서 알림이 보이게끔 해준다.
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        NotificationCenter.default.post(name: NSNotification.Name("SendbirdPushNotificationReceived"), object: nil)
         completionHandler([.banner, .sound, .badge])
     }
 

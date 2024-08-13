@@ -59,30 +59,42 @@ extension UIImageView {
          self.hideSkeleton()
     }
 
-    func loadProfileImage(from urlString: String) {
-        if let cachedImage = ImageCacheManager.shared.image(for: urlString) {
+    func loadProfileImage(from url: String, completion: @escaping (UIImage?) -> Void) {
+        self.isSkeletonable = true
+        self.showAnimatedGradientSkeleton()
+
+        if let cachedImage = ImageCacheManager.shared.image(for: url) {
             DispatchQueue.main.async {
-                self.image = cachedImage
-                return
+                print("캐싱이미지 사용")
+                completion(cachedImage)
+                self.hideSkeleton()
             }
+            return
         }
 
-        guard let url = URL(string: urlString) else { return }
-        URLSession.shared.dataTask(with: url) { data, _, _ in
-            guard let data = data, let downloadedImage = UIImage(data: data) else { return }
-
-            // 이미지 리사이징
-            let resizedImage = downloadedImage.resized(toWidth: 480)
-            if let resizedImage = resizedImage {
+        URLSession.shared.dataTask(with: URL(string: url)!) { data, _, error in
+            guard let data = data, error == nil else {
                 DispatchQueue.main.async {
-                    self.image = resizedImage
-                    self.clipsToBounds = true
+                    completion(nil)
+                    self.hideSkeleton()
                 }
-                // 리사이징된 이미지를 캐시에 저장하고 이미지 뷰에 설정
-                ImageCacheManager.shared.setImage(resizedImage, for: urlString)
+                return
             }
 
+            if let image = UIImage(data: data) {
+                DispatchQueue.main.async {
+                    // 이미지를 캐시에 추가
+                    ImageCacheManager.shared.setImage(image, for: url)
+                    completion(image)
+                    self.hideSkeleton()
+                }
+            } else {
+                DispatchQueue.main.async {
+                    completion(nil)
+                    self.hideSkeleton()
+                }
+            }
         }.resume()
-
     }
+
 }

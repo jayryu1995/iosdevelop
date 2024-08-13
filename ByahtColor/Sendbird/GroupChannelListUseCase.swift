@@ -43,7 +43,7 @@ open class GroupChannelListUseCase: NSObject {
             self.channels = channels
             self.delegate?.groupChannelListUseCase(self, didUpdateChannels: self.channels)
         }
-        print("channels.count : \(channels.count)")
+
     }
 
     open func loadNextPage() {

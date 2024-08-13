@@ -20,6 +20,9 @@ extension Date {
         case yyyyMMddhhmm = "yyyyMMddhhmm"
         case yyyyMMddhhmmss = "yyyyMMddhhmmss"
         case yyyyMMdd = "yyyyMMdd"
+        case ko = "yyyy년 MM월 dd일"
+        case jp = "yyyy年 MM月 dd日"
+        case global = "MM/dd/yyyy"
     }
 
     /// The `Date` value represents the time interval since 1970 with the time stamp
@@ -39,7 +42,7 @@ extension Date {
     ///    - localizedFormat: If `true`, it sets localized date format.
     /// - Note: If you want to use your own date format, please see `sbu_toString(formatString:localizedFormat:)`.
     /// - Since: 2.1.13
-    public func sbu_toString(format: SBUDateFormat, localizedFormat: Bool = true) -> String {
+    public func sbu_toString(format: SBUDateFormat, localizedFormat: Bool = false) -> String {
         self.sbu_toString(formatString: format.rawValue, localizedFormat: localizedFormat)
     }
 
@@ -51,11 +54,18 @@ extension Date {
     public func sbu_toString(formatString: String, localizedFormat: Bool = true) -> String {
         let formatter = DateFormatter()
 
-        if localizedFormat {
-            formatter.setLocalizedDateFormatFromTemplate(formatString)
-        } else {
-            formatter.dateFormat = formatString
-        }
+            let languageCode = Locale.preferredLanguages.first?.prefix(2)
+
+            if languageCode == "ko" {
+                print("한국어")
+                // 한국 로컬의 경우 커스텀 형식 사용
+                formatter.dateFormat = SBUDateFormat.ko.rawValue
+            } else if languageCode == "ja" {
+                formatter.dateFormat = SBUDateFormat.jp.rawValue
+            } else {
+                formatter.dateFormat = SBUDateFormat.global.rawValue
+            }
+
         return formatter.string(from: self)
     }
 

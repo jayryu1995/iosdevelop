@@ -206,7 +206,7 @@ class TalkReadTableCell: UITableViewCell, UIScrollViewDelegate {
 
         if let id = board.id {
             let url = "\(Bundle.main.TEST_URL)/img/profile/\(id).jpg"
-             profileImageView.loadProfileImage(from: url)
+             profileImageView.loadImage(from: url)
             profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2
         }
         nicknameLabel.text = board.nickname

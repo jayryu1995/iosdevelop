@@ -19,7 +19,7 @@ public protocol GroupChannelMessageListUseCaseDelegate: AnyObject {
 open class GroupChannelMessageListUseCase: NSObject {
 
     public weak var delegate: GroupChannelMessageListUseCaseDelegate?
-
+    var window: UIWindow?
     open var messages: [BaseMessage] = [] {
         didSet {
             notifyChangeMessages()
@@ -140,8 +140,9 @@ open class GroupChannelMessageListUseCase: NSObject {
                 SendbirdUser.shared.unReadMessages { result in
                     switch result {
                     case .success(let count):
-                        print("count : \(count)")
+                        NotificationCenter.default.post(name: NSNotification.Name("SendbirdPushNotificationReceived"), object: nil)
                         UIApplication.shared.applicationIconBadgeNumber = count
+
                     case .failure(let error):
                         print("error : \(error)")
                     }

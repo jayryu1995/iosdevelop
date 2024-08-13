@@ -50,7 +50,6 @@ class InfluenceHomeVC: UIViewController, UIScrollViewDelegate {
 
         setupHomeData()
         setupUI()
-
         if User.shared.name == nil || User.shared.name == "" {
             setupOnboardingView()
         }
@@ -368,4 +367,5 @@ class InfluenceHomeVC: UIViewController, UIScrollViewDelegate {
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.pushViewController(vc, animated: true)
     }
+
 }

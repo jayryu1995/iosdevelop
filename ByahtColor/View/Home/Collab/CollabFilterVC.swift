@@ -75,7 +75,7 @@ class CollabFilterVC: UIViewController {
             $0.leading.equalToSuperview().offset(20)
             $0.trailing.equalToSuperview().offset(-20)
             $0.height.equalTo(60)
-            $0.bottom.equalToSuperview().offset(-68)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-48)
         }
     }
 

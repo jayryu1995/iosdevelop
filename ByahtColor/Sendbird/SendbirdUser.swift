@@ -58,11 +58,10 @@ public class SendbirdUser {
         }
     }
 
-    public func updateUserInfo(nickname: String?, profileImage: Data?, completion: @escaping (Result<Void, SBError>) -> Void) {
+    public func updateUserInfo(nickname: String?, profileImage: String?, completion: @escaping (Result<Void, SBError>) -> Void) {
         let params = UserUpdateParams()
-
         params.nickname = nickname
-        params.profileImageData = profileImage
+        params.profileImageURL = profileImage
 
         SendbirdChat.updateCurrentUserInfo(params: params, completionHandler: { error in
             if let error = error {
@@ -87,10 +86,25 @@ public class SendbirdUser {
 
             if status == .pending {
                 print("Push registration is pending.")
+                self.setPushOption()
             } else {
                 print("APNS Token is registered.")
+                self.setPushOption()
             }
         }
+    }
+
+    private func setPushOption() {
+
+        // Send notifications only when the current user is mentioned in messages.
+        SendbirdChat.setPushTriggerOption(.all) { error in
+            guard error == nil else {
+                print("푸시설정 에러")
+                // Handle error.
+                return
+            }
+        }
+
     }
 
     private func storeUserInfo(_ user: SendbirdChatSDK.User) {

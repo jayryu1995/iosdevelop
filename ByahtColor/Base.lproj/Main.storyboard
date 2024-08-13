@@ -8,14 +8,6 @@
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="Pretendard-Bold.otf">
-            <string>Pretendard-Bold</string>
-        </array>
-        <array key="Pretendard-Medium.otf">
-            <string>Pretendard-Medium</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--Navigation Controller-->
         <scene sceneID="m5e-g1-cxq">
@@ -46,22 +38,10 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="splash" translatesAutoresizingMaskIntoConstraints="NO" id="bt6-UE-uNv">
                                 <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="크리에이터와 광고주의 더 빠른 매칭" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="55A-AX-OOJ">
-                                <rect key="frame" x="47.000000000000014" y="236.00000000000003" width="213.33333333333337" height="57.333333333333343"/>
-                                <fontDescription key="fontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="24"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Glow.B" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8fH-5F-Hwi" propertyAccessControl="none">
-                                <rect key="frame" x="47" y="317.33333333333331" width="129.33333333333334" height="48"/>
-                                <fontDescription key="fontDescription" name="Pretendard-Bold" family="Pretendard" pointSize="40"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="App Data Loading..." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GVf-pV-cgW">
                                 <rect key="frame" x="0.0" y="707" width="393" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" systemColor="systemGray2Color"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
@@ -71,14 +51,10 @@
                             <constraint firstItem="35b-6e-QJD" firstAttribute="bottom" secondItem="GVf-pV-cgW" secondAttribute="bottom" constant="90" id="RiZ-X0-eNt"/>
                             <constraint firstItem="bt6-UE-uNv" firstAttribute="top" secondItem="GFo-WH-CzJ" secondAttribute="top" id="Xe2-x7-xed"/>
                             <constraint firstAttribute="trailing" secondItem="bt6-UE-uNv" secondAttribute="trailing" id="Z0H-Wi-DA3"/>
-                            <constraint firstItem="8fH-5F-Hwi" firstAttribute="leading" secondItem="35b-6e-QJD" secondAttribute="leading" constant="47" id="asF-Ps-Ht8"/>
                             <constraint firstAttribute="bottom" secondItem="bt6-UE-uNv" secondAttribute="bottom" id="gM5-Jd-E99"/>
-                            <constraint firstItem="8fH-5F-Hwi" firstAttribute="top" secondItem="55A-AX-OOJ" secondAttribute="bottom" constant="24" id="gYi-f5-B7l"/>
-                            <constraint firstItem="55A-AX-OOJ" firstAttribute="leading" secondItem="GFo-WH-CzJ" secondAttribute="leading" constant="47" id="ga2-kO-ihH"/>
                             <constraint firstItem="GVf-pV-cgW" firstAttribute="leading" secondItem="35b-6e-QJD" secondAttribute="leading" id="gwP-h4-6Sn"/>
                             <constraint firstItem="GVf-pV-cgW" firstAttribute="trailing" secondItem="35b-6e-QJD" secondAttribute="trailing" id="jvI-FB-6wY"/>
                             <constraint firstItem="bt6-UE-uNv" firstAttribute="leading" secondItem="GFo-WH-CzJ" secondAttribute="leading" id="p0L-bE-ifC"/>
-                            <constraint firstItem="55A-AX-OOJ" firstAttribute="top" secondItem="35b-6e-QJD" secondAttribute="top" multiplier="4" id="pQf-PR-xbv"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="KZd-Hl-ebp"/>
@@ -93,9 +69,6 @@
         <image name="splash" width="390" height="844"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemGray2Color">
-            <color red="0.68235294120000001" green="0.68235294120000001" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
