@@ -114,12 +114,19 @@ class CollabDetailVC: UIViewController, UIGestureRecognizerDelegate {
         // 날짜 형식 설정
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-
+        
         // 신청 버튼 활성화
-        if let startDateString = collab?.start_date, let startDate = dateFormatter.date(from: startDateString) {
+        if let startDateString = collab?.start_date,
+           let startDate = dateFormatter.date(from: startDateString),
+           let endDateString = collab?.end_date,
+           let endDate = dateFormatter.date(from: endDateString) {
+            
             // 현재 날짜 가져오기
             let currentDate = Date()
+            
             if currentDate < startDate {
+                requestButton.isHidden = true
+            } else if currentDate > endDate {
                 requestButton.isHidden = true
             } else if collab?.state == false {
                 requestButton.isHidden = true
@@ -153,7 +160,12 @@ class CollabDetailVC: UIViewController, UIGestureRecognizerDelegate {
         if collab?.shopee == true {
             vc.tags.append("Shopee")
         }
-
+        if collab?.naver == true {
+            vc.tags.append("Naver")
+        }
+        if collab?.youtube == true {
+            vc.tags.append("Youtube")
+        }
         print(vc.tags.count)
         self.navigationController?.pushViewController(vc, animated: false)
     }
@@ -175,6 +187,12 @@ class CollabDetailVC: UIViewController, UIGestureRecognizerDelegate {
 
         if collab?.shopee == true {
             vc.tags.append("Shopee")
+        }
+        if collab?.naver == true {
+            vc.tags.append("Naver")
+        }
+        if collab?.youtube == true {
+            vc.tags.append("Youtube")
         }
 
         self.navigationController?.pushViewController(vc, animated: false)

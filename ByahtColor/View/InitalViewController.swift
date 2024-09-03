@@ -34,6 +34,7 @@ class InitialViewController: UIViewController {
                             self.presentUpdateAlertVC()
                         } else {
 
+                            //let vc = TestView()
                             let vc = LoginVC()
                             self.navigationController?.pushViewController(vc, animated: true)
                         }

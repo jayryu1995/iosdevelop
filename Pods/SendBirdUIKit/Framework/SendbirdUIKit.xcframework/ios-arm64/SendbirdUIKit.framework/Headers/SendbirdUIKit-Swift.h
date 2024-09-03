@@ -305,7 +305,6 @@ typedef unsigned int swift_uint4  __attribute__((__ext_vector_type__(4)));
 
 #if defined(__OBJC__)
 
-
 SWIFT_CLASS("_TtCC13SendbirdUIKit9SBUConfig9BaseInput")
 @interface BaseInput : NSObject
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -319,6 +318,8 @@ SWIFT_CLASS("_TtCC13SendbirdUIKit9SBUConfig9BaseInput")
 
 @interface BaseInput (SWIFT_EXTENSION(SendbirdUIKit))
 @end
+
+
 
 
 
@@ -360,6 +361,7 @@ SWIFT_CLASS("_TtCC13SendbirdUIKit32SBUFeedNotificationChannelModule14CategoryFil
 @end
 
 
+
 SWIFT_CLASS("_TtCCC13SendbirdUIKit9SBUConfig12GroupChannel7Channel")
 @interface Channel : NSObject
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
@@ -369,7 +371,6 @@ SWIFT_CLASS("_TtCCC13SendbirdUIKit9SBUConfig12GroupChannel7Channel")
 
 @interface Channel (SWIFT_EXTENSION(SendbirdUIKit))
 @end
-
 
 /// This is an enumeration used to select the channel editing type.
 typedef SWIFT_ENUM(NSInteger, ChannelEditType, open) {
@@ -486,15 +487,6 @@ SWIFT_CLASS("_TtC13SendbirdUIKit32HorizontalSuggestedReplyViewCell")
 @end
 
 
-SWIFT_CLASS("_TtC13SendbirdUIKit37HorizontalSuggestedReplyViewEmptyCell")
-@interface HorizontalSuggestedReplyViewEmptyCell : SBUCollectionViewCell
-- (void)setupStyles;
-- (void)setupLayouts;
-- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
 
 
 
@@ -570,34 +562,6 @@ SWIFT_CLASS_NAMED("List")
 @end
 
 
-/// A module component that represent the list of <code>SBUInviteUserModule</code>.
-SWIFT_CLASS_NAMED("List")
-@interface SBUInviteUserModuleList : SBUBaseChannelSettingsModuleList
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER SWIFT_UNAVAILABLE_MSG("'init' has been renamed to 'SBUInviteUserModule.List()'");
-- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER SWIFT_UNAVAILABLE_MSG("'init' has been renamed to 'SBUInviteUserModule.List()'");
-- (void)configureCell:(UITableViewCell * _Nullable)cell indexPath:(NSIndexPath * _Nonnull)indexPath;
-@end
-
-
-@interface SBUInviteUserModuleList (SWIFT_EXTENSION(SendbirdUIKit))
-- (void)didSelectRetry;
-@end
-
-
-/// A module component that represent the list of <code>SBURegisterOperatorModule</code>.
-SWIFT_CLASS_NAMED("List")
-@interface SBURegisterOperatorModuleList : SBUBaseChannelSettingsModuleList
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER SWIFT_UNAVAILABLE_MSG("'init' has been renamed to 'SBURegisterOperatorModule.List()'");
-- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER SWIFT_UNAVAILABLE_MSG("'init' has been renamed to 'SBURegisterOperatorModule.List()'");
-- (void)configureCell:(UITableViewCell * _Nullable)cell indexPath:(NSIndexPath * _Nonnull)indexPath;
-@end
-
-
-@interface SBURegisterOperatorModuleList (SWIFT_EXTENSION(SendbirdUIKit))
-- (void)didSelectRetry;
-@end
-
-
 /// A module component that represent the list of <code>SBUCreateChannelModule</code>.
 SWIFT_CLASS_NAMED("List")
 @interface SBUCreateChannelModuleList : SBUBaseChannelSettingsModuleList
@@ -619,18 +583,145 @@ SWIFT_CLASS_NAMED("List")
 - (void)didSelectRetry;
 @end
 
-@class SBUQuotedBaseMessageView;
 
-SWIFT_PROTOCOL("_TtP13SendbirdUIKit28SBUQuotedMessageViewDelegate_")
-@protocol SBUQuotedMessageViewDelegate
-/// Called when <code>SBUQuotedBaseMessageView</code> was tapped.
-/// \param quotedMessageView The tapped quoted message view
+/// A module component that represent the list of <code>SBURegisterOperatorModule</code>.
+SWIFT_CLASS_NAMED("List")
+@interface SBURegisterOperatorModuleList : SBUBaseChannelSettingsModuleList
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER SWIFT_UNAVAILABLE_MSG("'init' has been renamed to 'SBURegisterOperatorModule.List()'");
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER SWIFT_UNAVAILABLE_MSG("'init' has been renamed to 'SBURegisterOperatorModule.List()'");
+- (void)configureCell:(UITableViewCell * _Nullable)cell indexPath:(NSIndexPath * _Nonnull)indexPath;
+@end
+
+
+@interface SBURegisterOperatorModuleList (SWIFT_EXTENSION(SendbirdUIKit))
+- (void)didSelectRetry;
+@end
+
+
+/// A module component that represent the list of <code>SBUInviteUserModule</code>.
+SWIFT_CLASS_NAMED("List")
+@interface SBUInviteUserModuleList : SBUBaseChannelSettingsModuleList
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER SWIFT_UNAVAILABLE_MSG("'init' has been renamed to 'SBUInviteUserModule.List()'");
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER SWIFT_UNAVAILABLE_MSG("'init' has been renamed to 'SBUInviteUserModule.List()'");
+- (void)configureCell:(UITableViewCell * _Nullable)cell indexPath:(NSIndexPath * _Nonnull)indexPath;
+@end
+
+
+@interface SBUInviteUserModuleList (SWIFT_EXTENSION(SendbirdUIKit))
+- (void)didSelectRetry;
+@end
+
+@class SBUMessageSearchResultCell;
+@class SBDBaseMessage;
+
+/// A module component that represent the list of <code>SBUMessageSearchModule</code>.
+SWIFT_CLASS_NAMED("List")
+@interface SBUMessageSearchModuleList : UIView
+/// The table view to show the list of searched messages.
+@property (nonatomic, strong) UITableView * _Nonnull tableView;
+/// A view that shows when there is no searched messages.
+/// The default view type is <code>SBUEmptyView</code>.
+@property (nonatomic, strong) UIView * _Nullable emptyView;
+/// The search result cell for <code>SBUMessageSearchResultCell</code> object. Use <code>register(resultCell:nib:)</code> to update.
+@property (nonatomic, strong) SBUMessageSearchResultCell * _Nullable resultCell;
+/// The search result list object from <code>messageSearchModule(_:searchResultsInTableView:)</code> data source method.
+@property (nonatomic, readonly, copy) NSArray<SBDBaseMessage *> * _Nonnull resultList;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER SWIFT_UNAVAILABLE_MSG("'init' has been renamed to 'SBUMessageSearchModule.List()'");
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER SWIFT_UNAVAILABLE_MSG("'init' has been renamed to 'SBUMessageSearchModule.List()'");
+/// Set values of the views in the list component when it needs.
+- (void)setupViews;
+/// Sets layouts of the views in the list component.
+- (void)setupLayouts;
+/// Registers a custom cell as a search result cell based on <code>SBUMessageSearchResultCell</code>.
+/// important:
+/// To register custom search result cell, please use this function before calling <code>configure(delegate:dataSource:theme:)</code>
+/// \code
+/// listComponent.register(resultCell: MyResultCell)
+/// listComponent.configure(delegate: self, dataSource: self, theme: theme)
 ///
-- (void)didTapQuotedMessageView:(SBUQuotedBaseMessageView * _Nonnull)quotedMessageView;
+/// \endcode\param channelCell Customized search result cell
+///
+/// \param nib nib information. If the value is nil, the nib file is not used.
+///
+- (void)registerWithResultCell:(SBUMessageSearchResultCell * _Nonnull)resultCell nib:(UINib * _Nullable)nib;
+/// Configures cell for a particular row.
+/// \param cell <code>UITableViewCell</code> object
+///
+/// \param indexPath An index path representing the <code>searchResultCell</code>
+///
+- (void)configureCell:(UITableViewCell * _Nullable)cell indexPath:(NSIndexPath * _Nonnull)indexPath;
+/// Reloads table view. This method corresponds to <code>UITableView reloadData()</code>.
+- (void)reloadTableView;
+/// Retrives the <code>BaseMessage</code> object from the given <code>IndexPath</code> of the tableView.
+/// \param indexPath <code>IndexPath</code> of which you want to retrieve the <code>Message</code> object.
+///
+///
+/// returns:
+/// <code>BaseMessage</code> object of the corresponding <code>IndexPath</code>, or <code>nil</code> if the message can’t be found.
+- (SBDBaseMessage * _Nullable)messageAt:(NSIndexPath * _Nonnull)indexPath SWIFT_WARN_UNUSED_RESULT;
+@end
+
+
+@interface SBUMessageSearchModuleList (SWIFT_EXTENSION(SendbirdUIKit))
+- (void)didSelectRetry;
 @end
 
 @class SBDBaseChannel;
-@class SBDBaseMessage;
+
+/// A module component that represent the list of <code>SBUUserListModule</code>.
+SWIFT_CLASS_NAMED("List")
+@interface SBUUserListModuleList : UIView
+/// The table view that shows the list of the users.
+@property (nonatomic, strong) UITableView * _Nonnull tableView;
+/// A view that displays when the table view is empty.
+/// The default view type is <code>SBUEmptyView</code>.
+@property (nonatomic, strong) UIView * _Nullable emptyView;
+/// The user cell for <code>UITableViewCell</code> object. Use <code>register(userCell:nib:)</code> to update.
+@property (nonatomic, strong) UITableViewCell * _Nullable userCell;
+@property (nonatomic, readonly, strong) SBDBaseChannel * _Nullable channel;
+@property (nonatomic, readonly, copy) NSArray<SBUUser *> * _Nonnull userList;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER SWIFT_UNAVAILABLE_MSG("'init' has been renamed to 'SBUUserListModule.List()'");
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER SWIFT_UNAVAILABLE_MSG("'init' has been renamed to 'SBUUserListModule.List()'");
+- (void)setupViews;
+- (void)setupLayouts;
+/// Reloads table view. This method corresponds to <code>UITableView reloadData()</code>.
+- (void)reloadTableView;
+/// Registers a custom cell as a user cell based on <code>UITableViewCell</code>.
+/// important:
+/// To register custom user cell, please use this function before calling <code>configure(delegate:dataSource:userListType:theme:componentTheme:)</code>
+/// \code
+/// listComponent.register(userCell: MyUserCell)
+/// listComponent.configure(delegate: self, dataSource: self, userListType: .type, theme: theme, componentTheme: componentTheme)
+///
+/// \endcode\param channelCell Customized user cell
+///
+/// \param nib nib information. If the value is nil, the nib file is not used.
+///
+- (void)registerWithUserCell:(UITableViewCell * _Nonnull)userCell nib:(UINib * _Nullable)nib;
+/// Configures cell for a particular row.
+/// \param cell <code>UITableViewCell</code> object
+///
+/// \param indexPath An index path representing the <code>cell</code>
+///
+- (void)configureCell:(UITableViewCell * _Nullable)cell indexPath:(NSIndexPath * _Nonnull)indexPath;
+/// Sets up the cell’s more menu button action.
+/// important:
+/// Only for the group channel
+/// \param user <code>SBUUser</code> obejct
+///
+- (void)setMoreMenuTapAction:(SBUUser * _Nonnull)user;
+/// Sets up the user profile tap action.
+/// If you do not want to use the user profile function, override this function and leave it empty.
+/// \param user <code>SBUUser</code> object used for user profile configuration
+///
+- (void)setUserProfileTapAction:(SBUUser * _Nonnull)user;
+@end
+
+
+@interface SBUUserListModuleList (SWIFT_EXTENSION(SendbirdUIKit))
+- (void)didSelectRetry;
+@end
+
 @class UIScrollView;
 @class SBDFileMessage;
 enum MessageGroupPosition : NSInteger;
@@ -752,6 +843,12 @@ SWIFT_CLASS_NAMED("List")
 /// returns:
 /// Position of a message when grouped
 - (enum MessageGroupPosition)getMessageGroupingPositionWithCurrentIndex:(NSInteger)currentIndex SWIFT_WARN_UNUSED_RESULT;
+@end
+
+
+@interface SBUBaseChannelModuleList (SWIFT_EXTENSION(SendbirdUIKit))
+/// Reload data from the channel. This function invokes <code>SBUBaseChannelModuleListDelegate baseChannelModuleDidSelectRetry(_:)</code>
+- (void)didSelectRetry;
 @end
 
 @class SBUBaseMessageCell;
@@ -932,123 +1029,14 @@ SWIFT_CLASS_NAMED("List")
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 @end
 
+@class SBUThreadInfoView;
 
-@interface SBUGroupChannelModuleList (SWIFT_EXTENSION(SendbirdUIKit)) <SBUQuotedMessageViewDelegate>
-- (void)didTapQuotedMessageView:(SBUQuotedBaseMessageView * _Nonnull)quotedMessageView;
+@interface SBUGroupChannelModuleList (SWIFT_EXTENSION(SendbirdUIKit))
+- (void)threadInfoViewDidTap:(SBUThreadInfoView * _Nonnull)threadInfoView;
 @end
 
 
-@interface SBUBaseChannelModuleList (SWIFT_EXTENSION(SendbirdUIKit))
-/// Reload data from the channel. This function invokes <code>SBUBaseChannelModuleListDelegate baseChannelModuleDidSelectRetry(_:)</code>
-- (void)didSelectRetry;
-@end
-
-
-/// A module component that represent the list of <code>SBUUserListModule</code>.
-SWIFT_CLASS_NAMED("List")
-@interface SBUUserListModuleList : UIView
-/// The table view that shows the list of the users.
-@property (nonatomic, strong) UITableView * _Nonnull tableView;
-/// A view that displays when the table view is empty.
-/// The default view type is <code>SBUEmptyView</code>.
-@property (nonatomic, strong) UIView * _Nullable emptyView;
-/// The user cell for <code>UITableViewCell</code> object. Use <code>register(userCell:nib:)</code> to update.
-@property (nonatomic, strong) UITableViewCell * _Nullable userCell;
-@property (nonatomic, readonly, strong) SBDBaseChannel * _Nullable channel;
-@property (nonatomic, readonly, copy) NSArray<SBUUser *> * _Nonnull userList;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER SWIFT_UNAVAILABLE_MSG("'init' has been renamed to 'SBUUserListModule.List()'");
-- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER SWIFT_UNAVAILABLE_MSG("'init' has been renamed to 'SBUUserListModule.List()'");
-- (void)setupViews;
-- (void)setupLayouts;
-/// Reloads table view. This method corresponds to <code>UITableView reloadData()</code>.
-- (void)reloadTableView;
-/// Registers a custom cell as a user cell based on <code>UITableViewCell</code>.
-/// important:
-/// To register custom user cell, please use this function before calling <code>configure(delegate:dataSource:userListType:theme:componentTheme:)</code>
-/// \code
-/// listComponent.register(userCell: MyUserCell)
-/// listComponent.configure(delegate: self, dataSource: self, userListType: .type, theme: theme, componentTheme: componentTheme)
-///
-/// \endcode\param channelCell Customized user cell
-///
-/// \param nib nib information. If the value is nil, the nib file is not used.
-///
-- (void)registerWithUserCell:(UITableViewCell * _Nonnull)userCell nib:(UINib * _Nullable)nib;
-/// Configures cell for a particular row.
-/// \param cell <code>UITableViewCell</code> object
-///
-/// \param indexPath An index path representing the <code>cell</code>
-///
-- (void)configureCell:(UITableViewCell * _Nullable)cell indexPath:(NSIndexPath * _Nonnull)indexPath;
-/// Sets up the cell’s more menu button action.
-/// important:
-/// Only for the group channel
-/// \param user <code>SBUUser</code> obejct
-///
-- (void)setMoreMenuTapAction:(SBUUser * _Nonnull)user;
-/// Sets up the user profile tap action.
-/// If you do not want to use the user profile function, override this function and leave it empty.
-/// \param user <code>SBUUser</code> object used for user profile configuration
-///
-- (void)setUserProfileTapAction:(SBUUser * _Nonnull)user;
-@end
-
-
-@interface SBUUserListModuleList (SWIFT_EXTENSION(SendbirdUIKit))
-- (void)didSelectRetry;
-@end
-
-@class SBUMessageSearchResultCell;
-
-/// A module component that represent the list of <code>SBUMessageSearchModule</code>.
-SWIFT_CLASS_NAMED("List")
-@interface SBUMessageSearchModuleList : UIView
-/// The table view to show the list of searched messages.
-@property (nonatomic, strong) UITableView * _Nonnull tableView;
-/// A view that shows when there is no searched messages.
-/// The default view type is <code>SBUEmptyView</code>.
-@property (nonatomic, strong) UIView * _Nullable emptyView;
-/// The search result cell for <code>SBUMessageSearchResultCell</code> object. Use <code>register(resultCell:nib:)</code> to update.
-@property (nonatomic, strong) SBUMessageSearchResultCell * _Nullable resultCell;
-/// The search result list object from <code>messageSearchModule(_:searchResultsInTableView:)</code> data source method.
-@property (nonatomic, readonly, copy) NSArray<SBDBaseMessage *> * _Nonnull resultList;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER SWIFT_UNAVAILABLE_MSG("'init' has been renamed to 'SBUMessageSearchModule.List()'");
-- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER SWIFT_UNAVAILABLE_MSG("'init' has been renamed to 'SBUMessageSearchModule.List()'");
-/// Set values of the views in the list component when it needs.
-- (void)setupViews;
-/// Sets layouts of the views in the list component.
-- (void)setupLayouts;
-/// Registers a custom cell as a search result cell based on <code>SBUMessageSearchResultCell</code>.
-/// important:
-/// To register custom search result cell, please use this function before calling <code>configure(delegate:dataSource:theme:)</code>
-/// \code
-/// listComponent.register(resultCell: MyResultCell)
-/// listComponent.configure(delegate: self, dataSource: self, theme: theme)
-///
-/// \endcode\param channelCell Customized search result cell
-///
-/// \param nib nib information. If the value is nil, the nib file is not used.
-///
-- (void)registerWithResultCell:(SBUMessageSearchResultCell * _Nonnull)resultCell nib:(UINib * _Nullable)nib;
-/// Configures cell for a particular row.
-/// \param cell <code>UITableViewCell</code> object
-///
-/// \param indexPath An index path representing the <code>searchResultCell</code>
-///
-- (void)configureCell:(UITableViewCell * _Nullable)cell indexPath:(NSIndexPath * _Nonnull)indexPath;
-/// Reloads table view. This method corresponds to <code>UITableView reloadData()</code>.
-- (void)reloadTableView;
-/// Retrives the <code>BaseMessage</code> object from the given <code>IndexPath</code> of the tableView.
-/// \param indexPath <code>IndexPath</code> of which you want to retrieve the <code>Message</code> object.
-///
-///
-/// returns:
-/// <code>BaseMessage</code> object of the corresponding <code>IndexPath</code>, or <code>nil</code> if the message can’t be found.
-- (SBDBaseMessage * _Nullable)messageAt:(NSIndexPath * _Nonnull)indexPath SWIFT_WARN_UNUSED_RESULT;
-@end
-
-
-@interface SBUMessageSearchModuleList (SWIFT_EXTENSION(SendbirdUIKit))
+@interface SBUBaseChannelSettingsModuleList (SWIFT_EXTENSION(SendbirdUIKit))
 - (void)didSelectRetry;
 @end
 
@@ -1124,15 +1112,19 @@ SWIFT_CLASS_NAMED("List")
 - (void)didSelectRetry;
 @end
 
-@class SBUThreadInfoView;
+@class SBUQuotedBaseMessageView;
 
-@interface SBUGroupChannelModuleList (SWIFT_EXTENSION(SendbirdUIKit))
-- (void)threadInfoViewDidTap:(SBUThreadInfoView * _Nonnull)threadInfoView;
+SWIFT_PROTOCOL("_TtP13SendbirdUIKit28SBUQuotedMessageViewDelegate_")
+@protocol SBUQuotedMessageViewDelegate
+/// Called when <code>SBUQuotedBaseMessageView</code> was tapped.
+/// \param quotedMessageView The tapped quoted message view
+///
+- (void)didTapQuotedMessageView:(SBUQuotedBaseMessageView * _Nonnull)quotedMessageView;
 @end
 
 
-@interface SBUBaseChannelSettingsModuleList (SWIFT_EXTENSION(SendbirdUIKit))
-- (void)didSelectRetry;
+@interface SBUGroupChannelModuleList (SWIFT_EXTENSION(SendbirdUIKit)) <SBUQuotedMessageViewDelegate>
+- (void)didTapQuotedMessageView:(SBUQuotedBaseMessageView * _Nonnull)quotedMessageView;
 @end
 
 
@@ -1241,8 +1233,6 @@ SWIFT_CLASS_NAMED("List")
 - (NSInteger)tableView:(UITableView * _Nonnull)tableView numberOfRowsInSection:(NSInteger)section SWIFT_WARN_UNUSED_RESULT;
 - (UITableViewCell * _Nonnull)tableView:(UITableView * _Nonnull)tableView cellForRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath SWIFT_WARN_UNUSED_RESULT;
 @end
-
-
 
 @class SBUParentMessageInfoView;
 
@@ -1407,6 +1397,8 @@ SWIFT_CLASS_NAMED("List")
 @end
 
 
+
+
 /// A module component that represent the list of <code>SBUOpenChannelListModule</code>.
 SWIFT_CLASS_NAMED("List")
 @interface SBUOpenChannelListModuleList : SBUBaseChannelListModuleList
@@ -1425,32 +1417,6 @@ SWIFT_CLASS_NAMED("List")
 - (UITableViewCell * _Nonnull)tableView:(UITableView * _Nonnull)tableView cellForRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath SWIFT_WARN_UNUSED_RESULT;
 - (void)tableView:(UITableView * _Nonnull)tableView willDisplayCell:(UITableViewCell * _Nonnull)cell forRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath;
 - (NSInteger)tableView:(UITableView * _Nonnull)tableView numberOfRowsInSection:(NSInteger)section SWIFT_WARN_UNUSED_RESULT;
-@end
-
-
-@interface List (SWIFT_EXTENSION(SendbirdUIKit)) <UITableViewDataSource, UITableViewDelegate>
-- (UIView * _Nullable)tableView:(UITableView * _Nonnull)tableView viewForHeaderInSection:(NSInteger)section SWIFT_WARN_UNUSED_RESULT;
-- (CGFloat)tableView:(UITableView * _Nonnull)tableView heightForHeaderInSection:(NSInteger)section SWIFT_WARN_UNUSED_RESULT;
-- (UITableViewCell * _Nonnull)tableView:(UITableView * _Nonnull)tableView cellForRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath SWIFT_WARN_UNUSED_RESULT;
-- (NSInteger)tableView:(UITableView * _Nonnull)tableView numberOfRowsInSection:(NSInteger)section SWIFT_WARN_UNUSED_RESULT;
-- (void)tableView:(UITableView * _Nonnull)tableView didSelectRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath;
-@end
-
-
-/// A module component that represent the list of <code>SBUGroupChannelPushSettingsModule</code>.
-SWIFT_CLASS_NAMED("List")
-@interface SBUGroupChannelPushSettingsModuleList : UIView
-- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
-- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
-@end
-
-
-@interface SBUGroupChannelPushSettingsModuleList (SWIFT_EXTENSION(SendbirdUIKit)) <UITableViewDataSource, UITableViewDelegate>
-- (UIView * _Nullable)tableView:(UITableView * _Nonnull)tableView viewForHeaderInSection:(NSInteger)section SWIFT_WARN_UNUSED_RESULT;
-- (CGFloat)tableView:(UITableView * _Nonnull)tableView heightForHeaderInSection:(NSInteger)section SWIFT_WARN_UNUSED_RESULT;
-- (UITableViewCell * _Nonnull)tableView:(UITableView * _Nonnull)tableView cellForRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath SWIFT_WARN_UNUSED_RESULT;
-- (NSInteger)tableView:(UITableView * _Nonnull)tableView numberOfRowsInSection:(NSInteger)section SWIFT_WARN_UNUSED_RESULT;
-- (void)tableView:(UITableView * _Nonnull)tableView didSelectRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath;
 @end
 
 
@@ -1494,6 +1460,32 @@ SWIFT_CLASS_NAMED("List")
 - (CGFloat)tableView:(UITableView * _Nonnull)tableView heightForHeaderInSection:(NSInteger)section SWIFT_WARN_UNUSED_RESULT;
 - (NSInteger)tableView:(UITableView * _Nonnull)tableView numberOfRowsInSection:(NSInteger)section SWIFT_WARN_UNUSED_RESULT;
 - (UITableViewCell * _Nonnull)tableView:(UITableView * _Nonnull)tableView cellForRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath SWIFT_WARN_UNUSED_RESULT;
+- (void)tableView:(UITableView * _Nonnull)tableView didSelectRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath;
+@end
+
+
+/// A module component that represent the list of <code>SBUGroupChannelPushSettingsModule</code>.
+SWIFT_CLASS_NAMED("List")
+@interface SBUGroupChannelPushSettingsModuleList : UIView
+- (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
+- (nullable instancetype)initWithCoder:(NSCoder * _Nonnull)coder OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+@interface SBUGroupChannelPushSettingsModuleList (SWIFT_EXTENSION(SendbirdUIKit)) <UITableViewDataSource, UITableViewDelegate>
+- (UIView * _Nullable)tableView:(UITableView * _Nonnull)tableView viewForHeaderInSection:(NSInteger)section SWIFT_WARN_UNUSED_RESULT;
+- (CGFloat)tableView:(UITableView * _Nonnull)tableView heightForHeaderInSection:(NSInteger)section SWIFT_WARN_UNUSED_RESULT;
+- (UITableViewCell * _Nonnull)tableView:(UITableView * _Nonnull)tableView cellForRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath SWIFT_WARN_UNUSED_RESULT;
+- (NSInteger)tableView:(UITableView * _Nonnull)tableView numberOfRowsInSection:(NSInteger)section SWIFT_WARN_UNUSED_RESULT;
+- (void)tableView:(UITableView * _Nonnull)tableView didSelectRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath;
+@end
+
+
+@interface List (SWIFT_EXTENSION(SendbirdUIKit)) <UITableViewDataSource, UITableViewDelegate>
+- (UIView * _Nullable)tableView:(UITableView * _Nonnull)tableView viewForHeaderInSection:(NSInteger)section SWIFT_WARN_UNUSED_RESULT;
+- (CGFloat)tableView:(UITableView * _Nonnull)tableView heightForHeaderInSection:(NSInteger)section SWIFT_WARN_UNUSED_RESULT;
+- (UITableViewCell * _Nonnull)tableView:(UITableView * _Nonnull)tableView cellForRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath SWIFT_WARN_UNUSED_RESULT;
+- (NSInteger)tableView:(UITableView * _Nonnull)tableView numberOfRowsInSection:(NSInteger)section SWIFT_WARN_UNUSED_RESULT;
 - (void)tableView:(UITableView * _Nonnull)tableView didSelectRowAtIndexPath:(NSIndexPath * _Nonnull)indexPath;
 @end
 
@@ -2878,9 +2870,9 @@ SWIFT_CLASS("_TtC13SendbirdUIKit9SBUConfig")
 @end
 
 
-
 @interface SBUConfig (SWIFT_EXTENSION(SendbirdUIKit))
 @end
+
 
 
 @interface SBUConfig (SWIFT_EXTENSION(SendbirdUIKit))
@@ -3965,6 +3957,7 @@ SWIFT_CLASS("_TtC13SendbirdUIKit31SBUHorizontalSuggestedReplyView")
 - (void)setupStyles;
 - (NSInteger)collectionView:(UICollectionView * _Nonnull)collectionView numberOfItemsInSection:(NSInteger)section SWIFT_WARN_UNUSED_RESULT;
 - (UICollectionViewCell * _Nonnull)collectionView:(UICollectionView * _Nonnull)collectionView cellForItemAtIndexPath:(NSIndexPath * _Nonnull)indexPath SWIFT_WARN_UNUSED_RESULT;
+- (CGSize)collectionView:(UICollectionView * _Nonnull)collectionView layout:(UICollectionViewLayout * _Nonnull)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath * _Nonnull)indexPath SWIFT_WARN_UNUSED_RESULT;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)initWithFrame:(CGRect)frame OBJC_DESIGNATED_INITIALIZER;
 @end
@@ -6199,6 +6192,7 @@ SWIFT_CLASS("_TtC13SendbirdUIKit16SBUVoiceRecorder")
 /// Loaded <code>UIView</code> object
 + (UIView * _Nonnull)sbu_loadViewFromNib SWIFT_WARN_UNUSED_RESULT;
 @end
+
 
 
 

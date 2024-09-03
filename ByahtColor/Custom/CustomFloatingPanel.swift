@@ -27,10 +27,10 @@ class CustomFloatingPanel: FloatingPanelLayout {
             .tip: FloatingPanelLayoutAnchor(fractionalInset: 0.6, edge: .bottom, referenceGuide: .safeArea)
         ]
 
-        if let state = selectedState {
-            var filteredAnchors = [state: allAnchors[state]!]
-            if state != initialState {
-                filteredAnchors[initialState] = allAnchors[initialState]
+        if let state = selectedState, let anchor = allAnchors[state] {
+            var filteredAnchors = [state: anchor]
+            if state != initialState, let initialAnchor = allAnchors[initialState] {
+                filteredAnchors[initialState] = initialAnchor
             }
             return filteredAnchors
         } else {
@@ -42,3 +42,12 @@ class CustomFloatingPanel: FloatingPanelLayout {
         return 0.5
     }
 }
+
+// let screenHeight = UIScreen.main.bounds.height
+// let fullInset = screenHeight * 0.05 // 5% of the screen height
+//
+// let allAnchors: [FloatingPanelState: FloatingPanelLayoutAnchoring] = [
+//    .full: FloatingPanelLayoutAnchor(absoluteInset: fullInset, edge: .top, referenceGuide: .safeArea),
+//    .half: FloatingPanelLayoutAnchor(fractionalInset: 0.7, edge: .bottom, referenceGuide: .safeArea),
+//    .tip: FloatingPanelLayoutAnchor(fractionalInset: 0.6, edge: .bottom, referenceGuide: .safeArea)
+// ]

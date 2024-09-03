@@ -157,7 +157,7 @@ class RequestCollabVC: UIViewController, UIScrollViewDelegate, UINavigationContr
         print("in RequestCollabvc \(collab_no)")
         view.backgroundColor = .white
         setupBackButton2()
-        self.navigationItem.title = "ĐĂNG KÝ"
+        self.navigationItem.title = "request_collab_title".localized
         scrollView.delegate = self
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
@@ -212,6 +212,7 @@ class RequestCollabVC: UIViewController, UIScrollViewDelegate, UINavigationContr
         scrollView.addSubview(addressField)
 
         // SNS 필터 뷰 추가
+        print(tags)
         let snsFilterView = snsFilterView(tags: tags)
         scrollView.addSubview(snsFilterView)
 
@@ -372,7 +373,7 @@ class RequestCollabVC: UIViewController, UIScrollViewDelegate, UINavigationContr
     }
 
     private func snsFilterView(tags: [String]) -> UIView {
-        let container = createFilterViewContainer(withTitle: "Nền tảng của ảnh đã đăng", tags: tags)
+        let container = createFilterViewContainer(withTitle: "request_collab_platform_label".localized, tags: tags)
         return container
     }
 

@@ -43,7 +43,7 @@ extension UILabel {
         layoutManager.addTextContainer(textContainer)
         textStorage.addLayoutManager(layoutManager)
 
-        textStorage.addAttribute(.font, value: font, range: NSMakeRange(0, textStorage.length))
+        textStorage.addAttribute(.font, value: font, range: NSRange(location: 0, length: textStorage.length))
 
         textContainer.lineBreakMode = lineBreakMode
         textContainer.maximumNumberOfLines = numberOfLines
@@ -51,7 +51,7 @@ extension UILabel {
         var numberOfLines = 0
 
         for _ in 0..<textStorage.length {
-            let glyphRange = layoutManager.glyphRange(forCharacterRange: NSMakeRange(0, textStorage.length), actualCharacterRange: nil)
+            let glyphRange = layoutManager.glyphRange(forCharacterRange: NSRange(location: 0, length: textStorage.length), actualCharacterRange: nil)
             let lineRect = layoutManager.lineFragmentUsedRect(forGlyphAt: glyphRange.location, effectiveRange: nil)
 
             if lineRect.size.height > 0 {

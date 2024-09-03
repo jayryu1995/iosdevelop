@@ -122,9 +122,9 @@ extension ChatsListVC: UITableViewDelegate {
 extension ChatsListVC: GroupChannelListUseCaseDelegate {
 
    func groupChannelListUseCase(_ groupChannelListUseCase: GroupChannelListUseCase, didReceiveError error: SBError) {
-//        DispatchQueue.main.async { [weak self] in
-//            self?.presentAlert(error: error)
-//        }
+        DispatchQueue.main.async { [weak self] in
+            // self?.presentAlert(error: error)
+        }
    }
 
    func groupChannelListUseCase(_ groupChannelListUseCase: GroupChannelListUseCase, didUpdateChannels: [GroupChannel]) {

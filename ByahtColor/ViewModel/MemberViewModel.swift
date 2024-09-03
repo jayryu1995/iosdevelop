@@ -103,6 +103,7 @@ class MemberViewModel: ObservableObject {
                         User.shared.id = data.memberId
                         User.shared.name = data.name
                         User.shared.auth = data.auth
+                        User.shared.nation = data.nation
                     }
                     print("success: \(data)")
                     completion(.success(data))

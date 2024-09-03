@@ -9,6 +9,38 @@
 "server_error_title" = "Dịch vụ bảo trì";
 "server_error_message" = "Hiện tại dịch vụ đang bảo trì, vui lòng thử lại sau.";
 
+// ApplicationAlertVC
+"application_alert_titleLabel" = "Chú ý";
+"application_alert_agree" = "Đồng ý";
+"application_alert_cancel" = "Hủy";
+"application_alert_messageLabel" = "Trong trường hợp trúng nhận sản phẩm,nếu không thực hiện chiến dịch một cách trung thực, bạn có thể mất cơ hội tham gia tất cả các sự kiện hoặc ưu đãi trong tương lai hoặc xử lý theo pháp luật. Hãy nhấn nút đồng ý nếu bạn có thể thực hiện nghiêm túc những điều trên.";
+
+// BusinessProposalAlert
+"business_proposal_alert_label" = "Bạn có muốn bỏ qua \n đề xuất đã nhận được không?";
+"business_proposal_alert_confirm" = "Vâng! Bỏ qua";
+"business_proposal_alert_cancel" = "Không, tiếp tục xem thêm";
+
+// ProposalVC
+"proposal_count" = "C";
+"proposal_label" = "Đề xuất đã được nhận";
+"proposal_empty_label" = "Chưa có đề xuất nào.";
+"proposal_empty_label2" = "Chỉnh sửa profile doanh nghiệp\n nhận đề xuất từ influencer.";
+"proposal_empty_button" = "Chỉnh sửa profile doanh nghiệp";
+
+// ProposalSwipeVC
+"proposal_swipe_label" = "Không còn đề xuất nào.";
+
+
+// ProposalAlertVC
+"proposal_alert_label" = "Bạn có muốn gửi Profile của mình\n để đề xuất hợp tác không?";
+"proposal_alert_confirm" = "Vâng! Tôi muốn gửi đề xuất";
+"proposal_alert_cancel" = "Không! Để lần sau.";
+
+// InfluenceProposalAlert2VC
+"proposal_alert2_label" = "Đã gửi đề xuất cho doanh nghiệp!";
+"proposal_alert2_label2" = "Doanh nghiệp cần đồng ý để mở phòng chat.";
+"proposal_alert2_button" = "OK!";
+
 //온보딩
 "onboarding_button" = "Tiếp";
 "onboarding_first_label" = "Đăng ký hồ sơ cá nhân\n mà bạn đã xây dựng";
@@ -48,10 +80,11 @@
 "update_str" = "Cập nhật";
 "update_str1" = "Yêu cầu cập nhật";
 
-// InfluenceSampleVC
+// InfluenceSwipeGuideVC
 "influence_sample_label" = "Gạt sang hai bên để xem thêm nhiều doanh nghiệp hơn.";
+"influence_sample_chat" = "Gửi Profile của tôi để đề xuất hợp tác";
 
-// BusinessSampleVC
+// BusinessGuideVC
 "business_sample_label" = "Gạt sang hai bên để xem thêm nhiều influenecer hơn.";
 "business_sample_chat" = "Nhắn qua Chat để đền xuất hợp tác nhanh hơn.";
 
@@ -267,6 +300,7 @@
 "businesshome_button_label2" = "Từ tuyển dụng đến quản lý mà không gặp vấn đề về ngôn ngữ";
 
 // Business_MyPage
+"business_mypage_error_label" = "Gửi báo cáo lỗi ứng dụng";
 "business_mypage_profile_label" = "Chỉnh sửa trang cá nhân doanh nghiệp";
 "business_mypage_profile_label2" = "Tăng tỷ lệ đề xuất influencer";
 "business_mypage_maketing_label" = "Uỷ thác marketing influencer";
@@ -280,6 +314,7 @@
 "business_profile_subtitle1" = "Chủ đề";
 "business_profile_subtitle2" = "Độ tuổi";
 "business_profile_subtitle3" = "Giới tính";
+"business_profile_subtitle4" = "Quốc gia hoạt động";
 
 // BusinessProfileWriteVC
 "business_profile_write_thumbnail" = "Tải lên tài liệu tham khảo";
@@ -349,6 +384,7 @@
 "request_collab_address_label" = "Địa chỉ";
 "request_collab_address_placeholder" = "Nhập địa chỉ chủ tài khoản";
 "request_collab_submit_button" = "ĐĂNG KÝ";
+"request_collab_title" = "ĐĂNG KÝ";
 
 // ApplicationStateVC 신청한 이벤트
 "application_state_title" = "Tình trạng đăng ký";

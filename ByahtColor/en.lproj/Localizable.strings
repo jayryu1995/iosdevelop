@@ -9,6 +9,39 @@
 "server_error_title" = "Server Maintenance";
 "server_error_message" = "The server is currently undergoing maintenance. Please try again later.";
 
+// ApplicationAlertVC
+"application_alert_titleLabel" = "Attention";
+"application_alert_agree" = "Agree";
+"application_alert_cancel" = "Cancel";
+"application_alert_messageLabel" = "If you win the product, failure to faithfully implement the campaign may result in loss of any future event or benefit participation or legal punishment. If you can faithfully implement the above, please press the agree button.";
+
+// BusinessProposalAlert
+"business_proposal_alert_label" = "Would you like to check\nthe incoming proposals?";
+"business_proposal_alert_confirm" = "Yes, I’ll pass.";
+"business_proposal_alert_cancel" = "No, I’ll keep browsing.";
+
+// ProposalVC
+"proposal_count" = "EA";
+"proposal_label" = "Received collaboration proposals";
+"proposal_empty_label" = "No offers have been received.";
+"proposal_empty_label2" = "Modify the corporate profile and\nGet an offer for influencer.";
+"proposal_empty_button" = "Modify Profile";
+
+
+
+// ProposalSwipeVC
+"proposal_swipe_label" = "No offers have been received.";
+
+// ProposalAlertVC
+"proposal_alert_label" = "Would you like to send\nyour profile to propose collaboration?";
+"proposal_alert_confirm" = "Yes! I’ll propose.";
+"proposal_alert_cancel" = "No, maybe next time.";
+
+// InfluenceProposalAlert2VC
+"proposal_alert2_label" = "I have sent a proposal to the company!";
+"proposal_alert2_label2" = "When the company accepts the proposal, a chat room will be created.";
+"proposal_alert2_button" = "OK!";
+
 //온보딩
 "onboarding_button" = "Next";
 "onboarding_first_label" = "Register your\nsocial media account";
@@ -50,6 +83,7 @@
 
 // InfluenceSampleVC
 "influence_sample_label" = "Swipe left or right to check the companys.";
+"influence_sample_chat" = "Send my profile to propose collaboration";
 
 // BusinessSampleVC
 "business_sample_label" = "Swipe left or right to check the creators.";
@@ -149,7 +183,7 @@
 // InfluenceHomeVC
 "influencehome_label1" = "Fast and easy, with no commission.";
 "influencehome_label2" = "Connect with companies looking for influencers.";
-"influencehome_label3" = "Check out companies waiting for influencers.";
+"influencehome_label3" = "Check out companies\nwaiting for influencers.";
 "influencehome_button" = "See more >";
 
 // InfluenceProfileVC
@@ -267,6 +301,7 @@
 "businesshome_button_label2" = "From recruitment to management without language barriers.";
 
 // Business_MyPage
+"business_mypage_error_label" = "Report an app issue";
 "business_mypage_profile_label" = "Edit company profile and";
 "business_mypage_profile_label2" = "increase influencer proposals";
 "business_mypage_maketing_label" = "Request influencer marketing and";
@@ -280,6 +315,7 @@
 "business_profile_subtitle1" = "Topic";
 "business_profile_subtitle2" = "Age Range";
 "business_profile_subtitle3" = "Gender";
+"business_profile_subtitle4" = "Target Country";
 
 // BusinessProfileWriteVC
 "business_profile_write_thumbnail" = "Upload a thumbnail.";
@@ -334,6 +370,7 @@
 "talk_read_comment" = "Enter a comment";
 
 //RequestCollab
+"request_collab_title" = "Application";
 "request_collab_platform_label" = "Your Social Media Platform";
 "request_collab_email_label" = "Email Address";
 "request_collab_email_placeholder" = "Enter email address";

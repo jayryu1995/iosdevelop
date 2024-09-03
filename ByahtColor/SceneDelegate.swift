@@ -49,7 +49,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     // 상단 네비게이션 바 설정
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
-
+    
         if #available(iOS 15.0, *) {
             let appearance = UINavigationBarAppearance()
             appearance.configureWithOpaqueBackground()
@@ -99,4 +99,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // to restore the scene back to its current state.
     }
 
+ 
+    
 }

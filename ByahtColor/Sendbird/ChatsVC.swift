@@ -81,6 +81,11 @@ class ChatsVC: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        setupBackButton()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -164,7 +169,13 @@ class ChatsVC: UIViewController {
 
 // MARK: - UITableViewDataSource
 
-extension ChatsVC: UITableViewDataSource {
+extension ChatsVC: UITableViewDataSource, BasicMessageCellDelegate {
+    func didTapCell(_ cell: BasicMessageCell, withProfile profile: InfluenceProfileDto) {
+        let vc = BusinessReportVC()
+        vc.profile = profile
+        self.navigationController?.pushViewController(vc, animated: false)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         messageListUseCase.messages.count
     }
@@ -174,10 +185,7 @@ extension ChatsVC: UITableViewDataSource {
 
         let cell: BasicMessageCell = tableView.dequeueReusableCell(for: indexPath)
         cell.selectionStyle = .none
-
-//        if let url = message.sender?.profileURL {
-//            cell.confingImage(url: url)
-//        }
+        cell.delegate = self
 
         if indexPath.row != 0 {
             let firstMessage = messageListUseCase.messages[indexPath.row - 1]

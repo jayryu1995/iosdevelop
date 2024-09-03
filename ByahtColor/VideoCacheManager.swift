@@ -9,7 +9,7 @@ import Foundation
 
 class VideoCacheManager {
     static let shared = VideoCacheManager()
-    private let cacheLimit: Int64 = 100 * 1024 * 1024 // 100MB
+    private let cacheLimit: Int64 = 2000 * 1024 * 1024 // 100MB
     private let fileManager = FileManager.default
 
     private init() {}
@@ -55,11 +55,13 @@ class VideoCacheManager {
             if let fileSize = attributes[.size] as? Int64,
                let creationDate = attributes[.creationDate] as? Date {
                 totalCacheSize += fileSize
+                print("totalCacheSize: \(totalCacheSize) ")
                 fileInfoList.append((url: fileURL, size: fileSize, creationDate: creationDate))
             }
         }
 
         if totalCacheSize > cacheLimit {
+            print("totalCacheSize: \(totalCacheSize) 캐시초과")
             fileInfoList.sort { $0.creationDate < $1.creationDate } // 오래된 파일 순으로 정렬
             for fileInfo in fileInfoList {
                 try fileManager.removeItem(at: fileInfo.url)

@@ -9,8 +9,39 @@
 "server_error_title" = "서버 점검 중";
 "server_error_message" = "현재 서버 점검 중입니다. 잠시 후 다시 시도해주세요.";
 
+// ApplicationAlertVC
+"application_alert_titleLabel" = "주의";
+"application_alert_agree" = "동의";
+"application_alert_cancel" = "취소";
+"application_alert_messageLabel" = "제품에 당첨된 경우, 캠페인을 성실하게 이행하지 않으면 모든 향후 이벤트나 혜택 참여 기회를 잃거나 법적 처벌을 받을 수 있습니다. 위의 내용을 성실하게 이행할 수 있다면 동의 버튼을 눌러 주세요.";
+
 // MessageInputView
 "messageInputView_placeholder" = "메세지 보내기";
+
+// InfluenceProposalAlertVC
+"proposal_alert_label" = "내 프로필을 보내\n협업 제안을 하시겠어요?";
+"proposal_alert_confirm" = "네! 제안할게요.";
+"proposal_alert_cancel" = "아니요, 다음에요.";
+
+// InfluenceProposalAlert2VC
+"proposal_alert2_label" = "기업에게 제안을 보냈어요!";
+"proposal_alert2_label2" = "기업에서 제안을 수락하면 채팅방이 만들어져요.";
+"proposal_alert2_button" = "OK!";
+
+// BusinessProposalAlert
+"business_proposal_alert_label" = "들어온 제안을 \n패스하시겠습니까?";
+"business_proposal_alert_confirm" = "네, 패스할게요";
+"business_proposal_alert_cancel" = "아니요, 더 볼게요";
+
+// ProposalSwipeVC
+"proposal_swipe_label" = "남은 제안이 없습니다.";
+
+// ProposalVC
+"proposal_count" = "개";
+"proposal_label" = "받은 협업 제안";
+"proposal_empty_label" = "받은 제안이 없습니다.";
+"proposal_empty_label2" = "기업 프로필 수정하고\n인플루언서 제안 받아보기";
+"proposal_empty_button" = "기업 프로필 수정";
 
 //온보딩
 "onboarding_button" = "다음";
@@ -49,7 +80,8 @@
 "update_str1" = "업데이트 요청";
 
 // InfluenceSampleVC
-"influence_sample_label" = "양 옆으로 넘겨 이전이나 다음 기업 확인.";
+"influence_sample_label" = "양 옆으로 넘겨 이전이나 다음 기업 확인";
+"influence_sample_chat" = "내 프로필 보내서 협업 제안하기";
 
 // BusinessSampleVC
 "business_sample_label" = "양 옆으로 넘겨 이전이나 다음 크리에이터를 만나보세요.";
@@ -185,7 +217,7 @@
 "influence_profile_write_gender" = "성별";
 "influence_profile_write_nation" = "활동 국가";
 "influence_profile_write_alert" = "200MB 이상의 파일은 업로드 하실 수 없습니다.";
-"influence_profile_write_message1" = "간단한 소개를 입력해주세요.";
+"influence_profile_write_message1" = "업무적 장점이나 영상의 특징 등을 한 줄로 소개해보세요.";
 "influence_profile_write_message2" = "이미지 또는 릴스를 업로드해주세요.";
 "influence_profile_write_message3" = "최소 한개의 페이를 입력해주세요.";
 "influence_profile_write_message4" = "최소 한가지의 주제를 선택해주세요.";
@@ -238,7 +270,7 @@
 "influence_mypage_profile_label2" = "기업 제안률 높이기";
 "influence_mypage_diagnosis_label" = "10만원 상당의 상담";
 "influence_mypage_diagnosis_label2" = "무료로 내 프로필 진단 신청하기";
-"influence_mypage_account_label" = "내 정보";
+"influence_mypage_account_label" = "계정 정보";
 "influence_mypage_event_label" = "내가 신청한 이벤트";
 
 // InfluenceMypageWrite
@@ -258,14 +290,15 @@
 "influence_mypage_write_secession" = "탈퇴";
 
 // BusinessHomeVC
- "businesshome_label" = "빠르고 쉬운\n해외 인플루언서 마케팅";
- "businesshome_label2" = "현재 모집 공고";
- "businesshome_label3" = "공고 당 평균 ";
- "businesshome_label4" = "명이 지원해요.";
- "businesshome_button_label" = "글로우비에 모집 의뢰";
- "businesshome_button_label2" = "현지 언어 문제 없이, 모집부터 관리까지.";
+"businesshome_label" = "빠르고 쉬운\n해외 인플루언서 마케팅";
+"businesshome_label2" = "현재 모집 공고";
+"businesshome_label3" = "공고 당 평균 ";
+"businesshome_label4" = "명이 지원해요.";
+"businesshome_button_label" = "글로우비에 모집 의뢰";
+"businesshome_button_label2" = "현지 언어 문제 없이, 모집부터 관리까지.";
 
 // Business_MyPage
+"business_mypage_error_label" = "앱 오류 신고하기";
 "business_mypage_profile_label" = "회사 프로필 수정하고";
 "business_mypage_profile_label2" = "인플루언서 제안률 높이기";
 "business_mypage_maketing_label" = "인플루언서 마케팅 의뢰하고";
@@ -279,6 +312,7 @@
 "business_profile_subtitle1" = "주제";
 "business_profile_subtitle2" = "나이대";
 "business_profile_subtitle3" = "성별";
+"business_profile_subtitle4" = "활동 국가";
 
 // BusinessProfileWriteVC
 "business_profile_write_thumbnail" = "썸네일을 업로드하세요.";
@@ -333,6 +367,7 @@
 "talk_read_comment" = "댓글을 입력하세요.";
 
 //RequestCollab
+"request_collab_title" = "신청";
 "request_collab_platform_label" = "당신의 소셜 미디어 플랫폼";
 "request_collab_email_label" = "이메일 주소";
 "request_collab_email_placeholder" = "이메일 주소를 입력하세요";

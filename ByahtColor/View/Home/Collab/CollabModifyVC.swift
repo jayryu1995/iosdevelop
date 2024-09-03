@@ -80,13 +80,16 @@ class CollabModifyVC: UIViewController, UIScrollViewDelegate, UINavigationContro
         return label
     }()
     private var selectedStyle: String = ""
+    private var selectedNation: String = ""
     private var selectedSNS: [String] = []
-    private var tagButtons = [UIButton]()
+    private var styleButtons = [UIButton]()
     private var snsButtons = [UIButton]()
+    private var nationButtons = [UIButton]()
     private var selectedImages: [UIImage] = []
     private var activityIndicator: UIActivityIndicatorView!
     private var startDate: Date?
     private var endDate: Date?
+    private let viewModel = CollabViewModel()
     var collab: CollabDto?
 
     override func viewWillAppear(_ animated: Bool) {
@@ -145,6 +148,7 @@ class CollabModifyVC: UIViewController, UIScrollViewDelegate, UINavigationContro
 
         updateStyleButtonState()
         updateSnsButtonState()
+        updateNationButtonState()
     }
 
     private func loadImagesFromCollab() {
@@ -218,105 +222,136 @@ class CollabModifyVC: UIViewController, UIScrollViewDelegate, UINavigationContro
         }
 
         // 스타일 필터 뷰 추가
-        let styleFilterView = styleFilterView(tags: ["Beauty", "Fashion", "Travel", "Etc"])
+        let styleLabel = UILabel()
+        styleLabel.text = "카테고리"
+        styleLabel.font = UIFont(name: "Pretendard-SemiBold", size: 14)
+        let styleFilterView = createButtonView(titles: ["Beauty", "Fashion", "Travel", "Etc"],type: 0)
+        contentView.addSubview(styleLabel)
         contentView.addSubview(styleFilterView)
+        styleLabel.snp.makeConstraints{
+            $0.top.equalTo(dateButton.snp.bottom).offset(20)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalTo(view).offset(-20)
+        }
+        
         styleFilterView.snp.makeConstraints { make in
-            make.top.equalTo(dateButton.snp.bottom).offset(20)
+            make.top.equalTo(styleLabel.snp.bottom).offset(10)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalTo(view).offset(-20)
         }
 
         // SNS 필터 뷰 추가
+        let snsLabel = UILabel()
+        snsLabel.text = "SNS"
+        snsLabel.font = UIFont(name: "Pretendard-SemiBold", size: 14)
         let snsFilterView =
-        snsFilterView(tags: ["TikTok".localized, "Instagram".localized, "Facebook".localized, "Shopee".localized, "Naver".localized, "Youtube".localized])
+        createButtonView(titles:["TikTok".localized, "Instagram".localized, "Facebook".localized, "Shopee".localized, "Naver".localized, "Youtube".localized],type: 1)
+        contentView.addSubview(snsLabel)
         contentView.addSubview(snsFilterView)
+        snsLabel.snp.makeConstraints{
+            $0.top.equalTo(styleFilterView.snp.bottom).offset(20)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalTo(view).offset(-20)
+        }
+        
         snsFilterView.snp.makeConstraints { make in
-            make.top.equalTo(styleFilterView.snp.bottom).offset(20)
+            make.top.equalTo(snsLabel.snp.bottom).offset(10)
+            make.leading.equalToSuperview().offset(20)
+            make.trailing.equalTo(view).offset(-20)
+        }
+        
+        // 국가 선택 추가
+        let nationLabel = UILabel()
+        nationLabel.text = "노출 국가"
+        nationLabel.font = UIFont(name: "Pretendard-SemiBold", size: 14)
+        let nationFilterView =
+        createButtonView(titles: ["nation_ko".localized, "nation_jp".localized, "nation_th".localized, "nation_ph".localized, "nation_vi".localized, "nation_sg".localized],type: 2)
+        contentView.addSubview(nationLabel)
+        contentView.addSubview(nationFilterView)
+        
+        nationLabel.snp.makeConstraints{
+            $0.top.equalTo(snsFilterView.snp.bottom).offset(20)
+            $0.leading.equalToSuperview().offset(20)
+            $0.trailing.equalTo(view).offset(-20)
+        }
+        
+        nationFilterView.snp.makeConstraints { make in
+            make.top.equalTo(nationLabel.snp.bottom).offset(10)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalTo(view).offset(-20)
             make.bottom.equalTo(contentView.snp.bottom).offset(-20)
         }
     }
 
-    private func styleFilterView(tags: [String]) -> UIView {
-        let container = createFilterViewContainer(withTitle: "CATEGORY", tags: tags)
-        return container
-    }
-
-    private func snsFilterView(tags: [String]) -> UIView {
-        let container = createFilterViewContainer(withTitle: "SNS", tags: tags)
-        return container
-    }
-
-    private func createFilterViewContainer(withTitle title: String, tags: [String]) -> UIView {
-        let container = UIView()
-        container.isUserInteractionEnabled = true
-
-        let titleLabel = UILabel()
-        titleLabel.text = title
-        titleLabel.font = UIFont(name: "Pretendard-SemiBold", size: 14)
-        container.addSubview(titleLabel)
-        titleLabel.snp.makeConstraints { make in
-            make.top.leading.equalToSuperview()
-        }
-
-        let verticalStackView = UIStackView()
-        verticalStackView.axis = .vertical
-        verticalStackView.distribution = .equalSpacing
-        verticalStackView.alignment = .fill
-        verticalStackView.spacing = 10
-        verticalStackView.isUserInteractionEnabled = true
-
-        // 모든 태그를 처리하도록 개선
-        let rows = tags.chunked(into: 4) // 태그 배열을 4개 단위로 분할
-        for rowTags in rows {
-            let rowStackView = createHorizontalStackView(tags: rowTags)
-            verticalStackView.addArrangedSubview(rowStackView)
-        }
-
-        container.addSubview(verticalStackView)
-        verticalStackView.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(10)
-            make.leading.trailing.equalToSuperview()
-            make.bottom.equalToSuperview() // VerticalStackView의 바텀을 container의 바텀에 연결
-        }
-
-        return container
-    }
-
-    private func createHorizontalStackView(tags: [String]) -> UIStackView {
-        let horizontalStackView = UIStackView()
-        horizontalStackView.axis = .horizontal
-        horizontalStackView.distribution = .fillProportionally
-        horizontalStackView.alignment = .fill
-        horizontalStackView.spacing = 5
-        horizontalStackView.isUserInteractionEnabled = true
-        for tagName in tags {
-            let tagButton = UIButton()
-            tagButton.setTitle(tagName, for: .normal)
-            tagButton.backgroundColor = .white
-            tagButton.setTitleColor(.black, for: .normal)
-            tagButton.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 14)
-            tagButton.layer.cornerRadius = 16
-            tagButton.layer.borderWidth = 1
-            tagButton.layer.borderColor = UIColor.darkGray.cgColor
-            tagButton.isUserInteractionEnabled = true
-            if tags.count < 4 {
-                tagButton.addTarget(self, action: #selector(styleButtonTapped), for: .touchUpInside)
-                horizontalStackView.addArrangedSubview(tagButton)
-                tagButtons.append(tagButton)
+    private func createButtonView(titles: [String],type: Int) -> UIView {
+        let view = UIView()
+        let maxWidth = UIScreen.main.bounds.width - 40
+        var currentRowView = UIView()
+        var currentRowWidth: CGFloat = 0
+        var rowIndex = 0
+        let buttonSpacing : CGFloat = 8
+        for (index, title) in titles.enumerated() {
+            let button = UIButton()
+            button.setTitleColor(UIColor(hex: "#4E505B"), for: .normal)
+            button.backgroundColor = .white
+            button.setTitle(title, for: .normal)
+            button.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 14)
+            button.layer.cornerRadius = 16
+            button.layer.borderWidth = 1
+            button.layer.borderColor = UIColor(hex: "#D3D4DA").cgColor
+            button.titleEdgeInsets = UIEdgeInsets(top: 6, left: 8, bottom: 6, right: 8)
+            button.titleLabel?.adjustsFontSizeToFitWidth = true
+            button.titleLabel?.minimumScaleFactor = 0.5
+            button.titleLabel?.lineBreakMode = .byTruncatingTail
+            if type == 0 {
+                button.addTarget(self, action: #selector(styleButtonTapped), for: .touchUpInside)
+                styleButtons.append(button)
+            } else if type == 1 {
+                button.addTarget(self, action: #selector(snsButtonTapped), for: .touchUpInside)
+                snsButtons.append(button)
             } else {
-                tagButton.addTarget(self, action: #selector(snsButtonTapped), for: .touchUpInside)
-                horizontalStackView.addArrangedSubview(tagButton)
-                snsButtons.append(tagButton)
+                // index 값을 tag로 설정
+                button.tag = index
+                button.addTarget(self, action: #selector(nationButtonTapped), for: .touchUpInside)
+                nationButtons.append(button)
             }
+          
+            let buttonWidth: CGFloat = max(48, (title as NSString).size(withAttributes: [.font: UIFont(name: "Pretendard-Regular", size: 14)!]).width + 16) // 16 for padding
+            if currentRowWidth + buttonWidth + buttonSpacing > maxWidth { // 4 for spacing
+                view.addSubview(currentRowView)
+                currentRowView.snp.makeConstraints { make in
+                    make.top.equalTo(view).offset(rowIndex * 36) // Adjust the top offset for each row
+                    make.left.equalTo(view)
+                    make.right.equalTo(view)
+                    make.height.equalTo(36)
 
-            tagButton.snp.makeConstraints {
-                $0.height.equalTo(32)
+                }
+                currentRowView = UIView()
+                currentRowWidth = 0
+                rowIndex += 1
+            }
+            currentRowView.addSubview(button)
+            button.snp.makeConstraints { make in
+                make.left.equalTo(currentRowView).offset(currentRowWidth)
+                make.centerY.equalTo(currentRowView)
+                make.width.equalTo(buttonWidth)
+                make.height.equalTo(32)
+            }
+            currentRowWidth += buttonWidth + buttonSpacing
+        }
+
+        if !currentRowView.subviews.isEmpty {
+            view.addSubview(currentRowView)
+            currentRowView.snp.makeConstraints { make in
+                make.top.equalTo(view).offset(rowIndex * 36) // Adjust the top offset for each row
+                make.left.equalTo(view)
+                make.right.equalTo(view)
+                make.height.equalTo(36)
+                make.bottom.equalToSuperview()
             }
         }
 
-        return horizontalStackView
+        return view
     }
 
     private func setMiddleView() {
@@ -507,8 +542,10 @@ class CollabModifyVC: UIViewController, UIScrollViewDelegate, UINavigationContro
 
     // style 선택
     private func updateStyleButtonState() {
-        for button in tagButtons {
-            if let style = collab?.style, style.contains(button.titleLabel?.text ?? "") {
+
+        for button in styleButtons {
+            let title = button.titleLabel?.text ?? ""
+            if let style = collab?.style, title == style {
                 button.isSelected = true
                 button.backgroundColor = .black
                 button.setTitleColor(.white, for: .normal)
@@ -520,6 +557,24 @@ class CollabModifyVC: UIViewController, UIScrollViewDelegate, UINavigationContro
             }
         }
     }
+    
+    private func updateNationButtonState() {
+
+        for button in nationButtons {
+            let index = button.tag.toString()
+            if let nation = collab?.nation, index == nation {
+                button.isSelected = true
+                button.backgroundColor = .black
+                button.setTitleColor(.white, for: .normal)
+                selectedNation = button.tag.toString()
+            } else {
+                button.isSelected = false
+                button.backgroundColor = .white
+                button.setTitleColor(.black, for: .normal)
+            }
+        }
+    }
+    
 
     @objc private func styleButtonTapped(_ sender: UIButton) {
         // 스타일 선택 토글 로직
@@ -535,30 +590,57 @@ class CollabModifyVC: UIViewController, UIScrollViewDelegate, UINavigationContro
                 selectedStyle = ""
             }
         }
+        updateStyleSelectionUI()
     }
 
+    @objc private func nationButtonTapped(_ sender: UIButton) {
+        // 스타일 선택 토글 로직
+        sender.isSelected = !sender.isSelected
+        sender.backgroundColor = sender.isSelected ? .black : .white
+        sender.setTitleColor(sender.isSelected ? .white : .black, for: .normal)
+
+        // 선택된 스타일을 관리하기 위한 로직
+        
+        let index = sender.tag
+        if sender.isSelected {
+            selectedNation = index.toString()
+        } else if selectedNation == index.toString() {
+            selectedNation = ""
+        }
+        updateNationSelectionUI()
+    }
+    
     private func updateSnsButtonState() {
         // snsButtons 배열은 미리 생성된 각 SNS 버튼을 포함하고 있어야 합니다.
         for button in snsButtons {
             switch button.titleLabel?.text {
-            case "TikTok":
+            case "TikTok".localized:
                 button.isSelected = collab?.tiktok ?? false
 
-            case "Instagram":
+            case "Instagram".localized:
                 button.isSelected = collab?.instagram ?? false
 
-            case "Facebook":
+            case "Facebook".localized:
                 button.isSelected = collab?.facebook ?? false
 
-            case "Shopee":
+            case "Shopee".localized:
+                button.isSelected = collab?.shopee ?? false
+
+            case "Youtube".localized:
+                button.isSelected = collab?.shopee ?? false
+
+            case "Naver".localized:
                 button.isSelected = collab?.shopee ?? false
 
             default:
                 break
             }
             if button.isSelected {
-                selectedSNS.append(String(describing: button.titleLabel?.text))
-                print("실행")
+                if let title = button.titleLabel?.text {
+                    selectedSNS.append(title.localized)
+                    print("실행")
+                }
+
             }
             button.backgroundColor = button.isSelected ? .black : .white
             button.setTitleColor(button.isSelected ? .white : .black, for: .normal)
@@ -584,11 +666,42 @@ class CollabModifyVC: UIViewController, UIScrollViewDelegate, UINavigationContro
         }
 
         // 선택된 스타일이 변경될 때마다 UI를 업데이트합니다.
-        updateStyleSelectionUI()
+        updateSnsSelectionUI()
+    }
+    
+    private func updateStyleSelectionUI() {
+        styleButtons.forEach { button in
+            if let style = button.titleLabel?.text {
+                if selectedStyle.contains(style) {
+                    button.backgroundColor = .black
+                    button.setTitleColor(.white, for: .normal)
+                    button.isSelected = true
+                } else {
+                    button.backgroundColor = .white
+                    button.setTitleColor(.black, for: .normal)
+                    button.isSelected = false
+                }
+            }
+        }
     }
 
-    private func updateStyleSelectionUI() {
-
+    private func updateNationSelectionUI() {
+        nationButtons.forEach { button in
+            let index = button.tag
+            if selectedNation == index.toString() {
+                button.backgroundColor = .black
+                button.setTitleColor(.white, for: .normal)
+                button.isSelected = true
+            } else {
+                button.backgroundColor = .white
+                button.setTitleColor(.black, for: .normal)
+                button.isSelected = false
+            }
+            
+        }
+    }
+    
+    private func updateSnsSelectionUI() {
         snsButtons.forEach { button in
             if let sns = button.titleLabel?.text {
                 if selectedSNS.contains(sns) {
@@ -625,17 +738,15 @@ class CollabModifyVC: UIViewController, UIScrollViewDelegate, UINavigationContro
         }
 
         self.activityIndicator.startAnimating()
-        let no = collab?.no
-        let noString = String(no!)
-        let url = "\(Bundle.main.TEST_URL)/snap/update"
-        let headers: HTTPHeaders = ["Content-type": "multipart/form-data"]
+        let no = collab?.no?.toString()
         let style = selectedStyle
-        let facebookValue = selectedSNS.contains("Facebook") ? "true" : "false"
-        let tiktokValue = selectedSNS.contains("TikTok") ? "true" : "false"
-        let instagramValue = selectedSNS.contains("Instagram") ? "true" : "false"
-        let shopeeValue = selectedSNS.contains("Shopee") ? "true" : "false"
-        let youtubeValue = selectedSNS.contains("Youtube") ? "true" : "false"
-        let naverValue = selectedSNS.contains("Naver") ? "true" : "false"
+        let facebookValue = selectedSNS.contains("Facebook".localized) ? "true" : "false"
+        let tiktokValue = selectedSNS.contains("TikTok".localized) ? "true" : "false"
+        let instagramValue = selectedSNS.contains("Instagram".localized) ? "true" : "false"
+        let shopeeValue = selectedSNS.contains("Shopee".localized) ? "true" : "false"
+        let youtubeValue = selectedSNS.contains("Youtube".localized) ? "true" : "false"
+        let naverValue = selectedSNS.contains("Naver".localized) ? "true" : "false"
+
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
 
@@ -643,35 +754,15 @@ class CollabModifyVC: UIViewController, UIScrollViewDelegate, UINavigationContro
         let endDateString = formatter.string(from: endDate! )  // endDate에 대해서도 비슷하게 처리할 수 있음
         let title = tv_title.text ?? ""
         let link = tv_link.text ?? ""
-
-        // MultipartFormData를 사용하여 요청 생성
-        AF.upload(multipartFormData: { multipartFormData in
-            // 텍스트 데이터 추가
-            multipartFormData.append(Data(noString.utf8), withName: "no")
-            multipartFormData.append(Data(title.utf8), withName: "title")
-            multipartFormData.append(Data(self.tv_content.text.utf8), withName: "content")
-            multipartFormData.append(Data(self.tv_info.text.utf8), withName: "info")
-            multipartFormData.append(Data(link.utf8), withName: "link")
-            multipartFormData.append(Data(style.utf8), withName: "style")
-            multipartFormData.append(Data(facebookValue.utf8), withName: "facebook")
-            multipartFormData.append(Data(tiktokValue.utf8), withName: "tiktok")
-            multipartFormData.append(Data(instagramValue.utf8), withName: "instagram")
-            multipartFormData.append(Data(shopeeValue.utf8), withName: "shopee")
-            multipartFormData.append(Data(naverValue.utf8), withName: "naver")
-            multipartFormData.append(Data(youtubeValue.utf8), withName: "youtube")
-            multipartFormData.append(Data(startDateString.utf8), withName: "start_date")
-            multipartFormData.append(Data(endDateString.utf8), withName: "end_date")
-
-            // 이미지 데이터 추가
-            for (index, image) in self.selectedImages.enumerated() {
-                if let imageData = image.jpegData(compressionQuality: 1080) {
-                    multipartFormData.append(imageData, withName: "images", fileName: "image\(index).jpg", mimeType: "image/jpg")
-                }
-            }
-        }, to: url, method: .post, headers: headers).responseString { response in
-            switch response.result {
+        let nation = selectedNation
+        
+        let dto = SnapInsertDto(no: no, userId: nil, nickname: nil, content: self.tv_content.text, link: link, title: title, nation: nation, info: tv_info.text, startDate: startDateString, endDate: endDateString, style: style, facebook: facebookValue, tiktok: tiktokValue, instagram: instagramValue, shopee: shopeeValue, naver: naverValue, youtube: youtubeValue, people: nil, collabCode: nil)
+        
+        viewModel.updateCollab(dto : dto, images: selectedImages){ response in
+            switch response {
             case .success(let stringValue):
                 self.activityIndicator.stopAnimating()
+                print(stringValue)
                 if let navigationController = self.navigationController {
                     var navigationArray = navigationController.viewControllers // 모든 뷰 컨트롤러를 배열로 가져옵니다.
 

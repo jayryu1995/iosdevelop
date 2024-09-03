@@ -5,11 +5,26 @@
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>FacebookSignIn</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>fb295913122812550</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>GoogleSignIn</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.260279207418-08p6phg0bm8ivmci49oh556kqicrpjrc</string>
+			</array>
+		</dict>
+		<dict/>
 	</array>
 	<key>FacebookAppID</key>
 	<string>295913122812550</string>

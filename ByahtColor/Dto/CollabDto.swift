@@ -15,6 +15,7 @@ struct CollabDto: Codable {
     let content: String?
     let link: String?
     let title: String?
+    let nation: String?
     let info: String?
     let regi_date: String?
     let start_date: String?
@@ -34,6 +35,8 @@ struct CollabDto: Codable {
     let tiktok: Bool?
     let instagram: Bool?
     let shopee: Bool?
+    let naver: Bool?
+    let youtube: Bool?
     let state: Bool?
     let people: Int?
     let application_state: Int?
@@ -44,6 +47,7 @@ struct CollabRequestDTO: Encodable {
     let user_id: String?
     let styles: [String]?
     let sns: [String]?
+    let nation: String?
 }
 
 // SnapCommentVC

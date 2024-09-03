@@ -396,7 +396,7 @@ extension ApplicationStateVC: CollabTableViewCell2Delegate, UITableViewDelegate,
         }
         let url = "\(Bundle.main.TEST_URL)/mypage/snap/select"
         // 요청에 필요한 파라미터 설정
-        let parameters = CollabRequestDTO(user_id: User.shared.id ?? "", styles: nil, sns: nil)
+        let parameters = CollabRequestDTO(user_id: User.shared.id ?? "", styles: nil, sns: nil, nation: nil)
         AF.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default).responseDecodable(of: [CollabDto].self) { response in
             DispatchQueue.main.async {
                 switch response.result {

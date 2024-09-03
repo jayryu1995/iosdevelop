@@ -5,8 +5,8 @@ relocations:
   - { offsetInCU: 0x33, offset: 0x33, size: 0x8, addend: 0x0, symName: _FBSDKCoreKit_BasicsVersionString, symObjAddr: 0x0, symBinAddr: 0x9AA8, symSize: 0x0 }
   - { offsetInCU: 0x67, offset: 0x67, size: 0x8, addend: 0x0, symName: _FBSDKCoreKit_BasicsVersionNumber, symObjAddr: 0x48, symBinAddr: 0x9AF0, symSize: 0x0 }
   - { offsetInCU: 0x27, offset: 0xA3, size: 0x8, addend: 0x0, symName: '+[FBSDKBase64 initialize]', symObjAddr: 0x0, symBinAddr: 0x2054, symSize: 0x70 }
-  - { offsetInCU: 0x40, offset: 0xBC, size: 0x8, addend: 0x0, symName: __decoder, symObjAddr: 0x1E30, symBinAddr: 0x11FA0, symSize: 0x0 }
-  - { offsetInCU: 0x94, offset: 0x110, size: 0x8, addend: 0x0, symName: __encoder, symObjAddr: 0x1E38, symBinAddr: 0x11FA8, symSize: 0x0 }
+  - { offsetInCU: 0x40, offset: 0xBC, size: 0x8, addend: 0x0, symName: __decoder, symObjAddr: 0x1E28, symBinAddr: 0x11FA0, symSize: 0x0 }
+  - { offsetInCU: 0x94, offset: 0x110, size: 0x8, addend: 0x0, symName: __encoder, symObjAddr: 0x1E30, symBinAddr: 0x11FA8, symSize: 0x0 }
   - { offsetInCU: 0x103, offset: 0x17F, size: 0x8, addend: 0x0, symName: '+[FBSDKBase64 initialize]', symObjAddr: 0x0, symBinAddr: 0x2054, symSize: 0x70 }
   - { offsetInCU: 0x133, offset: 0x1AF, size: 0x8, addend: 0x0, symName: '+[FBSDKBase64 decodeAsData:]', symObjAddr: 0x70, symBinAddr: 0x20C4, symSize: 0xC }
   - { offsetInCU: 0x170, offset: 0x1EC, size: 0x8, addend: 0x0, symName: '+[FBSDKBase64 decodeAsString:]', symObjAddr: 0x7C, symBinAddr: 0x20D0, symSize: 0xC }
@@ -41,7 +41,7 @@ relocations:
   - { offsetInCU: 0x40, offset: 0x18AB, size: 0x8, addend: 0x0, symName: _FBLink_NSData_FileDataExtracting, symObjAddr: 0x2050, symBinAddr: 0xC248, symSize: 0x0 }
   - { offsetInCU: 0x60, offset: 0x18CB, size: 0x8, addend: 0x0, symName: _FBLink_NSFileManager_FileManaging, symObjAddr: 0x2058, symBinAddr: 0xC250, symSize: 0x0 }
   - { offsetInCU: 0x75, offset: 0x18E0, size: 0x8, addend: 0x0, symName: _FBLink_NSBundle_InfoDictionaryProviding, symObjAddr: 0x2060, symBinAddr: 0xC258, symSize: 0x0 }
-  - { offsetInCU: 0x8A, offset: 0x18F5, size: 0x8, addend: 0x0, symName: _mappingTableIdentifier, symObjAddr: 0xB108, symBinAddr: 0x11FB0, symSize: 0x0 }
+  - { offsetInCU: 0x8A, offset: 0x18F5, size: 0x8, addend: 0x0, symName: _mappingTableIdentifier, symObjAddr: 0xB0F8, symBinAddr: 0x11FB0, symSize: 0x0 }
   - { offsetInCU: 0xFD, offset: 0x1968, size: 0x8, addend: 0x0, symName: _kFBSDKAppVersion, symObjAddr: 0x2068, symBinAddr: 0xC260, symSize: 0x0 }
   - { offsetInCU: 0x117, offset: 0x1982, size: 0x8, addend: 0x0, symName: _kFBSDKCallstack, symObjAddr: 0x2070, symBinAddr: 0xC268, symSize: 0x0 }
   - { offsetInCU: 0x12C, offset: 0x1997, size: 0x8, addend: 0x0, symName: _kFBSDKCrashReason, symObjAddr: 0x2078, symBinAddr: 0xC270, symSize: 0x0 }
@@ -51,12 +51,12 @@ relocations:
   - { offsetInCU: 0x180, offset: 0x19EB, size: 0x8, addend: 0x0, symName: _kFBSDKMapingTable, symObjAddr: 0x2098, symBinAddr: 0xC290, symSize: 0x0 }
   - { offsetInCU: 0x195, offset: 0x1A00, size: 0x8, addend: 0x0, symName: _kFBSDKMappingTableIdentifier, symObjAddr: 0x20A0, symBinAddr: 0xC298, symSize: 0x0 }
   - { offsetInCU: 0x19E, offset: 0x1A09, size: 0x8, addend: 0x0, symName: '+[FBSDKCrashHandler shared]', symObjAddr: 0x1D0, symBinAddr: 0x3910, symSize: 0x74 }
-  - { offsetInCU: 0x1C7, offset: 0x1A32, size: 0x8, addend: 0x0, symName: _shared.nonce, symObjAddr: 0xB118, symBinAddr: 0x11FC0, symSize: 0x0 }
-  - { offsetInCU: 0x1DC, offset: 0x1A47, size: 0x8, addend: 0x0, symName: _shared.instance, symObjAddr: 0xB120, symBinAddr: 0x11FC8, symSize: 0x0 }
+  - { offsetInCU: 0x1C7, offset: 0x1A32, size: 0x8, addend: 0x0, symName: _shared.nonce, symObjAddr: 0xB108, symBinAddr: 0x11FC0, symSize: 0x0 }
+  - { offsetInCU: 0x1DC, offset: 0x1A47, size: 0x8, addend: 0x0, symName: _shared.instance, symObjAddr: 0xB110, symBinAddr: 0x11FC8, symSize: 0x0 }
   - { offsetInCU: 0x26D, offset: 0x1AD8, size: 0x8, addend: 0x0, symName: '-[FBSDKCrashHandler addObserver:]', symObjAddr: 0x3C8, symBinAddr: 0x3B08, symSize: 0x1A8 }
-  - { offsetInCU: 0x292, offset: 0x1AFD, size: 0x8, addend: 0x0, symName: '_addObserver:.onceToken', symObjAddr: 0xB128, symBinAddr: 0x11FD0, symSize: 0x0 }
-  - { offsetInCU: 0x324, offset: 0x1B8F, size: 0x8, addend: 0x0, symName: _directoryPath, symObjAddr: 0xB110, symBinAddr: 0x11FB8, symSize: 0x0 }
-  - { offsetInCU: 0x339, offset: 0x1BA4, size: 0x8, addend: 0x0, symName: _previousExceptionHandler, symObjAddr: 0xB130, symBinAddr: 0x11FD8, symSize: 0x0 }
+  - { offsetInCU: 0x292, offset: 0x1AFD, size: 0x8, addend: 0x0, symName: '_addObserver:.onceToken', symObjAddr: 0xB118, symBinAddr: 0x11FD0, symSize: 0x0 }
+  - { offsetInCU: 0x324, offset: 0x1B8F, size: 0x8, addend: 0x0, symName: _directoryPath, symObjAddr: 0xB100, symBinAddr: 0x11FB8, symSize: 0x0 }
+  - { offsetInCU: 0x339, offset: 0x1BA4, size: 0x8, addend: 0x0, symName: _previousExceptionHandler, symObjAddr: 0xB120, symBinAddr: 0x11FD8, symSize: 0x0 }
   - { offsetInCU: 0x7A5, offset: 0x2010, size: 0x8, addend: 0x0, symName: '-[FBSDKCrashHandler initWithFileManager:bundle:fileDataExtractor:]', symObjAddr: 0x0, symBinAddr: 0x3740, symSize: 0x1D0 }
   - { offsetInCU: 0x8F3, offset: 0x215E, size: 0x8, addend: 0x0, symName: '___27+[FBSDKCrashHandler shared]_block_invoke', symObjAddr: 0x244, symBinAddr: 0x3984, symSize: 0x9C }
   - { offsetInCU: 0x92F, offset: 0x219A, size: 0x8, addend: 0x0, symName: '+[FBSDKCrashHandler getFBSDKVersion]', symObjAddr: 0x2E0, symBinAddr: 0x3A20, symSize: 0xC }
@@ -112,7 +112,7 @@ relocations:
   - { offsetInCU: 0x18A6, offset: 0x3111, size: 0x8, addend: 0x0, symName: '-[FBSDKCrashHandler setProcessedCrashLogs:]', symObjAddr: 0x1F80, symBinAddr: 0x56C0, symSize: 0xC }
   - { offsetInCU: 0x18E3, offset: 0x314E, size: 0x8, addend: 0x0, symName: '-[FBSDKCrashHandler .cxx_destruct]', symObjAddr: 0x1F8C, symBinAddr: 0x56CC, symSize: 0x54 }
   - { offsetInCU: 0x27, offset: 0x342E, size: 0x8, addend: 0x0, symName: '+[FBSDKLibAnalyzer initialize]', symObjAddr: 0x0, symBinAddr: 0x5720, symSize: 0x34 }
-  - { offsetInCU: 0x40, offset: 0x3447, size: 0x8, addend: 0x0, symName: __methodMapping, symObjAddr: 0x50E8, symBinAddr: 0x11FE0, symSize: 0x0 }
+  - { offsetInCU: 0x40, offset: 0x3447, size: 0x8, addend: 0x0, symName: __methodMapping, symObjAddr: 0x50E0, symBinAddr: 0x11FE0, symSize: 0x0 }
   - { offsetInCU: 0x123, offset: 0x352A, size: 0x8, addend: 0x0, symName: '+[FBSDKLibAnalyzer initialize]', symObjAddr: 0x0, symBinAddr: 0x5720, symSize: 0x34 }
   - { offsetInCU: 0x14F, offset: 0x3556, size: 0x8, addend: 0x0, symName: '+[FBSDKLibAnalyzer getMethodsTable:frameworks:]', symObjAddr: 0x34, symBinAddr: 0x5754, symSize: 0x1C0 }
   - { offsetInCU: 0x26F, offset: 0x3676, size: 0x8, addend: 0x0, symName: '+[FBSDKLibAnalyzer symbolicateCallstack:methodMapping:]', symObjAddr: 0x1F4, symBinAddr: 0x5914, symSize: 0x384 }
@@ -141,82 +141,82 @@ relocations:
   - { offsetInCU: 0x7D3, offset: 0x4825, size: 0x8, addend: 0x0, symName: '+[FBSDKTypeUtility coercedToStringValue:]', symObjAddr: 0x5D8, symBinAddr: 0x6C44, symSize: 0xC0 }
   - { offsetInCU: 0x812, offset: 0x4864, size: 0x8, addend: 0x0, symName: '+[FBSDKTypeUtility timeIntervalValue:]', symObjAddr: 0x698, symBinAddr: 0x6D04, symSize: 0x80 }
   - { offsetInCU: 0x851, offset: 0x48A3, size: 0x8, addend: 0x0, symName: '+[FBSDKTypeUtility unsignedIntegerValue:]', symObjAddr: 0x718, symBinAddr: 0x6D84, symSize: 0x8C }
-  - { offsetInCU: 0x8B1, offset: 0x4903, size: 0x8, addend: 0x0, symName: '+[FBSDKTypeUtility coercedToURLValue:]', symObjAddr: 0x7A4, symBinAddr: 0x6E10, symSize: 0x94 }
-  - { offsetInCU: 0x8F0, offset: 0x4942, size: 0x8, addend: 0x0, symName: '+[FBSDKTypeUtility dataWithJSONObject:options:error:]', symObjAddr: 0x838, symBinAddr: 0x6EA4, symSize: 0xD8 }
-  - { offsetInCU: 0x975, offset: 0x49C7, size: 0x8, addend: 0x0, symName: '+[FBSDKTypeUtility JSONObjectWithData:options:error:]', symObjAddr: 0x910, symBinAddr: 0x6F7C, symSize: 0xF4 }
-  - { offsetInCU: 0x9F2, offset: 0x4A44, size: 0x8, addend: 0x0, symName: '+[FBSDKTypeUtility _objectValue:ofClass:]', symObjAddr: 0xA04, symBinAddr: 0x7070, symSize: 0x4C }
-  - { offsetInCU: 0x27, offset: 0x4D66, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSession initWithDelegate:delegateQueue:]', symObjAddr: 0x0, symBinAddr: 0x70BC, symSize: 0x98 }
-  - { offsetInCU: 0x40, offset: 0x4D7F, size: 0x8, addend: 0x0, symName: _FBLink_NSURLSessionTask_NetworkTask, symObjAddr: 0x458, symBinAddr: 0xC3A0, symSize: 0x0 }
-  - { offsetInCU: 0x60, offset: 0x4D9F, size: 0x8, addend: 0x0, symName: _FBLink_NSURLSession_URLSessionProviding, symObjAddr: 0x460, symBinAddr: 0xC3A8, symSize: 0x0 }
-  - { offsetInCU: 0xCAD, offset: 0x59EC, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSession initWithDelegate:delegateQueue:]', symObjAddr: 0x0, symBinAddr: 0x70BC, symSize: 0x98 }
-  - { offsetInCU: 0xCFF, offset: 0x5A3E, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSession executeURLRequest:completionHandler:]', symObjAddr: 0x98, symBinAddr: 0x7154, symSize: 0x118 }
-  - { offsetInCU: 0xD6A, offset: 0x5AA9, size: 0x8, addend: 0x0, symName: '___55-[FBSDKURLSession executeURLRequest:completionHandler:]_block_invoke', symObjAddr: 0x1B0, symBinAddr: 0x726C, symSize: 0x74 }
-  - { offsetInCU: 0xDE1, offset: 0x5B20, size: 0x8, addend: 0x0, symName: ___copy_helper_block_e8_32s40s48b, symObjAddr: 0x224, symBinAddr: 0x72E0, symSize: 0x3C }
-  - { offsetInCU: 0xE07, offset: 0x5B46, size: 0x8, addend: 0x0, symName: ___destroy_helper_block_e8_32s40s48s, symObjAddr: 0x260, symBinAddr: 0x731C, symSize: 0x30 }
-  - { offsetInCU: 0xE24, offset: 0x5B63, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSession updateSessionWithBlock:]', symObjAddr: 0x290, symBinAddr: 0x734C, symSize: 0xC4 }
-  - { offsetInCU: 0xE75, offset: 0x5BB4, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSession invalidateAndCancel]', symObjAddr: 0x354, symBinAddr: 0x7410, symSize: 0x40 }
-  - { offsetInCU: 0xEA5, offset: 0x5BE4, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSession valid]', symObjAddr: 0x394, symBinAddr: 0x7450, symSize: 0x34 }
-  - { offsetInCU: 0xED9, offset: 0x5C18, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSession session]', symObjAddr: 0x3C8, symBinAddr: 0x7484, symSize: 0xC }
-  - { offsetInCU: 0xF0D, offset: 0x5C4C, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSession setSession:]', symObjAddr: 0x3D4, symBinAddr: 0x7490, symSize: 0x8 }
-  - { offsetInCU: 0xF48, offset: 0x5C87, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSession delegate]', symObjAddr: 0x3DC, symBinAddr: 0x7498, symSize: 0x18 }
-  - { offsetInCU: 0xF7C, offset: 0x5CBB, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSession setDelegate:]', symObjAddr: 0x3F4, symBinAddr: 0x74B0, symSize: 0xC }
-  - { offsetInCU: 0xFB9, offset: 0x5CF8, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSession delegateQueue]', symObjAddr: 0x400, symBinAddr: 0x74BC, symSize: 0x8 }
-  - { offsetInCU: 0xFED, offset: 0x5D2C, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSession setDelegateQueue:]', symObjAddr: 0x408, symBinAddr: 0x74C4, symSize: 0xC }
-  - { offsetInCU: 0x102A, offset: 0x5D69, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSession .cxx_destruct]', symObjAddr: 0x414, symBinAddr: 0x74D0, symSize: 0x38 }
-  - { offsetInCU: 0x27, offset: 0x61C7, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSessionTask init]', symObjAddr: 0x0, symBinAddr: 0x7508, symSize: 0x6C }
-  - { offsetInCU: 0x784, offset: 0x6924, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSessionTask init]', symObjAddr: 0x0, symBinAddr: 0x7508, symSize: 0x6C }
-  - { offsetInCU: 0x7B8, offset: 0x6958, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSessionTask initWithRequest:fromSession:completionHandler:]', symObjAddr: 0x6C, symBinAddr: 0x7574, symSize: 0xEC }
-  - { offsetInCU: 0x819, offset: 0x69B9, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSessionTask state]', symObjAddr: 0x158, symBinAddr: 0x7660, symSize: 0x3C }
-  - { offsetInCU: 0x84D, offset: 0x69ED, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSessionTask start]', symObjAddr: 0x194, symBinAddr: 0x769C, symSize: 0x30 }
-  - { offsetInCU: 0x87D, offset: 0x6A1D, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSessionTask cancel]', symObjAddr: 0x1C4, symBinAddr: 0x76CC, symSize: 0x40 }
-  - { offsetInCU: 0x8AD, offset: 0x6A4D, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSessionTask task]', symObjAddr: 0x204, symBinAddr: 0x770C, symSize: 0x8 }
-  - { offsetInCU: 0x8E1, offset: 0x6A81, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSessionTask setTask:]', symObjAddr: 0x20C, symBinAddr: 0x7714, symSize: 0xC }
-  - { offsetInCU: 0x91E, offset: 0x6ABE, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSessionTask requestStartDate]', symObjAddr: 0x218, symBinAddr: 0x7720, symSize: 0x8 }
-  - { offsetInCU: 0x952, offset: 0x6AF2, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSessionTask handler]', symObjAddr: 0x220, symBinAddr: 0x7728, symSize: 0x8 }
-  - { offsetInCU: 0x986, offset: 0x6B26, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSessionTask setHandler:]', symObjAddr: 0x228, symBinAddr: 0x7730, symSize: 0x8 }
-  - { offsetInCU: 0x9C1, offset: 0x6B61, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSessionTask requestStartTime]', symObjAddr: 0x230, symBinAddr: 0x7738, symSize: 0x8 }
-  - { offsetInCU: 0x9F5, offset: 0x6B95, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSessionTask setRequestStartTime:]', symObjAddr: 0x238, symBinAddr: 0x7740, symSize: 0x8 }
-  - { offsetInCU: 0xA2E, offset: 0x6BCE, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSessionTask loggerSerialNumber]', symObjAddr: 0x240, symBinAddr: 0x7748, symSize: 0x8 }
-  - { offsetInCU: 0xA62, offset: 0x6C02, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSessionTask setLoggerSerialNumber:]', symObjAddr: 0x248, symBinAddr: 0x7750, symSize: 0x8 }
-  - { offsetInCU: 0xA9B, offset: 0x6C3B, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSessionTask .cxx_destruct]', symObjAddr: 0x250, symBinAddr: 0x7758, symSize: 0x3C }
-  - { offsetInCU: 0x27, offset: 0x6DAD, size: 0x8, addend: 0x0, symName: '-[NSBundle(InfoDictionaryProviding) fb_infoDictionary]', symObjAddr: 0x0, symBinAddr: 0x7794, symSize: 0x4 }
-  - { offsetInCU: 0x46, offset: 0x6DCC, size: 0x8, addend: 0x0, symName: _FBLinkable_NSBundle_InfoDictionaryProviding, symObjAddr: 0x10, symBinAddr: 0x11C68, symSize: 0x0 }
-  - { offsetInCU: 0x72, offset: 0x6DF8, size: 0x8, addend: 0x0, symName: '-[NSBundle(InfoDictionaryProviding) fb_infoDictionary]', symObjAddr: 0x0, symBinAddr: 0x7794, symSize: 0x4 }
-  - { offsetInCU: 0xA4, offset: 0x6E2A, size: 0x8, addend: 0x0, symName: '-[NSBundle(InfoDictionaryProviding) fb_bundleIdentifier]', symObjAddr: 0x4, symBinAddr: 0x7798, symSize: 0x4 }
-  - { offsetInCU: 0xD6, offset: 0x6E5C, size: 0x8, addend: 0x0, symName: '-[NSBundle(InfoDictionaryProviding) fb_objectForInfoDictionaryKey:]', symObjAddr: 0x8, symBinAddr: 0x779C, symSize: 0x4 }
-  - { offsetInCU: 0x27, offset: 0x7410, size: 0x8, addend: 0x0, symName: '+[NSData(FileDataExtracting) fb_dataWithContentsOfFile:options:error:]', symObjAddr: 0x0, symBinAddr: 0x77A0, symSize: 0x4 }
-  - { offsetInCU: 0x46, offset: 0x742F, size: 0x8, addend: 0x0, symName: _FBLinkable_NSData_FileDataExtracting, symObjAddr: 0x8, symBinAddr: 0x11CD0, symSize: 0x0 }
-  - { offsetInCU: 0xB5, offset: 0x749E, size: 0x8, addend: 0x0, symName: '+[NSData(FileDataExtracting) fb_dataWithContentsOfFile:options:error:]', symObjAddr: 0x0, symBinAddr: 0x77A0, symSize: 0x4 }
-  - { offsetInCU: 0x27, offset: 0x770D, size: 0x8, addend: 0x0, symName: '-[NSFileManager(FileManaging) fb_createDirectoryAtPath:withIntermediateDirectories:attributes:error:]', symObjAddr: 0x0, symBinAddr: 0x77A4, symSize: 0x4 }
-  - { offsetInCU: 0x40, offset: 0x7726, size: 0x8, addend: 0x0, symName: _FBLinkable_NSFileManager_FileManaging, symObjAddr: 0x10, symBinAddr: 0x11D38, symSize: 0x0 }
-  - { offsetInCU: 0x6C, offset: 0x7752, size: 0x8, addend: 0x0, symName: '-[NSFileManager(FileManaging) fb_createDirectoryAtPath:withIntermediateDirectories:attributes:error:]', symObjAddr: 0x0, symBinAddr: 0x77A4, symSize: 0x4 }
-  - { offsetInCU: 0xD7, offset: 0x77BD, size: 0x8, addend: 0x0, symName: '-[NSFileManager(FileManaging) fb_fileExistsAtPath:]', symObjAddr: 0x4, symBinAddr: 0x77A8, symSize: 0x4 }
-  - { offsetInCU: 0x116, offset: 0x77FC, size: 0x8, addend: 0x0, symName: '-[NSFileManager(FileManaging) fb_removeItemAtPath:error:]', symObjAddr: 0x8, symBinAddr: 0x77AC, symSize: 0x4 }
-  - { offsetInCU: 0x162, offset: 0x7848, size: 0x8, addend: 0x0, symName: '-[NSFileManager(FileManaging) fb_contentsOfDirectoryAtPath:error:]', symObjAddr: 0xC, symBinAddr: 0x77B0, symSize: 0x4 }
-  - { offsetInCU: 0x27, offset: 0x7ADE, size: 0x8, addend: 0x0, symName: '-[NSNotificationCenter(NotificationDelivering) fb_addObserver:selector:name:object:]', symObjAddr: 0x0, symBinAddr: 0x77B4, symSize: 0x4 }
-  - { offsetInCU: 0x40, offset: 0x7AF7, size: 0x8, addend: 0x0, symName: _FBLink_NSNotificationCenter_NotificationDelivering, symObjAddr: 0x78, symBinAddr: 0xC3E0, symSize: 0x0 }
-  - { offsetInCU: 0x60, offset: 0x7B17, size: 0x8, addend: 0x0, symName: _FBLinkable_NSNotificationCenter_NotificationDelivering, symObjAddr: 0x10, symBinAddr: 0x11DA0, symSize: 0x0 }
-  - { offsetInCU: 0xF1, offset: 0x7BA8, size: 0x8, addend: 0x0, symName: '-[NSNotificationCenter(NotificationDelivering) fb_addObserver:selector:name:object:]', symObjAddr: 0x0, symBinAddr: 0x77B4, symSize: 0x4 }
-  - { offsetInCU: 0x153, offset: 0x7C0A, size: 0x8, addend: 0x0, symName: '-[NSNotificationCenter(NotificationDelivering) fb_addObserverForName:object:queue:usingBlock:]', symObjAddr: 0x4, symBinAddr: 0x77B8, symSize: 0x4 }
-  - { offsetInCU: 0x1B9, offset: 0x7C70, size: 0x8, addend: 0x0, symName: '-[NSNotificationCenter(NotificationDelivering) fb_removeObserver:]', symObjAddr: 0x8, symBinAddr: 0x77BC, symSize: 0x4 }
-  - { offsetInCU: 0x27, offset: 0x83BF, size: 0x8, addend: 0x0, symName: '-[NSURLSession(URLSessionProviding) fb_dataTaskWithRequest:completionHandler:]', symObjAddr: 0x0, symBinAddr: 0x77C0, symSize: 0x4 }
-  - { offsetInCU: 0x46, offset: 0x83DE, size: 0x8, addend: 0x0, symName: _FBLinkable_NSURLSession_URLSessionProviding, symObjAddr: 0x18, symBinAddr: 0x11E08, symSize: 0x0 }
-  - { offsetInCU: 0x24F, offset: 0x85E7, size: 0x8, addend: 0x0, symName: '-[NSURLSession(URLSessionProviding) fb_dataTaskWithRequest:completionHandler:]', symObjAddr: 0x0, symBinAddr: 0x77C0, symSize: 0x4 }
-  - { offsetInCU: 0x27, offset: 0x9285, size: 0x8, addend: 0x0, symName: '-[NSURLSessionTask(NetworkTask) fb_state]', symObjAddr: 0x0, symBinAddr: 0x77C4, symSize: 0x4 }
-  - { offsetInCU: 0x46, offset: 0x92A4, size: 0x8, addend: 0x0, symName: _FBLinkable_NSURLSessionTask_NetworkTask, symObjAddr: 0x10, symBinAddr: 0x11ED0, symSize: 0x0 }
-  - { offsetInCU: 0x14F, offset: 0x93AD, size: 0x8, addend: 0x0, symName: '-[NSURLSessionTask(NetworkTask) fb_state]', symObjAddr: 0x0, symBinAddr: 0x77C4, symSize: 0x4 }
-  - { offsetInCU: 0x181, offset: 0x93DF, size: 0x8, addend: 0x0, symName: '-[NSURLSessionTask(NetworkTask) fb_resume]', symObjAddr: 0x4, symBinAddr: 0x77C8, symSize: 0x4 }
-  - { offsetInCU: 0x1AF, offset: 0x940D, size: 0x8, addend: 0x0, symName: '-[NSURLSessionTask(NetworkTask) fb_cancel]', symObjAddr: 0x8, symBinAddr: 0x77CC, symSize: 0x4 }
-  - { offsetInCU: 0x27, offset: 0x9D75, size: 0x8, addend: 0x0, symName: '-[NSUserDefaults(DataPersisting) fb_integerForKey:]', symObjAddr: 0x0, symBinAddr: 0x77D0, symSize: 0x4 }
-  - { offsetInCU: 0x40, offset: 0x9D8E, size: 0x8, addend: 0x0, symName: _FBLink_NSUserDefaults_DataPersisting, symObjAddr: 0x90, symBinAddr: 0xC3E8, symSize: 0x0 }
-  - { offsetInCU: 0x60, offset: 0x9DAE, size: 0x8, addend: 0x0, symName: _FBLinkable_NSUserDefaults_DataPersisting, symObjAddr: 0x28, symBinAddr: 0x11F38, symSize: 0x0 }
-  - { offsetInCU: 0xA3, offset: 0x9DF1, size: 0x8, addend: 0x0, symName: '-[NSUserDefaults(DataPersisting) fb_integerForKey:]', symObjAddr: 0x0, symBinAddr: 0x77D0, symSize: 0x4 }
-  - { offsetInCU: 0xE2, offset: 0x9E30, size: 0x8, addend: 0x0, symName: '-[NSUserDefaults(DataPersisting) fb_setInteger:forKey:]', symObjAddr: 0x4, symBinAddr: 0x77D4, symSize: 0x4 }
-  - { offsetInCU: 0x12A, offset: 0x9E78, size: 0x8, addend: 0x0, symName: '-[NSUserDefaults(DataPersisting) fb_objectForKey:]', symObjAddr: 0x8, symBinAddr: 0x77D8, symSize: 0x4 }
-  - { offsetInCU: 0x169, offset: 0x9EB7, size: 0x8, addend: 0x0, symName: '-[NSUserDefaults(DataPersisting) fb_setObject:forKey:]', symObjAddr: 0xC, symBinAddr: 0x77DC, symSize: 0x4 }
-  - { offsetInCU: 0x1B1, offset: 0x9EFF, size: 0x8, addend: 0x0, symName: '-[NSUserDefaults(DataPersisting) fb_stringForKey:]', symObjAddr: 0x10, symBinAddr: 0x77E0, symSize: 0x4 }
-  - { offsetInCU: 0x1F0, offset: 0x9F3E, size: 0x8, addend: 0x0, symName: '-[NSUserDefaults(DataPersisting) fb_dataForKey:]', symObjAddr: 0x14, symBinAddr: 0x77E4, symSize: 0x4 }
-  - { offsetInCU: 0x22F, offset: 0x9F7D, size: 0x8, addend: 0x0, symName: '-[NSUserDefaults(DataPersisting) fb_boolForKey:]', symObjAddr: 0x18, symBinAddr: 0x77E8, symSize: 0x4 }
-  - { offsetInCU: 0x26E, offset: 0x9FBC, size: 0x8, addend: 0x0, symName: '-[NSUserDefaults(DataPersisting) fb_setBool:forKey:]', symObjAddr: 0x1C, symBinAddr: 0x77EC, symSize: 0x4 }
-  - { offsetInCU: 0x2BB, offset: 0xA009, size: 0x8, addend: 0x0, symName: '-[NSUserDefaults(DataPersisting) fb_removeObjectForKey:]', symObjAddr: 0x20, symBinAddr: 0x77F0, symSize: 0x4 }
+  - { offsetInCU: 0x8A3, offset: 0x48F5, size: 0x8, addend: 0x0, symName: '+[FBSDKTypeUtility coercedToURLValue:]', symObjAddr: 0x7A4, symBinAddr: 0x6E10, symSize: 0x94 }
+  - { offsetInCU: 0x8E2, offset: 0x4934, size: 0x8, addend: 0x0, symName: '+[FBSDKTypeUtility dataWithJSONObject:options:error:]', symObjAddr: 0x838, symBinAddr: 0x6EA4, symSize: 0xD8 }
+  - { offsetInCU: 0x967, offset: 0x49B9, size: 0x8, addend: 0x0, symName: '+[FBSDKTypeUtility JSONObjectWithData:options:error:]', symObjAddr: 0x910, symBinAddr: 0x6F7C, symSize: 0xF4 }
+  - { offsetInCU: 0x9E4, offset: 0x4A36, size: 0x8, addend: 0x0, symName: '+[FBSDKTypeUtility _objectValue:ofClass:]', symObjAddr: 0xA04, symBinAddr: 0x7070, symSize: 0x4C }
+  - { offsetInCU: 0x27, offset: 0x4D58, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSession initWithDelegate:delegateQueue:]', symObjAddr: 0x0, symBinAddr: 0x70BC, symSize: 0x98 }
+  - { offsetInCU: 0x40, offset: 0x4D71, size: 0x8, addend: 0x0, symName: _FBLink_NSURLSessionTask_NetworkTask, symObjAddr: 0x458, symBinAddr: 0xC3A0, symSize: 0x0 }
+  - { offsetInCU: 0x60, offset: 0x4D91, size: 0x8, addend: 0x0, symName: _FBLink_NSURLSession_URLSessionProviding, symObjAddr: 0x460, symBinAddr: 0xC3A8, symSize: 0x0 }
+  - { offsetInCU: 0xCAD, offset: 0x59DE, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSession initWithDelegate:delegateQueue:]', symObjAddr: 0x0, symBinAddr: 0x70BC, symSize: 0x98 }
+  - { offsetInCU: 0xCFF, offset: 0x5A30, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSession executeURLRequest:completionHandler:]', symObjAddr: 0x98, symBinAddr: 0x7154, symSize: 0x118 }
+  - { offsetInCU: 0xD6A, offset: 0x5A9B, size: 0x8, addend: 0x0, symName: '___55-[FBSDKURLSession executeURLRequest:completionHandler:]_block_invoke', symObjAddr: 0x1B0, symBinAddr: 0x726C, symSize: 0x74 }
+  - { offsetInCU: 0xDE1, offset: 0x5B12, size: 0x8, addend: 0x0, symName: ___copy_helper_block_e8_32s40s48b, symObjAddr: 0x224, symBinAddr: 0x72E0, symSize: 0x3C }
+  - { offsetInCU: 0xE07, offset: 0x5B38, size: 0x8, addend: 0x0, symName: ___destroy_helper_block_e8_32s40s48s, symObjAddr: 0x260, symBinAddr: 0x731C, symSize: 0x30 }
+  - { offsetInCU: 0xE24, offset: 0x5B55, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSession updateSessionWithBlock:]', symObjAddr: 0x290, symBinAddr: 0x734C, symSize: 0xC4 }
+  - { offsetInCU: 0xE75, offset: 0x5BA6, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSession invalidateAndCancel]', symObjAddr: 0x354, symBinAddr: 0x7410, symSize: 0x40 }
+  - { offsetInCU: 0xEA5, offset: 0x5BD6, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSession valid]', symObjAddr: 0x394, symBinAddr: 0x7450, symSize: 0x34 }
+  - { offsetInCU: 0xED9, offset: 0x5C0A, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSession session]', symObjAddr: 0x3C8, symBinAddr: 0x7484, symSize: 0xC }
+  - { offsetInCU: 0xF0D, offset: 0x5C3E, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSession setSession:]', symObjAddr: 0x3D4, symBinAddr: 0x7490, symSize: 0x8 }
+  - { offsetInCU: 0xF48, offset: 0x5C79, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSession delegate]', symObjAddr: 0x3DC, symBinAddr: 0x7498, symSize: 0x18 }
+  - { offsetInCU: 0xF7C, offset: 0x5CAD, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSession setDelegate:]', symObjAddr: 0x3F4, symBinAddr: 0x74B0, symSize: 0xC }
+  - { offsetInCU: 0xFB9, offset: 0x5CEA, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSession delegateQueue]', symObjAddr: 0x400, symBinAddr: 0x74BC, symSize: 0x8 }
+  - { offsetInCU: 0xFED, offset: 0x5D1E, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSession setDelegateQueue:]', symObjAddr: 0x408, symBinAddr: 0x74C4, symSize: 0xC }
+  - { offsetInCU: 0x102A, offset: 0x5D5B, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSession .cxx_destruct]', symObjAddr: 0x414, symBinAddr: 0x74D0, symSize: 0x38 }
+  - { offsetInCU: 0x27, offset: 0x61B9, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSessionTask init]', symObjAddr: 0x0, symBinAddr: 0x7508, symSize: 0x6C }
+  - { offsetInCU: 0x784, offset: 0x6916, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSessionTask init]', symObjAddr: 0x0, symBinAddr: 0x7508, symSize: 0x6C }
+  - { offsetInCU: 0x7B8, offset: 0x694A, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSessionTask initWithRequest:fromSession:completionHandler:]', symObjAddr: 0x6C, symBinAddr: 0x7574, symSize: 0xEC }
+  - { offsetInCU: 0x819, offset: 0x69AB, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSessionTask state]', symObjAddr: 0x158, symBinAddr: 0x7660, symSize: 0x3C }
+  - { offsetInCU: 0x84D, offset: 0x69DF, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSessionTask start]', symObjAddr: 0x194, symBinAddr: 0x769C, symSize: 0x30 }
+  - { offsetInCU: 0x87D, offset: 0x6A0F, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSessionTask cancel]', symObjAddr: 0x1C4, symBinAddr: 0x76CC, symSize: 0x40 }
+  - { offsetInCU: 0x8AD, offset: 0x6A3F, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSessionTask task]', symObjAddr: 0x204, symBinAddr: 0x770C, symSize: 0x8 }
+  - { offsetInCU: 0x8E1, offset: 0x6A73, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSessionTask setTask:]', symObjAddr: 0x20C, symBinAddr: 0x7714, symSize: 0xC }
+  - { offsetInCU: 0x91E, offset: 0x6AB0, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSessionTask requestStartDate]', symObjAddr: 0x218, symBinAddr: 0x7720, symSize: 0x8 }
+  - { offsetInCU: 0x952, offset: 0x6AE4, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSessionTask handler]', symObjAddr: 0x220, symBinAddr: 0x7728, symSize: 0x8 }
+  - { offsetInCU: 0x986, offset: 0x6B18, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSessionTask setHandler:]', symObjAddr: 0x228, symBinAddr: 0x7730, symSize: 0x8 }
+  - { offsetInCU: 0x9C1, offset: 0x6B53, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSessionTask requestStartTime]', symObjAddr: 0x230, symBinAddr: 0x7738, symSize: 0x8 }
+  - { offsetInCU: 0x9F5, offset: 0x6B87, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSessionTask setRequestStartTime:]', symObjAddr: 0x238, symBinAddr: 0x7740, symSize: 0x8 }
+  - { offsetInCU: 0xA2E, offset: 0x6BC0, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSessionTask loggerSerialNumber]', symObjAddr: 0x240, symBinAddr: 0x7748, symSize: 0x8 }
+  - { offsetInCU: 0xA62, offset: 0x6BF4, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSessionTask setLoggerSerialNumber:]', symObjAddr: 0x248, symBinAddr: 0x7750, symSize: 0x8 }
+  - { offsetInCU: 0xA9B, offset: 0x6C2D, size: 0x8, addend: 0x0, symName: '-[FBSDKURLSessionTask .cxx_destruct]', symObjAddr: 0x250, symBinAddr: 0x7758, symSize: 0x3C }
+  - { offsetInCU: 0x27, offset: 0x6D9F, size: 0x8, addend: 0x0, symName: '-[NSBundle(InfoDictionaryProviding) fb_infoDictionary]', symObjAddr: 0x0, symBinAddr: 0x7794, symSize: 0x4 }
+  - { offsetInCU: 0x46, offset: 0x6DBE, size: 0x8, addend: 0x0, symName: _FBLinkable_NSBundle_InfoDictionaryProviding, symObjAddr: 0x10, symBinAddr: 0x11C68, symSize: 0x0 }
+  - { offsetInCU: 0x72, offset: 0x6DEA, size: 0x8, addend: 0x0, symName: '-[NSBundle(InfoDictionaryProviding) fb_infoDictionary]', symObjAddr: 0x0, symBinAddr: 0x7794, symSize: 0x4 }
+  - { offsetInCU: 0xA4, offset: 0x6E1C, size: 0x8, addend: 0x0, symName: '-[NSBundle(InfoDictionaryProviding) fb_bundleIdentifier]', symObjAddr: 0x4, symBinAddr: 0x7798, symSize: 0x4 }
+  - { offsetInCU: 0xD6, offset: 0x6E4E, size: 0x8, addend: 0x0, symName: '-[NSBundle(InfoDictionaryProviding) fb_objectForInfoDictionaryKey:]', symObjAddr: 0x8, symBinAddr: 0x779C, symSize: 0x4 }
+  - { offsetInCU: 0x27, offset: 0x7402, size: 0x8, addend: 0x0, symName: '+[NSData(FileDataExtracting) fb_dataWithContentsOfFile:options:error:]', symObjAddr: 0x0, symBinAddr: 0x77A0, symSize: 0x4 }
+  - { offsetInCU: 0x46, offset: 0x7421, size: 0x8, addend: 0x0, symName: _FBLinkable_NSData_FileDataExtracting, symObjAddr: 0x8, symBinAddr: 0x11CD0, symSize: 0x0 }
+  - { offsetInCU: 0xB5, offset: 0x7490, size: 0x8, addend: 0x0, symName: '+[NSData(FileDataExtracting) fb_dataWithContentsOfFile:options:error:]', symObjAddr: 0x0, symBinAddr: 0x77A0, symSize: 0x4 }
+  - { offsetInCU: 0x27, offset: 0x76FF, size: 0x8, addend: 0x0, symName: '-[NSFileManager(FileManaging) fb_createDirectoryAtPath:withIntermediateDirectories:attributes:error:]', symObjAddr: 0x0, symBinAddr: 0x77A4, symSize: 0x4 }
+  - { offsetInCU: 0x40, offset: 0x7718, size: 0x8, addend: 0x0, symName: _FBLinkable_NSFileManager_FileManaging, symObjAddr: 0x10, symBinAddr: 0x11D38, symSize: 0x0 }
+  - { offsetInCU: 0x6C, offset: 0x7744, size: 0x8, addend: 0x0, symName: '-[NSFileManager(FileManaging) fb_createDirectoryAtPath:withIntermediateDirectories:attributes:error:]', symObjAddr: 0x0, symBinAddr: 0x77A4, symSize: 0x4 }
+  - { offsetInCU: 0xD7, offset: 0x77AF, size: 0x8, addend: 0x0, symName: '-[NSFileManager(FileManaging) fb_fileExistsAtPath:]', symObjAddr: 0x4, symBinAddr: 0x77A8, symSize: 0x4 }
+  - { offsetInCU: 0x116, offset: 0x77EE, size: 0x8, addend: 0x0, symName: '-[NSFileManager(FileManaging) fb_removeItemAtPath:error:]', symObjAddr: 0x8, symBinAddr: 0x77AC, symSize: 0x4 }
+  - { offsetInCU: 0x162, offset: 0x783A, size: 0x8, addend: 0x0, symName: '-[NSFileManager(FileManaging) fb_contentsOfDirectoryAtPath:error:]', symObjAddr: 0xC, symBinAddr: 0x77B0, symSize: 0x4 }
+  - { offsetInCU: 0x27, offset: 0x7AD0, size: 0x8, addend: 0x0, symName: '-[NSNotificationCenter(NotificationDelivering) fb_addObserver:selector:name:object:]', symObjAddr: 0x0, symBinAddr: 0x77B4, symSize: 0x4 }
+  - { offsetInCU: 0x40, offset: 0x7AE9, size: 0x8, addend: 0x0, symName: _FBLink_NSNotificationCenter_NotificationDelivering, symObjAddr: 0x78, symBinAddr: 0xC3E0, symSize: 0x0 }
+  - { offsetInCU: 0x60, offset: 0x7B09, size: 0x8, addend: 0x0, symName: _FBLinkable_NSNotificationCenter_NotificationDelivering, symObjAddr: 0x10, symBinAddr: 0x11DA0, symSize: 0x0 }
+  - { offsetInCU: 0xF1, offset: 0x7B9A, size: 0x8, addend: 0x0, symName: '-[NSNotificationCenter(NotificationDelivering) fb_addObserver:selector:name:object:]', symObjAddr: 0x0, symBinAddr: 0x77B4, symSize: 0x4 }
+  - { offsetInCU: 0x153, offset: 0x7BFC, size: 0x8, addend: 0x0, symName: '-[NSNotificationCenter(NotificationDelivering) fb_addObserverForName:object:queue:usingBlock:]', symObjAddr: 0x4, symBinAddr: 0x77B8, symSize: 0x4 }
+  - { offsetInCU: 0x1B9, offset: 0x7C62, size: 0x8, addend: 0x0, symName: '-[NSNotificationCenter(NotificationDelivering) fb_removeObserver:]', symObjAddr: 0x8, symBinAddr: 0x77BC, symSize: 0x4 }
+  - { offsetInCU: 0x27, offset: 0x83B1, size: 0x8, addend: 0x0, symName: '-[NSURLSession(URLSessionProviding) fb_dataTaskWithRequest:completionHandler:]', symObjAddr: 0x0, symBinAddr: 0x77C0, symSize: 0x4 }
+  - { offsetInCU: 0x46, offset: 0x83D0, size: 0x8, addend: 0x0, symName: _FBLinkable_NSURLSession_URLSessionProviding, symObjAddr: 0x18, symBinAddr: 0x11E08, symSize: 0x0 }
+  - { offsetInCU: 0x24F, offset: 0x85D9, size: 0x8, addend: 0x0, symName: '-[NSURLSession(URLSessionProviding) fb_dataTaskWithRequest:completionHandler:]', symObjAddr: 0x0, symBinAddr: 0x77C0, symSize: 0x4 }
+  - { offsetInCU: 0x27, offset: 0x9277, size: 0x8, addend: 0x0, symName: '-[NSURLSessionTask(NetworkTask) fb_state]', symObjAddr: 0x0, symBinAddr: 0x77C4, symSize: 0x4 }
+  - { offsetInCU: 0x46, offset: 0x9296, size: 0x8, addend: 0x0, symName: _FBLinkable_NSURLSessionTask_NetworkTask, symObjAddr: 0x10, symBinAddr: 0x11ED0, symSize: 0x0 }
+  - { offsetInCU: 0x14F, offset: 0x939F, size: 0x8, addend: 0x0, symName: '-[NSURLSessionTask(NetworkTask) fb_state]', symObjAddr: 0x0, symBinAddr: 0x77C4, symSize: 0x4 }
+  - { offsetInCU: 0x181, offset: 0x93D1, size: 0x8, addend: 0x0, symName: '-[NSURLSessionTask(NetworkTask) fb_resume]', symObjAddr: 0x4, symBinAddr: 0x77C8, symSize: 0x4 }
+  - { offsetInCU: 0x1AF, offset: 0x93FF, size: 0x8, addend: 0x0, symName: '-[NSURLSessionTask(NetworkTask) fb_cancel]', symObjAddr: 0x8, symBinAddr: 0x77CC, symSize: 0x4 }
+  - { offsetInCU: 0x27, offset: 0x9D67, size: 0x8, addend: 0x0, symName: '-[NSUserDefaults(DataPersisting) fb_integerForKey:]', symObjAddr: 0x0, symBinAddr: 0x77D0, symSize: 0x4 }
+  - { offsetInCU: 0x40, offset: 0x9D80, size: 0x8, addend: 0x0, symName: _FBLink_NSUserDefaults_DataPersisting, symObjAddr: 0x90, symBinAddr: 0xC3E8, symSize: 0x0 }
+  - { offsetInCU: 0x60, offset: 0x9DA0, size: 0x8, addend: 0x0, symName: _FBLinkable_NSUserDefaults_DataPersisting, symObjAddr: 0x28, symBinAddr: 0x11F38, symSize: 0x0 }
+  - { offsetInCU: 0xA3, offset: 0x9DE3, size: 0x8, addend: 0x0, symName: '-[NSUserDefaults(DataPersisting) fb_integerForKey:]', symObjAddr: 0x0, symBinAddr: 0x77D0, symSize: 0x4 }
+  - { offsetInCU: 0xE2, offset: 0x9E22, size: 0x8, addend: 0x0, symName: '-[NSUserDefaults(DataPersisting) fb_setInteger:forKey:]', symObjAddr: 0x4, symBinAddr: 0x77D4, symSize: 0x4 }
+  - { offsetInCU: 0x12A, offset: 0x9E6A, size: 0x8, addend: 0x0, symName: '-[NSUserDefaults(DataPersisting) fb_objectForKey:]', symObjAddr: 0x8, symBinAddr: 0x77D8, symSize: 0x4 }
+  - { offsetInCU: 0x169, offset: 0x9EA9, size: 0x8, addend: 0x0, symName: '-[NSUserDefaults(DataPersisting) fb_setObject:forKey:]', symObjAddr: 0xC, symBinAddr: 0x77DC, symSize: 0x4 }
+  - { offsetInCU: 0x1B1, offset: 0x9EF1, size: 0x8, addend: 0x0, symName: '-[NSUserDefaults(DataPersisting) fb_stringForKey:]', symObjAddr: 0x10, symBinAddr: 0x77E0, symSize: 0x4 }
+  - { offsetInCU: 0x1F0, offset: 0x9F30, size: 0x8, addend: 0x0, symName: '-[NSUserDefaults(DataPersisting) fb_dataForKey:]', symObjAddr: 0x14, symBinAddr: 0x77E4, symSize: 0x4 }
+  - { offsetInCU: 0x22F, offset: 0x9F6F, size: 0x8, addend: 0x0, symName: '-[NSUserDefaults(DataPersisting) fb_boolForKey:]', symObjAddr: 0x18, symBinAddr: 0x77E8, symSize: 0x4 }
+  - { offsetInCU: 0x26E, offset: 0x9FAE, size: 0x8, addend: 0x0, symName: '-[NSUserDefaults(DataPersisting) fb_setBool:forKey:]', symObjAddr: 0x1C, symBinAddr: 0x77EC, symSize: 0x4 }
+  - { offsetInCU: 0x2BB, offset: 0x9FFB, size: 0x8, addend: 0x0, symName: '-[NSUserDefaults(DataPersisting) fb_removeObjectForKey:]', symObjAddr: 0x20, symBinAddr: 0x77F0, symSize: 0x4 }
 ...

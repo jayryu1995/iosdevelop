@@ -57,13 +57,14 @@ class UserLoginVC: UIViewController {
 
     // 토큰으로 유저정보 가져오기
     private func getUserProfile() {
-        GraphRequest.init(graphPath: "me", parameters: ["fields": "id, name, email"])
+        GraphRequest.init(graphPath: "me", parameters: ["fields": "id, name, email, friends"])
             .start(completion: {(_, result, _) in
                 guard let fb = result as? [String: AnyObject] else { return }
 
                 let name = fb["name"] as? String
                 let email = fb["email"] as? String
-
+                let friends = fb["friends"] as? String
+                print("friends count : \(friends)")
                 if let idString = fb["id"] as? String {
                     // 변환에 성공한 경우, id를 Int로 사용할 수 있습니다.
                     User.shared.updateUserData(id: idString, email: email, name: name)
@@ -78,12 +79,11 @@ class UserLoginVC: UIViewController {
 
     private func checkedUser() {
         if let id = User.shared.id {
-            viewModel.login(id: id) { [weak self] result in
+            viewModel.getLoginData(member_id: id) { [weak self] result in
                 DispatchQueue.main.async {
                     switch result {
-                    case .success(let message):
-                        print(message)
-                        User.shared.updateAuth(auth: message)
+                    case .success(let data):
+                        
                         let vc = TabBarViewController()
                         self?.navigationController?.pushViewController(vc, animated: true)
 

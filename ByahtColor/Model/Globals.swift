@@ -43,6 +43,17 @@ class Globals {
         "nation_sg".localized,
         "nation_global".localized
     ]
+    
+    
+    // 기업
+    let nations2 = [
+        "nation_ko".localized,
+        "nation_jp".localized,
+        "nation_th".localized,
+        "nation_ph".localized,
+        "nation_vi".localized,
+        "nation_sg".localized,
+    ]
 
     let sns = [
         "TikTok".localized,

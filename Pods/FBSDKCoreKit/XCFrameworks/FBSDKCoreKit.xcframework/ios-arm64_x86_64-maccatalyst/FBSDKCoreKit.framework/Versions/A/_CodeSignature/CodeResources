@@ -402,7 +402,7 @@
 		</dict>
 		<key>Resources/Info.plist</key>
 		<data>
-		3sgF7b2MfisVkNIfdp9CXHU8wr4=
+		6E6J2D8enh55FipYmjSOAL5jlYY=
 		</data>
 		<key>Resources/PrivacyInfo.xcprivacy</key>
 		<data>
@@ -947,7 +947,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			A32QMDY/nOga0hS7jHgHDXahi3aGWlT5HSe7TzNe0ps=
+			JZxXMAFlb1bcexQ8cnAs/tVNZAMYJnVfr+a3fM6Tljc=
 			</data>
 		</dict>
 		<key>Headers/FBSDKCrashObserver.h</key>
@@ -1913,56 +1913,56 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			WU5RkuI1+NRoZMWfmzSNDRc63WV77akXHwVLR+nkMgY=
+			xYMeI4dWjayIo+SyzqluodbtuFH466Sch0t3h3h9Uhs=
 			</data>
 		</dict>
 		<key>Modules/FBSDKCoreKit.swiftmodule/arm64-apple-ios-macabi.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			arBsHmhCG9WLKKn3bgjh4YUlxObzf8+8G+2NXsC9nfI=
+			YvAtRIJnT2ybrsB9Dx8MQIh74ZOwc9f3w+sqQfJV0h0=
 			</data>
 		</dict>
 		<key>Modules/FBSDKCoreKit.swiftmodule/arm64-apple-ios-macabi.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			bvGwh9pNBotHCK3uL+RYcvLJ2yQegT1Ny3t9O6iXHGM=
+			jvgigFcxdv48YldNq3sbuIuCaqwMCfLmdyi7ZJhBxC4=
 			</data>
 		</dict>
 		<key>Modules/FBSDKCoreKit.swiftmodule/arm64-apple-ios-macabi.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			arBsHmhCG9WLKKn3bgjh4YUlxObzf8+8G+2NXsC9nfI=
+			YvAtRIJnT2ybrsB9Dx8MQIh74ZOwc9f3w+sqQfJV0h0=
 			</data>
 		</dict>
 		<key>Modules/FBSDKCoreKit.swiftmodule/x86_64-apple-ios-macabi.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			WU5RkuI1+NRoZMWfmzSNDRc63WV77akXHwVLR+nkMgY=
+			xYMeI4dWjayIo+SyzqluodbtuFH466Sch0t3h3h9Uhs=
 			</data>
 		</dict>
 		<key>Modules/FBSDKCoreKit.swiftmodule/x86_64-apple-ios-macabi.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			8RHNxTbQn+F2hWStab876V2hL5wuINF07ZJNncdW30o=
+			k8WdBMuW2O4wgZh9JmDQNU4ddhRgOMol626tYYpSDaw=
 			</data>
 		</dict>
 		<key>Modules/FBSDKCoreKit.swiftmodule/x86_64-apple-ios-macabi.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			TWntc4c+wqI2OMWHWJx5DidCrtM7uF/bg0DAAWcGM0s=
+			mjOXQD+bWmtn+Zv4PHjWHIyanzVx50maTIrHw82wmjQ=
 			</data>
 		</dict>
 		<key>Modules/FBSDKCoreKit.swiftmodule/x86_64-apple-ios-macabi.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			8RHNxTbQn+F2hWStab876V2hL5wuINF07ZJNncdW30o=
+			k8WdBMuW2O4wgZh9JmDQNU4ddhRgOMol626tYYpSDaw=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -2372,7 +2372,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			/7oJddUoxomegZmjm7oszCaIbi7TrVXm4JEK4ZduaME=
+			V6EjQXuVXZQl+ly/nZxOnWWrR/Pk/hkyK5hNqQ5ezIk=
 			</data>
 		</dict>
 		<key>Resources/PrivacyInfo.xcprivacy</key>

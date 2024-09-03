@@ -17,12 +17,32 @@ class InfluenceViewModel: ObservableObject {
     var message: Bool?
     var error: String?
 
+    
+    
     // 기업리스트 가져오기(스와이프)
     func getSearchBusiness( completion: @escaping (Result<[BusinessDetailDto], Error>) -> Void) {
-        let url = "\(Bundle.main.TEST_URL)/influence/search"
+        let id = User.shared.id ?? ""
+        let url = "\(Bundle.main.TEST_URL)/influence/search/\(id)"
         AF.request(url, method: .get)
             .validate(statusCode: 200..<300)
             .responseDecodable(of: [BusinessDetailDto].self) { response in
+                switch response.result {
+                case .success(let data):
+                    completion(.success(data))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+    }
+    
+    // 기업프로필 가져오기
+    func getBusinessProfile( member_id: String, completion: @escaping (Result<BusinessDetailDto, Error>) -> Void) {
+        let business_id = member_id
+        let influence_id = User.shared.id ?? ""
+        let url = "\(Bundle.main.TEST_URL)/influence/\(business_id)/proposal/\(influence_id)"
+        AF.request(url, method: .get)
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of: BusinessDetailDto.self) { response in
                 switch response.result {
                 case .success(let data):
                     completion(.success(data))
@@ -112,14 +132,14 @@ class InfluenceViewModel: ObservableObject {
     }
 
     // 인플루언서 홈 데이터 가져오기
-    func getHomeData(id: String, completion: @escaping (Result<InfluenceHomeDto, Error>) -> Void) {
-        let url = "\(Bundle.main.TEST_URL)/influence/home/\(id)"
+    func getHomeData(nation: String?, completion: @escaping (Result<InfluenceHomeDto, Error>) -> Void) {
+        let id = User.shared.id ?? ""
+        let url = "\(Bundle.main.TEST_URL)/influence/home/\(id)/\(nation)"
         AF.request(url, method: .get)
             .validate(statusCode: 200..<300)
             .responseDecodable(of: InfluenceHomeDto.self) { response in
                 switch response.result {
                 case .success(let data):
-
                     completion(.success(data))
                 case .failure(let error):
                     completion(.failure(error))

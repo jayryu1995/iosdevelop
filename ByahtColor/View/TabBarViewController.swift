@@ -64,9 +64,12 @@ class TabBarViewController: UITabBarController {
             let homeVC = BusinessHomeVC()
             let searchVC = BusinessSwipeVC()
             let myPageVC = BusinessMypageVC()
+            let proposalVC = ProposalVC()
+
             homeVC.title = "Home"
             searchVC.title = "Search"
             myPageVC.title = "My Page"
+            proposalVC.title = "Proposal"
 
             homeVC.tabBarItem.selectedImage = UIImage(named: "icon_home")?.withRenderingMode(.alwaysOriginal)
             homeVC.tabBarItem.image = UIImage(named: "icon_home")
@@ -77,13 +80,17 @@ class TabBarViewController: UITabBarController {
             myPageVC.tabBarItem.image = UIImage(named: "icon_mypage")
             myPageVC.tabBarItem.selectedImage = UIImage(named: "icon_mypage")?.withRenderingMode(.alwaysOriginal)
 
+            proposalVC.tabBarItem.image = UIImage(named: "icon_proposal")
+            proposalVC.tabBarItem.selectedImage = UIImage(named: "icon_proposal")?.withRenderingMode(.alwaysOriginal)
+
             // navigationController의 root view 설정
             let navigationTab = UINavigationController(rootViewController: homeVC)
             let navigationTab2 = UINavigationController(rootViewController: searchVC)
             let navigationTab3 = UINavigationController(rootViewController: chatVC)
-            let navigationTab4 = UINavigationController(rootViewController: myPageVC)
+            let navigationTab4 = UINavigationController(rootViewController: proposalVC)
+            let navigationTab5 = UINavigationController(rootViewController: myPageVC)
 
-            setViewControllers([navigationTab, navigationTab2, navigationTab3, navigationTab4], animated: false)
+            setViewControllers([navigationTab, navigationTab2, navigationTab3, navigationTab4, navigationTab5], animated: false)
 
         }
 

@@ -16,8 +16,9 @@ import FirebaseMessaging
 import AdSupport
 import AppTrackingTransparency
 import SendbirdChatSDK
+import GoogleSignIn
 
-@main
+@UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     let viewControllerName = String(describing: type(of: AppDelegate.self))
     let device = UIDevice.current
@@ -46,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
 
-        // 페이스북 api 설정
+        // 페이스북 api 설정 & Google Login
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         FirebaseApp.configure()
 
@@ -55,9 +56,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         requestNotificationAuthorization()
         registerForPushNotifications()
 
+        
+        
         return true
     }
 
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+            return GIDSignIn.sharedInstance.handle(url)
+        }
+    
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
         // 세로방향 고정
         return UIInterfaceOrientationMask.portrait

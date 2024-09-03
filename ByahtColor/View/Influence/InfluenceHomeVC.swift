@@ -50,21 +50,20 @@ class InfluenceHomeVC: UIViewController, UIScrollViewDelegate {
 
         setupHomeData()
         setupUI()
-        if User.shared.name == nil || User.shared.name == "" {
+        let nickname = User.shared.name ?? ""
+        let homeValue = UserDefaults.standard.integer(forKey: "home")
+        if User.shared.name == nil || User.shared.name == "" || nickname.contains("user"){
             setupOnboardingView()
+        }
+        
+        if homeValue != 1{
+            setupAlertView()
         }
 
     }
 
-    private func setupOnboardingView() {
-        let exampleVC = InfluenceOnboardingVC()
-        exampleVC.modalPresentationStyle = .overFullScreen
-        exampleVC.modalTransitionStyle = .crossDissolve
-        present(exampleVC, animated: true, completion: nil)
-    }
-
     private func setupAlertView() {
-        let alertVC = RegistAlertInfluenceVC()
+        let alertVC = RegistAlertVC()
         alertVC.onConfirm = {
             let vc = InfluenceProfileWriteVC()
             vc.hidesBottomBarWhenPushed = true
@@ -74,14 +73,21 @@ class InfluenceHomeVC: UIViewController, UIScrollViewDelegate {
         alertVC.modalTransitionStyle = .crossDissolve
         present(alertVC, animated: true, completion: nil)
     }
+    
+    private func setupOnboardingView() {
+        let exampleVC = InfluenceOnboardingVC()
+        exampleVC.modalPresentationStyle = .overFullScreen
+        exampleVC.modalTransitionStyle = .crossDissolve
+        present(exampleVC, animated: true, completion: nil)
+    }
 
     private func setupHomeData() {
         if let id = User.shared.id {
-            viewModel.getHomeData(id: id) { [weak self] result in
+            let nation = User.shared.nation ?? nil
+            viewModel.getHomeData(nation: nation ) { [weak self] result in
                 DispatchQueue.main.async {
                     switch result {
                     case .success(let data):
-
                         self?.collabList = data.snapDtoList ?? []
                         self?.businessList = data.businessDtos ?? []
 
@@ -103,6 +109,7 @@ class InfluenceHomeVC: UIViewController, UIScrollViewDelegate {
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         scrollView.isUserInteractionEnabled = true
+        scrollView.showsVerticalScrollIndicator = false
         setupTopView()
         setupBottomView()
         setupConstraints()

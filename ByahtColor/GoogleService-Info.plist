@@ -3,7 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>API_KEY</key>
-	<string>AIzaSyCZ_h5b3RcggHt-OlcwGWaKapT83o4KeyE</string>
+	<string>AIzaSyDsy6OdI4E95MnMNMpoupchKFISc48-VPg</string>
+	<key>CLIENT_ID</key>
+	<string>260279207418-08p6phg0bm8ivmci49oh556kqicrpjrc.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.260279207418-08p6phg0bm8ivmci49oh556kqicrpjrc</string>
 	<key>GCM_SENDER_ID</key>
 	<string>260279207418</string>
 	<key>PLIST_VERSION</key>
@@ -15,15 +19,15 @@
 	<key>STORAGE_BUCKET</key>
 	<string>byaht-glowb.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false></false>
+	<false/>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_GCM_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true></true>
+	<true/>
 	<key>GOOGLE_APP_ID</key>
 	<string>1:260279207418:ios:6ed95c9746e94367529043</string>
 </dict>

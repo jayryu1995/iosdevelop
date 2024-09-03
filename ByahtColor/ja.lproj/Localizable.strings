@@ -9,7 +9,39 @@
 "server_error_title" = "サーバーメンテナンス中";
 "server_error_message" = "現在サーバーメンテナンス中です。しばらくしてから再度お試しください";
 
+
+// ApplicationAlertVC
+"application_alert_titleLabel" = "注意";
+"application_alert_agree" = "同意";
+"application_alert_cancel" = "取消";
+"application_alert_messageLabel" = "製品に当選した場合、キャンペーンを誠実に履行しないと、すべての今後のイベントや特典参加の機会を失ったり、法的処罰を受けることがあります。 上記の内容を誠実に履行できる場合は、同意ボタンを押してください。";
+
 "messageInputView_placeholder" = "メッセージを入力";
+
+// BusinessProposalAlert
+"business_proposal_alert_label" = "提案を\nパスしますか？";
+"business_proposal_alert_confirm" = "はい、パスします";
+"business_proposal_alert_cancel" = "いいえ、もっと見ます";
+
+// ProposalVC
+"proposal_count" = "件";
+"proposal_label" = "受けた協業提案";
+"proposal_empty_label" = "いただいたご提案がございません。";
+"proposal_empty_label2" = "企業プロフィールを修正して\nインフルエンサーの提案を受ける";
+"proposal_empty_button" = "企業プロファイルの修正";
+
+// ProposalSwipeVC
+"proposal_swipe_label" = "残りの提案はありません。";
+
+// ProposalAlertVC
+"proposal_alert_label" = "私のプロフィールを送って\n協業提案をしますか？";
+"proposal_alert_confirm" = "はい！提案します。";
+"proposal_alert_cancel" = "いいえ、今度にします。";
+
+// InfluenceProposalAlert2VC
+"proposal_alert2_label" = "企業に提案を送りました！";
+"proposal_alert2_label2" = "企業が提案を受け入れると、チャットルームが作成されます。";
+"proposal_alert2_button" = "OK!";
 
 //온보딩
 "onboarding_button" = "次へ";
@@ -42,6 +74,7 @@
 "update_str" = "アップデート";
 "update_str1" = "アップデートの要求";
 "influence_sample_label" = "両側に渡して企業を探索しましょう。";
+"influence_sample_chat" = "自分のプロフィールを送ってコラボを提案する";
 "business_sample_label" = "両側に渡してクリエーターを探索しましょう。";
 "business_sample_chat" = "チャットで素早くコラボを提案しましょう。";
 "alert_regist_button" = "プロフィールを登録";
@@ -215,17 +248,21 @@
 "businesshome_label4" = "人が応募します。";
 "businesshome_button_label" = "グロウビーに募集依頼";
 "businesshome_button_label2" = "現地語の問題なく、募集から管理まで。";
+"business_mypage_error_label" = "アプリのエラー申告";
 "business_mypage_profile_label" = "会社プロフィールを修正して";
 "business_mypage_profile_label2" = "インフルエンサーからの提案率を上げる";
 "business_mypage_maketing_label" = "インフルエンサーマーケティング依頼して";
 "business_mypage_maketing_label2" = "翻訳からレビュー管理まで一度に解決";
 "business_mypage_global_label" = "海外マーケティングを無料で相談して";
 "business_mypage_global_label2" = "自分の商品を海外進出をより簡単にする";
+
 "business_profile_target" = "ターゲットオーディエンス";
 "business_profile_pay" = "ペイ";
 "business_profile_subtitle1" = "テーマ";
 "business_profile_subtitle2" = "年齢層";
 "business_profile_subtitle3" = "性別";
+"business_profile_subtitle3" = "活動国";
+
 "business_profile_write_thumbnail" = "サムネイルをアップロードしてください。";
 "business_profile_write_thumbnail2" = "会社ロゴなど会社を代表できる写真を選んでください。インフルエンサーの提案率が上がります。";
 "business_profile_write_intro" = "簡単な紹介";
@@ -264,6 +301,7 @@
 "talk_write_content" = "内容を入力してください。";
 "talk_write_anonymous" = "匿名";
 "talk_read_comment" = "コメントを入力してください";
+"request_collab_title" = "Application";
 "request_collab_platform_label" = "あなたのソーシャルメディアプラットフォーム";
 "request_collab_email_label" = "メールアドレス";
 "request_collab_email_placeholder" = "メールアドレスを入力してください。";

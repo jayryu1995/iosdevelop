@@ -38,26 +38,22 @@ class ApplicationAlertVC: UIViewController {
         alertView.layer.cornerRadius = 12
 
         // titleLabel 설정
-        titleLabel.text = "Chú ý"
+        titleLabel.text = "application_alert_titleLabel".localized
         titleLabel.font = UIFont(name: "Pretendard-SemiBold", size: 20)
         titleLabel.textAlignment = .center
 
         // messageLabel 설정
-        messageLabel.text =
-        "Trong trường hợp trúng nhận sản phẩm," +
-        "nếu không thực hiện chiến dịch một cách trung thực," +
-        "bạn có thể mất cơ hội tham gia tất cả các sự kiện hoặc ưu đãi trong tương lai hoặc xử lý theo pháp luật." +
-        "Hãy nhấn nút đồng ý nếu bạn có thể thực hiện nghiêm túc những điều trên."
+        messageLabel.text = "application_alert_messageLabel".localized
         messageLabel.numberOfLines = 0
         messageLabel.font = UIFont(name: "Pretendard-Regular", size: 14)
         messageLabel.textAlignment = .center
 
         // confirmButton 설정
-        confirmButton.setTitle("Đồng ý", for: .normal)
+        confirmButton.setTitle("application_alert_agree".localized, for: .normal)
         confirmButton.addTarget(self, action: #selector(confirmButtonTapped), for: .touchUpInside)
 
         // cancleButton 설정
-        cancleButton.setTitle("Quay lại", for: .normal)
+        cancleButton.setTitle("application_alert_cancel".localized, for: .normal)
         cancleButton.setTitleColor(UIColor(hex: "#535358"), for: .normal)
         cancleButton.backgroundColor = UIColor(hex: "#F4F5F8")
         cancleButton.addTarget(self, action: #selector(cancleButtonTapped), for: .touchUpInside)

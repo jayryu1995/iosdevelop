@@ -45,7 +45,7 @@ class AdminCollabVC: UIViewController, CollabFilterVCDelegate {
 
     private let hotButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Mới nhất", for: .normal)
+        button.setTitle("collabVC_filter_recent".localized, for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .black
         button.layer.cornerRadius = 16
@@ -55,7 +55,7 @@ class AdminCollabVC: UIViewController, CollabFilterVCDelegate {
 
     private let newButton: UIButton = {
         let button = UIButton()
-        button.setTitle("Sắp hết hạn", for: .normal)
+        button.setTitle("collabVC_filter_deadline".localized, for: .normal)
         button.setTitleColor(UIColor(hex: "#535358"), for: .normal)
         button.backgroundColor = .white
         button.layer.borderColor = UIColor(hex: "#BCBDC0").cgColor

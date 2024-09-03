@@ -245,13 +245,12 @@ class LoginVC: UIViewController {
                     DispatchQueue.main.async {
                         switch result {
                         case .success(let data):
-                            print("data: \(data)")
                             let vc = TabBarViewController()
                             self?.navigationController?.pushViewController(vc, animated: true)
 
                         case .failure(let error):
                             print("error : \(error)")
-                            // self?.signUpInfluence()
+                            self?.signUpInfluence()
                         }
                     }
                 }

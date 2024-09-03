@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import AVFoundation
 
 class GradientImageView: UIImageView {
     private var gradientLayer: CAGradientLayer?

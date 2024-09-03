@@ -10549,6 +10549,167 @@
       },
       {
         "kind": "Import",
+        "name": "CryptoKit",
+        "printedName": "CryptoKit",
+        "declKind": "Import",
+        "moduleName": "FBSDKCoreKit",
+        "declAttributes": [
+          "RawDocComment"
+        ]
+      },
+      {
+        "kind": "Import",
+        "name": "Foundation",
+        "printedName": "Foundation",
+        "declKind": "Import",
+        "moduleName": "FBSDKCoreKit"
+      },
+      {
+        "kind": "TypeDecl",
+        "name": "ConvEncUtils",
+        "printedName": "ConvEncUtils",
+        "children": [
+          {
+            "kind": "Function",
+            "name": "encConvString",
+            "printedName": "encConvString(publicKeyB64Url:dataStr:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:12FBSDKCoreKit12ConvEncUtilsO03encC6String15publicKeyB64Url7dataStrSSSgSS_SStFZ",
+            "mangledName": "$s12FBSDKCoreKit12ConvEncUtilsO03encC6String15publicKeyB64Url7dataStrSSSgSS_SStFZ",
+            "moduleName": "FBSDKCoreKit",
+            "static": true,
+            "intro_iOS": "17.0",
+            "declAttributes": [
+              "Available",
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "encConvData",
+            "printedName": "encConvData(publicKey:data:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Swift.String?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Data",
+                "printedName": "Foundation.Data",
+                "usr": "s:10Foundation4DataV"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:12FBSDKCoreKit12ConvEncUtilsO03encC4Data9publicKey4dataSSSg10Foundation0G0V_AJtFZ",
+            "mangledName": "$s12FBSDKCoreKit12ConvEncUtilsO03encC4Data9publicKey4dataSSSg10Foundation0G0V_AJtFZ",
+            "moduleName": "FBSDKCoreKit",
+            "static": true,
+            "intro_iOS": "17.0",
+            "declAttributes": [
+              "Available"
+            ],
+            "funcSelfKind": "NonMutating"
+          },
+          {
+            "kind": "Function",
+            "name": "b64urlDecodePublicKey",
+            "printedName": "b64urlDecodePublicKey(publicKeyB64Url:)",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "Foundation.Data?",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Data",
+                    "printedName": "Foundation.Data",
+                    "usr": "s:10Foundation4DataV"
+                  }
+                ],
+                "usr": "s:Sq"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "String",
+                "printedName": "Swift.String",
+                "usr": "s:SS"
+              }
+            ],
+            "declKind": "Func",
+            "usr": "s:12FBSDKCoreKit12ConvEncUtilsO21b64urlDecodePublicKey06publicI6B64Url10Foundation4DataVSgSS_tFZ",
+            "mangledName": "$s12FBSDKCoreKit12ConvEncUtilsO21b64urlDecodePublicKey06publicI6B64Url10Foundation4DataVSgSS_tFZ",
+            "moduleName": "FBSDKCoreKit",
+            "static": true,
+            "declAttributes": [
+              "RawDocComment"
+            ],
+            "funcSelfKind": "NonMutating"
+          }
+        ],
+        "declKind": "Enum",
+        "usr": "s:12FBSDKCoreKit12ConvEncUtilsO",
+        "mangledName": "$s12FBSDKCoreKit12ConvEncUtilsO",
+        "moduleName": "FBSDKCoreKit",
+        "isEnumExhaustive": true,
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Sendable",
+            "printedName": "Sendable",
+            "usr": "s:s8SendableP",
+            "mangledName": "$ss8SendableP"
+          }
+        ]
+      },
+      {
+        "kind": "Import",
         "name": "FBAEMKit",
         "printedName": "FBAEMKit",
         "declKind": "Import",
@@ -39622,6 +39783,70 @@
         "name": "ProtectedModeManager",
         "printedName": "ProtectedModeManager",
         "children": [
+          {
+            "kind": "Var",
+            "name": "standardParametersDefault",
+            "printedName": "standardParametersDefault",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Set",
+                "printedName": "Swift.Set<Swift.String>",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "String",
+                    "printedName": "Swift.String",
+                    "usr": "s:SS"
+                  }
+                ],
+                "usr": "s:Sh"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "s:12FBSDKCoreKit20ProtectedModeManagerC25standardParametersDefaultShySSGvp",
+            "mangledName": "$s12FBSDKCoreKit20ProtectedModeManagerC25standardParametersDefaultShySSGvp",
+            "moduleName": "FBSDKCoreKit",
+            "declAttributes": [
+              "HasInitialValue",
+              "Final",
+              "HasStorage"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Set",
+                    "printedName": "Swift.Set<Swift.String>",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "String",
+                        "printedName": "Swift.String",
+                        "usr": "s:SS"
+                      }
+                    ],
+                    "usr": "s:Sh"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "s:12FBSDKCoreKit20ProtectedModeManagerC25standardParametersDefaultShySSGvg",
+                "mangledName": "$s12FBSDKCoreKit20ProtectedModeManagerC25standardParametersDefaultShySSGvg",
+                "moduleName": "FBSDKCoreKit",
+                "implicit": true,
+                "declAttributes": [
+                  "Final"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
           {
             "kind": "Var",
             "name": "configuredDependencies",
@@ -71545,14 +71770,14 @@
     {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/Internal\/Integrity\/ProtectedModeManager.swift",
       "kind": "Array",
-      "offset": 502,
-      "length": 3246,
-      "value": "[\"_currency\", \"_valueToSum\", \"fb_availability\", \"fb_body_style\", \"fb_checkin_date\", \"fb_checkout_date\", \"fb_city\", \"fb_condition_of_vehicle\", \"fb_content_category\", \"fb_content_ids\", \"fb_content_name\", \"fb_content_type\", \"fb_contents\", \"fb_country\", \"fb_currency\", \"fb_delivery_category\", \"fb_departing_arrival_date\", \"fb_departing_departure_date\", \"fb_destination_airport\", \"fb_destination_ids\", \"fb_dma_code\", \"fb_drivetrain\", \"fb_exterior_color\", \"fb_fuel_type\", \"fb_hotel_score\", \"fb_interior_color\", \"fb_lease_end_date\", \"fb_lease_start_date\", \"fb_listing_type\", \"fb_make\", \"fb_mileage.unit\", \"fb_mileage.value\", \"fb_model\", \"fb_neighborhood\", \"fb_num_adults\", \"fb_num_children\", \"fb_num_infants\", \"fb_num_items\", \"fb_order_id\", \"fb_origin_airport\", \"fb_postal_code\", \"fb_predicted_ltv\", \"fb_preferred_baths_range\", \"fb_preferred_beds_range\", \"fb_preferred_neighborhoods\", \"fb_preferred_num_stops\", \"fb_preferred_price_range\", \"fb_preferred_star_ratings\", \"fb_price\", \"fb_property_type\", \"fb_region\", \"fb_returning_arrival_date\", \"fb_returning_departure_date\", \"fb_search_string\", \"fb_state_of_vehicle\", \"fb_status\", \"fb_suggested_destinations\", \"fb_suggested_home_listings\", \"fb_suggested_hotels\", \"fb_suggested_jobs\", \"fb_suggested_local_service_businesses\", \"fb_suggested_location_based_items\", \"fb_suggested_vehicles\", \"fb_transmission\", \"fb_travel_class\", \"fb_travel_end\", \"fb_travel_start\", \"fb_trim\", \"fb_user_bucket\", \"fb_value\", \"fb_vin\", \"fb_year\", \"lead_event_source\", \"predicted_ltv\", \"product_catalog_id\", \"app_user_id\", \"appVersion\", \"_eventName\", \"_eventName_md5\", \"_currency\", \"_implicitlyLogged\", \"_inBackground\", \"_isTimedEvent\", \"_logTime\", \"fb_order_id\", \"_session_id\", \"_ui\", \"_valueToSum\", \"_valueToUpdate\", \"_is_fb_codeless\", \"_is_suggested_event\", \"_fb_pixel_referral_id\", \"fb_pixel_id\", \"trace_id\", \"user_agent\", \"subscription_id\", \"predicted_ltv\", \"event_id\", \"_restrictedParams\", \"_onDeviceParams\", \"purchase_valid_result_type\", \"core_lib_included\", \"login_lib_included\", \"share_lib_included\", \"place_lib_included\", \"messenger_lib_included\", \"applinks_lib_included\", \"marketing_lib_included\", \"_codeless_action\", \"sdk_initialized\", \"billing_client_lib_included\", \"billing_service_lib_included\", \"user_data_keys\", \"device_push_token\", \"fb_mobile_pckg_fp\", \"fb_mobile_app_cert_hash\", \"aggregate_id\", \"anonymous_id\", \"campaign_ids\", \"fb_post_attachment\", \"receipt_data\", \"ad_type\", \"fb_content\", \"fb_content_id\", \"fb_content_type\", \"fb_currency\", \"fb_description\", \"fb_level\", \"fb_max_rating_value\", \"fb_num_items\", \"fb_order_id\", \"fb_payment_info_available\", \"fb_registration_method\", \"fb_search_string\", \"fb_success\", \"pm\", \"_audiencePropertyIds\", \"cs_maca\"]"
+      "offset": 494,
+      "length": 3155,
+      "value": "[\"_currency\", \"_valueToSum\", \"fb_availability\", \"fb_body_style\", \"fb_checkin_date\", \"fb_checkout_date\", \"fb_city\", \"fb_condition_of_vehicle\", \"fb_content_ids\", \"fb_content_type\", \"fb_contents\", \"fb_country\", \"fb_currency\", \"fb_delivery_category\", \"fb_departing_arrival_date\", \"fb_departing_departure_date\", \"fb_destination_airport\", \"fb_destination_ids\", \"fb_dma_code\", \"fb_drivetrain\", \"fb_exterior_color\", \"fb_fuel_type\", \"fb_hotel_score\", \"fb_interior_color\", \"fb_lease_end_date\", \"fb_lease_start_date\", \"fb_listing_type\", \"fb_make\", \"fb_mileage.unit\", \"fb_mileage.value\", \"fb_model\", \"fb_neighborhood\", \"fb_num_adults\", \"fb_num_children\", \"fb_num_infants\", \"fb_num_items\", \"fb_order_id\", \"fb_origin_airport\", \"fb_postal_code\", \"fb_predicted_ltv\", \"fb_preferred_baths_range\", \"fb_preferred_beds_range\", \"fb_preferred_neighborhoods\", \"fb_preferred_num_stops\", \"fb_preferred_price_range\", \"fb_preferred_star_ratings\", \"fb_price\", \"fb_property_type\", \"fb_region\", \"fb_returning_arrival_date\", \"fb_returning_departure_date\", \"fb_state_of_vehicle\", \"fb_suggested_destinations\", \"fb_suggested_home_listings\", \"fb_suggested_hotels\", \"fb_suggested_jobs\", \"fb_suggested_local_service_businesses\", \"fb_suggested_location_based_items\", \"fb_suggested_vehicles\", \"fb_transmission\", \"fb_travel_class\", \"fb_travel_end\", \"fb_travel_start\", \"fb_trim\", \"fb_user_bucket\", \"fb_value\", \"fb_vin\", \"fb_year\", \"lead_event_source\", \"predicted_ltv\", \"product_catalog_id\", \"app_user_id\", \"appVersion\", \"_eventName\", \"_eventName_md5\", \"_currency\", \"_implicitlyLogged\", \"_inBackground\", \"_isTimedEvent\", \"_logTime\", \"fb_order_id\", \"_session_id\", \"_ui\", \"_valueToSum\", \"_valueToUpdate\", \"_is_fb_codeless\", \"_is_suggested_event\", \"_fb_pixel_referral_id\", \"fb_pixel_id\", \"trace_id\", \"user_agent\", \"subscription_id\", \"predicted_ltv\", \"event_id\", \"_restrictedParams\", \"_onDeviceParams\", \"purchase_valid_result_type\", \"core_lib_included\", \"login_lib_included\", \"share_lib_included\", \"place_lib_included\", \"messenger_lib_included\", \"applinks_lib_included\", \"marketing_lib_included\", \"_codeless_action\", \"sdk_initialized\", \"billing_client_lib_included\", \"billing_service_lib_included\", \"user_data_keys\", \"device_push_token\", \"fb_mobile_pckg_fp\", \"fb_mobile_app_cert_hash\", \"aggregate_id\", \"anonymous_id\", \"campaign_ids\", \"fb_post_attachment\", \"receipt_data\", \"ad_type\", \"fb_content\", \"fb_content_id\", \"fb_content_type\", \"fb_currency\", \"fb_description\", \"fb_level\", \"fb_max_rating_value\", \"fb_num_items\", \"fb_order_id\", \"fb_payment_info_available\", \"fb_registration_method\", \"fb_search_string\", \"fb_success\", \"pm\", \"_audiencePropertyIds\", \"cs_maca\"]"
     },
     {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/Internal\/Integrity\/ProtectedModeManager.swift",
       "kind": "Array",
-      "offset": 3797,
+      "offset": 3698,
       "length": 2,
       "value": "[]"
     },
@@ -72028,14 +72253,14 @@
     {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Settings.swift",
       "kind": "BooleanLiteral",
-      "offset": 21917,
+      "offset": 21968,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Settings.swift",
       "kind": "StringLiteral",
-      "offset": 22686,
+      "offset": 22737,
       "length": 391,
       "value": "\"As of v9.0, you must initialize the SDK prior to calling any methods or setting any properties. You can do this by calling `ApplicationDelegate.application(_:didFinishLaunchingWithOptions:)`. Learn more: https:\/\/developers.facebook.com\/docs\/ios\/getting-started. If no `UIApplication` instance is available, you can use `ApplicationDelegate.initializeSDK()`.\""
     },

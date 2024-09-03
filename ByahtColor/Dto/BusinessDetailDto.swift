@@ -15,5 +15,7 @@ struct BusinessDetailDto: Codable {
     let age: String?
     let category: String?
     let gender: String?
+    let nation: String?
     let imagePath: String?
+    let proposal: Bool?
 }

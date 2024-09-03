@@ -3,13 +3,18 @@ import UIKit
 import SendbirdChatSDK
 import SnapKit
 
-open class BasicMessageCell: UITableViewCell {
+protocol BasicMessageCellDelegate: AnyObject {
+    func didTapCell(_ cell: BasicMessageCell, withProfile profile: InfluenceProfileDto)
+}
 
+open class BasicMessageCell: UITableViewCell {
+    weak var delegate: BasicMessageCellDelegate?
     private lazy var profileImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "icon_profile2"))
         imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 16
         imageView.clipsToBounds = true
+        imageView.isUserInteractionEnabled = true
         return imageView
     }()
 
@@ -46,9 +51,11 @@ open class BasicMessageCell: UITableViewCell {
         image.contentMode = .scaleAspectFit
         return image
     }()
+    
+    private lazy var viewModel = BusinessViewModel()
 
     private var sender = ""
-
+    private var id = ""
     public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         commonInit()
@@ -60,6 +67,7 @@ open class BasicMessageCell: UITableViewCell {
     }
 
     private func commonInit() {
+        contentView.isUserInteractionEnabled = true
         contentView.addSubview(dateLabel)
         contentView.addSubview(profileImageView)
         contentView.addSubview(messageBox)
@@ -70,7 +78,7 @@ open class BasicMessageCell: UITableViewCell {
     open override func prepareForReuse() {
         super.prepareForReuse()
         profileImageView.isHidden = false
-        // profileImageView.image = UIImage(named: "icon_profile2")
+        
         messageBox.text = nil
         timeLabel.text = nil
         dateLabel.isHidden = true
@@ -80,9 +88,10 @@ open class BasicMessageCell: UITableViewCell {
         icon.snp.removeConstraints()
         timeLabel.snp.removeConstraints()
         messageBox.snp.removeConstraints()
-        // profileImageView.snp.removeConstraints()
+        
 
         sender = ""
+        id = ""
     }
 
     open override func updateConstraints() {
@@ -125,6 +134,9 @@ open class BasicMessageCell: UITableViewCell {
 
         } else {
             profileImageView.isHidden = false
+            // UITapGestureRecognizer 추가
+            let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.imageTapped))
+            self.profileImageView.addGestureRecognizer(tapGesture)
             messageBox.backgroundColor = UIColor(hex: "#F4F5F8")
             messageBox.textColor = .black
 
@@ -164,12 +176,40 @@ open class BasicMessageCell: UITableViewCell {
 
     }
 
+    // 이미지가 탭되었을 때 호출되는 메서드
+    @objc private func imageTapped(_ Sender: UIButton) {
+        if let auth = User.shared.auth{
+            if auth < 1 {
+                print("인플루언서 계정")
+            }else{
+                print("기업 계정")
+                
+                viewModel.findInfluenceById(id:id) { [weak self] result in
+                    switch result {
+                    case .success(let profile):
+                        if let strongSelf = self {
+                            strongSelf.delegate?.didTapCell(strongSelf, withProfile: profile)
+                        }
+                    case .failure(let error):
+                        print(error)
+                    }
+                }
+
+                
+            }
+        }
+        
+    }
+    
     open func configure(with message: BaseMessage) {
         sender = message.sender?.nickname ?? ""
         messageBox.text = message.message
-        timeLabel.text = Date.sbu_from(message.createdAt).sbu_toString(format: .hhmma)
-
+        timeLabel.text = Date.sbu_from(message.createdAt).sbu_toString(format: .hhmma, localizedFormat: false)
+        
         if message.sender?.nickname != User.shared.name {
+            if let id = message.sender?.userId{
+                self.id = id
+            }
             if let url = message.sender?.profileURL, !url.isEmpty {
                 profileImageView.loadProfileImage(from: url) { [weak self] image in
                     // 현재 셀이 해당 taskID를 가지고 있는지 확인

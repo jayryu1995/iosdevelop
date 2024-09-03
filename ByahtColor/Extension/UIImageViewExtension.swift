@@ -69,9 +69,12 @@ extension UIImageView {
             return
         }
 
-        URLSession.shared.dataTask(with: URL(string: url)!) { data, _, error in
+        DispatchQueue.main.async {
             self.isSkeletonable = true
             self.showAnimatedGradientSkeleton()
+        }
+
+        URLSession.shared.dataTask(with: URL(string: url)!) { data, _, error in
             guard let data = data, error == nil else {
                 DispatchQueue.main.async {
                     completion(nil)

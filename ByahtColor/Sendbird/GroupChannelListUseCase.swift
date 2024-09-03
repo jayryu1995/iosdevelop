@@ -78,7 +78,7 @@ open class GroupChannelListUseCase: NSObject {
     }
 
     open func leaveChannel(_ channel: GroupChannel, completion: @escaping (Result<Void, SBError>) -> Void) {
-        channel.leave { error in
+        channel.hide(hidePreviousMessages: false,allowAutoUnhide: true){ error in
             if let error = error {
                 completion(.failure(error))
             } else {

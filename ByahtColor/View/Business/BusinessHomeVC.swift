@@ -76,7 +76,6 @@ class BusinessHomeVC: UIViewController, UIScrollViewDelegate {
 
                         self?.collabList = data.snapDtoList ?? []
                         self?.influenceList = data.influenceProfileDtos ?? []
-                        print("influenceList : \(self?.influenceList.count)")
                         self?.setupUI()
                         self?.setupConstraints()
 
@@ -204,7 +203,7 @@ class BusinessHomeVC: UIViewController, UIScrollViewDelegate {
 
     @objc private func snapButtonTapped() {
 
-        if User.shared.id == "byaht" {
+        if User.shared.id == "byaht" || User.shared.id == "admin" {
             let vc = AdminCollabVC()
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
@@ -260,7 +259,7 @@ class BusinessHomeVC: UIViewController, UIScrollViewDelegate {
                     imageView.loadImage(from: url)
                 } else {
                     let path = "\(Bundle.main.TEST_URL)\(resource)"
-                    loadVideoThumbnail(imageView: imageView, path: path)
+                    CustomFunction().loadVideoThumbnail(imageView: imageView, path: path)
                 }
             } else {
                 imageView.image = UIImage(named: "sample_image")
@@ -369,44 +368,6 @@ class BusinessHomeVC: UIViewController, UIScrollViewDelegate {
         vc.hidesBottomBarWhenPushed = true
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.pushViewController(vc, animated: true)
-    }
-
-    private func loadVideoThumbnail(imageView: UIImageView, path: String) {
-        let loadingIndicator = UIActivityIndicatorView(style: .large)
-        imageView.addSubview(loadingIndicator)
-        loadingIndicator.snp.makeConstraints {
-            $0.center.equalToSuperview()
-        }
-        loadingIndicator.startAnimating()
-        if let videoURL = URL(string: path) {
-            DispatchQueue.global().async { [weak self] in
-                let asset = AVAsset(url: videoURL)
-                let imageGenerator = AVAssetImageGenerator(asset: asset)
-                imageGenerator.appliesPreferredTrackTransform = true
-
-                let time = CMTime(seconds: 1, preferredTimescale: 60)
-
-                do {
-                    let cgImage = try imageGenerator.copyCGImage(at: time, actualTime: nil)
-                    let uiImage = UIImage(cgImage: cgImage)
-
-                    DispatchQueue.main.async {
-                        imageView.image = uiImage
-                        loadingIndicator.stopAnimating()
-                        loadingIndicator.removeFromSuperview()
-                    }
-                } catch {
-                    DispatchQueue.main.async {
-                        loadingIndicator.stopAnimating()
-                        loadingIndicator.removeFromSuperview()
-                    }
-                    print("Failed to generate thumbnail: \(error.localizedDescription)")
-                }
-            }
-        } else {
-            loadingIndicator.stopAnimating()
-            loadingIndicator.removeFromSuperview()
-        }
     }
 
 }

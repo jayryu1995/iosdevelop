@@ -4,6 +4,7 @@
 import AdSupport
 import AppTrackingTransparency
 import AuthenticationServices
+import CryptoKit
 import FBAEMKit
 @_exported import FBSDKCoreKit
 import FBSDKCoreKit_Basics

@@ -12,9 +12,53 @@ import UIKit
 
 class BusinessViewModel: ObservableObject {
     @Published var businessDetail: BusinessDetailDto?
-    private var cancellables = Set<AnyCancellable>()
+    @Published var proposalList: [InfluenceProfileDto] = []
+    @Published var error: String?
+    var cancellables = Set<AnyCancellable>()
+
     var message: Bool?
-    var error: String?
+
+    // 홈 화면 데이터 조회
+    func findInfluenceById(id: String, completion: @escaping (Result<InfluenceProfileDto, Error>) -> Void) {
+        let url = "\(Bundle.main.TEST_URL)/business/search/\(id)"
+        AF.request(url, method: .get)
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of: InfluenceProfileDto.self) { response in
+                switch response.result {
+                case .success(let data):
+                    completion(.success(data))
+                case .failure(let error):
+                    completion(.failure(error))
+                    
+                }
+            }
+    }
+    
+    // 요청받은 제안 내역
+    func getProposalProfile() {
+        // Construct the URL
+        let url = "\(Bundle.main.TEST_URL)/proposal/\(User.shared.id ?? "")"
+
+        // Make the network request using Alamofire
+        AF.request(url, method: .get)
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of: [InfluenceProfileDto].self) { response in
+
+                switch response.result {
+                case .success(let data):
+
+                    DispatchQueue.main.async {
+                        print("데이터 수 : ", data.count)
+                        self.proposalList = data
+                    }
+                case .failure(let error):
+                    // On failure, update the error property
+                    DispatchQueue.main.async {
+                        self.error = error.localizedDescription
+                    }
+                }
+            }
+    }
 
     // 인플루언서 리스트(스와이프)
     func getSearchProfile(sns: [String]?, category: [String]?, nation: [String]?, completion: @escaping (Result<[InfluenceProfileDto], Error>) -> Void) {

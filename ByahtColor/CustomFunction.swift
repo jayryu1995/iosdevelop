@@ -7,6 +7,8 @@
 
 import UIKit
 import Alamofire
+import AVFoundation
+
 class CustomFunction {
     // 날짜로 자르기
     func formatDate(_ dateString: String) -> String {
@@ -43,4 +45,42 @@ class CustomFunction {
         })
     }
 
+    // 썸네일 생성
+    func loadVideoThumbnail(imageView: UIImageView, path: String) {
+        let loadingIndicator = UIActivityIndicatorView(style: .large)
+        imageView.addSubview(loadingIndicator)
+        loadingIndicator.snp.makeConstraints {
+            $0.center.equalToSuperview()
+        }
+        loadingIndicator.startAnimating()
+        if let videoURL = URL(string: path) {
+            DispatchQueue.global().async { [weak self] in
+                let asset = AVAsset(url: videoURL)
+                let imageGenerator = AVAssetImageGenerator(asset: asset)
+                imageGenerator.appliesPreferredTrackTransform = true
+
+                let time = CMTime(seconds: 1, preferredTimescale: 60)
+
+                do {
+                    let cgImage = try imageGenerator.copyCGImage(at: time, actualTime: nil)
+                    let uiImage = UIImage(cgImage: cgImage)
+
+                    DispatchQueue.main.async {
+                        imageView.image = uiImage
+                        loadingIndicator.stopAnimating()
+                        loadingIndicator.removeFromSuperview()
+                    }
+                } catch {
+                    DispatchQueue.main.async {
+                        loadingIndicator.stopAnimating()
+                        loadingIndicator.removeFromSuperview()
+                    }
+                    print("Failed to generate thumbnail: \(error.localizedDescription)")
+                }
+            }
+        } else {
+            loadingIndicator.stopAnimating()
+            loadingIndicator.removeFromSuperview()
+        }
+    }
 }

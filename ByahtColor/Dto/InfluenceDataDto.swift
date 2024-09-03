@@ -11,4 +11,5 @@ struct InfluenceDataDto: Codable {
     let memberId: String?
     let name: String?
     let auth: Int?
+    let nation: String?
 }
