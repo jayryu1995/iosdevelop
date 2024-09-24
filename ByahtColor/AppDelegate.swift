@@ -18,6 +18,7 @@ import AppTrackingTransparency
 import SendbirdChatSDK
 import GoogleSignIn
 
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
     let viewControllerName = String(describing: type(of: AppDelegate.self))
@@ -50,14 +51,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // 페이스북 api 설정 & Google Login
         ApplicationDelegate.shared.application(application, didFinishLaunchingWithOptions: launchOptions)
         FirebaseApp.configure()
-
+        
         Messaging.messaging().delegate = self
         UNUserNotificationCenter.current().delegate = self
         requestNotificationAuthorization()
         registerForPushNotifications()
 
-        
-        
+
         return true
     }
 
@@ -123,25 +123,53 @@ extension AppDelegate: MessagingDelegate, UNUserNotificationCenterDelegate {
       }
     }
 
+    
+    
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        let alertMsg = (userInfo["aps"] as! NSDictionary)["alert"] as! NSDictionary
-        let payload = userInfo["sendbird"] as! NSDictionary
-        let count = payload.value(forKey: "unread_message_count") as! Int
-        print("didReceiveRemoteNotification: ", count)
-        UIApplication.shared.applicationIconBadgeNumber = count
+        
+        // sendbird 알림
+        if let aps = userInfo["aps"] as? NSDictionary,
+           let alertMsg = aps["alert"] as? String,
+           let payload = userInfo["sendbird"] as? NSDictionary,
+           let count = payload["unread_message_count"] as? Int {
+           
+            // 알림 메시지와 카운트가 nil이 아닐 때만 실행
+            UIApplication.shared.applicationIconBadgeNumber = count
+        }
 
-        completionHandler(UIBackgroundFetchResult.newData)
+        print("알림 발생")
+        
+        // firebase 주제 알림메시지 - springboot 전송
+        if let data = userInfo["status"] as? String {
+            print(data)
+            if data == "COMPLETE"{
+                print("알림 실행")
+                NotificationCenter.default.post(name: Notification.Name("ProfileUpdateNotification"), object: nil)
+            }
+        }
+        
+        completionHandler(.newData)
     }
-
+    
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         Messaging.messaging().apnsToken = deviceToken
         PushNotificationUseCase().registerPushToken(deviceToken: deviceToken)
     }
 
+    func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
+        print("fcmToken: \\(fcmToken)")
+    }
+    
     // foreground 상에서 알림이 보이게끔 해준다.
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         NotificationCenter.default.post(name: NSNotification.Name("SendbirdPushNotificationReceived"), object: nil)
+        
         completionHandler([.banner, .sound, .badge])
     }
 
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+            print("Notification response received: \(response.notification.request.content.userInfo)")
+            completionHandler()
+        }
+    
 }

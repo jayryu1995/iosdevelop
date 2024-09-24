@@ -21,6 +21,10 @@ class TestView: UIViewController {
         setupUI()
     }
 
+    private func textApi(){
+        
+    }
+    
     private func setupUI() {
         // Google 로그인 버튼 추가
         signInButton.addTarget(self, action: #selector(didTapSignInButton), for: .touchUpInside)

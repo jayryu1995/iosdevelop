@@ -41,6 +41,7 @@ class ProposalVC: UIViewController {
         label.font = UIFont(name: "Pretendard-SemiBold", size: 20)
         label.textAlignment = .center
         label.textColor = UIColor(hex: "#4E505B")
+        label.isHidden = true
         return label
     }()
     
@@ -51,6 +52,7 @@ class ProposalVC: UIViewController {
         label.font = UIFont(name: "Pretendard-Medium", size: 16)
         label.textColor = UIColor(hex: "#4E505B")
         label.textAlignment = .center
+        label.isHidden = true
         return label
     }()
 
@@ -63,13 +65,15 @@ class ProposalVC: UIViewController {
         button.layer.cornerRadius = 4
         button.layer.borderColor = UIColor(hex: "#D3D4DA").cgColor
         button.layer.borderWidth = 1
+        button.isHidden = true
         return button
     }()
-    
+    private var profileList : [InfluenceProfileDto] = []
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         setupBindings()
+        
     }
     
     override func viewDidLoad() {
@@ -78,6 +82,8 @@ class ProposalVC: UIViewController {
         setupUI()
         setupConstraints()
         setupBindings()
+        setupEmptyView()
+        
     }
 
     private func setupUI() {
@@ -95,12 +101,9 @@ class ProposalVC: UIViewController {
             .receive(on: DispatchQueue.main)
             .sink { [weak self] _ in
                 self?.label.text = "\("proposal_label".localized) \(self?.viewModel.proposalList.count.toString() ?? "") \(self?.count.text ?? "")"
-                
-                if self?.viewModel.proposalList.count ?? 0 < 1 {
-                    self?.setupEmptyView()
-                }else{
-                    self?.tableView.reloadData()
-                }
+                self?.profileList = self?.viewModel.proposalList ?? []
+                self?.tableView.reloadData()
+                self?.activeEmptyView()
             }
             .store(in: &viewModel.cancellables)
         
@@ -115,6 +118,19 @@ class ProposalVC: UIViewController {
             .store(in: &viewModel.cancellables)
     }
 
+    private func activeEmptyView(){
+        if profileList.isEmpty {
+            emptyLabel.isHidden = false
+            emptyLabel2.isHidden = false
+            emptyButton.isHidden = false
+        }else{
+            emptyLabel.isHidden = true
+            emptyLabel2.isHidden = true
+            emptyButton.isHidden = true
+        }
+        
+    }
+    
     private func setupEmptyView(){
         view.addSubview(emptyLabel)
         view.addSubview(emptyLabel2)

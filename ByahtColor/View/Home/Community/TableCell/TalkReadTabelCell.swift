@@ -205,9 +205,12 @@ class TalkReadTableCell: UITableViewCell, UIScrollViewDelegate {
     func configure(with board: Talk) {
 
         if let id = board.id {
-            let url = "\(Bundle.main.TEST_URL)/img/profile/\(id).jpg"
-             profileImageView.loadImage(from: url)
+            let resource = "https://glowb-input.s3.ap-southeast-1.amazonaws.com/img/account/\(id).jpg"
+            
+            profileImageView.loadImage(from: resource)
             profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2
+            
+            
         }
         nicknameLabel.text = board.nickname
         dateLabel.text = CustomFunction().formatDate(board.regi_date ?? "")

@@ -68,7 +68,7 @@ open class GroupChannelListUseCase: NSObject {
         let channelListQuery = GroupChannel.createMyGroupChannelListQuery {
             $0.order = .latestLastMessage
             $0.limit = 20
-            $0.includeEmptyChannel = true
+            $0.includeEmptyChannel = false
         }
 
         let collection = SendbirdChat.createGroupChannelCollection(query: channelListQuery)

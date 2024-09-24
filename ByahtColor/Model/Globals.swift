@@ -10,6 +10,8 @@ import Foundation
 class Globals {
     static let shared = Globals()
 
+    var searchList : [InfluenceProfileDto]?
+    
     // 전역에서 사용하는 변수 선언
     let categories = [
         "categories_beauty".localized,

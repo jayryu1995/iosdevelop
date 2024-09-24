@@ -141,15 +141,17 @@ class BusinessProfileWriteVC: UIViewController {
                         self?.selectedCategory = data.category?.components(separatedBy: ",") ?? []
                         self?.selectedNation = data.nation?.components(separatedBy: ",") ?? []
 
-                        let path = "\(Bundle.main.TEST_URL)/business\( data.imagePath ?? "" )"
-                        self?.loadImageFromURL(path) { [weak self] image in
-                            DispatchQueue.main.async {
-                                if let image = image {
-                                    self?.selectedImages.append(image)
-                                    self?.resetHorizonScrollView()
+                        if let path = data.imagePath {
+                            self?.loadImageFromURL(path) { [weak self] image in
+                                DispatchQueue.main.async {
+                                    if let image = image {
+                                        self?.selectedImages.append(image)
+                                        self?.resetHorizonScrollView()
+                                    }
                                 }
                             }
                         }
+                        
                         self?.setupUI()
                         self?.setupConstraints()
 
@@ -395,10 +397,6 @@ class BusinessProfileWriteVC: UIViewController {
     private func setTopView() {
         topView.isUserInteractionEnabled = true
 
-        backButton.setImage(UIImage(named: "back_icon"), for: .normal)
-        backButton.imageView?.contentMode = .scaleAspectFit
-        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-
         titleLabel.text = "Profile"
         titleLabel.font = UIFont(name: "Pretendard-SemiBold", size: 16)
 
@@ -410,17 +408,11 @@ class BusinessProfileWriteVC: UIViewController {
         uploadButton.addTarget(self, action: #selector(uploadButtonTapped), for: .touchUpInside)
         view.addSubview(topView)
         topView.addSubview(titleLabel)
-        topView.addSubview(backButton)
         topView.addSubview(uploadButton)
 
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
             make.center.equalToSuperview()
-        }
-
-        backButton.snp.makeConstraints { make in
-            make.centerY.equalTo(titleLabel.snp.centerY)
-            make.leading.equalToSuperview().offset(20)
         }
 
         uploadButton.snp.makeConstraints { make in
@@ -661,13 +653,14 @@ class BusinessProfileWriteVC: UIViewController {
             let age = selectedAge.joined(separator: ",")
             let nation = selectedNation.joined(separator: ",")
             let dto = BusinessDetailDto(memberId: id, business_name: nil, intro: et_intro.text, payDtos: payArray, age: age,
-                                        category: category, gender: gender, nation: nation, imagePath: nil, proposal: nil)
+                                        category: category, gender: gender, nation: nation, imagePath: nil, proposal: nil, video: nil)
             viewModel.updateProfile(memberId: id, dto: dto, images: selectedImages, update: update) { [weak self] result in
                 DispatchQueue.main.async {
                     switch result {
                     case .success(let responseString):
                         self?.updateChatProfile()
                         UserDefaults.standard.set(1, forKey: "home")
+                        UserDefaults.standard.setValue(self?.et_intro.text, forKey: "intro")
                         self?.navigationController?.popViewController(animated: true)
 
                     case .failure(let error):

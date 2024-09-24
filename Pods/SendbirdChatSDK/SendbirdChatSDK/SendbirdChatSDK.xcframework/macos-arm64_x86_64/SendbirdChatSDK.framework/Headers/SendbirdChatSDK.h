@@ -827,8 +827,6 @@ SWIFT_CLASS_NAMED("BaseChannel")
 @end
 
 
-
-
 @interface SBDBaseChannel (SWIFT_EXTENSION(SendbirdChatSDK))
 /// Compares this object with given other object.
 /// \param object <code>Any</code> instance
@@ -839,95 +837,27 @@ SWIFT_CLASS_NAMED("BaseChannel")
 - (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
 @end
 
-@class SBDMessageListParams;
 
-@interface SBDBaseChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Retrieves previous or next messages based on a specified timestamp in the channel.
-/// since:
-/// 3.0.181
-/// \param timestamp Specifies the timestamp to be the reference point for messages to retrieve, in Unix
-/// milliseconds format. Messages sent before or after the timestamp can be retrieved.
-///
-/// \param params Contains a set of parameters you can set regarding the messages in the results.
-///
-/// \param completionHandler The handler block to be executed. The <code>messages</code> is the messages
-/// of the channel. The <code>error</code> indicates whether there is an error. If there is no error, the value is null.
-///
-- (void)getMessagesByTimestamp:(int64_t)timestamp params:(SBDMessageListParams * _Nonnull)params completionHandler:(void (^ _Nullable)(NSArray<SBDBaseMessage *> * _Nullable, SBError * _Nullable))completionHandler;
-/// Retrieves previous or next messages based on their message ID in a specific channel.
-/// since:
-/// 3.0.181
-/// \param messageId Specifies the message ID to be the reference point for messages to retrieve.
-/// Messages sent before or after the message with the matching message ID can be retrieved.
-///
-/// \param params Contains a set of parameters you can set regarding the messages in the results.
-///
-/// \param completionHandler The handler block to be executed. The <code>messages</code> is the messages
-/// of the channel. The <code>error</code> indicates whether there is an error. If there is no error, the value is null.
-///
-- (void)getMessagesByMessageId:(int64_t)messageId params:(SBDMessageListParams * _Nonnull)params completionHandler:(void (^ _Nullable)(NSArray<SBDBaseMessage *> * _Nullable, SBError * _Nullable))completionHandler;
+
+
+/// Mappable protocol to initialize sendbird object from a given dictionary.
+/// note:
+/// This is legacy method for objective c and recommend to use Codable protocol for swift
+SWIFT_PROTOCOL("_TtP15SendbirdChatSDK8Mappable_")
+@protocol Mappable
+/// Initialize an object with json dictionary
+- (nullable instancetype)initWithDictionary:(NSDictionary<NSString *, id> * _Nonnull)json SWIFT_METHOD_FAMILY(none) SWIFT_WARN_UNUSED_RESULT;
+@optional
+- (NSDictionary<NSString *, id> * _Nonnull)_toDictionary SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
-
-@interface SBDBaseChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Pins the message to the channel.
-/// note:
-/// Pin functionality in <code>OpenChannel</code> will be supported starting from 4.20.0.
-/// since:
-/// 4.2.0
-/// \param messageId The message ID of the message to be pinned.
-///
-/// \param completionHandler The handler block to be executed after pinning the message.
-///
-- (void)pinMessageWithMessageId:(int64_t)messageId completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Unpins the message from the channel.
-/// note:
-/// Pin functionality in <code>OpenChannel</code> will be supported starting from 4.20.0.
-/// since:
-/// 4.2.0
-/// \param messageId The message ID of the message to be unpinned.
-///
-/// \param completionHandler The handler block to be executed after unpinning the message.
-///
-- (void)unpinMessageWithMessageId:(int64_t)messageId completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+@interface SBDBaseChannel (SWIFT_EXTENSION(SendbirdChatSDK)) <Mappable>
+/// Initialize with json dictionary
+- (nullable instancetype)initWithDictionary:(NSDictionary<NSString *, id> * _Nonnull)json SWIFT_METHOD_FAMILY(none) SWIFT_WARN_UNUSED_RESULT;
+/// Converts the object into dictionary
+- (NSDictionary<NSString *, id> * _Nonnull)_toDictionary SWIFT_WARN_UNUSED_RESULT;
 @end
-
-@class SBDReactionEvent;
-
-@interface SBDBaseChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Adds a reaction to a message.
-/// Messages with <code>sendingStatus</code> is not <code>.success</code> will handler to return error.
-/// note:
-/// This is idempotent.
-/// note:
-/// This feature is only available in group channels.
-/// since:
-/// 3.0.169
-/// \param message The message object that the reaction will be added.
-///
-/// \param key The reaction key to be added.
-///
-/// \param completionHandler The handler block to be executed. If succeeded, the <code>reactionEvent</code>
-/// will have the information of the reaction.
-///
-- (void)addReactionWithMessage:(SBDBaseMessage * _Nonnull)message key:(NSString * _Nonnull)key completionHandler:(void (^ _Nullable)(SBDReactionEvent * _Nullable, SBError * _Nullable))completionHandler;
-/// Deletes a reaction from a message.
-/// note:
-/// This is idempotent.
-/// note:
-/// This feature is only available in group channels.
-/// since:
-/// 3.0.169
-/// \param message The message object that has the reaction key.
-///
-/// \param key The reaction key to be deleted.
-///
-/// \param completionHandler The handler block to be executed. If succeeded, the <code>reactionEvent</code> will have the information of the reaction.
-///
-- (void)deleteReactionWithMessage:(SBDBaseMessage * _Nonnull)message key:(NSString * _Nonnull)key completionHandler:(void (^ _Nullable)(SBDReactionEvent * _Nullable, SBError * _Nullable))completionHandler;
-@end
-
 
 @class NSData;
 
@@ -965,280 +895,61 @@ SWIFT_PROTOCOL("_TtP15SendbirdChatSDK12Serializable_")
 @end
 
 
-/// Mappable protocol to initialize sendbird object from a given dictionary.
-/// note:
-/// This is legacy method for objective c and recommend to use Codable protocol for swift
-SWIFT_PROTOCOL("_TtP15SendbirdChatSDK8Mappable_")
-@protocol Mappable
-/// Initialize an object with json dictionary
-- (nullable instancetype)initWithDictionary:(NSDictionary<NSString *, id> * _Nonnull)json SWIFT_METHOD_FAMILY(none) SWIFT_WARN_UNUSED_RESULT;
-@optional
-- (NSDictionary<NSString *, id> * _Nonnull)_toDictionary SWIFT_WARN_UNUSED_RESULT;
-@end
-
-
-@interface SBDBaseChannel (SWIFT_EXTENSION(SendbirdChatSDK)) <Mappable>
-/// Initialize with json dictionary
-- (nullable instancetype)initWithDictionary:(NSDictionary<NSString *, id> * _Nonnull)json SWIFT_METHOD_FAMILY(none) SWIFT_WARN_UNUSED_RESULT;
-/// Converts the object into dictionary
-- (NSDictionary<NSString *, id> * _Nonnull)_toDictionary SWIFT_WARN_UNUSED_RESULT;
-@end
-
-
-@interface SBDBaseChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Deletes a message. The message’s sender has to be the current user.
-/// note:
-/// When using the moderation feature in ephemeral open channel, you should use this function that uses the <code>message</code> object, not the function that uses the <code>messageId</code>.
-/// \param message The message to be deleted.
-///
-/// \param completionHandler The handler block to execute.
-///
-- (void)deleteMessage:(SBDBaseMessage * _Nonnull)message completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Deletes a message. The message’s sender has to be the current user.
-/// note:
-/// When using the moderation feature in ephemeral open channel, you should use the <code>deleteMessage(:completionHandler:)</code> function that uses the <code>message</code> object, not the function that uses the <code>messageId</code>.
-/// since:
-/// 3.0.179
-/// \param messageId The message ID to be deleted.
-///
-/// \param completionHandler The handler block to execute.
-///
-- (void)deleteMessageWithMessageId:(int64_t)messageId completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Deletes a message. The message’s sender has to be the current user.
-/// since:
-/// 4.19.2
-/// \param messageId The message ID to be deleted.
-///
-/// \param completionHandler The handler block to execute.
-///
-- (void)deleteMessageWithMessageId:(int64_t)messageId messageToken:(NSString * _Nullable)messageToken completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-@end
-
-enum SBDReportCategory : NSInteger;
-
-@interface SBDBaseChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Reports a user in a channel of inappropriate activities.
-/// since:
-/// 3.0.154
-/// \param offendingUser The user who is being reported.
-///
-/// \param reportCategory The category in which the report is being submitted. Valid choices are
-/// <code>suspicious</code>, <code>harassing</code>, <code>spam</code>, and <code>inappropriate</code>.
-///
-/// \param reportDescription An open ended description for why the report is being submitted.
-///
-/// \param completionHandler The handler block to execute.
-///
-- (void)reportUser:(SBDUser * _Nonnull)offendingUser reportCategory:(enum SBDReportCategory)reportCategory reportDescription:(NSString * _Nullable)reportDescription completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Reports current channel instance of inappropriate activities.
-/// since:
-/// 3.0.154
-/// \param category The category in which the report is being submitted. Valid choices are
-/// <code>suspicious</code>, <code>harassing</code>, <code>spam</code> and <code>inappropriate</code>.
-///
-/// \param reportDescription An open ended description for why the report is being submitted.
-///
-/// \param completionHandler The handler block to execute.
-///
-- (void)reportChannelWithCategory:(enum SBDReportCategory)category reportDescription:(NSString * _Nullable)reportDescription completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Reports a malicious message in the channel
-/// since:
-/// 3.0.154
-/// \param message The message object which is being reported.
-///
-/// \param reportCategory The category in which the report is being submitted. Valid choices are
-/// <code>suspicious</code>, <code>harassing</code>, <code>spam</code> and <code>inappropriate</code>.
-///
-/// \param reportDescription An open ended description for why the report is being submitted.
-///
-/// \param completionHandler The handler block to execute.
-///
-- (void)reportMessage:(SBDBaseMessage * _Nonnull)message reportCategory:(enum SBDReportCategory)reportCategory reportDescription:(NSString * _Nullable)reportDescription completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-@end
-
-
-@interface SBDBaseChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Adds operators to the channel.
-/// since:
-/// 3.0.189
-/// \param userIds The user IDs to be operators.
-///
-/// \param completionHandler The handler block to be executed.
-///
-- (void)addOperatorsWithUserIds:(NSArray<NSString *> * _Nonnull)userIds completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Removes operators from the channel.
-/// since:
-/// 3.0.189
-/// \param userIds The user IDs to be removed from the operators.
-///
-/// \param completionHandler The handler block to be executed.
-///
-- (void)removeOperatorsWithUserIds:(NSArray<NSString *> * _Nonnull)userIds completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Removes all operators from the channel.
-/// since:
-/// 3.0.189
-/// \param completionHandler The handler block to be executed.
-///
-- (void)removeAllOperatorsWithCompletionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-@end
-
-
 @interface SBDBaseChannel (SWIFT_EXTENSION(SendbirdChatSDK))
 @property (nonatomic, readonly, copy) NSString * _Nullable channelUrl SWIFT_UNAVAILABLE_MSG("'channelUrl' has been renamed to 'channelURL'");
 @property (nonatomic, readonly, copy) NSString * _Nullable coverUrl SWIFT_UNAVAILABLE_MSG("'coverUrl' has been renamed to 'coverURL'");
 @end
 
 
-@class SBDMessageChangeLogsParams;
-@class SBDPoll;
-
-@interface SBDBaseChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Retrieves the changelogs since a specified token regarding the updated messages or the unique IDs
-/// of deleted messages in the channel.
-/// since:
-/// 3.0.181
-/// \param token Specifies the token to be the reference point for the changelogs to retrieve.
-///
-/// \param params Contains a set of parameters you can set regarding the messages in the results.
-///
-/// \param completionHandler The handler block to execute. The <code>updatedMessages</code> retrieves the
-/// updated messages. The <code>deletedMessageIds</code> retrieves the unique ID of deleted messages.
-/// The <code>hasMore</code> indicates whether there are more changelogs to be retrieved. The <code>token</code>
-/// retrieves the token of the last changelog in the results. The <code>error</code> indicates whether there is
-/// an error. If there is no error, the value is <code>nil</code>.
-///
-- (void)getMessageChangeLogsSinceToken:(NSString * _Nullable)token params:(SBDMessageChangeLogsParams * _Nonnull)params completionHandler:(void (^ _Nullable)(NSArray<SBDBaseMessage *> * _Nullable, NSArray<NSNumber *> * _Nullable, BOOL, NSString * _Nullable, SBError * _Nullable))completionHandler;
-/// Retrieves the changelogs since a specified timestamp, in Unix milliseconds format, regarding the updated
-/// messages or the unique IDs of deleted messages in the channel.
-/// since:
-/// 3.0.181
-/// \param timestamp Specifies the timestamp to be the reference point for changelogs to retrieve, in Unix milliseconds format.
-///
-/// \param params Contains a set of parameters you can set regarding the messages in the results.
-///
-/// \param completionHandler The handler block to execute. The <code>updatedMessages</code> retrieves the
-/// updated messages. The <code>deletedMessageIds</code> retrieves the unique ID of deleted messages. The
-/// <code>hasMore</code> indicates whether there are more changelogs to be retrieved. The <code>token</code> retrieves the
-/// token of the last changelog in the results. The <code>error</code> indicates whether there is an error. If there is
-/// no error, the value is <code>nil</code>.
-///
-- (void)getMessageChangeLogsSinceTimestamp:(int64_t)timestamp params:(SBDMessageChangeLogsParams * _Nonnull)params completionHandler:(void (^ _Nullable)(NSArray<SBDBaseMessage *> * _Nullable, NSArray<NSNumber *> * _Nullable, BOOL, NSString * _Nullable, SBError * _Nullable))completionHandler;
-/// Retrieves the changelogs since a specified token regarding the updated polls or the unique IDs
-/// of deleted polls in the channel.
-/// since:
-/// 4.5.0
-/// \param token Specifies the token to be the reference point for the changelogs to retrieve.
-///
-/// \param completionHandler The handler block to execute. The <code>updatedPolls</code> retrieves the
-/// updated polls. The <code>deletedPollIds</code> retrieves the unique ID of deleted polls.
-/// The <code>hasMore</code> indicates whether there are more changelogs to be retrieved. The <code>token</code>
-/// retrieves the token of the last changelog in the results. The <code>error</code> indicates whether there is
-/// an error. If there is no error, the value is <code>nil</code>.
-///
-- (void)getPollChangeLogsWithToken:(NSString * _Nullable)token completionHandler:(void (^ _Nullable)(NSArray<SBDPoll *> * _Nullable, NSArray<NSNumber *> * _Nullable, BOOL, NSString * _Nullable, SBError * _Nullable))completionHandler;
-/// Retrieves the changelogs since a specified timestamp regarding the updated polls or the unique IDs
-/// of deleted polls in the channel.
-/// since:
-/// 4.5.0
-/// \param timestamp Specifies the timestamp to be the reference point for changelogs to retrieve, in Unix milliseconds format.
-///
-/// \param completionHandler The handler block to execute. The <code>updatedPolls</code> retrieves the
-/// updated polls. The <code>deletedPollIds</code> retrieves the unique ID of deleted polls.
-/// The <code>hasMore</code> indicates whether there are more changelogs to be retrieved. The <code>token</code>
-/// retrieves the token of the last changelog in the results. The <code>error</code> indicates whether there is
-/// an error. If there is no error, the value is <code>nil</code>.
-///
-- (void)getPollChangeLogsWithTimestamp:(int64_t)timestamp completionHandler:(void (^ _Nullable)(NSArray<SBDPoll *> * _Nullable, NSArray<NSNumber *> * _Nullable, BOOL, NSString * _Nullable, SBError * _Nullable))completionHandler;
-@end
-
-
-@interface SBDBaseChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Creates keys of meta array for the message.
-/// since:
-/// 3.0.116
-/// \param message The message object. This method creates <code>keys</code> in it.
-///
-/// \param keys Keys of meta array.
-///
-/// \param completionHandler The handler block to execute. The <code>message</code> is a base message object that has the keys for its meta array.
-///
-- (void)createMessageMetaArrayKeysWithMessage:(SBDBaseMessage * _Nonnull)message keys:(NSArray<NSString *> * _Nonnull)keys completionHandler:(void (^ _Nullable)(SBDBaseMessage * _Nullable, SBError * _Nullable))completionHandler;
-/// Deletes keys from meta array of the message.
-/// since:
-/// 3.0.116
-/// \param message The message object. This method deletes keys of meta array of it.
-///
-/// \param keys Keys to be deleted.
-///
-/// \param completionHandler The handler block to execute.
-///
-- (void)deleteMessageMetaArrayKeysWithMessage:(SBDBaseMessage * _Nonnull)message keys:(NSArray<NSString *> * _Nonnull)keys completionHandler:(void (^ _Nullable)(SBDBaseMessage * _Nullable, SBError * _Nullable))completionHandler;
-/// Adds meta array to the message.
-/// since:
-/// 3.0.116
-/// note:
-/// use <code>addMessageMetaArrayValues(message:metaArrays:completionHandler:)</code> as possible.
-/// \param message The message object. This method adds pairs of key and value to this message.
-///
-/// \param keyValues Pairs of key-value to be added.
-///
-/// \param completionHandler The handler block to execute.
-///
-- (void)addMessageMetaArrayValuesWithMessage:(SBDBaseMessage * _Nonnull)message keyValues:(NSDictionary<NSString *, NSArray<NSString *> *> * _Nonnull)keyValues completionHandler:(void (^ _Nullable)(SBDBaseMessage * _Nullable, SBError * _Nullable))completionHandler;
-/// Adds the array of meta array into the message.
-/// note:
-/// The <code>metaArrays</code> are upserted into the message. If a key in the metaArrays is new, the key will
-/// be inserted with the value. If a key in the metaArrays is already created, the value of the messageMetaArray
-/// will be inserted so strings in the value MUST be new one.
-/// since:
-/// 3.0.148
-/// \param message The message instance. The metaArrays will added into the message.
-///
-/// \param metaArrays An array of message meta array will be added into the message. the string of the value
-/// in the metaArray MUST NOT exist with same key.
-///
-/// \param completionHandler The handler block to execute after adding message meta arrays. The
-/// <code>message</code> of the handler is updated message. If failed to add message meta arrays, the <code>error</code>
-/// of the handler is not nil(null).
-///
-- (void)addMessageMetaArrayValuesWithMessage:(SBDBaseMessage * _Nonnull)message metaArrays:(NSArray<SBDMessageMetaArray *> * _Nonnull)metaArrays completionHandler:(void (^ _Nullable)(SBDBaseMessage * _Nullable, SBError * _Nullable))completionHandler;
-/// Removes meta array from the message.
-/// since:
-/// 3.0.116
-/// note:
-/// use <code>removeMessageMetaArrayValues(message:metaArrays:completionHandler:)</code> as possible.
-/// \param message The message object. This method removes pairs of key and value from this message. 
-///
-/// \param keyValues Pairs of key-value to be removed. 
-///
-/// \param completionHandler The handler block to execute. 
-///
-- (void)removeMessageMetaArrayValuesWithMessage:(SBDBaseMessage * _Nonnull)message keyValues:(NSDictionary<NSString *, NSArray<NSString *> *> * _Nonnull)keyValues completionHandler:(void (^ _Nullable)(SBDBaseMessage * _Nullable, SBError * _Nullable))completionHandler;
-/// Removes the array of meta array from the message.
-/// note:
-/// The <code>metaArrays</code> are removed from the message. If a key in the metaArrays has an emtpy
-/// array of the value, the key will be removed. If not, the value of the messageMetaArray will be removed from the message.
-/// note:
-/// The order of the meta array is guaranteed.
-/// since:
-/// 3.0.148
-/// \param message The message instance. The metaArrays will removed from the message.
-///
-/// \param metaArrays An array of message meta array will be removed from the message. the string of
-/// the value in the metaArray MUST exist with same key.
-///
-/// \param completionHandler The handler block to execute after removing message meta arrays.
-/// The <code>message</code> of the handler is removed message. If failed to remove message meta arrays,
-/// the <code>error</code> of the handler is not nil(null).
-///
-- (void)removeMessageMetaArrayValuesWithMessage:(SBDBaseMessage * _Nonnull)message metaArrays:(NSArray<SBDMessageMetaArray *> * _Nonnull)metaArrays completionHandler:(void (^ _Nullable)(SBDBaseMessage * _Nullable, SBError * _Nullable))completionHandler;
-@end
-
+@class SBDMessageListParams;
 @class SBDUserMessage;
 @class SBDUserMessageCreateParams;
 @class SBDUserMessageUpdateParams;
+@class SBDFileMessageCreateParams;
+@class SBDFileMessage;
+@class SBDFileMessageUpdateParams;
+enum SBDReportCategory : NSInteger;
+@class SBDPollUpdateParams;
+@class SBDPoll;
+@class SBDPollVoteEvent;
+@class SBDReactionEvent;
+@class SBDMutedUserListQuery;
+@class SBDMutedUserListQueryParams;
+@class SBDPreviousMessageListQuery;
+@class SBDPreviousMessageListQueryParams;
+@class SBDOperatorListQuery;
+@class SBDOperatorListQueryParams;
+@class SBDPollListQuery;
+@class SBDPollVoterListQuery;
+@class SBDPinnedMessageListQuery;
+@class SBDPinnedMessageListQueryParams;
+@class SBDMessageChangeLogsParams;
 
 @interface SBDBaseChannel (SWIFT_EXTENSION(SendbirdChatSDK))
+/// Retrieves previous or next messages based on a specified timestamp in the channel.
+/// since:
+/// 3.0.181
+/// \param timestamp Specifies the timestamp to be the reference point for messages to retrieve, in Unix
+/// milliseconds format. Messages sent before or after the timestamp can be retrieved.
+///
+/// \param params Contains a set of parameters you can set regarding the messages in the results.
+///
+/// \param completionHandler The handler block to be executed. The <code>messages</code> is the messages
+/// of the channel. The <code>error</code> indicates whether there is an error. If there is no error, the value is null.
+///
+- (void)getMessagesByTimestamp:(int64_t)timestamp params:(SBDMessageListParams * _Nonnull)params completionHandler:(void (^ _Nullable)(NSArray<SBDBaseMessage *> * _Nullable, SBError * _Nullable))completionHandler;
+/// Retrieves previous or next messages based on their message ID in a specific channel.
+/// since:
+/// 3.0.181
+/// \param messageId Specifies the message ID to be the reference point for messages to retrieve.
+/// Messages sent before or after the message with the matching message ID can be retrieved.
+///
+/// \param params Contains a set of parameters you can set regarding the messages in the results.
+///
+/// \param completionHandler The handler block to be executed. The <code>messages</code> is the messages
+/// of the channel. The <code>error</code> indicates whether there is an error. If there is no error, the value is null.
+///
+- (void)getMessagesByMessageId:(int64_t)messageId params:(SBDMessageListParams * _Nonnull)params completionHandler:(void (^ _Nullable)(NSArray<SBDBaseMessage *> * _Nullable, SBError * _Nullable))completionHandler;
 /// Sends a user message.
 /// \param message The message text.
 ///
@@ -1327,285 +1038,6 @@ enum SBDReportCategory : NSInteger;
 /// Another factor is an error. If failed to request, an error is dispatched.
 ///
 - (void)translateUserMessage:(SBDUserMessage * _Nonnull)message targetLanguages:(NSArray<NSString *> * _Nonnull)targetLanguages completionHandler:(void (^ _Nullable)(SBDUserMessage * _Nullable, SBError * _Nullable))completionHandler;
-@end
-
-@class SBDPollUpdateParams;
-@class SBDPollVoteEvent;
-
-@interface SBDBaseChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Updates a poll with params.
-/// since:
-/// 4.5.0
-/// \param pollId ID of Poll to update
-///
-/// \param params <code>PollUpdateParams</code> instance.
-///
-/// \param completionHandler Completion block.
-///
-- (void)updatePollWithPollId:(int64_t)pollId params:(SBDPollUpdateParams * _Nonnull)params completionHandler:(void (^ _Nullable)(SBDPoll * _Nullable, SBError * _Nullable))completionHandler;
-/// Deletes a poll.
-/// since:
-/// 4.5.0
-/// \param pollId ID of Poll to remove
-///
-/// \param completionHandler Completion block.
-///
-- (void)deletePollWithPollId:(int64_t)pollId completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Closes a poll.
-/// since:
-/// 4.5.0
-/// \param pollId ID of Poll to close
-///
-/// \param completionHandler Completion block
-///
-- (void)closePollWithPollId:(int64_t)pollId completionHandler:(void (^ _Nullable)(SBDPoll * _Nullable, SBError * _Nullable))completionHandler;
-/// Adds an option to a poll.
-/// since:
-/// 4.5.0
-/// \param pollId ID of Poll to add the poll option
-///
-/// \param optionText Option text of the poll option
-///
-/// \param completionHandler Completion block
-///
-- (void)addPollOptionWithPollId:(int64_t)pollId optionText:(NSString * _Nonnull)optionText completionHandler:(void (^ _Nullable)(SBDPoll * _Nullable, SBError * _Nullable))completionHandler;
-/// Updates an option to a poll.
-/// since:
-/// 4.5.0
-/// \param pollId ID of poll to update the poll option
-///
-/// \param pollOptionId ID of the poll option
-///
-/// \param optionText Option text of the poll option
-///
-/// \param completionHandler Completion block
-///
-- (void)updatePollOptionWithPollId:(int64_t)pollId pollOptionId:(int64_t)pollOptionId optionText:(NSString * _Nonnull)optionText completionHandler:(void (^ _Nullable)(SBDPoll * _Nullable, SBError * _Nullable))completionHandler;
-/// Removes Poll option
-/// since:
-/// 4.5.0
-/// \param pollId ID of the poll to delete poll option of
-///
-/// \param pollOptionId poll option id to delete
-///
-/// \param completionHandler Completion block
-///
-- (void)deletePollOptionWithPollId:(int64_t)pollId pollOptionId:(int64_t)pollOptionId completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Votes poll
-/// since:
-/// 4.5.0
-/// \param pollId Poll ID to vote
-///
-/// \param pollOptionIds List of poll option IDs to vote
-///
-/// \param completionHandler Completion block
-///
-- (void)votePollWithPollId:(int64_t)pollId pollOptionIds:(NSArray<NSNumber *> * _Nonnull)pollOptionIds completionHandler:(void (^ _Nullable)(SBDPollVoteEvent * _Nullable, SBError * _Nullable))completionHandler;
-@end
-
-
-@interface SBDBaseChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Creates the meta <em>data</em> for the channel.
-/// \param metaData The meta <em>data</em> to be set.
-///
-/// \param completionHandler The handler block to execute. <code>metaData</code> is the meta
-/// <em>data</em> which are set on Sendbird server.
-///
-- (void)createMetaData:(NSDictionary<NSString *, NSString *> * _Nonnull)metaData completionHandler:(void (^ _Nullable)(NSDictionary<NSString *, NSString *> * _Nullable, SBError * _Nullable))completionHandler;
-/// Gets the meta <em>data</em> for the channel.
-/// \param keys The keys to get meta <em>data</em>.
-///
-/// \param completionHandler The handler block to execute. <code>metaData</code> is the meta
-/// <em>data</em> which are set on Sendbird server.
-///
-- (void)getMetaDataWithKeys:(NSArray<NSString *> * _Nonnull)keys completionHandler:(void (^ _Nullable)(NSDictionary<NSString *, NSString *> * _Nullable, SBError * _Nullable))completionHandler;
-/// Gets all meta <em>data</em> for the channel.
-/// \param completionHandler The handler block to execute. <code>metaData</code> is the meta
-/// <em>data</em> which are set on Sendbird server.
-///
-- (void)getAllMetaDataWithCompletionHandler:(void (^ _Nullable)(NSDictionary<NSString *, NSString *> * _Nullable, SBError * _Nullable))completionHandler;
-/// Updates the meta <em>data</em> for the channel.
-/// \param metaData The meta <em>data</em> to be updated.
-///
-/// \param completionHandler The handler block to execute. <code>metaData</code> is the meta counters
-/// which are updated on Sendbird server.
-///
-- (void)updateMetaData:(NSDictionary<NSString *, NSString *> * _Nonnull)metaData completionHandler:(void (^ _Nullable)(NSDictionary<NSString *, NSString *> * _Nullable, SBError * _Nullable))completionHandler;
-/// Deletes meta <em>data</em> with key for the channel.
-/// \param key The key to be deleted.
-///
-/// \param completionHandler The handler block to execute.
-///
-- (void)deleteMetaDataWithKey:(NSString * _Nonnull)key completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Deletes all meta <em>data</em> for the channel.
-/// \param completionHandler The handler block to execute.
-///
-- (void)deleteAllMetaDataWithCompletionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Return cached channel meta data.
-/// since:
-/// 3.0.216
-///
-/// returns:
-/// Dictionary meta data.
-- (NSDictionary<NSString *, NSString *> * _Nonnull)getCachedMetaData SWIFT_WARN_UNUSED_RESULT;
-- (void)removeAllCachedMetaData;
-@end
-
-
-@interface SBDBaseChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Bans a user for seconds. Let a user out and prevent to join again.
-/// If the user is already banned, duration will be updated from the time that was initialized.
-/// since:
-/// 3.0.89
-/// \param user The user to be banned.
-///
-/// \param seconds Seconds of ducation to be banned. Seconds should be larger than -1. If it is -1,
-/// user is banned forever. If it is 0, duration is set 10 years by default.
-///
-/// \param description The reason why the user was banned.
-///
-/// \param completionHandler The handler block to be executed after the user is banned.
-/// This block has no return value and takes an argument that is an error madewhen there is something wrong to ban.
-///
-- (void)banUser:(SBDUser * _Nonnull)user seconds:(NSInteger)seconds description:(NSString * _Nullable)description completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Bans a user for seconds. Let a user out and prevent to join again. If the user is already banned, duration
-/// will be updated from the time that was initialized.
-/// since:
-/// 3.0.89
-/// \param userId The user ID to be banned.
-///
-/// \param seconds Seconds of ducation to be banned. Seconds should be larger than -1. If it is -1,
-/// user is banned forever. If it is 0, duration is set 10 years by default.
-///
-/// \param description The reason why the user was banned.
-///
-/// \param completionHandler The handler block to be executed after the user is banned. This
-/// block has no return value and takes an argument that is an error made when there is something wrong to ban.
-///
-- (void)banUserWithUserId:(NSString * _Nonnull)userId seconds:(NSInteger)seconds description:(NSString * _Nullable)description completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Removes ban for a user.
-/// since:
-/// 3.0.89
-/// \param user The user to be removed ban.
-///
-/// \param completionHandler The handler block to be executed after remove ban. This block has
-/// no return value and takes an argument that is an error made when there is something wrong to remove ban.
-///
-- (void)unbanUser:(SBDUser * _Nonnull)user completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Removes ban for a user.
-/// since:
-/// 3.0.89
-/// \param userId The user ID to be removed ban.
-///
-/// \param completionHandler The handler block to be executed after remove ban. This block has
-/// no return value and takes an argument that is an error made when there is something wrong to remove ban.
-///
-- (void)unbanUserWithUserId:(NSString * _Nonnull)userId completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Mutes a user with additional options. Muted user cannot send any messages to the group channel.
-/// since:
-/// 3.0.118
-/// \param user The user to be muted.
-///
-/// \param seconds The user cannot send any messages for this time.
-///
-/// \param description The description that explains the reason why the user is muted.
-///
-/// \param completionHandler The handler block to be executed after mute. This block has no return
-/// value and takes an argument that is an error made when there is something wrong to mute the user.
-///
-- (void)muteUser:(SBDUser * _Nonnull)user seconds:(NSInteger)seconds description:(NSString * _Nullable)description completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Mutes a user with additional options. Muted user cannot send any messages to the group channel.
-/// since:
-/// 3.0.118
-/// \param userId The user ID to be muted.
-///
-/// \param seconds The user cannot send any messages for this time.
-///
-/// \param description The description that explains the reason why the user is muted.
-///
-/// \param completionHandler The handler block to be executed after mute. This block has no return
-/// value and takes an argument that is an error made when there is something wrong to mute the user.
-///
-- (void)muteUserWithUserId:(NSString * _Nonnull)userId seconds:(NSInteger)seconds description:(NSString * _Nullable)description completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Unmutes a user.
-/// since:
-/// 3.0.89
-/// \param userId The user ID to be turned off mute.
-///
-/// \param completionHandler The handler block to be executed after turn off mute. This block has no
-/// return value and takes an argument that is an error made when there is something wrong to turn off mute.
-///
-- (void)unmuteUserWithUserId:(NSString * _Nonnull)userId completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Unmutes a user.
-/// since:
-/// 3.0.89
-/// \param user The user to be turned off mute.
-///
-/// \param completionHandler The handler block to be executed after turn off mute. This block has no
-/// return value and takes an argument that is an error made when there is something wrong to turn off mute.
-///
-- (void)unmuteUser:(SBDUser * _Nonnull)user completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-@end
-
-
-@interface SBDBaseChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Creates the meta counters for the channel.
-/// \param metaCounters The meta counters to be set
-///
-/// \param completionHandler The handler block to execute. <code>metaCounters</code> is the meta counters
-/// which are set on Sendbird server.
-///
-- (void)createMetaCounters:(NSDictionary<NSString *, NSNumber *> * _Nonnull)metaCounters completionHandler:(void (^ _Nullable)(NSDictionary<NSString *, NSNumber *> * _Nullable, SBError * _Nullable))completionHandler;
-/// Gets the meta counters with keys for the channel.
-/// \param keys The keys to get meta counters.
-///
-/// \param completionHandler The handler block to execute. <code>metaCounters</code> is the
-/// meta counters which are set on Sendbird server.
-///
-- (void)getMetaCountersWithKeys:(NSArray<NSString *> * _Nullable)keys completionHandler:(void (^ _Nullable)(NSDictionary<NSString *, NSNumber *> * _Nullable, SBError * _Nullable))completionHandler;
-/// Gets all meta counters for the channel.
-/// \param completionHandler handler block to execute. <code>metaCounters</code> is the meta
-/// counters which are returned from Sendbird server.
-///
-- (void)getAllMetaCountersWithCompletionHandler:(void (^ _Nullable)(NSDictionary<NSString *, NSNumber *> * _Nullable, SBError * _Nullable))completionHandler;
-/// Updates the meta counters for the channel.
-/// \param metaCounters The meta counters to be updated.
-///
-/// \param completionHandler The handler block to execute. <code>metaCounters</code> is the meta
-/// counters which are updated on Sendbird server.
-///
-- (void)updateMetaCounters:(NSDictionary<NSString *, NSNumber *> * _Nonnull)metaCounters completionHandler:(void (^ _Nullable)(NSDictionary<NSString *, NSNumber *> * _Nullable, SBError * _Nullable))completionHandler;
-/// Increases the meta counters for the channel.
-/// \param metaCounters The meta counters to be increased.
-///
-/// \param completionHandler The handler block to execute. <code>metaCounters</code> is the meta
-/// counters which are increased on Sendbird server.
-///
-- (void)increaseMetaCounters:(NSDictionary<NSString *, NSNumber *> * _Nonnull)metaCounters completionHandler:(void (^ _Nullable)(NSDictionary<NSString *, NSNumber *> * _Nullable, SBError * _Nullable))completionHandler;
-/// Decreases the meta counters for the channel.
-/// \param metaCounters The meta counters to be decreased.
-///
-/// \param completionHandler The handler block to execute. <code>metaCounters</code> is the meta
-/// counters which are decreased on Sendbird server.
-///
-- (void)decreaseMetaCounters:(NSDictionary<NSString *, NSNumber *> * _Nonnull)metaCounters completionHandler:(void (^ _Nullable)(NSDictionary<NSString *, NSNumber *> * _Nullable, SBError * _Nullable))completionHandler;
-/// Deletes the meta counters with key for the channel.
-/// \param key The key to be deleted.
-///
-/// \param completionHandler The handler block to execute.
-///
-- (void)deleteMetaCountersWithKey:(NSString * _Nonnull)key completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Deletes all meta counters for the channel.
-/// \param completionHandler The handler block to execute.
-///
-- (void)deleteAllMetaCountersWithCompletionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-@end
-
-@class SBDFileMessageCreateParams;
-@class SBDFileMessage;
-@class SBDFileMessageUpdateParams;
-
-@interface SBDBaseChannel (SWIFT_EXTENSION(SendbirdChatSDK))
 /// Sends a file message with file or file URL of params without progress.
 /// If the params has a binary file, it will upload data to Sendbird storage. If not, the params has a file url, it will send a message with file url.
 /// \param params Instance of <code>FileMessageCreateParams</code> that can has parameters related with file.
@@ -1633,6 +1065,7 @@ enum SBDReportCategory : NSInteger;
 /// Returns a temporary file message being sent to the Sendbird server. The message has a request ID instead of a message ID. The request status of the message is pending. If you try to send a message with an invalid parameter, the returned message is a user message with no properties. You can perform a validation of pending message by checking for the existence of the request ID.
 - (SBDFileMessage * _Nullable)sendFileMessageWithParams:(SBDFileMessageCreateParams * _Nonnull)params progressHandler:(void (^ _Nullable)(NSString * _Nullable, int64_t, int64_t, int64_t))progressHandler completionHandler:(void (^ _Nullable)(SBDFileMessage * _Nullable, SBError * _Nullable))completionHandler;
 - (SBDFileMessage * _Nullable)sendFileMessageWithParams:(SBDFileMessageCreateParams * _Nonnull)params requestId:(NSString * _Nullable)requestId progressHandler:(void (^ _Nullable)(NSString * _Nullable, int64_t, int64_t, int64_t))progressHandler completionHandler:(void (^ _Nullable)(SBDFileMessage * _Nullable, SBError * _Nullable))completionHandler SWIFT_WARN_UNUSED_RESULT;
+- (SBDFileMessage * _Nullable)sendFileMessageWithParams:(SBDFileMessageCreateParams * _Nonnull)params originalMessage:(SBDFileMessage * _Nonnull)originalMessage completionHandler:(void (^ _Nullable)(SBDFileMessage * _Nullable, SBError * _Nullable))completionHandler;
 - (SBDFileMessage * _Nullable)sendFileMessageWithParams:(SBDFileMessageCreateParams * _Nonnull)params requestId:(NSString * _Nullable)requestId originalMessage:(SBDFileMessage * _Nullable)originalMessage progressHandler:(void (^ _Nullable)(NSString * _Nullable, int64_t, int64_t, int64_t))progressHandler completionHandler:(void (^ _Nullable)(SBDFileMessage * _Nullable, SBError * _Nullable))completionHandler SWIFT_WARN_UNUSED_RESULT;
 /// Sends a file message with file or file URL of params with progress.
 /// If the params has a binary file, it will upload data to Sendbird storage. If not, the params has a file url, it will send a message with file url.
@@ -1742,20 +1175,474 @@ enum SBDReportCategory : NSInteger;
 /// task of the <code>requestId</code> has been cancelled.
 ///
 + (void)cancelUploadingFileMessageWithRequestId:(NSString * _Nonnull)requestId completionHandler:(void (^ _Nullable)(BOOL, SBError * _Nullable))completionHandler;
-@end
-
-@class SBDMutedUserListQuery;
-@class SBDMutedUserListQueryParams;
-@class SBDPreviousMessageListQuery;
-@class SBDPreviousMessageListQueryParams;
-@class SBDOperatorListQuery;
-@class SBDOperatorListQueryParams;
-@class SBDPollListQuery;
-@class SBDPollVoterListQuery;
-@class SBDPinnedMessageListQuery;
-@class SBDPinnedMessageListQueryParams;
-
-@interface SBDBaseChannel (SWIFT_EXTENSION(SendbirdChatSDK))
+/// Deletes a message. The message’s sender has to be the current user.
+/// note:
+/// When using the moderation feature in ephemeral open channel, you should use this function that uses the <code>message</code> object, not the function that uses the <code>messageId</code>.
+/// \param message The message to be deleted.
+///
+/// \param completionHandler The handler block to execute.
+///
+- (void)deleteMessage:(SBDBaseMessage * _Nonnull)message completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Deletes a message. The message’s sender has to be the current user.
+/// note:
+/// When using the moderation feature in ephemeral open channel, you should use the <code>deleteMessage(:completionHandler:)</code> function that uses the <code>message</code> object, not the function that uses the <code>messageId</code>.
+/// since:
+/// 3.0.179
+/// \param messageId The message ID to be deleted.
+///
+/// \param completionHandler The handler block to execute.
+///
+- (void)deleteMessageWithMessageId:(int64_t)messageId completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Deletes a message. The message’s sender has to be the current user.
+/// since:
+/// 4.19.2
+/// \param messageId The message ID to be deleted.
+///
+/// \param completionHandler The handler block to execute.
+///
+- (void)deleteMessageWithMessageId:(int64_t)messageId messageToken:(NSString * _Nullable)messageToken completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Pins the message to the channel.
+/// note:
+/// Pin functionality in <code>OpenChannel</code> will be supported starting from 4.20.0.
+/// since:
+/// 4.2.0
+/// \param messageId The message ID of the message to be pinned.
+///
+/// \param completionHandler The handler block to be executed after pinning the message.
+///
+- (void)pinMessageWithMessageId:(int64_t)messageId completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Unpins the message from the channel.
+/// note:
+/// Pin functionality in <code>OpenChannel</code> will be supported starting from 4.20.0.
+/// since:
+/// 4.2.0
+/// \param messageId The message ID of the message to be unpinned.
+///
+/// \param completionHandler The handler block to be executed after unpinning the message.
+///
+- (void)unpinMessageWithMessageId:(int64_t)messageId completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Creates keys of meta array for the message.
+/// since:
+/// 3.0.116
+/// \param message The message object. This method creates <code>keys</code> in it.
+///
+/// \param keys Keys of meta array.
+///
+/// \param completionHandler The handler block to execute. The <code>message</code> is a base message object that has the keys for its meta array.
+///
+- (void)createMessageMetaArrayKeysWithMessage:(SBDBaseMessage * _Nonnull)message keys:(NSArray<NSString *> * _Nonnull)keys completionHandler:(void (^ _Nullable)(SBDBaseMessage * _Nullable, SBError * _Nullable))completionHandler;
+/// Deletes keys from meta array of the message.
+/// since:
+/// 3.0.116
+/// \param message The message object. This method deletes keys of meta array of it.
+///
+/// \param keys Keys to be deleted.
+///
+/// \param completionHandler The handler block to execute.
+///
+- (void)deleteMessageMetaArrayKeysWithMessage:(SBDBaseMessage * _Nonnull)message keys:(NSArray<NSString *> * _Nonnull)keys completionHandler:(void (^ _Nullable)(SBDBaseMessage * _Nullable, SBError * _Nullable))completionHandler;
+/// Adds meta array to the message.
+/// since:
+/// 3.0.116
+/// note:
+/// use <code>addMessageMetaArrayValues(message:metaArrays:completionHandler:)</code> as possible.
+/// \param message The message object. This method adds pairs of key and value to this message.
+///
+/// \param keyValues Pairs of key-value to be added.
+///
+/// \param completionHandler The handler block to execute.
+///
+- (void)addMessageMetaArrayValuesWithMessage:(SBDBaseMessage * _Nonnull)message keyValues:(NSDictionary<NSString *, NSArray<NSString *> *> * _Nonnull)keyValues completionHandler:(void (^ _Nullable)(SBDBaseMessage * _Nullable, SBError * _Nullable))completionHandler;
+/// Adds the array of meta array into the message.
+/// note:
+/// The <code>metaArrays</code> are upserted into the message. If a key in the metaArrays is new, the key will
+/// be inserted with the value. If a key in the metaArrays is already created, the value of the messageMetaArray
+/// will be inserted so strings in the value MUST be new one.
+/// since:
+/// 3.0.148
+/// \param message The message instance. The metaArrays will added into the message.
+///
+/// \param metaArrays An array of message meta array will be added into the message. the string of the value
+/// in the metaArray MUST NOT exist with same key.
+///
+/// \param completionHandler The handler block to execute after adding message meta arrays. The
+/// <code>message</code> of the handler is updated message. If failed to add message meta arrays, the <code>error</code>
+/// of the handler is not nil(null).
+///
+- (void)addMessageMetaArrayValuesWithMessage:(SBDBaseMessage * _Nonnull)message metaArrays:(NSArray<SBDMessageMetaArray *> * _Nonnull)metaArrays completionHandler:(void (^ _Nullable)(SBDBaseMessage * _Nullable, SBError * _Nullable))completionHandler;
+/// Removes meta array from the message.
+/// since:
+/// 3.0.116
+/// note:
+/// use <code>removeMessageMetaArrayValues(message:metaArrays:completionHandler:)</code> as possible.
+/// \param message The message object. This method removes pairs of key and value from this message. 
+///
+/// \param keyValues Pairs of key-value to be removed. 
+///
+/// \param completionHandler The handler block to execute. 
+///
+- (void)removeMessageMetaArrayValuesWithMessage:(SBDBaseMessage * _Nonnull)message keyValues:(NSDictionary<NSString *, NSArray<NSString *> *> * _Nonnull)keyValues completionHandler:(void (^ _Nullable)(SBDBaseMessage * _Nullable, SBError * _Nullable))completionHandler;
+/// Removes the array of meta array from the message.
+/// note:
+/// The <code>metaArrays</code> are removed from the message. If a key in the metaArrays has an emtpy
+/// array of the value, the key will be removed. If not, the value of the messageMetaArray will be removed from the message.
+/// note:
+/// The order of the meta array is guaranteed.
+/// since:
+/// 3.0.148
+/// \param message The message instance. The metaArrays will removed from the message.
+///
+/// \param metaArrays An array of message meta array will be removed from the message. the string of
+/// the value in the metaArray MUST exist with same key.
+///
+/// \param completionHandler The handler block to execute after removing message meta arrays.
+/// The <code>message</code> of the handler is removed message. If failed to remove message meta arrays,
+/// the <code>error</code> of the handler is not nil(null).
+///
+- (void)removeMessageMetaArrayValuesWithMessage:(SBDBaseMessage * _Nonnull)message metaArrays:(NSArray<SBDMessageMetaArray *> * _Nonnull)metaArrays completionHandler:(void (^ _Nullable)(SBDBaseMessage * _Nullable, SBError * _Nullable))completionHandler;
+/// Creates the meta counters for the channel.
+/// \param metaCounters The meta counters to be set
+///
+/// \param completionHandler The handler block to execute. <code>metaCounters</code> is the meta counters
+/// which are set on Sendbird server.
+///
+- (void)createMetaCounters:(NSDictionary<NSString *, NSNumber *> * _Nonnull)metaCounters completionHandler:(void (^ _Nullable)(NSDictionary<NSString *, NSNumber *> * _Nullable, SBError * _Nullable))completionHandler;
+/// Gets the meta counters with keys for the channel.
+/// \param keys The keys to get meta counters.
+///
+/// \param completionHandler The handler block to execute. <code>metaCounters</code> is the
+/// meta counters which are set on Sendbird server.
+///
+- (void)getMetaCountersWithKeys:(NSArray<NSString *> * _Nullable)keys completionHandler:(void (^ _Nullable)(NSDictionary<NSString *, NSNumber *> * _Nullable, SBError * _Nullable))completionHandler;
+/// Gets all meta counters for the channel.
+/// \param completionHandler handler block to execute. <code>metaCounters</code> is the meta
+/// counters which are returned from Sendbird server.
+///
+- (void)getAllMetaCountersWithCompletionHandler:(void (^ _Nullable)(NSDictionary<NSString *, NSNumber *> * _Nullable, SBError * _Nullable))completionHandler;
+/// Updates the meta counters for the channel.
+/// \param metaCounters The meta counters to be updated.
+///
+/// \param completionHandler The handler block to execute. <code>metaCounters</code> is the meta
+/// counters which are updated on Sendbird server.
+///
+- (void)updateMetaCounters:(NSDictionary<NSString *, NSNumber *> * _Nonnull)metaCounters completionHandler:(void (^ _Nullable)(NSDictionary<NSString *, NSNumber *> * _Nullable, SBError * _Nullable))completionHandler;
+/// Increases the meta counters for the channel.
+/// \param metaCounters The meta counters to be increased.
+///
+/// \param completionHandler The handler block to execute. <code>metaCounters</code> is the meta
+/// counters which are increased on Sendbird server.
+///
+- (void)increaseMetaCounters:(NSDictionary<NSString *, NSNumber *> * _Nonnull)metaCounters completionHandler:(void (^ _Nullable)(NSDictionary<NSString *, NSNumber *> * _Nullable, SBError * _Nullable))completionHandler;
+/// Decreases the meta counters for the channel.
+/// \param metaCounters The meta counters to be decreased.
+///
+/// \param completionHandler The handler block to execute. <code>metaCounters</code> is the meta
+/// counters which are decreased on Sendbird server.
+///
+- (void)decreaseMetaCounters:(NSDictionary<NSString *, NSNumber *> * _Nonnull)metaCounters completionHandler:(void (^ _Nullable)(NSDictionary<NSString *, NSNumber *> * _Nullable, SBError * _Nullable))completionHandler;
+/// Deletes the meta counters with key for the channel.
+/// \param key The key to be deleted.
+///
+/// \param completionHandler The handler block to execute.
+///
+- (void)deleteMetaCountersWithKey:(NSString * _Nonnull)key completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Deletes all meta counters for the channel.
+/// \param completionHandler The handler block to execute.
+///
+- (void)deleteAllMetaCountersWithCompletionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Creates the meta <em>data</em> for the channel.
+/// \param metaData The meta <em>data</em> to be set.
+///
+/// \param completionHandler The handler block to execute. <code>metaData</code> is the meta
+/// <em>data</em> which are set on Sendbird server.
+///
+- (void)createMetaData:(NSDictionary<NSString *, NSString *> * _Nonnull)metaData completionHandler:(void (^ _Nullable)(NSDictionary<NSString *, NSString *> * _Nullable, SBError * _Nullable))completionHandler;
+/// Gets the meta <em>data</em> for the channel.
+/// \param keys The keys to get meta <em>data</em>.
+///
+/// \param completionHandler The handler block to execute. <code>metaData</code> is the meta
+/// <em>data</em> which are set on Sendbird server.
+///
+- (void)getMetaDataWithKeys:(NSArray<NSString *> * _Nonnull)keys completionHandler:(void (^ _Nullable)(NSDictionary<NSString *, NSString *> * _Nullable, SBError * _Nullable))completionHandler;
+/// Gets all meta <em>data</em> for the channel.
+/// \param completionHandler The handler block to execute. <code>metaData</code> is the meta
+/// <em>data</em> which are set on Sendbird server.
+///
+- (void)getAllMetaDataWithCompletionHandler:(void (^ _Nullable)(NSDictionary<NSString *, NSString *> * _Nullable, SBError * _Nullable))completionHandler;
+/// Updates the meta <em>data</em> for the channel.
+/// \param metaData The meta <em>data</em> to be updated.
+///
+/// \param completionHandler The handler block to execute. <code>metaData</code> is the meta counters
+/// which are updated on Sendbird server.
+///
+- (void)updateMetaData:(NSDictionary<NSString *, NSString *> * _Nonnull)metaData completionHandler:(void (^ _Nullable)(NSDictionary<NSString *, NSString *> * _Nullable, SBError * _Nullable))completionHandler;
+/// Deletes meta <em>data</em> with key for the channel.
+/// \param key The key to be deleted.
+///
+/// \param completionHandler The handler block to execute.
+///
+- (void)deleteMetaDataWithKey:(NSString * _Nonnull)key completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Deletes all meta <em>data</em> for the channel.
+/// \param completionHandler The handler block to execute.
+///
+- (void)deleteAllMetaDataWithCompletionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Return cached channel meta data.
+/// since:
+/// 3.0.216
+///
+/// returns:
+/// Dictionary meta data.
+- (NSDictionary<NSString *, NSString *> * _Nonnull)getCachedMetaData SWIFT_WARN_UNUSED_RESULT;
+- (void)removeAllCachedMetaData;
+/// Bans a user for seconds. Let a user out and prevent to join again.
+/// If the user is already banned, duration will be updated from the time that was initialized.
+/// since:
+/// 3.0.89
+/// \param user The user to be banned.
+///
+/// \param seconds Seconds of ducation to be banned. Seconds should be larger than -1. If it is -1,
+/// user is banned forever. If it is 0, duration is set 10 years by default.
+///
+/// \param description The reason why the user was banned.
+///
+/// \param completionHandler The handler block to be executed after the user is banned.
+/// This block has no return value and takes an argument that is an error madewhen there is something wrong to ban.
+///
+- (void)banUser:(SBDUser * _Nonnull)user seconds:(NSInteger)seconds description:(NSString * _Nullable)description completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Bans a user for seconds. Let a user out and prevent to join again. If the user is already banned, duration
+/// will be updated from the time that was initialized.
+/// since:
+/// 3.0.89
+/// \param userId The user ID to be banned.
+///
+/// \param seconds Seconds of ducation to be banned. Seconds should be larger than -1. If it is -1,
+/// user is banned forever. If it is 0, duration is set 10 years by default.
+///
+/// \param description The reason why the user was banned.
+///
+/// \param completionHandler The handler block to be executed after the user is banned. This
+/// block has no return value and takes an argument that is an error made when there is something wrong to ban.
+///
+- (void)banUserWithUserId:(NSString * _Nonnull)userId seconds:(NSInteger)seconds description:(NSString * _Nullable)description completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Removes ban for a user.
+/// since:
+/// 3.0.89
+/// \param user The user to be removed ban.
+///
+/// \param completionHandler The handler block to be executed after remove ban. This block has
+/// no return value and takes an argument that is an error made when there is something wrong to remove ban.
+///
+- (void)unbanUser:(SBDUser * _Nonnull)user completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Removes ban for a user.
+/// since:
+/// 3.0.89
+/// \param userId The user ID to be removed ban.
+///
+/// \param completionHandler The handler block to be executed after remove ban. This block has
+/// no return value and takes an argument that is an error made when there is something wrong to remove ban.
+///
+- (void)unbanUserWithUserId:(NSString * _Nonnull)userId completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Reports a user in a channel of inappropriate activities.
+/// since:
+/// 3.0.154
+/// \param offendingUser The user who is being reported.
+///
+/// \param reportCategory The category in which the report is being submitted. Valid choices are
+/// <code>suspicious</code>, <code>harassing</code>, <code>spam</code>, and <code>inappropriate</code>.
+///
+/// \param reportDescription An open ended description for why the report is being submitted.
+///
+/// \param completionHandler The handler block to execute.
+///
+- (void)reportUser:(SBDUser * _Nonnull)offendingUser reportCategory:(enum SBDReportCategory)reportCategory reportDescription:(NSString * _Nullable)reportDescription completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Reports current channel instance of inappropriate activities.
+/// since:
+/// 3.0.154
+/// \param category The category in which the report is being submitted. Valid choices are
+/// <code>suspicious</code>, <code>harassing</code>, <code>spam</code> and <code>inappropriate</code>.
+///
+/// \param reportDescription An open ended description for why the report is being submitted.
+///
+/// \param completionHandler The handler block to execute.
+///
+- (void)reportChannelWithCategory:(enum SBDReportCategory)category reportDescription:(NSString * _Nullable)reportDescription completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Reports a malicious message in the channel
+/// since:
+/// 3.0.154
+/// \param message The message object which is being reported.
+///
+/// \param reportCategory The category in which the report is being submitted. Valid choices are
+/// <code>suspicious</code>, <code>harassing</code>, <code>spam</code> and <code>inappropriate</code>.
+///
+/// \param reportDescription An open ended description for why the report is being submitted.
+///
+/// \param completionHandler The handler block to execute.
+///
+- (void)reportMessage:(SBDBaseMessage * _Nonnull)message reportCategory:(enum SBDReportCategory)reportCategory reportDescription:(NSString * _Nullable)reportDescription completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Mutes a user with additional options. Muted user cannot send any messages to the group channel.
+/// since:
+/// 3.0.118
+/// \param user The user to be muted.
+///
+/// \param seconds The user cannot send any messages for this time.
+///
+/// \param description The description that explains the reason why the user is muted.
+///
+/// \param completionHandler The handler block to be executed after mute. This block has no return
+/// value and takes an argument that is an error made when there is something wrong to mute the user.
+///
+- (void)muteUser:(SBDUser * _Nonnull)user seconds:(NSInteger)seconds description:(NSString * _Nullable)description completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Mutes a user with additional options. Muted user cannot send any messages to the group channel.
+/// since:
+/// 3.0.118
+/// \param userId The user ID to be muted.
+///
+/// \param seconds The user cannot send any messages for this time.
+///
+/// \param description The description that explains the reason why the user is muted.
+///
+/// \param completionHandler The handler block to be executed after mute. This block has no return
+/// value and takes an argument that is an error made when there is something wrong to mute the user.
+///
+- (void)muteUserWithUserId:(NSString * _Nonnull)userId seconds:(NSInteger)seconds description:(NSString * _Nullable)description completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Unmutes a user.
+/// since:
+/// 3.0.89
+/// \param userId The user ID to be turned off mute.
+///
+/// \param completionHandler The handler block to be executed after turn off mute. This block has no
+/// return value and takes an argument that is an error made when there is something wrong to turn off mute.
+///
+- (void)unmuteUserWithUserId:(NSString * _Nonnull)userId completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Unmutes a user.
+/// since:
+/// 3.0.89
+/// \param user The user to be turned off mute.
+///
+/// \param completionHandler The handler block to be executed after turn off mute. This block has no
+/// return value and takes an argument that is an error made when there is something wrong to turn off mute.
+///
+- (void)unmuteUser:(SBDUser * _Nonnull)user completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Adds operators to the channel.
+/// since:
+/// 3.0.189
+/// \param userIds The user IDs to be operators.
+///
+/// \param completionHandler The handler block to be executed.
+///
+- (void)addOperatorsWithUserIds:(NSArray<NSString *> * _Nonnull)userIds completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Removes operators from the channel.
+/// since:
+/// 3.0.189
+/// \param userIds The user IDs to be removed from the operators.
+///
+/// \param completionHandler The handler block to be executed.
+///
+- (void)removeOperatorsWithUserIds:(NSArray<NSString *> * _Nonnull)userIds completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Removes all operators from the channel.
+/// since:
+/// 3.0.189
+/// \param completionHandler The handler block to be executed.
+///
+- (void)removeAllOperatorsWithCompletionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Updates a poll with params.
+/// since:
+/// 4.5.0
+/// \param pollId ID of Poll to update
+///
+/// \param params <code>PollUpdateParams</code> instance.
+///
+/// \param completionHandler Completion block.
+///
+- (void)updatePollWithPollId:(int64_t)pollId params:(SBDPollUpdateParams * _Nonnull)params completionHandler:(void (^ _Nullable)(SBDPoll * _Nullable, SBError * _Nullable))completionHandler;
+/// Deletes a poll.
+/// since:
+/// 4.5.0
+/// \param pollId ID of Poll to remove
+///
+/// \param completionHandler Completion block.
+///
+- (void)deletePollWithPollId:(int64_t)pollId completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Closes a poll.
+/// since:
+/// 4.5.0
+/// \param pollId ID of Poll to close
+///
+/// \param completionHandler Completion block
+///
+- (void)closePollWithPollId:(int64_t)pollId completionHandler:(void (^ _Nullable)(SBDPoll * _Nullable, SBError * _Nullable))completionHandler;
+/// Adds an option to a poll.
+/// since:
+/// 4.5.0
+/// \param pollId ID of Poll to add the poll option
+///
+/// \param optionText Option text of the poll option
+///
+/// \param completionHandler Completion block
+///
+- (void)addPollOptionWithPollId:(int64_t)pollId optionText:(NSString * _Nonnull)optionText completionHandler:(void (^ _Nullable)(SBDPoll * _Nullable, SBError * _Nullable))completionHandler;
+/// Updates an option to a poll.
+/// since:
+/// 4.5.0
+/// \param pollId ID of poll to update the poll option
+///
+/// \param pollOptionId ID of the poll option
+///
+/// \param optionText Option text of the poll option
+///
+/// \param completionHandler Completion block
+///
+- (void)updatePollOptionWithPollId:(int64_t)pollId pollOptionId:(int64_t)pollOptionId optionText:(NSString * _Nonnull)optionText completionHandler:(void (^ _Nullable)(SBDPoll * _Nullable, SBError * _Nullable))completionHandler;
+/// Removes Poll option
+/// since:
+/// 4.5.0
+/// \param pollId ID of the poll to delete poll option of
+///
+/// \param pollOptionId poll option id to delete
+///
+/// \param completionHandler Completion block
+///
+- (void)deletePollOptionWithPollId:(int64_t)pollId pollOptionId:(int64_t)pollOptionId completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Votes poll
+/// since:
+/// 4.5.0
+/// \param pollId Poll ID to vote
+///
+/// \param pollOptionIds List of poll option IDs to vote
+///
+/// \param completionHandler Completion block
+///
+- (void)votePollWithPollId:(int64_t)pollId pollOptionIds:(NSArray<NSNumber *> * _Nonnull)pollOptionIds completionHandler:(void (^ _Nullable)(SBDPollVoteEvent * _Nullable, SBError * _Nullable))completionHandler;
+/// Adds a reaction to a message.
+/// Messages with <code>sendingStatus</code> is not <code>.success</code> will handler to return error.
+/// note:
+/// This is idempotent.
+/// note:
+/// This feature is only available in group channels.
+/// since:
+/// 3.0.169
+/// \param message The message object that the reaction will be added.
+///
+/// \param key The reaction key to be added.
+///
+/// \param completionHandler The handler block to be executed. If succeeded, the <code>reactionEvent</code>
+/// will have the information of the reaction.
+///
+- (void)addReactionWithMessage:(SBDBaseMessage * _Nonnull)message key:(NSString * _Nonnull)key completionHandler:(void (^ _Nullable)(SBDReactionEvent * _Nullable, SBError * _Nullable))completionHandler;
+/// Deletes a reaction from a message.
+/// note:
+/// This is idempotent.
+/// note:
+/// This feature is only available in group channels.
+/// since:
+/// 3.0.169
+/// \param message The message object that has the reaction key.
+///
+/// \param key The reaction key to be deleted.
+///
+/// \param completionHandler The handler block to be executed. If succeeded, the <code>reactionEvent</code> will have the information of the reaction.
+///
+- (void)deleteReactionWithMessage:(SBDBaseMessage * _Nonnull)message key:(NSString * _Nonnull)key completionHandler:(void (^ _Nullable)(SBDReactionEvent * _Nullable, SBError * _Nullable))completionHandler;
 /// Creates a query instance for banned user list of the channel.
 /// since:
 /// 3.0.89
@@ -2052,6 +1939,64 @@ enum SBDReportCategory : NSInteger;
 /// returns:
 /// A <code>PinnedMessageListQuery</code> object that can be used to retrieve a list of pinned messages.
 - (SBDPinnedMessageListQuery * _Nullable)createPinnedMessageListQueryWithParams:(SBDPinnedMessageListQueryParams * _Nonnull)params SWIFT_WARN_UNUSED_RESULT;
+/// Retrieves the changelogs since a specified token regarding the updated messages or the unique IDs
+/// of deleted messages in the channel.
+/// since:
+/// 3.0.181
+/// \param token Specifies the token to be the reference point for the changelogs to retrieve.
+///
+/// \param params Contains a set of parameters you can set regarding the messages in the results.
+///
+/// \param completionHandler The handler block to execute. The <code>updatedMessages</code> retrieves the
+/// updated messages. The <code>deletedMessageIds</code> retrieves the unique ID of deleted messages.
+/// The <code>hasMore</code> indicates whether there are more changelogs to be retrieved. The <code>token</code>
+/// retrieves the token of the last changelog in the results. The <code>error</code> indicates whether there is
+/// an error. If there is no error, the value is <code>nil</code>.
+///
+- (void)getMessageChangeLogsSinceToken:(NSString * _Nullable)token params:(SBDMessageChangeLogsParams * _Nonnull)params completionHandler:(void (^ _Nullable)(NSArray<SBDBaseMessage *> * _Nullable, NSArray<NSNumber *> * _Nullable, BOOL, NSString * _Nullable, SBError * _Nullable))completionHandler;
+/// Retrieves the changelogs since a specified timestamp, in Unix milliseconds format, regarding the updated
+/// messages or the unique IDs of deleted messages in the channel.
+/// since:
+/// 3.0.181
+/// \param timestamp Specifies the timestamp to be the reference point for changelogs to retrieve, in Unix milliseconds format.
+///
+/// \param params Contains a set of parameters you can set regarding the messages in the results.
+///
+/// \param completionHandler The handler block to execute. The <code>updatedMessages</code> retrieves the
+/// updated messages. The <code>deletedMessageIds</code> retrieves the unique ID of deleted messages. The
+/// <code>hasMore</code> indicates whether there are more changelogs to be retrieved. The <code>token</code> retrieves the
+/// token of the last changelog in the results. The <code>error</code> indicates whether there is an error. If there is
+/// no error, the value is <code>nil</code>.
+///
+- (void)getMessageChangeLogsSinceTimestamp:(int64_t)timestamp params:(SBDMessageChangeLogsParams * _Nonnull)params completionHandler:(void (^ _Nullable)(NSArray<SBDBaseMessage *> * _Nullable, NSArray<NSNumber *> * _Nullable, BOOL, NSString * _Nullable, SBError * _Nullable))completionHandler;
+- (void)getMessageChangeLogsWithToken:(NSString * _Nullable)token timestamp:(int64_t)timestamp params:(SBDMessageChangeLogsParams * _Nonnull)params completionHandler:(void (^ _Nullable)(NSArray<SBDBaseMessage *> * _Nullable, NSArray<NSNumber *> * _Nullable, BOOL, NSString * _Nullable, SBError * _Nullable))completionHandler;
+/// Retrieves the changelogs since a specified token regarding the updated polls or the unique IDs
+/// of deleted polls in the channel.
+/// since:
+/// 4.5.0
+/// \param token Specifies the token to be the reference point for the changelogs to retrieve.
+///
+/// \param completionHandler The handler block to execute. The <code>updatedPolls</code> retrieves the
+/// updated polls. The <code>deletedPollIds</code> retrieves the unique ID of deleted polls.
+/// The <code>hasMore</code> indicates whether there are more changelogs to be retrieved. The <code>token</code>
+/// retrieves the token of the last changelog in the results. The <code>error</code> indicates whether there is
+/// an error. If there is no error, the value is <code>nil</code>.
+///
+- (void)getPollChangeLogsWithToken:(NSString * _Nullable)token completionHandler:(void (^ _Nullable)(NSArray<SBDPoll *> * _Nullable, NSArray<NSNumber *> * _Nullable, BOOL, NSString * _Nullable, SBError * _Nullable))completionHandler;
+/// Retrieves the changelogs since a specified timestamp regarding the updated polls or the unique IDs
+/// of deleted polls in the channel.
+/// since:
+/// 4.5.0
+/// \param timestamp Specifies the timestamp to be the reference point for changelogs to retrieve, in Unix milliseconds format.
+///
+/// \param completionHandler The handler block to execute. The <code>updatedPolls</code> retrieves the
+/// updated polls. The <code>deletedPollIds</code> retrieves the unique ID of deleted polls.
+/// The <code>hasMore</code> indicates whether there are more changelogs to be retrieved. The <code>token</code>
+/// retrieves the token of the last changelog in the results. The <code>error</code> indicates whether there is
+/// an error. If there is no error, the value is <code>nil</code>.
+///
+- (void)getPollChangeLogsWithTimestamp:(int64_t)timestamp completionHandler:(void (^ _Nullable)(NSArray<SBDPoll *> * _Nullable, NSArray<NSNumber *> * _Nullable, BOOL, NSString * _Nullable, SBError * _Nullable))completionHandler;
+- (void)getPollChangeLogsWithToken:(NSString * _Nullable)token timestamp:(int64_t)timestamp completionHandler:(void (^ _Nullable)(NSArray<SBDPoll *> * _Nullable, NSArray<NSNumber *> * _Nullable, BOOL, NSString * _Nullable, SBError * _Nullable))completionHandler;
 @end
 
 @class SBDThreadInfoUpdateEvent;
@@ -2438,6 +2383,8 @@ enum FeedbackRating : NSInteger;
 /// \param completionHandler The handler block to be executed after the feedback is deleted.
 ///
 - (void)deleteFeedbackWithCompletionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// warning:
+/// This method will always fail because it is an interface that is no longer supported
 /// Submit data for a form type message.
 /// A form type message contains <code>forms</code> fields in the message’s <code>extendedMessagePayload</code>.
 /// The <code>BaseMessage/forms</code> property is the instance that contains the form information.
@@ -2451,7 +2398,9 @@ enum FeedbackRating : NSInteger;
 ///
 /// \param completionHandler The handler block to be executed after the answer is submitted.
 ///
-- (void)submitFormWithFormKey:(NSString * _Nonnull)formKey answers:(NSDictionary<NSString *, NSString *> * _Nonnull)answers completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler SWIFT_DEPRECATED_MSG("This method is deprecated in 4.14.1.", "submitFormWithForm:completionHandler:");
+- (void)submitFormWithFormKey:(NSString * _Nonnull)formKey answers:(NSDictionary<NSString *, NSString *> * _Nonnull)answers completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler SWIFT_DEPRECATED_MSG("This method is deprecated in 4.14.1.", "submitMessageForm(form:completionHandler:)");
+/// warning:
+/// This method will always fail because it is an interface that is no longer supported
 /// Submit data for a form type message.
 /// A form type message contains <code>forms</code> fields in the message’s <code>extendedMessagePayload</code>.
 /// The <code>BaseMessage/forms</code> property is the instance that contains the form information.
@@ -2463,7 +2412,19 @@ enum FeedbackRating : NSInteger;
 ///
 /// \param completionHandler The handler block to be executed after the answer is submitted.
 ///
-- (void)submitFormWithForm:(SBDForm * _Nonnull)form completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+- (void)submitFormWithForm:(SBDForm * _Nonnull)form completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler SWIFT_DEPRECATED_MSG("This method is deprecated in 4.21.0.", "submitMessageForm(form:completionHandler:)");
+/// Submit data for a form type message.
+/// A form type message contains <code>form</code> fields in the message’s <code>extendedMessagePayload</code>.
+/// The <code>BaseMessage/form</code> property is the instance that contains the form information.
+/// Using the given <code>MessageForm</code> model,
+/// You can do that just by updating the <code>FormItem/temporaryAnswer</code> property of each of the <code>fields</code>.
+/// since:
+/// 4.21.0
+/// \param form A message form instance with the answer to submit updated in <code>FormField/temporaryAnswer</code>.
+///
+/// \param completionHandler The handler block to be executed after the answer is submitted.
+///
+- (void)submitMessageFormWithCompletionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
 @end
 
 enum SBDPushNotificationDeliveryOption : NSInteger;
@@ -2675,6 +2636,7 @@ typedef SWIFT_ENUM_NAMED(NSInteger, SBDCachedDataClearOrder, "CachedDataClearOrd
 };
 
 enum SBDCollectionEventSource : NSInteger;
+@class SBDEventDetail;
 
 /// Channel context
 /// since:
@@ -2683,6 +2645,10 @@ SWIFT_CLASS_NAMED("ChannelContext")
 @interface SBDChannelContext : NSObject
 /// Event source
 @property (nonatomic) enum SBDCollectionEventSource source;
+/// The <code>EventDetail</code> of current context. Includes detailed information which are provided as function parameters in <code>GroupChannelDelegate</code>.
+/// since:
+/// 4.21.0
+@property (nonatomic, strong) SBDEventDetail * _Nonnull eventDetail;
 /// Checks whether the context is from an event or not.
 ///
 /// returns:
@@ -3077,6 +3043,293 @@ SWIFT_CLASS_NAMED("EmojiContainer")
 + (nullable instancetype)buildFromSerializedData:(NSData * _Nullable)data SWIFT_WARN_UNUSED_RESULT;
 @end
 
+
+/// General class for representing event details for <code>ChannelContext</code> and <code>FeedChannelContext</code>.
+/// Every detail from delegate functions from <code>GroupChannelDelegate</code> and <code>FeedChannelDelegate</code> can be found as a subclass of <code>EventDetail</code>
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("EventDetail")
+@interface SBDEventDetail : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+/// Represents the event source detail for channel changelogs.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("ChannelChangelogs")
+@interface SBDChannelChangelogs : SBDEventDetail
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+/// Represents the event source detail for channel refresh.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("ChannelRefresh")
+@interface SBDChannelRefresh : SBDEventDetail
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channelWasChanged(_:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("ChannelChanged")
+@interface SBDChannelChanged : SBDEventDetail
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channelDidChangeMemberCount(_:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("ChannelMemberCountChanged")
+@interface SBDChannelMemberCountChanged : SBDEventDetail
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channelWasFrozen(_:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("ChannelFrozen")
+@interface SBDChannelFrozen : SBDEventDetail
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channelWasUnfrozen(_:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("ChannelUnfrozen")
+@interface SBDChannelUnfrozen : SBDEventDetail
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channelWasHidden(_:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("ChannelHidden")
+@interface SBDChannelHidden : SBDEventDetail
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channelWasDeleted(_:channelType:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("ChannelDeleted")
+@interface SBDChannelDeleted : SBDEventDetail
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channelDidUpdateOperators(_:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("OperatorUpdated")
+@interface SBDOperatorUpdated : SBDEventDetail
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channelDidUpdateTypingStatus(_:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("TypingStatusUpdated")
+@interface SBDTypingStatusUpdated : SBDEventDetail
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channelDidUpdateDeliveryStatus(_:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("DeliveryStatusUpdated")
+@interface SBDDeliveryStatusUpdated : SBDEventDetail
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channelDidUpdateReadStatus(_:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("ReadStatusUpdated")
+@interface SBDReadStatusUpdated : SBDEventDetail
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channelDidUpdatePinnedMessages(_:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("PinnedMessageUpdated")
+@interface SBDPinnedMessageUpdated : SBDEventDetail
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channel(_:didUpdateFeedbackMessage:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("UpdateFeedbackMessage")
+@interface SBDUpdateFeedbackMessage : SBDEventDetail
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channel(_:didReceiveMention:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("MentionReceived")
+@interface SBDMentionReceived : SBDEventDetail
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channel(_:userWasMuted:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("UserMuted")
+@interface SBDUserMuted : SBDEventDetail
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channel(_:userWasUnmuted:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("UserUnmuted")
+@interface SBDUserUnmuted : SBDEventDetail
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channel(_:userWasBanned:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("UserBanned")
+@interface SBDUserBanned : SBDEventDetail
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+/// Represents the event source detail for<code>GroupChannelDelegate.channel(_:userWasUnbanned:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("UserUnbanned")
+@interface SBDUserUnbanned : SBDEventDetail
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channel(_:createdMetaData:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("MetaDataCreated")
+@interface SBDMetaDataCreated : SBDEventDetail
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channel(_:updatedMetaData:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("MetaDataUpdated")
+@interface SBDMetaDataUpdated : SBDEventDetail
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channel(_:deletedMetaDataKeys:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("MetaDataDeleted")
+@interface SBDMetaDataDeleted : SBDEventDetail
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channel(_:createdMetaCounters:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("MetaCountersCreated")
+@interface SBDMetaCountersCreated : SBDEventDetail
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channel(_:updatedMetaCounters:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("MetaCountersUpdated")
+@interface SBDMetaCountersUpdated : SBDEventDetail
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channel(_:deletedMetaCountersKeys:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("MetaCountersDeleted")
+@interface SBDMetaCountersDeleted : SBDEventDetail
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channel(_:didReceiveInvitation:inviter:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("UserReceivedInvitation")
+@interface SBDUserReceivedInvitation : SBDEventDetail
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channel(_:didDeclineInvitation:inviter:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("UserDeclinedInvitation")
+@interface SBDUserDeclinedInvitation : SBDEventDetail
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channel(_:userDidJoin:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("UserJoined")
+@interface SBDUserJoined : SBDEventDetail
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channel(_:userDidLeave:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("UserLeft")
+@interface SBDUserLeft : SBDEventDetail
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
 @class SBDNotificationCategory;
 
 /// A class that represents a feed channel.
@@ -3107,6 +3360,18 @@ SWIFT_CLASS_NAMED("FeedChannel")
 @end
 
 
+@class SBDFeedChannelListQueryParams;
+@class SBDFeedChannelListQuery;
+
+@interface SBDFeedChannel (SWIFT_EXTENSION(SendbirdChatSDK))
+/// since:
+/// 4.6.0
++ (SBDFeedChannelListQuery * _Nonnull)createMyFeedChannelListQueryWithParamsBuilder:(SWIFT_NOESCAPE void (^ _Nonnull)(SBDFeedChannelListQueryParams * _Nonnull))paramsBuilder SWIFT_WARN_UNUSED_RESULT;
+/// since:
+/// 4.6.0
++ (SBDFeedChannelListQuery * _Nonnull)createMyFeedChannelListQueryWithParams:(SBDFeedChannelListQueryParams * _Nonnull)params SWIFT_WARN_UNUSED_RESULT;
+@end
+
 
 @interface SBDFeedChannel (SWIFT_EXTENSION(SendbirdChatSDK))
 /// Deserializes and reconstructs the object
@@ -3131,18 +3396,6 @@ SWIFT_CLASS_NAMED("FeedChannel")
 /// \param completionhandler The completion handler to return the result.
 ///
 - (void)markAsReadByMessages:(NSArray<SBDBaseMessage *> * _Nonnull)messages completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-@end
-
-@class SBDFeedChannelListQueryParams;
-@class SBDFeedChannelListQuery;
-
-@interface SBDFeedChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// since:
-/// 4.6.0
-+ (SBDFeedChannelListQuery * _Nonnull)createMyFeedChannelListQueryWithParamsBuilder:(SWIFT_NOESCAPE void (^ _Nonnull)(SBDFeedChannelListQueryParams * _Nonnull))paramsBuilder SWIFT_WARN_UNUSED_RESULT;
-/// since:
-/// 4.6.0
-+ (SBDFeedChannelListQuery * _Nonnull)createMyFeedChannelListQueryWithParams:(SBDFeedChannelListQueryParams * _Nonnull)params SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -3178,6 +3431,10 @@ SWIFT_CLASS_NAMED("FeedChannelContext")
 @interface SBDFeedChannelContext : NSObject
 /// Event source
 @property (nonatomic) enum SBDCollectionEventSource source;
+/// The <code>EventDetail</code> of current context. Includes detailed information which are provided as function parameters in <code>FeedChannelDelegate</code>.
+/// since:
+/// 4.21.0
+@property (nonatomic, strong) SBDEventDetail * _Nonnull eventDetail;
 /// Checks whether the context is from an event or not.
 ///
 /// returns:
@@ -3210,6 +3467,12 @@ SWIFT_CLASS_NAMED("FeedChannelListQuery")
 
 
 @interface SBDFeedChannelListQuery (SWIFT_EXTENSION(SendbirdChatSDK))
+/// Determines channel list includes empty channel. Default is <code>true</code>
+@property (nonatomic, readonly) BOOL includeEmptyChannel;
+@end
+
+
+@interface SBDFeedChannelListQuery (SWIFT_EXTENSION(SendbirdChatSDK))
 /// Copies this object
 /// \param zone optional <code>NSZone</code>
 ///
@@ -3217,12 +3480,6 @@ SWIFT_CLASS_NAMED("FeedChannelListQuery")
 /// returns:
 /// <code>FeedChannelListQuery</code> instance
 - (id _Nonnull)copyWithZone:(struct _NSZone * _Nullable)zone SWIFT_WARN_UNUSED_RESULT;
-@end
-
-
-@interface SBDFeedChannelListQuery (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Determines channel list includes empty channel. Default is <code>true</code>
-@property (nonatomic, readonly) BOOL includeEmptyChannel;
 @end
 
 
@@ -3266,6 +3523,7 @@ SWIFT_CLASS_NAMED("Feedback")
 @end
 
 
+
 @interface SBDFeedback (SWIFT_EXTENSION(SendbirdChatSDK))
 @end
 
@@ -3289,7 +3547,6 @@ typedef SWIFT_ENUM_NAMED(NSInteger, FeedbackStatus, "Status", open) {
   FeedbackStatusSubmitted = 1,
   FeedbackStatusNoFeedback = 2,
 };
-
 
 
 @class SBDThumbnail;
@@ -3410,7 +3667,7 @@ SWIFT_CLASS_NAMED("FileMessageUpdateParams")
 /// Form data
 /// since:
 /// 4.14.1
-SWIFT_CLASS_NAMED("Form")
+SWIFT_CLASS_NAMED("Form") SWIFT_DEPRECATED_MSG("This method is deprecated in 4.21.0", "SBDMessageForm")
 @interface SBDForm : NSObject <NSCopying>
 /// Unique key of form.
 @property (nonatomic, readonly, copy) NSString * _Nonnull formKey;
@@ -3444,7 +3701,7 @@ enum SBDFormInputType : NSInteger;
 /// Input field data information.
 /// since:
 /// 4.14.1
-SWIFT_CLASS_NAMED("FormField")
+SWIFT_CLASS_NAMED("FormField") SWIFT_DEPRECATED_MSG("This method is deprecated in 4.21.0", "SBDMessageFormItem")
 @interface SBDFormField : NSObject <NSCopying>
 /// Unique key of field
 @property (nonatomic, readonly, copy) NSString * _Nonnull fieldKey;
@@ -3458,6 +3715,7 @@ SWIFT_CLASS_NAMED("FormField")
 @property (nonatomic, readonly, copy) NSString * _Nullable regex;
 /// Placeholder
 @property (nonatomic, readonly, copy) NSString * _Nullable placeholder;
+/// Field to store the data to be submitted.
 /// Memory-cache reserved property for answer.
 @property (nonatomic, copy) NSString * _Nullable temporaryAnswer;
 /// constructor
@@ -3498,11 +3756,18 @@ typedef SWIFT_ENUM_NAMED(NSInteger, SBDFormInputType, "InputType", open) {
 /// Submitted answer information for specific form field.
 /// since:
 /// 4.14.1
-SWIFT_CLASS_NAMED("FormFieldAnswer")
+SWIFT_CLASS_NAMED("FormFieldAnswer") SWIFT_DEPRECATED_MSG("This method is deprecated in 4.21.0")
 @interface SBDFormFieldAnswer : NSObject
 - (nonnull instancetype)initWithFieldKey:(NSString * _Nonnull)fieldKey value:(NSString * _Nonnull)value OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_PROTOCOL_NAMED("FormFieldValidator")
+@protocol SBDFormFieldValidator
+@property (nonatomic, readonly, copy) NSString * _Nonnull key;
+- (BOOL)isValidWithInput:(NSString * _Nullable)input SWIFT_WARN_UNUSED_RESULT;
 @end
 
 @class NSStream;
@@ -3749,7 +4014,6 @@ SWIFT_CLASS_NAMED("GroupChannel")
 
 
 
-
 @interface SBDGroupChannel (SWIFT_EXTENSION(SendbirdChatSDK))
 /// Compares this object with given other object.
 /// \param object <code>Any</code> instance
@@ -3760,96 +4024,6 @@ SWIFT_CLASS_NAMED("GroupChannel")
 - (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
 @end
 
-
-
-
-
-@interface SBDGroupChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Freeze the channel. If channel is frozen, only operators can send messages to the channel.
-/// since:
-/// 3.0.89
-/// \param completionHandler The handler block to be executed after freeze.
-///
-- (void)freezeWithCompletionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Stop to freeze the channel. If It is not frozen channel, this will be ignored.
-/// since:
-/// 3.0.89
-/// \param completionHandler The handler block to be executed after stop to freeze.
-///
-- (void)unfreezeWithCompletionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-@end
-
-@class SBDScheduledFileMessageCreateParams;
-
-@interface SBDGroupChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Creates a file message to be sent at the specified time.
-/// note:
-/// If a user leaves before sending scheduled messages, the scheduled messages will be removed.
-/// since:
-/// 4.0.0
-/// \param params The instance of <code>ScheduledFileMessageCreateParams</code> that can has parameters
-/// related with file message.
-///
-/// \param completionHandler The handler block to be executed after the message is registered in the schedule.
-/// This block has no return value and takes two argument, one is a user message is registered in the schedule and other is an
-/// error made when there is something wrong to message.
-///
-- (SBDFileMessage * _Nullable)createScheduledFileMessageWithParams:(SBDScheduledFileMessageCreateParams * _Nonnull)params completionHandler:(void (^ _Nullable)(SBDFileMessage * _Nullable, SBError * _Nullable))completionHandler;
-@end
-
-@class SBDScheduledFileMessageUpdateParams;
-
-@interface SBDGroupChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Updates a scheduled file message.
-/// note:
-/// If a user leaves before sending scheduled messages, the scheduled messages will be removed.
-/// since:
-/// 4.0.0
-/// \param scheduledMessageId The scheduled message ID.
-///
-/// \param params The instance of <code>ScheduledFileMessageUpdateParams</code> that can has parameters
-/// related with file message.
-///
-/// \param completionHandler The handler block to be executed after the message is registered in the schedule.
-/// This block has no return value and takes two argument, one is a user message is registered in the schedule and other is an
-/// error made when there is something wrong to message.
-///
-- (void)updateScheduledFileMessageWithScheduledMessageId:(int64_t)scheduledMessageId params:(SBDScheduledFileMessageUpdateParams * _Nonnull)params completionHandler:(void (^ _Nullable)(SBDFileMessage * _Nullable, SBError * _Nullable))completionHandler;
-@end
-
-@class SBDScheduledUserMessageCreateParams;
-@class SBDScheduledUserMessageUpdateParams;
-
-@interface SBDGroupChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Creates a user message to be sent at the specified time.
-/// note:
-/// If a user leaves before sending scheduled messages, the scheduled messages will be removed.
-/// since:
-/// 4.0.2
-/// \param params The instance of <code>ScheduledUserMessageCreateParams</code> that can has parameters
-/// related with string message.
-///
-/// \param completionHandler The handler block to be executed after the message is registered in the schedule.
-/// This block has no return value and takes two argument, one is a user message is registered in the schedule and other is an
-/// error made when there is something wrong to message.
-///
-- (SBDUserMessage * _Nullable)createScheduledUserMessageWithParams:(SBDScheduledUserMessageCreateParams * _Nonnull)params completionHandler:(void (^ _Nullable)(SBDUserMessage * _Nullable, SBError * _Nullable))completionHandler;
-/// Updates a user message to be sent at the specified time.
-/// note:
-/// If a user leaves before sending scheduled messages, the scheduled messages will be removed.
-/// since:
-/// 4.0.0
-/// \param scheduledMessageId The scheduled message ID.
-///
-/// \param params The instance of <code>ScheduledUserMessageUpdateParams</code> that can has parameters
-/// related with string message.
-///
-/// \param completionHandler The handler block to be executed after the message is registered in the schedule.
-/// This block has no return value and takes two argument, one is a user message is registered in the schedule and other is an
-/// error made when there is something wrong to message.
-///
-- (void)updateScheduledUserMessageWithScheduledMessageId:(int64_t)scheduledMessageId userMessageParams:(SBDScheduledUserMessageUpdateParams * _Nonnull)params completionHandler:(void (^ _Nullable)(SBDUserMessage * _Nullable, SBError * _Nullable))completionHandler;
-@end
 
 
 @interface SBDGroupChannel (SWIFT_EXTENSION(SendbirdChatSDK))
@@ -3863,201 +4037,47 @@ SWIFT_CLASS_NAMED("GroupChannel")
 @end
 
 
-@interface SBDGroupChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Sends the scheduled message now.
-/// since:
-/// 4.0.0
-/// \param scheduledMessageId The scheduled message ID.
-///
-/// \param completionHandler The handler block to be executed after sending the scheduled message or when an error occurs.
-///
-- (void)sendScheduledMessageNowWithScheduledMessageId:(int64_t)scheduledMessageId completionHandler:(void (^ _Nonnull)(SBError * _Nullable))completionHandler;
-/// Cancels the scheduled message.
-/// since:
-/// 4.0.0
-/// \param scheduledMessageId The scheduled message ID.
-///
-/// \param completionHandler The handler block to be executed after canceling the scheduled message or when an error occurs.
-///
-- (void)cancelScheduledMessageWithScheduledMessageId:(int64_t)scheduledMessageId completionHandler:(void (^ _Nonnull)(SBError * _Nullable))completionHandler;
-@end
 
 
 
 
+
+
+@class SBDGroupChannelTotalUnreadChannelCountParams;
 
 @interface SBDGroupChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Resets the history in this channel.
-/// \param completionHandler The handler block to execute.
-///
-- (void)resetMyHistoryWithCompletionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Changes a setting that decides which push notification for the current user to receive in the group channel.
-/// If a value of option is <code>.default</code>, a push trigger option in this group channel follows a push trigger option
-/// of the current user. It is related with <code>SendbirdChat setPushTriggerOption(_:completionHandler:)</code>.
-/// since:
-/// 3.0.128
-/// \param option options to choose which push notification for the current user to receive.
-///
-/// \param completionHandler handler block to execute when setting a push trigger option of the current user is completed.
-///
-- (void)setMyPushTriggerOption:(enum SBDGroupChannelPushTriggerOption)option completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Requests a setting that decides which push notification for the current user to receive in the group channel.
-/// since:
-/// 3.0.128
-/// \param completionHandler The handler block to execute when getting a push trigger option of the current user is completed.
-///
-- (void)getMyPushTriggerOptionWithCompletionHandler:(void (^ _Nonnull)(enum SBDGroupChannelPushTriggerOption, SBError * _Nullable))completionHandler;
-/// Sets count preference of current user.
-/// since:
-/// 3.0.102
-/// \param myCountPreference Preference is type of <code>CountPreference</code>. The default value is <code>.all</code>.
-///
-- (void)setMyCountPreference:(enum SBDCountPreference)myCountPreference completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+@property (nonatomic) BOOL sendMarkAsReadEnable SWIFT_UNAVAILABLE_MSG("`sendMarkAsReadEnable` has been removed.");
+@property (nonatomic) BOOL isPushEnabled SWIFT_UNAVAILABLE_MSG("`isPushEnabled` has been removed.");
+- (void)getChannelFromCacheWithChannelUrl:(NSString * _Nonnull)withChannelUrl SWIFT_UNAVAILABLE_MSG("`getChannelFromCache(withChannelUrl:)` has been removed.");
+- (void)getReadReceiptOf:(SBDBaseMessage * _Nonnull)message SWIFT_UNAVAILABLE_MSG("`getReadReceipt(of:)` has been removed.");
++ (void)createChannelWithName:(NSString * _Nullable)name isDistinct:(BOOL)isDistinct userIds:(NSArray<NSString *> * _Nonnull)userIds coverImage:(NSData * _Nonnull)coverImage coverImageName:(NSString * _Nonnull)coverImageName data:(NSString * _Nullable)data customType:(NSString * _Nullable)customType progressHandler:(void (^ _Nullable)(int64_t, int64_t, int64_t))progressHandler completionHandler:(void (^ _Nonnull)(SBDGroupChannel * _Nullable, SBError * _Nullable))completionHandler SWIFT_UNAVAILABLE_MSG("'createChannel' has been renamed to 'createChannelWithParams:progressHandler:completionHandler:'");
+- (void)updateWithName:(NSString * _Nullable)name isDistinct:(BOOL)isDistinct coverImage:(NSData * _Nullable)coverImage coverImageName:(NSString * _Nullable)coverImageName data:(NSString * _Nullable)data customType:(NSString * _Nullable)customType progressHandler:(void (^ _Nullable)(int64_t, int64_t, int64_t))progressHandler completionHandler:(void (^ _Nonnull)(SBDGroupChannel * _Nullable, SBError * _Nullable))completionHandler SWIFT_UNAVAILABLE_MSG("'update' has been renamed to 'updateChannelWithParams:progressHandler:completionHandler:'");
+- (void)hideWithHidePreviousMessages:(BOOL)hidePreviousMessages completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler SWIFT_UNAVAILABLE_MSG("'hide' has been renamed to 'hideChannelWithHidePreviousMessages:completionHandler:'");
+- (int64_t)getLastSeenAtBy:(SBDUser * _Nonnull)by SWIFT_WARN_UNUSED_RESULT SWIFT_UNAVAILABLE_MSG("'getLastSeenAt' has been renamed to 'getReadMembersWithMessage:includeAllMembers:'");
+- (int64_t)getLastSeenAtByUserId:(SBDUser * _Nonnull)byUserId SWIFT_WARN_UNUSED_RESULT SWIFT_UNAVAILABLE_MSG("'getLastSeenAt' has been renamed to 'getReadMembersWithMessage:includeAllMembers:'");
+- (NSInteger)getDeliveryReceipt SWIFT_WARN_UNUSED_RESULT SWIFT_UNAVAILABLE_MSG("'getDeliveryReceipt' has been renamed to 'getUndeliveredMemberCount:'");
+- (NSArray<SBDUser *> * _Nonnull)getTypingMembers SWIFT_WARN_UNUSED_RESULT SWIFT_UNAVAILABLE_MSG("'getTypingMembers' has been renamed to 'getTypingUsers'");
+- (void)setPushPreferenceWithPushOn:(BOOL)_ completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler SWIFT_UNAVAILABLE_MSG("`setPushPreferenceWithPushOn(_:completionHandler:)` has been removed.");
++ (void)getTotalUnreadMessageCountWithCompletionHandler:(void (^ _Nullable)(NSUInteger, SBError * _Nonnull))completionHandler SWIFT_UNAVAILABLE_MSG("Use `SendbirdChat.getTotalUnreadMessageCount(completionHandler:)` instead.");
++ (void)getTotalUnreadMessageCountWith:(SBDGroupChannelTotalUnreadChannelCountParams * _Nonnull)with completionHandler:(void (^ _Nullable)(NSUInteger, SBError * _Nonnull))completionHandler SWIFT_UNAVAILABLE_MSG("Use `SendbirdChat.getTotalUnreadMessageCount(params:completionHandler:)` instead.");
++ (void)getTotalUnreadMessageCountWithChannelCustomTypes:(NSArray<NSString *> * _Nullable)withChannelCustomTypes completionHandler:(void (^ _Nullable)(NSUInteger, SBError * _Nonnull))completionHandler SWIFT_UNAVAILABLE_MSG("Use `SendbirdChat.getTotalUnreadMessageCount(params:completionHandler:)` instead.");
 @end
-
-
-@interface SBDGroupChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Starts typing. The other <em>members</em> in the channel will receive an event.
-/// The event will be received in <code>channelDidUpdateTypingStatus(_:)</code> of <code>GroupChannelDelegate</code>.
-- (void)startTyping;
-/// Ends typing. The other <em>members</em> in the channel will receive an event.
-/// The event will be received in <code>channelDidUpdateTypingStatus(_:)</code> of <code>GroupChannelDelegate</code>.
-- (void)endTyping;
-/// Checks any members in the channel has been typing
-///
-/// returns:
-/// <code>true</code> when other users are typing in this channel.
-- (BOOL)isTyping SWIFT_WARN_UNUSED_RESULT;
-/// Returns the users who are typing now.
-/// since:
-/// 3.0.202
-///
-/// returns:
-/// The users who are typing now.
-- (NSArray<SBDUser *> * _Nullable)getTypingUsers SWIFT_WARN_UNUSED_RESULT;
-@end
-
-
-
-@interface SBDGroupChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Returns how many <em>members</em> haven’t been read the given message yet.
-/// since:
-/// 3.0.185
-/// \param message The message.
-///
-///
-/// returns:
-/// Number of unread member count. Zero if all <em>members</em> read the message.
-- (NSInteger)getUnreadMemberCount:(SBDBaseMessage * _Nonnull)message SWIFT_WARN_UNUSED_RESULT;
-/// Returns the <em>members</em> who read the given message.
-/// since:
-/// 3.0.115
-/// \param message The message.
-///
-/// \param includeAllMembers If <code>true</code>, the return value includes the current user and the sender of the message.
-///
-///
-/// returns:
-/// Members who read the message.
-- (NSArray<SBDMember *> * _Nonnull)getReadMembersWithMessage:(SBDBaseMessage * _Nonnull)message includeAllMembers:(BOOL)includeAllMembers SWIFT_WARN_UNUSED_RESULT;
-/// Returns the <em>members</em> who didn’t read the given message.
-/// since:
-/// 3.0.115
-/// \param message The message.
-///
-/// \param includeAllMembers If <code>true</code>, the return value includes the current user and the sender of the message.
-///
-///
-/// returns:
-/// Members who don’t read the message.
-- (NSArray<SBDMember *> * _Nonnull)getUnreadMembersWithMessage:(SBDBaseMessage * _Nonnull)message includeAllMembers:(BOOL)includeAllMembers SWIFT_WARN_UNUSED_RESULT;
-/// Returns how many <em>members</em> haven’t been delivery the given message yet.
-/// since:
-/// 3.0.185
-/// \param message The message.
-///
-///
-/// returns:
-/// Number of undelivered member count. Zero if all <em>members</em> delivered the message.
-- (NSInteger)getUndeliveredMemberCount:(SBDBaseMessage * _Nonnull)message SWIFT_WARN_UNUSED_RESULT;
-/// Returns the read status.
-/// since:
-/// 3.0.115
-/// [
-/// USER_ID: [
-/// “user”: <em>User</em> object,
-/// “last_seen_at”: <em>Int64</em>,
-/// ]
-/// ]
-/// <code>USER_ID</code> is the user ID as a key. Each <code>USER_ID</code> has a <code>Dictionary</code> which includes
-/// <code>User</code> object and <code>Int64</code>. The “user” is a key of <code>User</code> object and the
-/// “last_seen_at” is a key of <code>Int64</code> object.
-/// \param includeAllMembers If true, the return value includes the current user and the sender of the message.
-///
-///
-/// returns:
-/// The read status. If there’s no data, it will be an empty dictionary.
-- (NSDictionary<NSString *, NSDictionary<NSString *, id> *> * _Nonnull)getReadStatusIncludingAllMembers:(BOOL)includeAllMembers SWIFT_WARN_UNUSED_RESULT;
-@end
-
-@class SBDMultipleFilesMessageCreateParams;
-@class SBDUploadableFileInfo;
-@class SBDMultipleFilesMessage;
-
-@interface SBDGroupChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Sends a multipleFilesMessage with files (file or file URL) of params.
-/// For binary files in params.files, the data will be uploaded to Sendbird storage.
-/// For URL files in params.files, the URLs will be sent in the message.
-/// \param params An intance of <code>MultipleFilesMessageCreateParams</code> that contains parameters needed to create a MultipleFilesMessage.
-///
-/// \param fileUploadHandler A handler block to be executed after each file is uploaded. This block has no return value, and takes four arguments:
-/// first is requestId of a file, second is the index of a file, third is the UploadableFileInfo, and the fourth is the error made
-/// when there is a problem in uploading the file. This handler is called for both file-based UploadableFileInfo and file URL-based UploadableFileInfo.
-///
-/// \param completionHandler A handler block to be executed after the message is sent. This block has no return value, and takes two arguments:
-/// one is a multipleFilesMessage that is sent, and the other is an error made when there is a problem in sending the message.
-///
-///
-/// returns:
-/// A temporary multipleFilesMessage being sent to the Sendbird server. The sending status of the message is <code>pending</code>. The message has a request ID instead of a message ID.
-- (SBDMultipleFilesMessage * _Nullable)sendMultipleFilesMessageWithParams:(SBDMultipleFilesMessageCreateParams * _Nonnull)params fileUploadHandler:(void (^ _Nullable)(NSString * _Nonnull, NSInteger, SBDUploadableFileInfo * _Nonnull, SBError * _Nullable))fileUploadHandler completionHandler:(void (^ _Nonnull)(SBDMultipleFilesMessage * _Nullable, SBError * _Nullable))completionHandler;
-/// Copies a multiple files message to the target channel.
-/// note:
-/// Only copies the message whose <code>BaseMessage/sendingStatus</code> is <code>MessageSendingStatus/succeeded</code>
-/// since:
-/// 4.10.0
-/// \param message <code>MultipleFilesMessage</code> object.
-///
-/// \param targetChannel <code>GroupChannel</code> object that wants to copy the <code>message</code>.
-///
-/// \param completionHandler The handler block to execute when the copying is completed.
-///
-///
-/// returns:
-/// The temporary <code>MultipleFilesMessage</code> object that contains a <em>request ID</em> instead of a message ID. If there’s any error, <code>nil</code> could be returned.
-- (SBDMultipleFilesMessage * _Nullable)copyMultipleFilesMessageWithMessage:(SBDMultipleFilesMessage * _Nonnull)message toTargetChannel:(SBDGroupChannel * _Nonnull)targetChannel completionHandler:(void (^ _Nullable)(SBDMultipleFilesMessage * _Nullable, SBError * _Nullable))completionHandler;
-/// Attempts to resend a failed mutiple files message.
-/// note:
-/// Only resends the message that its <code>BaseMessage/sendingStatus</code> is <code>MessageSendingStatus/failed</code>
-/// since:
-/// 4.10.0
-/// \param message <code>MultipleFilesMessage</code> object to resend.
-///
-/// \param fileUploadHandler A handler block to execute after each file is uploaded. This block takes four arguments: the <em>requestId</em> of a file,  the <em>index</em> of a file, <code>UploadableFileInfo</code> object, and the <em>error</em>
-///
-/// \param completionHandler The handler block to execute when the copying is completed.
-///
-/// \param completionHandler The handler block to excute when the sending is completed. When the sending is failed, the parameter represents the failed message.
-///
-///
-/// returns:
-/// A temporary <code>MultipleFilesMessage</code> object being sent to the Sendbird server.
-- (SBDMultipleFilesMessage * _Nullable)resendMultipleFilesMessageWithMessage:(SBDMultipleFilesMessage * _Nonnull)message fileUploadHandler:(void (^ _Nullable)(NSString * _Nonnull, NSInteger, SBDUploadableFileInfo * _Nonnull, SBError * _Nullable))fileUploadHandler completionHandler:(void (^ _Nullable)(SBDMultipleFilesMessage * _Nullable, SBError * _Nullable))completionHandler;
-@end
-
 
 @class SBDGroupChannelCreateParams;
 @class SBDGroupChannelUpdateParams;
+@class SBDMultipleFilesMessageCreateParams;
+@class SBDUploadableFileInfo;
+@class SBDMultipleFilesMessage;
+@class SBDScheduledFileMessageCreateParams;
+@class SBDScheduledFileMessageUpdateParams;
+@class SBDScheduledUserMessageCreateParams;
+@class SBDScheduledUserMessageUpdateParams;
+@class SBDGroupChannelListQuery;
+@class SBDGroupChannelListQueryParams;
+@class SBDPublicGroupChannelListQuery;
+@class SBDPublicGroupChannelListQueryParams;
+@class SBDMemberListQuery;
+@class SBDMemberListQueryParams;
 
 @interface SBDGroupChannel (SWIFT_EXTENSION(SendbirdChatSDK))
 /// Refreshes this channel instance.
@@ -4147,103 +4167,138 @@ SWIFT_CLASS_NAMED("GroupChannel")
 /// \param completionHandler The handler block to execute.
 ///
 - (void)deleteChannelWithCompletionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-@end
-
-
-@class SBDGroupChannelListQuery;
-@class SBDGroupChannelListQueryParams;
-@class SBDPublicGroupChannelListQuery;
-@class SBDPublicGroupChannelListQueryParams;
-@class SBDMemberListQuery;
-@class SBDMemberListQueryParams;
-
-@interface SBDGroupChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Creates a query for my group channel list with default params.
+/// Sends a multipleFilesMessage with files (file or file URL) of params.
+/// For binary files in params.files, the data will be uploaded to Sendbird storage.
+/// For URL files in params.files, the URLs will be sent in the message.
+/// \param params An intance of <code>MultipleFilesMessageCreateParams</code> that contains parameters needed to create a MultipleFilesMessage.
 ///
-/// returns:
-/// GroupChannelListQuery instance for the current user.
-+ (SBDGroupChannelListQuery * _Nonnull)createMyGroupChannelListQuery SWIFT_WARN_UNUSED_RESULT;
-/// Creates a query for my group channel list with paramsBuilder.
-/// \param paramsBuilder The builder closure for setting <code>GroupChannelListQueryParams</code>.
+/// \param fileUploadHandler A handler block to be executed after each file is uploaded. This block has no return value, and takes four arguments:
+/// first is requestId of a file, second is the index of a file, third is the UploadableFileInfo, and the fourth is the error made
+/// when there is a problem in uploading the file. This handler is called for both file-based UploadableFileInfo and file URL-based UploadableFileInfo.
+///
+/// \param completionHandler A handler block to be executed after the message is sent. This block has no return value, and takes two arguments:
+/// one is a multipleFilesMessage that is sent, and the other is an error made when there is a problem in sending the message.
 ///
 ///
 /// returns:
-/// GroupChannelListQuery instance for the current user.
-+ (SBDGroupChannelListQuery * _Nonnull)createMyGroupChannelListQueryWithParamsBuilder:(SWIFT_NOESCAPE void (^ _Nonnull)(SBDGroupChannelListQueryParams * _Nonnull))paramsBuilder SWIFT_WARN_UNUSED_RESULT;
-/// Creates a query for my group channel list.
-/// \param params <code>GroupChannelListQueryParams</code>
+/// A temporary multipleFilesMessage being sent to the Sendbird server. The sending status of the message is <code>pending</code>. The message has a request ID instead of a message ID.
+- (SBDMultipleFilesMessage * _Nullable)sendMultipleFilesMessageWithParams:(SBDMultipleFilesMessageCreateParams * _Nonnull)params fileUploadHandler:(void (^ _Nullable)(NSString * _Nonnull, NSInteger, SBDUploadableFileInfo * _Nonnull, SBError * _Nullable))fileUploadHandler completionHandler:(void (^ _Nonnull)(SBDMultipleFilesMessage * _Nullable, SBError * _Nullable))completionHandler;
+/// Creates a file message to be sent at the specified time.
+/// note:
+/// If a user leaves before sending scheduled messages, the scheduled messages will be removed.
+/// since:
+/// 4.0.0
+/// \param params The instance of <code>ScheduledFileMessageCreateParams</code> that can has parameters
+/// related with file message.
+///
+/// \param completionHandler The handler block to be executed after the message is registered in the schedule.
+/// This block has no return value and takes two argument, one is a user message is registered in the schedule and other is an
+/// error made when there is something wrong to message.
+///
+- (SBDFileMessage * _Nullable)createScheduledFileMessageWithParams:(SBDScheduledFileMessageCreateParams * _Nonnull)params completionHandler:(void (^ _Nullable)(SBDFileMessage * _Nullable, SBError * _Nullable))completionHandler;
+/// Updates a scheduled file message.
+/// note:
+/// If a user leaves before sending scheduled messages, the scheduled messages will be removed.
+/// since:
+/// 4.0.0
+/// \param scheduledMessageId The scheduled message ID.
+///
+/// \param params The instance of <code>ScheduledFileMessageUpdateParams</code> that can has parameters
+/// related with file message.
+///
+/// \param completionHandler The handler block to be executed after the message is registered in the schedule.
+/// This block has no return value and takes two argument, one is a user message is registered in the schedule and other is an
+/// error made when there is something wrong to message.
+///
+- (void)updateScheduledFileMessageWithScheduledMessageId:(int64_t)scheduledMessageId params:(SBDScheduledFileMessageUpdateParams * _Nonnull)params completionHandler:(void (^ _Nullable)(SBDFileMessage * _Nullable, SBError * _Nullable))completionHandler;
+/// Creates a user message to be sent at the specified time.
+/// note:
+/// If a user leaves before sending scheduled messages, the scheduled messages will be removed.
+/// since:
+/// 4.0.2
+/// \param params The instance of <code>ScheduledUserMessageCreateParams</code> that can has parameters
+/// related with string message.
+///
+/// \param completionHandler The handler block to be executed after the message is registered in the schedule.
+/// This block has no return value and takes two argument, one is a user message is registered in the schedule and other is an
+/// error made when there is something wrong to message.
+///
+- (SBDUserMessage * _Nullable)createScheduledUserMessageWithParams:(SBDScheduledUserMessageCreateParams * _Nonnull)params completionHandler:(void (^ _Nullable)(SBDUserMessage * _Nullable, SBError * _Nullable))completionHandler;
+/// Updates a user message to be sent at the specified time.
+/// note:
+/// If a user leaves before sending scheduled messages, the scheduled messages will be removed.
+/// since:
+/// 4.0.0
+/// \param scheduledMessageId The scheduled message ID.
+///
+/// \param params The instance of <code>ScheduledUserMessageUpdateParams</code> that can has parameters
+/// related with string message.
+///
+/// \param completionHandler The handler block to be executed after the message is registered in the schedule.
+/// This block has no return value and takes two argument, one is a user message is registered in the schedule and other is an
+/// error made when there is something wrong to message.
+///
+- (void)updateScheduledUserMessageWithScheduledMessageId:(int64_t)scheduledMessageId userMessageParams:(SBDScheduledUserMessageUpdateParams * _Nonnull)params completionHandler:(void (^ _Nullable)(SBDUserMessage * _Nullable, SBError * _Nullable))completionHandler;
+/// Sends the scheduled message now.
+/// since:
+/// 4.0.0
+/// \param scheduledMessageId The scheduled message ID.
+///
+/// \param completionHandler The handler block to be executed after sending the scheduled message or when an error occurs.
+///
+- (void)sendScheduledMessageNowWithScheduledMessageId:(int64_t)scheduledMessageId completionHandler:(void (^ _Nonnull)(SBError * _Nullable))completionHandler;
+/// Cancels the scheduled message.
+/// since:
+/// 4.0.0
+/// \param scheduledMessageId The scheduled message ID.
+///
+/// \param completionHandler The handler block to be executed after canceling the scheduled message or when an error occurs.
+///
+- (void)cancelScheduledMessageWithScheduledMessageId:(int64_t)scheduledMessageId completionHandler:(void (^ _Nonnull)(SBError * _Nullable))completionHandler;
+/// Copies a multiple files message to the target channel.
+/// note:
+/// Only copies the message whose <code>BaseMessage/sendingStatus</code> is <code>MessageSendingStatus/succeeded</code>
+/// since:
+/// 4.10.0
+/// \param message <code>MultipleFilesMessage</code> object.
+///
+/// \param targetChannel <code>GroupChannel</code> object that wants to copy the <code>message</code>.
+///
+/// \param completionHandler The handler block to execute when the copying is completed.
 ///
 ///
 /// returns:
-/// GroupChannelListQuery instance for the current user.
-+ (SBDGroupChannelListQuery * _Nonnull)createMyGroupChannelListQueryWithParams:(SBDGroupChannelListQueryParams * _Nonnull)params SWIFT_WARN_UNUSED_RESULT;
-/// Creates a query for public group channel list.
+/// The temporary <code>MultipleFilesMessage</code> object that contains a <em>request ID</em> instead of a message ID. If there’s any error, <code>nil</code> could be returned.
+- (SBDMultipleFilesMessage * _Nullable)copyMultipleFilesMessageWithMessage:(SBDMultipleFilesMessage * _Nonnull)message toTargetChannel:(SBDGroupChannel * _Nonnull)targetChannel completionHandler:(void (^ _Nullable)(SBDMultipleFilesMessage * _Nullable, SBError * _Nullable))completionHandler;
+/// Attempts to resend a failed mutiple files message.
+/// note:
+/// Only resends the message that its <code>BaseMessage/sendingStatus</code> is <code>MessageSendingStatus/failed</code>
+/// since:
+/// 4.10.0
+/// \param message <code>MultipleFilesMessage</code> object to resend.
 ///
-/// returns:
-/// The instance to query public group channels.
-+ (SBDPublicGroupChannelListQuery * _Nonnull)createPublicGroupChannelListQuery SWIFT_WARN_UNUSED_RESULT;
-/// Creates a query for public group channel list.
-/// \param paramsBuilder The builder closure for setting <code>PublicGroupChannelListQueryParams</code>.
+/// \param fileUploadHandler A handler block to execute after each file is uploaded. This block takes four arguments: the <em>requestId</em> of a file,  the <em>index</em> of a file, <code>UploadableFileInfo</code> object, and the <em>error</em>
 ///
+/// \param completionHandler The handler block to execute when the copying is completed.
 ///
-/// returns:
-/// The instance to query public group channels.
-+ (SBDPublicGroupChannelListQuery * _Nonnull)createPublicGroupChannelListQueryWithParamsBuilder:(SWIFT_NOESCAPE void (^ _Nonnull)(SBDPublicGroupChannelListQueryParams * _Nonnull))paramsBuilder SWIFT_WARN_UNUSED_RESULT;
-/// Creates a query for public group channel list.
-/// \param params The params object to change query condition.
+/// \param completionHandler The handler block to excute when the sending is completed. When the sending is failed, the parameter represents the failed message.
 ///
 ///
 /// returns:
-/// The instance to query public group channels.
-+ (SBDPublicGroupChannelListQuery * _Nonnull)createPublicGroupChannelListQueryWithParams:(SBDPublicGroupChannelListQueryParams * _Nonnull)params SWIFT_WARN_UNUSED_RESULT;
-/// Creates a query for members in group channel.
-/// \param channelURL channel url
+/// A temporary <code>MultipleFilesMessage</code> object being sent to the Sendbird server.
+- (SBDMultipleFilesMessage * _Nullable)resendMultipleFilesMessageWithMessage:(SBDMultipleFilesMessage * _Nonnull)message fileUploadHandler:(void (^ _Nullable)(NSString * _Nonnull, NSInteger, SBDUploadableFileInfo * _Nonnull, SBError * _Nullable))fileUploadHandler completionHandler:(void (^ _Nullable)(SBDMultipleFilesMessage * _Nullable, SBError * _Nullable))completionHandler;
+/// Freeze the channel. If channel is frozen, only operators can send messages to the channel.
+/// since:
+/// 3.0.89
+/// \param completionHandler The handler block to be executed after freeze.
 ///
+- (void)freezeWithCompletionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Stop to freeze the channel. If It is not frozen channel, this will be ignored.
+/// since:
+/// 3.0.89
+/// \param completionHandler The handler block to be executed after stop to freeze.
 ///
-/// returns:
-/// The instance to query the members in group channel.
-+ (SBDMemberListQuery * _Nonnull)createMemberListQueryWithChannelURL:(NSString * _Nonnull)channelURL SWIFT_WARN_UNUSED_RESULT;
-/// Creates a query for members in group channel.
-/// \param channelURL channel url
-///
-/// \param paramsBuilder The builder closure for setting <code>MemberListQueryParams</code>.
-///
-///
-/// returns:
-/// The instance to query the members in group channel.
-+ (SBDMemberListQuery * _Nonnull)createMemberListQueryWithChannelURL:(NSString * _Nonnull)channelURL paramsBuilder:(SWIFT_NOESCAPE void (^ _Nonnull)(SBDMemberListQueryParams * _Nonnull))paramsBuilder SWIFT_WARN_UNUSED_RESULT;
-/// Creates a query for members in group channel.
-/// \param channelURL channel url
-///
-/// \param params The params object to change query condition.
-///
-///
-/// returns:
-/// The instance to query the members in group channel.
-+ (SBDMemberListQuery * _Nonnull)createMemberListQueryWithChannelURL:(NSString * _Nonnull)channelURL params:(SBDMemberListQueryParams * _Nonnull)params SWIFT_WARN_UNUSED_RESULT;
-/// Creates a query for members in group channel.
-///
-/// returns:
-/// The instance to query the members in group channel.
-- (SBDMemberListQuery * _Nullable)createMemberListQuery SWIFT_WARN_UNUSED_RESULT;
-/// Creates a query for members in group channel.
-/// \param paramsBuilder The builder closure for setting <code>MemberListQueryParams</code>.
-///
-///
-/// returns:
-/// The instance to query the members in group channel.
-- (SBDMemberListQuery * _Nullable)createMemberListQueryWithParamsBuilder:(SWIFT_NOESCAPE void (^ _Nonnull)(SBDMemberListQueryParams * _Nonnull))paramsBuilder SWIFT_WARN_UNUSED_RESULT;
-/// Creates a query for members in group channel.
-/// \param params The params object to change query condition.
-///
-///
-/// returns:
-/// The instance to query the members in group channel.
-- (SBDMemberListQuery * _Nullable)createMemberListQueryWithParams:(SBDMemberListQueryParams * _Nonnull)params SWIFT_WARN_UNUSED_RESULT;
-@end
-
-
-@interface SBDGroupChannel (SWIFT_EXTENSION(SendbirdChatSDK))
+- (void)unfreezeWithCompletionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
 /// Invites a single user to the group channel.
 /// \param user The user to be invited.
 ///
@@ -4350,26 +4405,190 @@ SWIFT_CLASS_NAMED("GroupChannel")
 /// \param completionHandler The handler block to be executed.
 ///
 - (void)notifyScreenshotWasTakenWithCompletionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-@end
-
-@class SBDGroupChannelTotalUnreadChannelCountParams;
-
-@interface SBDGroupChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-@property (nonatomic) BOOL sendMarkAsReadEnable SWIFT_UNAVAILABLE_MSG("`sendMarkAsReadEnable` has been removed.");
-@property (nonatomic) BOOL isPushEnabled SWIFT_UNAVAILABLE_MSG("`isPushEnabled` has been removed.");
-- (void)getChannelFromCacheWithChannelUrl:(NSString * _Nonnull)withChannelUrl SWIFT_UNAVAILABLE_MSG("`getChannelFromCache(withChannelUrl:)` has been removed.");
-- (void)getReadReceiptOf:(SBDBaseMessage * _Nonnull)message SWIFT_UNAVAILABLE_MSG("`getReadReceipt(of:)` has been removed.");
-+ (void)createChannelWithName:(NSString * _Nullable)name isDistinct:(BOOL)isDistinct userIds:(NSArray<NSString *> * _Nonnull)userIds coverImage:(NSData * _Nonnull)coverImage coverImageName:(NSString * _Nonnull)coverImageName data:(NSString * _Nullable)data customType:(NSString * _Nullable)customType progressHandler:(void (^ _Nullable)(int64_t, int64_t, int64_t))progressHandler completionHandler:(void (^ _Nonnull)(SBDGroupChannel * _Nullable, SBError * _Nullable))completionHandler SWIFT_UNAVAILABLE_MSG("'createChannel' has been renamed to 'createChannelWithParams:progressHandler:completionHandler:'");
-- (void)updateWithName:(NSString * _Nullable)name isDistinct:(BOOL)isDistinct coverImage:(NSData * _Nullable)coverImage coverImageName:(NSString * _Nullable)coverImageName data:(NSString * _Nullable)data customType:(NSString * _Nullable)customType progressHandler:(void (^ _Nullable)(int64_t, int64_t, int64_t))progressHandler completionHandler:(void (^ _Nonnull)(SBDGroupChannel * _Nullable, SBError * _Nullable))completionHandler SWIFT_UNAVAILABLE_MSG("'update' has been renamed to 'updateChannelWithParams:progressHandler:completionHandler:'");
-- (void)hideWithHidePreviousMessages:(BOOL)hidePreviousMessages completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler SWIFT_UNAVAILABLE_MSG("'hide' has been renamed to 'hideChannelWithHidePreviousMessages:completionHandler:'");
-- (int64_t)getLastSeenAtBy:(SBDUser * _Nonnull)by SWIFT_WARN_UNUSED_RESULT SWIFT_UNAVAILABLE_MSG("'getLastSeenAt' has been renamed to 'getReadMembersWithMessage:includeAllMembers:'");
-- (int64_t)getLastSeenAtByUserId:(SBDUser * _Nonnull)byUserId SWIFT_WARN_UNUSED_RESULT SWIFT_UNAVAILABLE_MSG("'getLastSeenAt' has been renamed to 'getReadMembersWithMessage:includeAllMembers:'");
-- (NSInteger)getDeliveryReceipt SWIFT_WARN_UNUSED_RESULT SWIFT_UNAVAILABLE_MSG("'getDeliveryReceipt' has been renamed to 'getUndeliveredMemberCount:'");
-- (NSArray<SBDUser *> * _Nonnull)getTypingMembers SWIFT_WARN_UNUSED_RESULT SWIFT_UNAVAILABLE_MSG("'getTypingMembers' has been renamed to 'getTypingUsers'");
-- (void)setPushPreferenceWithPushOn:(BOOL)_ completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler SWIFT_UNAVAILABLE_MSG("`setPushPreferenceWithPushOn(_:completionHandler:)` has been removed.");
-+ (void)getTotalUnreadMessageCountWithCompletionHandler:(void (^ _Nullable)(NSUInteger, SBError * _Nonnull))completionHandler SWIFT_UNAVAILABLE_MSG("Use `SendbirdChat.getTotalUnreadMessageCount(completionHandler:)` instead.");
-+ (void)getTotalUnreadMessageCountWith:(SBDGroupChannelTotalUnreadChannelCountParams * _Nonnull)with completionHandler:(void (^ _Nullable)(NSUInteger, SBError * _Nonnull))completionHandler SWIFT_UNAVAILABLE_MSG("Use `SendbirdChat.getTotalUnreadMessageCount(params:completionHandler:)` instead.");
-+ (void)getTotalUnreadMessageCountWithChannelCustomTypes:(NSArray<NSString *> * _Nullable)withChannelCustomTypes completionHandler:(void (^ _Nullable)(NSUInteger, SBError * _Nonnull))completionHandler SWIFT_UNAVAILABLE_MSG("Use `SendbirdChat.getTotalUnreadMessageCount(params:completionHandler:)` instead.");
+/// Returns how many <em>members</em> haven’t been read the given message yet.
+/// since:
+/// 3.0.185
+/// \param message The message.
+///
+///
+/// returns:
+/// Number of unread member count. Zero if all <em>members</em> read the message.
+- (NSInteger)getUnreadMemberCount:(SBDBaseMessage * _Nonnull)message SWIFT_WARN_UNUSED_RESULT;
+/// Returns the <em>members</em> who read the given message.
+/// since:
+/// 3.0.115
+/// \param message The message.
+///
+/// \param includeAllMembers If <code>true</code>, the return value includes the current user and the sender of the message.
+///
+///
+/// returns:
+/// Members who read the message.
+- (NSArray<SBDMember *> * _Nonnull)getReadMembersWithMessage:(SBDBaseMessage * _Nonnull)message includeAllMembers:(BOOL)includeAllMembers SWIFT_WARN_UNUSED_RESULT;
+/// Returns the <em>members</em> who didn’t read the given message.
+/// since:
+/// 3.0.115
+/// \param message The message.
+///
+/// \param includeAllMembers If <code>true</code>, the return value includes the current user and the sender of the message.
+///
+///
+/// returns:
+/// Members who don’t read the message.
+- (NSArray<SBDMember *> * _Nonnull)getUnreadMembersWithMessage:(SBDBaseMessage * _Nonnull)message includeAllMembers:(BOOL)includeAllMembers SWIFT_WARN_UNUSED_RESULT;
+/// Returns how many <em>members</em> haven’t been delivery the given message yet.
+/// since:
+/// 3.0.185
+/// \param message The message.
+///
+///
+/// returns:
+/// Number of undelivered member count. Zero if all <em>members</em> delivered the message.
+- (NSInteger)getUndeliveredMemberCount:(SBDBaseMessage * _Nonnull)message SWIFT_WARN_UNUSED_RESULT;
+/// Returns the read status.
+/// since:
+/// 3.0.115
+/// [
+/// USER_ID: [
+/// “user”: <em>User</em> object,
+/// “last_seen_at”: <em>Int64</em>,
+/// ]
+/// ]
+/// <code>USER_ID</code> is the user ID as a key. Each <code>USER_ID</code> has a <code>Dictionary</code> which includes
+/// <code>User</code> object and <code>Int64</code>. The “user” is a key of <code>User</code> object and the
+/// “last_seen_at” is a key of <code>Int64</code> object.
+/// \param includeAllMembers If true, the return value includes the current user and the sender of the message.
+///
+///
+/// returns:
+/// The read status. If there’s no data, it will be an empty dictionary.
+- (NSDictionary<NSString *, NSDictionary<NSString *, id> *> * _Nonnull)getReadStatusIncludingAllMembers:(BOOL)includeAllMembers SWIFT_WARN_UNUSED_RESULT;
+/// Starts typing. The other <em>members</em> in the channel will receive an event.
+/// The event will be received in <code>channelDidUpdateTypingStatus(_:)</code> of <code>GroupChannelDelegate</code>.
+- (void)startTyping;
+/// Ends typing. The other <em>members</em> in the channel will receive an event.
+/// The event will be received in <code>channelDidUpdateTypingStatus(_:)</code> of <code>GroupChannelDelegate</code>.
+- (void)endTyping;
+/// Checks any members in the channel has been typing
+///
+/// returns:
+/// <code>true</code> when other users are typing in this channel.
+- (BOOL)isTyping SWIFT_WARN_UNUSED_RESULT;
+/// Returns the users who are typing now.
+/// since:
+/// 3.0.202
+///
+/// returns:
+/// The users who are typing now.
+- (NSArray<SBDUser *> * _Nullable)getTypingUsers SWIFT_WARN_UNUSED_RESULT;
+/// Resets the history in this channel.
+/// \param completionHandler The handler block to execute.
+///
+- (void)resetMyHistoryWithCompletionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Changes a setting that decides which push notification for the current user to receive in the group channel.
+/// If a value of option is <code>.default</code>, a push trigger option in this group channel follows a push trigger option
+/// of the current user. It is related with <code>SendbirdChat setPushTriggerOption(_:completionHandler:)</code>.
+/// since:
+/// 3.0.128
+/// \param option options to choose which push notification for the current user to receive.
+///
+/// \param completionHandler handler block to execute when setting a push trigger option of the current user is completed.
+///
+- (void)setMyPushTriggerOption:(enum SBDGroupChannelPushTriggerOption)option completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Requests a setting that decides which push notification for the current user to receive in the group channel.
+/// since:
+/// 3.0.128
+/// \param completionHandler The handler block to execute when getting a push trigger option of the current user is completed.
+///
+- (void)getMyPushTriggerOptionWithCompletionHandler:(void (^ _Nonnull)(enum SBDGroupChannelPushTriggerOption, SBError * _Nullable))completionHandler;
+/// Sets count preference of current user.
+/// since:
+/// 3.0.102
+/// \param myCountPreference Preference is type of <code>CountPreference</code>. The default value is <code>.all</code>.
+///
+- (void)setMyCountPreference:(enum SBDCountPreference)myCountPreference completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Creates a query for my group channel list with default params.
+///
+/// returns:
+/// GroupChannelListQuery instance for the current user.
++ (SBDGroupChannelListQuery * _Nonnull)createMyGroupChannelListQuery SWIFT_WARN_UNUSED_RESULT;
+/// Creates a query for my group channel list with paramsBuilder.
+/// \param paramsBuilder The builder closure for setting <code>GroupChannelListQueryParams</code>.
+///
+///
+/// returns:
+/// GroupChannelListQuery instance for the current user.
++ (SBDGroupChannelListQuery * _Nonnull)createMyGroupChannelListQueryWithParamsBuilder:(SWIFT_NOESCAPE void (^ _Nonnull)(SBDGroupChannelListQueryParams * _Nonnull))paramsBuilder SWIFT_WARN_UNUSED_RESULT;
+/// Creates a query for my group channel list.
+/// \param params <code>GroupChannelListQueryParams</code>
+///
+///
+/// returns:
+/// GroupChannelListQuery instance for the current user.
++ (SBDGroupChannelListQuery * _Nonnull)createMyGroupChannelListQueryWithParams:(SBDGroupChannelListQueryParams * _Nonnull)params SWIFT_WARN_UNUSED_RESULT;
+/// Creates a query for public group channel list.
+///
+/// returns:
+/// The instance to query public group channels.
++ (SBDPublicGroupChannelListQuery * _Nonnull)createPublicGroupChannelListQuery SWIFT_WARN_UNUSED_RESULT;
+/// Creates a query for public group channel list.
+/// \param paramsBuilder The builder closure for setting <code>PublicGroupChannelListQueryParams</code>.
+///
+///
+/// returns:
+/// The instance to query public group channels.
++ (SBDPublicGroupChannelListQuery * _Nonnull)createPublicGroupChannelListQueryWithParamsBuilder:(SWIFT_NOESCAPE void (^ _Nonnull)(SBDPublicGroupChannelListQueryParams * _Nonnull))paramsBuilder SWIFT_WARN_UNUSED_RESULT;
+/// Creates a query for public group channel list.
+/// \param params The params object to change query condition.
+///
+///
+/// returns:
+/// The instance to query public group channels.
++ (SBDPublicGroupChannelListQuery * _Nonnull)createPublicGroupChannelListQueryWithParams:(SBDPublicGroupChannelListQueryParams * _Nonnull)params SWIFT_WARN_UNUSED_RESULT;
+/// Creates a query for members in group channel.
+/// \param channelURL channel url
+///
+///
+/// returns:
+/// The instance to query the members in group channel.
++ (SBDMemberListQuery * _Nonnull)createMemberListQueryWithChannelURL:(NSString * _Nonnull)channelURL SWIFT_WARN_UNUSED_RESULT;
+/// Creates a query for members in group channel.
+/// \param channelURL channel url
+///
+/// \param paramsBuilder The builder closure for setting <code>MemberListQueryParams</code>.
+///
+///
+/// returns:
+/// The instance to query the members in group channel.
++ (SBDMemberListQuery * _Nonnull)createMemberListQueryWithChannelURL:(NSString * _Nonnull)channelURL paramsBuilder:(SWIFT_NOESCAPE void (^ _Nonnull)(SBDMemberListQueryParams * _Nonnull))paramsBuilder SWIFT_WARN_UNUSED_RESULT;
+/// Creates a query for members in group channel.
+/// \param channelURL channel url
+///
+/// \param params The params object to change query condition.
+///
+///
+/// returns:
+/// The instance to query the members in group channel.
++ (SBDMemberListQuery * _Nonnull)createMemberListQueryWithChannelURL:(NSString * _Nonnull)channelURL params:(SBDMemberListQueryParams * _Nonnull)params SWIFT_WARN_UNUSED_RESULT;
+/// Creates a query for members in group channel.
+///
+/// returns:
+/// The instance to query the members in group channel.
+- (SBDMemberListQuery * _Nullable)createMemberListQuery SWIFT_WARN_UNUSED_RESULT;
+/// Creates a query for members in group channel.
+/// \param paramsBuilder The builder closure for setting <code>MemberListQueryParams</code>.
+///
+///
+/// returns:
+/// The instance to query the members in group channel.
+- (SBDMemberListQuery * _Nullable)createMemberListQueryWithParamsBuilder:(SWIFT_NOESCAPE void (^ _Nonnull)(SBDMemberListQueryParams * _Nonnull))paramsBuilder SWIFT_WARN_UNUSED_RESULT;
+/// Creates a query for members in group channel.
+/// \param params The params object to change query condition.
+///
+///
+/// returns:
+/// The instance to query the members in group channel.
+- (SBDMemberListQuery * _Nullable)createMemberListQueryWithParams:(SBDMemberListQueryParams * _Nonnull)params SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -4515,8 +4734,6 @@ SWIFT_PROTOCOL("_TtP15SendbirdChatSDK28InternalChannelEventDelegate_")
 
 
 
-
-
 @class SBDPollUpdateEvent;
 
 /// An object that adopts the <code>GroupChannelDelegate</code> protocol is responsible for receiving the events in the channel.
@@ -4627,7 +4844,6 @@ SWIFT_PROTOCOL_NAMED("GroupChannelDelegate")
 
 
 @interface SBDGroupChannelCollection (SWIFT_EXTENSION(SendbirdChatSDK)) <SBDGroupChannelDelegate>
-- (void)channel:(SBDBaseChannel * _Nonnull)channel didReceiveMessage:(SBDBaseMessage * _Nonnull)message;
 - (void)channel:(SBDBaseChannel * _Nonnull)channel didReceiveMention:(SBDBaseMessage * _Nonnull)message;
 - (void)channelWasChanged:(SBDBaseChannel * _Nonnull)channel;
 - (void)channel:(SBDGroupChannel * _Nonnull)channel didReceiveInvitation:(NSArray<SBDUser *> * _Nullable)invitees inviter:(SBDUser * _Nullable)inviter;
@@ -4654,7 +4870,7 @@ SWIFT_PROTOCOL_NAMED("GroupChannelDelegate")
 - (void)channel:(SBDBaseChannel * _Nonnull)channel updatedMetaCounters:(NSDictionary<NSString *, NSNumber *> * _Nullable)updatedMetaCounters;
 - (void)channel:(SBDBaseChannel * _Nonnull)channel deletedMetaCountersKeys:(NSArray<NSString *> * _Nullable)deletedMetaCountersKeys;
 - (void)channelDidUpdatePinnedMessages:(SBDGroupChannel * _Nonnull)channel;
-- (void)channel:(SBDGroupChannel * _Nonnull)channel didUpdateFeedbackMessage:(SBDBaseMessage * _Nonnull)didUpdateFeedbackMessage;
+- (void)channel:(SBDGroupChannel * _Nonnull)channel didUpdateFeedbackMessage:(SBDBaseMessage * _Nonnull)message;
 @end
 
 
@@ -5183,10 +5399,10 @@ SWIFT_CLASS_NAMED("GroupChannelListQueryParams")
 @end
 
 
+
 @interface SBDGroupChannelListQueryParams (SWIFT_EXTENSION(SendbirdChatSDK))
 - (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
 @end
-
 
 
 @interface SBDGroupChannelListQueryParams (SWIFT_EXTENSION(SendbirdChatSDK)) <NSCopying>
@@ -5306,6 +5522,22 @@ SWIFT_CLASS_NAMED("GroupChannelTotalUnreadMessageCountParams")
 /// The enumerator filter of super channel.
 @property (nonatomic) enum SBDGroupChannelSuperChannelFilter superChannelFilter;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class SBDUnreadItemKey;
+
+/// An object contains a set of options to get unread item count from a group channel
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("GroupChannelUnreadItemCountParams")
+@interface SBDGroupChannelUnreadItemCountParams : NSObject
+/// The optionSets to contain count flags.
+@property (nonatomic, strong) SBDUnreadItemKey * _Nonnull key;
+/// The string array of custom type filter.
+@property (nonatomic, copy) NSArray<NSString *> * _Nullable customTypesFilter;
+- (nonnull instancetype)initWithKey:(SBDUnreadItemKey * _Nonnull)key customTypesFilter:(NSArray<NSString *> * _Nullable)customTypesFilter OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 
@@ -5891,11 +6123,11 @@ SWIFT_CLASS_NAMED("MessageCollection")
 
 
 
-
 @interface SBDMessageCollection (SWIFT_EXTENSION(SendbirdChatSDK)) <SBDInternalConnectionDelegate>
 - (void)didInternalDisconnect;
 - (void)didExternalDisconnect;
 @end
+
 
 
 
@@ -5904,6 +6136,7 @@ SWIFT_CLASS_NAMED("MessageCollection")
 - (void)didSucceedReconnection;
 - (void)didConnectWithUserId:(NSString * _Nonnull)userId;
 @end
+
 
 
 @interface SBDMessageCollection (SWIFT_EXTENSION(SendbirdChatSDK)) <InternalChannelEventDelegate>
@@ -6052,6 +6285,102 @@ SWIFT_CLASS("_TtC15SendbirdChatSDK13MessageEvents")
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+
+/// Message form data
+/// Since: 4.21.0
+SWIFT_CLASS_NAMED("MessageForm")
+@interface SBDMessageForm : NSObject <NSCopying>
+/// Copies this object
+/// \param zone optional <code>NSZone</code>
+///
+///
+/// returns:
+/// <code>Form</code> instance
+- (id _Nonnull)copyWithZone:(struct _NSZone * _Nullable)zone SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+@interface SBDMessageForm (SWIFT_EXTENSION(SendbirdChatSDK))
+/// Indicates that the form data has already been submitted.
+@property (nonatomic, readonly) BOOL isSubmitted;
+/// Indicates that the form data can be submitted.
+///
+/// returns:
+/// If <code>true</code>, can be submitted
+/// NOTE: You <em>MUST</em> store the value entered by user interaction in the <code>FormField/temporaryAnswer</code>.
+@property (nonatomic, readonly) BOOL canSubmit;
+@end
+
+
+/// The item data held by the Message form.
+/// Since: 4.21.0
+SWIFT_CLASS_NAMED("MessageFormItem")
+@interface SBDMessageFormItem : NSObject <NSCopying>
+/// Copies this object
+/// \param zone optional <code>NSZone</code>
+///
+///
+/// returns:
+/// <code>Form</code> instance
+- (id _Nonnull)copyWithZone:(struct _NSZone * _Nullable)zone SWIFT_WARN_UNUSED_RESULT;
+/// Methods for checking if draft values are valid
+- (BOOL)isValid:(NSArray<NSString *> * _Nullable)draftValues SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+
+@interface SBDMessageFormItem (SWIFT_EXTENSION(SendbirdChatSDK))
+@end
+
+
+/// Data that describes the UI appearance of the item
+/// Since: 4.21.0
+SWIFT_CLASS_NAMED("Style")
+@interface SBDMessageFormItemStyle : NSObject <NSCopying>
+/// Copies this object
+/// \param zone optional <code>NSZone</code>
+///
+///
+/// returns:
+/// <code>Form</code> instance
+- (id _Nonnull)copyWithZone:(struct _NSZone * _Nullable)zone SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+/// Layout type enum value
+/// since:
+/// 4.21.0
+typedef SWIFT_ENUM_NAMED(NSInteger, SBDMessageFormItemLayoutType, "LayoutType", open) {
+  SBDMessageFormItemLayoutTypeText = 0,
+  SBDMessageFormItemLayoutTypeTextarea = 1,
+  SBDMessageFormItemLayoutTypeNumber = 2,
+  SBDMessageFormItemLayoutTypePhone = 3,
+  SBDMessageFormItemLayoutTypeEmail = 4,
+  SBDMessageFormItemLayoutTypeChip = 5,
+  SBDMessageFormItemLayoutTypeUnknown = 6,
+};
+
+
+/// Data to limit the number of values entered
+/// Since: 4.21.0
+SWIFT_CLASS_NAMED("ResultCount")
+@interface SBDMessageFormItemResultCount : NSObject <NSCopying>
+/// Copies this object
+/// \param zone optional <code>NSZone</code>
+///
+///
+/// returns:
+/// <code>Form</code> instance
+- (id _Nonnull)copyWithZone:(struct _NSZone * _Nullable)zone SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
 enum SBDMessageTypeFilter : NSInteger;
 
 /// An object contains set of options for get message methods
@@ -6129,10 +6458,10 @@ SWIFT_CLASS_NAMED("MessageListParams")
 
 
 
-
 @interface SBDMessageListParams (SWIFT_EXTENSION(SendbirdChatSDK))
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 @end
+
 
 
 /// The <code>MessageMetaArray</code> instance has a string type of key and an array type of value.
@@ -6779,15 +7108,15 @@ SWIFT_CLASS_NAMED("NotificationCollection")
 
 
 
-@interface SBDNotificationCollection (SWIFT_EXTENSION(SendbirdChatSDK)) <InternalChannelEventDelegate>
-- (void)channel:(SBDBaseChannel * _Nonnull)channel messageIds:(NSArray<NSNumber *> * _Nonnull)messageIds newMessageStatus:(enum SBDNotificationMessageStatus)newMessageStatus;
-- (void)channel:(SBDBaseChannel * _Nonnull)channel oldMessageStatus:(enum SBDNotificationMessageStatus)oldMessageStatus newMessageStatus:(enum SBDNotificationMessageStatus)newMessageStatus;
-@end
-
-
 @interface SBDNotificationCollection (SWIFT_EXTENSION(SendbirdChatSDK)) <SBDInternalConnectionDelegate>
 - (void)didInternalDisconnect;
 - (void)didExternalDisconnect;
+@end
+
+
+@interface SBDNotificationCollection (SWIFT_EXTENSION(SendbirdChatSDK)) <InternalChannelEventDelegate>
+- (void)channel:(SBDBaseChannel * _Nonnull)channel messageIds:(NSArray<NSNumber *> * _Nonnull)messageIds newMessageStatus:(enum SBDNotificationMessageStatus)newMessageStatus;
+- (void)channel:(SBDBaseChannel * _Nonnull)channel oldMessageStatus:(enum SBDNotificationMessageStatus)oldMessageStatus newMessageStatus:(enum SBDNotificationMessageStatus)newMessageStatus;
 @end
 
 
@@ -7087,18 +7416,6 @@ SWIFT_CLASS_NAMED("OpenChannel")
 
 
 @interface SBDOpenChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Enters this channel.
-/// \param completionHandler The handler block to execute.
-///
-- (void)enterChannelWithCompletionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Exits this channel.
-/// \param completionHandler The handler block to execute.
-///
-- (void)exitChannelWithCompletionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-@end
-
-
-@interface SBDOpenChannel (SWIFT_EXTENSION(SendbirdChatSDK))
 + (void)createChannelWithName:(NSString * _Nullable)name channelUrl:(NSString * _Nullable)channelUrl coverUrl:(NSString * _Nullable)coverUrl data:(NSString * _Nullable)data operatorUserIds:(NSArray<NSString *> * _Nullable)operatorUserIds customType:(NSString * _Nullable)customType completionHandler:(void (^ _Nonnull)(SBDOpenChannel * _Nullable, SBError * _Nullable))completionHandler SWIFT_UNAVAILABLE_MSG("'createChannel' has been renamed to 'createChannelWithParams:completionHandler:'");
 + (void)createChannelWithName:(NSString * _Nullable)name channelUrl:(NSString * _Nullable)channelUrl coverImage:(NSData * _Nonnull)coverImage coverImageName:(NSString * _Nonnull)coverImageName data:(NSString * _Nullable)data operatorUserIds:(NSArray<NSString *> * _Nullable)operatorUserIds customType:(NSString * _Nullable)customType progressHandler:(void (^ _Nullable)(int64_t, int64_t, int64_t))progressHandler completionHandler:(void (^ _Nonnull)(SBDOpenChannel * _Nullable, SBError * _Nullable))completionHandler SWIFT_UNAVAILABLE_MSG("'createChannel' has been renamed to 'createChannelWithParams:progressHandler:completionHandler:'");
 - (void)updateWithName:(NSString * _Nullable)name coverImage:(NSData * _Nullable)coverImage coverImageName:(NSString * _Nullable)coverImageName data:(NSString * _Nullable)data operatorUserIds:(NSArray<NSString *> * _Nullable)operatorUserIds customType:(NSString * _Nullable)customType progressHandler:(void (^ _Nullable)(int64_t, int64_t, int64_t))progressHandler completionHandler:(void (^ _Nonnull)(SBDOpenChannel * _Nullable, SBError * _Nullable))completionHandler SWIFT_UNAVAILABLE_MSG("'update' has been renamed to 'updateChannelWithParams:progressHandler:completionHandler:'");
@@ -7106,6 +7423,10 @@ SWIFT_CLASS_NAMED("OpenChannel")
 
 @class SBDOpenChannelCreateParams;
 @class SBDOpenChannelUpdateParams;
+@class SBDOpenChannelListQuery;
+@class SBDOpenChannelListQueryParams;
+@class SBDParticipantListQuery;
+@class SBDParticipantListQueryParams;
 
 @interface SBDOpenChannel (SWIFT_EXTENSION(SendbirdChatSDK))
 /// Creates an open channel.
@@ -7170,14 +7491,14 @@ SWIFT_CLASS_NAMED("OpenChannel")
 /// \param completionHandler The handler block to execute.
 ///
 - (void)refreshWithCompletionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-@end
-
-@class SBDOpenChannelListQuery;
-@class SBDOpenChannelListQueryParams;
-@class SBDParticipantListQuery;
-@class SBDParticipantListQueryParams;
-
-@interface SBDOpenChannel (SWIFT_EXTENSION(SendbirdChatSDK))
+/// Enters this channel.
+/// \param completionHandler The handler block to execute.
+///
+- (void)enterChannelWithCompletionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Exits this channel.
+/// \param completionHandler The handler block to execute.
+///
+- (void)exitChannelWithCompletionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
 /// Creates a query instance for open channel list.
 ///
 /// returns:
@@ -9256,7 +9577,6 @@ SWIFT_CLASS_NAMED("ScheduledUserMessageUpdateParams")
 enum SBDWebSocketConnectionState : NSInteger;
 @protocol SBDUserEventDelegate;
 @protocol SBDSessionDelegate;
-@class SBDUnreadItemKey;
 @class SBDUnreadItemCount;
 @class SBDUserUpdateParams;
 @class SBDTotalScheduledMessageCountParams;
@@ -9827,7 +10147,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, copy) void (^ _Nullable backgr
 /// and the other is error.
 ///
 + (void)getTotalUnreadMessageCountWithFeedWithParams:(SBDGroupChannelTotalUnreadMessageCountParams * _Nonnull)params completionHandler:(void (^ _Nonnull)(NSUInteger, NSUInteger, SBError * _Nullable))completionHandler;
-/// Gets unread counts of message and invitation counts in super and non_super channels.
+/// Gets unread messages and mentions counts of message and invitation counts in super and non_super channels.
 /// since:
 /// 3.0.116
 /// \param key <code>UnreadItemKey</code> optionSets to contain count flags
@@ -9837,7 +10157,18 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, copy) void (^ _Nullable backgr
 /// contains unsinged interger for count you requested. the other is an error made when there is something
 /// wrong to response.
 ///
-+ (void)getUnreadItemCountWithKey:(SBDUnreadItemKey * _Nonnull)key completionHandler:(void (^ _Nonnull)(SBDUnreadItemCount * _Nullable, SBError * _Nullable))completionHandler;
++ (void)getUnreadItemCountWithKey:(SBDUnreadItemKey * _Nonnull)key completionHandler:(void (^ _Nonnull)(SBDUnreadItemCount * _Nullable, SBError * _Nullable))completionHandler SWIFT_DEPRECATED_MSG("This method is deprecated in 4.21.0. Set `key` in `GroupChannelUnreadItemCountParams` and use `getUnreadItemCount(params:completionHandler:)` instead.", "getUnreadItemCountWithParams:completionHandler:");
+/// Gets unread messages and mentions counts of message and invitation counts in super and non_super channels.
+/// since:
+/// 4.21.0
+/// \param params <code>GroupChannelUnreadItemCountParams</code> object
+///
+/// \param completionHandler The handler block to be executed after getting unread item count.
+/// This block has no return value and takes two argument. the one is type of <code>UnreadItemCount</code> that
+/// contains unsinged interger for count you requested. The other is an error made when there is something
+/// wrong to response.
+///
++ (void)getUnreadItemCountWithParams:(SBDGroupChannelUnreadItemCountParams * _Nonnull)params completionHandler:(void (^ _Nonnull)(SBDUnreadItemCount * _Nullable, SBError * _Nullable))completionHandler;
 /// Gets total unread message count for current user
 + (NSInteger)getSubscribedTotalUnreadMessageCount SWIFT_WARN_UNUSED_RESULT;
 /// Gets total unread message count that is subscribed with custom types for current user
@@ -11094,6 +11425,17 @@ SWIFT_CLASS_NAMED("UserMessage")
 
 
 @interface SBDUserMessage (SWIFT_EXTENSION(SendbirdChatSDK))
+/// Copies this object
+/// \param zone optional <code>NSZone</code>
+///
+///
+/// returns:
+/// <code>UserMessage</code> instance
+- (id _Nonnull)copyWithZone:(struct _NSZone * _Nullable)zone SWIFT_WARN_UNUSED_RESULT;
+@end
+
+
+@interface SBDUserMessage (SWIFT_EXTENSION(SendbirdChatSDK))
 /// Deserializes and reconstructs the object
 /// \param data <code>Data</code> instance
 ///
@@ -11112,17 +11454,6 @@ SWIFT_CLASS_NAMED("UserMessage")
 /// returns:
 /// <code>true</code> if same otherwise <code>false</code>
 - (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
-@end
-
-
-@interface SBDUserMessage (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Copies this object
-/// \param zone optional <code>NSZone</code>
-///
-///
-/// returns:
-/// <code>UserMessage</code> instance
-- (id _Nonnull)copyWithZone:(struct _NSZone * _Nullable)zone SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -12061,8 +12392,6 @@ SWIFT_CLASS_NAMED("BaseChannel")
 @end
 
 
-
-
 @interface SBDBaseChannel (SWIFT_EXTENSION(SendbirdChatSDK))
 /// Compares this object with given other object.
 /// \param object <code>Any</code> instance
@@ -12073,95 +12402,27 @@ SWIFT_CLASS_NAMED("BaseChannel")
 - (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
 @end
 
-@class SBDMessageListParams;
 
-@interface SBDBaseChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Retrieves previous or next messages based on a specified timestamp in the channel.
-/// since:
-/// 3.0.181
-/// \param timestamp Specifies the timestamp to be the reference point for messages to retrieve, in Unix
-/// milliseconds format. Messages sent before or after the timestamp can be retrieved.
-///
-/// \param params Contains a set of parameters you can set regarding the messages in the results.
-///
-/// \param completionHandler The handler block to be executed. The <code>messages</code> is the messages
-/// of the channel. The <code>error</code> indicates whether there is an error. If there is no error, the value is null.
-///
-- (void)getMessagesByTimestamp:(int64_t)timestamp params:(SBDMessageListParams * _Nonnull)params completionHandler:(void (^ _Nullable)(NSArray<SBDBaseMessage *> * _Nullable, SBError * _Nullable))completionHandler;
-/// Retrieves previous or next messages based on their message ID in a specific channel.
-/// since:
-/// 3.0.181
-/// \param messageId Specifies the message ID to be the reference point for messages to retrieve.
-/// Messages sent before or after the message with the matching message ID can be retrieved.
-///
-/// \param params Contains a set of parameters you can set regarding the messages in the results.
-///
-/// \param completionHandler The handler block to be executed. The <code>messages</code> is the messages
-/// of the channel. The <code>error</code> indicates whether there is an error. If there is no error, the value is null.
-///
-- (void)getMessagesByMessageId:(int64_t)messageId params:(SBDMessageListParams * _Nonnull)params completionHandler:(void (^ _Nullable)(NSArray<SBDBaseMessage *> * _Nullable, SBError * _Nullable))completionHandler;
+
+
+/// Mappable protocol to initialize sendbird object from a given dictionary.
+/// note:
+/// This is legacy method for objective c and recommend to use Codable protocol for swift
+SWIFT_PROTOCOL("_TtP15SendbirdChatSDK8Mappable_")
+@protocol Mappable
+/// Initialize an object with json dictionary
+- (nullable instancetype)initWithDictionary:(NSDictionary<NSString *, id> * _Nonnull)json SWIFT_METHOD_FAMILY(none) SWIFT_WARN_UNUSED_RESULT;
+@optional
+- (NSDictionary<NSString *, id> * _Nonnull)_toDictionary SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
-
-@interface SBDBaseChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Pins the message to the channel.
-/// note:
-/// Pin functionality in <code>OpenChannel</code> will be supported starting from 4.20.0.
-/// since:
-/// 4.2.0
-/// \param messageId The message ID of the message to be pinned.
-///
-/// \param completionHandler The handler block to be executed after pinning the message.
-///
-- (void)pinMessageWithMessageId:(int64_t)messageId completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Unpins the message from the channel.
-/// note:
-/// Pin functionality in <code>OpenChannel</code> will be supported starting from 4.20.0.
-/// since:
-/// 4.2.0
-/// \param messageId The message ID of the message to be unpinned.
-///
-/// \param completionHandler The handler block to be executed after unpinning the message.
-///
-- (void)unpinMessageWithMessageId:(int64_t)messageId completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+@interface SBDBaseChannel (SWIFT_EXTENSION(SendbirdChatSDK)) <Mappable>
+/// Initialize with json dictionary
+- (nullable instancetype)initWithDictionary:(NSDictionary<NSString *, id> * _Nonnull)json SWIFT_METHOD_FAMILY(none) SWIFT_WARN_UNUSED_RESULT;
+/// Converts the object into dictionary
+- (NSDictionary<NSString *, id> * _Nonnull)_toDictionary SWIFT_WARN_UNUSED_RESULT;
 @end
-
-@class SBDReactionEvent;
-
-@interface SBDBaseChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Adds a reaction to a message.
-/// Messages with <code>sendingStatus</code> is not <code>.success</code> will handler to return error.
-/// note:
-/// This is idempotent.
-/// note:
-/// This feature is only available in group channels.
-/// since:
-/// 3.0.169
-/// \param message The message object that the reaction will be added.
-///
-/// \param key The reaction key to be added.
-///
-/// \param completionHandler The handler block to be executed. If succeeded, the <code>reactionEvent</code>
-/// will have the information of the reaction.
-///
-- (void)addReactionWithMessage:(SBDBaseMessage * _Nonnull)message key:(NSString * _Nonnull)key completionHandler:(void (^ _Nullable)(SBDReactionEvent * _Nullable, SBError * _Nullable))completionHandler;
-/// Deletes a reaction from a message.
-/// note:
-/// This is idempotent.
-/// note:
-/// This feature is only available in group channels.
-/// since:
-/// 3.0.169
-/// \param message The message object that has the reaction key.
-///
-/// \param key The reaction key to be deleted.
-///
-/// \param completionHandler The handler block to be executed. If succeeded, the <code>reactionEvent</code> will have the information of the reaction.
-///
-- (void)deleteReactionWithMessage:(SBDBaseMessage * _Nonnull)message key:(NSString * _Nonnull)key completionHandler:(void (^ _Nullable)(SBDReactionEvent * _Nullable, SBError * _Nullable))completionHandler;
-@end
-
 
 @class NSData;
 
@@ -12199,280 +12460,61 @@ SWIFT_PROTOCOL("_TtP15SendbirdChatSDK12Serializable_")
 @end
 
 
-/// Mappable protocol to initialize sendbird object from a given dictionary.
-/// note:
-/// This is legacy method for objective c and recommend to use Codable protocol for swift
-SWIFT_PROTOCOL("_TtP15SendbirdChatSDK8Mappable_")
-@protocol Mappable
-/// Initialize an object with json dictionary
-- (nullable instancetype)initWithDictionary:(NSDictionary<NSString *, id> * _Nonnull)json SWIFT_METHOD_FAMILY(none) SWIFT_WARN_UNUSED_RESULT;
-@optional
-- (NSDictionary<NSString *, id> * _Nonnull)_toDictionary SWIFT_WARN_UNUSED_RESULT;
-@end
-
-
-@interface SBDBaseChannel (SWIFT_EXTENSION(SendbirdChatSDK)) <Mappable>
-/// Initialize with json dictionary
-- (nullable instancetype)initWithDictionary:(NSDictionary<NSString *, id> * _Nonnull)json SWIFT_METHOD_FAMILY(none) SWIFT_WARN_UNUSED_RESULT;
-/// Converts the object into dictionary
-- (NSDictionary<NSString *, id> * _Nonnull)_toDictionary SWIFT_WARN_UNUSED_RESULT;
-@end
-
-
-@interface SBDBaseChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Deletes a message. The message’s sender has to be the current user.
-/// note:
-/// When using the moderation feature in ephemeral open channel, you should use this function that uses the <code>message</code> object, not the function that uses the <code>messageId</code>.
-/// \param message The message to be deleted.
-///
-/// \param completionHandler The handler block to execute.
-///
-- (void)deleteMessage:(SBDBaseMessage * _Nonnull)message completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Deletes a message. The message’s sender has to be the current user.
-/// note:
-/// When using the moderation feature in ephemeral open channel, you should use the <code>deleteMessage(:completionHandler:)</code> function that uses the <code>message</code> object, not the function that uses the <code>messageId</code>.
-/// since:
-/// 3.0.179
-/// \param messageId The message ID to be deleted.
-///
-/// \param completionHandler The handler block to execute.
-///
-- (void)deleteMessageWithMessageId:(int64_t)messageId completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Deletes a message. The message’s sender has to be the current user.
-/// since:
-/// 4.19.2
-/// \param messageId The message ID to be deleted.
-///
-/// \param completionHandler The handler block to execute.
-///
-- (void)deleteMessageWithMessageId:(int64_t)messageId messageToken:(NSString * _Nullable)messageToken completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-@end
-
-enum SBDReportCategory : NSInteger;
-
-@interface SBDBaseChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Reports a user in a channel of inappropriate activities.
-/// since:
-/// 3.0.154
-/// \param offendingUser The user who is being reported.
-///
-/// \param reportCategory The category in which the report is being submitted. Valid choices are
-/// <code>suspicious</code>, <code>harassing</code>, <code>spam</code>, and <code>inappropriate</code>.
-///
-/// \param reportDescription An open ended description for why the report is being submitted.
-///
-/// \param completionHandler The handler block to execute.
-///
-- (void)reportUser:(SBDUser * _Nonnull)offendingUser reportCategory:(enum SBDReportCategory)reportCategory reportDescription:(NSString * _Nullable)reportDescription completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Reports current channel instance of inappropriate activities.
-/// since:
-/// 3.0.154
-/// \param category The category in which the report is being submitted. Valid choices are
-/// <code>suspicious</code>, <code>harassing</code>, <code>spam</code> and <code>inappropriate</code>.
-///
-/// \param reportDescription An open ended description for why the report is being submitted.
-///
-/// \param completionHandler The handler block to execute.
-///
-- (void)reportChannelWithCategory:(enum SBDReportCategory)category reportDescription:(NSString * _Nullable)reportDescription completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Reports a malicious message in the channel
-/// since:
-/// 3.0.154
-/// \param message The message object which is being reported.
-///
-/// \param reportCategory The category in which the report is being submitted. Valid choices are
-/// <code>suspicious</code>, <code>harassing</code>, <code>spam</code> and <code>inappropriate</code>.
-///
-/// \param reportDescription An open ended description for why the report is being submitted.
-///
-/// \param completionHandler The handler block to execute.
-///
-- (void)reportMessage:(SBDBaseMessage * _Nonnull)message reportCategory:(enum SBDReportCategory)reportCategory reportDescription:(NSString * _Nullable)reportDescription completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-@end
-
-
-@interface SBDBaseChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Adds operators to the channel.
-/// since:
-/// 3.0.189
-/// \param userIds The user IDs to be operators.
-///
-/// \param completionHandler The handler block to be executed.
-///
-- (void)addOperatorsWithUserIds:(NSArray<NSString *> * _Nonnull)userIds completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Removes operators from the channel.
-/// since:
-/// 3.0.189
-/// \param userIds The user IDs to be removed from the operators.
-///
-/// \param completionHandler The handler block to be executed.
-///
-- (void)removeOperatorsWithUserIds:(NSArray<NSString *> * _Nonnull)userIds completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Removes all operators from the channel.
-/// since:
-/// 3.0.189
-/// \param completionHandler The handler block to be executed.
-///
-- (void)removeAllOperatorsWithCompletionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-@end
-
-
 @interface SBDBaseChannel (SWIFT_EXTENSION(SendbirdChatSDK))
 @property (nonatomic, readonly, copy) NSString * _Nullable channelUrl SWIFT_UNAVAILABLE_MSG("'channelUrl' has been renamed to 'channelURL'");
 @property (nonatomic, readonly, copy) NSString * _Nullable coverUrl SWIFT_UNAVAILABLE_MSG("'coverUrl' has been renamed to 'coverURL'");
 @end
 
 
-@class SBDMessageChangeLogsParams;
-@class SBDPoll;
-
-@interface SBDBaseChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Retrieves the changelogs since a specified token regarding the updated messages or the unique IDs
-/// of deleted messages in the channel.
-/// since:
-/// 3.0.181
-/// \param token Specifies the token to be the reference point for the changelogs to retrieve.
-///
-/// \param params Contains a set of parameters you can set regarding the messages in the results.
-///
-/// \param completionHandler The handler block to execute. The <code>updatedMessages</code> retrieves the
-/// updated messages. The <code>deletedMessageIds</code> retrieves the unique ID of deleted messages.
-/// The <code>hasMore</code> indicates whether there are more changelogs to be retrieved. The <code>token</code>
-/// retrieves the token of the last changelog in the results. The <code>error</code> indicates whether there is
-/// an error. If there is no error, the value is <code>nil</code>.
-///
-- (void)getMessageChangeLogsSinceToken:(NSString * _Nullable)token params:(SBDMessageChangeLogsParams * _Nonnull)params completionHandler:(void (^ _Nullable)(NSArray<SBDBaseMessage *> * _Nullable, NSArray<NSNumber *> * _Nullable, BOOL, NSString * _Nullable, SBError * _Nullable))completionHandler;
-/// Retrieves the changelogs since a specified timestamp, in Unix milliseconds format, regarding the updated
-/// messages or the unique IDs of deleted messages in the channel.
-/// since:
-/// 3.0.181
-/// \param timestamp Specifies the timestamp to be the reference point for changelogs to retrieve, in Unix milliseconds format.
-///
-/// \param params Contains a set of parameters you can set regarding the messages in the results.
-///
-/// \param completionHandler The handler block to execute. The <code>updatedMessages</code> retrieves the
-/// updated messages. The <code>deletedMessageIds</code> retrieves the unique ID of deleted messages. The
-/// <code>hasMore</code> indicates whether there are more changelogs to be retrieved. The <code>token</code> retrieves the
-/// token of the last changelog in the results. The <code>error</code> indicates whether there is an error. If there is
-/// no error, the value is <code>nil</code>.
-///
-- (void)getMessageChangeLogsSinceTimestamp:(int64_t)timestamp params:(SBDMessageChangeLogsParams * _Nonnull)params completionHandler:(void (^ _Nullable)(NSArray<SBDBaseMessage *> * _Nullable, NSArray<NSNumber *> * _Nullable, BOOL, NSString * _Nullable, SBError * _Nullable))completionHandler;
-/// Retrieves the changelogs since a specified token regarding the updated polls or the unique IDs
-/// of deleted polls in the channel.
-/// since:
-/// 4.5.0
-/// \param token Specifies the token to be the reference point for the changelogs to retrieve.
-///
-/// \param completionHandler The handler block to execute. The <code>updatedPolls</code> retrieves the
-/// updated polls. The <code>deletedPollIds</code> retrieves the unique ID of deleted polls.
-/// The <code>hasMore</code> indicates whether there are more changelogs to be retrieved. The <code>token</code>
-/// retrieves the token of the last changelog in the results. The <code>error</code> indicates whether there is
-/// an error. If there is no error, the value is <code>nil</code>.
-///
-- (void)getPollChangeLogsWithToken:(NSString * _Nullable)token completionHandler:(void (^ _Nullable)(NSArray<SBDPoll *> * _Nullable, NSArray<NSNumber *> * _Nullable, BOOL, NSString * _Nullable, SBError * _Nullable))completionHandler;
-/// Retrieves the changelogs since a specified timestamp regarding the updated polls or the unique IDs
-/// of deleted polls in the channel.
-/// since:
-/// 4.5.0
-/// \param timestamp Specifies the timestamp to be the reference point for changelogs to retrieve, in Unix milliseconds format.
-///
-/// \param completionHandler The handler block to execute. The <code>updatedPolls</code> retrieves the
-/// updated polls. The <code>deletedPollIds</code> retrieves the unique ID of deleted polls.
-/// The <code>hasMore</code> indicates whether there are more changelogs to be retrieved. The <code>token</code>
-/// retrieves the token of the last changelog in the results. The <code>error</code> indicates whether there is
-/// an error. If there is no error, the value is <code>nil</code>.
-///
-- (void)getPollChangeLogsWithTimestamp:(int64_t)timestamp completionHandler:(void (^ _Nullable)(NSArray<SBDPoll *> * _Nullable, NSArray<NSNumber *> * _Nullable, BOOL, NSString * _Nullable, SBError * _Nullable))completionHandler;
-@end
-
-
-@interface SBDBaseChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Creates keys of meta array for the message.
-/// since:
-/// 3.0.116
-/// \param message The message object. This method creates <code>keys</code> in it.
-///
-/// \param keys Keys of meta array.
-///
-/// \param completionHandler The handler block to execute. The <code>message</code> is a base message object that has the keys for its meta array.
-///
-- (void)createMessageMetaArrayKeysWithMessage:(SBDBaseMessage * _Nonnull)message keys:(NSArray<NSString *> * _Nonnull)keys completionHandler:(void (^ _Nullable)(SBDBaseMessage * _Nullable, SBError * _Nullable))completionHandler;
-/// Deletes keys from meta array of the message.
-/// since:
-/// 3.0.116
-/// \param message The message object. This method deletes keys of meta array of it.
-///
-/// \param keys Keys to be deleted.
-///
-/// \param completionHandler The handler block to execute.
-///
-- (void)deleteMessageMetaArrayKeysWithMessage:(SBDBaseMessage * _Nonnull)message keys:(NSArray<NSString *> * _Nonnull)keys completionHandler:(void (^ _Nullable)(SBDBaseMessage * _Nullable, SBError * _Nullable))completionHandler;
-/// Adds meta array to the message.
-/// since:
-/// 3.0.116
-/// note:
-/// use <code>addMessageMetaArrayValues(message:metaArrays:completionHandler:)</code> as possible.
-/// \param message The message object. This method adds pairs of key and value to this message.
-///
-/// \param keyValues Pairs of key-value to be added.
-///
-/// \param completionHandler The handler block to execute.
-///
-- (void)addMessageMetaArrayValuesWithMessage:(SBDBaseMessage * _Nonnull)message keyValues:(NSDictionary<NSString *, NSArray<NSString *> *> * _Nonnull)keyValues completionHandler:(void (^ _Nullable)(SBDBaseMessage * _Nullable, SBError * _Nullable))completionHandler;
-/// Adds the array of meta array into the message.
-/// note:
-/// The <code>metaArrays</code> are upserted into the message. If a key in the metaArrays is new, the key will
-/// be inserted with the value. If a key in the metaArrays is already created, the value of the messageMetaArray
-/// will be inserted so strings in the value MUST be new one.
-/// since:
-/// 3.0.148
-/// \param message The message instance. The metaArrays will added into the message.
-///
-/// \param metaArrays An array of message meta array will be added into the message. the string of the value
-/// in the metaArray MUST NOT exist with same key.
-///
-/// \param completionHandler The handler block to execute after adding message meta arrays. The
-/// <code>message</code> of the handler is updated message. If failed to add message meta arrays, the <code>error</code>
-/// of the handler is not nil(null).
-///
-- (void)addMessageMetaArrayValuesWithMessage:(SBDBaseMessage * _Nonnull)message metaArrays:(NSArray<SBDMessageMetaArray *> * _Nonnull)metaArrays completionHandler:(void (^ _Nullable)(SBDBaseMessage * _Nullable, SBError * _Nullable))completionHandler;
-/// Removes meta array from the message.
-/// since:
-/// 3.0.116
-/// note:
-/// use <code>removeMessageMetaArrayValues(message:metaArrays:completionHandler:)</code> as possible.
-/// \param message The message object. This method removes pairs of key and value from this message. 
-///
-/// \param keyValues Pairs of key-value to be removed. 
-///
-/// \param completionHandler The handler block to execute. 
-///
-- (void)removeMessageMetaArrayValuesWithMessage:(SBDBaseMessage * _Nonnull)message keyValues:(NSDictionary<NSString *, NSArray<NSString *> *> * _Nonnull)keyValues completionHandler:(void (^ _Nullable)(SBDBaseMessage * _Nullable, SBError * _Nullable))completionHandler;
-/// Removes the array of meta array from the message.
-/// note:
-/// The <code>metaArrays</code> are removed from the message. If a key in the metaArrays has an emtpy
-/// array of the value, the key will be removed. If not, the value of the messageMetaArray will be removed from the message.
-/// note:
-/// The order of the meta array is guaranteed.
-/// since:
-/// 3.0.148
-/// \param message The message instance. The metaArrays will removed from the message.
-///
-/// \param metaArrays An array of message meta array will be removed from the message. the string of
-/// the value in the metaArray MUST exist with same key.
-///
-/// \param completionHandler The handler block to execute after removing message meta arrays.
-/// The <code>message</code> of the handler is removed message. If failed to remove message meta arrays,
-/// the <code>error</code> of the handler is not nil(null).
-///
-- (void)removeMessageMetaArrayValuesWithMessage:(SBDBaseMessage * _Nonnull)message metaArrays:(NSArray<SBDMessageMetaArray *> * _Nonnull)metaArrays completionHandler:(void (^ _Nullable)(SBDBaseMessage * _Nullable, SBError * _Nullable))completionHandler;
-@end
-
+@class SBDMessageListParams;
 @class SBDUserMessage;
 @class SBDUserMessageCreateParams;
 @class SBDUserMessageUpdateParams;
+@class SBDFileMessageCreateParams;
+@class SBDFileMessage;
+@class SBDFileMessageUpdateParams;
+enum SBDReportCategory : NSInteger;
+@class SBDPollUpdateParams;
+@class SBDPoll;
+@class SBDPollVoteEvent;
+@class SBDReactionEvent;
+@class SBDMutedUserListQuery;
+@class SBDMutedUserListQueryParams;
+@class SBDPreviousMessageListQuery;
+@class SBDPreviousMessageListQueryParams;
+@class SBDOperatorListQuery;
+@class SBDOperatorListQueryParams;
+@class SBDPollListQuery;
+@class SBDPollVoterListQuery;
+@class SBDPinnedMessageListQuery;
+@class SBDPinnedMessageListQueryParams;
+@class SBDMessageChangeLogsParams;
 
 @interface SBDBaseChannel (SWIFT_EXTENSION(SendbirdChatSDK))
+/// Retrieves previous or next messages based on a specified timestamp in the channel.
+/// since:
+/// 3.0.181
+/// \param timestamp Specifies the timestamp to be the reference point for messages to retrieve, in Unix
+/// milliseconds format. Messages sent before or after the timestamp can be retrieved.
+///
+/// \param params Contains a set of parameters you can set regarding the messages in the results.
+///
+/// \param completionHandler The handler block to be executed. The <code>messages</code> is the messages
+/// of the channel. The <code>error</code> indicates whether there is an error. If there is no error, the value is null.
+///
+- (void)getMessagesByTimestamp:(int64_t)timestamp params:(SBDMessageListParams * _Nonnull)params completionHandler:(void (^ _Nullable)(NSArray<SBDBaseMessage *> * _Nullable, SBError * _Nullable))completionHandler;
+/// Retrieves previous or next messages based on their message ID in a specific channel.
+/// since:
+/// 3.0.181
+/// \param messageId Specifies the message ID to be the reference point for messages to retrieve.
+/// Messages sent before or after the message with the matching message ID can be retrieved.
+///
+/// \param params Contains a set of parameters you can set regarding the messages in the results.
+///
+/// \param completionHandler The handler block to be executed. The <code>messages</code> is the messages
+/// of the channel. The <code>error</code> indicates whether there is an error. If there is no error, the value is null.
+///
+- (void)getMessagesByMessageId:(int64_t)messageId params:(SBDMessageListParams * _Nonnull)params completionHandler:(void (^ _Nullable)(NSArray<SBDBaseMessage *> * _Nullable, SBError * _Nullable))completionHandler;
 /// Sends a user message.
 /// \param message The message text.
 ///
@@ -12561,285 +12603,6 @@ enum SBDReportCategory : NSInteger;
 /// Another factor is an error. If failed to request, an error is dispatched.
 ///
 - (void)translateUserMessage:(SBDUserMessage * _Nonnull)message targetLanguages:(NSArray<NSString *> * _Nonnull)targetLanguages completionHandler:(void (^ _Nullable)(SBDUserMessage * _Nullable, SBError * _Nullable))completionHandler;
-@end
-
-@class SBDPollUpdateParams;
-@class SBDPollVoteEvent;
-
-@interface SBDBaseChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Updates a poll with params.
-/// since:
-/// 4.5.0
-/// \param pollId ID of Poll to update
-///
-/// \param params <code>PollUpdateParams</code> instance.
-///
-/// \param completionHandler Completion block.
-///
-- (void)updatePollWithPollId:(int64_t)pollId params:(SBDPollUpdateParams * _Nonnull)params completionHandler:(void (^ _Nullable)(SBDPoll * _Nullable, SBError * _Nullable))completionHandler;
-/// Deletes a poll.
-/// since:
-/// 4.5.0
-/// \param pollId ID of Poll to remove
-///
-/// \param completionHandler Completion block.
-///
-- (void)deletePollWithPollId:(int64_t)pollId completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Closes a poll.
-/// since:
-/// 4.5.0
-/// \param pollId ID of Poll to close
-///
-/// \param completionHandler Completion block
-///
-- (void)closePollWithPollId:(int64_t)pollId completionHandler:(void (^ _Nullable)(SBDPoll * _Nullable, SBError * _Nullable))completionHandler;
-/// Adds an option to a poll.
-/// since:
-/// 4.5.0
-/// \param pollId ID of Poll to add the poll option
-///
-/// \param optionText Option text of the poll option
-///
-/// \param completionHandler Completion block
-///
-- (void)addPollOptionWithPollId:(int64_t)pollId optionText:(NSString * _Nonnull)optionText completionHandler:(void (^ _Nullable)(SBDPoll * _Nullable, SBError * _Nullable))completionHandler;
-/// Updates an option to a poll.
-/// since:
-/// 4.5.0
-/// \param pollId ID of poll to update the poll option
-///
-/// \param pollOptionId ID of the poll option
-///
-/// \param optionText Option text of the poll option
-///
-/// \param completionHandler Completion block
-///
-- (void)updatePollOptionWithPollId:(int64_t)pollId pollOptionId:(int64_t)pollOptionId optionText:(NSString * _Nonnull)optionText completionHandler:(void (^ _Nullable)(SBDPoll * _Nullable, SBError * _Nullable))completionHandler;
-/// Removes Poll option
-/// since:
-/// 4.5.0
-/// \param pollId ID of the poll to delete poll option of
-///
-/// \param pollOptionId poll option id to delete
-///
-/// \param completionHandler Completion block
-///
-- (void)deletePollOptionWithPollId:(int64_t)pollId pollOptionId:(int64_t)pollOptionId completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Votes poll
-/// since:
-/// 4.5.0
-/// \param pollId Poll ID to vote
-///
-/// \param pollOptionIds List of poll option IDs to vote
-///
-/// \param completionHandler Completion block
-///
-- (void)votePollWithPollId:(int64_t)pollId pollOptionIds:(NSArray<NSNumber *> * _Nonnull)pollOptionIds completionHandler:(void (^ _Nullable)(SBDPollVoteEvent * _Nullable, SBError * _Nullable))completionHandler;
-@end
-
-
-@interface SBDBaseChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Creates the meta <em>data</em> for the channel.
-/// \param metaData The meta <em>data</em> to be set.
-///
-/// \param completionHandler The handler block to execute. <code>metaData</code> is the meta
-/// <em>data</em> which are set on Sendbird server.
-///
-- (void)createMetaData:(NSDictionary<NSString *, NSString *> * _Nonnull)metaData completionHandler:(void (^ _Nullable)(NSDictionary<NSString *, NSString *> * _Nullable, SBError * _Nullable))completionHandler;
-/// Gets the meta <em>data</em> for the channel.
-/// \param keys The keys to get meta <em>data</em>.
-///
-/// \param completionHandler The handler block to execute. <code>metaData</code> is the meta
-/// <em>data</em> which are set on Sendbird server.
-///
-- (void)getMetaDataWithKeys:(NSArray<NSString *> * _Nonnull)keys completionHandler:(void (^ _Nullable)(NSDictionary<NSString *, NSString *> * _Nullable, SBError * _Nullable))completionHandler;
-/// Gets all meta <em>data</em> for the channel.
-/// \param completionHandler The handler block to execute. <code>metaData</code> is the meta
-/// <em>data</em> which are set on Sendbird server.
-///
-- (void)getAllMetaDataWithCompletionHandler:(void (^ _Nullable)(NSDictionary<NSString *, NSString *> * _Nullable, SBError * _Nullable))completionHandler;
-/// Updates the meta <em>data</em> for the channel.
-/// \param metaData The meta <em>data</em> to be updated.
-///
-/// \param completionHandler The handler block to execute. <code>metaData</code> is the meta counters
-/// which are updated on Sendbird server.
-///
-- (void)updateMetaData:(NSDictionary<NSString *, NSString *> * _Nonnull)metaData completionHandler:(void (^ _Nullable)(NSDictionary<NSString *, NSString *> * _Nullable, SBError * _Nullable))completionHandler;
-/// Deletes meta <em>data</em> with key for the channel.
-/// \param key The key to be deleted.
-///
-/// \param completionHandler The handler block to execute.
-///
-- (void)deleteMetaDataWithKey:(NSString * _Nonnull)key completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Deletes all meta <em>data</em> for the channel.
-/// \param completionHandler The handler block to execute.
-///
-- (void)deleteAllMetaDataWithCompletionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Return cached channel meta data.
-/// since:
-/// 3.0.216
-///
-/// returns:
-/// Dictionary meta data.
-- (NSDictionary<NSString *, NSString *> * _Nonnull)getCachedMetaData SWIFT_WARN_UNUSED_RESULT;
-- (void)removeAllCachedMetaData;
-@end
-
-
-@interface SBDBaseChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Bans a user for seconds. Let a user out and prevent to join again.
-/// If the user is already banned, duration will be updated from the time that was initialized.
-/// since:
-/// 3.0.89
-/// \param user The user to be banned.
-///
-/// \param seconds Seconds of ducation to be banned. Seconds should be larger than -1. If it is -1,
-/// user is banned forever. If it is 0, duration is set 10 years by default.
-///
-/// \param description The reason why the user was banned.
-///
-/// \param completionHandler The handler block to be executed after the user is banned.
-/// This block has no return value and takes an argument that is an error madewhen there is something wrong to ban.
-///
-- (void)banUser:(SBDUser * _Nonnull)user seconds:(NSInteger)seconds description:(NSString * _Nullable)description completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Bans a user for seconds. Let a user out and prevent to join again. If the user is already banned, duration
-/// will be updated from the time that was initialized.
-/// since:
-/// 3.0.89
-/// \param userId The user ID to be banned.
-///
-/// \param seconds Seconds of ducation to be banned. Seconds should be larger than -1. If it is -1,
-/// user is banned forever. If it is 0, duration is set 10 years by default.
-///
-/// \param description The reason why the user was banned.
-///
-/// \param completionHandler The handler block to be executed after the user is banned. This
-/// block has no return value and takes an argument that is an error made when there is something wrong to ban.
-///
-- (void)banUserWithUserId:(NSString * _Nonnull)userId seconds:(NSInteger)seconds description:(NSString * _Nullable)description completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Removes ban for a user.
-/// since:
-/// 3.0.89
-/// \param user The user to be removed ban.
-///
-/// \param completionHandler The handler block to be executed after remove ban. This block has
-/// no return value and takes an argument that is an error made when there is something wrong to remove ban.
-///
-- (void)unbanUser:(SBDUser * _Nonnull)user completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Removes ban for a user.
-/// since:
-/// 3.0.89
-/// \param userId The user ID to be removed ban.
-///
-/// \param completionHandler The handler block to be executed after remove ban. This block has
-/// no return value and takes an argument that is an error made when there is something wrong to remove ban.
-///
-- (void)unbanUserWithUserId:(NSString * _Nonnull)userId completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Mutes a user with additional options. Muted user cannot send any messages to the group channel.
-/// since:
-/// 3.0.118
-/// \param user The user to be muted.
-///
-/// \param seconds The user cannot send any messages for this time.
-///
-/// \param description The description that explains the reason why the user is muted.
-///
-/// \param completionHandler The handler block to be executed after mute. This block has no return
-/// value and takes an argument that is an error made when there is something wrong to mute the user.
-///
-- (void)muteUser:(SBDUser * _Nonnull)user seconds:(NSInteger)seconds description:(NSString * _Nullable)description completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Mutes a user with additional options. Muted user cannot send any messages to the group channel.
-/// since:
-/// 3.0.118
-/// \param userId The user ID to be muted.
-///
-/// \param seconds The user cannot send any messages for this time.
-///
-/// \param description The description that explains the reason why the user is muted.
-///
-/// \param completionHandler The handler block to be executed after mute. This block has no return
-/// value and takes an argument that is an error made when there is something wrong to mute the user.
-///
-- (void)muteUserWithUserId:(NSString * _Nonnull)userId seconds:(NSInteger)seconds description:(NSString * _Nullable)description completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Unmutes a user.
-/// since:
-/// 3.0.89
-/// \param userId The user ID to be turned off mute.
-///
-/// \param completionHandler The handler block to be executed after turn off mute. This block has no
-/// return value and takes an argument that is an error made when there is something wrong to turn off mute.
-///
-- (void)unmuteUserWithUserId:(NSString * _Nonnull)userId completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Unmutes a user.
-/// since:
-/// 3.0.89
-/// \param user The user to be turned off mute.
-///
-/// \param completionHandler The handler block to be executed after turn off mute. This block has no
-/// return value and takes an argument that is an error made when there is something wrong to turn off mute.
-///
-- (void)unmuteUser:(SBDUser * _Nonnull)user completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-@end
-
-
-@interface SBDBaseChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Creates the meta counters for the channel.
-/// \param metaCounters The meta counters to be set
-///
-/// \param completionHandler The handler block to execute. <code>metaCounters</code> is the meta counters
-/// which are set on Sendbird server.
-///
-- (void)createMetaCounters:(NSDictionary<NSString *, NSNumber *> * _Nonnull)metaCounters completionHandler:(void (^ _Nullable)(NSDictionary<NSString *, NSNumber *> * _Nullable, SBError * _Nullable))completionHandler;
-/// Gets the meta counters with keys for the channel.
-/// \param keys The keys to get meta counters.
-///
-/// \param completionHandler The handler block to execute. <code>metaCounters</code> is the
-/// meta counters which are set on Sendbird server.
-///
-- (void)getMetaCountersWithKeys:(NSArray<NSString *> * _Nullable)keys completionHandler:(void (^ _Nullable)(NSDictionary<NSString *, NSNumber *> * _Nullable, SBError * _Nullable))completionHandler;
-/// Gets all meta counters for the channel.
-/// \param completionHandler handler block to execute. <code>metaCounters</code> is the meta
-/// counters which are returned from Sendbird server.
-///
-- (void)getAllMetaCountersWithCompletionHandler:(void (^ _Nullable)(NSDictionary<NSString *, NSNumber *> * _Nullable, SBError * _Nullable))completionHandler;
-/// Updates the meta counters for the channel.
-/// \param metaCounters The meta counters to be updated.
-///
-/// \param completionHandler The handler block to execute. <code>metaCounters</code> is the meta
-/// counters which are updated on Sendbird server.
-///
-- (void)updateMetaCounters:(NSDictionary<NSString *, NSNumber *> * _Nonnull)metaCounters completionHandler:(void (^ _Nullable)(NSDictionary<NSString *, NSNumber *> * _Nullable, SBError * _Nullable))completionHandler;
-/// Increases the meta counters for the channel.
-/// \param metaCounters The meta counters to be increased.
-///
-/// \param completionHandler The handler block to execute. <code>metaCounters</code> is the meta
-/// counters which are increased on Sendbird server.
-///
-- (void)increaseMetaCounters:(NSDictionary<NSString *, NSNumber *> * _Nonnull)metaCounters completionHandler:(void (^ _Nullable)(NSDictionary<NSString *, NSNumber *> * _Nullable, SBError * _Nullable))completionHandler;
-/// Decreases the meta counters for the channel.
-/// \param metaCounters The meta counters to be decreased.
-///
-/// \param completionHandler The handler block to execute. <code>metaCounters</code> is the meta
-/// counters which are decreased on Sendbird server.
-///
-- (void)decreaseMetaCounters:(NSDictionary<NSString *, NSNumber *> * _Nonnull)metaCounters completionHandler:(void (^ _Nullable)(NSDictionary<NSString *, NSNumber *> * _Nullable, SBError * _Nullable))completionHandler;
-/// Deletes the meta counters with key for the channel.
-/// \param key The key to be deleted.
-///
-/// \param completionHandler The handler block to execute.
-///
-- (void)deleteMetaCountersWithKey:(NSString * _Nonnull)key completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Deletes all meta counters for the channel.
-/// \param completionHandler The handler block to execute.
-///
-- (void)deleteAllMetaCountersWithCompletionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-@end
-
-@class SBDFileMessageCreateParams;
-@class SBDFileMessage;
-@class SBDFileMessageUpdateParams;
-
-@interface SBDBaseChannel (SWIFT_EXTENSION(SendbirdChatSDK))
 /// Sends a file message with file or file URL of params without progress.
 /// If the params has a binary file, it will upload data to Sendbird storage. If not, the params has a file url, it will send a message with file url.
 /// \param params Instance of <code>FileMessageCreateParams</code> that can has parameters related with file.
@@ -12867,6 +12630,7 @@ enum SBDReportCategory : NSInteger;
 /// Returns a temporary file message being sent to the Sendbird server. The message has a request ID instead of a message ID. The request status of the message is pending. If you try to send a message with an invalid parameter, the returned message is a user message with no properties. You can perform a validation of pending message by checking for the existence of the request ID.
 - (SBDFileMessage * _Nullable)sendFileMessageWithParams:(SBDFileMessageCreateParams * _Nonnull)params progressHandler:(void (^ _Nullable)(NSString * _Nullable, int64_t, int64_t, int64_t))progressHandler completionHandler:(void (^ _Nullable)(SBDFileMessage * _Nullable, SBError * _Nullable))completionHandler;
 - (SBDFileMessage * _Nullable)sendFileMessageWithParams:(SBDFileMessageCreateParams * _Nonnull)params requestId:(NSString * _Nullable)requestId progressHandler:(void (^ _Nullable)(NSString * _Nullable, int64_t, int64_t, int64_t))progressHandler completionHandler:(void (^ _Nullable)(SBDFileMessage * _Nullable, SBError * _Nullable))completionHandler SWIFT_WARN_UNUSED_RESULT;
+- (SBDFileMessage * _Nullable)sendFileMessageWithParams:(SBDFileMessageCreateParams * _Nonnull)params originalMessage:(SBDFileMessage * _Nonnull)originalMessage completionHandler:(void (^ _Nullable)(SBDFileMessage * _Nullable, SBError * _Nullable))completionHandler;
 - (SBDFileMessage * _Nullable)sendFileMessageWithParams:(SBDFileMessageCreateParams * _Nonnull)params requestId:(NSString * _Nullable)requestId originalMessage:(SBDFileMessage * _Nullable)originalMessage progressHandler:(void (^ _Nullable)(NSString * _Nullable, int64_t, int64_t, int64_t))progressHandler completionHandler:(void (^ _Nullable)(SBDFileMessage * _Nullable, SBError * _Nullable))completionHandler SWIFT_WARN_UNUSED_RESULT;
 /// Sends a file message with file or file URL of params with progress.
 /// If the params has a binary file, it will upload data to Sendbird storage. If not, the params has a file url, it will send a message with file url.
@@ -12976,20 +12740,474 @@ enum SBDReportCategory : NSInteger;
 /// task of the <code>requestId</code> has been cancelled.
 ///
 + (void)cancelUploadingFileMessageWithRequestId:(NSString * _Nonnull)requestId completionHandler:(void (^ _Nullable)(BOOL, SBError * _Nullable))completionHandler;
-@end
-
-@class SBDMutedUserListQuery;
-@class SBDMutedUserListQueryParams;
-@class SBDPreviousMessageListQuery;
-@class SBDPreviousMessageListQueryParams;
-@class SBDOperatorListQuery;
-@class SBDOperatorListQueryParams;
-@class SBDPollListQuery;
-@class SBDPollVoterListQuery;
-@class SBDPinnedMessageListQuery;
-@class SBDPinnedMessageListQueryParams;
-
-@interface SBDBaseChannel (SWIFT_EXTENSION(SendbirdChatSDK))
+/// Deletes a message. The message’s sender has to be the current user.
+/// note:
+/// When using the moderation feature in ephemeral open channel, you should use this function that uses the <code>message</code> object, not the function that uses the <code>messageId</code>.
+/// \param message The message to be deleted.
+///
+/// \param completionHandler The handler block to execute.
+///
+- (void)deleteMessage:(SBDBaseMessage * _Nonnull)message completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Deletes a message. The message’s sender has to be the current user.
+/// note:
+/// When using the moderation feature in ephemeral open channel, you should use the <code>deleteMessage(:completionHandler:)</code> function that uses the <code>message</code> object, not the function that uses the <code>messageId</code>.
+/// since:
+/// 3.0.179
+/// \param messageId The message ID to be deleted.
+///
+/// \param completionHandler The handler block to execute.
+///
+- (void)deleteMessageWithMessageId:(int64_t)messageId completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Deletes a message. The message’s sender has to be the current user.
+/// since:
+/// 4.19.2
+/// \param messageId The message ID to be deleted.
+///
+/// \param completionHandler The handler block to execute.
+///
+- (void)deleteMessageWithMessageId:(int64_t)messageId messageToken:(NSString * _Nullable)messageToken completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Pins the message to the channel.
+/// note:
+/// Pin functionality in <code>OpenChannel</code> will be supported starting from 4.20.0.
+/// since:
+/// 4.2.0
+/// \param messageId The message ID of the message to be pinned.
+///
+/// \param completionHandler The handler block to be executed after pinning the message.
+///
+- (void)pinMessageWithMessageId:(int64_t)messageId completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Unpins the message from the channel.
+/// note:
+/// Pin functionality in <code>OpenChannel</code> will be supported starting from 4.20.0.
+/// since:
+/// 4.2.0
+/// \param messageId The message ID of the message to be unpinned.
+///
+/// \param completionHandler The handler block to be executed after unpinning the message.
+///
+- (void)unpinMessageWithMessageId:(int64_t)messageId completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Creates keys of meta array for the message.
+/// since:
+/// 3.0.116
+/// \param message The message object. This method creates <code>keys</code> in it.
+///
+/// \param keys Keys of meta array.
+///
+/// \param completionHandler The handler block to execute. The <code>message</code> is a base message object that has the keys for its meta array.
+///
+- (void)createMessageMetaArrayKeysWithMessage:(SBDBaseMessage * _Nonnull)message keys:(NSArray<NSString *> * _Nonnull)keys completionHandler:(void (^ _Nullable)(SBDBaseMessage * _Nullable, SBError * _Nullable))completionHandler;
+/// Deletes keys from meta array of the message.
+/// since:
+/// 3.0.116
+/// \param message The message object. This method deletes keys of meta array of it.
+///
+/// \param keys Keys to be deleted.
+///
+/// \param completionHandler The handler block to execute.
+///
+- (void)deleteMessageMetaArrayKeysWithMessage:(SBDBaseMessage * _Nonnull)message keys:(NSArray<NSString *> * _Nonnull)keys completionHandler:(void (^ _Nullable)(SBDBaseMessage * _Nullable, SBError * _Nullable))completionHandler;
+/// Adds meta array to the message.
+/// since:
+/// 3.0.116
+/// note:
+/// use <code>addMessageMetaArrayValues(message:metaArrays:completionHandler:)</code> as possible.
+/// \param message The message object. This method adds pairs of key and value to this message.
+///
+/// \param keyValues Pairs of key-value to be added.
+///
+/// \param completionHandler The handler block to execute.
+///
+- (void)addMessageMetaArrayValuesWithMessage:(SBDBaseMessage * _Nonnull)message keyValues:(NSDictionary<NSString *, NSArray<NSString *> *> * _Nonnull)keyValues completionHandler:(void (^ _Nullable)(SBDBaseMessage * _Nullable, SBError * _Nullable))completionHandler;
+/// Adds the array of meta array into the message.
+/// note:
+/// The <code>metaArrays</code> are upserted into the message. If a key in the metaArrays is new, the key will
+/// be inserted with the value. If a key in the metaArrays is already created, the value of the messageMetaArray
+/// will be inserted so strings in the value MUST be new one.
+/// since:
+/// 3.0.148
+/// \param message The message instance. The metaArrays will added into the message.
+///
+/// \param metaArrays An array of message meta array will be added into the message. the string of the value
+/// in the metaArray MUST NOT exist with same key.
+///
+/// \param completionHandler The handler block to execute after adding message meta arrays. The
+/// <code>message</code> of the handler is updated message. If failed to add message meta arrays, the <code>error</code>
+/// of the handler is not nil(null).
+///
+- (void)addMessageMetaArrayValuesWithMessage:(SBDBaseMessage * _Nonnull)message metaArrays:(NSArray<SBDMessageMetaArray *> * _Nonnull)metaArrays completionHandler:(void (^ _Nullable)(SBDBaseMessage * _Nullable, SBError * _Nullable))completionHandler;
+/// Removes meta array from the message.
+/// since:
+/// 3.0.116
+/// note:
+/// use <code>removeMessageMetaArrayValues(message:metaArrays:completionHandler:)</code> as possible.
+/// \param message The message object. This method removes pairs of key and value from this message. 
+///
+/// \param keyValues Pairs of key-value to be removed. 
+///
+/// \param completionHandler The handler block to execute. 
+///
+- (void)removeMessageMetaArrayValuesWithMessage:(SBDBaseMessage * _Nonnull)message keyValues:(NSDictionary<NSString *, NSArray<NSString *> *> * _Nonnull)keyValues completionHandler:(void (^ _Nullable)(SBDBaseMessage * _Nullable, SBError * _Nullable))completionHandler;
+/// Removes the array of meta array from the message.
+/// note:
+/// The <code>metaArrays</code> are removed from the message. If a key in the metaArrays has an emtpy
+/// array of the value, the key will be removed. If not, the value of the messageMetaArray will be removed from the message.
+/// note:
+/// The order of the meta array is guaranteed.
+/// since:
+/// 3.0.148
+/// \param message The message instance. The metaArrays will removed from the message.
+///
+/// \param metaArrays An array of message meta array will be removed from the message. the string of
+/// the value in the metaArray MUST exist with same key.
+///
+/// \param completionHandler The handler block to execute after removing message meta arrays.
+/// The <code>message</code> of the handler is removed message. If failed to remove message meta arrays,
+/// the <code>error</code> of the handler is not nil(null).
+///
+- (void)removeMessageMetaArrayValuesWithMessage:(SBDBaseMessage * _Nonnull)message metaArrays:(NSArray<SBDMessageMetaArray *> * _Nonnull)metaArrays completionHandler:(void (^ _Nullable)(SBDBaseMessage * _Nullable, SBError * _Nullable))completionHandler;
+/// Creates the meta counters for the channel.
+/// \param metaCounters The meta counters to be set
+///
+/// \param completionHandler The handler block to execute. <code>metaCounters</code> is the meta counters
+/// which are set on Sendbird server.
+///
+- (void)createMetaCounters:(NSDictionary<NSString *, NSNumber *> * _Nonnull)metaCounters completionHandler:(void (^ _Nullable)(NSDictionary<NSString *, NSNumber *> * _Nullable, SBError * _Nullable))completionHandler;
+/// Gets the meta counters with keys for the channel.
+/// \param keys The keys to get meta counters.
+///
+/// \param completionHandler The handler block to execute. <code>metaCounters</code> is the
+/// meta counters which are set on Sendbird server.
+///
+- (void)getMetaCountersWithKeys:(NSArray<NSString *> * _Nullable)keys completionHandler:(void (^ _Nullable)(NSDictionary<NSString *, NSNumber *> * _Nullable, SBError * _Nullable))completionHandler;
+/// Gets all meta counters for the channel.
+/// \param completionHandler handler block to execute. <code>metaCounters</code> is the meta
+/// counters which are returned from Sendbird server.
+///
+- (void)getAllMetaCountersWithCompletionHandler:(void (^ _Nullable)(NSDictionary<NSString *, NSNumber *> * _Nullable, SBError * _Nullable))completionHandler;
+/// Updates the meta counters for the channel.
+/// \param metaCounters The meta counters to be updated.
+///
+/// \param completionHandler The handler block to execute. <code>metaCounters</code> is the meta
+/// counters which are updated on Sendbird server.
+///
+- (void)updateMetaCounters:(NSDictionary<NSString *, NSNumber *> * _Nonnull)metaCounters completionHandler:(void (^ _Nullable)(NSDictionary<NSString *, NSNumber *> * _Nullable, SBError * _Nullable))completionHandler;
+/// Increases the meta counters for the channel.
+/// \param metaCounters The meta counters to be increased.
+///
+/// \param completionHandler The handler block to execute. <code>metaCounters</code> is the meta
+/// counters which are increased on Sendbird server.
+///
+- (void)increaseMetaCounters:(NSDictionary<NSString *, NSNumber *> * _Nonnull)metaCounters completionHandler:(void (^ _Nullable)(NSDictionary<NSString *, NSNumber *> * _Nullable, SBError * _Nullable))completionHandler;
+/// Decreases the meta counters for the channel.
+/// \param metaCounters The meta counters to be decreased.
+///
+/// \param completionHandler The handler block to execute. <code>metaCounters</code> is the meta
+/// counters which are decreased on Sendbird server.
+///
+- (void)decreaseMetaCounters:(NSDictionary<NSString *, NSNumber *> * _Nonnull)metaCounters completionHandler:(void (^ _Nullable)(NSDictionary<NSString *, NSNumber *> * _Nullable, SBError * _Nullable))completionHandler;
+/// Deletes the meta counters with key for the channel.
+/// \param key The key to be deleted.
+///
+/// \param completionHandler The handler block to execute.
+///
+- (void)deleteMetaCountersWithKey:(NSString * _Nonnull)key completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Deletes all meta counters for the channel.
+/// \param completionHandler The handler block to execute.
+///
+- (void)deleteAllMetaCountersWithCompletionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Creates the meta <em>data</em> for the channel.
+/// \param metaData The meta <em>data</em> to be set.
+///
+/// \param completionHandler The handler block to execute. <code>metaData</code> is the meta
+/// <em>data</em> which are set on Sendbird server.
+///
+- (void)createMetaData:(NSDictionary<NSString *, NSString *> * _Nonnull)metaData completionHandler:(void (^ _Nullable)(NSDictionary<NSString *, NSString *> * _Nullable, SBError * _Nullable))completionHandler;
+/// Gets the meta <em>data</em> for the channel.
+/// \param keys The keys to get meta <em>data</em>.
+///
+/// \param completionHandler The handler block to execute. <code>metaData</code> is the meta
+/// <em>data</em> which are set on Sendbird server.
+///
+- (void)getMetaDataWithKeys:(NSArray<NSString *> * _Nonnull)keys completionHandler:(void (^ _Nullable)(NSDictionary<NSString *, NSString *> * _Nullable, SBError * _Nullable))completionHandler;
+/// Gets all meta <em>data</em> for the channel.
+/// \param completionHandler The handler block to execute. <code>metaData</code> is the meta
+/// <em>data</em> which are set on Sendbird server.
+///
+- (void)getAllMetaDataWithCompletionHandler:(void (^ _Nullable)(NSDictionary<NSString *, NSString *> * _Nullable, SBError * _Nullable))completionHandler;
+/// Updates the meta <em>data</em> for the channel.
+/// \param metaData The meta <em>data</em> to be updated.
+///
+/// \param completionHandler The handler block to execute. <code>metaData</code> is the meta counters
+/// which are updated on Sendbird server.
+///
+- (void)updateMetaData:(NSDictionary<NSString *, NSString *> * _Nonnull)metaData completionHandler:(void (^ _Nullable)(NSDictionary<NSString *, NSString *> * _Nullable, SBError * _Nullable))completionHandler;
+/// Deletes meta <em>data</em> with key for the channel.
+/// \param key The key to be deleted.
+///
+/// \param completionHandler The handler block to execute.
+///
+- (void)deleteMetaDataWithKey:(NSString * _Nonnull)key completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Deletes all meta <em>data</em> for the channel.
+/// \param completionHandler The handler block to execute.
+///
+- (void)deleteAllMetaDataWithCompletionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Return cached channel meta data.
+/// since:
+/// 3.0.216
+///
+/// returns:
+/// Dictionary meta data.
+- (NSDictionary<NSString *, NSString *> * _Nonnull)getCachedMetaData SWIFT_WARN_UNUSED_RESULT;
+- (void)removeAllCachedMetaData;
+/// Bans a user for seconds. Let a user out and prevent to join again.
+/// If the user is already banned, duration will be updated from the time that was initialized.
+/// since:
+/// 3.0.89
+/// \param user The user to be banned.
+///
+/// \param seconds Seconds of ducation to be banned. Seconds should be larger than -1. If it is -1,
+/// user is banned forever. If it is 0, duration is set 10 years by default.
+///
+/// \param description The reason why the user was banned.
+///
+/// \param completionHandler The handler block to be executed after the user is banned.
+/// This block has no return value and takes an argument that is an error madewhen there is something wrong to ban.
+///
+- (void)banUser:(SBDUser * _Nonnull)user seconds:(NSInteger)seconds description:(NSString * _Nullable)description completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Bans a user for seconds. Let a user out and prevent to join again. If the user is already banned, duration
+/// will be updated from the time that was initialized.
+/// since:
+/// 3.0.89
+/// \param userId The user ID to be banned.
+///
+/// \param seconds Seconds of ducation to be banned. Seconds should be larger than -1. If it is -1,
+/// user is banned forever. If it is 0, duration is set 10 years by default.
+///
+/// \param description The reason why the user was banned.
+///
+/// \param completionHandler The handler block to be executed after the user is banned. This
+/// block has no return value and takes an argument that is an error made when there is something wrong to ban.
+///
+- (void)banUserWithUserId:(NSString * _Nonnull)userId seconds:(NSInteger)seconds description:(NSString * _Nullable)description completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Removes ban for a user.
+/// since:
+/// 3.0.89
+/// \param user The user to be removed ban.
+///
+/// \param completionHandler The handler block to be executed after remove ban. This block has
+/// no return value and takes an argument that is an error made when there is something wrong to remove ban.
+///
+- (void)unbanUser:(SBDUser * _Nonnull)user completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Removes ban for a user.
+/// since:
+/// 3.0.89
+/// \param userId The user ID to be removed ban.
+///
+/// \param completionHandler The handler block to be executed after remove ban. This block has
+/// no return value and takes an argument that is an error made when there is something wrong to remove ban.
+///
+- (void)unbanUserWithUserId:(NSString * _Nonnull)userId completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Reports a user in a channel of inappropriate activities.
+/// since:
+/// 3.0.154
+/// \param offendingUser The user who is being reported.
+///
+/// \param reportCategory The category in which the report is being submitted. Valid choices are
+/// <code>suspicious</code>, <code>harassing</code>, <code>spam</code>, and <code>inappropriate</code>.
+///
+/// \param reportDescription An open ended description for why the report is being submitted.
+///
+/// \param completionHandler The handler block to execute.
+///
+- (void)reportUser:(SBDUser * _Nonnull)offendingUser reportCategory:(enum SBDReportCategory)reportCategory reportDescription:(NSString * _Nullable)reportDescription completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Reports current channel instance of inappropriate activities.
+/// since:
+/// 3.0.154
+/// \param category The category in which the report is being submitted. Valid choices are
+/// <code>suspicious</code>, <code>harassing</code>, <code>spam</code> and <code>inappropriate</code>.
+///
+/// \param reportDescription An open ended description for why the report is being submitted.
+///
+/// \param completionHandler The handler block to execute.
+///
+- (void)reportChannelWithCategory:(enum SBDReportCategory)category reportDescription:(NSString * _Nullable)reportDescription completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Reports a malicious message in the channel
+/// since:
+/// 3.0.154
+/// \param message The message object which is being reported.
+///
+/// \param reportCategory The category in which the report is being submitted. Valid choices are
+/// <code>suspicious</code>, <code>harassing</code>, <code>spam</code> and <code>inappropriate</code>.
+///
+/// \param reportDescription An open ended description for why the report is being submitted.
+///
+/// \param completionHandler The handler block to execute.
+///
+- (void)reportMessage:(SBDBaseMessage * _Nonnull)message reportCategory:(enum SBDReportCategory)reportCategory reportDescription:(NSString * _Nullable)reportDescription completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Mutes a user with additional options. Muted user cannot send any messages to the group channel.
+/// since:
+/// 3.0.118
+/// \param user The user to be muted.
+///
+/// \param seconds The user cannot send any messages for this time.
+///
+/// \param description The description that explains the reason why the user is muted.
+///
+/// \param completionHandler The handler block to be executed after mute. This block has no return
+/// value and takes an argument that is an error made when there is something wrong to mute the user.
+///
+- (void)muteUser:(SBDUser * _Nonnull)user seconds:(NSInteger)seconds description:(NSString * _Nullable)description completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Mutes a user with additional options. Muted user cannot send any messages to the group channel.
+/// since:
+/// 3.0.118
+/// \param userId The user ID to be muted.
+///
+/// \param seconds The user cannot send any messages for this time.
+///
+/// \param description The description that explains the reason why the user is muted.
+///
+/// \param completionHandler The handler block to be executed after mute. This block has no return
+/// value and takes an argument that is an error made when there is something wrong to mute the user.
+///
+- (void)muteUserWithUserId:(NSString * _Nonnull)userId seconds:(NSInteger)seconds description:(NSString * _Nullable)description completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Unmutes a user.
+/// since:
+/// 3.0.89
+/// \param userId The user ID to be turned off mute.
+///
+/// \param completionHandler The handler block to be executed after turn off mute. This block has no
+/// return value and takes an argument that is an error made when there is something wrong to turn off mute.
+///
+- (void)unmuteUserWithUserId:(NSString * _Nonnull)userId completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Unmutes a user.
+/// since:
+/// 3.0.89
+/// \param user The user to be turned off mute.
+///
+/// \param completionHandler The handler block to be executed after turn off mute. This block has no
+/// return value and takes an argument that is an error made when there is something wrong to turn off mute.
+///
+- (void)unmuteUser:(SBDUser * _Nonnull)user completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Adds operators to the channel.
+/// since:
+/// 3.0.189
+/// \param userIds The user IDs to be operators.
+///
+/// \param completionHandler The handler block to be executed.
+///
+- (void)addOperatorsWithUserIds:(NSArray<NSString *> * _Nonnull)userIds completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Removes operators from the channel.
+/// since:
+/// 3.0.189
+/// \param userIds The user IDs to be removed from the operators.
+///
+/// \param completionHandler The handler block to be executed.
+///
+- (void)removeOperatorsWithUserIds:(NSArray<NSString *> * _Nonnull)userIds completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Removes all operators from the channel.
+/// since:
+/// 3.0.189
+/// \param completionHandler The handler block to be executed.
+///
+- (void)removeAllOperatorsWithCompletionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Updates a poll with params.
+/// since:
+/// 4.5.0
+/// \param pollId ID of Poll to update
+///
+/// \param params <code>PollUpdateParams</code> instance.
+///
+/// \param completionHandler Completion block.
+///
+- (void)updatePollWithPollId:(int64_t)pollId params:(SBDPollUpdateParams * _Nonnull)params completionHandler:(void (^ _Nullable)(SBDPoll * _Nullable, SBError * _Nullable))completionHandler;
+/// Deletes a poll.
+/// since:
+/// 4.5.0
+/// \param pollId ID of Poll to remove
+///
+/// \param completionHandler Completion block.
+///
+- (void)deletePollWithPollId:(int64_t)pollId completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Closes a poll.
+/// since:
+/// 4.5.0
+/// \param pollId ID of Poll to close
+///
+/// \param completionHandler Completion block
+///
+- (void)closePollWithPollId:(int64_t)pollId completionHandler:(void (^ _Nullable)(SBDPoll * _Nullable, SBError * _Nullable))completionHandler;
+/// Adds an option to a poll.
+/// since:
+/// 4.5.0
+/// \param pollId ID of Poll to add the poll option
+///
+/// \param optionText Option text of the poll option
+///
+/// \param completionHandler Completion block
+///
+- (void)addPollOptionWithPollId:(int64_t)pollId optionText:(NSString * _Nonnull)optionText completionHandler:(void (^ _Nullable)(SBDPoll * _Nullable, SBError * _Nullable))completionHandler;
+/// Updates an option to a poll.
+/// since:
+/// 4.5.0
+/// \param pollId ID of poll to update the poll option
+///
+/// \param pollOptionId ID of the poll option
+///
+/// \param optionText Option text of the poll option
+///
+/// \param completionHandler Completion block
+///
+- (void)updatePollOptionWithPollId:(int64_t)pollId pollOptionId:(int64_t)pollOptionId optionText:(NSString * _Nonnull)optionText completionHandler:(void (^ _Nullable)(SBDPoll * _Nullable, SBError * _Nullable))completionHandler;
+/// Removes Poll option
+/// since:
+/// 4.5.0
+/// \param pollId ID of the poll to delete poll option of
+///
+/// \param pollOptionId poll option id to delete
+///
+/// \param completionHandler Completion block
+///
+- (void)deletePollOptionWithPollId:(int64_t)pollId pollOptionId:(int64_t)pollOptionId completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Votes poll
+/// since:
+/// 4.5.0
+/// \param pollId Poll ID to vote
+///
+/// \param pollOptionIds List of poll option IDs to vote
+///
+/// \param completionHandler Completion block
+///
+- (void)votePollWithPollId:(int64_t)pollId pollOptionIds:(NSArray<NSNumber *> * _Nonnull)pollOptionIds completionHandler:(void (^ _Nullable)(SBDPollVoteEvent * _Nullable, SBError * _Nullable))completionHandler;
+/// Adds a reaction to a message.
+/// Messages with <code>sendingStatus</code> is not <code>.success</code> will handler to return error.
+/// note:
+/// This is idempotent.
+/// note:
+/// This feature is only available in group channels.
+/// since:
+/// 3.0.169
+/// \param message The message object that the reaction will be added.
+///
+/// \param key The reaction key to be added.
+///
+/// \param completionHandler The handler block to be executed. If succeeded, the <code>reactionEvent</code>
+/// will have the information of the reaction.
+///
+- (void)addReactionWithMessage:(SBDBaseMessage * _Nonnull)message key:(NSString * _Nonnull)key completionHandler:(void (^ _Nullable)(SBDReactionEvent * _Nullable, SBError * _Nullable))completionHandler;
+/// Deletes a reaction from a message.
+/// note:
+/// This is idempotent.
+/// note:
+/// This feature is only available in group channels.
+/// since:
+/// 3.0.169
+/// \param message The message object that has the reaction key.
+///
+/// \param key The reaction key to be deleted.
+///
+/// \param completionHandler The handler block to be executed. If succeeded, the <code>reactionEvent</code> will have the information of the reaction.
+///
+- (void)deleteReactionWithMessage:(SBDBaseMessage * _Nonnull)message key:(NSString * _Nonnull)key completionHandler:(void (^ _Nullable)(SBDReactionEvent * _Nullable, SBError * _Nullable))completionHandler;
 /// Creates a query instance for banned user list of the channel.
 /// since:
 /// 3.0.89
@@ -13286,6 +13504,64 @@ enum SBDReportCategory : NSInteger;
 /// returns:
 /// A <code>PinnedMessageListQuery</code> object that can be used to retrieve a list of pinned messages.
 - (SBDPinnedMessageListQuery * _Nullable)createPinnedMessageListQueryWithParams:(SBDPinnedMessageListQueryParams * _Nonnull)params SWIFT_WARN_UNUSED_RESULT;
+/// Retrieves the changelogs since a specified token regarding the updated messages or the unique IDs
+/// of deleted messages in the channel.
+/// since:
+/// 3.0.181
+/// \param token Specifies the token to be the reference point for the changelogs to retrieve.
+///
+/// \param params Contains a set of parameters you can set regarding the messages in the results.
+///
+/// \param completionHandler The handler block to execute. The <code>updatedMessages</code> retrieves the
+/// updated messages. The <code>deletedMessageIds</code> retrieves the unique ID of deleted messages.
+/// The <code>hasMore</code> indicates whether there are more changelogs to be retrieved. The <code>token</code>
+/// retrieves the token of the last changelog in the results. The <code>error</code> indicates whether there is
+/// an error. If there is no error, the value is <code>nil</code>.
+///
+- (void)getMessageChangeLogsSinceToken:(NSString * _Nullable)token params:(SBDMessageChangeLogsParams * _Nonnull)params completionHandler:(void (^ _Nullable)(NSArray<SBDBaseMessage *> * _Nullable, NSArray<NSNumber *> * _Nullable, BOOL, NSString * _Nullable, SBError * _Nullable))completionHandler;
+/// Retrieves the changelogs since a specified timestamp, in Unix milliseconds format, regarding the updated
+/// messages or the unique IDs of deleted messages in the channel.
+/// since:
+/// 3.0.181
+/// \param timestamp Specifies the timestamp to be the reference point for changelogs to retrieve, in Unix milliseconds format.
+///
+/// \param params Contains a set of parameters you can set regarding the messages in the results.
+///
+/// \param completionHandler The handler block to execute. The <code>updatedMessages</code> retrieves the
+/// updated messages. The <code>deletedMessageIds</code> retrieves the unique ID of deleted messages. The
+/// <code>hasMore</code> indicates whether there are more changelogs to be retrieved. The <code>token</code> retrieves the
+/// token of the last changelog in the results. The <code>error</code> indicates whether there is an error. If there is
+/// no error, the value is <code>nil</code>.
+///
+- (void)getMessageChangeLogsSinceTimestamp:(int64_t)timestamp params:(SBDMessageChangeLogsParams * _Nonnull)params completionHandler:(void (^ _Nullable)(NSArray<SBDBaseMessage *> * _Nullable, NSArray<NSNumber *> * _Nullable, BOOL, NSString * _Nullable, SBError * _Nullable))completionHandler;
+- (void)getMessageChangeLogsWithToken:(NSString * _Nullable)token timestamp:(int64_t)timestamp params:(SBDMessageChangeLogsParams * _Nonnull)params completionHandler:(void (^ _Nullable)(NSArray<SBDBaseMessage *> * _Nullable, NSArray<NSNumber *> * _Nullable, BOOL, NSString * _Nullable, SBError * _Nullable))completionHandler;
+/// Retrieves the changelogs since a specified token regarding the updated polls or the unique IDs
+/// of deleted polls in the channel.
+/// since:
+/// 4.5.0
+/// \param token Specifies the token to be the reference point for the changelogs to retrieve.
+///
+/// \param completionHandler The handler block to execute. The <code>updatedPolls</code> retrieves the
+/// updated polls. The <code>deletedPollIds</code> retrieves the unique ID of deleted polls.
+/// The <code>hasMore</code> indicates whether there are more changelogs to be retrieved. The <code>token</code>
+/// retrieves the token of the last changelog in the results. The <code>error</code> indicates whether there is
+/// an error. If there is no error, the value is <code>nil</code>.
+///
+- (void)getPollChangeLogsWithToken:(NSString * _Nullable)token completionHandler:(void (^ _Nullable)(NSArray<SBDPoll *> * _Nullable, NSArray<NSNumber *> * _Nullable, BOOL, NSString * _Nullable, SBError * _Nullable))completionHandler;
+/// Retrieves the changelogs since a specified timestamp regarding the updated polls or the unique IDs
+/// of deleted polls in the channel.
+/// since:
+/// 4.5.0
+/// \param timestamp Specifies the timestamp to be the reference point for changelogs to retrieve, in Unix milliseconds format.
+///
+/// \param completionHandler The handler block to execute. The <code>updatedPolls</code> retrieves the
+/// updated polls. The <code>deletedPollIds</code> retrieves the unique ID of deleted polls.
+/// The <code>hasMore</code> indicates whether there are more changelogs to be retrieved. The <code>token</code>
+/// retrieves the token of the last changelog in the results. The <code>error</code> indicates whether there is
+/// an error. If there is no error, the value is <code>nil</code>.
+///
+- (void)getPollChangeLogsWithTimestamp:(int64_t)timestamp completionHandler:(void (^ _Nullable)(NSArray<SBDPoll *> * _Nullable, NSArray<NSNumber *> * _Nullable, BOOL, NSString * _Nullable, SBError * _Nullable))completionHandler;
+- (void)getPollChangeLogsWithToken:(NSString * _Nullable)token timestamp:(int64_t)timestamp completionHandler:(void (^ _Nullable)(NSArray<SBDPoll *> * _Nullable, NSArray<NSNumber *> * _Nullable, BOOL, NSString * _Nullable, SBError * _Nullable))completionHandler;
 @end
 
 @class SBDThreadInfoUpdateEvent;
@@ -13672,6 +13948,8 @@ enum FeedbackRating : NSInteger;
 /// \param completionHandler The handler block to be executed after the feedback is deleted.
 ///
 - (void)deleteFeedbackWithCompletionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// warning:
+/// This method will always fail because it is an interface that is no longer supported
 /// Submit data for a form type message.
 /// A form type message contains <code>forms</code> fields in the message’s <code>extendedMessagePayload</code>.
 /// The <code>BaseMessage/forms</code> property is the instance that contains the form information.
@@ -13685,7 +13963,9 @@ enum FeedbackRating : NSInteger;
 ///
 /// \param completionHandler The handler block to be executed after the answer is submitted.
 ///
-- (void)submitFormWithFormKey:(NSString * _Nonnull)formKey answers:(NSDictionary<NSString *, NSString *> * _Nonnull)answers completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler SWIFT_DEPRECATED_MSG("This method is deprecated in 4.14.1.", "submitFormWithForm:completionHandler:");
+- (void)submitFormWithFormKey:(NSString * _Nonnull)formKey answers:(NSDictionary<NSString *, NSString *> * _Nonnull)answers completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler SWIFT_DEPRECATED_MSG("This method is deprecated in 4.14.1.", "submitMessageForm(form:completionHandler:)");
+/// warning:
+/// This method will always fail because it is an interface that is no longer supported
 /// Submit data for a form type message.
 /// A form type message contains <code>forms</code> fields in the message’s <code>extendedMessagePayload</code>.
 /// The <code>BaseMessage/forms</code> property is the instance that contains the form information.
@@ -13697,7 +13977,19 @@ enum FeedbackRating : NSInteger;
 ///
 /// \param completionHandler The handler block to be executed after the answer is submitted.
 ///
-- (void)submitFormWithForm:(SBDForm * _Nonnull)form completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+- (void)submitFormWithForm:(SBDForm * _Nonnull)form completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler SWIFT_DEPRECATED_MSG("This method is deprecated in 4.21.0.", "submitMessageForm(form:completionHandler:)");
+/// Submit data for a form type message.
+/// A form type message contains <code>form</code> fields in the message’s <code>extendedMessagePayload</code>.
+/// The <code>BaseMessage/form</code> property is the instance that contains the form information.
+/// Using the given <code>MessageForm</code> model,
+/// You can do that just by updating the <code>FormItem/temporaryAnswer</code> property of each of the <code>fields</code>.
+/// since:
+/// 4.21.0
+/// \param form A message form instance with the answer to submit updated in <code>FormField/temporaryAnswer</code>.
+///
+/// \param completionHandler The handler block to be executed after the answer is submitted.
+///
+- (void)submitMessageFormWithCompletionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
 @end
 
 enum SBDPushNotificationDeliveryOption : NSInteger;
@@ -13909,6 +14201,7 @@ typedef SWIFT_ENUM_NAMED(NSInteger, SBDCachedDataClearOrder, "CachedDataClearOrd
 };
 
 enum SBDCollectionEventSource : NSInteger;
+@class SBDEventDetail;
 
 /// Channel context
 /// since:
@@ -13917,6 +14210,10 @@ SWIFT_CLASS_NAMED("ChannelContext")
 @interface SBDChannelContext : NSObject
 /// Event source
 @property (nonatomic) enum SBDCollectionEventSource source;
+/// The <code>EventDetail</code> of current context. Includes detailed information which are provided as function parameters in <code>GroupChannelDelegate</code>.
+/// since:
+/// 4.21.0
+@property (nonatomic, strong) SBDEventDetail * _Nonnull eventDetail;
 /// Checks whether the context is from an event or not.
 ///
 /// returns:
@@ -14311,6 +14608,293 @@ SWIFT_CLASS_NAMED("EmojiContainer")
 + (nullable instancetype)buildFromSerializedData:(NSData * _Nullable)data SWIFT_WARN_UNUSED_RESULT;
 @end
 
+
+/// General class for representing event details for <code>ChannelContext</code> and <code>FeedChannelContext</code>.
+/// Every detail from delegate functions from <code>GroupChannelDelegate</code> and <code>FeedChannelDelegate</code> can be found as a subclass of <code>EventDetail</code>
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("EventDetail")
+@interface SBDEventDetail : NSObject
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+/// Represents the event source detail for channel changelogs.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("ChannelChangelogs")
+@interface SBDChannelChangelogs : SBDEventDetail
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+/// Represents the event source detail for channel refresh.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("ChannelRefresh")
+@interface SBDChannelRefresh : SBDEventDetail
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channelWasChanged(_:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("ChannelChanged")
+@interface SBDChannelChanged : SBDEventDetail
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channelDidChangeMemberCount(_:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("ChannelMemberCountChanged")
+@interface SBDChannelMemberCountChanged : SBDEventDetail
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channelWasFrozen(_:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("ChannelFrozen")
+@interface SBDChannelFrozen : SBDEventDetail
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channelWasUnfrozen(_:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("ChannelUnfrozen")
+@interface SBDChannelUnfrozen : SBDEventDetail
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channelWasHidden(_:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("ChannelHidden")
+@interface SBDChannelHidden : SBDEventDetail
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channelWasDeleted(_:channelType:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("ChannelDeleted")
+@interface SBDChannelDeleted : SBDEventDetail
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channelDidUpdateOperators(_:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("OperatorUpdated")
+@interface SBDOperatorUpdated : SBDEventDetail
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channelDidUpdateTypingStatus(_:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("TypingStatusUpdated")
+@interface SBDTypingStatusUpdated : SBDEventDetail
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channelDidUpdateDeliveryStatus(_:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("DeliveryStatusUpdated")
+@interface SBDDeliveryStatusUpdated : SBDEventDetail
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channelDidUpdateReadStatus(_:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("ReadStatusUpdated")
+@interface SBDReadStatusUpdated : SBDEventDetail
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channelDidUpdatePinnedMessages(_:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("PinnedMessageUpdated")
+@interface SBDPinnedMessageUpdated : SBDEventDetail
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channel(_:didUpdateFeedbackMessage:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("UpdateFeedbackMessage")
+@interface SBDUpdateFeedbackMessage : SBDEventDetail
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channel(_:didReceiveMention:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("MentionReceived")
+@interface SBDMentionReceived : SBDEventDetail
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channel(_:userWasMuted:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("UserMuted")
+@interface SBDUserMuted : SBDEventDetail
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channel(_:userWasUnmuted:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("UserUnmuted")
+@interface SBDUserUnmuted : SBDEventDetail
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channel(_:userWasBanned:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("UserBanned")
+@interface SBDUserBanned : SBDEventDetail
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+/// Represents the event source detail for<code>GroupChannelDelegate.channel(_:userWasUnbanned:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("UserUnbanned")
+@interface SBDUserUnbanned : SBDEventDetail
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channel(_:createdMetaData:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("MetaDataCreated")
+@interface SBDMetaDataCreated : SBDEventDetail
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channel(_:updatedMetaData:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("MetaDataUpdated")
+@interface SBDMetaDataUpdated : SBDEventDetail
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channel(_:deletedMetaDataKeys:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("MetaDataDeleted")
+@interface SBDMetaDataDeleted : SBDEventDetail
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channel(_:createdMetaCounters:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("MetaCountersCreated")
+@interface SBDMetaCountersCreated : SBDEventDetail
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channel(_:updatedMetaCounters:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("MetaCountersUpdated")
+@interface SBDMetaCountersUpdated : SBDEventDetail
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channel(_:deletedMetaCountersKeys:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("MetaCountersDeleted")
+@interface SBDMetaCountersDeleted : SBDEventDetail
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channel(_:didReceiveInvitation:inviter:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("UserReceivedInvitation")
+@interface SBDUserReceivedInvitation : SBDEventDetail
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channel(_:didDeclineInvitation:inviter:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("UserDeclinedInvitation")
+@interface SBDUserDeclinedInvitation : SBDEventDetail
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channel(_:userDidJoin:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("UserJoined")
+@interface SBDUserJoined : SBDEventDetail
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+/// Represents the event source detail for <code>GroupChannelDelegate.channel(_:userDidLeave:)</code>.
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("UserLeft")
+@interface SBDUserLeft : SBDEventDetail
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
 @class SBDNotificationCategory;
 
 /// A class that represents a feed channel.
@@ -14341,6 +14925,18 @@ SWIFT_CLASS_NAMED("FeedChannel")
 @end
 
 
+@class SBDFeedChannelListQueryParams;
+@class SBDFeedChannelListQuery;
+
+@interface SBDFeedChannel (SWIFT_EXTENSION(SendbirdChatSDK))
+/// since:
+/// 4.6.0
++ (SBDFeedChannelListQuery * _Nonnull)createMyFeedChannelListQueryWithParamsBuilder:(SWIFT_NOESCAPE void (^ _Nonnull)(SBDFeedChannelListQueryParams * _Nonnull))paramsBuilder SWIFT_WARN_UNUSED_RESULT;
+/// since:
+/// 4.6.0
++ (SBDFeedChannelListQuery * _Nonnull)createMyFeedChannelListQueryWithParams:(SBDFeedChannelListQueryParams * _Nonnull)params SWIFT_WARN_UNUSED_RESULT;
+@end
+
 
 @interface SBDFeedChannel (SWIFT_EXTENSION(SendbirdChatSDK))
 /// Deserializes and reconstructs the object
@@ -14365,18 +14961,6 @@ SWIFT_CLASS_NAMED("FeedChannel")
 /// \param completionhandler The completion handler to return the result.
 ///
 - (void)markAsReadByMessages:(NSArray<SBDBaseMessage *> * _Nonnull)messages completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-@end
-
-@class SBDFeedChannelListQueryParams;
-@class SBDFeedChannelListQuery;
-
-@interface SBDFeedChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// since:
-/// 4.6.0
-+ (SBDFeedChannelListQuery * _Nonnull)createMyFeedChannelListQueryWithParamsBuilder:(SWIFT_NOESCAPE void (^ _Nonnull)(SBDFeedChannelListQueryParams * _Nonnull))paramsBuilder SWIFT_WARN_UNUSED_RESULT;
-/// since:
-/// 4.6.0
-+ (SBDFeedChannelListQuery * _Nonnull)createMyFeedChannelListQueryWithParams:(SBDFeedChannelListQueryParams * _Nonnull)params SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -14412,6 +14996,10 @@ SWIFT_CLASS_NAMED("FeedChannelContext")
 @interface SBDFeedChannelContext : NSObject
 /// Event source
 @property (nonatomic) enum SBDCollectionEventSource source;
+/// The <code>EventDetail</code> of current context. Includes detailed information which are provided as function parameters in <code>FeedChannelDelegate</code>.
+/// since:
+/// 4.21.0
+@property (nonatomic, strong) SBDEventDetail * _Nonnull eventDetail;
 /// Checks whether the context is from an event or not.
 ///
 /// returns:
@@ -14444,6 +15032,12 @@ SWIFT_CLASS_NAMED("FeedChannelListQuery")
 
 
 @interface SBDFeedChannelListQuery (SWIFT_EXTENSION(SendbirdChatSDK))
+/// Determines channel list includes empty channel. Default is <code>true</code>
+@property (nonatomic, readonly) BOOL includeEmptyChannel;
+@end
+
+
+@interface SBDFeedChannelListQuery (SWIFT_EXTENSION(SendbirdChatSDK))
 /// Copies this object
 /// \param zone optional <code>NSZone</code>
 ///
@@ -14451,12 +15045,6 @@ SWIFT_CLASS_NAMED("FeedChannelListQuery")
 /// returns:
 /// <code>FeedChannelListQuery</code> instance
 - (id _Nonnull)copyWithZone:(struct _NSZone * _Nullable)zone SWIFT_WARN_UNUSED_RESULT;
-@end
-
-
-@interface SBDFeedChannelListQuery (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Determines channel list includes empty channel. Default is <code>true</code>
-@property (nonatomic, readonly) BOOL includeEmptyChannel;
 @end
 
 
@@ -14500,6 +15088,7 @@ SWIFT_CLASS_NAMED("Feedback")
 @end
 
 
+
 @interface SBDFeedback (SWIFT_EXTENSION(SendbirdChatSDK))
 @end
 
@@ -14523,7 +15112,6 @@ typedef SWIFT_ENUM_NAMED(NSInteger, FeedbackStatus, "Status", open) {
   FeedbackStatusSubmitted = 1,
   FeedbackStatusNoFeedback = 2,
 };
-
 
 
 @class SBDThumbnail;
@@ -14644,7 +15232,7 @@ SWIFT_CLASS_NAMED("FileMessageUpdateParams")
 /// Form data
 /// since:
 /// 4.14.1
-SWIFT_CLASS_NAMED("Form")
+SWIFT_CLASS_NAMED("Form") SWIFT_DEPRECATED_MSG("This method is deprecated in 4.21.0", "SBDMessageForm")
 @interface SBDForm : NSObject <NSCopying>
 /// Unique key of form.
 @property (nonatomic, readonly, copy) NSString * _Nonnull formKey;
@@ -14678,7 +15266,7 @@ enum SBDFormInputType : NSInteger;
 /// Input field data information.
 /// since:
 /// 4.14.1
-SWIFT_CLASS_NAMED("FormField")
+SWIFT_CLASS_NAMED("FormField") SWIFT_DEPRECATED_MSG("This method is deprecated in 4.21.0", "SBDMessageFormItem")
 @interface SBDFormField : NSObject <NSCopying>
 /// Unique key of field
 @property (nonatomic, readonly, copy) NSString * _Nonnull fieldKey;
@@ -14692,6 +15280,7 @@ SWIFT_CLASS_NAMED("FormField")
 @property (nonatomic, readonly, copy) NSString * _Nullable regex;
 /// Placeholder
 @property (nonatomic, readonly, copy) NSString * _Nullable placeholder;
+/// Field to store the data to be submitted.
 /// Memory-cache reserved property for answer.
 @property (nonatomic, copy) NSString * _Nullable temporaryAnswer;
 /// constructor
@@ -14732,11 +15321,18 @@ typedef SWIFT_ENUM_NAMED(NSInteger, SBDFormInputType, "InputType", open) {
 /// Submitted answer information for specific form field.
 /// since:
 /// 4.14.1
-SWIFT_CLASS_NAMED("FormFieldAnswer")
+SWIFT_CLASS_NAMED("FormFieldAnswer") SWIFT_DEPRECATED_MSG("This method is deprecated in 4.21.0")
 @interface SBDFormFieldAnswer : NSObject
 - (nonnull instancetype)initWithFieldKey:(NSString * _Nonnull)fieldKey value:(NSString * _Nonnull)value OBJC_DESIGNATED_INITIALIZER;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+SWIFT_PROTOCOL_NAMED("FormFieldValidator")
+@protocol SBDFormFieldValidator
+@property (nonatomic, readonly, copy) NSString * _Nonnull key;
+- (BOOL)isValidWithInput:(NSString * _Nullable)input SWIFT_WARN_UNUSED_RESULT;
 @end
 
 @class NSStream;
@@ -14983,7 +15579,6 @@ SWIFT_CLASS_NAMED("GroupChannel")
 
 
 
-
 @interface SBDGroupChannel (SWIFT_EXTENSION(SendbirdChatSDK))
 /// Compares this object with given other object.
 /// \param object <code>Any</code> instance
@@ -14994,96 +15589,6 @@ SWIFT_CLASS_NAMED("GroupChannel")
 - (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
 @end
 
-
-
-
-
-@interface SBDGroupChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Freeze the channel. If channel is frozen, only operators can send messages to the channel.
-/// since:
-/// 3.0.89
-/// \param completionHandler The handler block to be executed after freeze.
-///
-- (void)freezeWithCompletionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Stop to freeze the channel. If It is not frozen channel, this will be ignored.
-/// since:
-/// 3.0.89
-/// \param completionHandler The handler block to be executed after stop to freeze.
-///
-- (void)unfreezeWithCompletionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-@end
-
-@class SBDScheduledFileMessageCreateParams;
-
-@interface SBDGroupChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Creates a file message to be sent at the specified time.
-/// note:
-/// If a user leaves before sending scheduled messages, the scheduled messages will be removed.
-/// since:
-/// 4.0.0
-/// \param params The instance of <code>ScheduledFileMessageCreateParams</code> that can has parameters
-/// related with file message.
-///
-/// \param completionHandler The handler block to be executed after the message is registered in the schedule.
-/// This block has no return value and takes two argument, one is a user message is registered in the schedule and other is an
-/// error made when there is something wrong to message.
-///
-- (SBDFileMessage * _Nullable)createScheduledFileMessageWithParams:(SBDScheduledFileMessageCreateParams * _Nonnull)params completionHandler:(void (^ _Nullable)(SBDFileMessage * _Nullable, SBError * _Nullable))completionHandler;
-@end
-
-@class SBDScheduledFileMessageUpdateParams;
-
-@interface SBDGroupChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Updates a scheduled file message.
-/// note:
-/// If a user leaves before sending scheduled messages, the scheduled messages will be removed.
-/// since:
-/// 4.0.0
-/// \param scheduledMessageId The scheduled message ID.
-///
-/// \param params The instance of <code>ScheduledFileMessageUpdateParams</code> that can has parameters
-/// related with file message.
-///
-/// \param completionHandler The handler block to be executed after the message is registered in the schedule.
-/// This block has no return value and takes two argument, one is a user message is registered in the schedule and other is an
-/// error made when there is something wrong to message.
-///
-- (void)updateScheduledFileMessageWithScheduledMessageId:(int64_t)scheduledMessageId params:(SBDScheduledFileMessageUpdateParams * _Nonnull)params completionHandler:(void (^ _Nullable)(SBDFileMessage * _Nullable, SBError * _Nullable))completionHandler;
-@end
-
-@class SBDScheduledUserMessageCreateParams;
-@class SBDScheduledUserMessageUpdateParams;
-
-@interface SBDGroupChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Creates a user message to be sent at the specified time.
-/// note:
-/// If a user leaves before sending scheduled messages, the scheduled messages will be removed.
-/// since:
-/// 4.0.2
-/// \param params The instance of <code>ScheduledUserMessageCreateParams</code> that can has parameters
-/// related with string message.
-///
-/// \param completionHandler The handler block to be executed after the message is registered in the schedule.
-/// This block has no return value and takes two argument, one is a user message is registered in the schedule and other is an
-/// error made when there is something wrong to message.
-///
-- (SBDUserMessage * _Nullable)createScheduledUserMessageWithParams:(SBDScheduledUserMessageCreateParams * _Nonnull)params completionHandler:(void (^ _Nullable)(SBDUserMessage * _Nullable, SBError * _Nullable))completionHandler;
-/// Updates a user message to be sent at the specified time.
-/// note:
-/// If a user leaves before sending scheduled messages, the scheduled messages will be removed.
-/// since:
-/// 4.0.0
-/// \param scheduledMessageId The scheduled message ID.
-///
-/// \param params The instance of <code>ScheduledUserMessageUpdateParams</code> that can has parameters
-/// related with string message.
-///
-/// \param completionHandler The handler block to be executed after the message is registered in the schedule.
-/// This block has no return value and takes two argument, one is a user message is registered in the schedule and other is an
-/// error made when there is something wrong to message.
-///
-- (void)updateScheduledUserMessageWithScheduledMessageId:(int64_t)scheduledMessageId userMessageParams:(SBDScheduledUserMessageUpdateParams * _Nonnull)params completionHandler:(void (^ _Nullable)(SBDUserMessage * _Nullable, SBError * _Nullable))completionHandler;
-@end
 
 
 @interface SBDGroupChannel (SWIFT_EXTENSION(SendbirdChatSDK))
@@ -15097,201 +15602,47 @@ SWIFT_CLASS_NAMED("GroupChannel")
 @end
 
 
-@interface SBDGroupChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Sends the scheduled message now.
-/// since:
-/// 4.0.0
-/// \param scheduledMessageId The scheduled message ID.
-///
-/// \param completionHandler The handler block to be executed after sending the scheduled message or when an error occurs.
-///
-- (void)sendScheduledMessageNowWithScheduledMessageId:(int64_t)scheduledMessageId completionHandler:(void (^ _Nonnull)(SBError * _Nullable))completionHandler;
-/// Cancels the scheduled message.
-/// since:
-/// 4.0.0
-/// \param scheduledMessageId The scheduled message ID.
-///
-/// \param completionHandler The handler block to be executed after canceling the scheduled message or when an error occurs.
-///
-- (void)cancelScheduledMessageWithScheduledMessageId:(int64_t)scheduledMessageId completionHandler:(void (^ _Nonnull)(SBError * _Nullable))completionHandler;
-@end
 
 
 
 
+
+
+@class SBDGroupChannelTotalUnreadChannelCountParams;
 
 @interface SBDGroupChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Resets the history in this channel.
-/// \param completionHandler The handler block to execute.
-///
-- (void)resetMyHistoryWithCompletionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Changes a setting that decides which push notification for the current user to receive in the group channel.
-/// If a value of option is <code>.default</code>, a push trigger option in this group channel follows a push trigger option
-/// of the current user. It is related with <code>SendbirdChat setPushTriggerOption(_:completionHandler:)</code>.
-/// since:
-/// 3.0.128
-/// \param option options to choose which push notification for the current user to receive.
-///
-/// \param completionHandler handler block to execute when setting a push trigger option of the current user is completed.
-///
-- (void)setMyPushTriggerOption:(enum SBDGroupChannelPushTriggerOption)option completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Requests a setting that decides which push notification for the current user to receive in the group channel.
-/// since:
-/// 3.0.128
-/// \param completionHandler The handler block to execute when getting a push trigger option of the current user is completed.
-///
-- (void)getMyPushTriggerOptionWithCompletionHandler:(void (^ _Nonnull)(enum SBDGroupChannelPushTriggerOption, SBError * _Nullable))completionHandler;
-/// Sets count preference of current user.
-/// since:
-/// 3.0.102
-/// \param myCountPreference Preference is type of <code>CountPreference</code>. The default value is <code>.all</code>.
-///
-- (void)setMyCountPreference:(enum SBDCountPreference)myCountPreference completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+@property (nonatomic) BOOL sendMarkAsReadEnable SWIFT_UNAVAILABLE_MSG("`sendMarkAsReadEnable` has been removed.");
+@property (nonatomic) BOOL isPushEnabled SWIFT_UNAVAILABLE_MSG("`isPushEnabled` has been removed.");
+- (void)getChannelFromCacheWithChannelUrl:(NSString * _Nonnull)withChannelUrl SWIFT_UNAVAILABLE_MSG("`getChannelFromCache(withChannelUrl:)` has been removed.");
+- (void)getReadReceiptOf:(SBDBaseMessage * _Nonnull)message SWIFT_UNAVAILABLE_MSG("`getReadReceipt(of:)` has been removed.");
++ (void)createChannelWithName:(NSString * _Nullable)name isDistinct:(BOOL)isDistinct userIds:(NSArray<NSString *> * _Nonnull)userIds coverImage:(NSData * _Nonnull)coverImage coverImageName:(NSString * _Nonnull)coverImageName data:(NSString * _Nullable)data customType:(NSString * _Nullable)customType progressHandler:(void (^ _Nullable)(int64_t, int64_t, int64_t))progressHandler completionHandler:(void (^ _Nonnull)(SBDGroupChannel * _Nullable, SBError * _Nullable))completionHandler SWIFT_UNAVAILABLE_MSG("'createChannel' has been renamed to 'createChannelWithParams:progressHandler:completionHandler:'");
+- (void)updateWithName:(NSString * _Nullable)name isDistinct:(BOOL)isDistinct coverImage:(NSData * _Nullable)coverImage coverImageName:(NSString * _Nullable)coverImageName data:(NSString * _Nullable)data customType:(NSString * _Nullable)customType progressHandler:(void (^ _Nullable)(int64_t, int64_t, int64_t))progressHandler completionHandler:(void (^ _Nonnull)(SBDGroupChannel * _Nullable, SBError * _Nullable))completionHandler SWIFT_UNAVAILABLE_MSG("'update' has been renamed to 'updateChannelWithParams:progressHandler:completionHandler:'");
+- (void)hideWithHidePreviousMessages:(BOOL)hidePreviousMessages completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler SWIFT_UNAVAILABLE_MSG("'hide' has been renamed to 'hideChannelWithHidePreviousMessages:completionHandler:'");
+- (int64_t)getLastSeenAtBy:(SBDUser * _Nonnull)by SWIFT_WARN_UNUSED_RESULT SWIFT_UNAVAILABLE_MSG("'getLastSeenAt' has been renamed to 'getReadMembersWithMessage:includeAllMembers:'");
+- (int64_t)getLastSeenAtByUserId:(SBDUser * _Nonnull)byUserId SWIFT_WARN_UNUSED_RESULT SWIFT_UNAVAILABLE_MSG("'getLastSeenAt' has been renamed to 'getReadMembersWithMessage:includeAllMembers:'");
+- (NSInteger)getDeliveryReceipt SWIFT_WARN_UNUSED_RESULT SWIFT_UNAVAILABLE_MSG("'getDeliveryReceipt' has been renamed to 'getUndeliveredMemberCount:'");
+- (NSArray<SBDUser *> * _Nonnull)getTypingMembers SWIFT_WARN_UNUSED_RESULT SWIFT_UNAVAILABLE_MSG("'getTypingMembers' has been renamed to 'getTypingUsers'");
+- (void)setPushPreferenceWithPushOn:(BOOL)_ completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler SWIFT_UNAVAILABLE_MSG("`setPushPreferenceWithPushOn(_:completionHandler:)` has been removed.");
++ (void)getTotalUnreadMessageCountWithCompletionHandler:(void (^ _Nullable)(NSUInteger, SBError * _Nonnull))completionHandler SWIFT_UNAVAILABLE_MSG("Use `SendbirdChat.getTotalUnreadMessageCount(completionHandler:)` instead.");
++ (void)getTotalUnreadMessageCountWith:(SBDGroupChannelTotalUnreadChannelCountParams * _Nonnull)with completionHandler:(void (^ _Nullable)(NSUInteger, SBError * _Nonnull))completionHandler SWIFT_UNAVAILABLE_MSG("Use `SendbirdChat.getTotalUnreadMessageCount(params:completionHandler:)` instead.");
++ (void)getTotalUnreadMessageCountWithChannelCustomTypes:(NSArray<NSString *> * _Nullable)withChannelCustomTypes completionHandler:(void (^ _Nullable)(NSUInteger, SBError * _Nonnull))completionHandler SWIFT_UNAVAILABLE_MSG("Use `SendbirdChat.getTotalUnreadMessageCount(params:completionHandler:)` instead.");
 @end
-
-
-@interface SBDGroupChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Starts typing. The other <em>members</em> in the channel will receive an event.
-/// The event will be received in <code>channelDidUpdateTypingStatus(_:)</code> of <code>GroupChannelDelegate</code>.
-- (void)startTyping;
-/// Ends typing. The other <em>members</em> in the channel will receive an event.
-/// The event will be received in <code>channelDidUpdateTypingStatus(_:)</code> of <code>GroupChannelDelegate</code>.
-- (void)endTyping;
-/// Checks any members in the channel has been typing
-///
-/// returns:
-/// <code>true</code> when other users are typing in this channel.
-- (BOOL)isTyping SWIFT_WARN_UNUSED_RESULT;
-/// Returns the users who are typing now.
-/// since:
-/// 3.0.202
-///
-/// returns:
-/// The users who are typing now.
-- (NSArray<SBDUser *> * _Nullable)getTypingUsers SWIFT_WARN_UNUSED_RESULT;
-@end
-
-
-
-@interface SBDGroupChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Returns how many <em>members</em> haven’t been read the given message yet.
-/// since:
-/// 3.0.185
-/// \param message The message.
-///
-///
-/// returns:
-/// Number of unread member count. Zero if all <em>members</em> read the message.
-- (NSInteger)getUnreadMemberCount:(SBDBaseMessage * _Nonnull)message SWIFT_WARN_UNUSED_RESULT;
-/// Returns the <em>members</em> who read the given message.
-/// since:
-/// 3.0.115
-/// \param message The message.
-///
-/// \param includeAllMembers If <code>true</code>, the return value includes the current user and the sender of the message.
-///
-///
-/// returns:
-/// Members who read the message.
-- (NSArray<SBDMember *> * _Nonnull)getReadMembersWithMessage:(SBDBaseMessage * _Nonnull)message includeAllMembers:(BOOL)includeAllMembers SWIFT_WARN_UNUSED_RESULT;
-/// Returns the <em>members</em> who didn’t read the given message.
-/// since:
-/// 3.0.115
-/// \param message The message.
-///
-/// \param includeAllMembers If <code>true</code>, the return value includes the current user and the sender of the message.
-///
-///
-/// returns:
-/// Members who don’t read the message.
-- (NSArray<SBDMember *> * _Nonnull)getUnreadMembersWithMessage:(SBDBaseMessage * _Nonnull)message includeAllMembers:(BOOL)includeAllMembers SWIFT_WARN_UNUSED_RESULT;
-/// Returns how many <em>members</em> haven’t been delivery the given message yet.
-/// since:
-/// 3.0.185
-/// \param message The message.
-///
-///
-/// returns:
-/// Number of undelivered member count. Zero if all <em>members</em> delivered the message.
-- (NSInteger)getUndeliveredMemberCount:(SBDBaseMessage * _Nonnull)message SWIFT_WARN_UNUSED_RESULT;
-/// Returns the read status.
-/// since:
-/// 3.0.115
-/// [
-/// USER_ID: [
-/// “user”: <em>User</em> object,
-/// “last_seen_at”: <em>Int64</em>,
-/// ]
-/// ]
-/// <code>USER_ID</code> is the user ID as a key. Each <code>USER_ID</code> has a <code>Dictionary</code> which includes
-/// <code>User</code> object and <code>Int64</code>. The “user” is a key of <code>User</code> object and the
-/// “last_seen_at” is a key of <code>Int64</code> object.
-/// \param includeAllMembers If true, the return value includes the current user and the sender of the message.
-///
-///
-/// returns:
-/// The read status. If there’s no data, it will be an empty dictionary.
-- (NSDictionary<NSString *, NSDictionary<NSString *, id> *> * _Nonnull)getReadStatusIncludingAllMembers:(BOOL)includeAllMembers SWIFT_WARN_UNUSED_RESULT;
-@end
-
-@class SBDMultipleFilesMessageCreateParams;
-@class SBDUploadableFileInfo;
-@class SBDMultipleFilesMessage;
-
-@interface SBDGroupChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Sends a multipleFilesMessage with files (file or file URL) of params.
-/// For binary files in params.files, the data will be uploaded to Sendbird storage.
-/// For URL files in params.files, the URLs will be sent in the message.
-/// \param params An intance of <code>MultipleFilesMessageCreateParams</code> that contains parameters needed to create a MultipleFilesMessage.
-///
-/// \param fileUploadHandler A handler block to be executed after each file is uploaded. This block has no return value, and takes four arguments:
-/// first is requestId of a file, second is the index of a file, third is the UploadableFileInfo, and the fourth is the error made
-/// when there is a problem in uploading the file. This handler is called for both file-based UploadableFileInfo and file URL-based UploadableFileInfo.
-///
-/// \param completionHandler A handler block to be executed after the message is sent. This block has no return value, and takes two arguments:
-/// one is a multipleFilesMessage that is sent, and the other is an error made when there is a problem in sending the message.
-///
-///
-/// returns:
-/// A temporary multipleFilesMessage being sent to the Sendbird server. The sending status of the message is <code>pending</code>. The message has a request ID instead of a message ID.
-- (SBDMultipleFilesMessage * _Nullable)sendMultipleFilesMessageWithParams:(SBDMultipleFilesMessageCreateParams * _Nonnull)params fileUploadHandler:(void (^ _Nullable)(NSString * _Nonnull, NSInteger, SBDUploadableFileInfo * _Nonnull, SBError * _Nullable))fileUploadHandler completionHandler:(void (^ _Nonnull)(SBDMultipleFilesMessage * _Nullable, SBError * _Nullable))completionHandler;
-/// Copies a multiple files message to the target channel.
-/// note:
-/// Only copies the message whose <code>BaseMessage/sendingStatus</code> is <code>MessageSendingStatus/succeeded</code>
-/// since:
-/// 4.10.0
-/// \param message <code>MultipleFilesMessage</code> object.
-///
-/// \param targetChannel <code>GroupChannel</code> object that wants to copy the <code>message</code>.
-///
-/// \param completionHandler The handler block to execute when the copying is completed.
-///
-///
-/// returns:
-/// The temporary <code>MultipleFilesMessage</code> object that contains a <em>request ID</em> instead of a message ID. If there’s any error, <code>nil</code> could be returned.
-- (SBDMultipleFilesMessage * _Nullable)copyMultipleFilesMessageWithMessage:(SBDMultipleFilesMessage * _Nonnull)message toTargetChannel:(SBDGroupChannel * _Nonnull)targetChannel completionHandler:(void (^ _Nullable)(SBDMultipleFilesMessage * _Nullable, SBError * _Nullable))completionHandler;
-/// Attempts to resend a failed mutiple files message.
-/// note:
-/// Only resends the message that its <code>BaseMessage/sendingStatus</code> is <code>MessageSendingStatus/failed</code>
-/// since:
-/// 4.10.0
-/// \param message <code>MultipleFilesMessage</code> object to resend.
-///
-/// \param fileUploadHandler A handler block to execute after each file is uploaded. This block takes four arguments: the <em>requestId</em> of a file,  the <em>index</em> of a file, <code>UploadableFileInfo</code> object, and the <em>error</em>
-///
-/// \param completionHandler The handler block to execute when the copying is completed.
-///
-/// \param completionHandler The handler block to excute when the sending is completed. When the sending is failed, the parameter represents the failed message.
-///
-///
-/// returns:
-/// A temporary <code>MultipleFilesMessage</code> object being sent to the Sendbird server.
-- (SBDMultipleFilesMessage * _Nullable)resendMultipleFilesMessageWithMessage:(SBDMultipleFilesMessage * _Nonnull)message fileUploadHandler:(void (^ _Nullable)(NSString * _Nonnull, NSInteger, SBDUploadableFileInfo * _Nonnull, SBError * _Nullable))fileUploadHandler completionHandler:(void (^ _Nullable)(SBDMultipleFilesMessage * _Nullable, SBError * _Nullable))completionHandler;
-@end
-
 
 @class SBDGroupChannelCreateParams;
 @class SBDGroupChannelUpdateParams;
+@class SBDMultipleFilesMessageCreateParams;
+@class SBDUploadableFileInfo;
+@class SBDMultipleFilesMessage;
+@class SBDScheduledFileMessageCreateParams;
+@class SBDScheduledFileMessageUpdateParams;
+@class SBDScheduledUserMessageCreateParams;
+@class SBDScheduledUserMessageUpdateParams;
+@class SBDGroupChannelListQuery;
+@class SBDGroupChannelListQueryParams;
+@class SBDPublicGroupChannelListQuery;
+@class SBDPublicGroupChannelListQueryParams;
+@class SBDMemberListQuery;
+@class SBDMemberListQueryParams;
 
 @interface SBDGroupChannel (SWIFT_EXTENSION(SendbirdChatSDK))
 /// Refreshes this channel instance.
@@ -15381,103 +15732,138 @@ SWIFT_CLASS_NAMED("GroupChannel")
 /// \param completionHandler The handler block to execute.
 ///
 - (void)deleteChannelWithCompletionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-@end
-
-
-@class SBDGroupChannelListQuery;
-@class SBDGroupChannelListQueryParams;
-@class SBDPublicGroupChannelListQuery;
-@class SBDPublicGroupChannelListQueryParams;
-@class SBDMemberListQuery;
-@class SBDMemberListQueryParams;
-
-@interface SBDGroupChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Creates a query for my group channel list with default params.
+/// Sends a multipleFilesMessage with files (file or file URL) of params.
+/// For binary files in params.files, the data will be uploaded to Sendbird storage.
+/// For URL files in params.files, the URLs will be sent in the message.
+/// \param params An intance of <code>MultipleFilesMessageCreateParams</code> that contains parameters needed to create a MultipleFilesMessage.
 ///
-/// returns:
-/// GroupChannelListQuery instance for the current user.
-+ (SBDGroupChannelListQuery * _Nonnull)createMyGroupChannelListQuery SWIFT_WARN_UNUSED_RESULT;
-/// Creates a query for my group channel list with paramsBuilder.
-/// \param paramsBuilder The builder closure for setting <code>GroupChannelListQueryParams</code>.
+/// \param fileUploadHandler A handler block to be executed after each file is uploaded. This block has no return value, and takes four arguments:
+/// first is requestId of a file, second is the index of a file, third is the UploadableFileInfo, and the fourth is the error made
+/// when there is a problem in uploading the file. This handler is called for both file-based UploadableFileInfo and file URL-based UploadableFileInfo.
+///
+/// \param completionHandler A handler block to be executed after the message is sent. This block has no return value, and takes two arguments:
+/// one is a multipleFilesMessage that is sent, and the other is an error made when there is a problem in sending the message.
 ///
 ///
 /// returns:
-/// GroupChannelListQuery instance for the current user.
-+ (SBDGroupChannelListQuery * _Nonnull)createMyGroupChannelListQueryWithParamsBuilder:(SWIFT_NOESCAPE void (^ _Nonnull)(SBDGroupChannelListQueryParams * _Nonnull))paramsBuilder SWIFT_WARN_UNUSED_RESULT;
-/// Creates a query for my group channel list.
-/// \param params <code>GroupChannelListQueryParams</code>
+/// A temporary multipleFilesMessage being sent to the Sendbird server. The sending status of the message is <code>pending</code>. The message has a request ID instead of a message ID.
+- (SBDMultipleFilesMessage * _Nullable)sendMultipleFilesMessageWithParams:(SBDMultipleFilesMessageCreateParams * _Nonnull)params fileUploadHandler:(void (^ _Nullable)(NSString * _Nonnull, NSInteger, SBDUploadableFileInfo * _Nonnull, SBError * _Nullable))fileUploadHandler completionHandler:(void (^ _Nonnull)(SBDMultipleFilesMessage * _Nullable, SBError * _Nullable))completionHandler;
+/// Creates a file message to be sent at the specified time.
+/// note:
+/// If a user leaves before sending scheduled messages, the scheduled messages will be removed.
+/// since:
+/// 4.0.0
+/// \param params The instance of <code>ScheduledFileMessageCreateParams</code> that can has parameters
+/// related with file message.
+///
+/// \param completionHandler The handler block to be executed after the message is registered in the schedule.
+/// This block has no return value and takes two argument, one is a user message is registered in the schedule and other is an
+/// error made when there is something wrong to message.
+///
+- (SBDFileMessage * _Nullable)createScheduledFileMessageWithParams:(SBDScheduledFileMessageCreateParams * _Nonnull)params completionHandler:(void (^ _Nullable)(SBDFileMessage * _Nullable, SBError * _Nullable))completionHandler;
+/// Updates a scheduled file message.
+/// note:
+/// If a user leaves before sending scheduled messages, the scheduled messages will be removed.
+/// since:
+/// 4.0.0
+/// \param scheduledMessageId The scheduled message ID.
+///
+/// \param params The instance of <code>ScheduledFileMessageUpdateParams</code> that can has parameters
+/// related with file message.
+///
+/// \param completionHandler The handler block to be executed after the message is registered in the schedule.
+/// This block has no return value and takes two argument, one is a user message is registered in the schedule and other is an
+/// error made when there is something wrong to message.
+///
+- (void)updateScheduledFileMessageWithScheduledMessageId:(int64_t)scheduledMessageId params:(SBDScheduledFileMessageUpdateParams * _Nonnull)params completionHandler:(void (^ _Nullable)(SBDFileMessage * _Nullable, SBError * _Nullable))completionHandler;
+/// Creates a user message to be sent at the specified time.
+/// note:
+/// If a user leaves before sending scheduled messages, the scheduled messages will be removed.
+/// since:
+/// 4.0.2
+/// \param params The instance of <code>ScheduledUserMessageCreateParams</code> that can has parameters
+/// related with string message.
+///
+/// \param completionHandler The handler block to be executed after the message is registered in the schedule.
+/// This block has no return value and takes two argument, one is a user message is registered in the schedule and other is an
+/// error made when there is something wrong to message.
+///
+- (SBDUserMessage * _Nullable)createScheduledUserMessageWithParams:(SBDScheduledUserMessageCreateParams * _Nonnull)params completionHandler:(void (^ _Nullable)(SBDUserMessage * _Nullable, SBError * _Nullable))completionHandler;
+/// Updates a user message to be sent at the specified time.
+/// note:
+/// If a user leaves before sending scheduled messages, the scheduled messages will be removed.
+/// since:
+/// 4.0.0
+/// \param scheduledMessageId The scheduled message ID.
+///
+/// \param params The instance of <code>ScheduledUserMessageUpdateParams</code> that can has parameters
+/// related with string message.
+///
+/// \param completionHandler The handler block to be executed after the message is registered in the schedule.
+/// This block has no return value and takes two argument, one is a user message is registered in the schedule and other is an
+/// error made when there is something wrong to message.
+///
+- (void)updateScheduledUserMessageWithScheduledMessageId:(int64_t)scheduledMessageId userMessageParams:(SBDScheduledUserMessageUpdateParams * _Nonnull)params completionHandler:(void (^ _Nullable)(SBDUserMessage * _Nullable, SBError * _Nullable))completionHandler;
+/// Sends the scheduled message now.
+/// since:
+/// 4.0.0
+/// \param scheduledMessageId The scheduled message ID.
+///
+/// \param completionHandler The handler block to be executed after sending the scheduled message or when an error occurs.
+///
+- (void)sendScheduledMessageNowWithScheduledMessageId:(int64_t)scheduledMessageId completionHandler:(void (^ _Nonnull)(SBError * _Nullable))completionHandler;
+/// Cancels the scheduled message.
+/// since:
+/// 4.0.0
+/// \param scheduledMessageId The scheduled message ID.
+///
+/// \param completionHandler The handler block to be executed after canceling the scheduled message or when an error occurs.
+///
+- (void)cancelScheduledMessageWithScheduledMessageId:(int64_t)scheduledMessageId completionHandler:(void (^ _Nonnull)(SBError * _Nullable))completionHandler;
+/// Copies a multiple files message to the target channel.
+/// note:
+/// Only copies the message whose <code>BaseMessage/sendingStatus</code> is <code>MessageSendingStatus/succeeded</code>
+/// since:
+/// 4.10.0
+/// \param message <code>MultipleFilesMessage</code> object.
+///
+/// \param targetChannel <code>GroupChannel</code> object that wants to copy the <code>message</code>.
+///
+/// \param completionHandler The handler block to execute when the copying is completed.
 ///
 ///
 /// returns:
-/// GroupChannelListQuery instance for the current user.
-+ (SBDGroupChannelListQuery * _Nonnull)createMyGroupChannelListQueryWithParams:(SBDGroupChannelListQueryParams * _Nonnull)params SWIFT_WARN_UNUSED_RESULT;
-/// Creates a query for public group channel list.
+/// The temporary <code>MultipleFilesMessage</code> object that contains a <em>request ID</em> instead of a message ID. If there’s any error, <code>nil</code> could be returned.
+- (SBDMultipleFilesMessage * _Nullable)copyMultipleFilesMessageWithMessage:(SBDMultipleFilesMessage * _Nonnull)message toTargetChannel:(SBDGroupChannel * _Nonnull)targetChannel completionHandler:(void (^ _Nullable)(SBDMultipleFilesMessage * _Nullable, SBError * _Nullable))completionHandler;
+/// Attempts to resend a failed mutiple files message.
+/// note:
+/// Only resends the message that its <code>BaseMessage/sendingStatus</code> is <code>MessageSendingStatus/failed</code>
+/// since:
+/// 4.10.0
+/// \param message <code>MultipleFilesMessage</code> object to resend.
 ///
-/// returns:
-/// The instance to query public group channels.
-+ (SBDPublicGroupChannelListQuery * _Nonnull)createPublicGroupChannelListQuery SWIFT_WARN_UNUSED_RESULT;
-/// Creates a query for public group channel list.
-/// \param paramsBuilder The builder closure for setting <code>PublicGroupChannelListQueryParams</code>.
+/// \param fileUploadHandler A handler block to execute after each file is uploaded. This block takes four arguments: the <em>requestId</em> of a file,  the <em>index</em> of a file, <code>UploadableFileInfo</code> object, and the <em>error</em>
 ///
+/// \param completionHandler The handler block to execute when the copying is completed.
 ///
-/// returns:
-/// The instance to query public group channels.
-+ (SBDPublicGroupChannelListQuery * _Nonnull)createPublicGroupChannelListQueryWithParamsBuilder:(SWIFT_NOESCAPE void (^ _Nonnull)(SBDPublicGroupChannelListQueryParams * _Nonnull))paramsBuilder SWIFT_WARN_UNUSED_RESULT;
-/// Creates a query for public group channel list.
-/// \param params The params object to change query condition.
+/// \param completionHandler The handler block to excute when the sending is completed. When the sending is failed, the parameter represents the failed message.
 ///
 ///
 /// returns:
-/// The instance to query public group channels.
-+ (SBDPublicGroupChannelListQuery * _Nonnull)createPublicGroupChannelListQueryWithParams:(SBDPublicGroupChannelListQueryParams * _Nonnull)params SWIFT_WARN_UNUSED_RESULT;
-/// Creates a query for members in group channel.
-/// \param channelURL channel url
+/// A temporary <code>MultipleFilesMessage</code> object being sent to the Sendbird server.
+- (SBDMultipleFilesMessage * _Nullable)resendMultipleFilesMessageWithMessage:(SBDMultipleFilesMessage * _Nonnull)message fileUploadHandler:(void (^ _Nullable)(NSString * _Nonnull, NSInteger, SBDUploadableFileInfo * _Nonnull, SBError * _Nullable))fileUploadHandler completionHandler:(void (^ _Nullable)(SBDMultipleFilesMessage * _Nullable, SBError * _Nullable))completionHandler;
+/// Freeze the channel. If channel is frozen, only operators can send messages to the channel.
+/// since:
+/// 3.0.89
+/// \param completionHandler The handler block to be executed after freeze.
 ///
+- (void)freezeWithCompletionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Stop to freeze the channel. If It is not frozen channel, this will be ignored.
+/// since:
+/// 3.0.89
+/// \param completionHandler The handler block to be executed after stop to freeze.
 ///
-/// returns:
-/// The instance to query the members in group channel.
-+ (SBDMemberListQuery * _Nonnull)createMemberListQueryWithChannelURL:(NSString * _Nonnull)channelURL SWIFT_WARN_UNUSED_RESULT;
-/// Creates a query for members in group channel.
-/// \param channelURL channel url
-///
-/// \param paramsBuilder The builder closure for setting <code>MemberListQueryParams</code>.
-///
-///
-/// returns:
-/// The instance to query the members in group channel.
-+ (SBDMemberListQuery * _Nonnull)createMemberListQueryWithChannelURL:(NSString * _Nonnull)channelURL paramsBuilder:(SWIFT_NOESCAPE void (^ _Nonnull)(SBDMemberListQueryParams * _Nonnull))paramsBuilder SWIFT_WARN_UNUSED_RESULT;
-/// Creates a query for members in group channel.
-/// \param channelURL channel url
-///
-/// \param params The params object to change query condition.
-///
-///
-/// returns:
-/// The instance to query the members in group channel.
-+ (SBDMemberListQuery * _Nonnull)createMemberListQueryWithChannelURL:(NSString * _Nonnull)channelURL params:(SBDMemberListQueryParams * _Nonnull)params SWIFT_WARN_UNUSED_RESULT;
-/// Creates a query for members in group channel.
-///
-/// returns:
-/// The instance to query the members in group channel.
-- (SBDMemberListQuery * _Nullable)createMemberListQuery SWIFT_WARN_UNUSED_RESULT;
-/// Creates a query for members in group channel.
-/// \param paramsBuilder The builder closure for setting <code>MemberListQueryParams</code>.
-///
-///
-/// returns:
-/// The instance to query the members in group channel.
-- (SBDMemberListQuery * _Nullable)createMemberListQueryWithParamsBuilder:(SWIFT_NOESCAPE void (^ _Nonnull)(SBDMemberListQueryParams * _Nonnull))paramsBuilder SWIFT_WARN_UNUSED_RESULT;
-/// Creates a query for members in group channel.
-/// \param params The params object to change query condition.
-///
-///
-/// returns:
-/// The instance to query the members in group channel.
-- (SBDMemberListQuery * _Nullable)createMemberListQueryWithParams:(SBDMemberListQueryParams * _Nonnull)params SWIFT_WARN_UNUSED_RESULT;
-@end
-
-
-@interface SBDGroupChannel (SWIFT_EXTENSION(SendbirdChatSDK))
+- (void)unfreezeWithCompletionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
 /// Invites a single user to the group channel.
 /// \param user The user to be invited.
 ///
@@ -15584,26 +15970,190 @@ SWIFT_CLASS_NAMED("GroupChannel")
 /// \param completionHandler The handler block to be executed.
 ///
 - (void)notifyScreenshotWasTakenWithCompletionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-@end
-
-@class SBDGroupChannelTotalUnreadChannelCountParams;
-
-@interface SBDGroupChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-@property (nonatomic) BOOL sendMarkAsReadEnable SWIFT_UNAVAILABLE_MSG("`sendMarkAsReadEnable` has been removed.");
-@property (nonatomic) BOOL isPushEnabled SWIFT_UNAVAILABLE_MSG("`isPushEnabled` has been removed.");
-- (void)getChannelFromCacheWithChannelUrl:(NSString * _Nonnull)withChannelUrl SWIFT_UNAVAILABLE_MSG("`getChannelFromCache(withChannelUrl:)` has been removed.");
-- (void)getReadReceiptOf:(SBDBaseMessage * _Nonnull)message SWIFT_UNAVAILABLE_MSG("`getReadReceipt(of:)` has been removed.");
-+ (void)createChannelWithName:(NSString * _Nullable)name isDistinct:(BOOL)isDistinct userIds:(NSArray<NSString *> * _Nonnull)userIds coverImage:(NSData * _Nonnull)coverImage coverImageName:(NSString * _Nonnull)coverImageName data:(NSString * _Nullable)data customType:(NSString * _Nullable)customType progressHandler:(void (^ _Nullable)(int64_t, int64_t, int64_t))progressHandler completionHandler:(void (^ _Nonnull)(SBDGroupChannel * _Nullable, SBError * _Nullable))completionHandler SWIFT_UNAVAILABLE_MSG("'createChannel' has been renamed to 'createChannelWithParams:progressHandler:completionHandler:'");
-- (void)updateWithName:(NSString * _Nullable)name isDistinct:(BOOL)isDistinct coverImage:(NSData * _Nullable)coverImage coverImageName:(NSString * _Nullable)coverImageName data:(NSString * _Nullable)data customType:(NSString * _Nullable)customType progressHandler:(void (^ _Nullable)(int64_t, int64_t, int64_t))progressHandler completionHandler:(void (^ _Nonnull)(SBDGroupChannel * _Nullable, SBError * _Nullable))completionHandler SWIFT_UNAVAILABLE_MSG("'update' has been renamed to 'updateChannelWithParams:progressHandler:completionHandler:'");
-- (void)hideWithHidePreviousMessages:(BOOL)hidePreviousMessages completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler SWIFT_UNAVAILABLE_MSG("'hide' has been renamed to 'hideChannelWithHidePreviousMessages:completionHandler:'");
-- (int64_t)getLastSeenAtBy:(SBDUser * _Nonnull)by SWIFT_WARN_UNUSED_RESULT SWIFT_UNAVAILABLE_MSG("'getLastSeenAt' has been renamed to 'getReadMembersWithMessage:includeAllMembers:'");
-- (int64_t)getLastSeenAtByUserId:(SBDUser * _Nonnull)byUserId SWIFT_WARN_UNUSED_RESULT SWIFT_UNAVAILABLE_MSG("'getLastSeenAt' has been renamed to 'getReadMembersWithMessage:includeAllMembers:'");
-- (NSInteger)getDeliveryReceipt SWIFT_WARN_UNUSED_RESULT SWIFT_UNAVAILABLE_MSG("'getDeliveryReceipt' has been renamed to 'getUndeliveredMemberCount:'");
-- (NSArray<SBDUser *> * _Nonnull)getTypingMembers SWIFT_WARN_UNUSED_RESULT SWIFT_UNAVAILABLE_MSG("'getTypingMembers' has been renamed to 'getTypingUsers'");
-- (void)setPushPreferenceWithPushOn:(BOOL)_ completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler SWIFT_UNAVAILABLE_MSG("`setPushPreferenceWithPushOn(_:completionHandler:)` has been removed.");
-+ (void)getTotalUnreadMessageCountWithCompletionHandler:(void (^ _Nullable)(NSUInteger, SBError * _Nonnull))completionHandler SWIFT_UNAVAILABLE_MSG("Use `SendbirdChat.getTotalUnreadMessageCount(completionHandler:)` instead.");
-+ (void)getTotalUnreadMessageCountWith:(SBDGroupChannelTotalUnreadChannelCountParams * _Nonnull)with completionHandler:(void (^ _Nullable)(NSUInteger, SBError * _Nonnull))completionHandler SWIFT_UNAVAILABLE_MSG("Use `SendbirdChat.getTotalUnreadMessageCount(params:completionHandler:)` instead.");
-+ (void)getTotalUnreadMessageCountWithChannelCustomTypes:(NSArray<NSString *> * _Nullable)withChannelCustomTypes completionHandler:(void (^ _Nullable)(NSUInteger, SBError * _Nonnull))completionHandler SWIFT_UNAVAILABLE_MSG("Use `SendbirdChat.getTotalUnreadMessageCount(params:completionHandler:)` instead.");
+/// Returns how many <em>members</em> haven’t been read the given message yet.
+/// since:
+/// 3.0.185
+/// \param message The message.
+///
+///
+/// returns:
+/// Number of unread member count. Zero if all <em>members</em> read the message.
+- (NSInteger)getUnreadMemberCount:(SBDBaseMessage * _Nonnull)message SWIFT_WARN_UNUSED_RESULT;
+/// Returns the <em>members</em> who read the given message.
+/// since:
+/// 3.0.115
+/// \param message The message.
+///
+/// \param includeAllMembers If <code>true</code>, the return value includes the current user and the sender of the message.
+///
+///
+/// returns:
+/// Members who read the message.
+- (NSArray<SBDMember *> * _Nonnull)getReadMembersWithMessage:(SBDBaseMessage * _Nonnull)message includeAllMembers:(BOOL)includeAllMembers SWIFT_WARN_UNUSED_RESULT;
+/// Returns the <em>members</em> who didn’t read the given message.
+/// since:
+/// 3.0.115
+/// \param message The message.
+///
+/// \param includeAllMembers If <code>true</code>, the return value includes the current user and the sender of the message.
+///
+///
+/// returns:
+/// Members who don’t read the message.
+- (NSArray<SBDMember *> * _Nonnull)getUnreadMembersWithMessage:(SBDBaseMessage * _Nonnull)message includeAllMembers:(BOOL)includeAllMembers SWIFT_WARN_UNUSED_RESULT;
+/// Returns how many <em>members</em> haven’t been delivery the given message yet.
+/// since:
+/// 3.0.185
+/// \param message The message.
+///
+///
+/// returns:
+/// Number of undelivered member count. Zero if all <em>members</em> delivered the message.
+- (NSInteger)getUndeliveredMemberCount:(SBDBaseMessage * _Nonnull)message SWIFT_WARN_UNUSED_RESULT;
+/// Returns the read status.
+/// since:
+/// 3.0.115
+/// [
+/// USER_ID: [
+/// “user”: <em>User</em> object,
+/// “last_seen_at”: <em>Int64</em>,
+/// ]
+/// ]
+/// <code>USER_ID</code> is the user ID as a key. Each <code>USER_ID</code> has a <code>Dictionary</code> which includes
+/// <code>User</code> object and <code>Int64</code>. The “user” is a key of <code>User</code> object and the
+/// “last_seen_at” is a key of <code>Int64</code> object.
+/// \param includeAllMembers If true, the return value includes the current user and the sender of the message.
+///
+///
+/// returns:
+/// The read status. If there’s no data, it will be an empty dictionary.
+- (NSDictionary<NSString *, NSDictionary<NSString *, id> *> * _Nonnull)getReadStatusIncludingAllMembers:(BOOL)includeAllMembers SWIFT_WARN_UNUSED_RESULT;
+/// Starts typing. The other <em>members</em> in the channel will receive an event.
+/// The event will be received in <code>channelDidUpdateTypingStatus(_:)</code> of <code>GroupChannelDelegate</code>.
+- (void)startTyping;
+/// Ends typing. The other <em>members</em> in the channel will receive an event.
+/// The event will be received in <code>channelDidUpdateTypingStatus(_:)</code> of <code>GroupChannelDelegate</code>.
+- (void)endTyping;
+/// Checks any members in the channel has been typing
+///
+/// returns:
+/// <code>true</code> when other users are typing in this channel.
+- (BOOL)isTyping SWIFT_WARN_UNUSED_RESULT;
+/// Returns the users who are typing now.
+/// since:
+/// 3.0.202
+///
+/// returns:
+/// The users who are typing now.
+- (NSArray<SBDUser *> * _Nullable)getTypingUsers SWIFT_WARN_UNUSED_RESULT;
+/// Resets the history in this channel.
+/// \param completionHandler The handler block to execute.
+///
+- (void)resetMyHistoryWithCompletionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Changes a setting that decides which push notification for the current user to receive in the group channel.
+/// If a value of option is <code>.default</code>, a push trigger option in this group channel follows a push trigger option
+/// of the current user. It is related with <code>SendbirdChat setPushTriggerOption(_:completionHandler:)</code>.
+/// since:
+/// 3.0.128
+/// \param option options to choose which push notification for the current user to receive.
+///
+/// \param completionHandler handler block to execute when setting a push trigger option of the current user is completed.
+///
+- (void)setMyPushTriggerOption:(enum SBDGroupChannelPushTriggerOption)option completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Requests a setting that decides which push notification for the current user to receive in the group channel.
+/// since:
+/// 3.0.128
+/// \param completionHandler The handler block to execute when getting a push trigger option of the current user is completed.
+///
+- (void)getMyPushTriggerOptionWithCompletionHandler:(void (^ _Nonnull)(enum SBDGroupChannelPushTriggerOption, SBError * _Nullable))completionHandler;
+/// Sets count preference of current user.
+/// since:
+/// 3.0.102
+/// \param myCountPreference Preference is type of <code>CountPreference</code>. The default value is <code>.all</code>.
+///
+- (void)setMyCountPreference:(enum SBDCountPreference)myCountPreference completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Creates a query for my group channel list with default params.
+///
+/// returns:
+/// GroupChannelListQuery instance for the current user.
++ (SBDGroupChannelListQuery * _Nonnull)createMyGroupChannelListQuery SWIFT_WARN_UNUSED_RESULT;
+/// Creates a query for my group channel list with paramsBuilder.
+/// \param paramsBuilder The builder closure for setting <code>GroupChannelListQueryParams</code>.
+///
+///
+/// returns:
+/// GroupChannelListQuery instance for the current user.
++ (SBDGroupChannelListQuery * _Nonnull)createMyGroupChannelListQueryWithParamsBuilder:(SWIFT_NOESCAPE void (^ _Nonnull)(SBDGroupChannelListQueryParams * _Nonnull))paramsBuilder SWIFT_WARN_UNUSED_RESULT;
+/// Creates a query for my group channel list.
+/// \param params <code>GroupChannelListQueryParams</code>
+///
+///
+/// returns:
+/// GroupChannelListQuery instance for the current user.
++ (SBDGroupChannelListQuery * _Nonnull)createMyGroupChannelListQueryWithParams:(SBDGroupChannelListQueryParams * _Nonnull)params SWIFT_WARN_UNUSED_RESULT;
+/// Creates a query for public group channel list.
+///
+/// returns:
+/// The instance to query public group channels.
++ (SBDPublicGroupChannelListQuery * _Nonnull)createPublicGroupChannelListQuery SWIFT_WARN_UNUSED_RESULT;
+/// Creates a query for public group channel list.
+/// \param paramsBuilder The builder closure for setting <code>PublicGroupChannelListQueryParams</code>.
+///
+///
+/// returns:
+/// The instance to query public group channels.
++ (SBDPublicGroupChannelListQuery * _Nonnull)createPublicGroupChannelListQueryWithParamsBuilder:(SWIFT_NOESCAPE void (^ _Nonnull)(SBDPublicGroupChannelListQueryParams * _Nonnull))paramsBuilder SWIFT_WARN_UNUSED_RESULT;
+/// Creates a query for public group channel list.
+/// \param params The params object to change query condition.
+///
+///
+/// returns:
+/// The instance to query public group channels.
++ (SBDPublicGroupChannelListQuery * _Nonnull)createPublicGroupChannelListQueryWithParams:(SBDPublicGroupChannelListQueryParams * _Nonnull)params SWIFT_WARN_UNUSED_RESULT;
+/// Creates a query for members in group channel.
+/// \param channelURL channel url
+///
+///
+/// returns:
+/// The instance to query the members in group channel.
++ (SBDMemberListQuery * _Nonnull)createMemberListQueryWithChannelURL:(NSString * _Nonnull)channelURL SWIFT_WARN_UNUSED_RESULT;
+/// Creates a query for members in group channel.
+/// \param channelURL channel url
+///
+/// \param paramsBuilder The builder closure for setting <code>MemberListQueryParams</code>.
+///
+///
+/// returns:
+/// The instance to query the members in group channel.
++ (SBDMemberListQuery * _Nonnull)createMemberListQueryWithChannelURL:(NSString * _Nonnull)channelURL paramsBuilder:(SWIFT_NOESCAPE void (^ _Nonnull)(SBDMemberListQueryParams * _Nonnull))paramsBuilder SWIFT_WARN_UNUSED_RESULT;
+/// Creates a query for members in group channel.
+/// \param channelURL channel url
+///
+/// \param params The params object to change query condition.
+///
+///
+/// returns:
+/// The instance to query the members in group channel.
++ (SBDMemberListQuery * _Nonnull)createMemberListQueryWithChannelURL:(NSString * _Nonnull)channelURL params:(SBDMemberListQueryParams * _Nonnull)params SWIFT_WARN_UNUSED_RESULT;
+/// Creates a query for members in group channel.
+///
+/// returns:
+/// The instance to query the members in group channel.
+- (SBDMemberListQuery * _Nullable)createMemberListQuery SWIFT_WARN_UNUSED_RESULT;
+/// Creates a query for members in group channel.
+/// \param paramsBuilder The builder closure for setting <code>MemberListQueryParams</code>.
+///
+///
+/// returns:
+/// The instance to query the members in group channel.
+- (SBDMemberListQuery * _Nullable)createMemberListQueryWithParamsBuilder:(SWIFT_NOESCAPE void (^ _Nonnull)(SBDMemberListQueryParams * _Nonnull))paramsBuilder SWIFT_WARN_UNUSED_RESULT;
+/// Creates a query for members in group channel.
+/// \param params The params object to change query condition.
+///
+///
+/// returns:
+/// The instance to query the members in group channel.
+- (SBDMemberListQuery * _Nullable)createMemberListQueryWithParams:(SBDMemberListQueryParams * _Nonnull)params SWIFT_WARN_UNUSED_RESULT;
 @end
 
 
@@ -15749,8 +16299,6 @@ SWIFT_PROTOCOL("_TtP15SendbirdChatSDK28InternalChannelEventDelegate_")
 
 
 
-
-
 @class SBDPollUpdateEvent;
 
 /// An object that adopts the <code>GroupChannelDelegate</code> protocol is responsible for receiving the events in the channel.
@@ -15861,7 +16409,6 @@ SWIFT_PROTOCOL_NAMED("GroupChannelDelegate")
 
 
 @interface SBDGroupChannelCollection (SWIFT_EXTENSION(SendbirdChatSDK)) <SBDGroupChannelDelegate>
-- (void)channel:(SBDBaseChannel * _Nonnull)channel didReceiveMessage:(SBDBaseMessage * _Nonnull)message;
 - (void)channel:(SBDBaseChannel * _Nonnull)channel didReceiveMention:(SBDBaseMessage * _Nonnull)message;
 - (void)channelWasChanged:(SBDBaseChannel * _Nonnull)channel;
 - (void)channel:(SBDGroupChannel * _Nonnull)channel didReceiveInvitation:(NSArray<SBDUser *> * _Nullable)invitees inviter:(SBDUser * _Nullable)inviter;
@@ -15888,7 +16435,7 @@ SWIFT_PROTOCOL_NAMED("GroupChannelDelegate")
 - (void)channel:(SBDBaseChannel * _Nonnull)channel updatedMetaCounters:(NSDictionary<NSString *, NSNumber *> * _Nullable)updatedMetaCounters;
 - (void)channel:(SBDBaseChannel * _Nonnull)channel deletedMetaCountersKeys:(NSArray<NSString *> * _Nullable)deletedMetaCountersKeys;
 - (void)channelDidUpdatePinnedMessages:(SBDGroupChannel * _Nonnull)channel;
-- (void)channel:(SBDGroupChannel * _Nonnull)channel didUpdateFeedbackMessage:(SBDBaseMessage * _Nonnull)didUpdateFeedbackMessage;
+- (void)channel:(SBDGroupChannel * _Nonnull)channel didUpdateFeedbackMessage:(SBDBaseMessage * _Nonnull)message;
 @end
 
 
@@ -16417,10 +16964,10 @@ SWIFT_CLASS_NAMED("GroupChannelListQueryParams")
 @end
 
 
+
 @interface SBDGroupChannelListQueryParams (SWIFT_EXTENSION(SendbirdChatSDK))
 - (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
 @end
-
 
 
 @interface SBDGroupChannelListQueryParams (SWIFT_EXTENSION(SendbirdChatSDK)) <NSCopying>
@@ -16540,6 +17087,22 @@ SWIFT_CLASS_NAMED("GroupChannelTotalUnreadMessageCountParams")
 /// The enumerator filter of super channel.
 @property (nonatomic) enum SBDGroupChannelSuperChannelFilter superChannelFilter;
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
+@class SBDUnreadItemKey;
+
+/// An object contains a set of options to get unread item count from a group channel
+/// since:
+/// 4.21.0
+SWIFT_CLASS_NAMED("GroupChannelUnreadItemCountParams")
+@interface SBDGroupChannelUnreadItemCountParams : NSObject
+/// The optionSets to contain count flags.
+@property (nonatomic, strong) SBDUnreadItemKey * _Nonnull key;
+/// The string array of custom type filter.
+@property (nonatomic, copy) NSArray<NSString *> * _Nullable customTypesFilter;
+- (nonnull instancetype)initWithKey:(SBDUnreadItemKey * _Nonnull)key customTypesFilter:(NSArray<NSString *> * _Nullable)customTypesFilter OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
 
@@ -17125,11 +17688,11 @@ SWIFT_CLASS_NAMED("MessageCollection")
 
 
 
-
 @interface SBDMessageCollection (SWIFT_EXTENSION(SendbirdChatSDK)) <SBDInternalConnectionDelegate>
 - (void)didInternalDisconnect;
 - (void)didExternalDisconnect;
 @end
+
 
 
 
@@ -17138,6 +17701,7 @@ SWIFT_CLASS_NAMED("MessageCollection")
 - (void)didSucceedReconnection;
 - (void)didConnectWithUserId:(NSString * _Nonnull)userId;
 @end
+
 
 
 @interface SBDMessageCollection (SWIFT_EXTENSION(SendbirdChatSDK)) <InternalChannelEventDelegate>
@@ -17286,6 +17850,102 @@ SWIFT_CLASS("_TtC15SendbirdChatSDK13MessageEvents")
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+
+/// Message form data
+/// Since: 4.21.0
+SWIFT_CLASS_NAMED("MessageForm")
+@interface SBDMessageForm : NSObject <NSCopying>
+/// Copies this object
+/// \param zone optional <code>NSZone</code>
+///
+///
+/// returns:
+/// <code>Form</code> instance
+- (id _Nonnull)copyWithZone:(struct _NSZone * _Nullable)zone SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+@interface SBDMessageForm (SWIFT_EXTENSION(SendbirdChatSDK))
+/// Indicates that the form data has already been submitted.
+@property (nonatomic, readonly) BOOL isSubmitted;
+/// Indicates that the form data can be submitted.
+///
+/// returns:
+/// If <code>true</code>, can be submitted
+/// NOTE: You <em>MUST</em> store the value entered by user interaction in the <code>FormField/temporaryAnswer</code>.
+@property (nonatomic, readonly) BOOL canSubmit;
+@end
+
+
+/// The item data held by the Message form.
+/// Since: 4.21.0
+SWIFT_CLASS_NAMED("MessageFormItem")
+@interface SBDMessageFormItem : NSObject <NSCopying>
+/// Copies this object
+/// \param zone optional <code>NSZone</code>
+///
+///
+/// returns:
+/// <code>Form</code> instance
+- (id _Nonnull)copyWithZone:(struct _NSZone * _Nullable)zone SWIFT_WARN_UNUSED_RESULT;
+/// Methods for checking if draft values are valid
+- (BOOL)isValid:(NSArray<NSString *> * _Nullable)draftValues SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+
+@interface SBDMessageFormItem (SWIFT_EXTENSION(SendbirdChatSDK))
+@end
+
+
+/// Data that describes the UI appearance of the item
+/// Since: 4.21.0
+SWIFT_CLASS_NAMED("Style")
+@interface SBDMessageFormItemStyle : NSObject <NSCopying>
+/// Copies this object
+/// \param zone optional <code>NSZone</code>
+///
+///
+/// returns:
+/// <code>Form</code> instance
+- (id _Nonnull)copyWithZone:(struct _NSZone * _Nullable)zone SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+/// Layout type enum value
+/// since:
+/// 4.21.0
+typedef SWIFT_ENUM_NAMED(NSInteger, SBDMessageFormItemLayoutType, "LayoutType", open) {
+  SBDMessageFormItemLayoutTypeText = 0,
+  SBDMessageFormItemLayoutTypeTextarea = 1,
+  SBDMessageFormItemLayoutTypeNumber = 2,
+  SBDMessageFormItemLayoutTypePhone = 3,
+  SBDMessageFormItemLayoutTypeEmail = 4,
+  SBDMessageFormItemLayoutTypeChip = 5,
+  SBDMessageFormItemLayoutTypeUnknown = 6,
+};
+
+
+/// Data to limit the number of values entered
+/// Since: 4.21.0
+SWIFT_CLASS_NAMED("ResultCount")
+@interface SBDMessageFormItemResultCount : NSObject <NSCopying>
+/// Copies this object
+/// \param zone optional <code>NSZone</code>
+///
+///
+/// returns:
+/// <code>Form</code> instance
+- (id _Nonnull)copyWithZone:(struct _NSZone * _Nullable)zone SWIFT_WARN_UNUSED_RESULT;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
 enum SBDMessageTypeFilter : NSInteger;
 
 /// An object contains set of options for get message methods
@@ -17363,10 +18023,10 @@ SWIFT_CLASS_NAMED("MessageListParams")
 
 
 
-
 @interface SBDMessageListParams (SWIFT_EXTENSION(SendbirdChatSDK))
 @property (nonatomic, readonly, copy) NSString * _Nonnull description;
 @end
+
 
 
 /// The <code>MessageMetaArray</code> instance has a string type of key and an array type of value.
@@ -18013,15 +18673,15 @@ SWIFT_CLASS_NAMED("NotificationCollection")
 
 
 
-@interface SBDNotificationCollection (SWIFT_EXTENSION(SendbirdChatSDK)) <InternalChannelEventDelegate>
-- (void)channel:(SBDBaseChannel * _Nonnull)channel messageIds:(NSArray<NSNumber *> * _Nonnull)messageIds newMessageStatus:(enum SBDNotificationMessageStatus)newMessageStatus;
-- (void)channel:(SBDBaseChannel * _Nonnull)channel oldMessageStatus:(enum SBDNotificationMessageStatus)oldMessageStatus newMessageStatus:(enum SBDNotificationMessageStatus)newMessageStatus;
-@end
-
-
 @interface SBDNotificationCollection (SWIFT_EXTENSION(SendbirdChatSDK)) <SBDInternalConnectionDelegate>
 - (void)didInternalDisconnect;
 - (void)didExternalDisconnect;
+@end
+
+
+@interface SBDNotificationCollection (SWIFT_EXTENSION(SendbirdChatSDK)) <InternalChannelEventDelegate>
+- (void)channel:(SBDBaseChannel * _Nonnull)channel messageIds:(NSArray<NSNumber *> * _Nonnull)messageIds newMessageStatus:(enum SBDNotificationMessageStatus)newMessageStatus;
+- (void)channel:(SBDBaseChannel * _Nonnull)channel oldMessageStatus:(enum SBDNotificationMessageStatus)oldMessageStatus newMessageStatus:(enum SBDNotificationMessageStatus)newMessageStatus;
 @end
 
 
@@ -18321,18 +18981,6 @@ SWIFT_CLASS_NAMED("OpenChannel")
 
 
 @interface SBDOpenChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Enters this channel.
-/// \param completionHandler The handler block to execute.
-///
-- (void)enterChannelWithCompletionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Exits this channel.
-/// \param completionHandler The handler block to execute.
-///
-- (void)exitChannelWithCompletionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-@end
-
-
-@interface SBDOpenChannel (SWIFT_EXTENSION(SendbirdChatSDK))
 + (void)createChannelWithName:(NSString * _Nullable)name channelUrl:(NSString * _Nullable)channelUrl coverUrl:(NSString * _Nullable)coverUrl data:(NSString * _Nullable)data operatorUserIds:(NSArray<NSString *> * _Nullable)operatorUserIds customType:(NSString * _Nullable)customType completionHandler:(void (^ _Nonnull)(SBDOpenChannel * _Nullable, SBError * _Nullable))completionHandler SWIFT_UNAVAILABLE_MSG("'createChannel' has been renamed to 'createChannelWithParams:completionHandler:'");
 + (void)createChannelWithName:(NSString * _Nullable)name channelUrl:(NSString * _Nullable)channelUrl coverImage:(NSData * _Nonnull)coverImage coverImageName:(NSString * _Nonnull)coverImageName data:(NSString * _Nullable)data operatorUserIds:(NSArray<NSString *> * _Nullable)operatorUserIds customType:(NSString * _Nullable)customType progressHandler:(void (^ _Nullable)(int64_t, int64_t, int64_t))progressHandler completionHandler:(void (^ _Nonnull)(SBDOpenChannel * _Nullable, SBError * _Nullable))completionHandler SWIFT_UNAVAILABLE_MSG("'createChannel' has been renamed to 'createChannelWithParams:progressHandler:completionHandler:'");
 - (void)updateWithName:(NSString * _Nullable)name coverImage:(NSData * _Nullable)coverImage coverImageName:(NSString * _Nullable)coverImageName data:(NSString * _Nullable)data operatorUserIds:(NSArray<NSString *> * _Nullable)operatorUserIds customType:(NSString * _Nullable)customType progressHandler:(void (^ _Nullable)(int64_t, int64_t, int64_t))progressHandler completionHandler:(void (^ _Nonnull)(SBDOpenChannel * _Nullable, SBError * _Nullable))completionHandler SWIFT_UNAVAILABLE_MSG("'update' has been renamed to 'updateChannelWithParams:progressHandler:completionHandler:'");
@@ -18340,6 +18988,10 @@ SWIFT_CLASS_NAMED("OpenChannel")
 
 @class SBDOpenChannelCreateParams;
 @class SBDOpenChannelUpdateParams;
+@class SBDOpenChannelListQuery;
+@class SBDOpenChannelListQueryParams;
+@class SBDParticipantListQuery;
+@class SBDParticipantListQueryParams;
 
 @interface SBDOpenChannel (SWIFT_EXTENSION(SendbirdChatSDK))
 /// Creates an open channel.
@@ -18404,14 +19056,14 @@ SWIFT_CLASS_NAMED("OpenChannel")
 /// \param completionHandler The handler block to execute.
 ///
 - (void)refreshWithCompletionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-@end
-
-@class SBDOpenChannelListQuery;
-@class SBDOpenChannelListQueryParams;
-@class SBDParticipantListQuery;
-@class SBDParticipantListQueryParams;
-
-@interface SBDOpenChannel (SWIFT_EXTENSION(SendbirdChatSDK))
+/// Enters this channel.
+/// \param completionHandler The handler block to execute.
+///
+- (void)enterChannelWithCompletionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Exits this channel.
+/// \param completionHandler The handler block to execute.
+///
+- (void)exitChannelWithCompletionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
 /// Creates a query instance for open channel list.
 ///
 /// returns:
@@ -20490,7 +21142,6 @@ SWIFT_CLASS_NAMED("ScheduledUserMessageUpdateParams")
 enum SBDWebSocketConnectionState : NSInteger;
 @protocol SBDUserEventDelegate;
 @protocol SBDSessionDelegate;
-@class SBDUnreadItemKey;
 @class SBDUnreadItemCount;
 @class SBDUserUpdateParams;
 @class SBDTotalScheduledMessageCountParams;
@@ -21061,7 +21712,7 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, copy) void (^ _Nullable backgr
 /// and the other is error.
 ///
 + (void)getTotalUnreadMessageCountWithFeedWithParams:(SBDGroupChannelTotalUnreadMessageCountParams * _Nonnull)params completionHandler:(void (^ _Nonnull)(NSUInteger, NSUInteger, SBError * _Nullable))completionHandler;
-/// Gets unread counts of message and invitation counts in super and non_super channels.
+/// Gets unread messages and mentions counts of message and invitation counts in super and non_super channels.
 /// since:
 /// 3.0.116
 /// \param key <code>UnreadItemKey</code> optionSets to contain count flags
@@ -21071,7 +21722,18 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, copy) void (^ _Nullable backgr
 /// contains unsinged interger for count you requested. the other is an error made when there is something
 /// wrong to response.
 ///
-+ (void)getUnreadItemCountWithKey:(SBDUnreadItemKey * _Nonnull)key completionHandler:(void (^ _Nonnull)(SBDUnreadItemCount * _Nullable, SBError * _Nullable))completionHandler;
++ (void)getUnreadItemCountWithKey:(SBDUnreadItemKey * _Nonnull)key completionHandler:(void (^ _Nonnull)(SBDUnreadItemCount * _Nullable, SBError * _Nullable))completionHandler SWIFT_DEPRECATED_MSG("This method is deprecated in 4.21.0. Set `key` in `GroupChannelUnreadItemCountParams` and use `getUnreadItemCount(params:completionHandler:)` instead.", "getUnreadItemCountWithParams:completionHandler:");
+/// Gets unread messages and mentions counts of message and invitation counts in super and non_super channels.
+/// since:
+/// 4.21.0
+/// \param params <code>GroupChannelUnreadItemCountParams</code> object
+///
+/// \param completionHandler The handler block to be executed after getting unread item count.
+/// This block has no return value and takes two argument. the one is type of <code>UnreadItemCount</code> that
+/// contains unsinged interger for count you requested. The other is an error made when there is something
+/// wrong to response.
+///
++ (void)getUnreadItemCountWithParams:(SBDGroupChannelUnreadItemCountParams * _Nonnull)params completionHandler:(void (^ _Nonnull)(SBDUnreadItemCount * _Nullable, SBError * _Nullable))completionHandler;
 /// Gets total unread message count for current user
 + (NSInteger)getSubscribedTotalUnreadMessageCount SWIFT_WARN_UNUSED_RESULT;
 /// Gets total unread message count that is subscribed with custom types for current user
@@ -22328,6 +22990,17 @@ SWIFT_CLASS_NAMED("UserMessage")
 
 
 @interface SBDUserMessage (SWIFT_EXTENSION(SendbirdChatSDK))
+/// Copies this object
+/// \param zone optional <code>NSZone</code>
+///
+///
+/// returns:
+/// <code>UserMessage</code> instance
+- (id _Nonnull)copyWithZone:(struct _NSZone * _Nullable)zone SWIFT_WARN_UNUSED_RESULT;
+@end
+
+
+@interface SBDUserMessage (SWIFT_EXTENSION(SendbirdChatSDK))
 /// Deserializes and reconstructs the object
 /// \param data <code>Data</code> instance
 ///
@@ -22346,17 +23019,6 @@ SWIFT_CLASS_NAMED("UserMessage")
 /// returns:
 /// <code>true</code> if same otherwise <code>false</code>
 - (BOOL)isEqual:(id _Nullable)object SWIFT_WARN_UNUSED_RESULT;
-@end
-
-
-@interface SBDUserMessage (SWIFT_EXTENSION(SendbirdChatSDK))
-/// Copies this object
-/// \param zone optional <code>NSZone</code>
-///
-///
-/// returns:
-/// <code>UserMessage</code> instance
-- (id _Nonnull)copyWithZone:(struct _NSZone * _Nullable)zone SWIFT_WARN_UNUSED_RESULT;
 @end
 
 

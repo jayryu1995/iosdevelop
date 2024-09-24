@@ -18,6 +18,7 @@ class User: Encodable {
     var example: Int?
     var auth: Int?
     var nation: String?
+    var intro: String?
     private init() {} // private 생성자로 외부에서 인스턴스 생성을 방지합니다.
 
     func updateUserData(id: String?, email: String?, name: String?) {
@@ -32,6 +33,18 @@ class User: Encodable {
 
     func updateAuth(auth: Int) {
         self.auth = auth
+    }
+    
+    func clear(){
+        self.id = nil
+        self.name = nil
+        self.auth = nil
+        self.intro = nil
+        self.nation = nil
+        self.nickname = nil
+        self.home = nil
+        self.example = nil
+        self.email = nil
     }
 
 }

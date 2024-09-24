@@ -145,6 +145,13 @@
 		1F778ED82BF6FC4200C63FD8 /* UserDiscountDetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F778ED72BF6FC4200C63FD8 /* UserDiscountDetailCell.swift */; };
 		1F778EDA2BF7294300C63FD8 /* UserDiscountModifyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F778ED92BF7294300C63FD8 /* UserDiscountModifyVC.swift */; };
 		1F781BE62B9713F7002482C8 /* RequestCollabVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F781BE52B9713F7002482C8 /* RequestCollabVC.swift */; };
+		1F7EB9DC2C8ED1D0002B8D05 /* BusinessOnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7EB9DB2C8ED1D0002B8D05 /* BusinessOnboardingVC.swift */; };
+		1F7EB9DE2C8ED1FE002B8D05 /* BusinessFirstOnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7EB9DD2C8ED1FE002B8D05 /* BusinessFirstOnboardingVC.swift */; };
+		1F7EB9E02C8ED210002B8D05 /* BusinessSecondOnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7EB9DF2C8ED210002B8D05 /* BusinessSecondOnboardingVC.swift */; };
+		1F7EB9E22C8ED21C002B8D05 /* BusinessThirdOnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7EB9E12C8ED21C002B8D05 /* BusinessThirdOnboardingVC.swift */; };
+		1F7EB9E42C8ED253002B8D05 /* BusinessFourthOnboardingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7EB9E32C8ED253002B8D05 /* BusinessFourthOnboardingVC.swift */; };
+		1F7EB9E62C8EEA7C002B8D05 /* BusinessOnboardingDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7EB9E52C8EEA7C002B8D05 /* BusinessOnboardingDto.swift */; };
+		1F7EB9E82C9D1C17002B8D05 /* UploadIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7EB9E72C9D1C17002B8D05 /* UploadIndicatorView.swift */; };
 		1F8169692BA0023E009B06A0 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8169682BA0023E009B06A0 /* ArrayExtension.swift */; };
 		1F8AFD6F2B6B959F005A6491 /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8AFD6E2B6B959F005A6491 /* ImageCacheManager.swift */; };
 		1F8AFD722B6B95D8005A6491 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8AFD712B6B95D8005A6491 /* UIImageViewExtension.swift */; };
@@ -160,7 +167,6 @@
 		1F9E18152A5FD83A0000BA2D /* AppVersionCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9E18142A5FD83A0000BA2D /* AppVersionCheck.swift */; };
 		1F9E181A2A61341C0000BA2D /* StringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9E18192A61341C0000BA2D /* StringExtension.swift */; };
 		1F9E181C2A6146CC0000BA2D /* BundleExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9E181B2A6146CC0000BA2D /* BundleExtension.swift */; };
-		1F9E181E2A6148480000BA2D /* InfoChatGPT.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1F9E181D2A6148480000BA2D /* InfoChatGPT.plist */; };
 		1F9E18222A67F5F30000BA2D /* InfoAppID.plist in Resources */ = {isa = PBXBuildFile; fileRef = 1F9E18212A67F5F30000BA2D /* InfoAppID.plist */; };
 		1F9E182A2A6A58A70000BA2D /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F9E18292A6A58A70000BA2D /* UIViewControllerExtension.swift */; };
 		1FA41D432C245743003FE382 /* InfluenceProfileWriteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FA41D422C245743003FE382 /* InfluenceProfileWriteVC.swift */; };
@@ -379,6 +385,13 @@
 		1F778ED72BF6FC4200C63FD8 /* UserDiscountDetailCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDiscountDetailCell.swift; sourceTree = "<group>"; };
 		1F778ED92BF7294300C63FD8 /* UserDiscountModifyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDiscountModifyVC.swift; sourceTree = "<group>"; };
 		1F781BE52B9713F7002482C8 /* RequestCollabVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestCollabVC.swift; sourceTree = "<group>"; };
+		1F7EB9DB2C8ED1D0002B8D05 /* BusinessOnboardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessOnboardingVC.swift; sourceTree = "<group>"; };
+		1F7EB9DD2C8ED1FE002B8D05 /* BusinessFirstOnboardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessFirstOnboardingVC.swift; sourceTree = "<group>"; };
+		1F7EB9DF2C8ED210002B8D05 /* BusinessSecondOnboardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessSecondOnboardingVC.swift; sourceTree = "<group>"; };
+		1F7EB9E12C8ED21C002B8D05 /* BusinessThirdOnboardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessThirdOnboardingVC.swift; sourceTree = "<group>"; };
+		1F7EB9E32C8ED253002B8D05 /* BusinessFourthOnboardingVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessFourthOnboardingVC.swift; sourceTree = "<group>"; };
+		1F7EB9E52C8EEA7C002B8D05 /* BusinessOnboardingDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessOnboardingDto.swift; sourceTree = "<group>"; };
+		1F7EB9E72C9D1C17002B8D05 /* UploadIndicatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UploadIndicatorView.swift; sourceTree = "<group>"; };
 		1F8169682BA0023E009B06A0 /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
 		1F8AFD6E2B6B959F005A6491 /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
 		1F8AFD712B6B95D8005A6491 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
@@ -395,7 +408,6 @@
 		1F9E18142A5FD83A0000BA2D /* AppVersionCheck.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppVersionCheck.swift; sourceTree = "<group>"; };
 		1F9E18192A61341C0000BA2D /* StringExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringExtension.swift; sourceTree = "<group>"; };
 		1F9E181B2A6146CC0000BA2D /* BundleExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BundleExtension.swift; sourceTree = "<group>"; };
-		1F9E181D2A6148480000BA2D /* InfoChatGPT.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = InfoChatGPT.plist; sourceTree = "<group>"; };
 		1F9E18212A67F5F30000BA2D /* InfoAppID.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = InfoAppID.plist; sourceTree = "<group>"; };
 		1F9E18292A6A58A70000BA2D /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		1FA41D422C245743003FE382 /* InfluenceProfileWriteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfluenceProfileWriteVC.swift; sourceTree = "<group>"; };
@@ -502,6 +514,7 @@
 				1FAF63852C39253F00D0FFEE /* RegistAlertBusinessVC.swift */,
 				1FAF63A12C46554000D0FFEE /* GradientImageView.swift */,
 				1F773E952C4F9C75008CF7F8 /* PaddingLabel.swift */,
+				1F7EB9E72C9D1C17002B8D05 /* UploadIndicatorView.swift */,
 			);
 			path = Custom;
 			sourceTree = "<group>";
@@ -575,6 +588,7 @@
 		1F301EE52C17DA8600E3E478 /* Business */ = {
 			isa = PBXGroup;
 			children = (
+				1F7EB9DA2C8ED1A5002B8D05 /* Onboarding */,
 				1FAF525D2C75BD9900139B07 /* Profile */,
 				1FAF525C2C75BD6300139B07 /* Search */,
 				1FAF525B2C75BD5B00139B07 /* Mypage */,
@@ -632,7 +646,6 @@
 				1F48F73D2A1C7DC900E855CE /* LaunchScreen.storyboard */,
 				1F6154712C648FC6001A9285 /* Info.plist */,
 				1F4C66D92C183EAD00A960AF /* Localizable.strings */,
-				1F9E181D2A6148480000BA2D /* InfoChatGPT.plist */,
 				1F9E18212A67F5F30000BA2D /* InfoAppID.plist */,
 				1F084BAD2BCCDA5E00B9A3F1 /* PrivacyInfo.xcprivacy */,
 			);
@@ -755,6 +768,18 @@
 			path = Collab;
 			sourceTree = "<group>";
 		};
+		1F7EB9DA2C8ED1A5002B8D05 /* Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+				1F7EB9DB2C8ED1D0002B8D05 /* BusinessOnboardingVC.swift */,
+				1F7EB9DD2C8ED1FE002B8D05 /* BusinessFirstOnboardingVC.swift */,
+				1F7EB9DF2C8ED210002B8D05 /* BusinessSecondOnboardingVC.swift */,
+				1F7EB9E12C8ED21C002B8D05 /* BusinessThirdOnboardingVC.swift */,
+				1F7EB9E32C8ED253002B8D05 /* BusinessFourthOnboardingVC.swift */,
+			);
+			path = Onboarding;
+			sourceTree = "<group>";
+		};
 		1F8AFD8A2B71DD63005A6491 /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -790,6 +815,7 @@
 				1F773EA62C5C7AFE008CF7F8 /* InfluenceDataDto.swift */,
 				1F773EAA2C608984008CF7F8 /* InfluenceAccountNameDto.swift */,
 				1FAF526E2C7F13E900139B07 /* SnapInsertDto.swift */,
+				1F7EB9E52C8EEA7C002B8D05 /* BusinessOnboardingDto.swift */,
 			);
 			path = Dto;
 			sourceTree = "<group>";
@@ -1069,7 +1095,6 @@
 				1F415BF72A6FC84600FBA354 /* Roboto-CondensedItalic.ttf in Resources */,
 				1F415BFD2A6FC84600FBA354 /* Roboto-Regular.ttf in Resources */,
 				1F8AFD852B6E1BC6005A6491 /* GoogleService-Info.plist in Resources */,
-				1F9E181E2A6148480000BA2D /* InfoChatGPT.plist in Resources */,
 				1F415BFB2A6FC84600FBA354 /* Roboto-Light.ttf in Resources */,
 				1F08AFA62B32C4E20062FAF4 /* Pretendard-ExtraBold.otf in Resources */,
 				1F415BF42A6FC84600FBA354 /* Roboto-Condensed.ttf in Resources */,
@@ -1184,6 +1209,7 @@
 				1F4C66CF2C17F99400A960AF /* DiscountViewModel.swift in Sources */,
 				1FAF63932C3E8B6D00D0FFEE /* BusinessGuide2VC.swift in Sources */,
 				1FAF63842C390FE800D0FFEE /* RegistAlertVC.swift in Sources */,
+				1F7EB9E42C8ED253002B8D05 /* BusinessFourthOnboardingVC.swift in Sources */,
 				1F5963EF2C2EBDFC00FD8419 /* InfluenceSwipeVC.swift in Sources */,
 				1F6F46F32B9817E700E63548 /* BankTableViewCell.swift in Sources */,
 				1FA41D592C2ABDF9003FE382 /* InfluenceViewModel.swift in Sources */,
@@ -1242,6 +1268,7 @@
 				1F5964012C32E33A00FD8419 /* InfluenceMyPageDto.swift in Sources */,
 				1F9E17EA2A57C7AE0000BA2D /* ScreenExtension.swift in Sources */,
 				1F9DF12F2C633A0600F11474 /* CollabFloatingPanel.swift in Sources */,
+				1F7EB9E82C9D1C17002B8D05 /* UploadIndicatorView.swift in Sources */,
 				1FB97D652B5FD5290060AF73 /* CollabDetailVC.swift in Sources */,
 				1FA41D5D2C2C4FBB003FE382 /* InfluenceMyPageWriteVC.swift in Sources */,
 				1FD750E62B86E8570062F882 /* CustomErrorVC.swift in Sources */,
@@ -1253,6 +1280,7 @@
 				1FAF637E2C369E0400D0FFEE /* InfluenceReportVC.swift in Sources */,
 				1FA41D472C290A90003FE382 /* Experience.swift in Sources */,
 				1F778ECE2BF33A6600C63FD8 /* UserDiscountWriteVC.swift in Sources */,
+				1F7EB9DC2C8ED1D0002B8D05 /* BusinessOnboardingVC.swift in Sources */,
 				1FAF63A02C3FA6EC00D0FFEE /* Globals.swift in Sources */,
 				1FAF639C2C3F848800D0FFEE /* ExperienceCell.swift in Sources */,
 				1FFD63B92BBD0BB3005BDFFE /* ApplicantDto.swift in Sources */,
@@ -1261,6 +1289,7 @@
 				1FAF52502C747BBE00139B07 /* ProposalCell.swift in Sources */,
 				1F5963FB2C2FC79A00FD8419 /* BusinessHomeVC.swift in Sources */,
 				1FAF63862C39253F00D0FFEE /* RegistAlertBusinessVC.swift in Sources */,
+				1F7EB9DE2C8ED1FE002B8D05 /* BusinessFirstOnboardingVC.swift in Sources */,
 				1F301EDF2C10695E00E3E478 /* CollabViewModel.swift in Sources */,
 				1F415C7D2A7A3A3700FBA354 /* UIColorExtension.swift in Sources */,
 				1F08AFAA2B352C4D0062FAF4 /* TabBarViewController.swift in Sources */,
@@ -1268,6 +1297,7 @@
 				1F4C66F62C22A42E00A960AF /* FindPasswordVC.swift in Sources */,
 				1F8AFD6F2B6B959F005A6491 /* ImageCacheManager.swift in Sources */,
 				1FA41D512C2AA576003FE382 /* Influence.swift in Sources */,
+				1F7EB9E62C8EEA7C002B8D05 /* BusinessOnboardingDto.swift in Sources */,
 				1FE6100B2B7DDDB400F903E5 /* DeleteAlertVC.swift in Sources */,
 				1F773E7C2C4F83A7008CF7F8 /* BasicFileCell.swift in Sources */,
 				1F9E182A2A6A58A70000BA2D /* UIViewControllerExtension.swift in Sources */,
@@ -1275,6 +1305,7 @@
 				1F4C66D52C181C2C00A960AF /* TalkTableCell.swift in Sources */,
 				1FFD63AE2BB65855005BDFFE /* ReviewWriteVC.swift in Sources */,
 				1F778EC72BF20B8500C63FD8 /* UserDiscountVC.swift in Sources */,
+				1F7EB9E22C8ED21C002B8D05 /* BusinessThirdOnboardingVC.swift in Sources */,
 				1FBF5BCD2BCFA68A0030F903 /* TalkCommentTableCell.swift in Sources */,
 				1F4C66FC2C2403BE00A960AF /* InfluenceProfileVC.swift in Sources */,
 				1F773E9F2C58DDFC008CF7F8 /* FirstOnboardingVC.swift in Sources */,
@@ -1306,6 +1337,7 @@
 				1F4C66F02C2171DE00A960AF /* MemberViewModel.swift in Sources */,
 				1F4C66D32C18073B00A960AF /* Talk.swift in Sources */,
 				1F5964072C35498E00FD8419 /* BusinessHomeDto.swift in Sources */,
+				1F7EB9E02C8ED210002B8D05 /* BusinessSecondOnboardingVC.swift in Sources */,
 				1F08AFC12B3D507D0062FAF4 /* NextButton.swift in Sources */,
 				1F8AFD742B6BA3C7005A6491 /* CollabCommentVC.swift in Sources */,
 				1F4C66F22C229A5200A960AF /* FindAccountVC.swift in Sources */,
@@ -1531,7 +1563,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ByahtColor/ByahtColor.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2024.09.02;
+				CURRENT_PROJECT_VERSION = 2024.09.24;
 				DEVELOPMENT_TEAM = CS98CK3779;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1555,7 +1587,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.1.1;
+				MARKETING_VERSION = 3.1.3;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.byaht.ByahtColor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1577,7 +1609,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ByahtColor/ByahtColorRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2024.09.02;
+				CURRENT_PROJECT_VERSION = 2024.09.24;
 				DEVELOPMENT_TEAM = CS98CK3779;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1601,7 +1633,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.1.1;
+				MARKETING_VERSION = 3.1.3;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.byaht.ByahtColor;
 				PRODUCT_NAME = "$(TARGET_NAME)";

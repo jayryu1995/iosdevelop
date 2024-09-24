@@ -16,7 +16,7 @@ class BusinessMypageVC: UIViewController {
     private let profileImage: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "icon_profile2")
-        image.contentMode = .scaleAspectFill
+        image.contentMode = .scaleAspectFit
         image.layer.cornerRadius = 40
         image.clipsToBounds = true
         return image
@@ -99,14 +99,18 @@ class BusinessMypageVC: UIViewController {
                 DispatchQueue.main.async {
                     switch result {
                     case .success(let data):
-                        let path = "\(Bundle.main.TEST_URL)/business\( data.imagePath ?? "" )"
-                        self?.loadImageFromURL(path) { [weak self] image in
-                            DispatchQueue.main.async {
-                                if let image = image {
-                                    self?.profileImage.image = image
+                        if let path = data.imagePath{
+                            self?.loadImageFromURL(path) { [weak self] image in
+                                DispatchQueue.main.async {
+                                    if let image = image {
+                                        self?.profileImage.image = image
+                                    }
                                 }
                             }
+                        }else{
+                            self?.profileImage.image = UIImage(named: "sample_business_image")
                         }
+                        
                         self?.name.text = data.business_name ?? "회사명"
                         self?.introLabel.text = data.intro ?? "intro"
                     case .failure(let error):

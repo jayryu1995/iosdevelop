@@ -11,6 +11,7 @@ import AVKit
 import AVFoundation
 import Combine
 import SendbirdChatSDK
+import Kingfisher
 
 protocol ProposalListUpdateDelegate: AnyObject {
     func didUpdateProposalList(memberId : String)
@@ -18,7 +19,7 @@ protocol ProposalListUpdateDelegate: AnyObject {
 class ProposalSwipePageVC: UIViewController {
     
     weak var delegate: ProposalListUpdateDelegate?
-    private let imageView: GradientImageView = {
+    var imageView: GradientImageView = {
         let iv = GradientImageView(frame: .zero)
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
@@ -155,17 +156,20 @@ class ProposalSwipePageVC: UIViewController {
     private var selectedAge: [String] = []
     private var mediaPath: String = ""
     private var videoURL: URL?
-    private var player: AVPlayer?
     private var playerLayer: AVPlayerLayer?
-    private var loadingIndicator: UIActivityIndicatorView?
+    private var loadingIndicator = UIActivityIndicatorView(style: .large)
     private var tiktokLink = ""
     private var facebookLink = ""
     private var instaLink = ""
     private var naverLink = ""
     private var youtubeLink = ""
     var profile: InfluenceProfileDto?
-    var playerItem: AVPlayerItem?
+    private var player: AVPlayer?
 
+    deinit {
+        NotificationCenter.default.removeObserver(self)
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         player?.play()
@@ -176,16 +180,53 @@ class ProposalSwipePageVC: UIViewController {
         player?.pause()
     }
 
-    deinit {
-            NotificationCenter.default.removeObserver(self)
-            player?.removeObserver(self, forKeyPath: "status")
-        }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loadingIndicator.center = imageView.center
+        loadingIndicator.startAnimating()
+        view.addSubview(loadingIndicator)
+        loadingIndicator.snp.makeConstraints{
+            $0.edges.equalToSuperview()
+        }
+        
+        setupPlayer()
         setupProfile()
+
     }
 
+    private func setupPlayer(){
+        if let path = profile?.video {
+            if path.contains(".m3u8"), let mediaUrl = URL(string: path) {
+                let item = AVPlayerItem(url: mediaUrl)
+                item.preferredForwardBufferDuration = TimeInterval(1)
+                player = AVPlayer(playerItem: item)
+                
+                
+                if let url = URL(string:profile?.imagePath ?? ""){
+                    imageView.kf.setImage(with: url)
+                }
+                
+                loadingIndicator.stopAnimating()
+            } else if path.contains("jpg") {
+                
+                if let url = URL(string:path){
+                    imageView.kf.setImage(with: url)
+                }
+                loadingIndicator.stopAnimating()
+            } else {
+                imageView.image = UIImage(named: "sample_image")
+                loadingIndicator.stopAnimating()
+            }
+        } else {
+            imageView.image = UIImage(named: "sample_image")
+            loadingIndicator.stopAnimating()
+        }
+            
+        
+    }
+    
     private func setupProfile() {
         snsList = profile?.snsList ?? []
         experienceList = profile?.experienceList ?? []
@@ -196,12 +237,7 @@ class ProposalSwipePageVC: UIViewController {
         selectedNation = profile?.nation?.components(separatedBy: ",") ?? []
         selectedAge = profile?.age?.components(separatedBy: ",") ?? []
         selectedCategory = profile?.category?.components(separatedBy: ",") ?? []
-        if let path = profile?.imagePath {
-            let str = path.split(separator: ".").last ?? ""
-            if str == "jpg" {
-                mediaPath = "\(Bundle.main.TEST_URL)/img\( profile?.imagePath ?? "" )"
-            }
-        }
+        
         // 국가 아이콘설정
         if let nation = profile?.nation {
             setupNationIcon(nation: nation)
@@ -213,17 +249,6 @@ class ProposalSwipePageVC: UIViewController {
             setupIconView(list: list)
         }
 
-    }
-
-    private func setupLoadingIndicator() {
-        loadingIndicator = UIActivityIndicatorView(style: .large)
-        if let loadingIndicator = loadingIndicator {
-            imageView.addSubview(loadingIndicator)
-            loadingIndicator.snp.makeConstraints {
-                $0.center.equalToSuperview()
-            }
-            loadingIndicator.startAnimating()
-        }
     }
 
     private func setupUI() {
@@ -247,8 +272,8 @@ class ProposalSwipePageVC: UIViewController {
             if let player = player {
                 switch player.status {
                 case .readyToPlay:
-                    loadingIndicator?.stopAnimating()
-                    loadingIndicator?.removeFromSuperview()
+                    loadingIndicator.stopAnimating()
+                    loadingIndicator.removeFromSuperview()
                 case .failed, .unknown:
                     break
 
@@ -275,12 +300,14 @@ class ProposalSwipePageVC: UIViewController {
 
     private func setupTempletView() {
         contentView.addSubview(imageView)
-        setupLoadingIndicator()
+        
 
-        if let item = playerItem {
+        if let player = player {
             let width = UIScreen.main.bounds.width - 40
-            let height = width * (525.0 / 350.0)
-            player = AVPlayer(playerItem: item)
+            let height = width * (16.0 / 9.0)
+            if let url = URL(string:profile?.imagePath ?? ""){
+                imageView.kf.setImage(with: url)
+            }
             playerLayer = AVPlayerLayer(player: player)
             playerLayer?.frame = CGRect(origin: .zero, size: CGSize(width: width, height: height))
             playerLayer?.videoGravity = .resizeAspectFill
@@ -290,10 +317,7 @@ class ProposalSwipePageVC: UIViewController {
             }
 
             imageView.bringGradientLayerToFront()
-
-            player?.addObserver(self, forKeyPath: "status", options: [.new, .initial], context: nil)
-            player?.play()
-
+            
             // replayButton 액션 추가
             imageView.addSubview(replayButton)
             replayButton.addTarget(self, action: #selector(replayButtonTapped), for: .touchUpInside)
@@ -301,21 +325,15 @@ class ProposalSwipePageVC: UIViewController {
                 $0.width.height.equalTo(60)
                 $0.center.equalToSuperview()
             }
-        } else if mediaPath.contains("jpg") {
-            imageView.loadImage(from: mediaPath)
-            loadingIndicator?.stopAnimating()
-            loadingIndicator?.removeFromSuperview()
-        } else {
-            imageView.image = UIImage(named: "sample_image")
-            loadingIndicator?.stopAnimating()
-            loadingIndicator?.removeFromSuperview()
+            
+            NotificationCenter.default.addObserver(
+                self,
+                selector: #selector(playerDidFinishPlaying),
+                name: .AVPlayerItemDidPlayToEndTime,
+                object: player.currentItem
+            )
         }
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(playerDidFinishPlaying),
-            name: .AVPlayerItemDidPlayToEndTime,
-            object: player?.currentItem
-        )
+        
 
         // 아이콘 스택뷰 설정
         imageView.addSubview(nameLabel)
@@ -446,7 +464,7 @@ class ProposalSwipePageVC: UIViewController {
         imageView.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.leading.trailing.equalToSuperview().inset(20)
-            $0.height.equalTo(imageView.snp.width).multipliedBy(525.0 / 350.0)
+            $0.height.equalTo(imageView.snp.width).multipliedBy(16.0 / 9.0)
         }
 
         iconView.snp.makeConstraints {

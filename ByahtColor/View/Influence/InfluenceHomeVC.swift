@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import SkeletonView
+import FirebaseMessaging
 
 class InfluenceHomeVC: UIViewController, UIScrollViewDelegate {
 
@@ -31,6 +32,7 @@ class InfluenceHomeVC: UIViewController, UIScrollViewDelegate {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
         NotificationCenter.default.addObserver(self, selector: #selector(handleAccountUpdatedInHome), name: .dataChanged, object: nil)
+    
     }
 
     @objc private func handleAccountUpdatedInHome(notification: NSNotification) {
@@ -39,10 +41,10 @@ class InfluenceHomeVC: UIViewController, UIScrollViewDelegate {
         profileWriteVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(profileWriteVC, animated: false)
     }
-
-        deinit {
-            NotificationCenter.default.removeObserver(self, name: .dataChanged, object: nil)
-        }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .dataChanged, object: nil)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,7 +58,13 @@ class InfluenceHomeVC: UIViewController, UIScrollViewDelegate {
             setupOnboardingView()
         }
         
-        if homeValue != 1{
+        if let assetId = User.shared.id {
+            Messaging.messaging().subscribe(toTopic: assetId) { _ in
+                self.log(message: "Subscribed to MediaConvertFCM \(assetId)")
+            }
+        }
+        
+        if homeValue != 1 && User.shared.id != "122101478408205849"{
             setupAlertView()
         }
 
@@ -259,9 +267,11 @@ class InfluenceHomeVC: UIViewController, UIScrollViewDelegate {
         for (index, business) in businessList.enumerated() {
             if index < 4 {
                 let imageView = GradientImageView(frame: .zero)
+                print("business.imagePath : \(business.imagePath)")
                 if let resource = business.imagePath {
                     let url = "\(Bundle.main.TEST_URL)/business\( resource )"
-                    imageView.loadImage(from: url)
+                    print("resource : \(resource)")
+                    imageView.loadImage(from: resource)
                 } else {
                     imageView.image = UIImage(named: "sample_business_image")
                 }

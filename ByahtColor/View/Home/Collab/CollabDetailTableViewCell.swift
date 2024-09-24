@@ -304,6 +304,10 @@ class CollabDetailTableViewCell: UITableViewCell, UIScrollViewDelegate {
         snapId = snap.id ?? ""
 
         nicknameLabel.text = snap.nickname
+        if let resource = snap.profileImage{
+            profileIcon.loadImage(from: resource)
+        }
+        
         titleLabel.text = snap.title
         contentLabel.text = snap.content
         infoLabel.text = snap.info

@@ -18,4 +18,5 @@ struct BusinessDetailDto: Codable {
     let nation: String?
     let imagePath: String?
     let proposal: Bool?
+    let video: String?
 }

@@ -72,14 +72,15 @@ class ProposalCell: UITableViewCell {
             imageView.layer.cornerRadius = 4
             collectionCell.addSubview(imageView)
 
-            if let resource = item.imagePath {
+            
+            if let resource = item.video {
                 let str = resource.split(separator: ".").last ?? ""
                 if str == "jpg" {
-                    let url = "\(Bundle.main.TEST_URL)/img\(resource)"
-                    imageView.loadImage(from: url)
+                    imageView.loadImage(from: resource)
                 } else {
-                    let path = "\(Bundle.main.TEST_URL)\(resource)"
-                    CustomFunction().loadVideoThumbnail(imageView: imageView, path: path)
+                    if let image = item.imagePath{
+                        imageView.loadImage(from: image)
+                    }
                 }
             } else {
                 imageView.image = UIImage(named: "sample_image")

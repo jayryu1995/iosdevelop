@@ -11,6 +11,8 @@ import SnapKit
 import AVKit
 import AVFoundation
 import Combine
+import SendbirdChatSDK
+import Kingfisher
 
 class BusinessReportVC: UIViewController {
 
@@ -38,7 +40,6 @@ class BusinessReportVC: UIViewController {
 
     private let nameLabel: UILabel = {
         let label = UILabel()
-        label.text = "Jaemin Ryu"
         label.textColor = .white
         label.font = UIFont(name: "Pretendard-Bold", size: 24)
         return label
@@ -143,10 +144,10 @@ class BusinessReportVC: UIViewController {
     private var selectedAge: [String] = []
     private var selectedNation: [String] = []
     private var mediaPath: String = ""
-    private var videoURL: URL?
+    private var imagePath: String = ""
     private var player: AVPlayer?
     private var playerLayer: AVPlayerLayer?
-    private var loadingIndicator: UIActivityIndicatorView?
+    private var loadingIndicator = UIActivityIndicatorView(style: .large)
     private var tiktokLink = ""
     private var facebookLink = ""
     private var instaLink = ""
@@ -167,9 +168,8 @@ class BusinessReportVC: UIViewController {
 
     deinit {
         NotificationCenter.default.removeObserver(self)
-        player?.removeObserver(self, forKeyPath: "status")
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -178,10 +178,45 @@ class BusinessReportVC: UIViewController {
         }
 
         setupBackButton()
+        setupPlayer()
         setupProfile()
 
     }
 
+    private func setupPlayer(){
+        loadingIndicator.center = imageView.center
+        loadingIndicator.startAnimating()
+        view.addSubview(loadingIndicator)
+        loadingIndicator.snp.makeConstraints{
+            $0.edges.equalToSuperview()
+        }
+        if let path = profile?.video {
+            if path.contains(".m3u8"), let mediaUrl = URL(string: path) {
+                let item = AVPlayerItem(url: mediaUrl)
+                item.preferredForwardBufferDuration = TimeInterval(1)
+                player = AVPlayer(playerItem: item)
+                
+                if let url = URL(string:profile?.imagePath ?? ""){
+                    imageView.kf.setImage(with: url)
+                }
+                
+                loadingIndicator.stopAnimating()
+            } else if path.contains("jpg") {
+                if let url = URL(string: path) {
+                    imageView.kf.setImage(with: url)
+                    loadingIndicator.stopAnimating()
+                }
+                
+            } else {
+                imageView.image = UIImage(named: "sample_image")
+                loadingIndicator.stopAnimating()
+            }
+        } else {
+            imageView.image = UIImage(named: "sample_image")
+            loadingIndicator.stopAnimating()
+        }
+    }
+    
     private func setupProfile() {
         snsList = profile?.snsList ?? []
         experienceList = profile?.experienceList ?? []
@@ -191,24 +226,18 @@ class BusinessReportVC: UIViewController {
         selectedGender = profile?.gender?.components(separatedBy: ",") ?? []
         selectedAge = profile?.age?.components(separatedBy: ",") ?? []
         selectedCategory = profile?.category?.components(separatedBy: ",") ?? []
-        if let path = profile?.imagePath {
-            let str = path.split(separator: ".").last ?? ""
-            if str == "jpg" {
-                mediaPath = "\(Bundle.main.TEST_URL)/img\( profile?.imagePath ?? "" )"
-            } else {
-                mediaPath = "\(Bundle.main.TEST_URL)\( profile?.imagePath ?? "" )"
-            }
-        }
 
         // 국가 아이콘설정
         if let nation = profile?.nation {
             setupNationIcon(nation: nation)
             nationIcon.contentMode = .scaleAspectFit
         }
+        
         setupUI()
         setupConstraints()
+        
+        
         if let list = profile?.snsList {
-            print("setupIconView \(list.count)")
             setupIconView(list: list)
         }
     }
@@ -273,32 +302,25 @@ class BusinessReportVC: UIViewController {
         }
     }
 
-    private func setupLoadingIndicator() {
-        loadingIndicator = UIActivityIndicatorView(style: .large)
-        if let loadingIndicator = loadingIndicator {
-            imageView.addSubview(loadingIndicator)
-            loadingIndicator.snp.makeConstraints {
-                $0.center.equalToSuperview()
-            }
-            loadingIndicator.startAnimating()
-        }
-    }
 
     private func setupUI() {
         view.addSubview(scrollView)
         view.addSubview(chatButton)
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(navigationToChats))
+        chatButton.addGestureRecognizer(tapGesture)
         scrollView.addSubview(contentView)
         scrollView.showsVerticalScrollIndicator = false
         setupTempletView()
         setupReportView()
     }
+    
     override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey: Any]?, context: UnsafeMutableRawPointer?) {
         if keyPath == "status" {
             if let player = player {
                 switch player.status {
                 case .readyToPlay:
-                    loadingIndicator?.stopAnimating()
-                    loadingIndicator?.removeFromSuperview()
+                    loadingIndicator.stopAnimating()
+                    loadingIndicator.removeFromSuperview()
                 case .failed, .unknown:
                     break
 
@@ -308,6 +330,7 @@ class BusinessReportVC: UIViewController {
             }
         }
     }
+    
     private func setupReportView() {
         contentView.addSubview(reportView)
         reportView.addSubview(subtitle1)
@@ -324,49 +347,38 @@ class BusinessReportVC: UIViewController {
 
     private func setupTempletView() {
         contentView.addSubview(imageView)
-        setupLoadingIndicator()
-        replayButton.addTarget(self, action: #selector(replayButtonTapped), for: .touchUpInside)
-        if mediaPath.contains("video") {
+        
+        if let player = player {
             let width = UIScreen.main.bounds.width - 40
-            let height = width * (525.0 / 350.0)
-            if let videoURL = URL(string: mediaPath) {
-                VideoCacheManager.shared.cacheVideo(from: videoURL) { [weak self] cachedURL in
-                    guard let self = self, let cachedURL = cachedURL else { return }
-
-                    DispatchQueue.main.async {
-                        self.player = AVPlayer(url: cachedURL)
-                        self.playerLayer = AVPlayerLayer(player: self.player)
-                        self.playerLayer?.frame = CGRect(origin: .zero, size: CGSize(width: width, height: height))
-                        self.playerLayer?.videoGravity = .resizeAspectFill
-
-                        if let playerLayer = self.playerLayer {
-                            self.imageView.layer.addSublayer(playerLayer)
-                        }
-                        self.imageView.bringSubviewToFront(self.replayButton)
-                        self.player?.addObserver(self, forKeyPath: "status", options: [.new, .initial], context: nil)
-                        self.player?.play()
-                    }
-                }
+            let height = width * (16.0 / 9.0)
+            
+            playerLayer = AVPlayerLayer(player: player)
+            playerLayer?.frame = CGRect(origin: .zero, size: CGSize(width: width, height: height))
+            playerLayer?.videoGravity = .resizeAspectFill
+            
+            if let playerLayer = playerLayer {
+                imageView.layer.addSublayer(playerLayer)
             }
+            
+            imageView.bringGradientLayerToFront()
+            
             NotificationCenter.default.addObserver(
                 self,
                 selector: #selector(playerDidFinishPlaying),
                 name: .AVPlayerItemDidPlayToEndTime,
-                object: player?.currentItem
+                object: player.currentItem
             )
+
             // replayButton 액션 추가
             imageView.addSubview(replayButton)
             replayButton.addTarget(self, action: #selector(replayButtonTapped), for: .touchUpInside)
             replayButton.snp.makeConstraints {
-                $0.center.equalTo(imageView)
-                $0.width.height.equalTo(50)
+                $0.width.height.equalTo(60)
+                $0.center.equalToSuperview()
             }
-
-        } else {
-            imageView.loadImage(from: mediaPath)
-            loadingIndicator?.stopAnimating()
-            loadingIndicator?.removeFromSuperview()
         }
+       
+        
 
         imageView.addSubview(nameLabel)
         imageView.addSubview(introLabel)
@@ -407,6 +419,8 @@ class BusinessReportVC: UIViewController {
         icon_youtube.snp.makeConstraints {
             $0.width.height.equalTo(20)
         }
+        
+        
     }
 
     private func setupConstraints() {
@@ -430,7 +444,7 @@ class BusinessReportVC: UIViewController {
         imageView.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.leading.trailing.equalToSuperview().inset(20)
-            $0.height.equalTo(imageView.snp.width).multipliedBy(525.0 / 350.0)
+            $0.height.equalTo(imageView.snp.width).multipliedBy(16.0 / 9.0)
         }
 
         iconView.snp.makeConstraints {
@@ -812,5 +826,27 @@ class BusinessReportVC: UIViewController {
         replayButton.isHidden = true
         player?.seek(to: CMTime.zero)
         player?.play()
+    }
+    
+    @objc private func navigationToChats(_ sender: UIButton) {
+        let params = GroupChannelCreateParams()
+        params.name = "test Chat"
+
+        let server: String = User.shared.id ?? ""
+        let client: String = profile?.memberId ?? ""
+        params.userIds = [server, client]
+        params.isDistinct = true
+
+        GroupChannel.createChannel(params: params) { channel, error in
+            guard error == nil else {
+                // Handle error.
+                return
+            }
+            var timestampStorage = TimestampStorage()
+
+            let vc = ChatsVC(channel: channel!, timestampStorage: timestampStorage)
+            vc.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
 }

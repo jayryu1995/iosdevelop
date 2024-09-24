@@ -79,6 +79,72 @@ extension UIImage {
         return UIImage(cgImage: cgImage!)
     }
 
+    func fixedOrientation2() -> UIImage? {
+            guard self.imageOrientation != .up else {
+                // 이미 올바른 방향이면 그대로 반환
+                return self
+            }
+            
+            // 이미지의 크기와 방향을 기반으로 새 그래픽 컨텍스트 생성
+            var transform = CGAffineTransform.identity
+
+            switch self.imageOrientation {
+            case .down, .downMirrored:
+                transform = transform.translatedBy(x: self.size.width, y: self.size.height)
+                transform = transform.rotated(by: .pi)
+            case .left, .leftMirrored:
+                transform = transform.translatedBy(x: self.size.width, y: 0)
+                transform = transform.rotated(by: .pi / 2)
+            case .right, .rightMirrored:
+                transform = transform.translatedBy(x: 0, y: self.size.height)
+                transform = transform.rotated(by: -.pi / 2)
+            case .up, .upMirrored:
+                break
+            @unknown default:
+                return self
+            }
+
+            // 미러링된 이미지 처리
+            switch self.imageOrientation {
+            case .upMirrored, .downMirrored:
+                transform = transform.translatedBy(x: self.size.width, y: 0)
+                transform = transform.scaledBy(x: -1, y: 1)
+            case .leftMirrored, .rightMirrored:
+                transform = transform.translatedBy(x: self.size.height, y: 0)
+                transform = transform.scaledBy(x: -1, y: 1)
+            case .up, .down, .left, .right:
+                break
+            @unknown default:
+                return self
+            }
+
+            // 새로운 이미지를 생성하고 회전 변환 적용
+            guard let cgImage = self.cgImage else { return nil }
+            guard let colorSpace = cgImage.colorSpace else { return nil }
+
+            let context = CGContext(
+                data: nil,
+                width: Int(self.size.width),
+                height: Int(self.size.height),
+                bitsPerComponent: cgImage.bitsPerComponent,
+                bytesPerRow: 0,
+                space: colorSpace,
+                bitmapInfo: cgImage.bitmapInfo.rawValue
+            )
+
+            context?.concatenate(transform)
+
+            switch self.imageOrientation {
+            case .left, .leftMirrored, .right, .rightMirrored:
+                context?.draw(cgImage, in: CGRect(x: 0, y: 0, width: self.size.height, height: self.size.width))
+            default:
+                context?.draw(cgImage, in: CGRect(x: 0, y: 0, width: self.size.width, height: self.size.height))
+            }
+
+            guard let newCgImage = context?.makeImage() else { return nil }
+            return UIImage(cgImage: newCgImage)
+        }
+    
     func resizeAndCompressImage(maxResolution: CGFloat, compressionQuality: CGFloat = 0.5) -> UIImage? {
         let width = self.size.width
         let height = self.size.height

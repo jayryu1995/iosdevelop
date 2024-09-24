@@ -14,7 +14,7 @@ class InitialViewController: UIViewController {
     private let viewControllerName = String(describing: type(of: InitialViewController.self))
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
-
+    let viewModel = BusinessViewModel()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -34,9 +34,8 @@ class InitialViewController: UIViewController {
                             self.presentUpdateAlertVC()
                         } else {
 
-                            //let vc = TestView()
-                            let vc = LoginVC()
-                            self.navigationController?.pushViewController(vc, animated: true)
+                            self.setupSearchData()
+                            
                         }
                     } else {
                         self.log(message: "update_str2".localized)
@@ -49,6 +48,21 @@ class InitialViewController: UIViewController {
 
     }
 
+    private func setupSearchData(){
+        viewModel.getSearchProfile(sns: nil, category: nil, nation: nil) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let data):
+                    print(data.count)
+                    let vc = LoginVC()
+                    self?.navigationController?.pushViewController(vc, animated: true)
+                case .failure(let error):
+                    print("통신 에러 : \(error)")
+                }
+            }
+        }
+    }
+    
     // 앱 스토어 연결 //
     private func presentUpdateAlertVC() {
         let appID = Bundle.main.AppID

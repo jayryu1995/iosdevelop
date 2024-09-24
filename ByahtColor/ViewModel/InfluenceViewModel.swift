@@ -56,7 +56,7 @@ class InfluenceViewModel: ObservableObject {
     func updateProfile(dto: InfluenceProfileDto, images: [UIImage], video: URL?, getProfile: Bool, completion: @escaping (Result<String, Error>) -> Void) {
         let url = "\(Bundle.main.TEST_URL)/influence/profile/update"
         let headers: HTTPHeaders = ["Content-type": "multipart/form-data"]
-
+        var media = 0
         guard let jsonData = try? JSONEncoder().encode(dto) else {
             completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to encode dto"])))
             return
@@ -69,7 +69,7 @@ class InfluenceViewModel: ObservableObject {
                 multipartFormData.append(jsonData, withName: "data", mimeType: "application/json")
 
                 if let videoFileURL = videoFileURL {
-
+                    media = 1
                     // 파일이 존재하는지 확인
                     guard FileManager.default.fileExists(atPath: videoFileURL.path) else {
                         print("File does not exist at path: \(videoFileURL.path)")
@@ -79,10 +79,11 @@ class InfluenceViewModel: ObservableObject {
 
                     multipartFormData.append(videoFileURL, withName: "file", fileName: "\(dto.memberId ?? "").mp4", mimeType: "video/mp4")
                 } else {
+                    
                     // 비디오가 없는 경우에만 이미지 데이터 추가
                     for (index, image) in images.enumerated() {
                         if let imageData = image.jpegData(compressionQuality: 0.8) {
-                            multipartFormData.append(imageData, withName: "file", fileName: "\(dto.memberId ?? "")_\(index).jpg", mimeType: "image/jpg")
+                            multipartFormData.append(imageData, withName: "file", fileName: "\(dto.memberId ?? "").jpg", mimeType: "image/jpg")
                         }
                     }
                 }
@@ -90,6 +91,10 @@ class InfluenceViewModel: ObservableObject {
             }, to: url, method: method, headers: headers).responseString { response in
                 switch response.result {
                 case .success(let responseString):
+                    if media == 0 {
+                        NotificationCenter.default.post(name: Notification.Name("ProfileUpdateNotification"), object: nil)
+                    }
+                    
                     completion(.success(responseString))
                 case .failure(let error):
                     completion(.failure(error))

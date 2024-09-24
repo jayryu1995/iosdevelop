@@ -9,6 +9,23 @@
 "server_error_title" = "서버 점검 중";
 "server_error_message" = "현재 서버 점검 중입니다. 잠시 후 다시 시도해주세요.";
 
+// BusinessFirstOnboardingVC
+"business_onboarding_first_label" = "패키지 결제 없이, 원하는 만큼!";
+"business_onboarding_first_label2" = "수수료 없는\n인플루언서 마케팅의 시작.";
+
+// BusinessSecondOnboardingVC
+"business_onboarding_second_label" = "불필요한 DM없이\n먼저 단가, 레퍼런스 확인!";
+
+// BusinessThirdOnboardingVC
+"business_onboarding_third_label" = "DM, 메일함.. 이젠 한 곳에서 올인원 연락";
+"business_onboarding_third_label2" = "마음에 든다면 바로!\n협업 제안을 보내보세요.";
+
+// BusinessFourthOnboardingVC
+"business_onboarding_fourth_label" = "내 상품에 맞는 인플루언서를\n더 쉽게 찾아보세요.";
+"business_onboarding_fourth_label2" = "필요한 인플루언서를 찾을 수 있도록\n회사/상품 프로필을 입력해주세요.";
+"business_onboarding_fourth_hint" = "EX) (상품/회사/서비스)를 (SNS)로 광고해주실 분을 구하고 있습니다.";
+
+
 // ApplicationAlertVC
 "application_alert_titleLabel" = "주의";
 "application_alert_agree" = "동의";

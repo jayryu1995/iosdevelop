@@ -11,6 +11,7 @@ import UIKit
 import AVFoundation
 import SkeletonView
 import SendbirdChatSDK
+import Kingfisher
 
 class BusinessHomeVC: UIViewController, UIScrollViewDelegate {
 
@@ -40,6 +41,19 @@ class BusinessHomeVC: UIViewController, UIScrollViewDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.navigationBar.isHidden = true
+        NotificationCenter.default.addObserver(self, selector: #selector(handleAccountUpdatedInHome), name: .dataChanged, object: nil)
+    
+    }
+
+    @objc private func handleAccountUpdatedInHome(notification: NSNotification) {
+        // 프로필 작성 뷰로 전환
+        let profileWriteVC = BusinessProfileWriteVC()
+        profileWriteVC.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(profileWriteVC, animated: false)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self, name: .dataChanged, object: nil)
     }
 
     override func viewDidLoad() {
@@ -49,12 +63,22 @@ class BusinessHomeVC: UIViewController, UIScrollViewDelegate {
         self.navigationController?.navigationBar.isHidden = true
         setupHomeData()
 
-        if UserDefaults.standard.integer(forKey: "home") == 0 {
+        
+        if User.shared.intro == nil || User.shared.intro?.isEmpty == true {
+            setupOnboardingView()
+        }else if UserDefaults.standard.integer(forKey: "home") == 0  && User.shared.id != "admin"{
             setupAlertView()
         }
-
+        
     }
 
+    private func setupOnboardingView() {
+        let exampleVC = BusinessOnboardingVC()
+        exampleVC.modalPresentationStyle = .overFullScreen
+        exampleVC.modalTransitionStyle = .crossDissolve
+        present(exampleVC, animated: true, completion: nil)
+    }
+    
     private func setupAlertView() {
         let alertVC = RegistAlertBusinessVC()
         alertVC.onConfirm = {
@@ -252,19 +276,22 @@ class BusinessHomeVC: UIViewController, UIScrollViewDelegate {
         for (index, influence) in influenceList.enumerated() {
             let imageView = GradientImageView(frame: .zero)
 
-            if let resource = influence.imagePath {
+            if let resource = influence.video {
                 let str = resource.split(separator: ".").last ?? ""
                 if str == "jpg" {
-                    let url = "\(Bundle.main.TEST_URL)/img\(resource)"
-                    imageView.loadImage(from: url)
+                    if let url = URL(string:resource){
+                        imageView.kf.setImage(with: url)
+                    }
                 } else {
-                    let path = "\(Bundle.main.TEST_URL)\(resource)"
-                    CustomFunction().loadVideoThumbnail(imageView: imageView, path: path)
+                    if let url = URL(string:influence.imagePath ?? ""){
+                        imageView.kf.setImage(with: url)
+                    }
                 }
             } else {
                 imageView.image = UIImage(named: "sample_image")
             }
-
+            
+            
             let label = UILabel()
             label.text = "\(influence.name ?? "")"
             label.textColor = .white

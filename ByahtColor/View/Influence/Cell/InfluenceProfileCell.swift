@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import SnapKit
 import AVFoundation
-
+import Kingfisher
 class InfluenceProfileCell: UITableViewCell {
     private let image: GradientImageView = {
         let iv = GradientImageView(frame: .zero)
@@ -101,6 +101,11 @@ class InfluenceProfileCell: UITableViewCell {
     private var naverLink = ""
     private var youtubeLink = ""
 
+    deinit {
+        // 알림 해제
+        NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: nil)
+    }
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
@@ -112,13 +117,10 @@ class InfluenceProfileCell: UITableViewCell {
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-
+        
     }
 
-    deinit {
-           // 알림 해제
-           NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: nil)
-       }
+    
 
     private func setupUI() {
         contentView.addSubview(image)
@@ -147,7 +149,7 @@ class InfluenceProfileCell: UITableViewCell {
     private func setupConstraints() {
         image.snp.makeConstraints {
             $0.edges.equalToSuperview().inset(20)
-            $0.height.equalTo(image.snp.width).multipliedBy(525.0 / 350.0)
+            $0.height.equalTo(image.snp.width).multipliedBy(16.0 / 9.0)
         }
 
         infoLabel.snp.makeConstraints {
@@ -278,12 +280,11 @@ class InfluenceProfileCell: UITableViewCell {
             makeIconView(list: [])
         }
 
-        if let path = profile?.imagePath {
-            if path.contains("video") {
-                let width = UIScreen.main.bounds.width - 40
-                let height = width * (525.0 / 350.0)
-                let url = "\(Bundle.main.TEST_URL)\( path )"
-                if let videoURL = URL(string: url) {
+        if let path = profile?.video {
+            let width = UIScreen.main.bounds.width - 40
+            let height = width * (19.0 / 6.0)
+            if path.contains(".m3u8"){
+                if let videoURL = URL(string: path) {
                     player = AVPlayer(url: videoURL)
                     playerLayer = AVPlayerLayer(player: player)
                     playerLayer?.frame = CGRect(origin: .zero, size: CGSize(width: width, height: height))
@@ -302,7 +303,7 @@ class InfluenceProfileCell: UITableViewCell {
                         image.layer.addSublayer(playerLayer!)
                     }
                     image.layer.addSublayer(playerLayer!)
-
+                    
                     // replayButton 액션 추가
                     image.addSubview(replayButton)
                     replayButton.addTarget(self, action: #selector(replayButtonTapped), for: .touchUpInside)
@@ -313,7 +314,7 @@ class InfluenceProfileCell: UITableViewCell {
                     // 비디오 재생 시작
                     player?.play()
                 }
-            } else {
+            }else if path.contains(".jpg"){
                 // 기존의 player와 playerLayer 제거
                 player?.pause()
                 player = nil
@@ -327,9 +328,11 @@ class InfluenceProfileCell: UITableViewCell {
                         }
                     }
                 }
-
-                let url = "\(Bundle.main.TEST_URL)/img\( path )"
-                image.loadImage2(from: url)
+                if let url = URL(string:path){
+                    image.kf.setImage(with: url)
+                }
+            }else{
+                image.image = UIImage(named: "sample_image")
             }
 
             // 국가 아이콘설정
@@ -350,7 +353,7 @@ class InfluenceProfileCell: UITableViewCell {
             player = nil
             playerLayer?.removeFromSuperlayer()
             playerLayer = nil
-            image.image = UIImage(named: "defaultImage") // 기본 이미지 설정
+            image.image = UIImage(named: "sample_image") // 기본 이미지 설정
         }
     }
 

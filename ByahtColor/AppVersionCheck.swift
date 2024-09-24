@@ -23,7 +23,14 @@ class AppVersionCheck {
             return
         }
 
-        let task = URLSession.shared.dataTask(with: url) { (data, _, _) in
+        var request = URLRequest(url: url)
+        request.cachePolicy = .reloadIgnoringLocalCacheData
+        let config = URLSessionConfiguration.default
+        config.requestCachePolicy = .reloadIgnoringLocalCacheData
+        config.urlCache = nil  // URLCache 무효화
+        let session = URLSession(configuration: config)
+
+        let task = session.dataTask(with: request) { (data, _, _) in
             guard let data = data,
                   let json = try? JSONSerialization.jsonObject(with: data, options: .allowFragments) as? [String: Any],
                   let results = json["results"] as? [[String: Any]],
@@ -31,11 +38,14 @@ class AppVersionCheck {
                 completion(nil)
                 return
             }
+            print("App Store Version: \(appStoreVersion)")
             completion(appStoreVersion)
         }
 
         task.resume()
+
     }
+    
     // 업데이트 해야 하는지 비교
     // 매개변수에 nowVersion, latestVersion넣은 이유는 임의의 값을 넣은 테스트코드를 작성하기 위해서 넣었습니다.
     func shouldUpdate(nowVersion: String?, latestVersion: String?) -> Bool {
@@ -45,6 +55,7 @@ class AppVersionCheck {
         }
         print("nowVersion \(nowVersion)")
         print("latestVersion \(storeVersion)")
+        
         let nowVersionArr = nowVersion.split(separator: ".").map { Int($0) ?? 0 }
         let storeVersionArr = storeVersion.split(separator: ".").map { Int($0) ?? 0 }
 

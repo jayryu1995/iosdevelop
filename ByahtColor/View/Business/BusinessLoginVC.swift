@@ -144,14 +144,17 @@ class BusinessLoginVC: UIViewController {
             DispatchQueue.main.async {
                 switch result {
                 case .success(let business):
+                    
                     User.shared.id = business.memberId
                     User.shared.auth = 2
                     User.shared.name = business.businessName ?? nil
+                    User.shared.intro = business.intro ?? nil
 
                     UserDefaults.standard.setValue(business.memberId, forKey: "businessId")
                     UserDefaults.standard.setValue(2, forKey: "auth")
                     UserDefaults.standard.setValue(business.businessName, forKey: "name")
-
+                    UserDefaults.standard.setValue(business.intro, forKey: "intro")
+                    
                     let vc = TabBarViewController()
                     self?.navigationController?.pushViewController(vc, animated: false)
                 case .failure(let error):

@@ -7,6 +7,7 @@ target 'ByahtColor' do
 
   # Pods for ByahtColor
  pod 'SnapKit', '~> 5.6.0'
+ pod 'SwiftLint'
  pod 'FBSDKLoginKit'
  pod 'Alamofire', '~> 5.8'
  pod 'AlamofireImage', '~> 4.3'
@@ -19,6 +20,6 @@ target 'ByahtColor' do
  pod 'DropDown'
  pod 'SendBirdUIKit'
  pod 'FLAnimatedImage'
- pod 'Gifu'
+ pod 'Kingfisher'
  pod 'GoogleSignIn'
 end

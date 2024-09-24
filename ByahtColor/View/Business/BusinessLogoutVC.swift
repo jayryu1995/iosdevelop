@@ -89,10 +89,12 @@ class BusinessLogoutVC: UIViewController {
 
     @objc func facebookLogout(_ sender: Any) {
 
+        User.shared.clear()
         UserDefaults.standard.removeObject(forKey: "name")
         UserDefaults.standard.removeObject(forKey: "userID")
         UserDefaults.standard.removeObject(forKey: "email")
         UserDefaults.standard.removeObject(forKey: "businessId")
+        UserDefaults.standard.removeObject(forKey: "intro")
 
         let loginManager = LoginManager()
         loginManager.logOut()

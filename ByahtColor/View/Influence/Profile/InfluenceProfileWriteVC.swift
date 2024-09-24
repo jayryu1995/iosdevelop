@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import FloatingPanel
 import AVFoundation
+import FirebaseMessaging
 
 class InfluenceProfileWriteVC: UIViewController {
     private let topView = UIView()
@@ -125,7 +126,7 @@ class InfluenceProfileWriteVC: UIViewController {
     private var ageView = UIView()
     private var nationView = UIView()
     private var videoURL: URL?
-    private let activityIndicator = UIActivityIndicatorView(style: .large)
+    private let activityIndicator = UploadIndicatorView()
     private var selectedImages: [UIImage] = []
     private var getProfile = false
     private var update = false
@@ -138,6 +139,7 @@ class InfluenceProfileWriteVC: UIViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(handleNotification), name: Notification.Name("ProfileUpdateNotification"), object: nil)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -147,8 +149,10 @@ class InfluenceProfileWriteVC: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
+        NotificationCenter.default.removeObserver(self, name: Notification.Name("ProfileUpdateNotification"), object: nil)
     }
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -160,8 +164,11 @@ class InfluenceProfileWriteVC: UIViewController {
     private func setupActivityIndicator() {
         // 인디케이터 설정 및 뷰에 추가
         activityIndicator.center = view.center
-        activityIndicator.hidesWhenStopped = true
+        activityIndicator.isHidden = true
         view.addSubview(activityIndicator)
+        activityIndicator.snp.makeConstraints{
+            $0.edges.equalToSuperview()
+        }
     }
 
     private func setupProfile() {
@@ -180,35 +187,32 @@ class InfluenceProfileWriteVC: UIViewController {
                         self?.selectedCategory = data.category?.components(separatedBy: ",") ?? []
                         self?.selectedNation = data.nation?.components(separatedBy: ",") ?? []
                         self?.et_code.text = data.code
-                        if let path = data.imagePath {
-                            let str = path.split(separator: ".").last ?? ""
-                            if str == "jpg" {
-                                let path = "\(Bundle.main.TEST_URL)/img\( data.imagePath ?? "" )"
-                                self?.loadImageFromURL(path) { [weak self] image in
-                                    DispatchQueue.main.async {
-                                        if let image = image {
-                                            self?.selectedImages.append(image)
-                                            self?.resetHorizonScrollView()
-                                        }
-                                    }
-                                }
-                            } else {
-                                let path = "\(Bundle.main.TEST_URL)\( data.imagePath ?? "" )"
-                                guard let url = URL(string: path) else {
-                                    print("Invalid URL")
-                                    return
-                                }
-                                self?.videoURL = url
-                                self?.generateThumbnail(url: url) { [weak self] thumbnail in
-                                    guard let self = self else { return }
-                                    if let thumbnail = thumbnail {
-                                        selectedImages.append(thumbnail)
-                                        self.videoURL = nil
-                                        resetHorizonScrollView()
+                        
+                        if let path = data.video {
+                            print(path)
+                            // 비디오 경로가 있을 때
+                            if path.contains(".m3u8") {
+                                DispatchQueue.global(qos: .background).async { [weak self] in
+                                    // 비디오 썸네일 경로 (imagePath)로부터 이미지 다운로드
+                                    
+                                    if let imageUrlString = data.imagePath {
+                                        // 메인 스레드에서 UI 업데이트
+                                        self?.loadImage(from: imageUrlString)
+                                        
+                                    } else {
+                                        print("이미지를 불러올 수 없습니다: \(String(describing: data.imagePath))")
                                     }
                                 }
                             }
+                            else if path.contains(".jpg") {
+                                print("path",path)
+                                
+                                self?.loadImage(from:path)
+                                
+                                
+                            }
                         }
+
 
                         self?.setupUI()
                         self?.setupConstraints()
@@ -222,6 +226,45 @@ class InfluenceProfileWriteVC: UIViewController {
         }
     }
 
+    private func loadImage(from urlString: String) {
+        guard let url = URL(string: urlString) else {
+            print("Invalid URL: \(urlString)")
+            return
+        }
+
+        URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+            // 네트워크 에러 확인
+            if let error = error {
+                print("Failed to load image with error: \(error.localizedDescription)")
+                return
+            }
+
+            // HTTP 응답 상태 코드 확인
+            if let httpResponse = response as? HTTPURLResponse {
+                print("HTTP Status Code: \(httpResponse.statusCode)")
+                if httpResponse.statusCode != 200 {
+                    print("Failed to load image: Invalid response code \(httpResponse.statusCode)")
+                    return
+                }
+            }
+
+            // 데이터 확인 및 이미지 변환
+            guard let data = data, let downloadedImage = UIImage(data: data) else {
+                print("Failed to load image: Data is nil or not convertible to UIImage.")
+                return
+            }
+
+            // 이미지 성공적으로 로드 -> UI 업데이트는 메인 스레드에서 처리
+            DispatchQueue.main.async {
+                self?.selectedImages.append(downloadedImage)
+                print("selectedImages : ", self?.selectedImages.count ?? 0)
+                self?.resetHorizonScrollView()
+            }
+
+        }.resume()
+    }
+
+    
     private func setupUI() {
         setTopView()
         setupScrollView()
@@ -992,15 +1035,17 @@ class InfluenceProfileWriteVC: UIViewController {
     // 업로드
     @objc private func uploadButtonTapped() {
         guard validateForm() else { return }
-
+        
+        
+        
+        activityIndicator.isHidden = false
         view.bringSubviewToFront(activityIndicator)
-        activityIndicator.startAnimating()
         if let id = User.shared.id {
             let category = selectedCategory.joined(separator: ",")
             let gender = selectedGender.joined(separator: ",")
             let age = selectedAge.joined(separator: ",")
             let nation = selectedNation.joined(separator: ",")
-            let dto = InfluenceProfileDto(memberId: id, snsList: snsArray, payList: payArray, experienceList: experienceArray, age: age, category: category, gender: gender, intro: et_intro.text ?? "", name: nil, imagePath: nil, nation: nation, code: et_code.text ?? nil)
+            let dto = InfluenceProfileDto(memberId: id, snsList: snsArray, payList: payArray, experienceList: experienceArray, age: age, category: category, gender: gender, intro: et_intro.text ?? "", name: nil, imagePath: nil, nation: nation, code: et_code.text ?? nil, video: nil)
 
             if !update {
                 videoURL = nil
@@ -1010,10 +1055,10 @@ class InfluenceProfileWriteVC: UIViewController {
                 DispatchQueue.main.async {
                     switch result {
                     case .success(let responseString):
-                        self?.activityIndicator.stopAnimating()
-                        self?.navigationController?.popViewController(animated: true)
                         UserDefaults.standard.set(1, forKey: "home")
+                        
                     case .failure(let error):
+                        
                         print("에러가 발생했습니다")
                         print( "Error: \(error.localizedDescription)")
                     }
@@ -1022,6 +1067,13 @@ class InfluenceProfileWriteVC: UIViewController {
         }
     }
 
+    @objc private func handleNotification(_ notification: Notification) {
+        print("notification 실행")
+        // 알림 수신 시 실행할 코드
+        
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     private func validateForm() -> Bool {
         // 각 필드의 유효성 검사
         if et_intro.text.isEmpty || et_intro.text == "influence_profile_write_intro_hint".localized || et_intro.text.count > 80 {

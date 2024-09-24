@@ -77,10 +77,9 @@ class ProfileHeaderCell: UITableViewCell {
         nameLabel.text = profile.business_name
         infoLabel.text = profile.intro
         if let imagePath = profile.imagePath {
-            let url = "\(Bundle.main.TEST_URL)/business\(imagePath)"
-            image.loadImage2(from: url)
+            image.loadImage(from: imagePath)
         } else {
-            image.image = nil
+            image.image = UIImage(named: "sample_business_image")
         }
     }
 

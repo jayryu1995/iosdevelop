@@ -145,14 +145,16 @@ class InfluenceReportVC: UIViewController {
                                 self?.chatButton.isHidden = true
                             }
                         }
-                        let path = "\(Bundle.main.TEST_URL)/business\( data.imagePath ?? "" )"
-                        self?.loadImageFromURL(path) { [weak self] image in
-                            DispatchQueue.main.async {
-                                if let image = image {
-                                    self?.imageView.image = image
+                        if let path = data.imagePath {
+                            self?.loadImageFromURL(path) { [weak self] image in
+                                DispatchQueue.main.async {
+                                    if let image = image {
+                                        self?.imageView.image = image
+                                    }
                                 }
                             }
                         }
+                        
                         self?.setupUI()
                         self?.setupConstraints()
 

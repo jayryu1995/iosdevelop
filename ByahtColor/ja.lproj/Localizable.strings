@@ -10,6 +10,23 @@
 "server_error_message" = "現在サーバーメンテナンス中です。しばらくしてから再度お試しください";
 
 
+// BusinessFirstOnboardingVC
+"business_onboarding_first_label" = "パッケージプランの代わりに、欲しい分だけ!";
+"business_onboarding_first_label2" = "手数料なしの\nインフルエンサーマーケティングの始まり。";
+
+// BusinessSecondOnboardingVC
+"business_onboarding_second_label" = "不要なDMなしで、\nまずは料金や参考事例を確認！";
+
+// BusinessThirdOnboardingVC
+"business_onboarding_third_label" = "DM、メールボックス…今では1つの場所でオールインワンの連絡。";
+"business_onboarding_third_label2" = "気に入ったらすぐに！\nコラボ提案を送ってみてください。";
+
+// BusinessFourthOnboardingVC
+"business_onboarding_fourth_label" = "自分の商品に合ったインフルエンサーを\nもっと簡単に見つけましょう。";
+"business_onboarding_fourth_label2" = "必要なインフルエンサーを見つけられるように、\n会社/商品プロフィールを入力してください。";
+"business_onboarding_fourth_hint" = "例)（商品/会社/サービス）を（SNS）で宣伝してくれる方を探しています。";
+
+
 // ApplicationAlertVC
 "application_alert_titleLabel" = "注意";
 "application_alert_agree" = "同意";

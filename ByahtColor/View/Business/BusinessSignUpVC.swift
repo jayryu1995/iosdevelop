@@ -498,6 +498,8 @@ class BusinessSignUpVC: UIViewController, UIScrollViewDelegate {
                 switch result {
                 case .success(let responseString):
 
+                    User.shared.id = member.id
+                    User.shared.name = business.business_name
                     self?.navigationController?.popViewController(animated: false)
                     print( "Success: \(responseString)")
                 case .failure(let error):

@@ -10,6 +10,7 @@ import Alamofire
 import Combine
 import UIKit
 
+
 class BusinessViewModel: ObservableObject {
     @Published var businessDetail: BusinessDetailDto?
     @Published var proposalList: [InfluenceProfileDto] = []
@@ -17,7 +18,39 @@ class BusinessViewModel: ObservableObject {
     var cancellables = Set<AnyCancellable>()
 
     var message: Bool?
+    
+    // businessonboarding 계정 intro 등록
+    func updateIntro(intro: String, completion: @escaping (Result<String, Error>) -> Void) {
+        // 서버 URL 설정
+        let url = "\(Bundle.main.TEST_URL)/business/profile/intro"
+        let dto = BusinessOnboardingDto(memberId: User.shared.id, intro: intro)
 
+        
+        // JSON 인코딩
+        guard let jsonData = try? JSONEncoder().encode(dto) else {
+            let encodingError = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Failed to encode JSON"])
+            completion(.failure(encodingError))
+            return
+        }
+
+        // JSON 데이터를 딕셔너리로 변환
+        guard let jsonObject = try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers) as? [String: Any] else {
+            let jsonConversionError = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Failed to convert JSON to Dictionary"])
+            completion(.failure(jsonConversionError))
+            return
+        }
+
+        // 요청 보내기
+        AF.request(url, method: .patch, parameters: jsonObject, encoding: JSONEncoding.default, headers: ["Content-Type": "application/json"]).responseString { response in
+            switch response.result {
+            case .success(let responseString):
+                completion(.success(responseString))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
     // 홈 화면 데이터 조회
     func findInfluenceById(id: String, completion: @escaping (Result<InfluenceProfileDto, Error>) -> Void) {
         let url = "\(Bundle.main.TEST_URL)/business/search/\(id)"
@@ -82,6 +115,7 @@ class BusinessViewModel: ObservableObject {
             .responseDecodable(of: [InfluenceProfileDto].self) { response in
                 switch response.result {
                 case .success(let data):
+                    Globals.shared.searchList = data
                     completion(.success(data))
                 case .failure(let error):
                     completion(.failure(error))
@@ -139,6 +173,7 @@ class BusinessViewModel: ObservableObject {
 
     // 기업 프로필 업데이트
     func updateProfile(memberId: String, dto: BusinessDetailDto, images: [UIImage], update: Bool, completion: @escaping (Result<String, Error>) -> Void) {
+        print("memberId : ",memberId)
         let url = "\(Bundle.main.TEST_URL)/business/\(memberId)"
         let headers: HTTPHeaders = ["Content-type": "multipart/form-data"]
 
@@ -155,7 +190,7 @@ class BusinessViewModel: ObservableObject {
             // 이미지 데이터 추가
             for (index, image) in images.enumerated() {
                 if let imageData = image.jpegData(compressionQuality: 0.8) {
-                    multipartFormData.append(imageData, withName: "file", fileName: "\(memberId)_\(index).jpg", mimeType: "image/jpg")
+                    multipartFormData.append(imageData, withName: "file", fileName: "\(memberId).jpg", mimeType: "image/jpg")
                 }
             }
         }, to: url, method: method, headers: headers).responseString { response in

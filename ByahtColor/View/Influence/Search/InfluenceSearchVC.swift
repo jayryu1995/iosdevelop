@@ -132,8 +132,7 @@ class InfluenceSearchVC: UIViewController {
             chatButton.isHidden = true
         }
 
-        if business.imagePath != nil {
-            let path = "\(Bundle.main.TEST_URL)/business\( business.imagePath ?? "" )"
+        if let path = business.imagePath {
             loadImageFromURL(path) { [weak self] image in
                 DispatchQueue.main.async {
                     if let image = image {

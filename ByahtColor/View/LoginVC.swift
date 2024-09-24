@@ -119,6 +119,8 @@ class LoginVC: UIViewController {
             User.shared.id = id
             User.shared.auth = 2
             User.shared.name = UserDefaults.standard.string(forKey: "name")
+            User.shared.intro = UserDefaults.standard.string(forKey: "intro")
+            
             let vc = TabBarViewController()
             self.navigationController?.pushViewController(vc, animated: true)
         }

@@ -78,6 +78,7 @@ class ProposalSwipeVC: UIViewController {
 
 extension ProposalSwipeVC: UIPageViewControllerDataSource, UIPageViewControllerDelegate, FloatingPanelControllerDelegate,
                            ProposalListUpdateDelegate{
+    
     private func setupPageViewController() {
         if let pageViewController = pageViewController {
             pageViewController.willMove(toParent: nil)
@@ -89,55 +90,27 @@ extension ProposalSwipeVC: UIPageViewControllerDataSource, UIPageViewControllerD
         pageViewController.dataSource = self
         pageViewController.delegate = self
 
-        // profileList의 각 요소에 대해 페이지 생성
-        for (index, profile) in profileList.enumerated() {
-            let page = ProposalSwipePageVC()
-            page.delegate = self
-            // profile.imagePath가 있는지 확인
-            if let path = profile.imagePath {
-                let str = path.split(separator: ".").last ?? ""
-
-                // path에 "mp4"가 포함되어 있는지 확인
-                if str.contains("mp4") {
-                    if let mediaUrl = URL(string: "\(Bundle.main.TEST_URL)\(path.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? "")") {
-                        // 첫 페이지에 대한 추가 디버깅 메시지 출력
-                        if index == 0 {
-                            page.playerItem = AVPlayerItem(url: mediaUrl)
-                            print("mediaUrl : ", mediaUrl)
-                        }
-                        // 비디오 캐시
-                        VideoCacheManager.shared.cacheVideo(from: mediaUrl) { [weak page] localUrl in
-                            guard let localUrl = localUrl else { return }
-
-                            DispatchQueue.main.async {
-                                    page?.playerItem = AVPlayerItem(url: localUrl)
-                            }
-                        }
-                    }
-                }
-            }
-
+        // 모든 페이지를 한꺼번에 처리
+        for profile in profileList {
+            let page = BusinessSearchVC()
             page.profile = profile
-
             pages.append(page)
+
         }
 
+        // 첫 번째 페이지 설정
         if let firstPage = pages.first {
-            pageViewController.setViewControllers([firstPage], direction: .forward, animated: true, completion: nil)
+            self.pageViewController.setViewControllers([firstPage], direction: .forward, animated: true, completion: nil)
         }
 
-        addChild(pageViewController)
-        view.addSubview(pageViewController.view)
-        pageViewController.didMove(toParent: self)
-
-        pageViewController.view.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            pageViewController.view.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            pageViewController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            pageViewController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            pageViewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
+        self.addChild(self.pageViewController)
+        self.view.addSubview(self.pageViewController.view)
+        self.pageViewController.didMove(toParent: self)
+        self.pageViewController.view.snp.makeConstraints {
+            $0.edges.equalToSuperview()
+        }
     }
+    
     
     func didUpdateProposalList(memberId:String) {
         guard let currentViewController = pageViewController.viewControllers?.first,

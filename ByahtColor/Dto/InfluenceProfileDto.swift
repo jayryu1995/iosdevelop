@@ -20,4 +20,5 @@ struct InfluenceProfileDto: Codable {
     let imagePath: String?
     let nation: String?
     let code: String?
+    let video: String?
 }

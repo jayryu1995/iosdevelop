@@ -9,6 +9,23 @@
 "server_error_title" = "Dịch vụ bảo trì";
 "server_error_message" = "Hiện tại dịch vụ đang bảo trì, vui lòng thử lại sau.";
 
+// BusinessFirstOnboardingVC
+"business_onboarding_first_label" = "Không cần thanh toán gói dịch vụ, sử dụng thoải mái!";
+"business_onboarding_first_label2" = "Sự khởi đầu của marketing influencer\n không tính  phí .";
+
+// BusinessSecondOnboardingVC
+"business_onboarding_second_label" = "Xác nhận mức giá và tham khảo mẫu trước\n mà không cần nhắn tin!";
+
+// BusinessThirdOnboardingVC
+"business_onboarding_third_label" = "Tin nhắn, email,...  Tất cả đều có thể liên lạc ở một ứng dụng duy nhất.";
+"business_onboarding_third_label2" = "Nếu thích,\n hãy gửi ngay đề xuất hợp tác!";
+
+// BusinessFourthOnboardingVC
+"business_onboarding_fourth_label" = "Tìm kiếm influencer phù hợp với sản phẩm của bạn\n một cách dễ dàng hơn.";
+"business_onboarding_fourth_label2" = "Hãy nhập thông tin hồ sơ công ty/sản phẩm\n để tìm influencer phù hợp.";
+"business_onboarding_fourth_hint" = "Ví dụ: Chúng tôi đang tìm kiếm người quảng cáo (sản phẩm/công ty/dịch vụ) trên (MXH).";
+
+
 // ApplicationAlertVC
 "application_alert_titleLabel" = "Chú ý";
 "application_alert_agree" = "Đồng ý";

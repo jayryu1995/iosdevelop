@@ -9,6 +9,24 @@
 "server_error_title" = "Server Maintenance";
 "server_error_message" = "The server is currently undergoing maintenance. Please try again later.";
 
+
+// BusinessFirstOnboardingVC
+"business_onboarding_first_label" = "Pay as you go, without package commitments!";
+"business_onboarding_first_label2" = "Start influencer marketing\nwith no fees.";
+
+// BusinessSecondOnboardingVC
+"business_onboarding_second_label" = "Check rates and references first,\nwithout unnecessary DMs!";
+
+// BusinessThirdOnboardingVC
+"business_onboarding_third_label" = "Manage all communication in one place—DMs, emails, all-in-one.";
+"business_onboarding_third_label2" = "Like what you see?\nSend a collaboration proposal instantly!";
+
+// BusinessFourthOnboardingVC
+"business_onboarding_fourth_label" = "Find influencers\nthat fit your product more easily.";
+"business_onboarding_fourth_label2" = "Enter your company/product profile\nto help you find the right influencers.";
+"business_onboarding_fourth_hint" = "EX) We are looking for someone to advertise (product/company/service) on (SNS).";
+
+
 // ApplicationAlertVC
 "application_alert_titleLabel" = "Attention";
 "application_alert_agree" = "Agree";

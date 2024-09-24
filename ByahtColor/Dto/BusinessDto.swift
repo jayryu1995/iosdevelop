@@ -18,4 +18,5 @@ struct BusinessDto: Codable {
     let tel: String?
     let email: String?
     let imagePath: String?
+    let intro: String?
 }
