@@ -8,7 +8,7 @@
 import Foundation
 import SnapKit
 import UIKit
-
+import Kingfisher
 class TalkTableCell: UITableViewCell, UIScrollViewDelegate {
     private let nicknameLabel = {
         let label = UILabel()
@@ -184,6 +184,7 @@ class TalkTableCell: UITableViewCell, UIScrollViewDelegate {
         nicknameLabel.text = talk.nickname ?? ""
         likeLabel.text = "\(talk.like_count ?? 0)"
         commentLabel.text = "\(talk.comment_count ?? 0)"
+        
 
         let date = CustomFunction().formatDate(talk.regi_date ?? "")
         dateLabel.text = "| \(date) |"
@@ -193,22 +194,29 @@ class TalkTableCell: UITableViewCell, UIScrollViewDelegate {
     }
 
     func setImage(imagePath: String) {
-        image.isHidden = false
-        image.contentMode = .scaleAspectFill
-        let url = "\(Bundle.main.TEST_URL)/board\(imagePath)"
-        image.loadImage(from: url)
-        print(url)
-        titleLabel.snp.remakeConstraints {
-            $0.top.equalToSuperview().offset(16)
-            $0.leading.equalToSuperview()
-            $0.height.equalTo(20)
-            $0.trailing.equalTo(image.snp.leading).offset(-10)
-        }
-
-        contentLabel.snp.remakeConstraints {
-            $0.top.equalTo(titleLabel.snp.bottom).offset(4)
-            $0.leading.equalToSuperview()
-            $0.trailing.equalTo(image.snp.leading).offset(-10)
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            
+            self.image.isHidden = false
+            self.image.contentMode = .scaleAspectFill
+            self.image.clipsToBounds = true
+            
+            if let url = URL(string: imagePath) {
+                self.image.kf.setImage(with: url)
+            }
+            
+            self.titleLabel.snp.remakeConstraints {
+                $0.top.equalToSuperview().offset(16)
+                $0.leading.equalToSuperview()
+                $0.height.equalTo(20)
+                $0.trailing.equalTo(self.image.snp.leading).offset(-10)
+            }
+            
+            self.contentLabel.snp.remakeConstraints {
+                $0.top.equalTo(self.titleLabel.snp.bottom).offset(4)
+                $0.leading.equalToSuperview()
+                $0.trailing.equalTo(self.image.snp.leading).offset(-10)
+            }
         }
     }
 

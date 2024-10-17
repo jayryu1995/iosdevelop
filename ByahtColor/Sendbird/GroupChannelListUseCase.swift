@@ -33,6 +33,22 @@ open class GroupChannelListUseCase: NSObject {
         channelListCollection = createGroupChannelListCollection()
         channelListCollection?.loadMore { [weak self] channels, error in
             guard let self = self else { return }
+            if let error = error {
+                self.delegate?.groupChannelListUseCase(self, didReceiveError: error)
+                return
+            }
+            guard let channels = channels else { return }
+            self.channels = channels
+            self.delegate?.groupChannelListUseCase(self, didUpdateChannels: self.channels)
+        }
+
+    }
+    
+    open func reloadMcnChannels(withInfluenceId id: String) {
+        channelListCollection?.dispose()
+        channelListCollection = createGroupChannelListCollection()
+        channelListCollection?.loadMore { [weak self] channels, error in
+            guard let self = self else { return }
 
             if let error = error {
                 self.delegate?.groupChannelListUseCase(self, didReceiveError: error)
@@ -41,11 +57,12 @@ open class GroupChannelListUseCase: NSObject {
 
             guard let channels = channels else { return }
             self.channels = channels
-            self.delegate?.groupChannelListUseCase(self, didUpdateChannels: self.channels)
+            // mcn 필터를 적용
+            self.channelMcnFilter(self.channelListCollection!, context: ChannelContext(source: .channelRefresh), id: id)
         }
-
     }
 
+    
     open func loadNextPage() {
         guard let channelListCollection = channelListCollection,
               channelListCollection.hasNext else { return }
@@ -113,6 +130,19 @@ extension GroupChannelListUseCase: GroupChannelCollectionDelegate {
             deletedChannelURLs.contains($0.channelURL) == false
         }
 
+        self.delegate?.groupChannelListUseCase(self, didUpdateChannels: self.channels)
+    }
+
+    public func channelMcnFilter(_ collection: GroupChannelCollection, context: ChannelContext, id: String) {
+        self.channels = self.channels.filter { channel in
+            let cachedMetaData = channel.getCachedMetaData()
+            if let influenceId = cachedMetaData["influence_id"] {
+                return influenceId == id
+            }
+            return false
+        }
+
+        // 필터링된 채널을 delegate로 업데이트
         self.delegate?.groupChannelListUseCase(self, didUpdateChannels: self.channels)
     }
 

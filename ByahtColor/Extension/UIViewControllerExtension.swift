@@ -138,4 +138,26 @@ extension UIViewController {
         presentAlert(title: "Error", message: error.localizedDescription)
     }
 
+    func getLanguageNumber() -> String {
+        let currentLanguage = Locale.current.languageCode
+        
+        switch currentLanguage {
+        case "ko": // 한국어
+            return "0"
+        case "ja": // 일본어
+            return "1"
+        case "th": // 태국어
+            return "2"
+        case "tl": // 필리핀어 (타갈로그어)
+            return "3"
+        case "vi": // 베트남어
+            return "4"
+        case "en-SG": // 싱가포르 영어
+            return "5"
+        case "en": // 영어
+            return "6"
+        default: // 그 외 다른 언어의 경우
+            return "6" // 영어로 기본 설정
+        }
+    }
 }

@@ -13,20 +13,27 @@ import Combine
 import AuthenticationServices
 
 class UserLoginVC: UIViewController {
-    private let appleButton: UIButton = {
-        let button = UIButton()
-        button.backgroundColor = .black
-        button.setTitle("Continue with Apple", for: .normal)
-        button.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 16)
-        button.setTitleColor(.white, for: .normal)
-        button.layer.cornerRadius = 4
-        button.clipsToBounds = true
-        return button
+    private let appleButton: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "apple")
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.isUserInteractionEnabled = true  // 제스처 인식을 위해 필요
+        return imageView
+    }()
+
+    private let facebookButton: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "facebook")
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.isUserInteractionEnabled = true  // 제스처 인식을 위해 필요
+        return imageView
     }()
 
     lazy private var templetView: UIImageView = {
         let image = UIImageView(image: UIImage(named: "image_login"))
-        image.contentMode = .scaleAspectFill
+        image.contentMode = .scaleAspectFit
         return image
     }()
 
@@ -36,7 +43,7 @@ class UserLoginVC: UIViewController {
     private let backgroundImage = UIImage(named: "logo")
     private let imageView = UIImageView()
     private let textLabel = UILabel()
-    private let facebookButton = UIButton()
+    
     private let scrollView = UIScrollView()
     private let contentView = UIView()
 
@@ -88,7 +95,7 @@ class UserLoginVC: UIViewController {
                         self?.navigationController?.pushViewController(vc, animated: true)
 
                     case .failure(let error):
-                        print("데이터 없음")
+                        print(error)
                         self?.signUpInfluence()
                     }
                 }
@@ -134,12 +141,6 @@ class UserLoginVC: UIViewController {
     // 이미지 뷰 설정
     private func configureImageView() {
         contentView.addSubview(templetView)
-
-        templetView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(16)
-            $0.height.equalTo(264)
-            $0.leading.trailing.equalToSuperview().inset(20)
-        }
     }
 
     // 텍스트 라벨 설정
@@ -153,13 +154,13 @@ class UserLoginVC: UIViewController {
     // 로그인 버튼 구성
     private func configureLoginButtons() {
 
-        facebookButton.setTitle("Continue with Facebook", for: .normal)
-        facebookButton.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 16)
-        facebookButton.setTitleColor(.white, for: .normal)
-        facebookButton.backgroundColor = UIColor(hex: "#3875E9")
-        facebookButton.layer.cornerRadius = 4
-        facebookButton.addTarget(self, action: #selector(self.facebookLogin(_:)), for: .touchUpInside)
-        appleButton.addTarget(self, action: #selector(self.appleLogin), for: .touchUpInside)
+        // Facebook 이미지에 탭 제스처 추가
+        let facebookTapGesture = UITapGestureRecognizer(target: self, action: #selector(facebookLogin))
+        facebookButton.addGestureRecognizer(facebookTapGesture)
+        
+        // Apple 이미지에 탭 제스처 추가
+        let appleTapGesture = UITapGestureRecognizer(target: self, action: #selector(appleLogin))
+        appleButton.addGestureRecognizer(appleTapGesture)
         contentView.addSubview(facebookButton)
         contentView.addSubview(appleButton)
 
@@ -177,31 +178,28 @@ class UserLoginVC: UIViewController {
             $0.height.greaterThanOrEqualTo(scrollView).priority(.low)
         }
 
-        templetView.snp.makeConstraints {
-            $0.top.equalToSuperview().offset(16)
-            $0.leading.trailing.equalToSuperview().inset(20)
-            $0.height.equalTo(templetView.snp.width).multipliedBy(264.0 / 350.0)
-        }
-
         textLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(templetView.snp.bottom).offset(16)
-            make.height.equalTo(60)
+            make.bottom.equalTo(facebookButton.snp.top).offset(-24)
         }
 
         facebookButton.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(20)
-            $0.top.equalTo(textLabel.snp.bottom).offset(16)
-            $0.height.equalTo(52)
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalTo(view.snp.centerX).offset(-9)
+            $0.width.height.equalTo(52)
         }
 
         appleButton.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(20)
-            $0.top.equalTo(facebookButton.snp.bottom).offset(16)
-            $0.height.equalTo(52)
-            $0.bottom.equalToSuperview().offset(-200)
+            $0.centerY.equalToSuperview()
+            $0.leading.equalTo(view.snp.centerX).offset(9)
+            $0.width.height.equalTo(52)
         }
-
+        
+        templetView.snp.makeConstraints {
+            $0.width.equalToSuperview().multipliedBy(0.5)
+            $0.centerX.equalTo(view.snp.centerX)
+            $0.centerY.equalToSuperview().multipliedBy(0.3)
+        }
     }
 
 }

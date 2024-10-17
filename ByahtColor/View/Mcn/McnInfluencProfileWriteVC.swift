@@ -1,8 +1,8 @@
 //
-//  InfluenceProfileWriteVC.swift
+//  McnInfluencProfileWriteVC.swift
 //  ByahtColor
 //
-//  Created by jaem on 6/20/24.
+//  Created by jaem on 9/25/24.
 //
 
 import SnapKit
@@ -13,14 +13,16 @@ import AVFoundation
 import FirebaseMessaging
 import Kingfisher
 
-class InfluenceProfileWriteVC: UIViewController {
+class McnInfluencProfileWriteVC: UIViewController {
     private let topView = UIView()
     private let scrollView = UIScrollView()
     private let contentView = UIView()
     private let titleLabel = UILabel()
     private let uploadButton = UIButton()
+    private let closeButton = UIButton()
     private let thumbnailView = UIView()
     private let infoView = UIView()
+    private let nameView = UIView()
     private let experienceView = UIView()
     private let payView = UIView()
     private let targetView = UIView()
@@ -28,7 +30,13 @@ class InfluenceProfileWriteVC: UIViewController {
     private let buttonPicture = UIButton()
     private let horizonScrollView = UIScrollView()
     private let et_intro = UITextView()
-    let et_code = UITextField()
+    private let et_code = UITextField()
+    private let nameLabel = UILabel()
+    private let tf_name = {
+        let tf = UITextField()
+        
+        return tf
+    }()
     private var etIntroHeightConstraint: Constraint?
     private var experienceStackView: UIStackView = {
         let stackView = UIStackView()
@@ -84,7 +92,7 @@ class InfluenceProfileWriteVC: UIViewController {
         label.textColor = .black
         return label
     }()
-
+    
     private let subtitle2: UILabel = {
         let label = UILabel()
         label.text = "influence_profile_write_ages".localized
@@ -92,7 +100,7 @@ class InfluenceProfileWriteVC: UIViewController {
         label.textColor = .black
         return label
     }()
-
+    
     private let subtitle3: UILabel = {
         let label = UILabel()
         label.text = "influence_profile_write_gender".localized
@@ -100,7 +108,7 @@ class InfluenceProfileWriteVC: UIViewController {
         label.textColor = .black
         return label
     }()
-
+    
     private let subtitle4: UILabel = {
         let label = UILabel()
         label.text = "influence_profile_write_nation".localized
@@ -108,7 +116,7 @@ class InfluenceProfileWriteVC: UIViewController {
         label.textColor = .black
         return label
     }()
-
+    
     private var targetStackView = UIStackView()
     private var experienceArray: [Experience] = []
     private var payArray: [Pay] = []
@@ -122,6 +130,7 @@ class InfluenceProfileWriteVC: UIViewController {
     private var selectedGender: [String] = []
     private var selectedNation: [String] = []
     private let viewModel = InfluenceViewModel()
+    private let mcnViewModel = McnViewModel()
     private var genderView = UIView()
     private var categoryView = UIView()
     private var ageView = UIView()
@@ -133,36 +142,38 @@ class InfluenceProfileWriteVC: UIViewController {
     private var update = false
     private var floatingPanel: FloatingPanelController!
     private var codeView = UIView()
-    private var getImagePath : String?
-
+    private var imageUrl : String?
+    var influenceId : String?
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
+        
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleNotification), name: Notification.Name("ProfileUpdateNotification"), object: nil)
     }
-
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-
+        
         // 화면 이동 이전에 네비게이션 바를 다시 표시
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: Notification.Name("ProfileUpdateNotification"), object: nil)
     }
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupProfile()
         setupGesture()
         setupActivityIndicator()
+        
+        codeView.isHidden = true // 불필요시 주석 처리
     }
-
+    
     private func setupActivityIndicator() {
         // 인디케이터 설정 및 뷰에 추가
         activityIndicator.center = view.center
@@ -172,9 +183,10 @@ class InfluenceProfileWriteVC: UIViewController {
             $0.edges.equalToSuperview()
         }
     }
-
+    
     private func setupProfile() {
-        if let id = User.shared.id {
+        print(influenceId)
+        if let id = influenceId {
             viewModel.getProfileWrite(id: id) { [weak self] result in
                 DispatchQueue.main.async {
                     switch result {
@@ -189,15 +201,13 @@ class InfluenceProfileWriteVC: UIViewController {
                         self?.selectedCategory = data.category?.components(separatedBy: ",") ?? []
                         self?.selectedNation = data.nation?.components(separatedBy: ",") ?? []
                         self?.et_code.text = data.code
+                        self?.tf_name.text = data.name
                         
                         if let path = data.video {
-                            print(path)
-                            self?.getImagePath = path
                             // 비디오 경로가 있을 때
                             if path.contains(".m3u8") {
                                 DispatchQueue.global(qos: .background).async { [weak self] in
                                     // 비디오 썸네일 경로 (imagePath)로부터 이미지 다운로드
-                                    
                                     if let imageUrlString = data.imagePath {
                                         // 메인 스레드에서 UI 업데이트
                                         self?.loadImage(from: imageUrlString)
@@ -208,38 +218,38 @@ class InfluenceProfileWriteVC: UIViewController {
                                 }
                             }
                             else if path.contains(".jpg") {
-                                print("path",path)
-                                self?.getImagePath = path
                                 self?.loadImage(from:path)
+                                self?.imageUrl = path
                             }
                         }
-
-
-                        self?.setupUI()
-                        self?.setupConstraints()
+                        
                     case .failure(let error):
                         print("통신 에러 : \(error)")
-                        self?.setupUI()
-                        self?.setupConstraints()
                     }
+                    self?.setupUI()
+                    self?.setupConstraints()
                 }
+                
             }
+        }else{
+            setupUI()
+            setupConstraints()
         }
     }
-
+    
     private func loadImage(from urlString: String) {
         guard let url = URL(string: urlString) else {
             print("Invalid URL: \(urlString)")
             return
         }
-
+        
         URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
             // 네트워크 에러 확인
             if let error = error {
                 print("Failed to load image with error: \(error.localizedDescription)")
                 return
             }
-
+            
             // HTTP 응답 상태 코드 확인
             if let httpResponse = response as? HTTPURLResponse {
                 print("HTTP Status Code: \(httpResponse.statusCode)")
@@ -248,23 +258,23 @@ class InfluenceProfileWriteVC: UIViewController {
                     return
                 }
             }
-
+            
             // 데이터 확인 및 이미지 변환
             guard let data = data, let downloadedImage = UIImage(data: data) else {
                 print("Failed to load image: Data is nil or not convertible to UIImage.")
                 return
             }
-
+            
             // 이미지 성공적으로 로드 -> UI 업데이트는 메인 스레드에서 처리
             DispatchQueue.main.async {
                 self?.selectedImages.append(downloadedImage)
                 print("selectedImages : ", self?.selectedImages.count ?? 0)
                 self?.resetHorizonScrollView()
             }
-
+            
         }.resume()
     }
-
+    
     
     private func setupUI() {
         setTopView()
@@ -272,23 +282,24 @@ class InfluenceProfileWriteVC: UIViewController {
         setupThumbnailView()
         setupHorizonScrollView()
         resetHorizonScrollView()
+        setupNameView()
         setupInfoView()
         setupExperienceView()
         setupPayView()
         setupReportView()
         setupSnsView()
-
+        
         // 추천이벤트 종료 시 주석처리 후 constraint조절
         setupCodeView()
     }
-
+    
     // 추천인코드
     private func setupCodeView() {
         contentView.addSubview(codeView)
         let label = UILabel()
         label.text = "influence_profile_write_code".localized
         label.font = UIFont(name: "Pretendard-SemiBold", size: 16)
-
+        
         et_code.layer.cornerRadius = 8
         et_code.font = UIFont(name: "Pretendard-Medium", size: 14)
         et_code.layer.borderColor = UIColor(hex: "#D3D4DA").cgColor
@@ -296,12 +307,12 @@ class InfluenceProfileWriteVC: UIViewController {
         et_code.leftPadding()
         codeView.addSubview(label)
         codeView.addSubview(et_code)
-
+        
         label.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.leading.equalToSuperview()
         }
-
+        
         et_code.snp.makeConstraints {
             $0.top.equalTo(label.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview()
@@ -309,7 +320,7 @@ class InfluenceProfileWriteVC: UIViewController {
             $0.bottom.equalToSuperview()
         }
     }
-
+    
     // 이미지 추가뷰
     private func setupThumbnailView() {
         contentView.addSubview(thumbnailView)
@@ -317,62 +328,62 @@ class InfluenceProfileWriteVC: UIViewController {
         thumblabel1.text = "influence_profile_write_thumbnail".localized
         thumblabel1.font = UIFont(name: "Pretendard-SemiBold", size: 16)
         thumblabel1.appendRedStar()
-
+        
         let thumblabel2 = UILabel()
         thumblabel2.text = "influence_profile_write_thumbnail2".localized
         thumblabel2.font = UIFont(name: "Pretendard-Regular", size: 14)
-
+        
         thumbnailView.addSubview(thumblabel1)
         thumbnailView.addSubview(thumblabel2)
         thumblabel1.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.leading.trailing.equalToSuperview()
         }
-
+        
         thumblabel2.snp.makeConstraints {
             $0.top.equalTo(thumblabel1.snp.bottom)
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
         }
-
+        
     }
-
+    
     private func setupHorizonScrollView() {
         horizonScrollView.delegate = self
         horizonScrollView.showsHorizontalScrollIndicator = true
         horizonScrollView.isPagingEnabled = false
         contentView.addSubview(horizonScrollView)
-
+        
         buttonPicture.backgroundColor = UIColor(hex: "#F7F7F7")
         buttonPicture.setImage(UIImage(named: "icon_plus"), for: .normal)
         buttonPicture.layer.cornerRadius = 8
         buttonPicture.imageView?.contentMode = .scaleAspectFill
         buttonPicture.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-
+        
         // 버튼의 이미지가 가운데에 위치하도록 설정
         buttonPicture.contentHorizontalAlignment = .center
         buttonPicture.contentVerticalAlignment = .center
         horizonScrollView.addSubview(buttonPicture)
-
+        
         buttonPicture.snp.makeConstraints { make in
             make.top.equalToSuperview()
             make.leading.equalToSuperview().offset(20)
             make.width.equalTo(218)
             make.height.equalTo(294)
         }
-
+        
     }
-
+    
     private func resetHorizonScrollView() {
         horizonScrollView.subviews.forEach { subview in
             if subview is UIImageView {
                 subview.removeFromSuperview()
             }
         }
-
+        
         var totalWidth: CGFloat = 20 // 초기 여백
         let buttonWidth = CGFloat(218)
-
+        
         // buttonPicture를 항상 왼쪽에 고정
         buttonPicture.snp.remakeConstraints { make in
             make.top.equalToSuperview()
@@ -380,9 +391,9 @@ class InfluenceProfileWriteVC: UIViewController {
             make.width.equalTo(buttonWidth)
             make.height.equalTo(294)
         }
-
+        
         totalWidth += buttonWidth + 20 // buttonPicture의 너비와 여백을 더함
-
+        
         for (index, image) in selectedImages.enumerated() {
             let imageView = UIImageView(image: image)
             imageView.tag = selectedImages.count - 1 - index
@@ -391,17 +402,17 @@ class InfluenceProfileWriteVC: UIViewController {
             imageView.clipsToBounds = true
             imageView.isUserInteractionEnabled = true
             horizonScrollView.addSubview(imageView)
-
+            
             imageView.snp.makeConstraints { make in
                 make.top.equalToSuperview()
                 make.width.equalTo(buttonWidth)
                 make.height.equalTo(294)
                 make.leading.equalToSuperview().offset(totalWidth)
             }
-
+            
             // 이미지 너비와 여백을 더함
             totalWidth += buttonWidth + 20
-
+            
             // 지우기 버튼
             let closeButton = UIButton()
             closeButton.setImage(UIImage(named: "icon_close"), for: .normal)
@@ -414,12 +425,12 @@ class InfluenceProfileWriteVC: UIViewController {
                 make.trailing.equalToSuperview().offset(-10)
             }
         }
-
+        
         // 스크롤뷰의 contentSize 업데이트
         horizonScrollView.contentSize = CGSize(width: totalWidth, height: 294)
-
+        
     }
-
+    
     @objc private func buttonTapped() {
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
@@ -427,7 +438,37 @@ class InfluenceProfileWriteVC: UIViewController {
         imagePickerController.sourceType = .photoLibrary // 또는 .camera
         present(imagePickerController, animated: true)
     }
-
+    
+    private func setupNameView(){
+        contentView.addSubview(nameView)
+        nameView.isUserInteractionEnabled = true
+        
+        let label = UILabel()
+        label.text = "이름"
+        label.font = UIFont(name: "Pretendard-SemiBold", size: 16)
+        label.appendRedStar()
+        
+        tf_name.layer.cornerRadius = 8
+        tf_name.font = UIFont(name: "Pretendard-Medium", size: 14)
+        tf_name.layer.borderColor = UIColor(hex: "#D3D4DA").cgColor
+        tf_name.layer.borderWidth = 1
+        tf_name.leftPadding()
+        tf_name.placeholder = "mcn_mypage_write_name2".localized
+        
+        nameView.addSubview(label)
+        nameView.addSubview(tf_name)
+        
+        label.snp.makeConstraints {
+            $0.top.leading.equalToSuperview()
+        }
+        
+        tf_name.snp.makeConstraints {
+            $0.top.equalTo(label.snp.bottom).offset(8)
+            $0.leading.trailing.bottom.equalToSuperview()
+            self.etIntroHeightConstraint = $0.height.equalTo(40).constraint
+        }
+    }
+    
     private func setupInfoView() {
         contentView.addSubview(infoView)
         infoView.isUserInteractionEnabled = true
@@ -436,43 +477,45 @@ class InfluenceProfileWriteVC: UIViewController {
         label.text = "influence_profile_write_intro".localized
         label.font = UIFont(name: "Pretendard-SemiBold", size: 16)
         label.appendRedStar()
-
+        
         let label2 = UILabel()
         label2.text = "influence_profile_write_intro2".localized
         label2.font = UIFont(name: "Pretendard-Regular", size: 14)
-
+        
         et_intro.layer.cornerRadius = 8
         et_intro.font = UIFont(name: "Pretendard-Medium", size: 14)
         et_intro.layer.borderColor = UIColor(hex: "#D3D4DA").cgColor
         et_intro.layer.borderWidth = 1
+        et_intro.textContainerInset = UIEdgeInsets(top: 8, left: 10, bottom: -8, right: 10)
 
+        
         infoView.addSubview(label)
         infoView.addSubview(label2)
         infoView.addSubview(et_intro)
-
+        
         label.snp.makeConstraints {
             $0.top.leading.equalToSuperview()
         }
-
+        
         label2.snp.makeConstraints {
             $0.top.equalTo(label.snp.bottom)
             $0.leading.equalToSuperview()
         }
-
+        
         et_intro.snp.makeConstraints {
             $0.top.equalTo(label2.snp.bottom).offset(8)
             $0.leading.trailing.bottom.equalToSuperview()
             self.etIntroHeightConstraint = $0.height.equalTo(40).constraint
         }
     }
-
+    
     private func setupExperienceView() {
         contentView.addSubview(experienceView)
-
+        
         let label = UILabel()
         label.text = "influence_profile_write_experience".localized
         label.font = UIFont(name: "Pretendard-SemiBold", size: 16)
-
+        
         let button = UIButton()
         button.setTitle("influence_profile_write_add".localized, for: .normal)
         button.setTitleColor(UIColor(hex: "#4E505B"), for: .normal)
@@ -482,48 +525,48 @@ class InfluenceProfileWriteVC: UIViewController {
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor(hex: "#D3D4DA").cgColor
         button.addTarget(self, action: #selector(showFilter), for: .touchUpInside)
-
+        
         reloadExperienceStackView()
-
+        
         let stackContainerView = UIView()
         stackContainerView.layer.cornerRadius = 8
         stackContainerView.backgroundColor = UIColor(hex: "#F4F5F8")
-
+        
         stackContainerView.addSubview(experienceStackView)
-
+        
         experienceView.addSubview(label)
         experienceView.addSubview(stackContainerView)
         experienceView.addSubview(button)
-
+        
         label.snp.makeConstraints {
             $0.top.leading.equalToSuperview()
         }
-
+        
         stackContainerView.snp.makeConstraints {
             $0.top.equalTo(label.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview()
         }
-
+        
         experienceStackView.snp.makeConstraints {
             $0.edges.equalToSuperview().inset(20)
         }
-
+        
         button.snp.makeConstraints {
             $0.top.equalTo(stackContainerView.snp.bottom).offset(8)
             $0.leading.bottom.trailing.equalToSuperview()
             $0.height.equalTo(32)
         }
-
+        
     }
-
+    
     private func setupPayView() {
         contentView.addSubview(payView)
-
+        
         let label = UILabel()
         label.text = "influence_profile_write_pay".localized
         label.font = UIFont(name: "Pretendard-SemiBold", size: 16)
         label.appendRedStar()
-
+        
         let button = UIButton()
         button.setTitle("influence_profile_write_add".localized, for: .normal)
         button.setTitleColor(UIColor(hex: "#4E505B"), for: .normal)
@@ -533,38 +576,38 @@ class InfluenceProfileWriteVC: UIViewController {
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor(hex: "#D3D4DA").cgColor
         button.addTarget(self, action: #selector(showFilter2), for: .touchUpInside)
-
+        
         reloadPayStackView()
-
+        
         let stackContainerView = UIView()
         stackContainerView.layer.cornerRadius = 8
         stackContainerView.backgroundColor = UIColor(hex: "#F4F5F8")
-
+        
         stackContainerView.addSubview(payStackView)
         payView.addSubview(label)
         payView.addSubview(stackContainerView)
         payView.addSubview(button)
-
+        
         label.snp.makeConstraints {
             $0.top.leading.equalToSuperview()
         }
-
+        
         stackContainerView.snp.makeConstraints {
             $0.top.equalTo(label.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview()
         }
-
+        
         payStackView.snp.makeConstraints {
             $0.edges.equalToSuperview().inset(20)
         }
-
+        
         button.snp.makeConstraints {
             $0.top.equalTo(stackContainerView.snp.bottom).offset(8)
             $0.leading.trailing.bottom.equalToSuperview()
             $0.height.equalTo(32)
         }
     }
-
+    
     private func setupReportView() {
         contentView.addSubview(reportView)
         makeTargetStackView()
@@ -572,16 +615,16 @@ class InfluenceProfileWriteVC: UIViewController {
         contentView.addSubview(targetLabel2)
         reportView.addSubview(targetView)
     }
-
+    
     // SNS
     private func setupSnsView() {
         contentView.addSubview(snsView)
-
+        
         let label = UILabel()
         label.text = "influence_profile_write_sns".localized
         label.font = UIFont(name: "Pretendard-SemiBold", size: 16)
         label.appendRedStar()
-
+        
         let button = UIButton()
         button.setTitle("influence_profile_write_add".localized, for: .normal)
         button.setTitleColor(UIColor(hex: "#4E505B"), for: .normal)
@@ -591,50 +634,57 @@ class InfluenceProfileWriteVC: UIViewController {
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor(hex: "#D3D4DA").cgColor
         button.addTarget(self, action: #selector(showFilter3), for: .touchUpInside)
-
+        
         reloadSnsStackView()
-
+        
         let stackContainerView = UIView()
         stackContainerView.layer.cornerRadius = 8
         stackContainerView.backgroundColor = UIColor(hex: "#F4F5F8")
-
+        
         stackContainerView.addSubview(snsStackView)
         snsView.addSubview(label)
         snsView.addSubview(stackContainerView)
         snsView.addSubview(button)
-
+        
         label.snp.makeConstraints {
             $0.top.leading.equalToSuperview()
         }
-
+        
         stackContainerView.snp.makeConstraints {
             $0.top.equalTo(label.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview()
         }
-
+        
         snsStackView.snp.makeConstraints {
             $0.edges.equalToSuperview().inset(20)
         }
-
+        
         button.snp.makeConstraints {
             $0.top.equalTo(stackContainerView.snp.bottom).offset(8)
             $0.leading.trailing.bottom.equalToSuperview()
             $0.height.equalTo(32)
         }
     }
-
+    
     private func setupScrollView() {
         view.addSubview(scrollView)
         scrollView.isUserInteractionEnabled = true
         scrollView.addSubview(contentView)
     }
-
+    
+    @objc private func backButtonTapped(){
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     private func setTopView() {
         topView.isUserInteractionEnabled = true
-
+        
         titleLabel.text = "Profile"
         titleLabel.font = UIFont(name: "Pretendard-SemiBold", size: 16)
-
+        
+        closeButton.setImage(UIImage(named: "back_icon"), for: .normal)
+        closeButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        
         uploadButton.setTitle("Upload", for: .normal)
         uploadButton.titleLabel?.font = UIFont(name: "Pretendard-SemiBold", size: 12)
         uploadButton.backgroundColor = .black
@@ -644,12 +694,19 @@ class InfluenceProfileWriteVC: UIViewController {
         view.addSubview(topView)
         topView.addSubview(titleLabel)
         topView.addSubview(uploadButton)
-
+        topView.addSubview(closeButton)
+        
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(20)
             make.center.equalToSuperview()
         }
-
+        
+        closeButton.snp.makeConstraints{
+            $0.leading.equalToSuperview().offset(20)
+            $0.centerY.equalTo(titleLabel.snp.centerY)
+            $0.width.height.equalTo(24)
+        }
+        
         uploadButton.snp.makeConstraints { make in
             make.centerY.equalTo(titleLabel.snp.centerY)
             make.height.equalTo(24)
@@ -657,10 +714,10 @@ class InfluenceProfileWriteVC: UIViewController {
             make.trailing.equalToSuperview().offset(-20)
         }
     }
-
+    
     // 경력
     private func reloadExperienceStackView() {
-
+        
         clearStackView(type: 1)
         experienceArray.enumerated().forEach { (_, experience) in
             let facebookIcon = UIImageView(image: UIImage(named: "facebook"))
@@ -686,42 +743,42 @@ class InfluenceProfileWriteVC: UIViewController {
             } else {
                 icon = youtubeIcon
             }
-
+            
             let lbl = UILabel()
             lbl.text = experience.contents
             lbl.font = UIFont(name: "Pretendard-Medium", size: 16)
-
+            
             let lbl2 = UILabel()
             lbl2.text = "\(experience.business ?? "")"
             lbl2.font = UIFont(name: "Pretendard-Regular", size: 12)
             lbl2.textColor = UIColor(hex: "#4E505B")
-
+            
             let closeButton = UIButton()
             closeButton.setImage(UIImage(named: "back_icon"), for: .normal)
             closeButton.addTarget(self, action: #selector(experienceDeleteTapped), for: .touchUpInside)
-
+            
             view.addSubview(icon)
             view.addSubview(closeButton)
             view.addSubview(lbl)
             view.addSubview(lbl2)
-
+            
             icon.snp.makeConstraints {
                 $0.top.equalToSuperview()
                 $0.leading.equalToSuperview()
                 $0.width.height.equalTo(20)
             }
-
+            
             lbl.snp.makeConstraints {
                 $0.top.equalToSuperview()
                 $0.leading.equalTo(icon.snp.trailing).offset(4)
                 $0.trailing.equalToSuperview()
             }
-
+            
             lbl2.snp.makeConstraints {
                 $0.top.equalTo(icon.snp.bottom).offset(4)
                 $0.leading.trailing.equalToSuperview()
             }
-
+            
             closeButton.snp.makeConstraints { make in
                 make.width.height.equalTo(24)
                 make.centerY.equalToSuperview()
@@ -729,10 +786,10 @@ class InfluenceProfileWriteVC: UIViewController {
             }
         }
     }
-
+    
     // 페이
     private func reloadPayStackView() {
-
+        
         clearStackView(type: 2)
         payArray.enumerated().forEach { (index, pay) in
             let facebookIcon = UIImageView(image: UIImage(named: "facebook"))
@@ -746,7 +803,7 @@ class InfluenceProfileWriteVC: UIViewController {
                 $0.height.equalTo(42)
                 $0.leading.trailing.equalToSuperview()
             }
-
+            
             var icon: UIImageView
             if pay.sns == 0 {
                 icon = tiktokIcon
@@ -759,35 +816,35 @@ class InfluenceProfileWriteVC: UIViewController {
             } else {
                 icon = youtubeIcon
             }
-
+            
             let lbl = UILabel()
             lbl.text = pay.cash
             lbl.font = UIFont(name: "Pretendard-Medium", size: 16)
-
+            
             var negotiable = ""
             if pay.negotiable ?? false {
                 negotiable = "influence_profile_write_negotiable".localized
             } else {
                 negotiable = "influence_profile_write_non_negotiable".localized
             }
-
+            
             var type = ""
             if pay.type == 0 {
                 type = "influence_profile_write_video".localized
             } else {
                 type = "influence_profile_write_photo".localized
             }
-
+            
             let lbl2 = UILabel()
             lbl2.text = "\(negotiable) | \(type)"
             lbl2.font = UIFont(name: "Pretendard-Regular", size: 12)
             lbl2.textColor = UIColor(hex: "#4E505B")
-
+            
             let removeButton = UIButton()
             removeButton.setImage(UIImage(named: "back_icon"), for: .normal)
             removeButton.tag = index  // index 값을 tag로 설정
             removeButton.addTarget(self, action: #selector(payDeleteTapped), for: .touchUpInside)
-
+            
             view.addSubview(icon)
             view.addSubview(lbl)
             view.addSubview(lbl2)
@@ -797,18 +854,18 @@ class InfluenceProfileWriteVC: UIViewController {
                 $0.leading.equalToSuperview()
                 $0.width.height.equalTo(20)
             }
-
+            
             lbl.snp.makeConstraints {
                 $0.top.equalToSuperview()
                 $0.leading.equalTo(icon.snp.trailing).offset(4)
                 $0.trailing.equalToSuperview()
             }
-
+            
             lbl2.snp.makeConstraints {
                 $0.top.equalTo(icon.snp.bottom).offset(4)
                 $0.leading.trailing.equalToSuperview()
             }
-
+            
             removeButton.snp.makeConstraints {
                 $0.centerY.equalTo(view.snp.centerY)
                 $0.width.height.equalTo(16)
@@ -816,12 +873,12 @@ class InfluenceProfileWriteVC: UIViewController {
             }
         }
     }
-
+    
     // SNS
     private func reloadSnsStackView() {
-
+        
         clearStackView(type: 3)
-
+        
         snsArray.enumerated().forEach { (index, sns) in
             let facebookIcon = UIImageView(image: UIImage(named: "facebook"))
             let InstagramIcon = UIImageView(image: UIImage(named: "instagram"))
@@ -848,7 +905,7 @@ class InfluenceProfileWriteVC: UIViewController {
             } else {
                 icon = tiktokIcon
             }
-
+            
             let lbl = UILabel()
             lbl.text = sns.link
             lbl.font = UIFont(name: "Pretendard-Medium", size: 16)
@@ -857,45 +914,45 @@ class InfluenceProfileWriteVC: UIViewController {
             lbl.layer.cornerRadius = 4
             lbl.layer.borderColor = UIColor(hex: "#D3D4DA").cgColor
             lbl.layer.borderWidth = 1
-
+            
             let removeButton = UIButton()
             removeButton.setImage(UIImage(named: "back_icon"), for: .normal)
             removeButton.tag = index  // index 값을 tag로 설정
             removeButton.addTarget(self, action: #selector(snsDeleteTapped), for: .touchUpInside)
-
+            
             view.addSubview(icon)
             view.addSubview(lbl)
             view.addSubview(removeButton)
-
+            
             icon.snp.makeConstraints {
                 $0.centerY.equalTo(lbl.snp.centerY)
                 $0.leading.equalToSuperview()
                 $0.width.height.equalTo(20)
             }
-
+            
             lbl.snp.makeConstraints {
                 $0.top.equalToSuperview()
                 $0.leading.equalTo(icon.snp.trailing).offset(4)
                 $0.width.equalTo(228)
                 $0.height.equalTo(28)
             }
-
+            
             removeButton.snp.makeConstraints {
                 $0.centerY.equalTo(lbl.snp.centerY)
                 $0.width.height.equalTo(16)
                 $0.trailing.equalToSuperview()
             }
         }
-
+        
     }
-
+    
     // target
     private func makeTargetStackView() {
         categoryView = createCategoryView(titles: Globals.shared.categories, type: 0, selected: selectedCategory)
         ageView = createCategoryView(titles: Globals.shared.ages, type: 1, selected: selectedAge)
         genderView = createCategoryView(titles: Globals.shared.genders, type: 2, selected: selectedGender)
         nationView = createCategoryView(titles: Globals.shared.nations, type: 3, selected: selectedNation)
-
+        
         targetView.addSubview(subtitle1)
         targetView.addSubview(subtitle2)
         targetView.addSubview(subtitle3)
@@ -904,53 +961,53 @@ class InfluenceProfileWriteVC: UIViewController {
         targetView.addSubview(ageView)
         targetView.addSubview(genderView)
         targetView.addSubview(nationView)
-
+        
         subtitle1.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.leading.equalToSuperview()
             $0.height.equalTo(24)
         }
-
+        
         categoryView.snp.makeConstraints {
             $0.top.equalTo(subtitle1.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview()
         }
-
+        
         subtitle2.snp.makeConstraints {
             $0.top.equalTo(categoryView.snp.bottom).offset(16)
             $0.leading.equalToSuperview()
             $0.height.equalTo(24)
         }
-
+        
         ageView.snp.makeConstraints {
             $0.top.equalTo(subtitle2.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview()
         }
-
+        
         subtitle3.snp.makeConstraints {
             $0.top.equalTo(ageView.snp.bottom).offset(16)
             $0.leading.equalToSuperview()
             $0.height.equalTo(24)
         }
-
+        
         genderView.snp.makeConstraints {
             $0.top.equalTo(subtitle3.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview()
         }
-
+        
         subtitle4.snp.makeConstraints {
             $0.top.equalTo(genderView.snp.bottom).offset(16)
             $0.leading.equalToSuperview()
             $0.height.equalTo(24)
         }
-
+        
         nationView.snp.makeConstraints {
             $0.top.equalTo(subtitle4.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview()
         }
     }
-
+    
     private func createCategoryView(titles: [String], type: Int, selected: [String]) -> UIView {
         let view = UIView()
         let maxWidth = UIScreen.main.bounds.width - 80
@@ -991,23 +1048,23 @@ class InfluenceProfileWriteVC: UIViewController {
                 nationButtons.append(button)
             }
             let buttonWidth: CGFloat = max(48, (title as NSString).size(withAttributes: [.font: UIFont(name: "Pretendard-Regular", size: 14)!]).width + 16) // 16 for padding
-
+            
             if currentRowWidth + buttonWidth + 4 > maxWidth { // 4 for spacing
                 view.addSubview(currentRowView)
-
+                
                 currentRowView.snp.makeConstraints { make in
                     make.top.equalTo(view).offset(rowIndex * 36) // Adjust the top offset for each row
                     make.left.equalTo(view)
                     make.right.equalTo(view)
                     make.height.equalTo(36)
-
+                    
                 }
-
+                
                 currentRowView = UIView()
                 currentRowWidth = 0
                 rowIndex += 1
             }
-
+            
             currentRowView.addSubview(button)
             button.snp.makeConstraints { make in
                 make.left.equalTo(currentRowView).offset(currentRowWidth)
@@ -1015,10 +1072,10 @@ class InfluenceProfileWriteVC: UIViewController {
                 make.width.equalTo(buttonWidth)
                 make.height.equalTo(32)
             }
-
+            
             currentRowWidth += buttonWidth + 4
         }
-
+        
         if !currentRowView.subviews.isEmpty {
             view.addSubview(currentRowView)
             currentRowView.snp.makeConstraints { make in
@@ -1029,49 +1086,56 @@ class InfluenceProfileWriteVC: UIViewController {
                 make.bottom.equalToSuperview()
             }
         }
-
+        
         return view
     }
-
+    
     // 업로드
     @objc private func uploadButtonTapped() {
         guard validateForm() else { return }
-        
-        activityIndicator.isHidden = false
+        print("업로드 ")
+        //activityIndicator.isHidden = false
         view.bringSubviewToFront(activityIndicator)
-        if let id = User.shared.id {
-            let category = selectedCategory.joined(separator: ",")
-            let gender = selectedGender.joined(separator: ",")
-            let age = selectedAge.joined(separator: ",")
-            let nation = selectedNation.joined(separator: ",")
-            let dto = InfluenceProfileDto(memberId: id, snsList: snsArray, payList: payArray, experienceList: experienceArray, age: age, category: category, gender: gender, intro: et_intro.text ?? "", name: nil, imagePath: nil, nation: nation, code: et_code.text ?? nil, video: nil)
-
-            if !update {
-                videoURL = nil
-                selectedImages = []
-            }
-            viewModel.updateProfile(dto: dto, images: selectedImages, video: videoURL, getProfile: getProfile) { [weak self] result in
-                DispatchQueue.main.async {
-                    switch result {
-                    case .success(let responseString):
-                        UserDefaults.standard.set(1, forKey: "home")
-                        print("완료 : \(responseString)")
-                        if let url = self?.getImagePath{
-                            ImageCache.default.removeImage(forKey: url) {
-                                // 캐시 삭제 후 추가 작업을 할 수 있습니다.
-                                print("캐시가 삭제되었습니다.")
-                            }
-                        }
-                        
-                    case .failure(let error):
-                        self?.view.showToast(message: error.localizedDescription)
-                        self?.navigationController?.popViewController(animated: true)
+        var memberDto : Member?
+        if let id = influenceId {
+            memberDto = Member(id: id, auth: 0, regi_date: nil)
+        }else{
+            influenceId = createInfluenceId()
+            memberDto = Member(id: influenceId ?? "", auth: 0, regi_date: nil)
+        }
+        let category = selectedCategory.joined(separator: ",")
+        let gender = selectedGender.joined(separator: ",")
+        let age = selectedAge.joined(separator: ",")
+        let nation = selectedNation.joined(separator: ",")
+        
+        if !update {
+            videoURL = nil
+            selectedImages = []
+        }
+        
+        let influenceProfileDto = InfluenceProfileDto(memberId: influenceId, snsList: snsArray, payList: payArray, experienceList: experienceArray, age: age, category: category, gender: gender, intro: et_intro.text ?? "", name: tf_name.text ?? "", imagePath: nil, nation: nation, code: et_code.text ?? nil, video: nil, mcnId: User.shared.id )
+        
+        let dto = McnInfluenceDto(member: memberDto!, influenceProfileDto: influenceProfileDto)
+        
+        mcnViewModel.updateProfile(dto: dto, images: selectedImages, video: videoURL, getProfile: getProfile) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let responseString):
+                    UserDefaults.standard.set(1, forKey: "home")
+                    if let url = self?.imageUrl {
+                        print(url)
+                        ImageCache.default.removeImage(forKey: url)
                     }
+                    
+                case .failure(let error):
+                    
+                    print("에러가 발생했습니다")
+                    print( "Error: \(error.localizedDescription)")
                 }
             }
         }
     }
-
+    
     @objc private func handleNotification(_ notification: Notification) {
         print("notification 실행")
         // 알림 수신 시 실행할 코드
@@ -1081,50 +1145,50 @@ class InfluenceProfileWriteVC: UIViewController {
     
     private func validateForm() -> Bool {
         // 각 필드의 유효성 검사
-        if et_intro.text.isEmpty || et_intro.text == "influence_profile_write_intro_hint".localized || et_intro.text.count > 80 {
+        if et_intro.text.isEmpty || (tf_name.text ?? "").isEmpty || et_intro.text == "influence_profile_write_intro_hint".localized || et_intro.text.count > 80 {
             showAlert(message: "influence_profile_write_message1".localized)
             return false
         }
-
+        
         if selectedImages.isEmpty {
             showAlert(message: "influence_profile_write_message2".localized)
             return false
         }
-
+        
         if payArray.isEmpty {
             showAlert(message: "influence_profile_write_message3".localized)
             return false
         }
-
+        
         if selectedCategory.isEmpty {
             showAlert(message: "influence_profile_write_message4".localized)
             return false
         }
-
+        
         if selectedAge.isEmpty {
             showAlert(message: "influence_profile_write_message5".localized)
             return false
         }
-
+        
         if selectedGender.isEmpty {
             showAlert(message: "influence_profile_write_message6".localized)
             return false
         }
-
+        
         if selectedNation.isEmpty {
             showAlert(message: "influence_profile_write_message7".localized)
             return false
         }
-
+        
         if snsArray.isEmpty {
             showAlert(message: "influence_profile_write_message8".localized)
             return false
         }
-
+        
         // 모든 유효성 검사를 통과하면 true를 반환
         return true
     }
-
+    
     private func clearStackView(type: Int) {
         switch type {
         case 1: for view in experienceStackView.arrangedSubviews {
@@ -1145,10 +1209,10 @@ class InfluenceProfileWriteVC: UIViewController {
         }
         }
     }
-
+    
     @objc private func categoryButtonTapped(_ sender: UIButton) {
         let selector = sender.tag.toString()
-
+        
         if sender.isSelected {
             // 버튼이 이미 선택된 상태라면, 선택 해제
             sender.isSelected = false
@@ -1165,10 +1229,10 @@ class InfluenceProfileWriteVC: UIViewController {
             selectedCategory.append(selector)
         }
     }
-
+    
     @objc private func ageButtonTapped(_ sender: UIButton) {
         let selector = sender.tag.toString()
-
+        
         if sender.isSelected {
             // 버튼이 이미 선택된 상태라면, 선택 해제
             sender.isSelected = false
@@ -1185,10 +1249,10 @@ class InfluenceProfileWriteVC: UIViewController {
             selectedAge.append(selector)
         }
     }
-
+    
     @objc private func genderButtonTapped(_ sender: UIButton) {
         let selector = sender.tag.toString()
-
+        
         if sender.isSelected {
             // 버튼이 이미 선택된 상태라면, 선택 해제
             sender.isSelected = false
@@ -1205,7 +1269,7 @@ class InfluenceProfileWriteVC: UIViewController {
             selectedGender.append(selector)
         }
     }
-
+    
     @objc private func nationButtonTapped(_ sender: UIButton) {
         let selector = String(sender.tag)
         selectedNation = []
@@ -1219,51 +1283,51 @@ class InfluenceProfileWriteVC: UIViewController {
         sender.setTitleColor(.white, for: .normal)
         selectedNation.append(selector)
     }
-
+    
     // 추가된 이미지 제거
     @objc private func removeImage(_ sender: UIButton) {
         guard let imageView = sender.superview as? UIImageView else { return }
-
+        
         // 이미지뷰 제거
         imageView.removeFromSuperview()
-
+        
         // 선택된 이미지 목록에서 해당 이미지 제거
         selectedImages.removeLast()
-
+        
         // 스크롤뷰에 남아있는 이미지뷰들의 레이아웃을 다시 조정
         resetHorizonScrollView()
     }
-
+    
     @objc private func experienceDeleteTapped(_ sender: UIButton) {
         experienceArray.remove(at: sender.tag)
         reloadExperienceStackView()
     }
-
+    
     @objc private func snsDeleteTapped(_ sender: UIButton) {
         snsArray.remove(at: sender.tag)
         reloadSnsStackView()
     }
-
+    
     @objc private func payDeleteTapped(_ sender: UIButton) {
         payArray.remove(at: sender.tag)
         reloadPayStackView()
     }
-
+    
     private func setupGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tapGesture)
     }
-
+    
     @objc private func keyboardWillShow(notification: NSNotification) {
         guard let userInfo = notification.userInfo,
               let keyboardFrame = userInfo[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect,
               let animationDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double else { return }
-
+        
         let keyboardHeight = keyboardFrame.height
         let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardHeight, right: 0)
         scrollView.contentInset = contentInsets
         scrollView.scrollIndicatorInsets = contentInsets
-
+        
         var visibleRect = view.frame
         visibleRect.size.height -= keyboardHeight
         if let activeTextView = UIResponder.currentFirstResponder as? UITextView {
@@ -1282,90 +1346,95 @@ class InfluenceProfileWriteVC: UIViewController {
             }
         }
     }
-
+    
     @objc private func keyboardWillHide(notification: NSNotification) {
         guard let userInfo = notification.userInfo,
               let animationDuration = userInfo[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double else { return }
-
+        
         UIView.animate(withDuration: animationDuration) {
             self.scrollView.contentInset = .zero
             self.scrollView.scrollIndicatorInsets = .zero
         }
-
+        
     }
-
+    
     private func setupConstraints() {
         topView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             make.width.equalToSuperview()
             make.height.equalTo(60)
         }
-
+        
         scrollView.snp.makeConstraints {
             $0.top.equalTo(topView.snp.bottom).offset(20)
             $0.leading.trailing.bottom.equalToSuperview()
         }
-
+        
         contentView.snp.makeConstraints {
             $0.edges.equalTo(scrollView)
             $0.width.equalTo(scrollView)
             $0.height.greaterThanOrEqualTo(scrollView).priority(.low)
         }
-
+        
         thumbnailView.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.leading.trailing.equalToSuperview().inset(20)
         }
-
+        
         horizonScrollView.snp.makeConstraints { make in
             make.top.equalTo(thumbnailView.snp.bottom).offset(10)
             make.leading.trailing.equalToSuperview()
             make.height.equalTo(294)
         }
-
-        infoView.snp.makeConstraints {
+        
+        nameView.snp.makeConstraints {
             $0.top.equalTo(horizonScrollView.snp.bottom).offset(32)
             $0.leading.trailing.equalToSuperview().inset(20)
         }
-
+        
+        infoView.snp.makeConstraints {
+            $0.top.equalTo(nameView.snp.bottom).offset(32)
+            $0.leading.trailing.equalToSuperview().inset(20)
+        }
+        
         experienceView.snp.makeConstraints {
             $0.top.equalTo(infoView.snp.bottom).offset(32)
             $0.leading.trailing.equalToSuperview().inset(20)
-
+            
         }
-
+        
         payView.snp.makeConstraints {
             $0.top.equalTo(experienceView.snp.bottom).offset(32)
             $0.leading.trailing.equalToSuperview().inset(20)
         }
-
+        
         targetLabel.snp.makeConstraints {
             $0.top.equalTo(payView.snp.bottom).offset(32)
             $0.leading.trailing.equalToSuperview().inset(20)
         }
-
+        
         targetLabel2.snp.makeConstraints {
             $0.top.equalTo(targetLabel.snp.bottom)
             $0.leading.trailing.equalToSuperview().inset(20)
         }
-
+        
         // 보고서
         reportView.snp.makeConstraints {
             $0.top.equalTo(targetLabel2.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview().inset(20)
         }
-
+        
         targetView.snp.makeConstraints {
             $0.top.equalToSuperview().offset(20)
             $0.leading.trailing.equalToSuperview().inset(20)
             $0.bottom.equalToSuperview().offset(-20)
         }
-
+        
         snsView.snp.makeConstraints {
             $0.top.equalTo(targetView.snp.bottom).offset(32)
             $0.leading.trailing.equalToSuperview().inset(20)
         }
-
+        
         codeView.snp.makeConstraints {
             $0.top.equalTo(snsView.snp.bottom).offset(32)
             $0.leading.trailing.equalToSuperview().inset(20)
@@ -1374,27 +1443,27 @@ class InfluenceProfileWriteVC: UIViewController {
     }
 }
 
-extension InfluenceProfileWriteVC: UIImagePickerControllerDelegate, UIScrollViewDelegate, UINavigationControllerDelegate, UITextViewDelegate,
-                                   FloatingPanelControllerDelegate, AddSnsVCDelegate, AddPayVCDelegate, AddExperienceVCDelegate {
-
+extension McnInfluencProfileWriteVC: UIImagePickerControllerDelegate, UIScrollViewDelegate, UINavigationControllerDelegate, UITextViewDelegate,
+                                     FloatingPanelControllerDelegate, AddSnsVCDelegate, AddPayVCDelegate, AddExperienceVCDelegate {
+    
     // 경력 추가
     func didTapButton(_ VC: AddExperienceVC, getData: Experience) {
         experienceArray.append(getData)
         reloadExperienceStackView()
     }
-
+    
     // 페이 추가
     func didTapButton(_ VC: AddPayVC, getData: Pay) {
         payArray.append(getData)
         reloadPayStackView()
     }
-
+    
     // SNS링크 추가
     func didTapButton(_ snsVC: AddSnsVC, getSns: Sns) {
         snsArray.append(getSns)
         reloadSnsStackView()
     }
-
+    
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         selectedImages = []
         videoURL = nil
@@ -1403,18 +1472,18 @@ extension InfluenceProfileWriteVC: UIImagePickerControllerDelegate, UIScrollView
             update = true
             self.resetHorizonScrollView()
         }
-
+        
         if let videoURL = info[.mediaURL] as? URL {
             self.videoURL = videoURL
             let maxFileSize: Int64 = 100 * 1024 * 1024
             let videoSize = getFileSize(url: videoURL)
-
+            
             if videoSize > maxFileSize {
                 showAlert(message: "influence_profile_write_alert".localized)
                 picker.dismiss(animated: true)
                 return
             }
-
+            
             generateThumbnail(url: videoURL) { [weak self] (thumbnail) in
                 self?.selectedImages.append(thumbnail!)
                 self?.update = true
@@ -1423,18 +1492,18 @@ extension InfluenceProfileWriteVC: UIImagePickerControllerDelegate, UIScrollView
         }
         picker.dismiss(animated: true)
     }
-
+    
     // 경고 메시지를 표시하는 함수
     private func showAlert(message: String) {
         let alert = UIAlertController(title: "Error", message: message, preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
         present(alert, animated: true, completion: nil)
     }
-
+    
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         picker.dismiss(animated: true)
     }
-
+    
     private func getFileSize(url: URL) -> Int64 {
         do {
             let resourceValues = try url.resourceValues(forKeys: [.fileSizeKey])
@@ -1444,13 +1513,13 @@ extension InfluenceProfileWriteVC: UIImagePickerControllerDelegate, UIScrollView
             return 0
         }
     }
-
+    
     private func generateThumbnail(url: URL, completion: @escaping (UIImage?) -> Void) {
         DispatchQueue.global().async {
             let asset = AVAsset(url: url)
             let assetImgGenerate = AVAssetImageGenerator(asset: asset)
             assetImgGenerate.appliesPreferredTrackTransform = true
-
+            
             let time = CMTime(seconds: 1, preferredTimescale: 60)
             do {
                 let img = try assetImgGenerate.copyCGImage(at: time, actualTime: nil)
@@ -1466,7 +1535,7 @@ extension InfluenceProfileWriteVC: UIImagePickerControllerDelegate, UIScrollView
             }
         }
     }
-
+    
     // Text
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == UIColor(hex: "#D3D4DA") {
@@ -1474,20 +1543,20 @@ extension InfluenceProfileWriteVC: UIImagePickerControllerDelegate, UIScrollView
             textView.textColor = UIColor.black
         }
     }
-
+    
     func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
             textView.text = "influence_profile_write_intro_hint".localized
             textView.textColor = UIColor(hex: "#D3D4DA")
         }
     }
-
+    
     func textViewDidChange(_ textView: UITextView) {
         let size = textView.sizeThatFits(CGSize(width: textView.frame.width, height: CGFloat.greatestFiniteMagnitude))
         etIntroHeightConstraint?.update(offset: size.height)
         view.layoutIfNeeded()
     }
-
+    
     @objc private func showFilter() {
         let fpc = FloatingPanelController()
         fpc.delegate = self
@@ -1499,9 +1568,9 @@ extension InfluenceProfileWriteVC: UIImagePickerControllerDelegate, UIScrollView
         fpc.surfaceView.appearance.cornerRadius = 20
         fpc.addPanel(toParent: self)
     }
-
+    
     @objc private func showFilter2() {
-
+        
         let fpc = FloatingPanelController()
         fpc.delegate = self
         let contentVC = AddPayVC() // 패널에 표시할 컨텐츠 뷰 컨트롤러
@@ -1511,21 +1580,41 @@ extension InfluenceProfileWriteVC: UIImagePickerControllerDelegate, UIScrollView
         fpc.isRemovalInteractionEnabled = true
         fpc.surfaceView.appearance.cornerRadius = 20
         fpc.addPanel(toParent: self)
-
+        
     }
-
+    
     @objc private func showFilter3() {
         floatingPanel = FloatingPanelController()
         floatingPanel.delegate = self
-
+        
         let contentVC = AddSnsVC() // 패널에 표시할 컨텐츠 뷰 컨트롤러
         contentVC.delegate = self
-
+        
         floatingPanel.layout = CustomFloatingPanel(selectedState: .full) // layout 먼저 설정
         floatingPanel.set(contentViewController: contentVC)
         floatingPanel.isRemovalInteractionEnabled = true
         floatingPanel.surfaceView.appearance.cornerRadius = 20
         floatingPanel.addPanel(toParent: self)
     }
-
+    
+    private func createInfluenceId() -> String {
+        var createdId = ""
+        
+        if let id = User.shared.id {
+            // 현재 날짜와 시간을 가져옴
+            let date = Date()
+            
+            // DateFormatter 생성 및 포맷 설정
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "yyyyMMddHHmmss" // 원하는 포맷 (년월일시분초)
+            
+            // 날짜를 문자열로 변환
+            let dateString = dateFormatter.string(from: date)
+            
+            // id 뒤에 날짜를 붙임
+            createdId = id + dateString
+        }
+        
+        return createdId
+    }
 }

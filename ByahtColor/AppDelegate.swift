@@ -17,7 +17,7 @@ import AdSupport
 import AppTrackingTransparency
 import SendbirdChatSDK
 import GoogleSignIn
-
+import Kingfisher
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -85,11 +85,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {
-        ImageCacheManager.shared.clearCache()
+        // Kingfisher 캐시 지우기
+        let cache = ImageCache.default
+        
+        cache.clearDiskCache {
+            print("Disk cache cleared")
+        }
+        
+        cache.clearMemoryCache()
+        print("Memory cache cleared")
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
-        ImageCacheManager.shared.clearCache()
+        // Kingfisher 캐시 지우기
+        let cache = ImageCache.default
+        
+        cache.clearDiskCache {
+            print("Disk cache cleared")
+        }
+        
+        cache.clearMemoryCache()
+        print("Memory cache cleared")
     }
 
 }
@@ -171,5 +187,6 @@ extension AppDelegate: MessagingDelegate, UNUserNotificationCenterDelegate {
             print("Notification response received: \(response.notification.request.content.userInfo)")
             completionHandler()
         }
-    
+ 
+
 }

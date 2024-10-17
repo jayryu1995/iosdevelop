@@ -10,7 +10,7 @@ import UIKit
 import SendbirdChatSDK
 
 class TabBarViewController: UITabBarController {
-    let chatVC = ChatsListVC()
+    var chatVC : UIViewController = ChatsListVC()
     static let shared = TabBarViewController()
 
     override func viewDidLoad() {
@@ -23,32 +23,39 @@ class TabBarViewController: UITabBarController {
         setupTapbar()
         initSendBird()
 
-        chatVC.title = "Chats"
-        chatVC.tabBarItem.image = UIImage(named: "icon_chat")
-        chatVC.tabBarItem.selectedImage = UIImage(named: "icon_chat2")?.withRenderingMode(.alwaysOriginal)
         NotificationCenter.default.addObserver(self, selector: #selector(handlePushNotification), name: NSNotification.Name("SendbirdPushNotificationReceived"), object: nil)
 
         if User.shared.auth ?? 0 < 2 {
+            
             let homeVC = InfluenceHomeVC()
-            let profileVC = InfluenceProfileVC()
-            let communityVC = TalkVC()
-            let myPageVC = InfluenceMyPageVC()
-
+            var profileVC : UIViewController = InfluenceProfileVC()
+            var myPageVC : UIViewController = InfluenceMyPageVC()
+            
+            // MCN 권한일 경우
+            if User.shared.auth == 1 {
+                profileVC = McnProfileVC()
+                myPageVC = McnMyPageVC()
+                chatVC = McnChannelListVC()
+            }
+            
+            chatVC.title = "Chats"
+            chatVC.tabBarItem.image = UIImage(named: "icon_chat")
+            chatVC.tabBarItem.selectedImage = UIImage(named: "icon_chat2")?.withRenderingMode(.alwaysOriginal)
+            
             homeVC.title = "Home"
-            profileVC.title = "Profile"
-
-            communityVC.title = "Community"
-            myPageVC.title = "My Page"
-
             homeVC.tabBarItem.selectedImage = UIImage(named: "icon_home")?.withRenderingMode(.alwaysOriginal)
             homeVC.tabBarItem.image = UIImage(named: "icon_home")
-
+            
+            let communityVC = TalkVC()
+            communityVC.title = "Community"
             communityVC.tabBarItem.image = UIImage(named: "icon_community")
             communityVC.tabBarItem.selectedImage = UIImage(named: "icon_community")?.withRenderingMode(.alwaysOriginal)
 
+            myPageVC.title = "My Page"
             myPageVC.tabBarItem.image = UIImage(named: "icon_mypage")
             myPageVC.tabBarItem.selectedImage = UIImage(named: "icon_mypage")?.withRenderingMode(.alwaysOriginal)
 
+            profileVC.title = "Profile"
             profileVC.tabBarItem.image = UIImage(named: "icon_profile")
             profileVC.tabBarItem.selectedImage = UIImage(named: "icon_profile")?.withRenderingMode(.alwaysOriginal)
 
@@ -66,6 +73,10 @@ class TabBarViewController: UITabBarController {
             let myPageVC = BusinessMypageVC()
             let proposalVC = ProposalVC()
 
+            chatVC.title = "Chats"
+            chatVC.tabBarItem.image = UIImage(named: "icon_chat")
+            chatVC.tabBarItem.selectedImage = UIImage(named: "icon_chat2")?.withRenderingMode(.alwaysOriginal)
+            
             homeVC.title = "Home"
             searchVC.title = "Search"
             myPageVC.title = "My Page"
@@ -87,9 +98,16 @@ class TabBarViewController: UITabBarController {
             let navigationTab = UINavigationController(rootViewController: homeVC)
             let navigationTab2 = UINavigationController(rootViewController: searchVC)
             let navigationTab3 = UINavigationController(rootViewController: chatVC)
-            let navigationTab4 = UINavigationController(rootViewController: proposalVC)
+            var navigationTab4 = UINavigationController(rootViewController: proposalVC)
             let navigationTab5 = UINavigationController(rootViewController: myPageVC)
 
+            if User.shared.id == "byaht" || User.shared.id == "admin"{
+                let communityVC = TalkVC()
+                communityVC.title = "Community"
+                communityVC.tabBarItem.image = UIImage(named: "icon_community")
+                communityVC.tabBarItem.selectedImage = UIImage(named: "icon_community")?.withRenderingMode(.alwaysOriginal)
+                navigationTab4 = UINavigationController(rootViewController: communityVC)
+            }
             setViewControllers([navigationTab, navigationTab2, navigationTab3, navigationTab4, navigationTab5], animated: false)
 
         }
@@ -157,8 +175,8 @@ class TabBarViewController: UITabBarController {
         updateReadState()
     }
 
-    func updateReadState() {
-        print("updateReadState() 실행")
+    private func updateReadState() {
+        
         SendbirdUser.shared.unReadMessages { result in
             switch result {
             case .success(let count):

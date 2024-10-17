@@ -11,18 +11,48 @@ import GoogleSignIn
 import UIKit
 import SnapKit
 import Foundation
+import SendbirdChatSDK
+
 class TestView: UIViewController {
 
     private let signInButton = GIDSignInButton()
-
+    private lazy var useCase: GroupChannelListUseCase = {
+        let useCase = GroupChannelListUseCase()
+        useCase.delegate = self
+        return useCase
+    }()
+    
+    private let key = ["358269290323828","739314881656903"]
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupUI()
+        useCase.reloadChannels()
+        //testApi(id: "122112388466162066")
+        testApi()
     }
 
-    private func textApi(){
+    private func testApi(){
+        let key = ["influence_id"]
         
+        print("검색 실행 \(self.useCase.channels.count)")
+        
+        self.useCase.channels.forEach{ channel in
+            let cachedMetaData = channel.getCachedMetaData()
+            let value = cachedMetaData["influence_id"]
+            let count = channel.unreadMessageCount
+            
+            if let id = value{
+                print("metaData : \(value)")
+            }
+        }
+    }
+    
+    private func logoutApi(){
+        SendbirdUser.shared.logout{
+            print("로그아웃 완료")
+        }
     }
     
     private func setupUI() {
@@ -37,49 +67,66 @@ class TestView: UIViewController {
     }
 
     @objc private func didTapSignInButton() {
-        guard let clientID = FirebaseApp.app()?.options.clientID else {
-            print("Error: Missing Firebase clientID")
-            return
-        }
-
-        // Create Google Sign In configuration object with YouTube scope.
-        let config = GIDConfiguration(clientID: clientID)
-        GIDSignIn.sharedInstance.configuration = config
-
-        // Start the sign-in flow with YouTube scope
-        GIDSignIn.sharedInstance.signIn(withPresenting: self, hint: nil, additionalScopes: ["https://www.googleapis.com/auth/youtube.readonly"]) { [weak self] result, error in
-            guard let self = self else { return }
-            guard error == nil else {
-                self.handleSignInError(error)
-                return
-            }
-
-            guard let user = result?.user else {
-                print("Failed to retrieve user")
-                return
-            }
-
-            let idToken = user.idToken?.tokenString
-            let accessToken = user.accessToken.tokenString
-
-            print("idToken:", idToken ?? "No ID Token")
-            print("accessToken:", accessToken)
-
-            // Use the access token to fetch the user's YouTube channels
-            YoutubeConfig.shared.fetchYouTubeChannels(accessToken: accessToken) { result in
-                switch result {
-                case .success(let channels):
-                    print("YouTube Channels: \(channels)")
-                case .failure(let error):
-                    print("Failed to fetch YouTube channels: \(error.localizedDescription)")
-                }
-            }
-        }
+        testApi()
+//        guard let clientID = FirebaseApp.app()?.options.clientID else {
+//            print("Error: Missing Firebase clientID")
+//            return
+//        }
+//
+//        // Create Google Sign In configuration object with YouTube scope.
+//        let config = GIDConfiguration(clientID: clientID)
+//        GIDSignIn.sharedInstance.configuration = config
+//
+//        // Start the sign-in flow with YouTube scope
+//        GIDSignIn.sharedInstance.signIn(withPresenting: self, hint: nil, additionalScopes: ["https://www.googleapis.com/auth/youtube.readonly"]) { [weak self] result, error in
+//            guard let self = self else { return }
+//            guard error == nil else {
+//                self.handleSignInError(error)
+//                return
+//            }
+//
+//            guard let user = result?.user else {
+//                print("Failed to retrieve user")
+//                return
+//            }
+//
+//            let idToken = user.idToken?.tokenString
+//            let accessToken = user.accessToken.tokenString
+//
+//            print("idToken:", idToken ?? "No ID Token")
+//            print("accessToken:", accessToken)
+//
+//            // Use the access token to fetch the user's YouTube channels
+//            YoutubeConfig.shared.fetchYouTubeChannels(accessToken: accessToken) { result in
+//                switch result {
+//                case .success(let channels):
+//                    print("YouTube Channels: \(channels)")
+//                case .failure(let error):
+//                    print("Failed to fetch YouTube channels: \(error.localizedDescription)")
+//                }
+//            }
+//        }
     }
 
     private func handleSignInError(_ error: Error?) {
         if let error = error {
             print("Error during Google Sign-In: \(error.localizedDescription)")
+        }
+    }
+    
+    
+}
+
+extension TestView : GroupChannelListUseCaseDelegate {
+    func groupChannelListUseCase(_ groupChannelListUseCase: GroupChannelListUseCase, didReceiveError error: SBError) {
+         DispatchQueue.main.async { [weak self] in
+             // self?.presentAlert(error: error)
+         }
+    }
+
+    func groupChannelListUseCase(_ groupChannelListUseCase: GroupChannelListUseCase, didUpdateChannels: [GroupChannel]) {
+        DispatchQueue.main.async { [weak self] in
+            
         }
     }
 }

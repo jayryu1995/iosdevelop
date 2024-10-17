@@ -8,6 +8,7 @@
 import UIKit
 import SendbirdChatSDK
 import SnapKit
+import Kingfisher
 open class GroupChannelListCell: UITableViewCell {
 
     private let profileImage: UIImageView = {
@@ -112,7 +113,7 @@ open class GroupChannelListCell: UITableViewCell {
     }
 
     open func configure(with channel: GroupChannel) {
-        var currentProfileURL: String?
+        
         let taskID = UUID()
         self.taskIdentifier = taskID
         channel.members.forEach { it in
@@ -121,17 +122,22 @@ open class GroupChannelListCell: UITableViewCell {
                 
                 self.name = it.nickname
                 self.profileImage.isUserInteractionEnabled = true
-                
-                if let url = it.profileURL, !url.isEmpty {
-                    currentProfileURL = url
-                    DispatchQueue.main.async {
-                        self.profileImage.loadProfileImage(from: url) { [weak self] image in
-                            guard let self = self, self.taskIdentifier == taskID else { return }
-                            self.profileImage.image = UIImage(named: "icon_profile2")
-                            self.profileImage.image = image
-                            
-                        }
+                print("it.profileURL : \(it.profileURL)")
+                if let path = it.profileURL, !path.isEmpty {
+                    let url = URL(string: path)
+                    DispatchQueue.main.async{
+                        self.profileImage.kf.setImage(with: url)
                     }
+                    
+//                    currentProfileURL = url
+//                    DispatchQueue.main.async {
+//                        self.profileImage.loadProfileImage(from: url) { [weak self] image in
+//                            guard let self = self, self.taskIdentifier == taskID else { return }
+//                            self.profileImage.image = UIImage(named: "icon_profile2")
+//                            self.profileImage.image = image
+//                            
+//                        }
+//                    }
                 }
             }
         }

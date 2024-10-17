@@ -57,10 +57,15 @@ class AdminCollabReadVC: UIViewController {
         setView()
         setContainView()
         updateNotificationButton()
-        self.requestButton.snp.updateConstraints {
+        
+        
+        if User.shared.id == "1" {
+            requestButton.isHidden = true
+        }
+        requestButton.snp.updateConstraints {
             $0.bottom.equalToSuperview().offset(-20)
         }
-        self.view.layoutIfNeeded()
+        view.layoutIfNeeded()
     }
 
     @objc private func moreButtonTapped() {
@@ -191,7 +196,6 @@ class AdminCollabReadVC: UIViewController {
 
     // 삭제
     @objc private func deleteButtonTapped() {
-
         guard let no = collab?.no else { return }
         let url = "\(Bundle.main.TEST_URL)/snap/del/\(no)"
 

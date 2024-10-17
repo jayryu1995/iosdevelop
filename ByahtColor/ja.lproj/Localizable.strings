@@ -9,6 +9,30 @@
 "server_error_title" = "サーバーメンテナンス中";
 "server_error_message" = "現在サーバーメンテナンス中です。しばらくしてから再度お試しください";
 
+// McnMyPageVC
+"mcn_mypage_profile_label" = "所属クリエイタープロフィール管理";
+"mcn_mypage_account_label" = "自分の情報";
+"mcn_mypage_error_label" = "アプリのエラー申告";
+
+// McnMyPageWriteVC
+"mcn_mypage_write_logo" = "会社ロゴ";
+"mcn_mypage_write_info" = "コラボのための情報を入力してください。";
+"mcn_mypage_write_info2" = "より良い機能を提供するため\n継続的にアップデート予定です。";
+"mcn_mypage_write_name" = "名前を入力";
+"mcn_mypage_write_name2" = "Vui lòng nhập tên sẽ sử dụng khi hợp tác.";
+"mcn_mypage_write_tel" = "電話番号";
+"mcn_mypage_write_tel2" = "業務連絡が可能な電話番号を入力してください。";
+"mcn_mypage_write_address" = "会社住所";
+"mcn_mypage_write_address_hint" = "住所を入力してください。";
+"mcn_mypage_write_logout" = "ログアウト";
+"mcn_mypage_write_secession" = "脱退";
+
+
+// McnProfileVC
+"mcn_profile_topLabel" = "登録されたクリエイター";
+"mcn_profile_topLabel2" = "人";
+"mcn_profile_emptyLabel" = "クリエイターを登録してください。";
+"mcn_profile_regist" = "登録";
 
 // BusinessFirstOnboardingVC
 "business_onboarding_first_label" = "パッケージプランの代わりに、欲しい分だけ!";
@@ -113,10 +137,15 @@
 "ages_50" = "50代以上";
 "gender_male" = "男性";
 "gender_female" = "女性";
+
+// LoginVC
 "login_str" = "SNSアカウントで簡単にログイン";
 "login_str2" = "Inquiry about Enrollment for Non-Korean Companies : \nbkim@byaht.com";
 "login_str3" = "IDまたはパスワードを入力してください。";
 "login_str4" = "ログイン情報が正しくありません。";
+"login_mcn" = "MCNログイン";
+"login_mcn_str" = "MCNの登録はBYAHTで受け付けています。\n bkim@byaht.com";
+
 "find_account_id" = "ID検索";
 "find_account_password" = "パスワード検索";
 "findid_label" = "本人確認後、IDを検索できます。";

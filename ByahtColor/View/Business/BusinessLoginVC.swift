@@ -7,10 +7,11 @@
 
 import Foundation
 import UIKit
+import SnapKit
 
 class BusinessLoginVC: UIViewController {
 
-    lazy private var tf_id: UITextField = {
+    private lazy var tf_id: UITextField = {
         let tf = UITextField()
         tf.font = UIFont(name: "Pretendard-Medium", size: 16)
         tf.layer.borderWidth = 1
@@ -25,7 +26,7 @@ class BusinessLoginVC: UIViewController {
         return tf
     }()
 
-    lazy private var tf_passwd: UITextField = {
+    private lazy var tf_passwd: UITextField = {
         let tf = UITextField()
         tf.font = UIFont(name: "Pretendard-Medium", size: 16)
         tf.layer.borderWidth = 1
@@ -41,7 +42,7 @@ class BusinessLoginVC: UIViewController {
         return tf
 
     }()
-    lazy private var btn_login: UIButton = {
+    private lazy var btn_login: UIButton = {
         let button = UIButton()
         button.setTitle("Log in", for: .normal)
         button.setTitleColor(.white, for: .normal)
@@ -52,7 +53,7 @@ class BusinessLoginVC: UIViewController {
         return button
     }()
 
-    lazy private var btn_join: UIButton = {
+    private lazy var btn_join: UIButton = {
         let button = UIButton()
         button.setTitleColor(.black, for: .normal)
         button.setTitle(("login_join".localized), for: .normal)
@@ -61,7 +62,7 @@ class BusinessLoginVC: UIViewController {
         return button
     }()
 
-    lazy private var btn_findId: UIButton = {
+    private lazy var btn_findId: UIButton = {
         let button = UIButton()
         button.setTitle(("login_find_account".localized), for: .normal)
         button.setTitleColor(UIColor(hex: "#B5B8C2"), for: .normal)
@@ -71,13 +72,8 @@ class BusinessLoginVC: UIViewController {
         return button
     }()
 
-    lazy private var imageView: UIImageView = {
-        let image = UIImageView(image: UIImage(named: "image_business_login"))
-        image.contentMode = .scaleAspectFill
-        return image
-    }()
 
-    lazy private var bottomLabel: UILabel = {
+    private lazy var bottomLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Pretendard-Regular", size: 12)
         label.textColor = UIColor(hex: "#B5B8C2")
@@ -87,17 +83,43 @@ class BusinessLoginVC: UIViewController {
         return label
     }()
 
-    lazy private var errorLabel: UILabel = {
+    private lazy var errorLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Pretendard-Regular", size: 14)
         label.textColor = UIColor(hex: "#FF2727")
         label.isHidden = true
         return label
     }()
+    
+    private lazy var switchLabel = {
+        let label = UILabel()
+        label.text = "login_mcn".localized
+        label.font = UIFont(name: "Pretendard-Regular", size: 14)
+        label.textColor = .black
+        label.textAlignment = .center
+        return label
+    }()
+    
+    private lazy var tooltipImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "icon_question")
+        imageView.contentMode = .scaleAspectFit
+        imageView.isUserInteractionEnabled = true
+        return imageView
+    }()
+    
+    private lazy var switchButton = {
+        let mySwitch = UISwitch()
+        mySwitch.onTintColor = UIColor(hex: "#009BF2")
+        return mySwitch
+    }()
+    
     private let scrollView = UIScrollView()
     private let contentView = UIView()
-    lazy private var viewModel = MemberViewModel()
-
+    private lazy var viewModel = MemberViewModel()
+    private lazy var mcnViewModel = MemberViewModel()
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -122,16 +144,21 @@ class BusinessLoginVC: UIViewController {
     private func setupGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
         view.addGestureRecognizer(tapGesture)
+        
+        let tooltipGesture = UITapGestureRecognizer(target: self, action: #selector(showTooltip))
+        tooltipImageView.addGestureRecognizer(tooltipGesture)
     }
 
     private func setupButtons() {
         btn_join.addTarget(self, action: #selector(buttonJoinTapped), for: .touchUpInside)
         btn_login.addTarget(self, action: #selector(submitButtonTapped), for: .touchUpInside)
         btn_findId.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+        switchButton.addTarget(self, action: #selector(switchTapped), for: .touchUpInside)
+        
     }
 
     @objc private func submitButtonTapped() {
-        print("id: \(tf_id.text), password : \(tf_passwd.text)")
+        
         guard let username = tf_id.text, !username.isEmpty,
               let password = tf_passwd.text, !password.isEmpty else {
 
@@ -140,18 +167,55 @@ class BusinessLoginVC: UIViewController {
             return
         }
 
-        viewModel.loginBusiness(userid: username, password: password ) { [weak self] result in
+        if switchButton.isOn == true {
+            print("실행")
+            mcnLogin(id: username, password: password)
+        }else{
+            businessLogin(id: username, password: password)
+        }
+        
+    }
+    
+    private func mcnLogin(id:String,password:String){
+        mcnViewModel.loginMcn(userid: id, password: password ) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let user):
+                    
+                    User.shared.id = user.memberId
+                    User.shared.auth = user.auth
+                    User.shared.name = user.name
+                    
+                    UserDefaults.standard.setValue(user.memberId, forKey: "businessId")
+                    UserDefaults.standard.setValue(user.auth, forKey: "auth")
+                    UserDefaults.standard.setValue(user.name, forKey: "name")
+                    
+                    
+                    let vc = TabBarViewController()
+                    self?.navigationController?.pushViewController(vc, animated: false)
+                case .failure(let error):
+                    print("Error: \(error.localizedDescription)")
+                    self?.errorLabel.text = "login_str4".localized
+                    self?.errorLabel.isHidden = false
+                }
+            }
+        }
+    }
+
+    private func businessLogin(id: String, password: String){
+        viewModel.loginBusiness(userid: id, password: password ) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let business):
                     
                     User.shared.id = business.memberId
-                    User.shared.auth = 2
+                    User.shared.auth = business.auth?.toInt()
+                    print(business.auth?.toInt())
                     User.shared.name = business.businessName ?? nil
                     User.shared.intro = business.intro ?? nil
-
+                    
                     UserDefaults.standard.setValue(business.memberId, forKey: "businessId")
-                    UserDefaults.standard.setValue(2, forKey: "auth")
+                    UserDefaults.standard.setValue(business.auth, forKey: "auth")
                     UserDefaults.standard.setValue(business.businessName, forKey: "name")
                     UserDefaults.standard.setValue(business.intro, forKey: "intro")
                     
@@ -165,7 +229,7 @@ class BusinessLoginVC: UIViewController {
             }
         }
     }
-
+    
     @objc private func buttonJoinTapped() {
         let vc = BusinessSignUpVC()
         self.navigationController?.pushViewController(vc, animated: true)
@@ -176,16 +240,22 @@ class BusinessLoginVC: UIViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
+    @objc private func switchTapped() {
+        print(switchButton.isOn)
+    }
+    
     private func setupConstraints() {
         contentView.addSubview(tf_id)
         contentView.addSubview(tf_passwd)
         contentView.addSubview(btn_login)
         contentView.addSubview(btn_join)
         contentView.addSubview(btn_findId)
-        contentView.addSubview(imageView)
         contentView.addSubview(errorLabel)
         contentView.addSubview(bottomLabel)
-
+        contentView.addSubview(switchButton)
+        contentView.addSubview(switchLabel)
+        contentView.addSubview(tooltipImageView)
+        
         scrollView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
@@ -196,14 +266,25 @@ class BusinessLoginVC: UIViewController {
             $0.height.greaterThanOrEqualTo(scrollView).priority(.low)
         }
 
-        imageView.snp.makeConstraints {
+        switchButton.snp.makeConstraints {
             $0.top.equalToSuperview().offset(16)
-            $0.leading.trailing.equalToSuperview().inset(20)
-            $0.height.equalTo(imageView.snp.width).multipliedBy(264.0 / 350.0)
+            $0.leading.equalToSuperview().inset(20)
         }
 
+        switchLabel.snp.makeConstraints{
+            $0.top.equalTo(switchButton.snp.top)
+            $0.bottom.equalTo(switchButton.snp.bottom)
+            $0.leading.equalTo(switchButton.snp.trailing).offset(10)
+        }
+        
+        tooltipImageView.snp.makeConstraints {
+            $0.leading.equalTo(switchLabel.snp.trailing).offset(8)
+            $0.centerY.equalTo(switchLabel.snp.centerY)
+            $0.width.height.equalTo(15)
+        }
+        
         tf_id.snp.makeConstraints {
-            $0.top.equalTo(imageView.snp.bottom).offset(16)
+            $0.top.equalTo(switchButton.snp.bottom).offset(16)
             $0.leading.trailing.equalToSuperview().inset(20)
             $0.height.equalTo(48)
         }
@@ -237,11 +318,12 @@ class BusinessLoginVC: UIViewController {
         }
 
         bottomLabel.snp.makeConstraints {
-            $0.top.equalTo(btn_join.snp.bottom).offset(16)
+            
             $0.centerX.equalToSuperview()
             $0.bottom.equalToSuperview().offset(-10)
         }
     }
+    
     @objc private func keyboardWillShow(notification: NSNotification) {
             if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
                 let contentInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
@@ -262,6 +344,33 @@ class BusinessLoginVC: UIViewController {
             scrollView.contentInset = contentInsets
             scrollView.scrollIndicatorInsets = contentInsets
         }
+    
+    // 툴팁 표시 액션
+    @objc private func showTooltip() {
+        let tooltip = TooltipView(message: "login_mcn_str".localized)
+        
+        // 최상위 활성 윈도우 가져오기
+        if let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
+           let window = windowScene.windows.first(where: { $0.isKeyWindow }) {
+            
+            window.addSubview(tooltip)
+            
+            // 툴팁의 위치 설정 (예: 이미지 오른쪽에 표시)
+            tooltip.snp.makeConstraints { make in
+                make.centerX.equalTo(tooltipImageView.snp.centerX)
+                make.bottom.equalTo(tooltipImageView.snp.top).offset(-10)
+                make.width.lessThanOrEqualToSuperview().multipliedBy(0.8)
+            }
+            
+            // 툴팁을 3초 뒤에 사라지도록 설정
+            DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
+                tooltip.removeFromSuperview()
+            }
+        }
+    }
+
+
+
 }
 
 extension BusinessLoginVC: UITextFieldDelegate {

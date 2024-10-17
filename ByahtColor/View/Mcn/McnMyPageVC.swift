@@ -1,15 +1,16 @@
 //
-//  InfulenceMyPageVC.swift
+//  McnMyPageVC.swift
 //  ByahtColor
 //
-//  Created by jaem on 6/26/24.
+//  Created by jaem on 9/30/24.
 //
 
 import UIKit
 import Combine
 import SnapKit
+import Kingfisher
 
-class InfluenceMyPageVC: UIViewController {
+class McnMyPageVC: UIViewController {
 
     private let profileImage: UIImageView = {
         let image = UIImageView()
@@ -56,13 +57,6 @@ class InfluenceMyPageVC: UIViewController {
         return button
     }()
 
-    private let eventButton: UIButton = {
-        let button = UIButton()
-        button.setBackgroundColor(UIColor(hex: "#F4F5F8"), for: .normal)
-        button.layer.cornerRadius = 4
-        return button
-    }()
-    
     private let errorButton: UIButton = {
         let button = UIButton()
         button.setBackgroundColor(UIColor(hex: "#F4F5F8"), for: .normal)
@@ -70,7 +64,7 @@ class InfluenceMyPageVC: UIViewController {
         return button
     }()
 
-    private let viewModel = InfluenceViewModel()
+    private let viewModel = McnViewModel()
     private var cancellables = Set<AnyCancellable>()
 
     override func viewDidLayoutSubviews() {
@@ -82,6 +76,7 @@ class InfluenceMyPageVC: UIViewController {
         super.viewWillAppear(animated)
         guard let id = User.shared.id else { return }
         viewModel.getMyAccount(id: id)
+        
     }
 
     override func viewDidLoad() {
@@ -91,6 +86,7 @@ class InfluenceMyPageVC: UIViewController {
         setupConstraints()
         setupBinding()
         NotificationCenter.default.addObserver(self, selector: #selector(handleDataChangedNotification), name: .dataChanged, object: nil)
+        
     }
 
     @objc private func handleDataChangedNotification() {
@@ -108,12 +104,12 @@ class InfluenceMyPageVC: UIViewController {
             .sink { [weak self] data in
                 guard let data = data else { return }
                 
-                if let url = data.imagePath {
-                    self?.profileImage.loadProfileImage(from: url) { [weak self] image in
-                        // 현재 셀이 해당 taskID를 가지고 있는지 확인
-                        self?.profileImage.image = image
-                        self?.profileImage.layer.cornerRadius = (self?.profileImage.frame.size.width ?? 80) / 2
-                    }
+                if let source = data.imagePath {
+                    self?.updateChatProfile(imagePath: source)
+                    print("imagePath : \(source)")
+                    let url = URL(string: source)
+                    self?.profileImage.kf.setImage(with: url)
+                    self?.profileImage.layer.cornerRadius = (self?.profileImage.frame.size.width ?? 80) / 2
                 }
             
                 self?.name.text = data.name ?? "influence_mypage_name_info".localized
@@ -128,13 +124,11 @@ class InfluenceMyPageVC: UIViewController {
         view.addSubview(accountLabel)
         view.addSubview(layer)
         view.addSubview(profileButton)
-        view.addSubview(eventButton)
         view.addSubview(accountLabel)
         view.addSubview(accountButton)
         view.addSubview(errorButton)
 
         setupProfileButton()
-        setupeventButton()
         setupAccountButton()
         setupErrorButton()
     }
@@ -160,15 +154,10 @@ class InfluenceMyPageVC: UIViewController {
         stackView.distribution = .fillProportionally
         let label = UILabel()
         label.text = "influence_mypage_profile_label".localized
-        label.font = UIFont(name: "Pretendard-Regular", size: 12)
+        label.font = UIFont(name: "Pretendard-SemiBold", size: 16)
         label.textColor = .white
 
-        let label2 = UILabel()
-        label2.text = "influence_mypage_profile_label2".localized
-        label2.font = UIFont(name: "Pretendard-SemiBold", size: 14)
-        label2.textColor = .white
         stackView.addArrangedSubview(label)
-        stackView.addArrangedSubview(label2)
 
         let icon = UIImageView(image: UIImage(named: "arrow_right")?.withRenderingMode(.alwaysTemplate))
         icon.tintColor = .white
@@ -188,40 +177,9 @@ class InfluenceMyPageVC: UIViewController {
         }
     }
 
-    private func setupeventButton() {
-        eventButton.addTarget(self, action: #selector(eventButtonTapped), for: .touchUpInside)
-
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.distribution = .fillProportionally
-
-        let label = UILabel()
-        label.text = "influence_mypage_event_label".localized
-        label.font = UIFont(name: "Pretendard-SemiBold", size: 14)
-        label.textColor = .black
-        stackView.addArrangedSubview(label)
-
-        let icon = UIImageView(image: UIImage(named: "arrow_right")?.withRenderingMode(.alwaysTemplate))
-        icon.tintColor = UIColor(hex: "#4E505B")
-        icon.contentMode = .scaleAspectFit
-
-        eventButton.addSubview(stackView)
-        eventButton.addSubview(icon)
-        stackView.snp.makeConstraints {
-            $0.top.bottom.equalToSuperview().inset(12)
-            $0.leading.equalToSuperview().offset(20)
-        }
-
-        icon.snp.makeConstraints {
-            $0.centerY.equalTo(stackView.snp.centerY)
-            $0.trailing.equalToSuperview().inset(20)
-            $0.width.height.equalTo(24)
-        }
-    }
-
     private func setupErrorButton() {
         let label = UILabel()
-        label.text = "business_mypage_error_label".localized
+        label.text = "mcn_mypage_error_label".localized
         label.font = UIFont(name: "Pretendard-Medium", size: 14)
         label.textColor = .black
 
@@ -246,7 +204,7 @@ class InfluenceMyPageVC: UIViewController {
     
     private func setupAccountButton() {
         let label = UILabel()
-        label.text = "influence_mypage_account_label".localized
+        label.text = "mcn_mypage_account_label".localized
         label.font = UIFont(name: "Pretendard-Medium", size: 14)
         label.textColor = .black
 
@@ -299,14 +257,8 @@ class InfluenceMyPageVC: UIViewController {
             $0.height.equalTo(60)
         }
 
-        eventButton.snp.makeConstraints {
-            $0.top.equalTo(profileButton.snp.bottom).offset(4)
-            $0.leading.trailing.equalToSuperview().inset(20)
-            $0.height.equalTo(60)
-        }
-
         accountLabel.snp.makeConstraints {
-            $0.top.equalTo(eventButton.snp.bottom).offset(40)
+            $0.top.equalTo(profileButton.snp.bottom).offset(40)
             $0.leading.trailing.equalToSuperview().inset(20)
         }
 
@@ -324,17 +276,12 @@ class InfluenceMyPageVC: UIViewController {
     }
 
     @objc private func profileButtonTapped() {
-        let vc = InfluenceProfileVC()
+        let vc = McnProfileVC()
         self.navigationController?.pushViewController(vc, animated: false)
     }
 
     @objc private func accountButtonTapped() {
-        let vc = InfluenceMyPageWriteVC()
-        self.navigationController?.pushViewController(vc, animated: false)
-    }
-
-    @objc private func eventButtonTapped() {
-        let vc = ApplicationStateVC()
+        let vc = McnMyPageWriteVC()
         self.navigationController?.pushViewController(vc, animated: false)
     }
     
@@ -343,5 +290,24 @@ class InfluenceMyPageVC: UIViewController {
         if let url = URL(string: urlString) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
+    }
+    
+    private func updateChatProfile(imagePath: String) {
+        
+        print("imagePath \(imagePath)")
+        
+        if let name = User.shared.name {
+            SendbirdUser.shared.updateUserInfo(nickname: name, profileImage: imagePath) { result in
+                switch result {
+                case .success(let user):
+                    print("업데이트 성공")
+                case .failure(let error):
+                    print("error : \(error)")
+                }
+            }
+            
+        }
+            
+        
     }
 }

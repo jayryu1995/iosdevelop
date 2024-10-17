@@ -62,12 +62,11 @@ class InfluenceViewModel: ObservableObject {
             return
         }
 
-        let method: HTTPMethod = getProfile ? .patch : .post
+        let method: HTTPMethod = .patch
         func uploadRequest(videoFileURL: URL?) {
             AF.upload(multipartFormData: { multipartFormData in
                 // 텍스트 데이터 추가
                 multipartFormData.append(jsonData, withName: "data", mimeType: "application/json")
-
                 if let videoFileURL = videoFileURL {
                     media = 1
                     // 파일이 존재하는지 확인
@@ -76,7 +75,6 @@ class InfluenceViewModel: ObservableObject {
                         completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Video file does not exist"])))
                         return
                     }
-
                     multipartFormData.append(videoFileURL, withName: "file", fileName: "\(dto.memberId ?? "").mp4", mimeType: "video/mp4")
                 } else {
                     

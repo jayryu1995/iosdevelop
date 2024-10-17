@@ -9,6 +9,30 @@
 "server_error_title" = "Server Maintenance";
 "server_error_message" = "The server is currently undergoing maintenance. Please try again later.";
 
+// McnMyPageVC
+"mcn_mypage_profile_label" = "Manage Creator Profiles";
+"mcn_mypage_account_label" = "My Information";
+"mcn_mypage_error_label" = "Report an App Issue";
+
+// McnMyPageWriteVC
+"mcn_mypage_write_logo" = "Company Logo";
+"mcn_mypage_write_info" = "Enter information for collaboration.";
+"mcn_mypage_write_info2" = "We will keep updating to provide better features.";
+"mcn_mypage_write_name" = "Name";
+"mcn_mypage_write_name2" = "Please enter the name to be used for collaboration.";
+"mcn_mypage_write_tel" = "Company Phone Number";
+"mcn_mypage_write_tel2" = "Please enter a phone number available for business contact.";
+"mcn_mypage_write_address" = "Company Address";
+"mcn_mypage_write_address_hint" = "Enter Address";
+"mcn_mypage_write_logout" = "Log Out";
+"mcn_mypage_write_secession" = "Withdraw";
+
+// McnProfileVC
+"mcn_profile_topLabel" = "Registered Creators";
+"mcn_profile_topLabel2" = "creators";
+"mcn_profile_emptyLabel" = "Please register a creator.";
+"mcn_profile_regist" = "Register";
+
 
 // BusinessFirstOnboardingVC
 "business_onboarding_first_label" = "Pay as you go, without package commitments!";
@@ -138,6 +162,8 @@
 "login_str2" = "Inquiry about Enrollment for Non-Korean Companies: \nbkim@byaht.com";
 "login_str3" = "Please enter your ID or password.";
 "login_str4" = "Login information is incorrect.";
+"login_mcn" = "MCN Login";
+"login_mcn_str" = "MCN membership registration is available through Byat.\n bkim@byaht.com";
 
 //FindAccountVC
 "find_account_id" = "Find ID";

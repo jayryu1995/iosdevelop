@@ -485,7 +485,7 @@ class BusinessSignUpVC: UIViewController, UIScrollViewDelegate {
     }
 
     @objc private func submitButtonTapped() {
-        let member = Member(id: tf_manager_id.text ?? "", auth: 1, regi_date: nil)
+        let member = Member(id: tf_manager_id.text ?? "", auth: 2, regi_date: nil)
         let business = Business(
             license: tf_num.text ?? "test", memberId: tf_manager_id.text ?? "",
             password: tf_manager_pwd.text ?? "", business_name: tf_name.text ?? "",

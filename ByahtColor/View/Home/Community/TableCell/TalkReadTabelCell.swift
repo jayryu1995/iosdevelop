@@ -7,8 +7,8 @@
 
 import UIKit
 import SnapKit
-import AlamofireImage
 import Alamofire
+import Kingfisher
 
 class TalkReadTableCell: UITableViewCell, UIScrollViewDelegate {
     private let profileImageView: UIImageView = {
@@ -204,13 +204,10 @@ class TalkReadTableCell: UITableViewCell, UIScrollViewDelegate {
     // 데이터 입력
     func configure(with board: Talk) {
 
-        if let id = board.id {
-            let resource = "https://glowb-input.s3.ap-southeast-1.amazonaws.com/img/account/\(id).jpg"
-            
-            profileImageView.loadImage(from: resource)
+        if let resource = board.profileImage{
+            let url = URL(string: resource)
+            profileImageView.kf.setImage(with: url)
             profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2
-            
-            
         }
         nicknameLabel.text = board.nickname
         dateLabel.text = CustomFunction().formatDate(board.regi_date ?? "")
@@ -243,8 +240,8 @@ class TalkReadTableCell: UITableViewCell, UIScrollViewDelegate {
         for resource in imageList {
             let imageView = UIImageView()
             let widthSize = UIScreen.main.bounds.width
-            let url = "\(Bundle.main.TEST_URL)/board\( resource )"
-            imageView.loadImage(from: url)
+            let url = URL(string: resource)
+            imageView.kf.setImage(with: url)
             imageView.contentMode = .scaleAspectFill
             imageView.clipsToBounds = true
             imageScrollView.addSubview(imageView)

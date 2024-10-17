@@ -21,4 +21,5 @@ struct InfluenceProfileDto: Codable {
     let nation: String?
     let code: String?
     let video: String?
+    var mcnId: String? = nil
 }

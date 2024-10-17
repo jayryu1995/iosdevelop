@@ -19,12 +19,13 @@ class TalkWriteVC: UIViewController, UITextViewDelegate, UIImagePickerController
     private let contentTextView = UITextView()
     private let layerView = UIView()
     private let cameraButton = UIButton()
-    private let checkButton = UIButton()
     private let checkLabel = UILabel()
-    private var selectedImages: [UIImage] = []
-    private var mainScrollView = UIScrollView()
-    private var contentView = UIView()
-
+    lazy private var selectedImages: [UIImage] = []
+    lazy private var mainScrollView = UIScrollView()
+    lazy private var contentView = UIView()
+    lazy private var imageContainerView = UIView()
+    lazy private var imageScrollView = UIScrollView()
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
@@ -52,38 +53,58 @@ class TalkWriteVC: UIViewController, UITextViewDelegate, UIImagePickerController
 
     }
 
+    
     private func setView() {
         setTopView()
+        setCameraButton()
+        setMainScrollView()
         setTitleView()
         setLayerView()
-        setContentView()
-        setCameraButton()
-        setCheckButton()
+        setImageScrollView()
+        setTextView()
+        
     }
-
-    private func setCheckButton() {
-        checkButton.setImage(UIImage(named: "checkbox_icon"), for: .normal)
-        checkButton.setImage(UIImage(named: "checkbox_icon2"), for: .selected)
-        checkButton.backgroundColor = .white
-        checkButton.addTarget(self, action: #selector(checkButtonTapped), for: .touchUpInside)
-
-        checkLabel.text = "talk_write_anonymous".localized
-        checkLabel.font = UIFont(name: "Pretendard-SemiBold", size: 14)
-        checkLabel.textColor = UIColor(hex: "#BCBDC0")
-
-        view.addSubview(checkLabel)
-        view.addSubview(checkButton)
-
-        checkLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(cameraButton.snp.centerY)
+    
+    private func setImageScrollView() {
+        // 가로 스크롤 뷰 설정
+        imageScrollView.isPagingEnabled = false
+        imageScrollView.showsHorizontalScrollIndicator = false
+        imageScrollView.alwaysBounceHorizontal = true
+        imageScrollView.backgroundColor = .clear
+        contentView.addSubview(imageScrollView)
+        imageScrollView.snp.makeConstraints { make in
+            make.top.equalTo(layerView.snp.bottom).offset(10)
+            make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
+            make.height.equalTo(0)
         }
-
-        checkButton.snp.makeConstraints { make in
-            make.centerY.equalTo(cameraButton.snp.centerY)
-            make.trailing.equalTo(checkLabel.snp.leading).offset(-5)
-            make.width.height.equalTo(20)
-
+        
+        
+        
+        // 이미지 컨테이너 뷰를 imageScrollView에 추가하여 이미지들을 배치
+        imageScrollView.addSubview(imageContainerView)
+        imageContainerView.snp.makeConstraints { make in
+            make.width.equalToSuperview()
+            make.height.equalToSuperview()
+        }
+        
+    }
+    
+    private func setMainScrollView() {
+        mainScrollView.isUserInteractionEnabled = true
+        view.addSubview(mainScrollView)
+        
+        mainScrollView.snp.makeConstraints { make in
+            make.top.equalTo(topView.snp.bottom)
+            make.bottom.equalTo(cameraButton.snp.top).offset(-10)
+            make.leading.trailing.equalToSuperview()
+        }
+        
+        // contentView를 mainScrollView에 추가
+        mainScrollView.addSubview(contentView)
+        contentView.snp.makeConstraints { make in
+            make.height.equalToSuperview() // mainScrollView의 가장자리에 맞춤
+            make.width.equalToSuperview() // contentView의 가로 길이를 mainScrollView와 같게 설정
         }
     }
 
@@ -100,18 +121,18 @@ class TalkWriteVC: UIViewController, UITextViewDelegate, UIImagePickerController
         }
     }
 
-    private func setContentView() {
+    private func setTextView() {
         contentTextView.text = "talk_write_content".localized
         contentTextView.textColor = .lightGray
         contentTextView.isUserInteractionEnabled = true
         contentTextView.font = UIFont(name: "Pretendard-Regular", size: 14)
-        view.addSubview(contentTextView)
+        contentView.addSubview(contentTextView)
 
         contentTextView.snp.makeConstraints { make in
-            make.top.equalTo(layerView.snp.bottom).offset(10)
+            make.top.equalTo(imageScrollView.snp.bottom).offset(10)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-100)
+            make.bottom.equalToSuperview()
         }
     }
 
@@ -170,10 +191,10 @@ class TalkWriteVC: UIViewController, UITextViewDelegate, UIImagePickerController
         titleTextView.font = UIFont(name: "Pretendard-SemiBold", size: 20)
         titleTextView.isUserInteractionEnabled = true
         titleTextView.textColor = .lightGray
-        view.addSubview(titleTextView)
+        contentView.addSubview(titleTextView)
 
         titleTextView.snp.makeConstraints { make in
-            make.top.equalTo(topView.snp.bottom)
+            make.top.equalTo(contentView.snp.top)
             make.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().offset(-20)
             make.height.equalTo(40)
@@ -181,10 +202,8 @@ class TalkWriteVC: UIViewController, UITextViewDelegate, UIImagePickerController
     }
 
     private func setLayerView() {
-
         layerView.backgroundColor = .lightGray // 회색 배경 설정
-
-        view.addSubview(layerView)
+        contentView.addSubview(layerView)
         layerView.snp.makeConstraints { make in
             make.top.equalTo(titleTextView.snp.bottom).offset(10) // titleTextView 아래에 위치
             make.leading.equalToSuperview().offset(20)
@@ -203,21 +222,16 @@ class TalkWriteVC: UIViewController, UITextViewDelegate, UIImagePickerController
         let url = "\(Bundle.main.TEST_URL)/board/insert"
         let headers: HTTPHeaders = ["Content-type": "multipart/form-data"]
         let user_id = User.shared.id ?? ""
-
-        var nickname = ""
-        if checkButton.isSelected {
-            nickname = User.shared.name ?? "talk_write_anonymous".localized
-        } else {
-            nickname = "talk_write_anonymous".localized
-        }
-
+        let name = User.shared.name ?? ""
+        let nation = getLanguageNumber()
         // MultipartFormData를 사용하여 요청 생성
         AF.upload(multipartFormData: { multipartFormData in
             // 텍스트 데이터 추가
             multipartFormData.append(Data(user_id.utf8), withName: "user_id")
-            multipartFormData.append(Data(nickname.utf8), withName: "nickname")
+            multipartFormData.append(Data(name.utf8), withName: "nickname")
             multipartFormData.append(Data(self.contentTextView.text.utf8), withName: "content")
             multipartFormData.append(Data(self.titleTextView.text.utf8), withName: "title")
+            multipartFormData.append(Data(nation.utf8), withName: "nation")
 
             // 이미지 데이터 추가
             for (index, image) in self.selectedImages.enumerated() {
@@ -237,11 +251,6 @@ class TalkWriteVC: UIViewController, UITextViewDelegate, UIImagePickerController
         }
     }
 
-    @objc private func checkButtonTapped() {
-        checkButton.isSelected = !checkButton.isSelected  // 버튼의 선택 상태를 토글
-        checkLabel.textColor = checkButton.isSelected ? UIColor(hex: "#935DFF") : UIColor(hex: "#BCBDC0")
-    }
-
     // UITextViewDelegate 메서드
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView == titleTextView && textView.text == "talk_write_title".localized {
@@ -256,18 +265,10 @@ class TalkWriteVC: UIViewController, UITextViewDelegate, UIImagePickerController
     @objc private func keyboardWillShow(notification: NSNotification) {
         if let keyboardSize = (notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
             if view.frame.origin.y == 0 {
-                let height = keyboardSize.height - 20
-                // Adjust the constraint or frame for cameraButton, checkLabel, and checkButton
-                // For example:
+                let keyboardHeight = keyboardSize.height - view.safeAreaInsets.bottom
+                print(keyboardHeight)
                 cameraButton.snp.updateConstraints { make in
-                    make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-height)
-                }
-
-                contentTextView.snp.remakeConstraints { make in
-                    make.top.equalTo(layerView.snp.bottom).offset(10)
-                    make.leading.equalToSuperview().offset(20)
-                    make.trailing.equalToSuperview().offset(-20)
-                    make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-height)
+                    make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-keyboardHeight)
                 }
             }
         }
@@ -278,13 +279,55 @@ class TalkWriteVC: UIViewController, UITextViewDelegate, UIImagePickerController
         cameraButton.snp.updateConstraints { make in
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
         }
+    }
+    
+    private func addImagesToScrollView(images: [UIImage]) {
+        if images.isEmpty {
+                imageScrollView.snp.updateConstraints { make in
+                    make.height.equalTo(0)
+                }
+            } else {
+                imageScrollView.snp.updateConstraints { make in
+                    make.height.equalTo(188)  // 이미지 스크롤뷰의 높이 설정 (100은 예시입니다. 원하는 높이로 조정하세요)
+                }
+            }
+        imageContainerView.subviews.forEach { $0.removeFromSuperview() }
+        // 스크롤 뷰에 이미지 추가
+        var previousImageView: UIImageView? = nil
 
-        contentTextView.snp.remakeConstraints { make in
-            make.top.equalTo(layerView.snp.bottom).offset(10)
-            make.leading.equalToSuperview().offset(20)
-            make.trailing.equalToSuperview().offset(-20)
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-100)
+        for (index, image) in images.enumerated() {
+            let imageView = UIImageView(image: image)
+            imageView.contentMode = .scaleAspectFill
+            imageView.clipsToBounds = true
+            imageView.isUserInteractionEnabled = true
+            imageContainerView.addSubview(imageView)
+            
+            // 제거 버튼 추가
+            let removeButton = UIButton()
+            removeButton.setImage(UIImage(named: "icon_close"), for: .normal)
+            removeButton.addTarget(self, action: #selector(removeImage), for: .touchUpInside)
+            removeButton.tag = index
+            imageView.addSubview(removeButton)
+
+            // 제거 버튼 제약 조건
+            removeButton.snp.makeConstraints { make in
+                make.top.right.equalToSuperview().inset(10)
+                make.width.height.equalTo(30)
+            }
+            
+            imageView.snp.makeConstraints { make in
+                make.top.bottom.equalToSuperview()
+                make.width.equalTo(188)  // 이미지의 너비 설정
+                if let previous = previousImageView {
+                    make.leading.equalTo(previous.snp.trailing).offset(10)
+                } else {
+                    make.leading.equalToSuperview()
+                }
+            }
+
+            previousImageView = imageView
         }
+
     }
 
     // 카메라 버튼
@@ -299,6 +342,7 @@ class TalkWriteVC: UIViewController, UITextViewDelegate, UIImagePickerController
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
         if let selectedImage = info[.originalImage] as? UIImage {
             self.selectedImages.append(selectedImage)
+            addImagesToScrollView(images: selectedImages)
         }
         picker.dismiss(animated: true, completion: nil)
     }
@@ -311,5 +355,18 @@ class TalkWriteVC: UIViewController, UITextViewDelegate, UIImagePickerController
 
         // 모든 검사를 통과한 경우
         return nil
+    }
+    
+    // 이미지 제거 메소드
+    @objc private func removeImage(_ sender: UIButton) {
+        print("삭제")
+        let index = sender.tag
+        if !selectedImages.isEmpty {
+            selectedImages.remove(at: index)
+            
+            // 남은 이미지들로 스크롤뷰를 다시 채움
+            addImagesToScrollView(images: selectedImages)
+        }
+        
     }
 }

@@ -117,7 +117,7 @@ class LoginVC: UIViewController {
     private func businessGet() {
         if let id = UserDefaults.standard.string(forKey: "businessId") {
             User.shared.id = id
-            User.shared.auth = 2
+            User.shared.auth = UserDefaults.standard.integer(forKey: "auth")
             User.shared.name = UserDefaults.standard.string(forKey: "name")
             User.shared.intro = UserDefaults.standard.string(forKey: "intro")
             
@@ -140,7 +140,7 @@ class LoginVC: UIViewController {
         }
 
         titleLabel.snp.makeConstraints {
-            $0.top.equalTo(logoImage.snp.bottom).offset(16)
+            $0.top.equalToSuperview().offset((view.safeAreaLayoutGuide.layoutFrame.height / 6))
             $0.centerX.equalToSuperview()
         }
 
@@ -225,8 +225,6 @@ class LoginVC: UIViewController {
 
     private func updateButtonBottomLayerFrame() {
         [userButton, businessButton].forEach { button in
-            // 버튼의 타이틀 라벨 크기를 조정
-
             // 타이틀 라벨의 너비를 바탕으로 바텀 레이어의 프레임 설정
             let layerWidth = button.frame.width
             let layer = button.tag == 0 ? layer1 : layer2
@@ -264,7 +262,7 @@ class LoginVC: UIViewController {
     private func signUpInfluence() {
         if let id = User.shared.id {
             let member = Member(id: id, auth: 0, regi_date: nil)
-            let influence = Influence(no: nil, id: nil, name: User.shared.name ?? "", intro: nil, age: nil, category: nil, gender: nil, video: nil, evaluation: nil)
+            let influence = Influence(no: nil, id: nil, name: User.shared.name ?? "", intro: nil, age: nil, category: nil, gender: nil, video: nil, evaluation: nil, mcnId: nil)
             let dto = MemberInfluenceDto(member: member, influence: influence)
             viewModel.updateMemberInfluence(memberInfluenceDto: dto) { [weak self] result in
                 DispatchQueue.main.async {
@@ -326,7 +324,7 @@ extension LoginVC: UIPageViewControllerDataSource, UIPageViewControllerDelegate,
 
             }
 
-            let id = userIdentifier ?? ""
+            let id = userIdentifier 
             let name = "\(fullName?.givenName ?? "") \(fullName?.familyName ?? "")"
             let user_email = email ?? ""
 

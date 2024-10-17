@@ -16,6 +16,7 @@ struct BoardDto: Encodable {
     let content: String?
     let like_count: Int?
     let comment_count: Int?
+    let filePath: String?
 }
 
 struct BoardRequestDTO: Encodable {

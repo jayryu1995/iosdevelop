@@ -9,6 +9,32 @@
 "server_error_title" = "서버 점검 중";
 "server_error_message" = "현재 서버 점검 중입니다. 잠시 후 다시 시도해주세요.";
 
+// McnMyPageVC
+"mcn_mypage_profile_label" = "소속 크리에이터 프로필 관리";
+"mcn_mypage_account_label" = "내 정보";
+"mcn_mypage_error_label" = "앱 오류 신고하기";
+
+// McnMyPageWriteVC
+"mcn_mypage_write_logo" = "회사 로고";
+"mcn_mypage_write_info" = "협업을 위한 정보를 입력하세요.";
+"mcn_mypage_write_info2" = "더 좋은 기능을 제공하기 위해\n계속 업데이트 예정이에요.";
+"mcn_mypage_write_name" = "이름";
+"mcn_mypage_write_name2" = "원활한 협업을 위해 회사명을 입력해 주세요.";
+"mcn_mypage_write_tel" = "회사 전화번호";
+"mcn_mypage_write_tel2" = "업무 연락이 가능한 전화번호를 입력해 주세요.";
+"mcn_mypage_write_address" = "회사 주소";
+"mcn_mypage_write_address_hint" = "주소 입력";
+"mcn_mypage_write_logout" = "로그아웃";
+"mcn_mypage_write_secession" = "탈퇴";
+
+
+// McnProfileVC
+"mcn_profile_topLabel" = "등록된 크리에이터";
+"mcn_profile_topLabel2" = "명";
+"mcn_profile_emptyLabel" = "크리에이터를 등록해주세요.";
+"mcn_profile_regist" = "등록하기";
+
+
 // BusinessFirstOnboardingVC
 "business_onboarding_first_label" = "패키지 결제 없이, 원하는 만큼!";
 "business_onboarding_first_label2" = "수수료 없는\n인플루언서 마케팅의 시작.";
@@ -134,6 +160,9 @@
 "login_str2" = "Inquiry about Enrollment for Non-Korean Companies : \nbkim@byaht.com";
 "login_str3" = "아이디 또는 패스워드를 입력해주세요.";
 "login_str4" = "로그인 정보가 올바르지 않습니다.";
+"login_mcn" = "MCN 로그인";
+"login_mcn_str" = "MCN 회원 가입은 바이엇에서 받고 있습니다.\n bkim@byaht.com";
+
 
 //FindAccountVC
 "find_account_id" = "아이디 찾기";

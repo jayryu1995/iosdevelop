@@ -33,6 +33,7 @@ class TalkReadVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDeleg
         NotificationCenter.default.removeObserver(self)
     }
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -40,7 +41,7 @@ class TalkReadVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDeleg
         navigationController?.interactivePopGestureRecognizer?.delegate = self
         self.view.backgroundColor = .white
 
-        if board?.id == User.shared.id || User.shared.auth == 2 {
+        if board?.id == User.shared.id || User.shared.auth == 4 {
             let moreButtonItem = UIBarButtonItem(image: UIImage(named: "icon_more")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(moreButtonTapped))
             moreButtonItem.tintColor = .black // 원하는 색상으로 설정
             navigationItem.rightBarButtonItem = moreButtonItem
@@ -52,7 +53,7 @@ class TalkReadVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDeleg
         loadData()
         setView()
         setupBackButton()
-        self.navigationItem.title = "Talk"
+        self.navigationItem.title = ""
         notification = board?.notification ?? false
 
         // 스피너 초기화 및 설정

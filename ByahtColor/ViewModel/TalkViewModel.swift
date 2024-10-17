@@ -13,12 +13,13 @@ class TalkViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     private var cancellables = Set<AnyCancellable>()
 
-    func fetchTalk() {
+    func fetchTalk(nation: String) {
         isLoading = true
         let url = "\(Bundle.main.TEST_URL)/board/sel"
-        let parameters: [String: Any] = [ "user_id": User.shared.id ?? "" ]
+        let parameters: [String: Any] = [ "user_id": User.shared.id ?? "",
+                                          "nation": nation]
 
-        AF.request(url, method: .post, parameters: parameters)
+        AF.request(url, method: .get, parameters: parameters)
             .responseDecodable(of: [Talk].self) { response in
                 switch response.result {
                 case .success(let data):

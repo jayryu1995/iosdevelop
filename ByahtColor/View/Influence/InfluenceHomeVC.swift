@@ -55,7 +55,10 @@ class InfluenceHomeVC: UIViewController, UIScrollViewDelegate {
         let nickname = User.shared.name ?? ""
         let homeValue = UserDefaults.standard.integer(forKey: "home")
         if User.shared.name == nil || User.shared.name == "" || nickname.contains("user"){
-            setupOnboardingView()
+            if User.shared.auth != 1{
+                setupOnboardingView()
+            }
+            
         }
         
         if let assetId = User.shared.id {
@@ -65,7 +68,10 @@ class InfluenceHomeVC: UIViewController, UIScrollViewDelegate {
         }
         
         if homeValue != 1 && User.shared.id != "122101478408205849"{
-            setupAlertView()
+            
+            if User.shared.auth != 1{
+                setupAlertView()
+            }
         }
 
     }

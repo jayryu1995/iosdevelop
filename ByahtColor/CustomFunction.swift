@@ -83,4 +83,6 @@ class CustomFunction {
             loadingIndicator.removeFromSuperview()
         }
     }
+    
+    
 }

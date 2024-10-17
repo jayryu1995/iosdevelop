@@ -135,8 +135,10 @@ class CollabDetailVC: UIViewController, UIGestureRecognizerDelegate {
             }
         }
 
-        if User.shared.auth ?? 0 > 1 {
-            requestButton.isHidden = true
+        if let auth = User.shared.auth {
+            if auth > 0 {
+                requestButton.isHidden = true
+            }
         }
 
     }
@@ -166,7 +168,7 @@ class CollabDetailVC: UIViewController, UIGestureRecognizerDelegate {
         if collab?.youtube == true {
             vc.tags.append("Youtube")
         }
-        print(vc.tags.count)
+        
         self.navigationController?.pushViewController(vc, animated: false)
     }
 

@@ -9,6 +9,32 @@
 "server_error_title" = "Dịch vụ bảo trì";
 "server_error_message" = "Hiện tại dịch vụ đang bảo trì, vui lòng thử lại sau.";
 
+// McnMyPageVC
+"mcn_mypage_profile_label" = "Quản lý hồ sơ influencer trực thuộc";
+"mcn_mypage_account_label" = "Thông tin của tôi";
+"mcn_mypage_error_label" = "Gửi báo cáo lỗi ứng dụng";
+
+// McnMyPageWriteVC
+"mcn_mypage_write_logo" = "Logo công ty";
+"mcn_mypage_write_info" = "Nhập thông tin hợp tác.";
+"mcn_mypage_write_info2" = "Để cung cấp tính năng tốt hơn ứng dụng sẽ update liên tục";
+"mcn_mypage_write_name" = "Họ và tên khai sinh";
+"mcn_mypage_write_name2" = "Vui lòng nhập tên công ty để thuận lợi hơn trong việc hợp tác.";
+"mcn_mypage_write_tel" = "Số điện thoại";
+"mcn_mypage_write_tel2" = "Nhập số điện thoại liên lạc công việc.";
+"mcn_mypage_write_address" = "Địa chỉ";
+"mcn_mypage_write_address_hint" = "Nhập địa chỉ";
+"mcn_mypage_write_logout" = "Đăng xuất";
+"mcn_mypage_write_secession" = "Huỷ tài khoản";
+
+
+// McnProfileVC
+"mcn_profile_topLabel" = " Influencer đã đăng ký";
+"mcn_profile_topLabel2" = "Người";
+"mcn_profile_emptyLabel" = "Vui lòng đăng ký hồ sơ influencer.";
+"mcn_profile_regist" = "ĐĂNG KÝ";
+
+
 // BusinessFirstOnboardingVC
 "business_onboarding_first_label" = "Không cần thanh toán gói dịch vụ, sử dụng thoải mái!";
 "business_onboarding_first_label2" = "Sự khởi đầu của marketing influencer\n không tính  phí .";
@@ -140,6 +166,8 @@
 "login_str2" = "Inquiry about Enrollment for Non-Korean Companies : \nbkim@byaht.com";
 "login_str3" = "Nhập tên đăng nhập và mật khẩu";
 "login_str4" = "Thông tin đăng nhập không chính xác";
+"login_mcn" = "MCN đăng nhập";
+"login_mcn_str" = "Việc đăng ký thành viên MCN được thực hiện bởi BYAHT\n bkim@byaht.com";
 
 //FindAccountVC
 "find_account_id" = "Tìm tên đăng nhập";

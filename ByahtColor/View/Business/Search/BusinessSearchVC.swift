@@ -223,6 +223,8 @@ class BusinessSearchVC: UIViewController {
         selectedNation = profile?.nation?.components(separatedBy: ",") ?? []
         selectedAge = profile?.age?.components(separatedBy: ",") ?? []
         selectedCategory = profile?.category?.components(separatedBy: ",") ?? []
+        
+        print("profile?.mcnId : \(profile?.mcnId)")
         // 국가 아이콘설정
         if let nation = profile?.nation {
             setupNationIcon(nation: nation)
@@ -805,10 +807,16 @@ class BusinessSearchVC: UIViewController {
     
     @objc private func navigationToChats(_ sender: UIButton) {
         let params = GroupChannelCreateParams()
-        params.name = "test Chat"
+        params.name = "Chat"
         
-        let server: String = User.shared.id ?? ""
-        let client: String = profile?.memberId ?? ""
+        let server = User.shared.id ?? ""
+        
+        var client : String
+        if let member = profile?.mcnId {
+            client = member
+        }else{
+            client = profile?.memberId ?? ""
+        }
         params.userIds = [server, client]
         params.isDistinct = true
         
@@ -819,9 +827,25 @@ class BusinessSearchVC: UIViewController {
             }
             var timestampStorage = TimestampStorage()
             
+            self.createMetaData(channel: channel!)
+            
             let vc = ChatsVC(channel: channel!, timestampStorage: timestampStorage)
             vc.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    private func createMetaData(channel: GroupChannel){
+        let metaDataToUpdate = [
+            "influence_id": profile?.memberId ?? "",
+            "profile_img": profile?.imagePath ?? ""
+        ]
+        
+        channel.updateMetaData(metaDataToUpdate) { metaData, error in
+            guard error == nil else {
+                // Handle error.
+                return
+            }
         }
     }
 }

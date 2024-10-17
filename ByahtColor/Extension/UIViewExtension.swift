@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 extension UIView {
-    func showToast(message: String, duration: TimeInterval = 2.0) {
+    func showToast(message: String, duration: TimeInterval = 5.0) {
         let toastLabel = UILabel(frame: CGRect(x: self.frame.size.width/2 - 125, y: self.frame.size.height/2 - 50, width: 250, height: 35))
         toastLabel.backgroundColor = UIColor.black.withAlphaComponent(0.6)
         toastLabel.textColor = UIColor.white

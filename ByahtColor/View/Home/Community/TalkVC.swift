@@ -34,6 +34,8 @@ class TalkVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
+        let nation = getLanguageNumber()
+        viewModel.fetchTalk(nation: nation)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -45,9 +47,14 @@ class TalkVC: UIViewController {
         super.viewDidLoad()
         setupView()
         setupBindings()
-        viewModel.fetchTalk()
+        
+        let nation = getLanguageNumber()
+        viewModel.fetchTalk(nation: nation)
     }
 
+    
+
+    
     private func setupView() {
         self.navigationController?.setNavigationBarHidden(true, animated: false)
         view.backgroundColor = .white
@@ -81,7 +88,11 @@ class TalkVC: UIViewController {
         button.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 14)
         button.setImage(UIImage(named: "pen_icon"), for: .normal)
         button.setTitleColor(.white, for: .normal)
-
+        print("User.shared.auth : \(User.shared.auth)")
+        if User.shared.auth != 4 {
+            button.isHidden = true
+        }
+        
         let spacing: CGFloat = 5
         button.imageEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: spacing)
         button.titleEdgeInsets = UIEdgeInsets(top: 0, left: spacing, bottom: 0, right: 0)
@@ -166,6 +177,7 @@ extension TalkVC: UITableViewDataSource, UITableViewDelegate {
         let talk = viewModel.results[index]
         cell.configure(with: talk)
         if let path = talk.imageList?.first {
+            print(path)
             cell.setImage(imagePath: path)
         }
 

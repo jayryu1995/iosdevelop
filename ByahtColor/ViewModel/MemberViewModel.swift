@@ -176,4 +176,23 @@ class MemberViewModel: ObservableObject {
                 }
             }
     }
+    
+    // MCN 로그인
+    func loginMcn(userid: String, password: String, completion: @escaping (Result<McnDto, Error>) -> Void) {
+        let url = "\(Bundle.main.TEST_URL)/mcn/login"
+        let parameters: [String: Any] = [
+            "id": userid,
+            "password": password
+        ]
+        AF.request(url, method: .post, parameters: parameters)
+            .validate()
+            .responseDecodable(of: McnDto.self) { response in
+                switch response.result {
+                case .success(let business):
+                    completion(.success(business))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+    }
 }

@@ -17,4 +17,5 @@ struct Influence: Codable {
     let gender: Bool?
     let video: String?
     let evaluation: Int?
+    var mcnId : String? = nil
 }
