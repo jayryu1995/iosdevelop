@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 import Alamofire
 import FloatingPanel
+import Kingfisher
 
 class CollabDetailVC: UIViewController, UIGestureRecognizerDelegate {
 

@@ -14,9 +14,9 @@ class CollabViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     var cancellables = Set<AnyCancellable>()
 
-    func loadData(url: String, userId: String, styles: [String], sns: [String]) {
+    func loadData(url: String, userId: String, styles: [String], sns: [String], nation: String?) {
         isLoading = true
-        let nation = User.shared.nation
+        
         let parameters = CollabRequestDTO(user_id: userId, styles: styles, sns: sns, nation: nation)
         AF.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default)
             .validate(statusCode: 200..<300)

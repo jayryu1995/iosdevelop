@@ -33,7 +33,6 @@ public class SendbirdUser {
             }
 
             guard let user = user else { return }
-
             self?.registerPushTokenIfNeeded()
             self?.storeUserInfo(user)
             completion(.success(user))
@@ -105,6 +104,14 @@ public class SendbirdUser {
             }
         }
 
+        SendbirdChat.setPushTemplate(name: SendbirdChat.PushTemplate.alternative) { (error) in
+            guard error == nil else {
+                // Handle error.
+                return
+            }
+
+            print("템플릿 설정완료")
+        }
     }
 
     private func storeUserInfo(_ user: SendbirdChatSDK.User) {

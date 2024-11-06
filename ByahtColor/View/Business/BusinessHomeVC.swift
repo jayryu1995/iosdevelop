@@ -12,6 +12,7 @@ import AVFoundation
 import SkeletonView
 import SendbirdChatSDK
 import Kingfisher
+import FirebaseMessaging
 
 class BusinessHomeVC: UIViewController, UIScrollViewDelegate {
 
@@ -61,8 +62,12 @@ class BusinessHomeVC: UIViewController, UIScrollViewDelegate {
 
         view.backgroundColor = .white
         self.navigationController?.navigationBar.isHidden = true
+        
+        Messaging.messaging().subscribe(toTopic: "business") { _ in
+            self.log(message: "Subscribed to business")
+        }
+        
         setupHomeData()
-
         
         if User.shared.intro == nil || User.shared.intro?.isEmpty == true {
             setupOnboardingView()
@@ -122,7 +127,6 @@ class BusinessHomeVC: UIViewController, UIScrollViewDelegate {
         scrollView.showsVerticalScrollIndicator = false
         setupTopView()
         setupBottomView()
-
     }
 
     private func setupBottomView() {
@@ -154,8 +158,8 @@ class BusinessHomeVC: UIViewController, UIScrollViewDelegate {
         for (index, collab) in collabList.enumerated() {
             let imageView = UIImageView()
             if let resource = collab.imageList?.first {
-                let url = "\(Bundle.main.TEST_URL)/image\( resource )"
-                imageView.loadImage(from: url)
+                let url = URL(string: resource)
+                imageView.kf.setImage(with: url)
             } else {
                 DispatchQueue.main.async {
                     imageView.backgroundColor = .lightGray

@@ -67,7 +67,7 @@ extension UIViewController {
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
         let dateString = formatter.string(from: Date())
         let logMessage = "[\(vcName)] || \(dateString): \(message)\n"
-        print(logMessage)
+        
         guard let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
 
         let fileURL = documentsDirectory.appendingPathComponent("log.txt")
@@ -140,7 +140,7 @@ extension UIViewController {
 
     func getLanguageNumber() -> String {
         let currentLanguage = Locale.current.languageCode
-        
+        print(currentLanguage)
         switch currentLanguage {
         case "ko": // 한국어
             return "0"
@@ -156,8 +156,25 @@ extension UIViewController {
             return "5"
         case "en": // 영어
             return "6"
+        case "ar": // 영어
+            return "6"
         default: // 그 외 다른 언어의 경우
             return "6" // 영어로 기본 설정
+        }
+    }
+    
+    func getLanguage() -> String {
+        let currentLanguage = Locale.current.languageCode
+        
+        switch currentLanguage {
+        case "ko": // 한국어
+            return "ko"
+        case "vi": // 베트남어
+            return "vi"
+        case "jp": // 일본어
+            return "jp"
+        default: // 그 외 다른 언어의 경우
+            return "en" // 영어로 기본 설정
         }
     }
 }

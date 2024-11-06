@@ -143,7 +143,7 @@
 "login_str2" = "Inquiry about Enrollment for Non-Korean Companies : \nbkim@byaht.com";
 "login_str3" = "IDまたはパスワードを入力してください。";
 "login_str4" = "ログイン情報が正しくありません。";
-"login_mcn" = "MCNログイン";
+"login_mcn" = "MCN∙Agency Login";
 "login_mcn_str" = "MCNの登録はBYAHTで受け付けています。\n bkim@byaht.com";
 
 "find_account_id" = "ID検索";

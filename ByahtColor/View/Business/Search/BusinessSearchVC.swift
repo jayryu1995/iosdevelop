@@ -224,7 +224,6 @@ class BusinessSearchVC: UIViewController {
         selectedAge = profile?.age?.components(separatedBy: ",") ?? []
         selectedCategory = profile?.category?.components(separatedBy: ",") ?? []
         
-        print("profile?.mcnId : \(profile?.mcnId)")
         // 국가 아이콘설정
         if let nation = profile?.nation {
             setupNationIcon(nation: nation)

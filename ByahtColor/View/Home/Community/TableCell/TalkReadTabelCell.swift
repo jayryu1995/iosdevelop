@@ -97,7 +97,6 @@ class TalkReadTableCell: UITableViewCell, UIScrollViewDelegate {
     private var currentPage: Int = 0
     private var likeCounter = 0 // 게시물
     private var likeFlag = false
-    private var likeCount = 0
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -214,8 +213,12 @@ class TalkReadTableCell: UITableViewCell, UIScrollViewDelegate {
         titleLabel.text = board.title
         contentLabel.text = board.content
         commentLabel.text = board.comment_count?.toString()
-        likeLabel.text = board.like_count?.toString()
-
+        if let count = board.like_count{
+            likeCounter = count
+            likeLabel.text = board.like_count?.toString()
+        }
+        
+        
         if board.imageList?.isEmpty == false {
             setImage(imageList: board.imageList!)
         } else { modifyContraint() }

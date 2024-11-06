@@ -106,9 +106,12 @@ class TabBarViewController: UITabBarController {
                 communityVC.title = "Community"
                 communityVC.tabBarItem.image = UIImage(named: "icon_community")
                 communityVC.tabBarItem.selectedImage = UIImage(named: "icon_community")?.withRenderingMode(.alwaysOriginal)
-                navigationTab4 = UINavigationController(rootViewController: communityVC)
+                let navigationTab6 = UINavigationController(rootViewController: communityVC)
+                setViewControllers([navigationTab, navigationTab2, navigationTab3, navigationTab4, navigationTab6, navigationTab5], animated: false)
+            }else{
+                setViewControllers([navigationTab, navigationTab2, navigationTab3, navigationTab4, navigationTab5], animated: false)
             }
-            setViewControllers([navigationTab, navigationTab2, navigationTab3, navigationTab4, navigationTab5], animated: false)
+            
 
         }
 

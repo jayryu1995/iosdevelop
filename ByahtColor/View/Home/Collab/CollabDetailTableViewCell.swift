@@ -7,7 +7,7 @@
 
 import UIKit
 import SnapKit
-import AlamofireImage
+import Kingfisher
 import Alamofire
 
 protocol CollabDetailTableViewCellDelegate: AnyObject {
@@ -45,7 +45,9 @@ class CollabDetailTableViewCell: UITableViewCell, UIScrollViewDelegate {
     let profileIcon: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "icon_profile2")
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 20
         return imageView
     }()
 
@@ -270,11 +272,12 @@ class CollabDetailTableViewCell: UITableViewCell, UIScrollViewDelegate {
     func setImages(_ imageList: [String]) {
         var lastImageView: UIImageView?
         pageControl.numberOfPages = imageList.count
+        print(imageList)
         for resource in imageList {
+            print(resource)
             let imageView = UIImageView()
-            let widthSize = UIScreen.main.bounds.width
-            let url = "\(Bundle.main.TEST_URL)/image\( resource )"
-            imageView.loadImage(from: url)
+            let url = URL(string: resource)
+            imageView.kf.setImage(with: url)
             imageView.contentMode = .scaleAspectFill
             imageView.clipsToBounds = true
             imageScrollView.addSubview(imageView)
@@ -304,14 +307,22 @@ class CollabDetailTableViewCell: UITableViewCell, UIScrollViewDelegate {
         snapId = snap.id ?? ""
 
         nicknameLabel.text = snap.nickname
+        
         if let resource = snap.profileImage{
-            profileIcon.loadImage(from: resource)
+            print("prfileImage: \(resource)")
+            let url = URL(string: resource)
+            profileIcon.kf.setImage(with: url)
         }
         
         titleLabel.text = snap.title
         contentLabel.text = snap.content
         infoLabel.text = snap.info
         linkUrl = snap.link ?? ""
+        
+        if !linkUrl.contains("https") && !linkUrl.contains("http"){
+            linkLabel.isHidden = true
+        }
+        
         if snap.application_state ?? 0 < 2 {
             codeLabel.isHidden = true
             codeButton.isHidden = true

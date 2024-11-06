@@ -35,6 +35,7 @@ class TalkVC: UIViewController {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
         let nation = getLanguageNumber()
+        
         viewModel.fetchTalk(nation: nation)
     }
 

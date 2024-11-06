@@ -86,7 +86,7 @@ class CollabModifyVC: UIViewController, UIScrollViewDelegate, UINavigationContro
     private var snsButtons = [UIButton]()
     private var nationButtons = [UIButton]()
     private var selectedImages: [UIImage] = []
-    private var activityIndicator: UIActivityIndicatorView!
+    private var activityIndicator = UIActivityIndicatorView(style: .large)
     private var startDate: Date?
     private var endDate: Date?
     private let viewModel = CollabViewModel()
@@ -117,9 +117,10 @@ class CollabModifyVC: UIViewController, UIScrollViewDelegate, UINavigationContro
         tv_title.delegate = self
 
         // 스피너 초기화 및 설정
-        activityIndicator = UIActivityIndicatorView(style: .large)
         activityIndicator.center = self.view.center
         view.addSubview(activityIndicator)
+        activityIndicator.isHidden = false
+        
         loadImagesFromCollab()
         setMainScrollView()
         setupScrollContentView()
@@ -153,13 +154,12 @@ class CollabModifyVC: UIViewController, UIScrollViewDelegate, UINavigationContro
 
     private func loadImagesFromCollab() {
         guard let imageUrls = collab?.imageList else { return }
-
+        
+        
         let group = DispatchGroup()
         imageUrls.forEach { urlString in
             group.enter()
-            let url = "\(Bundle.main.TEST_URL)/image\( urlString )"
-            print(url)
-            loadImageFromURL(url) { [weak self] image in
+            loadImageFromURL(urlString) { [weak self] image in
                 DispatchQueue.main.async {
                     if let image = image {
                         self?.selectedImages.append(image)

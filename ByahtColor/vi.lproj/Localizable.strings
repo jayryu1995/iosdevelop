@@ -166,7 +166,7 @@
 "login_str2" = "Inquiry about Enrollment for Non-Korean Companies : \nbkim@byaht.com";
 "login_str3" = "Nhập tên đăng nhập và mật khẩu";
 "login_str4" = "Thông tin đăng nhập không chính xác";
-"login_mcn" = "MCN đăng nhập";
+"login_mcn" = "MCN∙Agency đăng nhập";
 "login_mcn_str" = "Việc đăng ký thành viên MCN được thực hiện bởi BYAHT\n bkim@byaht.com";
 
 //FindAccountVC

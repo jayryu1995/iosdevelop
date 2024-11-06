@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import SkeletonView
+import Kingfisher
 import FirebaseMessaging
 
 class InfluenceHomeVC: UIViewController, UIScrollViewDelegate {
@@ -50,6 +51,26 @@ class InfluenceHomeVC: UIViewController, UIScrollViewDelegate {
         super.viewDidLoad()
         view.backgroundColor = .white
 
+        
+        // 알림 구독
+        // 개인
+        if let assetId = User.shared.id {
+            Messaging.messaging().subscribe(toTopic: assetId) { _ in
+                self.log(message: "Subscribed to MediaConvertFCM \(assetId)")
+            }
+        }
+        
+        // 국가
+        let nation = getLanguage() // ko, vi, en
+        Messaging.messaging().subscribe(toTopic: nation) { _ in
+            self.log(message: "Subscribed to \(nation)")
+        }
+        
+        // 유저
+        Messaging.messaging().subscribe(toTopic: "user") { _ in
+            self.log(message: "Subscribed to user")
+        }
+        
         setupHomeData()
         setupUI()
         let nickname = User.shared.name ?? ""
@@ -59,12 +80,6 @@ class InfluenceHomeVC: UIViewController, UIScrollViewDelegate {
                 setupOnboardingView()
             }
             
-        }
-        
-        if let assetId = User.shared.id {
-            Messaging.messaging().subscribe(toTopic: assetId) { _ in
-                self.log(message: "Subscribed to MediaConvertFCM \(assetId)")
-            }
         }
         
         if homeValue != 1 && User.shared.id != "122101478408205849"{
@@ -164,8 +179,8 @@ class InfluenceHomeVC: UIViewController, UIScrollViewDelegate {
         for (index, collab) in collabList.enumerated() {
             let imageView = UIImageView()
             if let resource = collab.imageList?.first {
-                let url = "\(Bundle.main.TEST_URL)/image\( resource )"
-                imageView.loadImage(from: url)
+                let url = URL(string: resource)
+                imageView.kf.setImage(with: url)
             } else {
                 DispatchQueue.main.async {
                     imageView.backgroundColor = .lightGray
@@ -273,11 +288,10 @@ class InfluenceHomeVC: UIViewController, UIScrollViewDelegate {
         for (index, business) in businessList.enumerated() {
             if index < 4 {
                 let imageView = GradientImageView(frame: .zero)
-                print("business.imagePath : \(business.imagePath)")
+                
                 if let resource = business.imagePath {
-                    let url = "\(Bundle.main.TEST_URL)/business\( resource )"
-                    print("resource : \(resource)")
-                    imageView.loadImage(from: resource)
+                    let url = URL(string: resource)
+                    imageView.kf.setImage(with: url )
                 } else {
                     imageView.image = UIImage(named: "sample_business_image")
                 }

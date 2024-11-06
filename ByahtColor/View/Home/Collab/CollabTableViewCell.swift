@@ -7,7 +7,7 @@
 
 import UIKit
 import SnapKit
-import AlamofireImage
+import Kingfisher
 
 class CollabTableViewCell: UITableViewCell {
     weak var delegate: CollabTableViewCellDelegate?
@@ -66,11 +66,12 @@ class CollabTableViewCell: UITableViewCell {
                 make.width.equalTo(widthSize)
                 make.height.equalTo(widthSize)
             }
-
-            // URL 문자열을 URL 객체로 변환
-            let url = "\(Bundle.main.TEST_URL)/image\( list[i].imageList?.first ?? "" )"
+            
             let imageView = UIImageView()
-            imageView.loadImage(from: url)
+            if let path = list[i].imageList?.first{
+                let url = URL(string: path)
+                imageView.kf.setImage(with: url)
+            }
             imageView.contentMode = .scaleAspectFill
             imageView.layer.cornerRadius = 4
             imageView.clipsToBounds = true

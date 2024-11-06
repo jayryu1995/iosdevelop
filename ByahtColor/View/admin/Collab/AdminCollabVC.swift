@@ -166,7 +166,7 @@ class AdminCollabVC: UIViewController, CollabFilterVCDelegate {
 
         // 데이터 다시 로드
         self.view.bringSubviewToFront(loadingIndicator!)
-        viewModel.loadData(url: url, userId: User.shared.id ?? "", styles: filter, sns: filter2)
+        viewModel.loadData(url: url, userId: User.shared.id ?? "", styles: filter, sns: filter2,nation: nil)
         view.bringSubviewToFront(uploadButton2)
     }
 

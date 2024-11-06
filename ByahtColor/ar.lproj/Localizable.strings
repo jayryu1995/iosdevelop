@@ -162,7 +162,7 @@
 "login_str2" = "Inquiry about Enrollment for Non-Korean Companies: \nbkim@byaht.com";
 "login_str3" = "Please enter your ID or password.";
 "login_str4" = "Login information is incorrect.";
-"login_mcn" = "MCN∙Agency Login";
+"login_mcn" = "MCN Login";
 "login_mcn_str" = "MCN membership registration is available through Byat.\n bkim@byaht.com";
 
 //FindAccountVC

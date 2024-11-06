@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 import AlamofireImage
 import Alamofire
+import Kingfisher
 
 class TalkCommentTableCell: UITableViewCell, UIScrollViewDelegate {
     weak var delegate: TalkCommentTableCellDelegate?
@@ -66,8 +67,9 @@ class TalkCommentTableCell: UITableViewCell, UIScrollViewDelegate {
     private let profileIcon: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "icon_profile2")
-        image.contentMode = .scaleAspectFit
+        image.contentMode = .scaleAspectFill
         image.layer.cornerRadius = 12
+        image.clipsToBounds = true
         return image
     }()
 
@@ -104,6 +106,7 @@ class TalkCommentTableCell: UITableViewCell, UIScrollViewDelegate {
     override func layoutSubviews() {
         super.layoutSubviews()
         contentView.layoutIfNeeded()  // 뷰가 자신의 크기를 다시 계산하도록 함
+        profileIcon.layer.cornerRadius = profileIcon.frame.size.width / 2
     }
 
     private func setupUI() {
@@ -221,10 +224,15 @@ class TalkCommentTableCell: UITableViewCell, UIScrollViewDelegate {
         self.likeFlag = comment.isLiked ?? false
         self.likeCount = comment.like_count ?? 0
 
-        let url = "\(Bundle.main.TEST_URL)/image\( comment.imageUrl ?? "" )"
+        
         let date = comment.regi_date ?? ""
 
-        if let url = URL(string: url) { profileIcon.af.setImage(withURL: url) }
+        print(comment.imageUrl)
+        if let path = comment.imageUrl{
+            if let url = URL(string: path) { profileIcon.kf.setImage(with: url) }
+        }
+        
+        
         self.likeButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         self.dateLabel.text = CustomFunction().formatDate(date)
         moreButton.addTarget(self, action: #selector(moreButtonTapped), for: .touchUpInside)

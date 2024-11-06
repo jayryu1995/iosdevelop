@@ -127,9 +127,14 @@ class CollabVC: UIViewController, CollabFilterVCDelegate {
         default: url = "\(Bundle.main.TEST_URL)/snap/select"
         }
 
+        var nation = getLanguageNumber()
+        
+        if nation != "0" && nation != "1" && nation != "4"{
+            nation = "6"
+        }
         // 데이터 다시 로드
         self.view.bringSubviewToFront(loadingIndicator!)
-        viewModel.loadData(url: url, userId: User.shared.id ?? "", styles: filter, sns: filter2)
+        viewModel.loadData(url: url, userId: User.shared.id ?? "", styles: filter, sns: filter2, nation: nation)
 
     }
 

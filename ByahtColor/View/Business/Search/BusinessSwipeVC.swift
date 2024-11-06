@@ -15,7 +15,8 @@ class BusinessSwipeVC: UIViewController {
     private var currentPageIndex: Int = 0
     private let viewModel = BusinessViewModel()
     private var profileList: [InfluenceProfileDto] = []
-
+    private var isTransitioning = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
@@ -131,6 +132,7 @@ extension BusinessSwipeVC: UIPageViewControllerDataSource, UIPageViewControllerD
     // MARK: - UIPageViewControllerDataSource
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
+        guard !isTransitioning else { return nil }
         guard let viewControllerIndex = pages.firstIndex(of: viewController) else { return nil }
         let previousIndex = viewControllerIndex - 1
         guard previousIndex >= 0 else { return nil }
@@ -140,6 +142,7 @@ extension BusinessSwipeVC: UIPageViewControllerDataSource, UIPageViewControllerD
     }
 
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
+        guard !isTransitioning else { return nil }
         guard let viewControllerIndex = pages.firstIndex(of: viewController) else { return nil }
         let nextIndex = viewControllerIndex + 1
         guard nextIndex < pages.count else { return nil }
@@ -153,8 +156,14 @@ extension BusinessSwipeVC: UIPageViewControllerDataSource, UIPageViewControllerD
         if completed, let visibleViewController = pageViewController.viewControllers?.first, let index = pages.firstIndex(of: visibleViewController) {
             currentPageIndex = index
         }
+        isTransitioning = false // 전환이 완료되었으므로 상호작용을 다시 활성화
     }
 
+    // 전환이 시작되면 상호작용 비활성화
+    func pageViewController(_ pageViewController: UIPageViewController, willTransitionTo pendingViewControllers: [UIViewController]) {
+        isTransitioning = true
+    }
+    
     func floatingPanelWillBeginAttracting(_ fpc: FloatingPanelController, to state: FloatingPanelState) {
         if state == FloatingPanelState.half {
             self.navigationController?.navigationBar.isHidden = false

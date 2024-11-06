@@ -15,11 +15,14 @@ class InitialViewController: UIViewController {
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String
     let viewModel = BusinessViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         self.navigationController?.setNavigationBarHidden(true, animated: false)
 
+        
+        
         if let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
 
             let appVersionCheck = AppVersionCheck()
@@ -45,6 +48,8 @@ class InitialViewController: UIViewController {
         } else {
             self.log(message: "[Error] Can not find current version. ")
         }
+        
+        
 
     }
 
