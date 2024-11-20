@@ -1,5 +1,4 @@
 ${PODS_ROOT}/Target Support Files/Pods-ByahtColor/Pods-ByahtColor-resources.sh
-${PODS_CONFIGURATION_BUILD_DIR}/Alamofire/Alamofire.bundle
 ${PODS_CONFIGURATION_BUILD_DIR}/AppAuth/AppAuthCore_Privacy.bundle
 ${BUILT_PRODUCTS_DIR}/DropDown/DropDown.framework/DropDownCell.nib
 ${PODS_CONFIGURATION_BUILD_DIR}/FirebaseAuth/FirebaseAuth_Privacy.bundle

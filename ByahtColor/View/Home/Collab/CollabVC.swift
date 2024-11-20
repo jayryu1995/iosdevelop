@@ -9,7 +9,6 @@ import SnapKit
 import UIKit
 import FloatingPanel
 import Alamofire
-import AlamofireImage
 import FirebaseMessaging
 import Combine
 

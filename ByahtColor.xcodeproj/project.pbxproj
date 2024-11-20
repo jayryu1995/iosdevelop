@@ -79,6 +79,18 @@
 		1F515E8E2B56819C001A9364 /* BoardDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F515E8D2B56819C001A9364 /* BoardDto.swift */; };
 		1F515E902B56B518001A9364 /* TalkReadVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F515E8F2B56B517001A9364 /* TalkReadVC.swift */; };
 		1F515E932B57CD92001A9364 /* CollabVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F515E922B57CD92001A9364 /* CollabVC.swift */; };
+		1F57E33E2CE73BA200129B3F /* KakaoSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 1F57E33D2CE73BA200129B3F /* KakaoSDK */; };
+		1F57E3402CE73BA200129B3F /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 1F57E33F2CE73BA200129B3F /* KakaoSDKAuth */; };
+		1F57E3422CE73BA200129B3F /* KakaoSDKCert in Frameworks */ = {isa = PBXBuildFile; productRef = 1F57E3412CE73BA200129B3F /* KakaoSDKCert */; };
+		1F57E3442CE73BA200129B3F /* KakaoSDKCertCore in Frameworks */ = {isa = PBXBuildFile; productRef = 1F57E3432CE73BA200129B3F /* KakaoSDKCertCore */; };
+		1F57E3462CE73BA200129B3F /* KakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 1F57E3452CE73BA200129B3F /* KakaoSDKCommon */; };
+		1F57E3482CE73BA200129B3F /* KakaoSDKFriend in Frameworks */ = {isa = PBXBuildFile; productRef = 1F57E3472CE73BA200129B3F /* KakaoSDKFriend */; };
+		1F57E34A2CE73BA200129B3F /* KakaoSDKFriendCore in Frameworks */ = {isa = PBXBuildFile; productRef = 1F57E3492CE73BA200129B3F /* KakaoSDKFriendCore */; };
+		1F57E34C2CE73BA200129B3F /* KakaoSDKNavi in Frameworks */ = {isa = PBXBuildFile; productRef = 1F57E34B2CE73BA200129B3F /* KakaoSDKNavi */; };
+		1F57E34E2CE73BA200129B3F /* KakaoSDKShare in Frameworks */ = {isa = PBXBuildFile; productRef = 1F57E34D2CE73BA200129B3F /* KakaoSDKShare */; };
+		1F57E3502CE73BA200129B3F /* KakaoSDKTalk in Frameworks */ = {isa = PBXBuildFile; productRef = 1F57E34F2CE73BA200129B3F /* KakaoSDKTalk */; };
+		1F57E3522CE73BA200129B3F /* KakaoSDKTemplate in Frameworks */ = {isa = PBXBuildFile; productRef = 1F57E3512CE73BA200129B3F /* KakaoSDKTemplate */; };
+		1F57E3542CE73BA200129B3F /* KakaoSDKUser in Frameworks */ = {isa = PBXBuildFile; productRef = 1F57E3532CE73BA200129B3F /* KakaoSDKUser */; };
 		1F591BD42B57D89D00CD29B9 /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F591BD32B57D89D00CD29B9 /* UILabelExtension.swift */; };
 		1F591BE02B5A65DB00CD29B9 /* CustomFloatingPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F591BDF2B5A65DB00CD29B9 /* CustomFloatingPanel.swift */; };
 		1F591BE22B5CF49300CD29B9 /* CollabTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F591BE12B5CF49300CD29B9 /* CollabTableViewCell.swift */; };
@@ -102,6 +114,11 @@
 		1F59640B2C3668D700FD8419 /* BusinessDetailDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F59640A2C3668D700FD8419 /* BusinessDetailDto.swift */; };
 		1F5A06782B7DB546005E6193 /* TalkModifyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5A06772B7DB546005E6193 /* TalkModifyVC.swift */; };
 		1F61548F2C65EAB4001A9285 /* splash.png in Resources */ = {isa = PBXBuildFile; fileRef = 1F61548E2C65EAB4001A9285 /* splash.png */; };
+		1F65D20E2CE742B600405A43 /* KakaoSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 1F65D20D2CE742B600405A43 /* KakaoSDK */; };
+		1F65D2102CE742B600405A43 /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 1F65D20F2CE742B600405A43 /* KakaoSDKAuth */; };
+		1F65D2122CE742B600405A43 /* KakaoSDKCert in Frameworks */ = {isa = PBXBuildFile; productRef = 1F65D2112CE742B600405A43 /* KakaoSDKCert */; };
+		1F65D2142CE742B600405A43 /* KakaoSDKCertCore in Frameworks */ = {isa = PBXBuildFile; productRef = 1F65D2132CE742B600405A43 /* KakaoSDKCertCore */; };
+		1F65D2162CE742B600405A43 /* KakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 1F65D2152CE742B600405A43 /* KakaoSDKCommon */; };
 		1F69859E2CACF3A200A2A6EE /* McnChatListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F69859D2CACF3A200A2A6EE /* McnChatListVC.swift */; };
 		1F6985A02CB8D3F800A2A6EE /* BusinessAccountVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F69859F2CB8D3F800A2A6EE /* BusinessAccountVC.swift */; };
 		1F6F46ED2B98110A00E63548 /* UnderlinedTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F6F46EC2B98110A00E63548 /* UnderlinedTextField.swift */; };
@@ -168,6 +185,7 @@
 		1F7EBA052CAA972E002B8D05 /* McnChannelList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7EBA042CAA972E002B8D05 /* McnChannelList.swift */; };
 		1F7EBA082CAA97E4002B8D05 /* McnChannelListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F7EBA072CAA97E4002B8D05 /* McnChannelListCell.swift */; };
 		1F8169692BA0023E009B06A0 /* ArrayExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8169682BA0023E009B06A0 /* ArrayExtension.swift */; };
+		1F83E9F42CDE0E9300117238 /* ImageLoadManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F83E9F32CDE0E9300117238 /* ImageLoadManager.swift */; };
 		1F8AFD6F2B6B959F005A6491 /* ImageCacheManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8AFD6E2B6B959F005A6491 /* ImageCacheManager.swift */; };
 		1F8AFD722B6B95D8005A6491 /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8AFD712B6B95D8005A6491 /* UIImageViewExtension.swift */; };
 		1F8AFD742B6BA3C7005A6491 /* CollabCommentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F8AFD732B6BA3C7005A6491 /* CollabCommentVC.swift */; };
@@ -236,6 +254,11 @@
 		1FD750E62B86E8570062F882 /* CustomErrorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FD750E52B86E8570062F882 /* CustomErrorVC.swift */; };
 		1FE26D2D2C4916930009C76E /* BusinessDataDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE26D2C2C4916930009C76E /* BusinessDataDto.swift */; };
 		1FE6100B2B7DDDB400F903E5 /* DeleteAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FE6100A2B7DDDB400F903E5 /* DeleteAlertVC.swift */; };
+		1FEC33B32CEB46FA000901EC /* KakaoAuthVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEC33B22CEB46FA000901EC /* KakaoAuthVM.swift */; };
+		1FEC33B62CED9F28000901EC /* TikTokOpenAuthSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 1FEC33B52CED9F28000901EC /* TikTokOpenAuthSDK */; };
+		1FEC33B82CED9F28000901EC /* TikTokOpenSDKCore in Frameworks */ = {isa = PBXBuildFile; productRef = 1FEC33B72CED9F28000901EC /* TikTokOpenSDKCore */; };
+		1FEC33BA2CED9F28000901EC /* TikTokOpenShareSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 1FEC33B92CED9F28000901EC /* TikTokOpenShareSDK */; };
+		1FEC33BD2CEDB5FB000901EC /* TiktokVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEC33BC2CEDB5F1000901EC /* TiktokVM.swift */; };
 		1FFD63A82BB51566005BDFFE /* ApplicationStateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFD63A72BB51566005BDFFE /* ApplicationStateVC.swift */; };
 		1FFD63AC2BB531AD005BDFFE /* CollabTableViewCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFD63AB2BB531AD005BDFFE /* CollabTableViewCell2.swift */; };
 		1FFD63AE2BB65855005BDFFE /* ReviewWriteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFD63AD2BB65855005BDFFE /* ReviewWriteVC.swift */; };
@@ -423,6 +446,7 @@
 		1F7EBA042CAA972E002B8D05 /* McnChannelList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = McnChannelList.swift; sourceTree = "<group>"; };
 		1F7EBA072CAA97E4002B8D05 /* McnChannelListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = McnChannelListCell.swift; sourceTree = "<group>"; };
 		1F8169682BA0023E009B06A0 /* ArrayExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrayExtension.swift; sourceTree = "<group>"; };
+		1F83E9F32CDE0E9300117238 /* ImageLoadManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoadManager.swift; sourceTree = "<group>"; };
 		1F8AFD6E2B6B959F005A6491 /* ImageCacheManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheManager.swift; sourceTree = "<group>"; };
 		1F8AFD712B6B95D8005A6491 /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		1F8AFD732B6BA3C7005A6491 /* CollabCommentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollabCommentVC.swift; sourceTree = "<group>"; };
@@ -494,6 +518,8 @@
 		1FD750E52B86E8570062F882 /* CustomErrorVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomErrorVC.swift; sourceTree = "<group>"; };
 		1FE26D2C2C4916930009C76E /* BusinessDataDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessDataDto.swift; sourceTree = "<group>"; };
 		1FE6100A2B7DDDB400F903E5 /* DeleteAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeleteAlertVC.swift; sourceTree = "<group>"; };
+		1FEC33B22CEB46FA000901EC /* KakaoAuthVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoAuthVM.swift; sourceTree = "<group>"; };
+		1FEC33BC2CEDB5F1000901EC /* TiktokVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TiktokVM.swift; sourceTree = "<group>"; };
 		1FF2F4742B723C4400479515 /* ByahtColorRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ByahtColorRelease.entitlements; sourceTree = "<group>"; };
 		1FF2F4792B731A2300479515 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		1FF2F47A2B731A2300479515 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -519,7 +545,27 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1FEC33B82CED9F28000901EC /* TikTokOpenSDKCore in Frameworks */,
 				AB73CABB8CB1ADCE7924F34F /* Pods_ByahtColor.framework in Frameworks */,
+				1F65D2142CE742B600405A43 /* KakaoSDKCertCore in Frameworks */,
+				1F57E3482CE73BA200129B3F /* KakaoSDKFriend in Frameworks */,
+				1F57E33E2CE73BA200129B3F /* KakaoSDK in Frameworks */,
+				1F65D2162CE742B600405A43 /* KakaoSDKCommon in Frameworks */,
+				1F65D2122CE742B600405A43 /* KakaoSDKCert in Frameworks */,
+				1F57E34C2CE73BA200129B3F /* KakaoSDKNavi in Frameworks */,
+				1F57E3442CE73BA200129B3F /* KakaoSDKCertCore in Frameworks */,
+				1F57E3522CE73BA200129B3F /* KakaoSDKTemplate in Frameworks */,
+				1FEC33BA2CED9F28000901EC /* TikTokOpenShareSDK in Frameworks */,
+				1F57E34A2CE73BA200129B3F /* KakaoSDKFriendCore in Frameworks */,
+				1F57E3402CE73BA200129B3F /* KakaoSDKAuth in Frameworks */,
+				1F57E3542CE73BA200129B3F /* KakaoSDKUser in Frameworks */,
+				1F57E3502CE73BA200129B3F /* KakaoSDKTalk in Frameworks */,
+				1F57E34E2CE73BA200129B3F /* KakaoSDKShare in Frameworks */,
+				1FEC33B62CED9F28000901EC /* TikTokOpenAuthSDK in Frameworks */,
+				1F57E3462CE73BA200129B3F /* KakaoSDKCommon in Frameworks */,
+				1F57E3422CE73BA200129B3F /* KakaoSDKCert in Frameworks */,
+				1F65D20E2CE742B600405A43 /* KakaoSDK in Frameworks */,
+				1F65D2102CE742B600405A43 /* KakaoSDKAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -558,6 +604,7 @@
 				1F4BB42B2A4172D5007B8DB1 /* Logging.swift */,
 				1F8AFD6E2B6B959F005A6491 /* ImageCacheManager.swift */,
 				1F9DF1302C645F3C00F11474 /* VideoCacheManager.swift */,
+				1F83E9F32CDE0E9300117238 /* ImageLoadManager.swift */,
 			);
 			name = modules;
 			sourceTree = "<group>";
@@ -658,6 +705,8 @@
 		1F48F7312A1C7DC800E855CE /* ByahtColor */ = {
 			isa = PBXGroup;
 			children = (
+				1FEC33BB2CEDB5E5000901EC /* Tiktok */,
+				1FEC33B12CEB46D3000901EC /* Kakao */,
 				1FAF526B2C7DCA9E00139B07 /* Youtube */,
 				1F773E682C4F4AF5008CF7F8 /* Sendbird */,
 				1FF2F4742B723C4400479515 /* ByahtColorRelease.entitlements */,
@@ -1066,6 +1115,22 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		1FEC33B12CEB46D3000901EC /* Kakao */ = {
+			isa = PBXGroup;
+			children = (
+				1FEC33B22CEB46FA000901EC /* KakaoAuthVM.swift */,
+			);
+			path = Kakao;
+			sourceTree = "<group>";
+		};
+		1FEC33BB2CEDB5E5000901EC /* Tiktok */ = {
+			isa = PBXGroup;
+			children = (
+				1FEC33BC2CEDB5F1000901EC /* TiktokVM.swift */,
+			);
+			path = Tiktok;
+			sourceTree = "<group>";
+		};
 		3EDE195AE919882DDC6042E3 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1102,6 +1167,28 @@
 			dependencies = (
 			);
 			name = ByahtColor;
+			packageProductDependencies = (
+				1F57E33D2CE73BA200129B3F /* KakaoSDK */,
+				1F57E33F2CE73BA200129B3F /* KakaoSDKAuth */,
+				1F57E3412CE73BA200129B3F /* KakaoSDKCert */,
+				1F57E3432CE73BA200129B3F /* KakaoSDKCertCore */,
+				1F57E3452CE73BA200129B3F /* KakaoSDKCommon */,
+				1F57E3472CE73BA200129B3F /* KakaoSDKFriend */,
+				1F57E3492CE73BA200129B3F /* KakaoSDKFriendCore */,
+				1F57E34B2CE73BA200129B3F /* KakaoSDKNavi */,
+				1F57E34D2CE73BA200129B3F /* KakaoSDKShare */,
+				1F57E34F2CE73BA200129B3F /* KakaoSDKTalk */,
+				1F57E3512CE73BA200129B3F /* KakaoSDKTemplate */,
+				1F57E3532CE73BA200129B3F /* KakaoSDKUser */,
+				1F65D20D2CE742B600405A43 /* KakaoSDK */,
+				1F65D20F2CE742B600405A43 /* KakaoSDKAuth */,
+				1F65D2112CE742B600405A43 /* KakaoSDKCert */,
+				1F65D2132CE742B600405A43 /* KakaoSDKCertCore */,
+				1F65D2152CE742B600405A43 /* KakaoSDKCommon */,
+				1FEC33B52CED9F28000901EC /* TikTokOpenAuthSDK */,
+				1FEC33B72CED9F28000901EC /* TikTokOpenSDKCore */,
+				1FEC33B92CED9F28000901EC /* TikTokOpenShareSDK */,
+			);
 			productName = ByahtColor;
 			productReference = 1F48F72F2A1C7DC800E855CE /* ByahtColor.app */;
 			productType = "com.apple.product-type.application";
@@ -1133,6 +1220,10 @@
 				ja,
 			);
 			mainGroup = 1F48F7262A1C7DC800E855CE;
+			packageReferences = (
+				1F57E33C2CE73BA200129B3F /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
+				1FEC33B42CED9F28000901EC /* XCRemoteSwiftPackageReference "tiktok-opensdk-ios" */,
+			);
 			productRefGroup = 1F48F7302A1C7DC800E855CE /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -1263,6 +1354,7 @@
 				1FAF639A2C3F751700D0FFEE /* InfluenceProfileCell.swift in Sources */,
 				1F5963FF2C2FFF8400FD8419 /* BusinessLogoutVC.swift in Sources */,
 				1FAF639E2C3F8A3200D0FFEE /* TargetCell.swift in Sources */,
+				1F83E9F42CDE0E9300117238 /* ImageLoadManager.swift in Sources */,
 				1FAF52542C759DE100139B07 /* ProposalSwipePageVC.swift in Sources */,
 				1F4C66FA2C22BE4900A960AF /* InfluenceHomeVC.swift in Sources */,
 				1F773EA52C5A30A8008CF7F8 /* FourthOnboardingVC.swift in Sources */,
@@ -1340,6 +1432,7 @@
 				1FD750E62B86E8570062F882 /* CustomErrorVC.swift in Sources */,
 				1F415C7B2A7A387600FBA354 /* UIImageExtension.swift in Sources */,
 				1F773E762C4F5FD9008CF7F8 /* ChatsListVC.swift in Sources */,
+				1FEC33B32CEB46FA000901EC /* KakaoAuthVM.swift in Sources */,
 				1FAF63972C3F720D00D0FFEE /* NotificationExtension.swift in Sources */,
 				1F515E8E2B56819C001A9364 /* BoardDto.swift in Sources */,
 				1F591BE62B5E6AE200CD29B9 /* CollabFilterVC.swift in Sources */,
@@ -1402,6 +1495,7 @@
 				1F773E7E2C4F843A008CF7F8 /* TimestampStorage.swift in Sources */,
 				1F8169692BA0023E009B06A0 /* ArrayExtension.swift in Sources */,
 				1F773EA72C5C7AFE008CF7F8 /* InfluenceDataDto.swift in Sources */,
+				1FEC33BD2CEDB5FB000901EC /* TiktokVM.swift in Sources */,
 				1F591BE22B5CF49300CD29B9 /* CollabTableViewCell.swift in Sources */,
 				1F08AFCA2B440B720062FAF4 /* RadiusUIView.swift in Sources */,
 				1FFD63A82BB51566005BDFFE /* ApplicationStateVC.swift in Sources */,
@@ -1639,7 +1733,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ByahtColor/ByahtColor.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2024.10.28;
+				CURRENT_PROJECT_VERSION = 2024.11.18;
 				DEVELOPMENT_TEAM = CS98CK3779;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1663,7 +1757,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.1.7;
+				MARKETING_VERSION = 3.1.8;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.byaht.ByahtColor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1685,7 +1779,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ByahtColor/ByahtColorRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2024.10.28;
+				CURRENT_PROJECT_VERSION = 2024.11.18;
 				DEVELOPMENT_TEAM = CS98CK3779;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1709,7 +1803,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.1.7;
+				MARKETING_VERSION = 3.1.8;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.byaht.ByahtColor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1745,6 +1839,128 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1F57E33C2CE73BA200129B3F /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kakao/kakao-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.23.0;
+			};
+		};
+		1FEC33B42CED9F28000901EC /* XCRemoteSwiftPackageReference "tiktok-opensdk-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/tiktok/tiktok-opensdk-ios";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1F57E33D2CE73BA200129B3F /* KakaoSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1F57E33C2CE73BA200129B3F /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDK;
+		};
+		1F57E33F2CE73BA200129B3F /* KakaoSDKAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1F57E33C2CE73BA200129B3F /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKAuth;
+		};
+		1F57E3412CE73BA200129B3F /* KakaoSDKCert */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1F57E33C2CE73BA200129B3F /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKCert;
+		};
+		1F57E3432CE73BA200129B3F /* KakaoSDKCertCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1F57E33C2CE73BA200129B3F /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKCertCore;
+		};
+		1F57E3452CE73BA200129B3F /* KakaoSDKCommon */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1F57E33C2CE73BA200129B3F /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKCommon;
+		};
+		1F57E3472CE73BA200129B3F /* KakaoSDKFriend */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1F57E33C2CE73BA200129B3F /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKFriend;
+		};
+		1F57E3492CE73BA200129B3F /* KakaoSDKFriendCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1F57E33C2CE73BA200129B3F /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKFriendCore;
+		};
+		1F57E34B2CE73BA200129B3F /* KakaoSDKNavi */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1F57E33C2CE73BA200129B3F /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKNavi;
+		};
+		1F57E34D2CE73BA200129B3F /* KakaoSDKShare */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1F57E33C2CE73BA200129B3F /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKShare;
+		};
+		1F57E34F2CE73BA200129B3F /* KakaoSDKTalk */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1F57E33C2CE73BA200129B3F /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKTalk;
+		};
+		1F57E3512CE73BA200129B3F /* KakaoSDKTemplate */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1F57E33C2CE73BA200129B3F /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKTemplate;
+		};
+		1F57E3532CE73BA200129B3F /* KakaoSDKUser */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1F57E33C2CE73BA200129B3F /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKUser;
+		};
+		1F65D20D2CE742B600405A43 /* KakaoSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1F57E33C2CE73BA200129B3F /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDK;
+		};
+		1F65D20F2CE742B600405A43 /* KakaoSDKAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1F57E33C2CE73BA200129B3F /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKAuth;
+		};
+		1F65D2112CE742B600405A43 /* KakaoSDKCert */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1F57E33C2CE73BA200129B3F /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKCert;
+		};
+		1F65D2132CE742B600405A43 /* KakaoSDKCertCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1F57E33C2CE73BA200129B3F /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKCertCore;
+		};
+		1F65D2152CE742B600405A43 /* KakaoSDKCommon */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1F57E33C2CE73BA200129B3F /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKCommon;
+		};
+		1FEC33B52CED9F28000901EC /* TikTokOpenAuthSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1FEC33B42CED9F28000901EC /* XCRemoteSwiftPackageReference "tiktok-opensdk-ios" */;
+			productName = TikTokOpenAuthSDK;
+		};
+		1FEC33B72CED9F28000901EC /* TikTokOpenSDKCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1FEC33B42CED9F28000901EC /* XCRemoteSwiftPackageReference "tiktok-opensdk-ios" */;
+			productName = TikTokOpenSDKCore;
+		};
+		1FEC33B92CED9F28000901EC /* TikTokOpenShareSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1FEC33B42CED9F28000901EC /* XCRemoteSwiftPackageReference "tiktok-opensdk-ios" */;
+			productName = TikTokOpenShareSDK;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1F48F7272A1C7DC800E855CE /* Project object */;
 }

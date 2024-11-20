@@ -10,7 +10,7 @@
 		</data>
 		<key>Resources/Info.plist</key>
 		<data>
-		7A+p1NSYEFE3hS2XIHqYsl0mJH4=
+		veO8sRM2hlxztoRfmle9MA/RfIM=
 		</data>
 		<key>Resources/PrivacyInfo.xcprivacy</key>
 		<data>
@@ -23,77 +23,77 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			F/nAK5JSppQnBdeIVFvUC+quhvRq3xRkxJXSt7pANqw=
+			ROCAibBUxfRBXAjn6y/qK7t2kjRCoz905BGH0eiMH3k=
 			</data>
 		</dict>
 		<key>Modules/SendbirdChatSDK.swiftmodule/arm64-apple-macos.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			E+tATWO3jo1wn/b3vTZD1Zzx4vwmGEvC0L+GH7VD5aM=
+			e3a/5Ggd9jtCqzcqazb4OeEoQVww8L35zbkAHZPNqFk=
 			</data>
 		</dict>
 		<key>Modules/SendbirdChatSDK.swiftmodule/arm64-apple-macos.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			EWvTUxJSGfivaHbXDnm/4A4RpTVOCtML+raeY3+tOpg=
+			1Ii9Nqgrl9+ZbaR6zJkrzpzgVbnlvQ01uo+HSdOaprg=
 			</data>
 		</dict>
 		<key>Modules/SendbirdChatSDK.swiftmodule/arm64-apple-macos.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			8AKE7VKiWATfZ/TmwsqOtEhwH75RtYzfWcpDHBktCLk=
+			jc73RP9nmWMX4wnfOCsifDNFB4/yX/5k6UYpPjYphz4=
 			</data>
 		</dict>
 		<key>Modules/SendbirdChatSDK.swiftmodule/arm64-apple-macos.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			EWvTUxJSGfivaHbXDnm/4A4RpTVOCtML+raeY3+tOpg=
+			1Ii9Nqgrl9+ZbaR6zJkrzpzgVbnlvQ01uo+HSdOaprg=
 			</data>
 		</dict>
 		<key>Modules/SendbirdChatSDK.swiftmodule/arm64-apple-macos.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			2vHhLLOtWcawOI03soDOTelWvVAqPMoAYUM+RLlJ9qc=
+			PKJq02tcRsynu2csdlSjA5syGz5ANkzrK1FHH7wbe/I=
 			</data>
 		</dict>
 		<key>Modules/SendbirdChatSDK.swiftmodule/x86_64-apple-macos.abi.json</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			wR7bdwi61IY9tPW/WVO+6+rls+/b4GC9ab2Gyni6wiI=
+			jFKoqsxmuEiA8Mf4F2+sqUgWSkWw0fVtmQQ7CPAhrdk=
 			</data>
 		</dict>
 		<key>Modules/SendbirdChatSDK.swiftmodule/x86_64-apple-macos.private.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			i40YVYN/dZHwLaiebY6GhWCOgiCE1vxhSTEHw12pkn8=
+			bLNcRz8PbUP/JYC4UXKoHWgUkGAZAFK4phPk1KKoRJI=
 			</data>
 		</dict>
 		<key>Modules/SendbirdChatSDK.swiftmodule/x86_64-apple-macos.swiftdoc</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			gC3nTnKFsvNr4msL2ly7vIZ5J3OW4e3G/lOWrGfWqjU=
+			VfkECjNan+gXjmsXYateDaTchX7r1pllY6fl01SozGs=
 			</data>
 		</dict>
 		<key>Modules/SendbirdChatSDK.swiftmodule/x86_64-apple-macos.swiftinterface</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			i40YVYN/dZHwLaiebY6GhWCOgiCE1vxhSTEHw12pkn8=
+			bLNcRz8PbUP/JYC4UXKoHWgUkGAZAFK4phPk1KKoRJI=
 			</data>
 		</dict>
 		<key>Modules/SendbirdChatSDK.swiftmodule/x86_64-apple-macos.swiftmodule</key>
 		<dict>
 			<key>hash2</key>
 			<data>
-			7KK6RNBAxlnPNZtLDBCNsHFT9zO+LB65ls8wptYrF2c=
+			X73x3qrBV+OV8/p/tozBPPDXVslVAVbZjRqb7+G/piI=
 			</data>
 		</dict>
 		<key>Modules/module.modulemap</key>
@@ -114,7 +114,7 @@
 		<dict>
 			<key>hash2</key>
 			<data>
-			HQ66ILrglKCRYGYxmnWE79k79QH4Zwy3Ba5HMe212TA=
+			m8r6xdd2+mABOYHMlCRCeAtB5QmfsOgMB0QqTP7GZWE=
 			</data>
 		</dict>
 		<key>Resources/PrivacyInfo.xcprivacy</key>

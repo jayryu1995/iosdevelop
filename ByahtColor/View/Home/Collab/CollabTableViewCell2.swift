@@ -7,7 +7,6 @@
 
 import UIKit
 import SnapKit
-import AlamofireImage
 
 class CollabTableViewCell2: UITableViewCell {
     weak var delegate: CollabTableViewCell2Delegate?

@@ -1,8 +1,8 @@
 {
   "ABIRoot": {
     "kind": "Root",
-    "name": "TopLevel",
-    "printedName": "TopLevel",
+    "name": "FBSDKCoreKit",
+    "printedName": "FBSDKCoreKit",
     "children": [
       {
         "kind": "Import",
@@ -190,6 +190,20 @@
           },
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -316,6 +330,22 @@
         "declAttributes": [
           "Final",
           "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          }
         ]
       },
       {
@@ -896,6 +926,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -1048,6 +1092,22 @@
         "declAttributes": [
           "Final",
           "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          }
         ]
       },
       {
@@ -1490,6 +1550,58 @@
           },
           {
             "kind": "Var",
+            "name": "maxDepth",
+            "printedName": "maxDepth",
+            "children": [
+              {
+                "kind": "TypeNominal",
+                "name": "Int",
+                "printedName": "Swift.Int",
+                "usr": "s:Si"
+              }
+            ],
+            "declKind": "Var",
+            "usr": "c:@M@FBSDKCoreKit@objc(cs)FBSDKAppLinkNavigation(cpy)maxDepth",
+            "mangledName": "$s12FBSDKCoreKit17AppLinkNavigationC8maxDepthSivpZ",
+            "moduleName": "FBSDKCoreKit",
+            "static": true,
+            "declAttributes": [
+              "HasInitialValue",
+              "Final",
+              "HasStorage",
+              "ObjC"
+            ],
+            "isLet": true,
+            "hasStorage": true,
+            "accessors": [
+              {
+                "kind": "Accessor",
+                "name": "Get",
+                "printedName": "Get()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Int",
+                    "printedName": "Swift.Int",
+                    "usr": "s:Si"
+                  }
+                ],
+                "declKind": "Accessor",
+                "usr": "c:@M@FBSDKCoreKit@objc(cs)FBSDKAppLinkNavigation(cm)maxDepth",
+                "mangledName": "$s12FBSDKCoreKit17AppLinkNavigationC8maxDepthSivgZ",
+                "moduleName": "FBSDKCoreKit",
+                "static": true,
+                "implicit": true,
+                "declAttributes": [
+                  "Final",
+                  "ObjC"
+                ],
+                "accessorKind": "get"
+              }
+            ]
+          },
+          {
+            "kind": "Var",
             "name": "navigationType",
             "printedName": "navigationType",
             "children": [
@@ -1843,26 +1955,72 @@
           {
             "kind": "Function",
             "name": "navigate",
-            "printedName": "navigate()",
+            "printedName": "navigate(handler:)",
             "children": [
               {
                 "kind": "TypeNominal",
-                "name": "AppLinkNavigationType",
-                "printedName": "FBSDKCoreKit.AppLinkNavigationType",
-                "usr": "c:@E@FBSDKAppLinkNavigationType"
+                "name": "Void",
+                "printedName": "()"
+              },
+              {
+                "kind": "TypeNominal",
+                "name": "Optional",
+                "printedName": "((FBSDKCoreKit.AppLinkNavigationType, (any Swift.Error)?) -> ())?",
+                "children": [
+                  {
+                    "kind": "TypeFunc",
+                    "name": "Function",
+                    "printedName": "(FBSDKCoreKit.AppLinkNavigationType, (any Swift.Error)?) -> ()",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Void",
+                        "printedName": "()"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Tuple",
+                        "printedName": "(FBSDKCoreKit.AppLinkNavigationType, (any Swift.Error)?)",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "AppLinkNavigationType",
+                            "printedName": "FBSDKCoreKit.AppLinkNavigationType",
+                            "usr": "c:@E@FBSDKAppLinkNavigationType"
+                          },
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Optional",
+                            "printedName": "(any Swift.Error)?",
+                            "children": [
+                              {
+                                "kind": "TypeNominal",
+                                "name": "Error",
+                                "printedName": "any Swift.Error",
+                                "usr": "s:s5ErrorP"
+                              }
+                            ],
+                            "usr": "s:Sq"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "usr": "s:Sq"
               }
             ],
             "declKind": "Func",
-            "usr": "s:12FBSDKCoreKit17AppLinkNavigationC8navigateSo08FBSDKAppdE4TypeVyKF",
-            "mangledName": "$s12FBSDKCoreKit17AppLinkNavigationC8navigateSo08FBSDKAppdE4TypeVyKF",
+            "usr": "c:@M@FBSDKCoreKit@objc(cs)FBSDKAppLinkNavigation(im)navigate:",
+            "mangledName": "$s12FBSDKCoreKit17AppLinkNavigationC8navigate7handleryySo08FBSDKAppdE4TypeV_s5Error_pSgtcSg_tF",
             "moduleName": "FBSDKCoreKit",
+            "objc_name": "navigate:",
             "declAttributes": [
               "Final",
               "AccessControl",
-              "NonObjC",
+              "ObjC",
               "RawDocComment"
             ],
-            "throwing": true,
             "funcSelfKind": "NonMutating"
           },
           {
@@ -2030,33 +2188,70 @@
           {
             "kind": "Function",
             "name": "navigate",
-            "printedName": "navigate(to:)",
+            "printedName": "navigate(to:handler:)",
             "children": [
               {
                 "kind": "TypeNominal",
-                "name": "AppLinkNavigationType",
-                "printedName": "FBSDKCoreKit.AppLinkNavigationType",
-                "usr": "c:@E@FBSDKAppLinkNavigationType"
+                "name": "Void",
+                "printedName": "()"
               },
               {
                 "kind": "TypeNominal",
                 "name": "AppLink",
                 "printedName": "FBSDKCoreKit.AppLink",
                 "usr": "c:@M@FBSDKCoreKit@objc(cs)FBSDKAppLink"
+              },
+              {
+                "kind": "TypeFunc",
+                "name": "Function",
+                "printedName": "(FBSDKCoreKit.AppLinkNavigationType, (any Swift.Error)?) -> ()",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Void",
+                    "printedName": "()"
+                  },
+                  {
+                    "kind": "TypeNominal",
+                    "name": "Tuple",
+                    "printedName": "(FBSDKCoreKit.AppLinkNavigationType, (any Swift.Error)?)",
+                    "children": [
+                      {
+                        "kind": "TypeNominal",
+                        "name": "AppLinkNavigationType",
+                        "printedName": "FBSDKCoreKit.AppLinkNavigationType",
+                        "usr": "c:@E@FBSDKAppLinkNavigationType"
+                      },
+                      {
+                        "kind": "TypeNominal",
+                        "name": "Optional",
+                        "printedName": "(any Swift.Error)?",
+                        "children": [
+                          {
+                            "kind": "TypeNominal",
+                            "name": "Error",
+                            "printedName": "any Swift.Error",
+                            "usr": "s:s5ErrorP"
+                          }
+                        ],
+                        "usr": "s:Sq"
+                      }
+                    ]
+                  }
+                ]
               }
             ],
             "declKind": "Func",
-            "usr": "s:12FBSDKCoreKit17AppLinkNavigationC8navigate2toSo08FBSDKAppdE4TypeVAA0cD0C_tKFZ",
-            "mangledName": "$s12FBSDKCoreKit17AppLinkNavigationC8navigate2toSo08FBSDKAppdE4TypeVAA0cD0C_tKFZ",
+            "usr": "c:@M@FBSDKCoreKit@objc(cs)FBSDKAppLinkNavigation(cm)navigateToAppLink:handler:",
+            "mangledName": "$s12FBSDKCoreKit17AppLinkNavigationC8navigate2to7handleryAA0cD0C_ySo08FBSDKAppdE4TypeV_s5Error_pSgtctFZ",
             "moduleName": "FBSDKCoreKit",
             "static": true,
+            "objc_name": "navigateToAppLink:handler:",
             "declAttributes": [
               "Final",
               "AccessControl",
-              "NonObjC",
-              "RawDocComment"
+              "ObjC"
             ],
-            "throwing": true,
             "funcSelfKind": "NonMutating"
           },
           {
@@ -2831,7 +3026,23 @@
             "usr": "s:12FBSDKCoreKit17AppLinkNavigationC16TypeDependenciesV",
             "mangledName": "$s12FBSDKCoreKit17AppLinkNavigationC16TypeDependenciesV",
             "moduleName": "FBSDKCoreKit",
-            "isFromExtension": true
+            "isFromExtension": true,
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              }
+            ]
           },
           {
             "kind": "Var",
@@ -3110,25 +3321,17 @@
         "conformances": [
           {
             "kind": "Conformance",
-            "name": "DependentAsType",
-            "printedName": "DependentAsType",
-            "children": [
-              {
-                "kind": "TypeWitness",
-                "name": "TypeDependencies",
-                "printedName": "TypeDependencies",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "TypeDependencies",
-                    "printedName": "FBSDKCoreKit.AppLinkNavigation.TypeDependencies",
-                    "usr": "s:12FBSDKCoreKit17AppLinkNavigationC16TypeDependenciesV"
-                  }
-                ]
-              }
-            ],
-            "usr": "s:12FBSDKCoreKit15DependentAsTypeP",
-            "mangledName": "$s12FBSDKCoreKit15DependentAsTypeP"
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
           },
           {
             "kind": "Conformance",
@@ -3178,6 +3381,28 @@
             "printedName": "CustomDebugStringConvertible",
             "usr": "s:s28CustomDebugStringConvertibleP",
             "mangledName": "$ss28CustomDebugStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "DependentAsType",
+            "printedName": "DependentAsType",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "TypeDependencies",
+                "printedName": "TypeDependencies",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "TypeDependencies",
+                    "printedName": "FBSDKCoreKit.AppLinkNavigation.TypeDependencies",
+                    "usr": "s:12FBSDKCoreKit17AppLinkNavigationC16TypeDependenciesV"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:12FBSDKCoreKit15DependentAsTypeP",
+            "mangledName": "$s12FBSDKCoreKit15DependentAsTypeP"
           }
         ]
       },
@@ -3909,6 +4134,20 @@
             "conformances": [
               {
                 "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
+              {
+                "kind": "Conformance",
                 "name": "Sendable",
                 "printedName": "Sendable",
                 "usr": "s:s8SendableP",
@@ -4191,6 +4430,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -4427,6 +4680,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -4850,6 +5117,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -4997,6 +5278,22 @@
         "moduleName": "FBSDKCoreKit",
         "declAttributes": [
           "Final"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          }
         ]
       },
       {
@@ -5084,6 +5381,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -6186,6 +6497,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -6508,7 +6833,23 @@
         "declKind": "Protocol",
         "usr": "s:12FBSDKCoreKit29AuthenticationSessionProtocolP",
         "mangledName": "$s12FBSDKCoreKit29AuthenticationSessionProtocolP",
-        "moduleName": "FBSDKCoreKit"
+        "moduleName": "FBSDKCoreKit",
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
+        ]
       },
       {
         "kind": "Import",
@@ -6838,6 +7179,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -6856,6 +7211,13 @@
             "printedName": "Sendable",
             "usr": "s:s8SendableP",
             "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "BitwiseCopyable",
+            "printedName": "BitwiseCopyable",
+            "usr": "s:s15BitwiseCopyableP",
+            "mangledName": "$ss15BitwiseCopyableP"
           }
         ]
       },
@@ -8654,7 +9016,23 @@
             "usr": "s:12FBSDKCoreKit25AuthenticationTokenClaimsC16TypeDependenciesV",
             "mangledName": "$s12FBSDKCoreKit25AuthenticationTokenClaimsC16TypeDependenciesV",
             "moduleName": "FBSDKCoreKit",
-            "isFromExtension": true
+            "isFromExtension": true,
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              }
+            ]
           },
           {
             "kind": "Var",
@@ -8929,25 +9307,17 @@
         "conformances": [
           {
             "kind": "Conformance",
-            "name": "DependentAsType",
-            "printedName": "DependentAsType",
-            "children": [
-              {
-                "kind": "TypeWitness",
-                "name": "TypeDependencies",
-                "printedName": "TypeDependencies",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "TypeDependencies",
-                    "printedName": "FBSDKCoreKit.AuthenticationTokenClaims.TypeDependencies",
-                    "usr": "s:12FBSDKCoreKit25AuthenticationTokenClaimsC16TypeDependenciesV"
-                  }
-                ]
-              }
-            ],
-            "usr": "s:12FBSDKCoreKit15DependentAsTypeP",
-            "mangledName": "$s12FBSDKCoreKit15DependentAsTypeP"
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
           },
           {
             "kind": "Conformance",
@@ -8997,6 +9367,28 @@
             "printedName": "CustomDebugStringConvertible",
             "usr": "s:s28CustomDebugStringConvertibleP",
             "mangledName": "$ss28CustomDebugStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "DependentAsType",
+            "printedName": "DependentAsType",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "TypeDependencies",
+                "printedName": "TypeDependencies",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "TypeDependencies",
+                    "printedName": "FBSDKCoreKit.AuthenticationTokenClaims.TypeDependencies",
+                    "usr": "s:12FBSDKCoreKit25AuthenticationTokenClaimsC16TypeDependenciesV"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:12FBSDKCoreKit15DependentAsTypeP",
+            "mangledName": "$s12FBSDKCoreKit15DependentAsTypeP"
           }
         ]
       },
@@ -9317,6 +9709,20 @@
             "conformances": [
               {
                 "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
+              {
+                "kind": "Conformance",
                 "name": "Sendable",
                 "printedName": "Sendable",
                 "usr": "s:s8SendableP",
@@ -9587,6 +9993,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "BackgroundEventLogging",
             "printedName": "BackgroundEventLogging",
             "usr": "s:12FBSDKCoreKit22BackgroundEventLoggingP",
@@ -9598,6 +10018,13 @@
             "printedName": "Sendable",
             "usr": "s:s8SendableP",
             "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "BitwiseCopyable",
+            "printedName": "BitwiseCopyable",
+            "usr": "s:s15BitwiseCopyableP",
+            "mangledName": "$ss15BitwiseCopyableP"
           },
           {
             "kind": "Conformance",
@@ -9662,6 +10089,22 @@
         "moduleName": "FBSDKCoreKit",
         "declAttributes": [
           "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
         ]
       },
       {
@@ -10188,6 +10631,20 @@
             "conformances": [
               {
                 "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
+              {
+                "kind": "Conformance",
                 "name": "Sendable",
                 "printedName": "Sendable",
                 "usr": "s:s8SendableP",
@@ -10211,6 +10668,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -10407,6 +10878,22 @@
         "moduleName": "FBSDKCoreKit",
         "declAttributes": [
           "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
         ]
       },
       {
@@ -10545,6 +11032,22 @@
         "declAttributes": [
           "AccessControl",
           "ObjC"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
         ]
       },
       {
@@ -10701,10 +11204,31 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Sendable",
             "printedName": "Sendable",
             "usr": "s:s8SendableP",
             "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "BitwiseCopyable",
+            "printedName": "BitwiseCopyable",
+            "usr": "s:s15BitwiseCopyableP",
+            "mangledName": "$ss15BitwiseCopyableP"
           }
         ]
       },
@@ -15262,6 +15786,22 @@
         "moduleName": "FBSDKCoreKit",
         "declAttributes": [
           "Final"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          }
         ]
       },
       {
@@ -15384,6 +15924,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "CoreKitConfiguring",
             "printedName": "CoreKitConfiguring",
             "usr": "s:12FBSDKCoreKit04CoreB11ConfiguringP",
@@ -15424,6 +15978,22 @@
         "moduleName": "FBSDKCoreKit",
         "declAttributes": [
           "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
         ]
       },
       {
@@ -15538,6 +16108,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -15947,6 +16531,22 @@
         "declAttributes": [
           "DynamicMemberLookup",
           "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
         ]
       },
       {
@@ -16316,6 +16916,22 @@
         "declAttributes": [
           "DynamicMemberLookup",
           "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
         ]
       },
       {
@@ -16680,6 +17296,22 @@
         "declAttributes": [
           "DynamicMemberLookup",
           "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
         ]
       },
       {
@@ -17088,8 +17720,8 @@
             "isInternal": true,
             "declAttributes": [
               "HasInitialValue",
-              "HasStorage",
-              "Final"
+              "Final",
+              "HasStorage"
             ],
             "fixedbinaryorder": 5,
             "hasStorage": true
@@ -17359,6 +17991,20 @@
             "conformances": [
               {
                 "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
+              {
+                "kind": "Conformance",
                 "name": "Sendable",
                 "printedName": "Sendable",
                 "usr": "s:s8SendableP",
@@ -17376,6 +18022,20 @@
           "RawDocComment"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "DependentAsObject",
@@ -17670,6 +18330,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -17760,8 +18434,9 @@
             "declAttributes": [
               "HasInitialValue",
               "Final",
-              "HasStorage",
+              "Preconcurrency",
               "Custom",
+              "HasStorage",
               "AccessControl",
               "RawDocComment",
               "ObjC"
@@ -17860,6 +18535,7 @@
             "moduleName": "FBSDKCoreKit",
             "declAttributes": [
               "Final",
+              "Preconcurrency",
               "Custom",
               "AccessControl",
               "RawDocComment",
@@ -17956,6 +18632,7 @@
             "moduleName": "FBSDKCoreKit",
             "declAttributes": [
               "Final",
+              "Preconcurrency",
               "Custom"
             ],
             "accessors": [
@@ -18001,8 +18678,9 @@
             "declAttributes": [
               "HasInitialValue",
               "Final",
-              "HasStorage",
+              "Preconcurrency",
               "Custom",
+              "HasStorage",
               "ObjC"
             ],
             "hasStorage": true,
@@ -18108,8 +18786,9 @@
             "declAttributes": [
               "HasInitialValue",
               "Final",
-              "HasStorage",
-              "Custom"
+              "Preconcurrency",
+              "Custom",
+              "HasStorage"
             ],
             "hasStorage": true,
             "accessors": [
@@ -18220,8 +18899,9 @@
             "declAttributes": [
               "HasInitialValue",
               "Final",
-              "HasStorage",
+              "Preconcurrency",
               "Custom",
+              "HasStorage",
               "ObjC"
             ],
             "hasStorage": true,
@@ -18319,8 +18999,9 @@
             "declAttributes": [
               "HasInitialValue",
               "Final",
-              "HasStorage",
+              "Preconcurrency",
               "Custom",
+              "HasStorage",
               "ObjC"
             ],
             "hasStorage": true,
@@ -18418,8 +19099,9 @@
             "declAttributes": [
               "HasInitialValue",
               "Final",
-              "HasStorage",
+              "Preconcurrency",
               "Custom",
+              "HasStorage",
               "ObjC"
             ],
             "hasStorage": true,
@@ -18519,6 +19201,7 @@
             "declAttributes": [
               "Final",
               "ObjC",
+              "Preconcurrency",
               "Custom",
               "Override",
               "AccessControl"
@@ -18621,6 +19304,7 @@
             "declAttributes": [
               "Final",
               "ObjC",
+              "Preconcurrency",
               "Custom",
               "Override",
               "AccessControl"
@@ -18741,6 +19425,7 @@
             "moduleName": "FBSDKCoreKit",
             "objc_name": "initWith:profile:",
             "declAttributes": [
+              "Preconcurrency",
               "Custom",
               "AccessControl",
               "ObjC",
@@ -18781,6 +19466,7 @@
             "moduleName": "FBSDKCoreKit",
             "objc_name": "initWithProfile:",
             "declAttributes": [
+              "Preconcurrency",
               "Custom",
               "Convenience",
               "AccessControl",
@@ -18815,6 +19501,7 @@
             "objc_name": "initWithFrame:",
             "declAttributes": [
               "Dynamic",
+              "Preconcurrency",
               "Custom",
               "Override",
               "AccessControl",
@@ -18857,6 +19544,7 @@
             "objc_name": "initWithCoder:",
             "declAttributes": [
               "Dynamic",
+              "Preconcurrency",
               "Custom",
               "Required",
               "AccessControl",
@@ -18882,6 +19570,7 @@
             "moduleName": "FBSDKCoreKit",
             "declAttributes": [
               "Final",
+              "Preconcurrency",
               "Custom",
               "AccessControl",
               "RawDocComment",
@@ -18906,6 +19595,7 @@
             "moduleName": "FBSDKCoreKit",
             "declAttributes": [
               "Final",
+              "Preconcurrency",
               "Custom",
               "ObjC"
             ],
@@ -18934,6 +19624,7 @@
             "moduleName": "FBSDKCoreKit",
             "declAttributes": [
               "Final",
+              "Preconcurrency",
               "Custom",
               "ObjC"
             ],
@@ -18962,6 +19653,7 @@
             "moduleName": "FBSDKCoreKit",
             "declAttributes": [
               "Final",
+              "Preconcurrency",
               "Custom",
               "ObjC"
             ],
@@ -18984,6 +19676,7 @@
             "moduleName": "FBSDKCoreKit",
             "declAttributes": [
               "Final",
+              "Preconcurrency",
               "Custom",
               "ObjC"
             ],
@@ -19006,6 +19699,7 @@
             "moduleName": "FBSDKCoreKit",
             "declAttributes": [
               "Final",
+              "Preconcurrency",
               "Custom",
               "ObjC"
             ],
@@ -19040,6 +19734,7 @@
             "moduleName": "FBSDKCoreKit",
             "declAttributes": [
               "Final",
+              "Preconcurrency",
               "Custom"
             ],
             "funcSelfKind": "NonMutating"
@@ -19062,6 +19757,7 @@
             "moduleName": "FBSDKCoreKit",
             "declAttributes": [
               "Final",
+              "Preconcurrency",
               "Custom",
               "ObjC"
             ],
@@ -19097,6 +19793,7 @@
             "moduleName": "FBSDKCoreKit",
             "declAttributes": [
               "Final",
+              "Preconcurrency",
               "Custom",
               "ObjC"
             ],
@@ -19134,6 +19831,7 @@
             "moduleName": "FBSDKCoreKit",
             "declAttributes": [
               "Final",
+              "Preconcurrency",
               "Custom"
             ],
             "funcSelfKind": "NonMutating"
@@ -19155,6 +19853,7 @@
             "moduleName": "FBSDKCoreKit",
             "declAttributes": [
               "Final",
+              "Preconcurrency",
               "Custom",
               "ObjC"
             ],
@@ -19189,6 +19888,7 @@
             "moduleName": "FBSDKCoreKit",
             "declAttributes": [
               "Final",
+              "Preconcurrency",
               "Custom"
             ],
             "funcSelfKind": "NonMutating"
@@ -19210,6 +19910,7 @@
             "moduleName": "FBSDKCoreKit",
             "declAttributes": [
               "Final",
+              "Preconcurrency",
               "Custom",
               "ObjC"
             ],
@@ -19222,6 +19923,7 @@
         "moduleName": "FBSDKCoreKit",
         "objc_name": "FBSDKProfilePictureView",
         "declAttributes": [
+          "Preconcurrency",
           "Custom",
           "Final",
           "AccessControl",
@@ -19237,6 +19939,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -19934,6 +20650,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -19974,6 +20704,13 @@
             "printedName": "Sendable",
             "usr": "s:s8SendableP",
             "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "BitwiseCopyable",
+            "printedName": "BitwiseCopyable",
+            "usr": "s:s15BitwiseCopyableP",
+            "mangledName": "$ss15BitwiseCopyableP"
           }
         ]
       },
@@ -20710,6 +21447,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -20750,6 +21501,13 @@
             "printedName": "Sendable",
             "usr": "s:s8SendableP",
             "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "BitwiseCopyable",
+            "printedName": "BitwiseCopyable",
+            "usr": "s:s15BitwiseCopyableP",
+            "mangledName": "$ss15BitwiseCopyableP"
           }
         ]
       },
@@ -20945,6 +21703,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -20985,6 +21757,13 @@
             "printedName": "Sendable",
             "usr": "s:s8SendableP",
             "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "BitwiseCopyable",
+            "printedName": "BitwiseCopyable",
+            "usr": "s:s15BitwiseCopyableP",
+            "mangledName": "$ss15BitwiseCopyableP"
           }
         ]
       },
@@ -21765,6 +22544,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -21805,6 +22598,13 @@
             "printedName": "Sendable",
             "usr": "s:s8SendableP",
             "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "BitwiseCopyable",
+            "printedName": "BitwiseCopyable",
+            "usr": "s:s15BitwiseCopyableP",
+            "mangledName": "$ss15BitwiseCopyableP"
           }
         ]
       },
@@ -22050,6 +22850,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -22090,6 +22904,13 @@
             "printedName": "Sendable",
             "usr": "s:s8SendableP",
             "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "BitwiseCopyable",
+            "printedName": "BitwiseCopyable",
+            "usr": "s:s15BitwiseCopyableP",
+            "mangledName": "$ss15BitwiseCopyableP"
           }
         ]
       },
@@ -22826,6 +23647,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -22866,6 +23701,13 @@
             "printedName": "Sendable",
             "usr": "s:s8SendableP",
             "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "BitwiseCopyable",
+            "printedName": "BitwiseCopyable",
+            "usr": "s:s15BitwiseCopyableP",
+            "mangledName": "$ss15BitwiseCopyableP"
           }
         ]
       },
@@ -23646,6 +24488,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -23686,6 +24542,13 @@
             "printedName": "Sendable",
             "usr": "s:s8SendableP",
             "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "BitwiseCopyable",
+            "printedName": "BitwiseCopyable",
+            "usr": "s:s15BitwiseCopyableP",
+            "mangledName": "$ss15BitwiseCopyableP"
           }
         ]
       },
@@ -24308,6 +25171,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -24348,6 +25225,13 @@
             "printedName": "Sendable",
             "usr": "s:s8SendableP",
             "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "BitwiseCopyable",
+            "printedName": "BitwiseCopyable",
+            "usr": "s:s15BitwiseCopyableP",
+            "mangledName": "$ss15BitwiseCopyableP"
           }
         ]
       },
@@ -24628,6 +25512,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -24668,6 +25566,13 @@
             "printedName": "Sendable",
             "usr": "s:s8SendableP",
             "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "BitwiseCopyable",
+            "printedName": "BitwiseCopyable",
+            "usr": "s:s15BitwiseCopyableP",
+            "mangledName": "$ss15BitwiseCopyableP"
           }
         ]
       },
@@ -24838,10 +25743,31 @@
             "conformances": [
               {
                 "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
+              {
+                "kind": "Conformance",
                 "name": "Sendable",
                 "printedName": "Sendable",
                 "usr": "s:s8SendableP",
                 "mangledName": "$ss8SendableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "BitwiseCopyable",
+                "printedName": "BitwiseCopyable",
+                "usr": "s:s15BitwiseCopyableP",
+                "mangledName": "$ss15BitwiseCopyableP"
               }
             ]
           },
@@ -25084,10 +26010,31 @@
             "conformances": [
               {
                 "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
+              {
+                "kind": "Conformance",
                 "name": "Sendable",
                 "printedName": "Sendable",
                 "usr": "s:s8SendableP",
                 "mangledName": "$ss8SendableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "BitwiseCopyable",
+                "printedName": "BitwiseCopyable",
+                "usr": "s:s15BitwiseCopyableP",
+                "mangledName": "$ss15BitwiseCopyableP"
               }
             ]
           },
@@ -25462,6 +26409,9 @@
                 "moduleName": "FBSDKCoreKit",
                 "static": true,
                 "implicit": true,
+                "declAttributes": [
+                  "Nonisolated"
+                ],
                 "accessors": [
                   {
                     "kind": "Accessor",
@@ -25501,6 +26451,20 @@
             "enumRawTypeName": "String",
             "isEnumExhaustive": true,
             "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
               {
                 "kind": "Conformance",
                 "name": "Equatable",
@@ -25573,6 +26537,13 @@
                 "printedName": "Sendable",
                 "usr": "s:s8SendableP",
                 "mangledName": "$ss8SendableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "BitwiseCopyable",
+                "printedName": "BitwiseCopyable",
+                "usr": "s:s15BitwiseCopyableP",
+                "mangledName": "$ss15BitwiseCopyableP"
               }
             ]
           },
@@ -25825,6 +26796,9 @@
                 "moduleName": "FBSDKCoreKit",
                 "static": true,
                 "implicit": true,
+                "declAttributes": [
+                  "Nonisolated"
+                ],
                 "accessors": [
                   {
                     "kind": "Accessor",
@@ -25864,6 +26838,20 @@
             "enumRawTypeName": "String",
             "isEnumExhaustive": true,
             "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
               {
                 "kind": "Conformance",
                 "name": "Equatable",
@@ -25936,6 +26924,13 @@
                 "printedName": "Sendable",
                 "usr": "s:s8SendableP",
                 "mangledName": "$ss8SendableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "BitwiseCopyable",
+                "printedName": "BitwiseCopyable",
+                "usr": "s:s15BitwiseCopyableP",
+                "mangledName": "$ss15BitwiseCopyableP"
               }
             ]
           },
@@ -26869,10 +27864,31 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Sendable",
             "printedName": "Sendable",
             "usr": "s:s8SendableP",
             "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "BitwiseCopyable",
+            "printedName": "BitwiseCopyable",
+            "usr": "s:s15BitwiseCopyableP",
+            "mangledName": "$ss15BitwiseCopyableP"
           }
         ]
       },
@@ -27139,6 +28155,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -27179,6 +28209,13 @@
             "printedName": "Sendable",
             "usr": "s:s8SendableP",
             "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "BitwiseCopyable",
+            "printedName": "BitwiseCopyable",
+            "usr": "s:s15BitwiseCopyableP",
+            "mangledName": "$ss15BitwiseCopyableP"
           }
         ]
       },
@@ -28226,6 +29263,20 @@
           },
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -29013,6 +30064,22 @@
             "moduleName": "FBSDKCoreKit",
             "declAttributes": [
               "AccessControl"
+            ],
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              }
             ]
           },
           {
@@ -29336,6 +30403,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -29702,10 +30783,31 @@
             "conformances": [
               {
                 "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
+              {
+                "kind": "Conformance",
                 "name": "Sendable",
                 "printedName": "Sendable",
                 "usr": "s:s8SendableP",
                 "mangledName": "$ss8SendableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "BitwiseCopyable",
+                "printedName": "BitwiseCopyable",
+                "usr": "s:s15BitwiseCopyableP",
+                "mangledName": "$ss15BitwiseCopyableP"
               }
             ]
           },
@@ -30538,7 +31640,23 @@
             "usr": "s:12FBSDKCoreKit28GraphRequestPiggybackManagerC18ObjectDependenciesV",
             "mangledName": "$s12FBSDKCoreKit28GraphRequestPiggybackManagerC18ObjectDependenciesV",
             "moduleName": "FBSDKCoreKit",
-            "isFromExtension": true
+            "isFromExtension": true,
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              }
+            ]
           }
         ],
         "declKind": "Class",
@@ -30550,6 +31668,20 @@
           "RawDocComment"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "DependentAsObject",
@@ -30653,6 +31785,22 @@
           "Final",
           "AccessControl",
           "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          }
         ]
       },
       {
@@ -30766,6 +31914,22 @@
         "declAttributes": [
           "AccessControl",
           "ObjC"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
         ]
       },
       {
@@ -31932,7 +33096,23 @@
             "usr": "s:12FBSDKCoreKit23MACARuleMatchingManagerC18ObjectDependenciesV",
             "mangledName": "$s12FBSDKCoreKit23MACARuleMatchingManagerC18ObjectDependenciesV",
             "moduleName": "FBSDKCoreKit",
-            "isFromExtension": true
+            "isFromExtension": true,
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              }
+            ]
           }
         ],
         "declKind": "Class",
@@ -31956,6 +33136,20 @@
             "printedName": "MACARuleMatching",
             "usr": "c:@M@FBSDKCoreKit@objc(pl)FBSDKMACARuleMatching",
             "mangledName": "$s12FBSDKCoreKit16MACARuleMatchingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
           },
           {
             "kind": "Conformance",
@@ -32157,6 +33351,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Error",
             "printedName": "Error",
             "usr": "s:s5ErrorP",
@@ -32175,6 +33383,13 @@
             "printedName": "Sendable",
             "usr": "s:s8SendableP",
             "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "BitwiseCopyable",
+            "printedName": "BitwiseCopyable",
+            "usr": "s:s15BitwiseCopyableP",
+            "mangledName": "$ss15BitwiseCopyableP"
           }
         ]
       },
@@ -33899,6 +35114,20 @@
           "RawDocComment"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Hashable",
@@ -36413,6 +37642,20 @@
             "conformances": [
               {
                 "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
+              {
+                "kind": "Conformance",
                 "name": "Equatable",
                 "printedName": "Equatable",
                 "usr": "s:SQ",
@@ -38192,6 +39435,20 @@
             "conformances": [
               {
                 "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
+              {
+                "kind": "Conformance",
                 "name": "Equatable",
                 "printedName": "Equatable",
                 "usr": "s:SQ",
@@ -38253,6 +39510,13 @@
                 "printedName": "Sendable",
                 "usr": "s:s8SendableP",
                 "mangledName": "$ss8SendableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "BitwiseCopyable",
+                "printedName": "BitwiseCopyable",
+                "usr": "s:s15BitwiseCopyableP",
+                "mangledName": "$ss15BitwiseCopyableP"
               }
             ]
           },
@@ -38909,7 +40173,23 @@
             "usr": "s:12FBSDKCoreKit7ProfileC16TypeDependenciesV",
             "mangledName": "$s12FBSDKCoreKit7ProfileC16TypeDependenciesV",
             "moduleName": "FBSDKCoreKit",
-            "isFromExtension": true
+            "isFromExtension": true,
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              }
+            ]
           },
           {
             "kind": "Var",
@@ -39185,32 +40465,17 @@
         "conformances": [
           {
             "kind": "Conformance",
-            "name": "ProfileProviding",
-            "printedName": "ProfileProviding",
-            "usr": "c:@M@FBSDKCoreKit@objc(pl)FBSDKProfileProviding",
-            "mangledName": "$s12FBSDKCoreKit16ProfileProvidingP"
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
           },
           {
             "kind": "Conformance",
-            "name": "DependentAsType",
-            "printedName": "DependentAsType",
-            "children": [
-              {
-                "kind": "TypeWitness",
-                "name": "TypeDependencies",
-                "printedName": "TypeDependencies",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "TypeDependencies",
-                    "printedName": "FBSDKCoreKit.Profile.TypeDependencies",
-                    "usr": "s:12FBSDKCoreKit7ProfileC16TypeDependenciesV"
-                  }
-                ]
-              }
-            ],
-            "usr": "s:12FBSDKCoreKit15DependentAsTypeP",
-            "mangledName": "$s12FBSDKCoreKit15DependentAsTypeP"
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
           },
           {
             "kind": "Conformance",
@@ -39260,6 +40525,35 @@
             "printedName": "CustomDebugStringConvertible",
             "usr": "s:s28CustomDebugStringConvertibleP",
             "mangledName": "$ss28CustomDebugStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "ProfileProviding",
+            "printedName": "ProfileProviding",
+            "usr": "c:@M@FBSDKCoreKit@objc(pl)FBSDKProfileProviding",
+            "mangledName": "$s12FBSDKCoreKit16ProfileProvidingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "DependentAsType",
+            "printedName": "DependentAsType",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "TypeDependencies",
+                "printedName": "TypeDependencies",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "TypeDependencies",
+                    "printedName": "FBSDKCoreKit.Profile.TypeDependencies",
+                    "usr": "s:12FBSDKCoreKit7ProfileC16TypeDependenciesV"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:12FBSDKCoreKit15DependentAsTypeP",
+            "mangledName": "$s12FBSDKCoreKit15DependentAsTypeP"
           }
         ]
       },
@@ -39602,6 +40896,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -39766,6 +41074,22 @@
           "AccessControl",
           "ObjC",
           "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
         ]
       },
       {
@@ -40405,6 +41729,20 @@
             "conformances": [
               {
                 "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
+              {
+                "kind": "Conformance",
                 "name": "Sendable",
                 "printedName": "Sendable",
                 "usr": "s:s8SendableP",
@@ -40429,6 +41767,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -41040,6 +42392,20 @@
             "conformances": [
               {
                 "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
+              {
+                "kind": "Conformance",
                 "name": "Sendable",
                 "printedName": "Sendable",
                 "usr": "s:s8SendableP",
@@ -41063,6 +42429,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -41765,6 +43145,20 @@
             "conformances": [
               {
                 "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
+              {
+                "kind": "Conformance",
                 "name": "Sendable",
                 "printedName": "Sendable",
                 "usr": "s:s8SendableP",
@@ -41787,6 +43181,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -42008,6 +43416,20 @@
           "RawDocComment"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -42250,6 +43672,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -47183,6 +48619,20 @@
             "conformances": [
               {
                 "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
+              {
+                "kind": "Conformance",
                 "name": "Equatable",
                 "printedName": "Equatable",
                 "usr": "s:SQ",
@@ -47223,6 +48673,13 @@
                 "printedName": "Sendable",
                 "usr": "s:s8SendableP",
                 "mangledName": "$ss8SendableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "BitwiseCopyable",
+                "printedName": "BitwiseCopyable",
+                "usr": "s:s15BitwiseCopyableP",
+                "mangledName": "$ss15BitwiseCopyableP"
               }
             ]
           },
@@ -47747,6 +49204,20 @@
             "conformances": [
               {
                 "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
+              {
+                "kind": "Conformance",
                 "name": "Sendable",
                 "printedName": "Sendable",
                 "usr": "s:s8SendableP",
@@ -48235,6 +49706,20 @@
             "moduleName": "FBSDKCoreKit",
             "isFromExtension": true,
             "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
               {
                 "kind": "Conformance",
                 "name": "Sendable",
@@ -49115,6 +50600,20 @@
             "conformances": [
               {
                 "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
+              {
+                "kind": "Conformance",
                 "name": "Equatable",
                 "printedName": "Equatable",
                 "usr": "s:SQ",
@@ -49155,6 +50654,13 @@
                 "printedName": "Sendable",
                 "usr": "s:s8SendableP",
                 "mangledName": "$ss8SendableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "BitwiseCopyable",
+                "printedName": "BitwiseCopyable",
+                "usr": "s:s15BitwiseCopyableP",
+                "mangledName": "$ss15BitwiseCopyableP"
               }
             ]
           },
@@ -49691,6 +51197,20 @@
             "conformances": [
               {
                 "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
+              {
+                "kind": "Conformance",
                 "name": "Sendable",
                 "printedName": "Sendable",
                 "usr": "s:s8SendableP",
@@ -49798,6 +51318,20 @@
             "printedName": "SettingsProtocol",
             "usr": "c:@M@FBSDKCoreKit@objc(pl)FBSDKSettings",
             "mangledName": "$s12FBSDKCoreKit16SettingsProtocolP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
           },
           {
             "kind": "Conformance",
@@ -52357,6 +53891,22 @@
           "AccessControl",
           "ObjC",
           "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
         ]
       },
       {
@@ -52466,6 +54016,22 @@
         "declAttributes": [
           "AccessControl",
           "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          }
         ]
       },
       {
@@ -52955,6 +54521,20 @@
             "conformances": [
               {
                 "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
+              {
+                "kind": "Conformance",
                 "name": "Sendable",
                 "printedName": "Sendable",
                 "usr": "s:s8SendableP",
@@ -52972,6 +54552,20 @@
           "RawDocComment"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "DependentAsValue",
@@ -53320,6 +54914,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -54128,7 +55736,23 @@
             "usr": "s:12FBSDKCoreKit10TokenCacheC18ObjectDependenciesV",
             "mangledName": "$s12FBSDKCoreKit10TokenCacheC18ObjectDependenciesV",
             "moduleName": "FBSDKCoreKit",
-            "isFromExtension": true
+            "isFromExtension": true,
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              }
+            ]
           }
         ],
         "declKind": "Class",
@@ -54140,6 +55764,20 @@
           "RawDocComment"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "DependentAsObject",
@@ -54442,6 +56080,22 @@
           "AccessControl",
           "ObjC",
           "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
         ]
       },
       {
@@ -54635,6 +56289,20 @@
           },
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -54699,6 +56367,22 @@
           "AccessControl",
           "ObjC",
           "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
         ]
       },
       {
@@ -57157,6 +58841,8 @@
             "declAttributes": [
               "Final",
               "ObjC",
+              "Preconcurrency",
+              "Custom",
               "AccessControl"
             ],
             "isFromExtension": true,
@@ -57179,6 +58865,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -58293,6 +59993,20 @@
             "conformances": [
               {
                 "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
+              {
+                "kind": "Conformance",
                 "name": "Sendable",
                 "printedName": "Sendable",
                 "usr": "s:s8SendableP",
@@ -58574,6 +60288,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -58820,6 +60548,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -59033,6 +60775,20 @@
           },
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -59207,6 +60963,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -59996,6 +61766,20 @@
             "conformances": [
               {
                 "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
+              {
+                "kind": "Conformance",
                 "name": "Sendable",
                 "printedName": "Sendable",
                 "usr": "s:s8SendableP",
@@ -60277,6 +62061,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -60501,6 +62299,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -60651,6 +62463,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -61464,7 +63290,23 @@
             "usr": "s:12FBSDKCoreKit15_FeatureManagerC16TypeDependenciesV",
             "mangledName": "$s12FBSDKCoreKit15_FeatureManagerC16TypeDependenciesV",
             "moduleName": "FBSDKCoreKit",
-            "isFromExtension": true
+            "isFromExtension": true,
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              }
+            ]
           },
           {
             "kind": "Var",
@@ -61741,6 +63583,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -61915,6 +63771,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -62072,6 +63942,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -62529,6 +64413,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -63408,7 +65306,23 @@
             "usr": "s:12FBSDKCoreKit31_PaymentProductRequestorFactoryC16TypeDependenciesV",
             "mangledName": "$s12FBSDKCoreKit31_PaymentProductRequestorFactoryC16TypeDependenciesV",
             "moduleName": "FBSDKCoreKit",
-            "isFromExtension": true
+            "isFromExtension": true,
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              }
+            ]
           },
           {
             "kind": "Var",
@@ -63682,6 +65596,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -63988,6 +65916,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -64379,6 +66321,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -65435,6 +67391,20 @@
             "conformances": [
               {
                 "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
+              {
+                "kind": "Conformance",
                 "name": "Sendable",
                 "printedName": "Sendable",
                 "usr": "s:s8SendableP",
@@ -65714,6 +67684,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -67590,6 +69574,20 @@
             "conformances": [
               {
                 "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
+              {
+                "kind": "Conformance",
                 "name": "Sendable",
                 "printedName": "Sendable",
                 "usr": "s:s8SendableP",
@@ -67871,25 +69869,17 @@
         "conformances": [
           {
             "kind": "Conformance",
-            "name": "DependentAsType",
-            "printedName": "DependentAsType",
-            "children": [
-              {
-                "kind": "TypeWitness",
-                "name": "TypeDependencies",
-                "printedName": "TypeDependencies",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "TypeDependencies",
-                    "printedName": "FBSDKCoreKit._WebDialog.TypeDependencies",
-                    "usr": "s:12FBSDKCoreKit10_WebDialogC16TypeDependenciesV"
-                  }
-                ]
-              }
-            ],
-            "usr": "s:12FBSDKCoreKit15DependentAsTypeP",
-            "mangledName": "$s12FBSDKCoreKit15DependentAsTypeP"
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
           },
           {
             "kind": "Conformance",
@@ -67939,6 +69929,28 @@
             "printedName": "CustomDebugStringConvertible",
             "usr": "s:s28CustomDebugStringConvertibleP",
             "mangledName": "$ss28CustomDebugStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "DependentAsType",
+            "printedName": "DependentAsType",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "TypeDependencies",
+                "printedName": "TypeDependencies",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "TypeDependencies",
+                    "printedName": "FBSDKCoreKit._WebDialog.TypeDependencies",
+                    "usr": "s:12FBSDKCoreKit10_WebDialogC16TypeDependenciesV"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:12FBSDKCoreKit15DependentAsTypeP",
+            "mangledName": "$s12FBSDKCoreKit15DependentAsTypeP"
           }
         ]
       },
@@ -68032,6 +70044,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -68320,6 +70346,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -68391,6 +70431,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -68498,6 +70552,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -68528,10 +70596,17 @@
         "conformances": [
           {
             "kind": "Conformance",
-            "name": "_AEMReporterProtocol",
-            "printedName": "_AEMReporterProtocol",
-            "usr": "c:@M@FBSDKCoreKit@objc(pl)FBSDKAEMReporter",
-            "mangledName": "$s12FBSDKCoreKit20_AEMReporterProtocolP"
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
           },
           {
             "kind": "Conformance",
@@ -68581,6 +70656,13 @@
             "printedName": "CustomDebugStringConvertible",
             "usr": "s:s28CustomDebugStringConvertibleP",
             "mangledName": "$ss28CustomDebugStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "_AEMReporterProtocol",
+            "printedName": "_AEMReporterProtocol",
+            "usr": "c:@M@FBSDKCoreKit@objc(pl)FBSDKAEMReporter",
+            "mangledName": "$s12FBSDKCoreKit20_AEMReporterProtocolP"
           }
         ]
       }
@@ -68589,88 +70671,81 @@
   },
   "ConstValues": [
     {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppLink\/AppLink.swift",
-      "kind": "StringLiteral",
-      "offset": 396,
-      "length": 7,
-      "value": "\"FBSDKCoreKit.AppLink\""
+      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppLink\/AppLinkNavigation.swift",
+      "kind": "IntegerLiteral",
+      "offset": 2225,
+      "length": 2,
+      "value": "32"
     },
     {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppLink\/AppLinkNavigation.swift",
       "kind": "StringLiteral",
-      "offset": 10915,
+      "offset": 12585,
       "length": 17,
       "value": "\"outputURLScheme\""
     },
     {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppLink\/AppLinkNavigation.swift",
       "kind": "StringLiteral",
-      "offset": 10960,
+      "offset": 12630,
       "length": 11,
       "value": "\"outputURL\""
     },
     {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppLink\/AppLinkNavigation.swift",
       "kind": "StringLiteral",
-      "offset": 10999,
+      "offset": 12669,
       "length": 11,
       "value": "\"sourceURL\""
     },
     {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppLink\/AppLinkNavigation.swift",
       "kind": "StringLiteral",
-      "offset": 11039,
+      "offset": 12709,
       "length": 12,
       "value": "\"sourceHost\""
     },
     {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppLink\/AppLinkNavigation.swift",
       "kind": "StringLiteral",
-      "offset": 11082,
+      "offset": 12752,
       "length": 14,
       "value": "\"sourceScheme\""
     },
     {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppLink\/AppLinkNavigation.swift",
       "kind": "StringLiteral",
-      "offset": 11122,
+      "offset": 12792,
       "length": 9,
       "value": "\"success\""
     },
     {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppLink\/AppLinkNavigation.swift",
       "kind": "StringLiteral",
-      "offset": 11154,
+      "offset": 12824,
       "length": 6,
       "value": "\"type\""
     },
     {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppLink\/AppLinkNavigation.swift",
       "kind": "StringLiteral",
-      "offset": 11184,
+      "offset": 12854,
       "length": 7,
       "value": "\"error\""
     },
     {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppLink\/AppLinkNavigation.swift",
       "kind": "StringLiteral",
-      "offset": 11251,
+      "offset": 12921,
       "length": 3,
       "value": "\"1\""
     },
     {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppLink\/AppLinkNavigation.swift",
       "kind": "StringLiteral",
-      "offset": 11280,
+      "offset": 12950,
       "length": 3,
       "value": "\"0\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppLink\/AppLinkNavigation.swift",
-      "kind": "StringLiteral",
-      "offset": 609,
-      "length": 17,
-      "value": "\"FBSDKCoreKit.AppLinkNavigation\""
     },
     {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppLink\/Resolver\/AppLinkResolver.swift",
@@ -68741,27 +70816,6 @@
       "offset": 493,
       "length": 11,
       "value": "\"app_links\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppLink\/Resolver\/AppLinkResolverRequestBuilder.swift",
-      "kind": "StringLiteral",
-      "offset": 493,
-      "length": 11,
-      "value": "\"app_links\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppLink\/Resolver\/AppLinkResolverRequestBuilder.swift",
-      "kind": "StringLiteral",
-      "offset": 318,
-      "length": 29,
-      "value": "\"FBSDKCoreKit.AppLinkResolverRequestBuilder\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppLink\/AppLinkTarget.swift",
-      "kind": "StringLiteral",
-      "offset": 419,
-      "length": 13,
-      "value": "\"FBSDKCoreKit.AppLinkTarget\""
     },
     {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/ApplicationDelegate.swift",
@@ -69058,13 +71112,6 @@
       "value": "\".facebook.com\""
     },
     {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AuthenticationTokenClaims.swift",
-      "kind": "StringLiteral",
-      "offset": 287,
-      "length": 25,
-      "value": "\"FBSDKCoreKit.AuthenticationTokenClaims\""
-    },
-    {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Internal\/BackgroundEventLogger.swift",
       "kind": "StringLiteral",
       "offset": 327,
@@ -69298,223 +71345,6 @@
     {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
       "kind": "StringLiteral",
-      "offset": 312,
-      "length": 32,
-      "value": "\"fb_mobile_achievement_unlocked\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 367,
-      "length": 24,
-      "value": "\"fb_mobile_activate_app\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 418,
-      "length": 28,
-      "value": "\"fb_mobile_add_payment_info\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 468,
-      "length": 23,
-      "value": "\"fb_mobile_add_to_cart\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 517,
-      "length": 27,
-      "value": "\"fb_mobile_add_to_wishlist\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 576,
-      "length": 33,
-      "value": "\"fb_mobile_complete_registration\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 633,
-      "length": 24,
-      "value": "\"fb_mobile_content_view\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 685,
-      "length": 30,
-      "value": "\"fb_mobile_initiated_checkout\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 739,
-      "length": 26,
-      "value": "\"fb_mobile_level_achieved\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 785,
-      "length": 20,
-      "value": "\"fb_mobile_purchase\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 821,
-      "length": 16,
-      "value": "\"fb_mobile_rate\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 856,
-      "length": 18,
-      "value": "\"fb_mobile_search\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 897,
-      "length": 25,
-      "value": "\"fb_mobile_spent_credits\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 950,
-      "length": 31,
-      "value": "\"fb_mobile_tutorial_completion\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 1036,
-      "length": 10,
-      "value": "\"_logTime\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 1066,
-      "length": 12,
-      "value": "\"_eventName\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 1099,
-      "length": 13,
-      "value": "\"_valueToSum\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 1133,
-      "length": 13,
-      "value": "\"content_ids\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 1165,
-      "length": 15,
-      "value": "\"fb_content_id\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 1202,
-      "length": 17,
-      "value": "\"fb_content_type\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 1241,
-      "length": 16,
-      "value": "\"fb_description\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 1273,
-      "length": 10,
-      "value": "\"fb_level\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 1308,
-      "length": 21,
-      "value": "\"fb_max_rating_value\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 1348,
-      "length": 14,
-      "value": "\"fb_num_items\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 1393,
-      "length": 27,
-      "value": "\"fb_payment_info_available\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 1449,
-      "length": 24,
-      "value": "\"fb_registration_method\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 1496,
-      "length": 18,
-      "value": "\"fb_search_string\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 1532,
-      "length": 12,
-      "value": "\"fb_success\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 1562,
-      "length": 13,
-      "value": "\"fb_order_id\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 1592,
-      "length": 9,
-      "value": "\"ad_type\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 1620,
-      "length": 13,
-      "value": "\"fb_currency\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
       "offset": 1036,
       "length": 10,
       "value": "\"_logTime\""
@@ -69753,153 +71583,6 @@
     {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
       "kind": "StringLiteral",
-      "offset": 1988,
-      "length": 9,
-      "value": "\"anon_id\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 2017,
-      "length": 13,
-      "value": "\"app_user_id\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 2053,
-      "length": 15,
-      "value": "\"advertiser_id\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 2085,
-      "length": 9,
-      "value": "\"page_id\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 2121,
-      "length": 21,
-      "value": "\"page_scoped_user_id\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 2161,
-      "length": 4,
-      "value": "\"ud\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 2203,
-      "length": 29,
-      "value": "\"advertiser_tracking_enabled\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 2248,
-      "length": 30,
-      "value": "\"application_tracking_enabled\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 2302,
-      "length": 16,
-      "value": "\"consider_views\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 2340,
-      "length": 14,
-      "value": "\"device_token\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 2396,
-      "length": 20,
-      "value": "\"include_dwell_data\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 2443,
-      "length": 20,
-      "value": "\"include_video_data\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 2489,
-      "length": 18,
-      "value": "\"install_referrer\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 2534,
-      "length": 19,
-      "value": "\"installer_package\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 2575,
-      "length": 14,
-      "value": "\"receipt_data\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 2610,
-      "length": 13,
-      "value": "\"url_schemes\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 2645,
-      "length": 14,
-      "value": "\"campaign_ids\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 2754,
-      "length": 11,
-      "value": "\"user_data\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 2783,
-      "length": 10,
-      "value": "\"app_data\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 2814,
-      "length": 13,
-      "value": "\"custom_data\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 2850,
-      "length": 15,
-      "value": "\"custom_events\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
       "offset": 2754,
       "length": 11,
       "value": "\"user_data\""
@@ -70008,202 +71691,6 @@
       "offset": 3400,
       "length": 9,
       "value": "\"ad_type\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 2935,
-      "length": 7,
-      "value": "\"value\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 2962,
-      "length": 12,
-      "value": "\"event_time\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 2994,
-      "length": 12,
-      "value": "\"event_name\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 3027,
-      "length": 13,
-      "value": "\"content_ids\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 3078,
-      "length": 14,
-      "value": "\"content_type\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 3149,
-      "length": 18,
-      "value": "\"max_rating_value\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 3186,
-      "length": 11,
-      "value": "\"num_items\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 3228,
-      "length": 24,
-      "value": "\"payment_info_available\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 3281,
-      "length": 21,
-      "value": "\"registration_method\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 3325,
-      "length": 15,
-      "value": "\"search_string\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 3373,
-      "length": 10,
-      "value": "\"order_id\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 3400,
-      "length": 9,
-      "value": "\"ad_type\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 3516,
-      "length": 9,
-      "value": "\"anon_id\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 3545,
-      "length": 13,
-      "value": "\"fb_login_id\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 3588,
-      "length": 9,
-      "value": "\"page_id\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 3624,
-      "length": 21,
-      "value": "\"page_scoped_user_id\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 3664,
-      "length": 4,
-      "value": "\"ud\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 3706,
-      "length": 29,
-      "value": "\"advertiser_tracking_enabled\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 3751,
-      "length": 30,
-      "value": "\"application_tracking_enabled\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 3805,
-      "length": 16,
-      "value": "\"consider_views\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 3843,
-      "length": 14,
-      "value": "\"device_token\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 3899,
-      "length": 20,
-      "value": "\"include_dwell_data\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 3946,
-      "length": 20,
-      "value": "\"include_video_data\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 3992,
-      "length": 18,
-      "value": "\"install_referrer\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 4037,
-      "length": 19,
-      "value": "\"installer_package\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 4078,
-      "length": 14,
-      "value": "\"receipt_data\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 4113,
-      "length": 13,
-      "value": "\"url_schemes\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 4148,
-      "length": 14,
-      "value": "\"campaign_ids\""
     },
     {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
@@ -70418,125 +71905,6 @@
     {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
       "kind": "StringLiteral",
-      "offset": 4234,
-      "length": 21,
-      "value": "\"AchievementUnlocked\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 4277,
-      "length": 13,
-      "value": "\"ActivateApp\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 4315,
-      "length": 16,
-      "value": "\"AddPaymentInfo\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 4351,
-      "length": 11,
-      "value": "\"AddToCart\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 4386,
-      "length": 15,
-      "value": "\"AddToWishlist\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 4432,
-      "length": 22,
-      "value": "\"CompleteRegistration\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 4476,
-      "length": 13,
-      "value": "\"ViewContent\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 4516,
-      "length": 18,
-      "value": "\"InitiateCheckout\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 4558,
-      "length": 15,
-      "value": "\"LevelAchieved\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 4592,
-      "length": 10,
-      "value": "\"Purchase\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 4617,
-      "length": 6,
-      "value": "\"Rate\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 4640,
-      "length": 8,
-      "value": "\"Search\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 4671,
-      "length": 14,
-      "value": "\"SpentCredits\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 4714,
-      "length": 20,
-      "value": "\"TutorialCompletion\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 4808,
-      "length": 15,
-      "value": "\"action_source\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 4861,
-      "length": 18,
-      "value": "\"MobileAppInstall\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 4906,
-      "length": 19,
-      "value": "\"install_timestamp\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
       "offset": 4808,
       "length": 15,
       "value": "\"action_source\""
@@ -70575,55 +71943,6 @@
       "offset": 8724,
       "length": 31,
       "value": "\"data_processing_options_state\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 8628,
-      "length": 25,
-      "value": "\"data_processing_options\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 8673,
-      "length": 33,
-      "value": "\"data_processing_options_country\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventConversionsAPITransformer.swift",
-      "kind": "StringLiteral",
-      "offset": 8724,
-      "length": 31,
-      "value": "\"data_processing_options_state\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventsCAPIManager.swift",
-      "kind": "StringLiteral",
-      "offset": 317,
-      "length": 10,
-      "value": "\"endpoint\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventsCAPIManager.swift",
-      "kind": "StringLiteral",
-      "offset": 345,
-      "length": 12,
-      "value": "\"is_enabled\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventsCAPIManager.swift",
-      "kind": "StringLiteral",
-      "offset": 377,
-      "length": 12,
-      "value": "\"dataset_id\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventsCAPIManager.swift",
-      "kind": "StringLiteral",
-      "offset": 409,
-      "length": 12,
-      "value": "\"access_key\""
     },
     {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/CAPIGateway\/FBSDKAppEventsCAPIManager.swift",
@@ -71158,286 +72477,6 @@
       "value": "\"user_age_range\""
     },
     {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Permission.swift",
-      "kind": "StringLiteral",
-      "offset": 7931,
-      "length": 16,
-      "value": "\"public_profile\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Permission.swift",
-      "kind": "StringLiteral",
-      "offset": 7969,
-      "length": 14,
-      "value": "\"user_friends\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Permission.swift",
-      "kind": "StringLiteral",
-      "offset": 8018,
-      "length": 15,
-      "value": "\"user_about_me\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Permission.swift",
-      "kind": "StringLiteral",
-      "offset": 8060,
-      "length": 20,
-      "value": "\"user_actions.books\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Permission.swift",
-      "kind": "StringLiteral",
-      "offset": 8109,
-      "length": 21,
-      "value": "\"user_action.fitness\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Permission.swift",
-      "kind": "StringLiteral",
-      "offset": 8157,
-      "length": 20,
-      "value": "\"user_actions.music\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Permission.swift",
-      "kind": "StringLiteral",
-      "offset": 8203,
-      "length": 19,
-      "value": "\"user_actions.news\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Permission.swift",
-      "kind": "StringLiteral",
-      "offset": 8249,
-      "length": 20,
-      "value": "\"user_actions.video\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Permission.swift",
-      "kind": "StringLiteral",
-      "offset": 8292,
-      "length": 15,
-      "value": "\"user_birthday\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Permission.swift",
-      "kind": "StringLiteral",
-      "offset": 8338,
-      "length": 24,
-      "value": "\"user_education_history\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Permission.swift",
-      "kind": "StringLiteral",
-      "offset": 8383,
-      "length": 13,
-      "value": "\"user_events\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Permission.swift",
-      "kind": "StringLiteral",
-      "offset": 8424,
-      "length": 21,
-      "value": "\"user_games_activity\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Permission.swift",
-      "kind": "StringLiteral",
-      "offset": 8466,
-      "length": 13,
-      "value": "\"user_gender\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Permission.swift",
-      "kind": "StringLiteral",
-      "offset": 8502,
-      "length": 15,
-      "value": "\"user_hometown\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Permission.swift",
-      "kind": "StringLiteral",
-      "offset": 8537,
-      "length": 12,
-      "value": "\"user_likes\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Permission.swift",
-      "kind": "StringLiteral",
-      "offset": 8572,
-      "length": 15,
-      "value": "\"user_location\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Permission.swift",
-      "kind": "StringLiteral",
-      "offset": 8615,
-      "length": 21,
-      "value": "\"user_managed_groups\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Permission.swift",
-      "kind": "StringLiteral",
-      "offset": 8657,
-      "length": 13,
-      "value": "\"user_photos\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Permission.swift",
-      "kind": "StringLiteral",
-      "offset": 8690,
-      "length": 12,
-      "value": "\"user_posts\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Permission.swift",
-      "kind": "StringLiteral",
-      "offset": 8730,
-      "length": 20,
-      "value": "\"user_relationships\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Permission.swift",
-      "kind": "StringLiteral",
-      "offset": 8784,
-      "length": 27,
-      "value": "\"user_relationship_details\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Permission.swift",
-      "kind": "StringLiteral",
-      "offset": 8842,
-      "length": 24,
-      "value": "\"user_religion_politics\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Permission.swift",
-      "kind": "StringLiteral",
-      "offset": 8893,
-      "length": 20,
-      "value": "\"user_tagged_places\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Permission.swift",
-      "kind": "StringLiteral",
-      "offset": 8934,
-      "length": 13,
-      "value": "\"user_videos\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Permission.swift",
-      "kind": "StringLiteral",
-      "offset": 8969,
-      "length": 14,
-      "value": "\"user_website\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Permission.swift",
-      "kind": "StringLiteral",
-      "offset": 9009,
-      "length": 19,
-      "value": "\"user_work_history\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Permission.swift",
-      "kind": "StringLiteral",
-      "offset": 9060,
-      "length": 25,
-      "value": "\"read_custom_friendlists\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Permission.swift",
-      "kind": "StringLiteral",
-      "offset": 9108,
-      "length": 15,
-      "value": "\"read_insights\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Permission.swift",
-      "kind": "StringLiteral",
-      "offset": 9161,
-      "length": 32,
-      "value": "\"read_audience_network_insights\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Permission.swift",
-      "kind": "StringLiteral",
-      "offset": 9221,
-      "length": 21,
-      "value": "\"read_page_mailboxes\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Permission.swift",
-      "kind": "StringLiteral",
-      "offset": 9266,
-      "length": 17,
-      "value": "\"pages_show_list\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Permission.swift",
-      "kind": "StringLiteral",
-      "offset": 9308,
-      "length": 18,
-      "value": "\"pages_manage_cta\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Permission.swift",
-      "kind": "StringLiteral",
-      "offset": 9363,
-      "length": 31,
-      "value": "\"pages_manage_instant_articles\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Permission.swift",
-      "kind": "StringLiteral",
-      "offset": 9412,
-      "length": 10,
-      "value": "\"ads_read\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Permission.swift",
-      "kind": "StringLiteral",
-      "offset": 9441,
-      "length": 11,
-      "value": "\"user_link\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Permission.swift",
-      "kind": "StringLiteral",
-      "offset": 9475,
-      "length": 16,
-      "value": "\"user_age_range\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Profile+ImageURL.swift",
-      "kind": "IntegerLiteral",
-      "offset": 591,
-      "length": 6,
-      "value": "1"
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Profile+ImageURL.swift",
-      "kind": "IntegerLiteral",
-      "offset": 699,
-      "length": 5,
-      "value": "2"
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Profile+ImageURL.swift",
-      "kind": "IntegerLiteral",
-      "offset": 806,
-      "length": 5,
-      "value": "3"
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Profile+ImageURL.swift",
-      "kind": "IntegerLiteral",
-      "offset": 913,
-      "length": 5,
-      "value": "4"
-    },
-    {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Profile+ImageURL.swift",
       "kind": "IntegerLiteral",
       "offset": 591,
@@ -71501,20 +72540,6 @@
       "value": "\"type\""
     },
     {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Profile+ImageURL.swift",
-      "kind": "StringLiteral",
-      "offset": 3348,
-      "length": 14,
-      "value": "\"access_token\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Profile+ImageURL.swift",
-      "kind": "StringLiteral",
-      "offset": 3388,
-      "length": 6,
-      "value": "\"type\""
-    },
-    {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Profile+Loading.swift",
       "kind": "StringLiteral",
       "offset": 292,
@@ -71523,38 +72548,66 @@
     },
     {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Profile+Loading.swift",
-      "kind": "StringLiteral",
-      "offset": 9101,
-      "length": 4,
-      "value": "\"id\""
+      "kind": "IntegerLiteral",
+      "offset": 2063,
+      "length": 3,
+      "value": "100"
     },
     {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Profile+Loading.swift",
-      "kind": "StringLiteral",
-      "offset": 9157,
-      "length": 11,
-      "value": "\"age_range\""
+      "kind": "IntegerLiteral",
+      "offset": 2120,
+      "length": 3,
+      "value": "100"
     },
     {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Profile+Loading.swift",
-      "kind": "StringLiteral",
-      "offset": 9260,
-      "length": 12,
-      "value": "\"first_name\""
+      "kind": "BooleanLiteral",
+      "offset": 2184,
+      "length": 5,
+      "value": "false"
     },
     {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Profile+Loading.swift",
-      "kind": "StringLiteral",
-      "offset": 9295,
-      "length": 13,
-      "value": "\"middle_name\""
+      "kind": "Array",
+      "offset": 2464,
+      "length": 2,
+      "value": "[]"
     },
     {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Profile+Loading.swift",
-      "kind": "StringLiteral",
-      "offset": 9329,
-      "length": 11,
-      "value": "\"last_name\""
+      "kind": "Array",
+      "offset": 2907,
+      "length": 2,
+      "value": "[]"
+    },
+    {
+      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Profile+Loading.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3101,
+      "length": 3,
+      "value": "100"
+    },
+    {
+      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Profile+Loading.swift",
+      "kind": "IntegerLiteral",
+      "offset": 3152,
+      "length": 3,
+      "value": "100"
+    },
+    {
+      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Profile+Loading.swift",
+      "kind": "BooleanLiteral",
+      "offset": 3210,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Profile+Loading.swift",
+      "kind": "Array",
+      "offset": 3426,
+      "length": 2,
+      "value": "[]"
     },
     {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Profile+Loading.swift",
@@ -71657,55 +72710,6 @@
     {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Profile+Loading.swift",
       "kind": "StringLiteral",
-      "offset": 9599,
-      "length": 4,
-      "value": "\"id\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Profile+Loading.swift",
-      "kind": "StringLiteral",
-      "offset": 9625,
-      "length": 12,
-      "value": "\"first_name\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Profile+Loading.swift",
-      "kind": "StringLiteral",
-      "offset": 9660,
-      "length": 13,
-      "value": "\"middle_name\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Profile+Loading.swift",
-      "kind": "StringLiteral",
-      "offset": 9694,
-      "length": 11,
-      "value": "\"last_name\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Profile+Loading.swift",
-      "kind": "StringLiteral",
-      "offset": 9726,
-      "length": 6,
-      "value": "\"name\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Profile+Loading.swift",
-      "kind": "StringLiteral",
-      "offset": 9817,
-      "length": 11,
-      "value": "\"age_range\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Profile+Loading.swift",
-      "kind": "StringLiteral",
-      "offset": 10087,
-      "length": 15,
-      "value": "\"is_silhouette\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Profile+Loading.swift",
-      "kind": "StringLiteral",
       "offset": 10087,
       "length": 15,
       "value": "\"is_silhouette\""
@@ -71739,18 +72743,18 @@
       "value": "\"com.facebook.sdk.FBSDKProfile.currentProfile\""
     },
     {
+      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Profile+ProfileProviding.swift",
+      "kind": "BooleanLiteral",
+      "offset": 2766,
+      "length": 4,
+      "value": "true"
+    },
+    {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Profile.swift",
       "kind": "BooleanLiteral",
       "offset": 4036,
       "length": 5,
       "value": "false"
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Profile.swift",
-      "kind": "StringLiteral",
-      "offset": 858,
-      "length": 7,
-      "value": "\"FBSDKCoreKit.Profile\""
     },
     {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/Internal\/Integrity\/ProtectedModeManager.swift",
@@ -71835,20 +72839,6 @@
       "offset": 668,
       "length": 14,
       "value": "\"_filteredKey\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Settings+AutoLogAppEvents.swift",
-      "kind": "StringLiteral",
-      "offset": 294,
-      "length": 29,
-      "value": "\"auto_log_app_events_default\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Settings+AutoLogAppEvents.swift",
-      "kind": "StringLiteral",
-      "offset": 342,
-      "length": 29,
-      "value": "\"auto_log_app_events_enabled\""
     },
     {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Settings+AutoLogAppEvents.swift",
@@ -72068,139 +73058,6 @@
       "value": "\"com.facebook.sdk:FBSDKSettingsSetAdvertiserTrackingEnabledTimestamp\""
     },
     {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Settings+PersistenceKey.swift",
-      "kind": "StringLiteral",
-      "offset": 291,
-      "length": 25,
-      "value": "\"FacebookUrlSchemeSuffix\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Settings+PersistenceKey.swift",
-      "kind": "StringLiteral",
-      "offset": 340,
-      "length": 21,
-      "value": "\"FacebookClientToken\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Settings+PersistenceKey.swift",
-      "kind": "StringLiteral",
-      "offset": 385,
-      "length": 21,
-      "value": "\"FacebookDisplayName\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Settings+PersistenceKey.swift",
-      "kind": "StringLiteral",
-      "offset": 429,
-      "length": 20,
-      "value": "\"FacebookDomainPart\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Settings+PersistenceKey.swift",
-      "kind": "StringLiteral",
-      "offset": 494,
-      "length": 33,
-      "value": "\"FacebookAutoLogAppEventsEnabled\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Settings+PersistenceKey.swift",
-      "kind": "StringLiteral",
-      "offset": 571,
-      "length": 39,
-      "value": "\"FacebookAdvertiserIDCollectionEnabled\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Settings+PersistenceKey.swift",
-      "kind": "StringLiteral",
-      "offset": 648,
-      "length": 33,
-      "value": "\"FacebookCodelessDebugLogEnabled\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Settings+PersistenceKey.swift",
-      "kind": "StringLiteral",
-      "offset": 710,
-      "length": 25,
-      "value": "\"FacebookLoggingBehavior\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Settings+PersistenceKey.swift",
-      "kind": "StringLiteral",
-      "offset": 753,
-      "length": 15,
-      "value": "\"FacebookAppID\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Settings+PersistenceKey.swift",
-      "kind": "StringLiteral",
-      "offset": 803,
-      "length": 32,
-      "value": "\"FacebookJpegCompressionQuality\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Settings+PersistenceKey.swift",
-      "kind": "StringLiteral",
-      "offset": 874,
-      "length": 34,
-      "value": "\"FacebookSKAdNetworkReportEnabled\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Settings+PersistenceKey.swift",
-      "kind": "StringLiteral",
-      "offset": 946,
-      "length": 57,
-      "value": "\"com.facebook.sdk:FBSDKSettingsAdvertisingTrackingStatus\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Settings+PersistenceKey.swift",
-      "kind": "StringLiteral",
-      "offset": 1038,
-      "length": 54,
-      "value": "\"com.facebook.sdk:FBSDKSettingsLimitEventAndDataUsage\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Settings+PersistenceKey.swift",
-      "kind": "StringLiteral",
-      "offset": 1140,
-      "length": 67,
-      "value": "\"com.facebook.sdk:FBSDKSettingsUseCachedValuesForExpensiveMetadata\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Settings+PersistenceKey.swift",
-      "kind": "StringLiteral",
-      "offset": 1241,
-      "length": 53,
-      "value": "\"com.facebook.sdk.FBSDKSettingsUseTokenOptimizations\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Settings+PersistenceKey.swift",
-      "kind": "StringLiteral",
-      "offset": 1328,
-      "length": 53,
-      "value": "\"com.facebook.sdk:FBSDKSettingsDataProcessingOptions\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Settings+PersistenceKey.swift",
-      "kind": "StringLiteral",
-      "offset": 1401,
-      "length": 39,
-      "value": "\"com.facebook.sdk:FBSDKSettingsBitmask\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Settings+PersistenceKey.swift",
-      "kind": "StringLiteral",
-      "offset": 1469,
-      "length": 48,
-      "value": "\"com.facebook.sdk:FBSDKSettingsInstallTimestamp\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Settings+PersistenceKey.swift",
-      "kind": "StringLiteral",
-      "offset": 1567,
-      "length": 69,
-      "value": "\"com.facebook.sdk:FBSDKSettingsSetAdvertiserTrackingEnabledTimestamp\""
-    },
-    {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Settings.swift",
       "kind": "FloatLiteral",
       "offset": 1378,
@@ -72245,9 +73102,44 @@
     {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Settings.swift",
       "kind": "BooleanLiteral",
+      "offset": 14660,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Settings.swift",
+      "kind": "BooleanLiteral",
       "offset": 18897,
       "length": 4,
       "value": "true"
+    },
+    {
+      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Settings.swift",
+      "kind": "BooleanLiteral",
+      "offset": 19725,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Settings.swift",
+      "kind": "FloatLiteral",
+      "offset": 19774,
+      "length": 4,
+      "value": "60.0"
+    },
+    {
+      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Settings.swift",
+      "kind": "FloatLiteral",
+      "offset": 19795,
+      "length": 4,
+      "value": "60.0"
+    },
+    {
+      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Settings.swift",
+      "kind": "FloatLiteral",
+      "offset": 19816,
+      "length": 4,
+      "value": "24.0"
     },
     {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Settings.swift",
@@ -72301,27 +73193,6 @@
     {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/GraphAPI\/ShimGraphRequestInterceptor.swift",
       "kind": "StringLiteral",
-      "offset": 648,
-      "length": 5,
-      "value": "\"\/me\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/GraphAPI\/ShimGraphRequestInterceptor.swift",
-      "kind": "StringLiteral",
-      "offset": 673,
-      "length": 10,
-      "value": "\"\/friends\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/GraphAPI\/ShimGraphRequestInterceptor.swift",
-      "kind": "StringLiteral",
-      "offset": 703,
-      "length": 10,
-      "value": "\"\/picture\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/GraphAPI\/ShimGraphRequestInterceptor.swift",
-      "kind": "StringLiteral",
       "offset": 1909,
       "length": 14,
       "value": "\"access_token\""
@@ -72339,41 +73210,6 @@
       "offset": 2021,
       "length": 14,
       "value": "\"Content-Type\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/GraphAPI\/ShimGraphRequestInterceptor.swift",
-      "kind": "StringLiteral",
-      "offset": 1909,
-      "length": 14,
-      "value": "\"access_token\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/GraphAPI\/ShimGraphRequestInterceptor.swift",
-      "kind": "StringLiteral",
-      "offset": 1967,
-      "length": 17,
-      "value": "\"include_headers\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/GraphAPI\/ShimGraphRequestInterceptor.swift",
-      "kind": "StringLiteral",
-      "offset": 2021,
-      "length": 14,
-      "value": "\"Content-Type\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/GraphAPI\/ShimGraphRequestInterceptor.swift",
-      "kind": "StringLiteral",
-      "offset": 2172,
-      "length": 12,
-      "value": "\"image\/jpeg\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/GraphAPI\/ShimGraphRequestInterceptor.swift",
-      "kind": "StringLiteral",
-      "offset": 2216,
-      "length": 3,
-      "value": "\"0\""
     },
     {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/GraphAPI\/ShimGraphRequestInterceptor.swift",
@@ -72432,13 +73268,6 @@
       "value": "\"tokenEncoded\""
     },
     {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Internal\/TokenCaching\/_AccessTokenExpirer.swift",
-      "kind": "StringLiteral",
-      "offset": 483,
-      "length": 19,
-      "value": "\"FBSDKCoreKit._AccessTokenExpirer\""
-    },
-    {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/_BridgeAPI.swift",
       "kind": "StringLiteral",
       "offset": 682,
@@ -72479,13 +73308,6 @@
       "offset": 1542,
       "length": 5,
       "value": "false"
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/_BridgeAPI.swift",
-      "kind": "StringLiteral",
-      "offset": 445,
-      "length": 10,
-      "value": "\"FBSDKCoreKit._BridgeAPI\""
     },
     {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Internal\/BridgeAPI\/ProtocolVersions\/_BridgeAPIProtocolNativeV1.swift",
@@ -72670,13 +73492,6 @@
       "value": "\"user_info\""
     },
     {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Internal\/BridgeAPI\/ProtocolVersions\/_BridgeAPIProtocolNativeV1.swift",
-      "kind": "StringLiteral",
-      "offset": 457,
-      "length": 26,
-      "value": "\"FBSDKCoreKit._BridgeAPIProtocolNativeV1\""
-    },
-    {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Internal\/ServerConfiguration\/_DialogConfigurationMapBuilder.swift",
       "kind": "StringLiteral",
       "offset": 587,
@@ -72754,20 +73569,6 @@
       "value": "false"
     },
     {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/Internal\/_PaymentObserver.swift",
-      "kind": "StringLiteral",
-      "offset": 514,
-      "length": 16,
-      "value": "\"FBSDKCoreKit._PaymentObserver\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/Internal\/Integrity\/_RestrictiveEventFilter.swift",
-      "kind": "StringLiteral",
-      "offset": 459,
-      "length": 23,
-      "value": "\"FBSDKCoreKit._RestrictiveEventFilter\""
-    },
-    {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/Internal\/SKAdNetwork\/_SKAdNetworkEvent.swift",
       "kind": "StringLiteral",
       "offset": 604,
@@ -72794,20 +73595,6 @@
       "offset": 711,
       "length": 8,
       "value": "\"amount\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/AppEvents\/Internal\/SKAdNetwork\/_SKAdNetworkEvent.swift",
-      "kind": "StringLiteral",
-      "offset": 453,
-      "length": 17,
-      "value": "\"FBSDKCoreKit._SKAdNetworkEvent\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Internal\/UI\/_ViewImpressionLogger.swift",
-      "kind": "StringLiteral",
-      "offset": 479,
-      "length": 21,
-      "value": "\"FBSDKCoreKit._ViewImpressionLogger\""
     },
     {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Internal\/WebDialog\/_WebDialog.swift",
@@ -72892,13 +73679,6 @@
       "offset": 1200,
       "length": 21,
       "value": "\"fbconnect:\/\/success\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKCoreKit\/FBSDKCoreKit\/Internal\/WebDialog\/_WebDialog.swift",
-      "kind": "StringLiteral",
-      "offset": 447,
-      "length": 10,
-      "value": "\"FBSDKCoreKit._WebDialog\""
     }
   ]
 }

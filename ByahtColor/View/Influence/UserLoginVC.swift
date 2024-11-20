@@ -11,9 +11,12 @@ import FBSDKCoreKit
 import Alamofire
 import Combine
 import AuthenticationServices
+import KakaoSDKAuth
+import KakaoSDKUser
+import TikTokOpenAuthSDK
 
 class UserLoginVC: UIViewController {
-    private let appleButton: UIImageView = {
+    lazy private var appleButton: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "apple")
         imageView.contentMode = .scaleAspectFill
@@ -22,7 +25,7 @@ class UserLoginVC: UIViewController {
         return imageView
     }()
 
-    private let facebookButton: UIImageView = {
+    lazy private var facebookButton: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "facebook")
         imageView.contentMode = .scaleAspectFill
@@ -31,6 +34,24 @@ class UserLoginVC: UIViewController {
         return imageView
     }()
 
+    lazy private var kakaoButton: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "kakaotalk")
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.isUserInteractionEnabled = true  // 제스처 인식을 위해 필요
+        return imageView
+    }()
+    
+    lazy private var tiktokButton: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "tiktok")
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.isUserInteractionEnabled = true  // 제스처 인식을 위해 필요
+        return imageView
+    }()
+    
     lazy private var templetView: UIImageView = {
         let image = UIImageView(image: UIImage(named: "image_login"))
         image.contentMode = .scaleAspectFit
@@ -38,15 +59,16 @@ class UserLoginVC: UIViewController {
     }()
 
     private let viewModel = MemberViewModel()
+    private let kakaoVM = KakaoAuthVM()
+    private let tiktokVM = TiktokVM()
     private var cancellables = Set<AnyCancellable>()
     private var activityIndicator: UIActivityIndicatorView!
     private let backgroundImage = UIImage(named: "logo")
     private let imageView = UIImageView()
     private let textLabel = UILabel()
-    
     private let scrollView = UIScrollView()
     private let contentView = UIView()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -161,12 +183,23 @@ class UserLoginVC: UIViewController {
         // Apple 이미지에 탭 제스처 추가
         let appleTapGesture = UITapGestureRecognizer(target: self, action: #selector(appleLogin))
         appleButton.addGestureRecognizer(appleTapGesture)
+        
+        // kakao 이미지에 탭 제스처 추가
+        let kakaoTapGesture = UITapGestureRecognizer(target: self, action: #selector(kakaoLogin))
+        kakaoButton.addGestureRecognizer(kakaoTapGesture)
+        
+        let tiktokTapGesture = UITapGestureRecognizer(target: self, action: #selector(tiktokLogin))
+        tiktokButton.addGestureRecognizer(tiktokTapGesture)
+        
+        contentView.addSubview(kakaoButton)
         contentView.addSubview(facebookButton)
         contentView.addSubview(appleButton)
+        contentView.addSubview(tiktokButton)
 
     }
 
     // 오토레이아웃 제약 조건 설정
+    
     private func setupLayoutConstraints() {
         scrollView.snp.makeConstraints {
             $0.edges.equalToSuperview()
@@ -178,21 +211,31 @@ class UserLoginVC: UIViewController {
             $0.height.greaterThanOrEqualTo(scrollView).priority(.low)
         }
 
+        // SNS 버튼들을 균등하게 배치하기 위한 StackView 설정
+        let snsButtonStack = UIStackView(arrangedSubviews: [facebookButton, appleButton, kakaoButton, tiktokButton])
+        snsButtonStack.axis = .horizontal
+        snsButtonStack.distribution = .equalSpacing
+        snsButtonStack.alignment = .center
+        snsButtonStack.spacing = 16 // 버튼 사이 간격
+        
+        contentView.addSubview(snsButtonStack)
+        
+        snsButtonStack.snp.makeConstraints {
+            $0.centerX.equalToSuperview()
+            $0.centerY.equalToSuperview()
+            $0.height.equalTo(52)
+        }
+
+        // 각 버튼의 크기를 동일하게 설정
+        [facebookButton, appleButton, kakaoButton, tiktokButton].forEach { button in
+            button.snp.makeConstraints {
+                $0.width.height.equalTo(52)
+            }
+        }
+
         textLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.equalTo(facebookButton.snp.top).offset(-24)
-        }
-
-        facebookButton.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.trailing.equalTo(view.snp.centerX).offset(-9)
-            $0.width.height.equalTo(52)
-        }
-
-        appleButton.snp.makeConstraints {
-            $0.centerY.equalToSuperview()
-            $0.leading.equalTo(view.snp.centerX).offset(9)
-            $0.width.height.equalTo(52)
+            make.bottom.equalTo(snsButtonStack.snp.top).offset(-24)
         }
         
         templetView.snp.makeConstraints {
@@ -201,6 +244,7 @@ class UserLoginVC: UIViewController {
             $0.centerY.equalToSuperview().multipliedBy(0.3)
         }
     }
+
 
 }
 
@@ -224,7 +268,7 @@ extension UserLoginVC: ASAuthorizationControllerDelegate, ASAuthorizationControl
                 let identifyTokenString = String(data: identityToken, encoding: .utf8) {
             }
 
-            let id = userIdentifier ?? ""
+            let id = userIdentifier
             var name = "\(fullName?.givenName ?? "") \(fullName?.familyName ?? "")"
             let user_email = email ?? ""
 
@@ -262,9 +306,24 @@ extension UserLoginVC: ASAuthorizationControllerDelegate, ASAuthorizationControl
         authorizationController.delegate = self
         authorizationController.presentationContextProvider = self
         authorizationController.performRequests()
-
     }
 
+    @objc private func kakaoLogin() {
+        // 카카오톡 실행 가능 여부 확인
+        print("tapped")
+        kakaoVM.handleKakaoLogin(){ id in
+            if let id = id {
+                self.getNickname()
+            }
+        }
+    }
+    
+    @objc private func tiktokLogin() {
+        // 카카오톡 실행 가능 여부 확인
+        print("tapped")
+        tiktokVM.handleTiktokLogin()
+    }
+    
     @objc private func facebookLogin(_ sender: Any) {
         let loginManager = LoginManager()
         guard let configuration = LoginConfiguration(

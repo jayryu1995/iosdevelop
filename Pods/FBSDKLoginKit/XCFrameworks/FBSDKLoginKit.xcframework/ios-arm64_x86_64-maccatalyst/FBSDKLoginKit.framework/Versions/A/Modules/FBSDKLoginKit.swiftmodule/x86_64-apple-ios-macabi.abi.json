@@ -1,8 +1,8 @@
 {
   "ABIRoot": {
     "kind": "Root",
-    "name": "TopLevel",
-    "printedName": "TopLevel",
+    "name": "FBSDKLoginKit",
+    "printedName": "FBSDKLoginKit",
     "children": [
       {
         "kind": "Import",
@@ -98,7 +98,23 @@
         "declKind": "Protocol",
         "usr": "s:13FBSDKLoginKit27AuthenticationTokenCreatingP",
         "mangledName": "$s13FBSDKLoginKit27AuthenticationTokenCreatingP",
-        "moduleName": "FBSDKLoginKit"
+        "moduleName": "FBSDKLoginKit",
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
+        ]
       },
       {
         "kind": "Import",
@@ -661,6 +677,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "AuthenticationTokenCreating",
             "printedName": "AuthenticationTokenCreating",
             "usr": "s:13FBSDKLoginKit27AuthenticationTokenCreatingP",
@@ -775,6 +805,22 @@
         "moduleName": "FBSDKLoginKit",
         "declAttributes": [
           "Final"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          }
         ]
       },
       {
@@ -991,6 +1037,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -1268,6 +1328,20 @@
         ],
         "enumRawTypeName": "UInt",
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -1664,6 +1738,22 @@
         "declAttributes": [
           "DynamicMemberLookup",
           "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
         ]
       },
       {
@@ -2033,6 +2123,22 @@
         "declAttributes": [
           "DynamicMemberLookup",
           "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
         ]
       },
       {
@@ -2401,6 +2507,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -3041,6 +3161,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "CustomNSError",
             "printedName": "CustomNSError",
             "usr": "s:10Foundation13CustomNSErrorP",
@@ -3334,6 +3468,20 @@
         ],
         "enumRawTypeName": "Int",
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Hashable",
@@ -4888,7 +5036,23 @@
             "usr": "s:13FBSDKLoginKit18DeviceLoginManagerC18ObjectDependenciesV",
             "mangledName": "$s13FBSDKLoginKit18DeviceLoginManagerC18ObjectDependenciesV",
             "moduleName": "FBSDKLoginKit",
-            "isFromExtension": true
+            "isFromExtension": true,
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              }
+            ]
           }
         ],
         "declKind": "Class",
@@ -4910,25 +5074,17 @@
         "conformances": [
           {
             "kind": "Conformance",
-            "name": "DependentAsObject",
-            "printedName": "DependentAsObject",
-            "children": [
-              {
-                "kind": "TypeWitness",
-                "name": "ObjectDependencies",
-                "printedName": "ObjectDependencies",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "ObjectDependencies",
-                    "printedName": "FBSDKLoginKit.DeviceLoginManager.ObjectDependencies",
-                    "usr": "s:13FBSDKLoginKit18DeviceLoginManagerC18ObjectDependenciesV"
-                  }
-                ]
-              }
-            ],
-            "usr": "s:13FBSDKLoginKit17DependentAsObjectP",
-            "mangledName": "$s13FBSDKLoginKit17DependentAsObjectP"
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
           },
           {
             "kind": "Conformance",
@@ -4978,6 +5134,28 @@
             "printedName": "CustomDebugStringConvertible",
             "usr": "s:s28CustomDebugStringConvertibleP",
             "mangledName": "$ss28CustomDebugStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "DependentAsObject",
+            "printedName": "DependentAsObject",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "ObjectDependencies",
+                "printedName": "ObjectDependencies",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ObjectDependencies",
+                    "printedName": "FBSDKLoginKit.DeviceLoginManager.ObjectDependencies",
+                    "usr": "s:13FBSDKLoginKit18DeviceLoginManagerC18ObjectDependenciesV"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:13FBSDKLoginKit17DependentAsObjectP",
+            "mangledName": "$s13FBSDKLoginKit17DependentAsObjectP"
           }
         ]
       },
@@ -5096,6 +5274,22 @@
           "AccessControl",
           "ObjC",
           "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
         ]
       },
       {
@@ -5328,6 +5522,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -5452,6 +5660,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "DevicePolling",
             "printedName": "DevicePolling",
             "usr": "s:13FBSDKLoginKit13DevicePollingP",
@@ -5463,6 +5685,13 @@
             "printedName": "Sendable",
             "usr": "s:s8SendableP",
             "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "BitwiseCopyable",
+            "printedName": "BitwiseCopyable",
+            "usr": "s:s15BitwiseCopyableP",
+            "mangledName": "$ss15BitwiseCopyableP"
           }
         ]
       },
@@ -5522,6 +5751,22 @@
         "moduleName": "FBSDKLoginKit",
         "declAttributes": [
           "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
         ]
       },
       {
@@ -5745,10 +5990,31 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Sendable",
             "printedName": "Sendable",
             "usr": "s:s8SendableP",
             "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "BitwiseCopyable",
+            "printedName": "BitwiseCopyable",
+            "usr": "s:s15BitwiseCopyableP",
+            "mangledName": "$ss15BitwiseCopyableP"
           }
         ]
       },
@@ -5792,6 +6058,7 @@
             "moduleName": "FBSDKLoginKit",
             "declAttributes": [
               "Final",
+              "Preconcurrency",
               "Custom",
               "AccessControl",
               "RawDocComment",
@@ -5888,8 +6155,9 @@
             "declAttributes": [
               "HasInitialValue",
               "Final",
-              "HasStorage",
+              "Preconcurrency",
               "Custom",
+              "HasStorage",
               "ReferenceOwnership",
               "AccessControl",
               "IBOutlet",
@@ -6016,8 +6284,9 @@
             "declAttributes": [
               "HasInitialValue",
               "Final",
-              "HasStorage",
+              "Preconcurrency",
               "Custom",
+              "HasStorage",
               "AccessControl",
               "RawDocComment",
               "ObjC"
@@ -6133,8 +6402,9 @@
             "declAttributes": [
               "HasInitialValue",
               "Final",
-              "HasStorage",
+              "Preconcurrency",
               "Custom",
+              "HasStorage",
               "AccessControl",
               "RawDocComment",
               "ObjC"
@@ -6234,8 +6504,9 @@
             "declAttributes": [
               "HasInitialValue",
               "Final",
-              "HasStorage",
+              "Preconcurrency",
               "Custom",
+              "HasStorage",
               "AccessControl",
               "RawDocComment",
               "ObjC"
@@ -6335,8 +6606,9 @@
             "declAttributes": [
               "HasInitialValue",
               "Final",
-              "HasStorage",
+              "Preconcurrency",
               "Custom",
+              "HasStorage",
               "AccessControl",
               "RawDocComment",
               "ObjC"
@@ -6443,6 +6715,7 @@
             "moduleName": "FBSDKLoginKit",
             "declAttributes": [
               "Final",
+              "Preconcurrency",
               "Custom",
               "AccessControl",
               "RawDocComment",
@@ -6564,8 +6837,9 @@
             "declAttributes": [
               "HasInitialValue",
               "Final",
-              "HasStorage",
+              "Preconcurrency",
               "Custom",
+              "HasStorage",
               "AccessControl",
               "RawDocComment",
               "ObjC"
@@ -6689,8 +6963,9 @@
             "declAttributes": [
               "HasInitialValue",
               "Final",
-              "HasStorage",
+              "Preconcurrency",
               "Custom",
+              "HasStorage",
               "AccessControl",
               "RawDocComment",
               "ObjC"
@@ -6806,8 +7081,9 @@
             "declAttributes": [
               "HasInitialValue",
               "Final",
-              "HasStorage",
+              "Preconcurrency",
               "Custom",
+              "HasStorage",
               "AccessControl",
               "RawDocComment",
               "ObjC"
@@ -6915,8 +7191,9 @@
             "declAttributes": [
               "HasInitialValue",
               "Final",
-              "HasStorage",
+              "Preconcurrency",
               "Custom",
+              "HasStorage",
               "ObjC"
             ],
             "hasStorage": true,
@@ -7038,8 +7315,9 @@
             "declAttributes": [
               "HasInitialValue",
               "Final",
-              "HasStorage",
+              "Preconcurrency",
               "Custom",
+              "HasStorage",
               "ObjC"
             ],
             "hasStorage": true,
@@ -7153,8 +7431,9 @@
             "declAttributes": [
               "HasInitialValue",
               "Final",
-              "HasStorage",
-              "Custom"
+              "Preconcurrency",
+              "Custom",
+              "HasStorage"
             ],
             "hasStorage": true,
             "accessors": [
@@ -7249,8 +7528,9 @@
             "declAttributes": [
               "HasInitialValue",
               "Final",
-              "HasStorage",
-              "Custom"
+              "Preconcurrency",
+              "Custom",
+              "HasStorage"
             ],
             "hasStorage": true,
             "accessors": [
@@ -7345,8 +7625,9 @@
             "declAttributes": [
               "HasInitialValue",
               "Final",
-              "HasStorage",
-              "Custom"
+              "Preconcurrency",
+              "Custom",
+              "HasStorage"
             ],
             "hasStorage": true,
             "accessors": [
@@ -7441,8 +7722,9 @@
             "declAttributes": [
               "HasInitialValue",
               "Final",
-              "HasStorage",
+              "Preconcurrency",
               "Custom",
+              "HasStorage",
               "ObjC"
             ],
             "hasStorage": true,
@@ -7539,6 +7821,7 @@
             "moduleName": "FBSDKLoginKit",
             "declAttributes": [
               "Final",
+              "Preconcurrency",
               "Custom",
               "ObjC"
             ],
@@ -7785,6 +8068,20 @@
             "conformances": [
               {
                 "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
+              {
+                "kind": "Conformance",
                 "name": "Equatable",
                 "printedName": "Equatable",
                 "usr": "s:SQ",
@@ -7848,6 +8145,7 @@
             "declAttributes": [
               "Dynamic",
               "ObjC",
+              "Preconcurrency",
               "Custom",
               "Override",
               "AccessControl",
@@ -7890,6 +8188,7 @@
             "declAttributes": [
               "Dynamic",
               "ObjC",
+              "Preconcurrency",
               "Custom",
               "Required"
             ],
@@ -7943,6 +8242,7 @@
             "mangledName": "$s13FBSDKLoginKit13FBLoginButtonC5frame15elementProvider06stringG005loginG019graphRequestFactoryACSo6CGRectV_AA29UserInterfaceElementProviding_pAA0no6StringQ0_pAA05LoginQ0_pSo010FBSDKGraphkL0_ptcfc",
             "moduleName": "FBSDKLoginKit",
             "declAttributes": [
+              "Preconcurrency",
               "Custom",
               "Convenience"
             ],
@@ -7987,6 +8287,7 @@
             "mangledName": "$s13FBSDKLoginKit13FBLoginButtonC5frame11permissionsACSo6CGRectV_Say09FBSDKCoreB010PermissionOGtcfc",
             "moduleName": "FBSDKLoginKit",
             "declAttributes": [
+              "Preconcurrency",
               "Custom",
               "Convenience",
               "RawDocComment"
@@ -8013,6 +8314,7 @@
             "declAttributes": [
               "Final",
               "ObjC",
+              "Preconcurrency",
               "Custom",
               "Override",
               "AccessControl",
@@ -8047,6 +8349,7 @@
             "declAttributes": [
               "Final",
               "ObjC",
+              "Preconcurrency",
               "Custom",
               "Override",
               "AccessControl",
@@ -8081,6 +8384,7 @@
             "declAttributes": [
               "Final",
               "ObjC",
+              "Preconcurrency",
               "Custom",
               "Override",
               "AccessControl"
@@ -8107,6 +8411,7 @@
             "declAttributes": [
               "Final",
               "ObjC",
+              "Preconcurrency",
               "Custom",
               "Override",
               "AccessControl"
@@ -8140,6 +8445,7 @@
             "declAttributes": [
               "Final",
               "ObjC",
+              "Preconcurrency",
               "Custom",
               "Override",
               "AccessControl"
@@ -8169,6 +8475,7 @@
             "moduleName": "FBSDKLoginKit",
             "declAttributes": [
               "Final",
+              "Preconcurrency",
               "Custom",
               "ObjC"
             ],
@@ -8197,6 +8504,7 @@
             "moduleName": "FBSDKLoginKit",
             "declAttributes": [
               "Final",
+              "Preconcurrency",
               "Custom",
               "ObjC"
             ],
@@ -8224,6 +8532,7 @@
             "moduleName": "FBSDKLoginKit",
             "declAttributes": [
               "Final",
+              "Preconcurrency",
               "Custom",
               "RawDocComment",
               "ObjC"
@@ -8256,6 +8565,7 @@
             "moduleName": "FBSDKLoginKit",
             "declAttributes": [
               "Final",
+              "Preconcurrency",
               "Custom",
               "ObjC"
             ],
@@ -8278,6 +8588,7 @@
             "moduleName": "FBSDKLoginKit",
             "declAttributes": [
               "Final",
+              "Preconcurrency",
               "Custom",
               "RawDocComment",
               "ObjC"
@@ -8301,6 +8612,7 @@
             "moduleName": "FBSDKLoginKit",
             "declAttributes": [
               "Final",
+              "Preconcurrency",
               "Custom",
               "ObjC"
             ],
@@ -8323,6 +8635,7 @@
             "moduleName": "FBSDKLoginKit",
             "declAttributes": [
               "Final",
+              "Preconcurrency",
               "Custom",
               "ObjC"
             ],
@@ -8359,6 +8672,7 @@
             "moduleName": "FBSDKLoginKit",
             "declAttributes": [
               "Final",
+              "Preconcurrency",
               "Custom",
               "ObjC"
             ],
@@ -8381,6 +8695,7 @@
             "moduleName": "FBSDKLoginKit",
             "declAttributes": [
               "Final",
+              "Preconcurrency",
               "Custom",
               "ObjC"
             ],
@@ -8393,6 +8708,7 @@
         "moduleName": "FBSDKLoginKit",
         "objc_name": "FBSDKLoginButton",
         "declAttributes": [
+          "Preconcurrency",
           "Custom",
           "Final",
           "AccessControl",
@@ -8413,6 +8729,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -8518,8 +8848,9 @@
             "declAttributes": [
               "HasInitialValue",
               "Final",
-              "HasStorage",
+              "Preconcurrency",
               "Custom",
+              "HasStorage",
               "ReferenceOwnership",
               "AccessControl",
               "ObjC",
@@ -8637,8 +8968,9 @@
             "declAttributes": [
               "HasInitialValue",
               "Final",
-              "HasStorage",
+              "Preconcurrency",
               "Custom",
+              "HasStorage",
               "AccessControl",
               "ObjC",
               "RawDocComment"
@@ -8737,6 +9069,7 @@
             "moduleName": "FBSDKLoginKit",
             "declAttributes": [
               "Final",
+              "Preconcurrency",
               "Custom",
               "AccessControl",
               "ObjC",
@@ -8833,8 +9166,9 @@
             "moduleName": "FBSDKLoginKit",
             "declAttributes": [
               "Final",
-              "HasStorage",
+              "Preconcurrency",
               "Custom",
+              "HasStorage",
               "RawDocComment"
             ],
             "isLet": true,
@@ -8882,8 +9216,9 @@
             "moduleName": "FBSDKLoginKit",
             "declAttributes": [
               "Final",
-              "HasStorage",
+              "Preconcurrency",
               "Custom",
+              "HasStorage",
               "RawDocComment"
             ],
             "isLet": true,
@@ -8934,6 +9269,7 @@
             "declAttributes": [
               "Dynamic",
               "ObjC",
+              "Preconcurrency",
               "Custom",
               "Convenience",
               "AccessControl",
@@ -8994,6 +9330,7 @@
             "overriding": true,
             "objc_name": "initWithTagline:message:colorStyle:",
             "declAttributes": [
+              "Preconcurrency",
               "Custom",
               "Override",
               "AccessControl",
@@ -9030,6 +9367,7 @@
             "mangledName": "$s13FBSDKLoginKit18FBLoginTooltipViewC27serverConfigurationProvider06stringH0AcA06ServerG9Providing_p_AA019UserInterfaceStringK0_ptcfc",
             "moduleName": "FBSDKLoginKit",
             "declAttributes": [
+              "Preconcurrency",
               "Custom",
               "RawDocComment"
             ],
@@ -9073,6 +9411,7 @@
             "declAttributes": [
               "Final",
               "ObjC",
+              "Preconcurrency",
               "Custom",
               "Override",
               "AccessControl"
@@ -9086,6 +9425,7 @@
         "moduleName": "FBSDKLoginKit",
         "objc_name": "FBSDKLoginTooltipView",
         "declAttributes": [
+          "Preconcurrency",
           "Custom",
           "Final",
           "AccessControl",
@@ -9102,6 +9442,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -9567,6 +9921,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -9815,6 +10183,20 @@
             "conformances": [
               {
                 "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
+              {
+                "kind": "Conformance",
                 "name": "Equatable",
                 "printedName": "Equatable",
                 "usr": "s:SQ",
@@ -9855,6 +10237,13 @@
                 "printedName": "Sendable",
                 "usr": "s:s8SendableP",
                 "mangledName": "$ss8SendableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "BitwiseCopyable",
+                "printedName": "BitwiseCopyable",
+                "usr": "s:s15BitwiseCopyableP",
+                "mangledName": "$ss15BitwiseCopyableP"
               }
             ]
           },
@@ -10034,6 +10423,20 @@
             "conformances": [
               {
                 "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              },
+              {
+                "kind": "Conformance",
                 "name": "Equatable",
                 "printedName": "Equatable",
                 "usr": "s:SQ",
@@ -10074,6 +10477,13 @@
                 "printedName": "Sendable",
                 "usr": "s:s8SendableP",
                 "mangledName": "$ss8SendableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "BitwiseCopyable",
+                "printedName": "BitwiseCopyable",
+                "usr": "s:s15BitwiseCopyableP",
+                "mangledName": "$ss15BitwiseCopyableP"
               }
             ]
           },
@@ -10096,8 +10506,9 @@
             "isOpen": true,
             "declAttributes": [
               "HasInitialValue",
-              "HasStorage",
+              "Preconcurrency",
               "Custom",
+              "HasStorage",
               "AccessControl",
               "ObjC",
               "RawDocComment"
@@ -10194,8 +10605,9 @@
             "moduleName": "FBSDKLoginKit",
             "isOpen": true,
             "declAttributes": [
-              "HasStorage",
+              "Preconcurrency",
               "Custom",
+              "HasStorage",
               "AccessControl",
               "ObjC",
               "RawDocComment"
@@ -10301,8 +10713,9 @@
             "isOpen": true,
             "declAttributes": [
               "HasInitialValue",
-              "HasStorage",
+              "Preconcurrency",
               "Custom",
+              "HasStorage",
               "AccessControl",
               "ObjC",
               "RawDocComment"
@@ -10424,8 +10837,9 @@
             "isOpen": true,
             "declAttributes": [
               "HasInitialValue",
-              "HasStorage",
+              "Preconcurrency",
               "Custom",
+              "HasStorage",
               "AccessControl",
               "ObjC",
               "RawDocComment"
@@ -10538,9 +10952,10 @@
             "moduleName": "FBSDKLoginKit",
             "declAttributes": [
               "HasInitialValue",
-              "HasStorage",
+              "Preconcurrency",
               "Custom",
               "Final",
+              "HasStorage",
               "ObjC",
               "RawDocComment"
             ],
@@ -10593,6 +11008,7 @@
             "declAttributes": [
               "Dynamic",
               "ObjC",
+              "Preconcurrency",
               "Custom",
               "Convenience",
               "RawDocComment"
@@ -10651,6 +11067,7 @@
             "moduleName": "FBSDKLoginKit",
             "objc_name": "initWithTagline:message:colorStyle:",
             "declAttributes": [
+              "Preconcurrency",
               "Custom",
               "AccessControl",
               "ObjC",
@@ -10682,6 +11099,7 @@
             "isOpen": true,
             "objc_name": "presentFromView:",
             "declAttributes": [
+              "Preconcurrency",
               "Custom",
               "AccessControl",
               "ObjC",
@@ -10725,6 +11143,7 @@
             "isOpen": true,
             "objc_name": "presentInView:withArrowPosition:direction:",
             "declAttributes": [
+              "Preconcurrency",
               "Custom",
               "AccessControl",
               "ObjC",
@@ -10749,6 +11168,7 @@
             "moduleName": "FBSDKLoginKit",
             "isOpen": true,
             "declAttributes": [
+              "Preconcurrency",
               "Custom",
               "AccessControl",
               "ObjC",
@@ -10774,6 +11194,7 @@
             "isOpen": true,
             "objc_name": "animateFadeIn",
             "declAttributes": [
+              "Preconcurrency",
               "Custom",
               "ObjC",
               "RawDocComment"
@@ -10807,6 +11228,7 @@
             "declAttributes": [
               "Dynamic",
               "ObjC",
+              "Preconcurrency",
               "Custom",
               "Override",
               "AccessControl"
@@ -10834,6 +11256,7 @@
             "declAttributes": [
               "Dynamic",
               "ObjC",
+              "Preconcurrency",
               "Custom",
               "Override",
               "AccessControl",
@@ -10869,6 +11292,7 @@
             "declAttributes": [
               "Dynamic",
               "ObjC",
+              "Preconcurrency",
               "Custom",
               "Override"
             ],
@@ -10882,6 +11306,7 @@
         "isOpen": true,
         "objc_name": "FBSDKTooltipView",
         "declAttributes": [
+          "Preconcurrency",
           "Custom",
           "AccessControl",
           "ObjC",
@@ -10894,6 +11319,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -11222,6 +11661,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -11407,6 +11860,22 @@
           "AccessControl",
           "ObjC",
           "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
         ]
       },
       {
@@ -11487,6 +11956,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "LoginCompleterFactoryProtocol",
             "printedName": "LoginCompleterFactoryProtocol",
             "usr": "s:13FBSDKLoginKit29LoginCompleterFactoryProtocolP",
@@ -11498,6 +11981,13 @@
             "printedName": "Sendable",
             "usr": "s:s8SendableP",
             "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "BitwiseCopyable",
+            "printedName": "BitwiseCopyable",
+            "usr": "s:s15BitwiseCopyableP",
+            "mangledName": "$ss15BitwiseCopyableP"
           }
         ]
       },
@@ -11560,6 +12050,22 @@
         "moduleName": "FBSDKLoginKit",
         "declAttributes": [
           "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
         ]
       },
       {
@@ -11686,6 +12192,22 @@
         "moduleName": "FBSDKLoginKit",
         "declAttributes": [
           "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
         ]
       },
       {
@@ -12758,6 +13280,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -13697,6 +14233,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "CustomNSError",
             "printedName": "CustomNSError",
             "usr": "s:10Foundation13CustomNSErrorP",
@@ -14286,6 +14836,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Hashable",
             "printedName": "Hashable",
             "usr": "s:SH",
@@ -14517,7 +15081,23 @@
         "declKind": "Protocol",
         "usr": "s:13FBSDKLoginKit17LoginEventLoggingP",
         "mangledName": "$s13FBSDKLoginKit17LoginEventLoggingP",
-        "moduleName": "FBSDKLoginKit"
+        "moduleName": "FBSDKLoginKit",
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
+        ]
       },
       {
         "kind": "Import",
@@ -17654,7 +18234,23 @@
             "usr": "s:13FBSDKLoginKit12LoginManagerC18ObjectDependenciesV",
             "mangledName": "$s13FBSDKLoginKit12LoginManagerC18ObjectDependenciesV",
             "moduleName": "FBSDKLoginKit",
-            "isFromExtension": true
+            "isFromExtension": true,
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              }
+            ]
           }
         ],
         "declKind": "Class",
@@ -17677,32 +18273,17 @@
         "conformances": [
           {
             "kind": "Conformance",
-            "name": "LoginProviding",
-            "printedName": "LoginProviding",
-            "usr": "s:13FBSDKLoginKit14LoginProvidingP",
-            "mangledName": "$s13FBSDKLoginKit14LoginProvidingP"
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
           },
           {
             "kind": "Conformance",
-            "name": "DependentAsObject",
-            "printedName": "DependentAsObject",
-            "children": [
-              {
-                "kind": "TypeWitness",
-                "name": "ObjectDependencies",
-                "printedName": "ObjectDependencies",
-                "children": [
-                  {
-                    "kind": "TypeNominal",
-                    "name": "ObjectDependencies",
-                    "printedName": "FBSDKLoginKit.LoginManager.ObjectDependencies",
-                    "usr": "s:13FBSDKLoginKit12LoginManagerC18ObjectDependenciesV"
-                  }
-                ]
-              }
-            ],
-            "usr": "s:13FBSDKLoginKit17DependentAsObjectP",
-            "mangledName": "$s13FBSDKLoginKit17DependentAsObjectP"
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
           },
           {
             "kind": "Conformance",
@@ -17752,6 +18333,35 @@
             "printedName": "CustomDebugStringConvertible",
             "usr": "s:s28CustomDebugStringConvertibleP",
             "mangledName": "$ss28CustomDebugStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "LoginProviding",
+            "printedName": "LoginProviding",
+            "usr": "s:13FBSDKLoginKit14LoginProvidingP",
+            "mangledName": "$s13FBSDKLoginKit14LoginProvidingP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "DependentAsObject",
+            "printedName": "DependentAsObject",
+            "children": [
+              {
+                "kind": "TypeWitness",
+                "name": "ObjectDependencies",
+                "printedName": "ObjectDependencies",
+                "children": [
+                  {
+                    "kind": "TypeNominal",
+                    "name": "ObjectDependencies",
+                    "printedName": "FBSDKLoginKit.LoginManager.ObjectDependencies",
+                    "usr": "s:13FBSDKLoginKit12LoginManagerC18ObjectDependenciesV"
+                  }
+                ]
+              }
+            ],
+            "usr": "s:13FBSDKLoginKit17DependentAsObjectP",
+            "mangledName": "$s13FBSDKLoginKit17DependentAsObjectP"
           }
         ]
       },
@@ -19141,7 +19751,23 @@
             "usr": "s:13FBSDKLoginKit18LoginManagerLoggerC16TypeDependenciesV",
             "mangledName": "$s13FBSDKLoginKit18LoginManagerLoggerC16TypeDependenciesV",
             "moduleName": "FBSDKLoginKit",
-            "isFromExtension": true
+            "isFromExtension": true,
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              }
+            ]
           },
           {
             "kind": "Var",
@@ -19241,8 +19867,8 @@
                 "static": true,
                 "implicit": true,
                 "declAttributes": [
-                  "Transparent",
-                  "Final"
+                  "Final",
+                  "Transparent"
                 ],
                 "isFromExtension": true,
                 "accessorKind": "set"
@@ -19265,8 +19891,8 @@
                 "static": true,
                 "implicit": true,
                 "declAttributes": [
-                  "Transparent",
-                  "Final"
+                  "Final",
+                  "Transparent"
                 ],
                 "isFromExtension": true,
                 "accessorKind": "_modify"
@@ -19412,6 +20038,20 @@
           "Final"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "DependentAsType",
@@ -20024,6 +20664,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -20283,6 +20937,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -20323,6 +20991,13 @@
             "printedName": "Sendable",
             "usr": "s:s8SendableP",
             "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "BitwiseCopyable",
+            "printedName": "BitwiseCopyable",
+            "usr": "s:s15BitwiseCopyableP",
+            "mangledName": "$ss15BitwiseCopyableP"
           }
         ]
       },
@@ -20628,7 +21303,23 @@
         "declKind": "Protocol",
         "usr": "s:13FBSDKLoginKit14LoginProvidingP",
         "mangledName": "$s13FBSDKLoginKit14LoginProvidingP",
-        "moduleName": "FBSDKLoginKit"
+        "moduleName": "FBSDKLoginKit",
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
+        ]
       },
       {
         "kind": "Import",
@@ -20974,7 +21665,23 @@
             "usr": "s:13FBSDKLoginKit22LoginRecoveryAttempterC16TypeDependenciesV",
             "mangledName": "$s13FBSDKLoginKit22LoginRecoveryAttempterC16TypeDependenciesV",
             "moduleName": "FBSDKLoginKit",
-            "isFromExtension": true
+            "isFromExtension": true,
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              }
+            ]
           },
           {
             "kind": "Var",
@@ -21074,8 +21781,8 @@
                 "static": true,
                 "implicit": true,
                 "declAttributes": [
-                  "Transparent",
-                  "Final"
+                  "Final",
+                  "Transparent"
                 ],
                 "isFromExtension": true,
                 "accessorKind": "set"
@@ -21098,8 +21805,8 @@
                 "static": true,
                 "implicit": true,
                 "declAttributes": [
-                  "Transparent",
-                  "Final"
+                  "Final",
+                  "Transparent"
                 ],
                 "isFromExtension": true,
                 "accessorKind": "_modify"
@@ -21245,6 +21952,20 @@
           "Final"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "DependentAsType",
@@ -21638,7 +22359,23 @@
           "Frozen",
           "RawDocComment"
         ],
-        "isEnumExhaustive": true
+        "isEnumExhaustive": true,
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          }
+        ]
       },
       {
         "kind": "TypeDecl",
@@ -21763,6 +22500,22 @@
           "AccessControl",
           "ObjC",
           "RawDocComment"
+        ],
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
         ]
       },
       {
@@ -21937,6 +22690,20 @@
         ],
         "enumRawTypeName": "UInt",
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -23136,7 +23903,23 @@
             "usr": "s:13FBSDKLoginKit17LoginURLCompleterV16TypeDependenciesV",
             "mangledName": "$s13FBSDKLoginKit17LoginURLCompleterV16TypeDependenciesV",
             "moduleName": "FBSDKLoginKit",
-            "isFromExtension": true
+            "isFromExtension": true,
+            "conformances": [
+              {
+                "kind": "Conformance",
+                "name": "Copyable",
+                "printedName": "Copyable",
+                "usr": "s:s8CopyableP",
+                "mangledName": "$ss8CopyableP"
+              },
+              {
+                "kind": "Conformance",
+                "name": "Escapable",
+                "printedName": "Escapable",
+                "usr": "s:s9EscapableP",
+                "mangledName": "$ss9EscapableP"
+              }
+            ]
           },
           {
             "kind": "Var",
@@ -23401,6 +24184,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "LoginCompleting",
             "printedName": "LoginCompleting",
             "usr": "s:13FBSDKLoginKit15LoginCompletingP",
@@ -23573,10 +24370,31 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Sendable",
             "printedName": "Sendable",
             "usr": "s:s8SendableP",
             "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "BitwiseCopyable",
+            "printedName": "BitwiseCopyable",
+            "usr": "s:s15BitwiseCopyableP",
+            "mangledName": "$ss15BitwiseCopyableP"
           }
         ]
       },
@@ -23707,6 +24525,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Error",
             "printedName": "Error",
             "usr": "s:s5ErrorP",
@@ -23725,6 +24557,13 @@
             "printedName": "Sendable",
             "usr": "s:s8SendableP",
             "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "BitwiseCopyable",
+            "printedName": "BitwiseCopyable",
+            "usr": "s:s15BitwiseCopyableP",
+            "mangledName": "$ss15BitwiseCopyableP"
           }
         ]
       },
@@ -23777,10 +24616,31 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Sendable",
             "printedName": "Sendable",
             "usr": "s:s8SendableP",
             "mangledName": "$ss8SendableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "BitwiseCopyable",
+            "printedName": "BitwiseCopyable",
+            "usr": "s:s15BitwiseCopyableP",
+            "mangledName": "$ss15BitwiseCopyableP"
           }
         ]
       },
@@ -24066,7 +24926,23 @@
         "declKind": "Protocol",
         "usr": "s:13FBSDKLoginKit15ProfileCreatingP",
         "mangledName": "$s13FBSDKLoginKit15ProfileCreatingP",
-        "moduleName": "FBSDKLoginKit"
+        "moduleName": "FBSDKLoginKit",
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
+        ]
       },
       {
         "kind": "Import",
@@ -24393,6 +25269,20 @@
           },
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -24547,7 +25437,23 @@
         "declKind": "Protocol",
         "usr": "s:13FBSDKLoginKit28ServerConfigurationProvidingP",
         "mangledName": "$s13FBSDKLoginKit28ServerConfigurationProvidingP",
-        "moduleName": "FBSDKLoginKit"
+        "moduleName": "FBSDKLoginKit",
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
+        ]
       },
       {
         "kind": "Import",
@@ -24634,7 +25540,23 @@
         "declKind": "Protocol",
         "usr": "s:13FBSDKLoginKit29UserInterfaceElementProvidingP",
         "mangledName": "$s13FBSDKLoginKit29UserInterfaceElementProvidingP",
-        "moduleName": "FBSDKLoginKit"
+        "moduleName": "FBSDKLoginKit",
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
+        ]
       },
       {
         "kind": "Import",
@@ -24697,7 +25619,23 @@
         "declKind": "Protocol",
         "usr": "s:13FBSDKLoginKit28UserInterfaceStringProvidingP",
         "mangledName": "$s13FBSDKLoginKit28UserInterfaceStringProvidingP",
-        "moduleName": "FBSDKLoginKit"
+        "moduleName": "FBSDKLoginKit",
+        "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          }
+        ]
       },
       {
         "kind": "Import",
@@ -26931,6 +27869,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "Equatable",
             "printedName": "Equatable",
             "usr": "s:SQ",
@@ -27000,6 +27952,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -27078,6 +28044,20 @@
           "ObjectiveC.NSObject"
         ],
         "conformances": [
+          {
+            "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
           {
             "kind": "Conformance",
             "name": "Equatable",
@@ -27529,6 +28509,20 @@
         "conformances": [
           {
             "kind": "Conformance",
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
+          },
+          {
+            "kind": "Conformance",
             "name": "_ObjectiveCBridgeable",
             "printedName": "_ObjectiveCBridgeable",
             "children": [
@@ -27629,10 +28623,17 @@
         "conformances": [
           {
             "kind": "Conformance",
-            "name": "ServerConfigurationProviding",
-            "printedName": "ServerConfigurationProviding",
-            "usr": "s:13FBSDKLoginKit28ServerConfigurationProvidingP",
-            "mangledName": "$s13FBSDKLoginKit28ServerConfigurationProvidingP"
+            "name": "Copyable",
+            "printedName": "Copyable",
+            "usr": "s:s8CopyableP",
+            "mangledName": "$ss8CopyableP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "Escapable",
+            "printedName": "Escapable",
+            "usr": "s:s9EscapableP",
+            "mangledName": "$ss9EscapableP"
           },
           {
             "kind": "Conformance",
@@ -27682,6 +28683,13 @@
             "printedName": "CustomDebugStringConvertible",
             "usr": "s:s28CustomDebugStringConvertibleP",
             "mangledName": "$ss28CustomDebugStringConvertibleP"
+          },
+          {
+            "kind": "Conformance",
+            "name": "ServerConfigurationProviding",
+            "printedName": "ServerConfigurationProviding",
+            "usr": "s:13FBSDKLoginKit28ServerConfigurationProvidingP",
+            "mangledName": "$s13FBSDKLoginKit28ServerConfigurationProvidingP"
           }
         ]
       }
@@ -27702,6 +28710,20 @@
       "offset": 784,
       "length": 27,
       "value": "\"-----END CERTIFICATE-----\""
+    },
+    {
+      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/CodeVerifier.swift",
+      "kind": "StringLiteral",
+      "offset": 865,
+      "length": 2,
+      "value": "\"\""
+    },
+    {
+      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/CodeVerifier.swift",
+      "kind": "IntegerLiteral",
+      "offset": 914,
+      "length": 1,
+      "value": "0"
     },
     {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/CodeVerifier.swift",
@@ -27739,32 +28761,11 @@
       "value": "2"
     },
     {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/DefaultAudience.swift",
-      "kind": "IntegerLiteral",
-      "offset": 964,
-      "length": 6,
-      "value": "1"
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/DefaultAudience.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1064,
-      "length": 8,
-      "value": "2"
-    },
-    {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/DeviceLoginCodeInfo.swift",
       "kind": "IntegerLiteral",
       "offset": 850,
       "length": 1,
       "value": "5"
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/DeviceLoginCodeInfo.swift",
-      "kind": "StringLiteral",
-      "offset": 410,
-      "length": 19,
-      "value": "\"FBSDKLoginKit.DeviceLoginCodeInfo\""
     },
     {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/DeviceLoginError.swift",
@@ -27802,53 +28803,11 @@
       "value": "1349152"
     },
     {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/DeviceLoginError.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1994,
-      "length": 7,
-      "value": "1349172"
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/DeviceLoginError.swift",
-      "kind": "IntegerLiteral",
-      "offset": 2089,
-      "length": 7,
-      "value": "1349173"
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/DeviceLoginError.swift",
-      "kind": "IntegerLiteral",
-      "offset": 2198,
-      "length": 7,
-      "value": "1349174"
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/DeviceLoginError.swift",
-      "kind": "IntegerLiteral",
-      "offset": 2268,
-      "length": 7,
-      "value": "1349152"
-    },
-    {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/DeviceLoginManager.swift",
       "kind": "BooleanLiteral",
       "offset": 1341,
       "length": 5,
       "value": "false"
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/DeviceLoginManager.swift",
-      "kind": "StringLiteral",
-      "offset": 803,
-      "length": 18,
-      "value": "\"FBSDKLoginKit.DeviceLoginManager\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/DeviceLoginManagerResult.swift",
-      "kind": "StringLiteral",
-      "offset": 411,
-      "length": 24,
-      "value": "\"FBSDKLoginKit.DeviceLoginManagerResult\""
     },
     {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/Internal\/DeviceRequestsHelper.swift",
@@ -27950,27 +28909,6 @@
     },
     {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/FBLoginButton.swift",
-      "kind": "IntegerLiteral",
-      "offset": 4173,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/FBLoginButton.swift",
-      "kind": "IntegerLiteral",
-      "offset": 4249,
-      "length": 12,
-      "value": "1"
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/FBLoginButton.swift",
-      "kind": "IntegerLiteral",
-      "offset": 4418,
-      "length": 7,
-      "value": "2"
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/FBLoginButton.swift",
       "kind": "FloatLiteral",
       "offset": 4487,
       "length": 4,
@@ -28012,13 +28950,6 @@
       "value": "false"
     },
     {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/Internal\/FBPermission.swift",
-      "kind": "StringLiteral",
-      "offset": 456,
-      "length": 12,
-      "value": "\"FBSDKLoginKit.FBPermission\""
-    },
-    {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/FBTooltipView.swift",
       "kind": "IntegerLiteral",
       "offset": 752,
@@ -28029,34 +28960,6 @@
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/FBTooltipView.swift",
       "kind": "IntegerLiteral",
       "offset": 814,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/FBTooltipView.swift",
-      "kind": "IntegerLiteral",
-      "offset": 752,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/FBTooltipView.swift",
-      "kind": "IntegerLiteral",
-      "offset": 814,
-      "length": 1,
-      "value": "1"
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/FBTooltipView.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1016,
-      "length": 1,
-      "value": "0"
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/FBTooltipView.swift",
-      "kind": "IntegerLiteral",
-      "offset": 1041,
       "length": 1,
       "value": "1"
     },
@@ -28432,13 +29335,6 @@
       "value": "[]"
     },
     {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/FBTooltipView.swift",
-      "kind": "StringLiteral",
-      "offset": 489,
-      "length": 13,
-      "value": "\"FBSDKLoginKit.FBTooltipView\""
-    },
-    {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/LoginAppEventNames.swift",
       "kind": "StringLiteral",
       "offset": 307,
@@ -28495,95 +29391,11 @@
       "value": "[]"
     },
     {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/LoginConfiguration.swift",
-      "kind": "StringLiteral",
-      "offset": 387,
-      "length": 18,
-      "value": "\"FBSDKLoginKit.LoginConfiguration\""
-    },
-    {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/LoginError.swift",
       "kind": "Dictionary",
       "offset": 679,
       "length": 3,
       "value": "[]"
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/LoginError.swift",
-      "kind": "IntegerLiteral",
-      "offset": 2931,
-      "length": 3,
-      "value": "300"
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/LoginError.swift",
-      "kind": "IntegerLiteral",
-      "offset": 2983,
-      "length": 7,
-      "value": "301"
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/LoginError.swift",
-      "kind": "IntegerLiteral",
-      "offset": 3059,
-      "length": 15,
-      "value": "302"
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/LoginError.swift",
-      "kind": "IntegerLiteral",
-      "offset": 3165,
-      "length": 16,
-      "value": "303"
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/LoginError.swift",
-      "kind": "IntegerLiteral",
-      "offset": 3272,
-      "length": 12,
-      "value": "304"
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/LoginError.swift",
-      "kind": "IntegerLiteral",
-      "offset": 3367,
-      "length": 15,
-      "value": "305"
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/LoginError.swift",
-      "kind": "IntegerLiteral",
-      "offset": 3579,
-      "length": 24,
-      "value": "306"
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/LoginError.swift",
-      "kind": "IntegerLiteral",
-      "offset": 3677,
-      "length": 24,
-      "value": "307"
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/LoginError.swift",
-      "kind": "IntegerLiteral",
-      "offset": 3772,
-      "length": 18,
-      "value": "308"
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/LoginError.swift",
-      "kind": "IntegerLiteral",
-      "offset": 3857,
-      "length": 14,
-      "value": "309"
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/LoginError.swift",
-      "kind": "IntegerLiteral",
-      "offset": 3939,
-      "length": 18,
-      "value": "310"
     },
     {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/LoginError.swift",
@@ -28889,39 +29701,11 @@
     {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/Internal\/LoginManagerLogger.swift",
       "kind": "StringLiteral",
-      "offset": 1614,
-      "length": 23,
-      "value": "\"com.facebook.sdk.core\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/Internal\/LoginManagerLogger.swift",
-      "kind": "StringLiteral",
-      "offset": 1655,
-      "length": 24,
-      "value": "\"com.facebook.sdk.login\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/Internal\/LoginManagerLogger.swift",
-      "kind": "StringLiteral",
       "offset": 1758,
       "length": 11,
       "value": "\"cancelled\""
     },
     {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/Internal\/LoginManagerLogger.swift",
-      "kind": "StringLiteral",
-      "offset": 1758,
-      "length": 11,
-      "value": "\"cancelled\""
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/LoginManagerLoginResult.swift",
-      "kind": "StringLiteral",
-      "offset": 390,
-      "length": 23,
-      "value": "\"FBSDKLoginKit.LoginManagerLoginResult\""
-    },
-    {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/Internal\/LoginManagerState.swift",
       "kind": "IntegerLiteral",
       "offset": 301,
@@ -28934,41 +29718,6 @@
       "offset": 388,
       "length": 15,
       "value": "2"
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/Internal\/LoginManagerState.swift",
-      "kind": "IntegerLiteral",
-      "offset": 301,
-      "length": 5,
-      "value": "1"
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/Internal\/LoginManagerState.swift",
-      "kind": "IntegerLiteral",
-      "offset": 388,
-      "length": 15,
-      "value": "2"
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/Internal\/LoginManagerState.swift",
-      "kind": "IntegerLiteral",
-      "offset": 301,
-      "length": 5,
-      "value": "1"
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/Internal\/LoginManagerState.swift",
-      "kind": "IntegerLiteral",
-      "offset": 388,
-      "length": 15,
-      "value": "2"
-    },
-    {
-      "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/LoginTracking.swift",
-      "kind": "IntegerLiteral",
-      "offset": 506,
-      "length": 7,
-      "value": "1"
     },
     {
       "filePath": "\/data\/sandcastle\/boxes\/trunk-git-facebook-ios-sdk\/FBSDKLoginKit\/FBSDKLoginKit\/LoginTracking.swift",

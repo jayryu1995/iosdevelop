@@ -7,6 +7,7 @@
 
 import Alamofire
 import Combine
+import Foundation
 
 class TalkViewModel: ObservableObject {
     @Published var results: [Talk] = []

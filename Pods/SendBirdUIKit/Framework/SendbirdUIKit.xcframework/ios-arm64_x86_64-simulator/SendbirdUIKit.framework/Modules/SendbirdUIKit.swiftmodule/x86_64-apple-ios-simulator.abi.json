@@ -431511,322 +431511,336 @@
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 10929,
+      "offset": 10831,
+      "length": 1,
+      "value": "0"
+    },
+    {
+      "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
+      "kind": "BooleanLiteral",
+      "offset": 10863,
+      "length": 4,
+      "value": "true"
+    },
+    {
+      "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 11066,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 10955,
+      "offset": 11092,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 11106,
+      "offset": 11243,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 12504,
+      "offset": 12641,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
       "kind": "StringLiteral",
-      "offset": 14516,
+      "offset": 14653,
       "length": 37,
       "value": "\"Did receive error: \""
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
       "kind": "StringLiteral",
-      "offset": 14549,
+      "offset": 14686,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
       "kind": "StringLiteral",
-      "offset": 14552,
+      "offset": 14689,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 15281,
+      "offset": 15418,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 15362,
+      "offset": 15499,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 15491,
+      "offset": 15628,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 15503,
+      "offset": 15640,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 15582,
+      "offset": 15719,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 15594,
+      "offset": 15731,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 15664,
+      "offset": 15801,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 15684,
+      "offset": 15821,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 15748,
+      "offset": 15885,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 15793,
+      "offset": 15930,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 16693,
+      "offset": 16830,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 16764,
+      "offset": 16901,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 18393,
+      "offset": 18530,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 19156,
+      "offset": 19293,
       "length": 1,
       "value": "1"
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 19227,
+      "offset": 19364,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 19285,
+      "offset": 19422,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
       "kind": "StringLiteral",
-      "offset": 20592,
+      "offset": 20729,
       "length": 63,
       "value": "\"Fetched : \""
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
       "kind": "StringLiteral",
-      "offset": 20625,
+      "offset": 20762,
       "length": 1,
       "value": "\", keepScroll : \""
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
       "kind": "StringLiteral",
-      "offset": 20654,
+      "offset": 20791,
       "length": 2,
       "value": "\"\""
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
       "kind": "StringLiteral",
-      "offset": 20798,
+      "offset": 20935,
       "length": 30,
       "value": "\"Fetched empty notifications.\""
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 21085,
+      "offset": 21222,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
       "kind": "Array",
-      "offset": 22053,
+      "offset": 22190,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 22294,
+      "offset": 22431,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 25325,
+      "offset": 25462,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 25618,
+      "offset": 25755,
       "length": 1,
       "value": "2"
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 25722,
+      "offset": 25859,
       "length": 1,
       "value": "5"
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 26083,
+      "offset": 26220,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 26136,
+      "offset": 26273,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 26898,
+      "offset": 27035,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 26957,
+      "offset": 27094,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 27194,
+      "offset": 27331,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 27349,
-      "length": 5,
-      "value": "false"
-    },
-    {
-      "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
-      "kind": "IntegerLiteral",
       "offset": 27486,
+      "length": 5,
+      "value": "false"
+    },
+    {
+      "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
+      "kind": "IntegerLiteral",
+      "offset": 27623,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 27752,
+      "offset": 27889,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
       "kind": "Array",
-      "offset": 28998,
+      "offset": 29135,
       "length": 2,
       "value": "[]"
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
       "kind": "IntegerLiteral",
-      "offset": 29223,
+      "offset": 29360,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 29441,
+      "offset": 29578,
       "length": 5,
       "value": "false"
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 29961,
+      "offset": 30098,
       "length": 4,
       "value": "true"
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/SBUFeedNotificationChannelViewController.swift",
       "kind": "BooleanLiteral",
-      "offset": 30881,
+      "offset": 31018,
       "length": 4,
       "value": "true"
     },
@@ -440058,21 +440072,21 @@
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/CellView\/SBUMarkdownTransfer.swift",
       "kind": "IntegerLiteral",
-      "offset": 3707,
+      "offset": 3720,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/CellView\/SBUMarkdownTransfer.swift",
       "kind": "IntegerLiteral",
-      "offset": 3728,
+      "offset": 3741,
       "length": 1,
       "value": "0"
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/View\/Channel\/CellView\/SBUMarkdownTransfer.swift",
       "kind": "BooleanLiteral",
-      "offset": 3775,
+      "offset": 3788,
       "length": 4,
       "value": "true"
     },
@@ -473035,14 +473049,14 @@
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/Extension\/String+SBUIKit.swift",
       "kind": "StringLiteral",
-      "offset": 2706,
+      "offset": 3013,
       "length": 5,
       "value": "\"\\n\""
     },
     {
       "filePath": "\/Users\/distiller\/project\/uikit-ios\/SendbirdUIKit\/Extension\/String+SBUIKit.swift",
       "kind": "StringLiteral",
-      "offset": 2719,
+      "offset": 3026,
       "length": 4,
       "value": "\"\n\""
     },

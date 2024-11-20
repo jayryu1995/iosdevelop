@@ -8,24 +8,41 @@ import AdSupport
 import AppTrackingTransparency
 import FirebaseAnalytics
 import FBSDKCoreKit
+import KakaoSDKAuth
+import TikTokOpenSDKCore
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
 
-    // 페이스북
+    // 페이스북, 카카오
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+        // URLContexts에서 URL 가져오기
         guard let url = URLContexts.first?.url else {
             return
         }
 
-        ApplicationDelegate.shared.application(
-            UIApplication.shared,
-            open: url,
-            sourceApplication: nil,
-            annotation: [UIApplication.OpenURLOptionsKey.annotation]
-        )
+        // 페이스북 URL 처리 (URL이 페이스북 로그인과 관련된 경우에만 실행)
+        if url.absoluteString.contains("fb") { // 페이스북 관련 URL인지 확인
+            ApplicationDelegate.shared.application(
+                UIApplication.shared,
+                open: url,
+                sourceApplication: nil,
+                annotation: [UIApplication.OpenURLOptionsKey.annotation]
+            )
+        }
+        
+        // 카카오톡 로그인 URL 처리
+        if AuthApi.isKakaoTalkLoginUrl(url) {
+            _ = AuthController.handleOpenUrl(url: url)
+        }
+        
+        // 틱톡
+        if (TikTokURLHandler.handleOpenURL(URLContexts.first?.url)) {
+            return
+        }
     }
+
 
     func sceneDidBecomeActive(_ scene: UIScene) {
 

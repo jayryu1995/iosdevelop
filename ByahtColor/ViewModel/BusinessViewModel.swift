@@ -109,6 +109,7 @@ class BusinessViewModel: ObservableObject {
         if let nation = nation {
             parameters["nation"] = nation.joined(separator: ",")
         }
+        
 
         AF.request(url, method: .get, parameters: parameters, encoding: URLEncoding.queryString)
             .validate(statusCode: 200..<300)
@@ -123,6 +124,39 @@ class BusinessViewModel: ObservableObject {
             }
     }
 
+    // 인플루언서 리스트(스와이프)
+    func getSearchProfilePage(sns: [String]?, category: [String]?, nation: [String]?, page: Int, completion: @escaping (Result<[InfluenceProfileDto], Error>) -> Void) {
+        let url = "\(Bundle.main.TEST_URL)/business/search"
+
+        // 파라미터 딕셔너리 생성
+        var parameters: [String: Any] = [:]
+
+        if let sns = sns {
+            parameters["platform"] = sns.joined(separator: ",")
+        }
+        if let category = category {
+            parameters["category"] = category.joined(separator: ",")
+        }
+        if let nation = nation {
+            parameters["nation"] = nation.joined(separator: ",")
+        }
+        
+        parameters["page"] = String(page)
+        parameters["pageSize"] = "10"
+
+        AF.request(url, method: .get, parameters: parameters, encoding: URLEncoding.queryString)
+            .validate(statusCode: 200..<300)
+            .responseDecodable(of: [InfluenceProfileDto].self) { response in
+                switch response.result {
+                case .success(let data):
+                    print("data.count : \(data.count)")
+                    completion(.success(data))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+    }
+    
     // 홈 화면 데이터 조회
     func getHomeData(id: String, completion: @escaping (Result<BusinessHomeDto, Error>) -> Void) {
         let url = "\(Bundle.main.TEST_URL)/business/home/\(id)"
@@ -172,7 +206,7 @@ class BusinessViewModel: ObservableObject {
     }
 
     // 기업 프로필 업데이트
-    func updateProfile(memberId: String, dto: BusinessDetailDto, images: [UIImage], update: Bool, completion: @escaping (Result<String, Error>) -> Void) {
+    func updateProfile(memberId: String, dto: BusinessDetailDto, images: [UIImage], completion: @escaping (Result<String, Error>) -> Void) {
         print("memberId : ",memberId)
         let url = "\(Bundle.main.TEST_URL)/business/\(memberId)"
         let headers: HTTPHeaders = ["Content-type": "multipart/form-data"]
@@ -181,8 +215,6 @@ class BusinessViewModel: ObservableObject {
             completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to encode dto"])))
             return
         }
-
-        let method: HTTPMethod = update ? .patch : .post
 
         AF.upload(multipartFormData: { multipartFormData in
             // 텍스트 데이터 추가
@@ -193,7 +225,7 @@ class BusinessViewModel: ObservableObject {
                     multipartFormData.append(imageData, withName: "file", fileName: "\(memberId).jpg", mimeType: "image/jpg")
                 }
             }
-        }, to: url, method: method, headers: headers).responseString { response in
+        }, to: url, method: .patch, headers: headers).responseString { response in
             switch response.result {
             case .success(let responseString):
                 completion(.success(responseString))

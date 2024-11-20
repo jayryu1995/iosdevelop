@@ -101,7 +101,7 @@ class BusinessProfileWriteVC: UIViewController {
     private var categoryView = UIView()
     private var ageView = UIView()
     private var nationView = UIView()
-    private var update = false
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
@@ -133,7 +133,6 @@ class BusinessProfileWriteVC: UIViewController {
                 DispatchQueue.main.async {
                     switch result {
                     case .success(let data):
-                        self?.update = true
                         self?.payArray = data.payDtos ?? []
                         self?.et_intro.text = "\(data.intro ?? "")"
                         self?.selectedGender = data.gender?.components(separatedBy: ",") ?? []
@@ -654,7 +653,7 @@ class BusinessProfileWriteVC: UIViewController {
             let nation = selectedNation.joined(separator: ",")
             let dto = BusinessDetailDto(memberId: id, business_name: nil, intro: et_intro.text, payDtos: payArray, age: age,
                                         category: category, gender: gender, nation: nation, imagePath: nil, proposal: nil, video: nil)
-            viewModel.updateProfile(memberId: id, dto: dto, images: selectedImages, update: update) { [weak self] result in
+            viewModel.updateProfile(memberId: id, dto: dto, images: selectedImages) { [weak self] result in
                 DispatchQueue.main.async {
                     switch result {
                     case .success(let responseString):

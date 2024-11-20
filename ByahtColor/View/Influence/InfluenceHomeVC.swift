@@ -82,12 +82,11 @@ class InfluenceHomeVC: UIViewController, UIScrollViewDelegate {
             
         }
         
-        if homeValue != 1 && User.shared.id != "122101478408205849"{
-            
-            if User.shared.auth != 1{
-                setupAlertView()
-            }
-        }
+//        if homeValue != 1 && User.shared.id != "122101478408205849"{
+//            if User.shared.auth != 1{
+//                setupAlertView()
+//            }
+//        }
 
     }
 

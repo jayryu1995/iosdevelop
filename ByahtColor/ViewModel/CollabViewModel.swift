@@ -8,6 +8,7 @@
 import Foundation
 import Alamofire
 import Combine
+import UIKit
 
 class CollabViewModel: ObservableObject {
     @Published var collabList: [CollabDto] = []

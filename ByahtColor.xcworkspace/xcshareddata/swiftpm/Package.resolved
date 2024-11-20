@@ -1,0 +1,33 @@
+{
+  "originHash" : "4925edfc34791426371483b9f6ab160d4f7ca739c710d23dbf2034d9a85eb716",
+  "pins" : [
+    {
+      "identity" : "alamofire",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/Alamofire/Alamofire.git",
+      "state" : {
+        "revision" : "e16d3481f5ed35f0472cb93350085853d754913f",
+        "version" : "5.10.1"
+      }
+    },
+    {
+      "identity" : "kakao-ios-sdk",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/kakao/kakao-ios-sdk",
+      "state" : {
+        "revision" : "ab4309c1950550add307046ad1e08024c7514603",
+        "version" : "2.23.0"
+      }
+    },
+    {
+      "identity" : "tiktok-opensdk-ios",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/tiktok/tiktok-opensdk-ios",
+      "state" : {
+        "branch" : "main",
+        "revision" : "cb0cdc785b653c3be116fd1302ec280fbcfac695"
+      }
+    }
+  ],
+  "version" : 3
+}

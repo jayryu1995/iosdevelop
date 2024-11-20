@@ -315,6 +315,7 @@ enum SBDMentionType : NSInteger;
 @class SBDPlugin;
 @class SBDNotificationData;
 enum SBDNotificationMessageStatus : NSInteger;
+@class SBDTemplateMessageData;
 @class SBDBaseMessageCreateParams;
 @class SBDFeedback;
 enum FeedbackStatus : NSInteger;
@@ -454,6 +455,9 @@ SWIFT_CLASS_NAMED("BaseMessage")
 /// since:
 /// 4.13.0
 @property (nonatomic) enum SBDNotificationMessageStatus notificationMessageStatus;
+/// since:
+/// 4.22.0
+@property (nonatomic, readonly, strong) SBDTemplateMessageData * _Nullable templateMessageData;
 /// An object that was used to resend this message. This property is valid when the sendingStatus is <code>MessageSendingStatus.pending</code> or <code>MessageSendingStatus.failed</code>. When this message is trying to be resent, this property will be used as well. If the message object is <code>UserMessage</code> class, then the <code>messageParams</code> has to be casted to <code>UserMessageCreateParams</code> class. If the message object is <code>FileMessage</code> class, then the <code>messageParams</code> has to be casted to <code>FileMessageCreateParams</code> class.
 /// since:
 /// 3.1.0
@@ -1194,13 +1198,27 @@ enum SBDReportCategory : NSInteger;
 ///
 - (void)deleteMessageWithMessageId:(int64_t)messageId completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
 /// Deletes a message. The message’s sender has to be the current user.
+/// note:
+/// When using the moderation feature in ephemeral open channel, you should use the <code>deleteMessage(:completionHandler:)</code> function that uses the <code>message</code> object, not the function that uses the <code>messageId</code>.
+/// since:
+/// 4.22.0
+/// \param messageId The message ID to be deleted.
+///
+/// \param completionHandler The handler block to execute.
+///
+/// \param hardDelete Whether to hard delete the message. Enabling this option will delete messages from the database as well as their contents. It’s set to <code>false</code> by default.
+///
+- (void)deleteMessageWithMessageId:(int64_t)messageId hardDelete:(BOOL)hardDelete completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Deletes a message. The message’s sender has to be the current user.
 /// since:
 /// 4.19.2
 /// \param messageId The message ID to be deleted.
 ///
 /// \param completionHandler The handler block to execute.
 ///
-- (void)deleteMessageWithMessageId:(int64_t)messageId messageToken:(NSString * _Nullable)messageToken completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// \param hardDelete Whether to hard delete the message. Enabling this option will delete messages from the database as well as their contents. It’s set to <code>false</code> by default.
+///
+- (void)deleteMessageWithMessageId:(int64_t)messageId messageToken:(NSString * _Nullable)messageToken hardDelete:(BOOL)hardDelete completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
 /// Pins the message to the channel.
 /// note:
 /// Pin functionality in <code>OpenChannel</code> will be supported starting from 4.20.0.
@@ -3360,6 +3378,21 @@ SWIFT_CLASS_NAMED("FeedChannel")
 @end
 
 
+
+@interface SBDFeedChannel (SWIFT_EXTENSION(SendbirdChatSDK))
+/// since:
+/// 4.6.0
+- (void)markAsReadWithCompletionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+/// Marks as read by messages.
+/// since:
+/// 4.13.0
+/// \param messageIds The message ids to be marked as read
+///
+/// \param completionhandler The completion handler to return the result.
+///
+- (void)markAsReadByMessages:(NSArray<SBDBaseMessage *> * _Nonnull)messages completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
+@end
+
 @class SBDFeedChannelListQueryParams;
 @class SBDFeedChannelListQuery;
 
@@ -3381,21 +3414,6 @@ SWIFT_CLASS_NAMED("FeedChannel")
 /// returns:
 /// <code>FeedChannel</code> if parameter is valid, otherwise <code>nil</code>
 + (nullable instancetype)buildFromSerializedData:(NSData * _Nullable)data SWIFT_WARN_UNUSED_RESULT;
-@end
-
-
-@interface SBDFeedChannel (SWIFT_EXTENSION(SendbirdChatSDK))
-/// since:
-/// 4.6.0
-- (void)markAsReadWithCompletionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
-/// Marks as read by messages.
-/// since:
-/// 4.13.0
-/// \param messageIds The message ids to be marked as read
-///
-/// \param completionhandler The completion handler to return the result.
-///
-- (void)markAsReadByMessages:(NSArray<SBDBaseMessage *> * _Nonnull)messages completionHandler:(void (^ _Nullable)(SBError * _Nullable))completionHandler;
 @end
 
 
@@ -3845,10 +3863,10 @@ SWIFT_CLASS_NAMED("GlobalNotificationChannelSetting")
 
 @class SBDMember;
 enum SBDGroupChannelPushTriggerOption : NSInteger;
+enum SBDGroupChannelHiddenState : NSInteger;
 enum SBDMemberState : NSInteger;
 enum SBDRole : NSInteger;
 enum SBDMutedState : NSInteger;
-enum SBDGroupChannelHiddenState : NSInteger;
 enum SBDGroupChannelListOrder : NSInteger;
 
 /// The <code>GroupChannel</code> class represents a group channel which is a private chat.
@@ -3934,6 +3952,10 @@ SWIFT_CLASS_NAMED("GroupChannel")
 @property (nonatomic) enum SBDGroupChannelPushTriggerOption myPushTriggerOption;
 /// Represents this channel is hidden or not.
 @property (nonatomic) BOOL isHidden;
+/// The hidden state of the channel.
+/// since:
+/// 3.0.122
+@property (nonatomic) enum SBDGroupChannelHiddenState hiddenState;
 /// Current member’s state in the channel.
 @property (nonatomic) enum SBDMemberState myMemberState;
 /// The role of current user in the channel.
@@ -3948,10 +3970,6 @@ SWIFT_CLASS_NAMED("GroupChannel")
 /// since:
 /// 3.0.107
 @property (nonatomic) int64_t invitedAt;
-/// The hidden state of the channel.
-/// since:
-/// 3.0.122
-@property (nonatomic) enum SBDGroupChannelHiddenState hiddenState;
 /// A last read information for the current user.
 /// since:
 /// 3.0.138
@@ -6029,8 +6047,11 @@ SWIFT_CLASS_NAMED("MessageChangeLogsParams")
 @property (nonatomic) enum SBDReplyType replyType;
 /// Default constructor.
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithIncludeMetaArray:(BOOL)includeMetaArray includeReactions:(BOOL)includeReactions includeThreadInfo:(BOOL)includeThreadInfo includeParentMessageInfo:(BOOL)includeParentMessageInfo replyType:(enum SBDReplyType)replyType OBJC_DESIGNATED_INITIALIZER SWIFT_DEPRECATED_MSG("", "initWithBuilder:");
 /// Default parameter constructor
-- (nonnull instancetype)initWithIncludeMetaArray:(BOOL)includeMetaArray includeReactions:(BOOL)includeReactions includeThreadInfo:(BOOL)includeThreadInfo includeParentMessageInfo:(BOOL)includeParentMessageInfo replyType:(enum SBDReplyType)replyType OBJC_DESIGNATED_INITIALIZER;
+/// since:
+/// 4.22.0
+- (nonnull instancetype)initWithBuilder:(void (^ _Nullable)(SBDMessageChangeLogsParams * _Nonnull))builder OBJC_DESIGNATED_INITIALIZER;
 /// Creates <code>PreviousMessageListQuery</code> from a given <code>PreviousMessageListQuery</code> instance.
 /// since:
 /// 3.0.185
@@ -6122,11 +6143,11 @@ SWIFT_CLASS_NAMED("MessageCollection")
 
 
 
-
 @interface SBDMessageCollection (SWIFT_EXTENSION(SendbirdChatSDK)) <SBDInternalConnectionDelegate>
 - (void)didInternalDisconnect;
 - (void)didExternalDisconnect;
 @end
+
 
 
 
@@ -6430,8 +6451,10 @@ SWIFT_CLASS_NAMED("MessageListParams")
 @property (nonatomic, copy) NSArray<NSString *> * _Nullable customTypes;
 /// Default constructor.
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithPreviousResultSize:(NSInteger)previousResultSize nextResultSize:(NSInteger)nextResultSize isInclusive:(BOOL)isInclusive reverse:(BOOL)reverse messageTypeFilter:(enum SBDMessageTypeFilter)messageTypeFilter customType:(NSString * _Nullable)customType senderUserIds:(NSArray<NSString *> * _Nullable)senderUserIds includeMetaArray:(BOOL)includeMetaArray includeReactions:(BOOL)includeReactions includeThreadInfo:(BOOL)includeThreadInfo includeParentMessageInfo:(BOOL)includeParentMessageInfo replyType:(enum SBDReplyType)replyType showSubChannelMessagesOnly:(BOOL)showSubChannelMessagesOnly customTypes:(NSArray<NSString *> * _Nullable)customTypes OBJC_DESIGNATED_INITIALIZER SWIFT_DEPRECATED_MSG("", "initWithBuilder:");
 /// Parameter constructor
-- (nonnull instancetype)initWithPreviousResultSize:(NSInteger)previousResultSize nextResultSize:(NSInteger)nextResultSize isInclusive:(BOOL)isInclusive reverse:(BOOL)reverse messageTypeFilter:(enum SBDMessageTypeFilter)messageTypeFilter customType:(NSString * _Nullable)customType senderUserIds:(NSArray<NSString *> * _Nullable)senderUserIds includeMetaArray:(BOOL)includeMetaArray includeReactions:(BOOL)includeReactions includeThreadInfo:(BOOL)includeThreadInfo includeParentMessageInfo:(BOOL)includeParentMessageInfo replyType:(enum SBDReplyType)replyType showSubChannelMessagesOnly:(BOOL)showSubChannelMessagesOnly customTypes:(NSArray<NSString *> * _Nullable)customTypes OBJC_DESIGNATED_INITIALIZER;
+/// Default parameter constructor
+- (nonnull instancetype)initWithBuilder:(void (^ _Nullable)(SBDMessageListParams * _Nonnull))builder OBJC_DESIGNATED_INITIALIZER;
 /// Checks whether given message is belonged to this params
 /// \param message <code>BaseMessage</code> instance
 ///
@@ -6598,7 +6621,9 @@ SWIFT_CLASS_NAMED("MessageRetrievalParams")
 /// Default constructor.
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 /// Parameter constructor
-- (nonnull instancetype)initWithChannelURL:(NSString * _Nonnull)channelURL channelType:(enum SBDChannelType)channelType messageId:(int64_t)messageId includeMetaArray:(BOOL)includeMetaArray includeReactions:(BOOL)includeReactions includeThreadInfo:(BOOL)includeThreadInfo includeParentMessageInfo:(BOOL)includeParentMessageInfo OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithChannelURL:(NSString * _Nonnull)channelURL channelType:(enum SBDChannelType)channelType messageId:(int64_t)messageId includeMetaArray:(BOOL)includeMetaArray includeReactions:(BOOL)includeReactions includeThreadInfo:(BOOL)includeThreadInfo includeParentMessageInfo:(BOOL)includeParentMessageInfo OBJC_DESIGNATED_INITIALIZER SWIFT_DEPRECATED_MSG("", "initWithChannelURL:channelType:messageId:builder:");
+/// Parameter constructor
+- (nonnull instancetype)initWithChannelURL:(NSString * _Nonnull)channelURL channelType:(enum SBDChannelType)channelType messageId:(int64_t)messageId builder:(void (^ _Nullable)(SBDMessageRetrievalParams * _Nonnull))builder OBJC_DESIGNATED_INITIALIZER;
 /// Copies this object
 /// \param zone optional <code>NSZone</code>
 ///
@@ -8113,7 +8138,7 @@ SWIFT_CLASS_NAMED("Poll")
 @property (nonatomic, copy) NSArray<SBDPollOption *> * _Nonnull options;
 /// The name of the user who created the poll
 @property (nonatomic, readonly, copy) NSString * _Nullable createdBy;
-/// If Set to true, to enable anonymous voting. Default is false
+/// If set to true, the poll allows user-suggested options. Default is false.
 @property (nonatomic) BOOL allowUserSuggestion;
 /// If set to true, voting items can be added. Default is false
 @property (nonatomic) BOOL allowMultipleVotes;
@@ -8953,11 +8978,24 @@ SWIFT_CLASS_NAMED("Reaction")
 /// The reaction key.
 @property (nonatomic, readonly, copy) NSString * _Nonnull key;
 /// A list of userIds that have reacted to this Reaction.
-@property (nonatomic, copy) NSArray<NSString *> * _Nonnull userIds;
+@property (nonatomic, copy) NSArray<NSString *> * _Nonnull userIds SWIFT_DEPRECATED_MSG("", "sampledUserIds");
 /// Gets a list of userIds that have reacted to this Reaction.
-@property (nonatomic, readonly, copy) NSArray<NSString *> * _Nonnull getUserIds;
+@property (nonatomic, readonly, copy) NSArray<NSString *> * _Nonnull getUserIds SWIFT_DEPRECATED_MSG("", "sampledUserIds");
 /// The timestamp when the reaction is updated.
 @property (nonatomic) int64_t updatedAt;
+/// A list of sampled userIds that have reacted to this Reaction.
+/// since:
+/// 4.22.0
+@property (nonatomic, readonly, copy) NSArray<NSString *> * _Nonnull sampledUserIds;
+/// A count of the number of users who have reacted to this.
+/// since:
+/// 4.22.0
+@property (nonatomic, readonly) NSUInteger count;
+/// A flag indicating whether the current user has reacted to this.
+/// since:
+/// 4.22.0
+@property (nonatomic, readonly) BOOL hasCurrentUserReacted;
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
 /// Compares this object with the other given object.
 /// \param object <code>Any</code> instance.
 ///
@@ -9000,6 +9038,7 @@ SWIFT_CLASS_NAMED("ReactionEvent")
 @property (nonatomic, readonly) enum SBDReactionEventAction operation;
 /// The timestamp that represents when the reaction event occurs.
 @property (nonatomic, readonly) int64_t updatedAt;
+@property (nonatomic, readonly, copy) NSString * _Nonnull description;
 - (nonnull instancetype)init SWIFT_UNAVAILABLE;
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
@@ -9663,15 +9702,13 @@ SWIFT_CLASS_PROPERTY(@property (nonatomic, class, readonly) BOOL isInitializedWi
 /// Performs a connection to Sendbird with the user ID and the access token.
 /// seealso:
 /// <code>connect(userId:authToken:completionHandler:)</code>
-/// warning:
-/// <em>Important</em>: DON’T use this method. This method will be unavailable.
 /// \param userId user ID
 ///
 /// \param authToken authToken
 ///
-/// \param apiHost apiHost
+/// \param apiHost apiHost. Internal use only.
 ///
-/// \param wsHost wsHost
+/// \param wsHost wsHost. Internal use only.
 ///
 /// \param completionHandler completionHandler
 ///
@@ -10804,6 +10841,67 @@ SWIFT_CLASS("_TtC15SendbirdChatSDK13TaskOperation")
 + (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
 @end
 
+@class SBDContainerOptions;
+@class SBDSimpleTemplateData;
+
+/// Represents the data structure for template messages.
+/// since:
+/// 4.22.0
+SWIFT_CLASS_NAMED("TemplateMessageData")
+@interface SBDTemplateMessageData : NSObject
+/// The type of the message template.
+/// since:
+/// 4.22.0
+@property (nonatomic, readonly, copy) NSString * _Nonnull type;
+/// The key of the message template.
+/// since:
+/// 4.22.0
+@property (nonatomic, readonly, copy) NSString * _Nonnull key;
+/// The container options of the message template.
+/// since:
+/// 4.22.0
+@property (nonatomic, readonly, strong) SBDContainerOptions * _Nonnull containerOptions;
+/// The variables of the message template.
+/// since:
+/// 4.22.0
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, id> * _Nonnull variables;
+/// The view variables of the message template.
+/// since:
+/// 4.22.0
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSArray<SBDSimpleTemplateData *> *> * _Nonnull viewVariables;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+/// Represents simple template data including key and variables.
+/// since:
+/// 4.22.0
+SWIFT_CLASS_NAMED("SimpleTemplateData")
+@interface SBDSimpleTemplateData : NSObject
+/// The unique identifier for the template data.
+@property (nonatomic, readonly, copy) NSString * _Nonnull key;
+/// A dictionary containing the variables for the template.
+@property (nonatomic, readonly, copy) NSDictionary<NSString *, NSString *> * _Nonnull variables;
+- (nonnull instancetype)init SWIFT_UNAVAILABLE;
++ (nonnull instancetype)new SWIFT_UNAVAILABLE_MSG("-init is unavailable");
+@end
+
+
+/// Options for configuring the container of a message template.
+/// since:
+/// 4.22.0
+SWIFT_CLASS_NAMED("ContainerOptions")
+@interface SBDContainerOptions : NSObject
+/// Indicates if the profile should be included.
+@property (nonatomic, readonly) BOOL profile;
+/// Indicates if the time should be included.
+@property (nonatomic, readonly) BOOL time;
+/// Indicates if the nickname should be included.
+@property (nonatomic, readonly) BOOL nickname;
+- (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
+@end
+
 
 /// An object that represents the information about threaded messages, whose properties show how many
 /// replies the thread has received, who left the replies, and when the last reply was added.
@@ -10881,7 +10979,9 @@ SWIFT_CLASS_NAMED("ThreadedMessageListParams")
 /// Default constructor.
 - (nonnull instancetype)init OBJC_DESIGNATED_INITIALIZER;
 /// Parameter constructor.
-- (nonnull instancetype)initWithPreviousResultSize:(NSInteger)previousResultSize nextResultSize:(NSInteger)nextResultSize isInclusive:(BOOL)isInclusive reverse:(BOOL)reverse messageTypeFilter:(enum SBDMessageTypeFilter)messageTypeFilter customType:(NSString * _Nullable)customType senderUserIds:(NSArray<NSString *> * _Nullable)senderUserIds includeMetaArray:(BOOL)includeMetaArray includeReactions:(BOOL)includeReactions includeParentMessageInfo:(BOOL)includeParentMessageInfo customTypes:(NSArray<NSString *> * _Nullable)customTypes OBJC_DESIGNATED_INITIALIZER;
+- (nonnull instancetype)initWithPreviousResultSize:(NSInteger)previousResultSize nextResultSize:(NSInteger)nextResultSize isInclusive:(BOOL)isInclusive reverse:(BOOL)reverse messageTypeFilter:(enum SBDMessageTypeFilter)messageTypeFilter customType:(NSString * _Nullable)customType senderUserIds:(NSArray<NSString *> * _Nullable)senderUserIds includeMetaArray:(BOOL)includeMetaArray includeReactions:(BOOL)includeReactions includeParentMessageInfo:(BOOL)includeParentMessageInfo customTypes:(NSArray<NSString *> * _Nullable)customTypes OBJC_DESIGNATED_INITIALIZER SWIFT_DEPRECATED_MSG("", "initWithBuilder:");
+/// Parameter constructor.
+- (nonnull instancetype)initWithBuilder:(void (^ _Nullable)(SBDThreadedMessageListParams * _Nonnull))builder OBJC_DESIGNATED_INITIALIZER;
 /// Copies this object.
 /// \param zone optional <code>NSZone</code>
 ///

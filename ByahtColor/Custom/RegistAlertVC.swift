@@ -10,11 +10,11 @@ import SnapKit
 import UIKit
 class RegistAlertVC: UIViewController {
 
-    let backgroundView = UIView()
-    let alertView = UIView()
-    let titleLabel = UILabel()
-    let messageLabel = UILabel()
-    let confirmButton: UIButton = {
+    private lazy var backgroundView = UIView()
+    private lazy var alertView = UIView()
+    private lazy var titleLabel = UILabel()
+    private lazy var messageLabel = UILabel()
+    private lazy var confirmButton: UIButton = {
         let button = UIButton()
         button.backgroundColor = .black
         button.setTitleColor(.white, for: .normal)
@@ -22,9 +22,16 @@ class RegistAlertVC: UIViewController {
         button.setTitle("alert_regist_button".localized, for: .normal)
         return button
     }()
-
+    
+    private lazy var cancleButton: UIButton = {
+        let button = UIButton()
+        button.imageView?.image = UIImage(named: "back_icon")
+        return button
+    }()
+    
     // 콜백 정의
     var onConfirm: (() -> Void)?
+    var onCancel: (() -> Void)?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +67,7 @@ class RegistAlertVC: UIViewController {
         alertView.addSubview(titleLabel)
         alertView.addSubview(messageLabel)
         alertView.addSubview(confirmButton)
+        alertView.addSubview(cancleButton)
 
         // 전체 뷰에 alertView 추가
         backgroundView.addSubview(alertView)
@@ -78,6 +86,11 @@ class RegistAlertVC: UIViewController {
             make.center.equalToSuperview()
         }
 
+        cancleButton.snp.makeConstraints{
+            $0.top.leading.equalToSuperview().offset(10)
+            $0.width.height.equalTo(40)
+        }
+        
         titleLabel.snp.makeConstraints { make in
             make.top.leading.equalToSuperview().offset(20)
             make.trailing.equalToSuperview().multipliedBy(0.6)

@@ -165,9 +165,11 @@ class BusinessSearchVC: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         player?.pause()
+        
     }
     
     deinit {
+       
         NotificationCenter.default.removeObserver(self)
     }
     
@@ -198,6 +200,7 @@ class BusinessSearchVC: UIViewController {
                 loadingIndicator.stopAnimating()
             } else if path.contains("jpg") {
                 if let url = URL(string: path) {
+                    imageView.image = UIImage(named: "sample_image")
                     imageView.kf.setImage(with: url)
                     loadingIndicator.stopAnimating()
                 }
@@ -847,4 +850,5 @@ class BusinessSearchVC: UIViewController {
             }
         }
     }
+    
 }

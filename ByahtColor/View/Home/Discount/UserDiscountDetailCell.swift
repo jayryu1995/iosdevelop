@@ -7,7 +7,6 @@
 
 import UIKit
 import SnapKit
-import AlamofireImage
 import Alamofire
 
 class UserDiscountDetailCell: UITableViewCell, UIScrollViewDelegate {

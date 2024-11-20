@@ -56,11 +56,11 @@ public class SurfaceAppearance: NSObject {
     /// Defaults to `.circular`.
     @available(iOS 13.0, *)
     public var cornerCurve: CALayerCornerCurve {
-        get { _cornerCurve ?? .circular }
+        get { _cornerCurve as? CALayerCornerCurve ?? .circular }
         set { _cornerCurve = newValue }
     }
 
-    private var _cornerCurve: CALayerCornerCurve?
+    private var _cornerCurve: Any?
 
     /// An array of shadows used to create drop shadows underneath a surface view.
     public var shadows: [Shadow] = [Shadow()]
@@ -418,12 +418,30 @@ public class SurfaceView: UIView {
         let leftConstraint = contentView.leftAnchor.constraint(equalTo: leftAnchor, constant: containerMargins.left + contentPadding.left)
         let rightConstraint = rightAnchor.constraint(equalTo: contentView.rightAnchor, constant: containerMargins.right + contentPadding.right)
         let bottomConstraint = bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: containerMargins.bottom + contentPadding.bottom)
-        NSLayoutConstraint.activate([
+
+        var constraints = [
             topConstraint,
             leftConstraint,
             rightConstraint,
-            bottomConstraint,
-        ].map {
+            bottomConstraint
+        ]
+
+        // This constraint is for UICollectionView using UICollectionViewCompositionalLayout.
+        // It's seemingly obvious, but the UICollectionView doesn't work without setting it. (#628)
+        switch position {
+        case .top, .bottom:
+            constraints += [
+                heightAnchor.constraint(greaterThanOrEqualToConstant: 1.0)
+            ]
+        case .left, .right:
+            constraints += [
+                widthAnchor.constraint(greaterThanOrEqualToConstant: 1.0)
+            ]
+        }
+
+        NSLayoutConstraint.activate(
+            constraints
+            .map {
             switch mode {
             case .static:
                 $0.priority = .required

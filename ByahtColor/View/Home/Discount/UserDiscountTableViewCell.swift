@@ -7,7 +7,7 @@
 
 import UIKit
 import SnapKit
-import AlamofireImage
+
 
 class UserDiscountTableViewCell: UITableViewCell {
     weak var delegate: UserDiscountTableViewCellDelegate?

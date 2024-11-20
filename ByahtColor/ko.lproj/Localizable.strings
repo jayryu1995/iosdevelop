@@ -161,7 +161,7 @@
 "login_str3" = "아이디 또는 패스워드를 입력해주세요.";
 "login_str4" = "로그인 정보가 올바르지 않습니다.";
 "login_mcn" = "MCN∙에이전시 로그인";
-"login_mcn_str" = "MCN 회원 가입은 바이엇에서 받고 있습니다.\n bkim@byaht.com";
+"login_mcn_str" = "MCN∙에이전시 회원 가입은 바이엇에서 받고 있습니다.\n bkim@byaht.com";
 
 
 //FindAccountVC

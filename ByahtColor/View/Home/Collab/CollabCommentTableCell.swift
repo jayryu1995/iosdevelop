@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import Alamofire
+import Kingfisher
 
 class CollabCommentTableCell: UITableViewCell, UIScrollViewDelegate {
 
@@ -148,7 +149,7 @@ class CollabCommentTableCell: UITableViewCell, UIScrollViewDelegate {
         let url = "\(Bundle.main.TEST_URL)/image\( comment.imageUrl ?? "" )"
         print(url)
         if let url = URL(string: url) {
-            profileIcon.af.setImage(withURL: url)
+            profileIcon.kf.setImage(with:url)
         }
         self.likeButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         let date = comment.regi_date ?? ""

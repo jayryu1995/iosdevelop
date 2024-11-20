@@ -97,7 +97,6 @@ EOM
   esac
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_resource "${PODS_CONFIGURATION_BUILD_DIR}/Alamofire/Alamofire.bundle"
   install_resource "${PODS_CONFIGURATION_BUILD_DIR}/AppAuth/AppAuthCore_Privacy.bundle"
   install_resource "${BUILT_PRODUCTS_DIR}/DropDown/DropDown.framework/DropDownCell.nib"
   install_resource "${PODS_CONFIGURATION_BUILD_DIR}/FirebaseAuth/FirebaseAuth_Privacy.bundle"
@@ -116,7 +115,6 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "${PODS_CONFIGURATION_BUILD_DIR}/nanopb/nanopb_Privacy.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_resource "${PODS_CONFIGURATION_BUILD_DIR}/Alamofire/Alamofire.bundle"
   install_resource "${PODS_CONFIGURATION_BUILD_DIR}/AppAuth/AppAuthCore_Privacy.bundle"
   install_resource "${BUILT_PRODUCTS_DIR}/DropDown/DropDown.framework/DropDownCell.nib"
   install_resource "${PODS_CONFIGURATION_BUILD_DIR}/FirebaseAuth/FirebaseAuth_Privacy.bundle"

@@ -7,7 +7,6 @@
 
 import UIKit
 import Alamofire
-import AlamofireImage
 import FBSDKCoreKit
 import FirebaseAnalytics
 import FirebaseCore
@@ -18,6 +17,9 @@ import AppTrackingTransparency
 import SendbirdChatSDK
 import GoogleSignIn
 import Kingfisher
+import KakaoSDKAuth
+import KakaoSDKCommon
+import TikTokOpenSDKCore
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -62,12 +64,38 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         registerForPushNotifications()
 
 
+        KakaoSDK.initSDK(appKey: "c874edf53a20306b31bf73e4c7aaf9cc")
+        
         return true
     }
 
     func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
-            return GIDSignIn.sharedInstance.handle(url)
+        // 카카오톡 로그인 URL 처리
+        if AuthApi.isKakaoTalkLoginUrl(url) {
+            return AuthController.handleOpenUrl(url: url)
         }
+        
+        // Google 로그인 URL 처리
+        if GIDSignIn.sharedInstance.handle(url) {
+            return true
+        }
+
+        if (TikTokURLHandler.handleOpenURL(url)) {
+            return true
+        }
+        
+        // 처리되지 않은 URL의 경우 false 반환
+        return false
+    }
+
+    func application(_ application: UIApplication,
+                     continue userActivity: NSUserActivity,
+                     restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
+        if (TikTokURLHandler.handleOpenURL(userActivity.webpageURL)) {
+            return true
+        }
+        return false
+    }
     
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
         // 세로방향 고정
@@ -143,7 +171,9 @@ extension AppDelegate: MessagingDelegate, UNUserNotificationCenterDelegate {
       }
     }
     
-    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+    func application(_ application: UIApplication,
+                     didReceiveRemoteNotification userInfo: [AnyHashable: Any]) async
+      -> UIBackgroundFetchResult {
         
         // sendbird 알림
         if let aps = userInfo["aps"] as? NSDictionary,
@@ -166,13 +196,15 @@ extension AppDelegate: MessagingDelegate, UNUserNotificationCenterDelegate {
                 NotificationCenter.default.post(name: Notification.Name("ProfileUpdateNotification"), object: nil)
             }
         }
-        
+          
         
         if let title = userInfo["title"] as? String, let status = userInfo["status"] as? String {
             print("Title: \(title), Status: \(status)")
+            Messaging.messaging().appDidReceiveMessage(userInfo)
+
         }
         
-        completionHandler(.newData)
+        return UIBackgroundFetchResult.newData
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
@@ -209,6 +241,8 @@ extension AppDelegate: MessagingDelegate, UNUserNotificationCenterDelegate {
         
         
         if let title = userInfo["title"] as? String, let status = userInfo["status"] as? String {
+            Messaging.messaging().appDidReceiveMessage(userInfo)
+
             print("Title: \(title), Status: \(status)")
         }
         
@@ -218,57 +252,13 @@ extension AppDelegate: MessagingDelegate, UNUserNotificationCenterDelegate {
         completionHandler([.banner, .sound, .badge])
     }
 
-//    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-//        
-//        // userInfo에서 커스텀 플래그 확인
-//        if let isCustomNotification = notification.request.content.userInfo["isCustomNotification"] as? Bool, isCustomNotification {
-//            // 이미 수정된 알림이므로 무한 반복 방지를 위해 종료
-//            completionHandler([.banner, .sound, .badge])
-//            return
-//        }
-//        
-//        // 원본 알림 내용을 추출
-//        let originalContent = notification.request.content
-//        
-//        
-//        print(originalContent.title)
-//        print(originalContent.body)
-//        let modifiedContent = UNMutableNotificationContent()
-//        
-//        // 제목과 본문 등 수정
-//        modifiedContent.title = "\(originalContent.title)에서 협업 메시지 도착"
-//        modifiedContent.body = "\(originalContent.body)"
-//        modifiedContent.sound = .default
-//        
-//        // 추가 필드 수정 (예: 배지 개수나 사용자 정의 데이터)
-//        if let badge = originalContent.badge as? Int {
-//            modifiedContent.badge = NSNumber(value: badge)
-//        } else {
-//            modifiedContent.badge = NSNumber(value: 1)
-//        }
-//        
-//        // 무한 반복 방지 플래그 추가
-//        modifiedContent.userInfo["isCustomNotification"] = true
-//        
-//        // 수정된 내용으로 로컬 알림 표시
-//        let request = UNNotificationRequest(identifier: notification.request.identifier, content: modifiedContent, trigger: nil)
-//        center.add(request, withCompletionHandler: nil)
-//        
-//        // 앱 내부에서 NotificationCenter로 알림을 처리해야 하는 경우
-//        NotificationCenter.default.post(name: NSNotification.Name("SendbirdPushNotificationReceived"), object: nil)
-//        
-//        // 테스트용 로그 출력
-//        print("사용자 정의 알림 표시")
-//        
-//        // 원래 알림은 표시되지 않도록 빈 세트를 전달
-//        completionHandler([])
-//    }
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                  didReceive response: UNNotificationResponse) async {
+        let userInfo = response.notification.request.content.userInfo
 
-
+        print(userInfo)
+      }
     
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-            print("Notification response received: \(response.notification.request.content.userInfo)")
-            completionHandler()
-        }
+
     
 }

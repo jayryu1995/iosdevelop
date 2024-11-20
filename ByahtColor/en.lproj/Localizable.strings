@@ -163,7 +163,7 @@
 "login_str3" = "Please enter your ID or password.";
 "login_str4" = "Login information is incorrect.";
 "login_mcn" = "MCN∙Agency Login";
-"login_mcn_str" = "MCN membership registration is available through Byat.\n bkim@byaht.com";
+"login_mcn_str" = "MCN∙Agency membership registration is available through Byat.\n bkim@byaht.com";
 
 //FindAccountVC
 "find_account_id" = "Find ID";

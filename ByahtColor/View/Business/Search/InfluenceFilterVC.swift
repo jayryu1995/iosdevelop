@@ -283,7 +283,12 @@ class InfluenceFilterVC: UIViewController {
             sender.isSelected = true
             sender.backgroundColor = .black
             sender.setTitleColor(.white, for: .normal)
-            selectedNation.append(selector)
+            
+            if selector == "0"{
+                selectedNation.append(selector)
+            }else if selector == "1"{
+                selectedNation.append("4")
+            }
         }
     }
 

@@ -7,7 +7,6 @@
 
 import UIKit
 import SnapKit
-import AlamofireImage
 
 class BankTableViewCell: UITableViewCell {
 

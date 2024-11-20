@@ -47,7 +47,7 @@ extension UIImageView {
             }
 
             // 이미지 리사이징
-            let resizedImage = downloadedImage.resized(toWidth: 480)
+            let resizedImage = downloadedImage.resized(toWidth: self.frame.width)
             if let resizedImage = resizedImage {
                 DispatchQueue.main.async {
                     self.image = resizedImage
@@ -55,7 +55,7 @@ extension UIImageView {
                     self.clipsToBounds = true
                 }
                 // 리사이징된 이미지를 캐시에 저장하고 이미지 뷰에 설정
-                ImageCacheManager.shared.setImage(resizedImage, for: urlString)
+                //ImageCacheManager.shared.setImage(resizedImage, for: urlString)
 
             }
 
@@ -104,5 +104,17 @@ extension UIImageView {
         }.resume()
     }
 
-    
+    func loadImageDirectly(with url: URL) {
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            guard let data = data, error == nil else {
+                print("Image load failed:", error ?? "Unknown error")
+                return
+            }
+            
+            DispatchQueue.main.async {
+                self.image = UIImage(data: data)
+            }
+        }
+        task.resume()
+    }
 }
