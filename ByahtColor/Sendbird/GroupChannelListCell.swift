@@ -129,15 +129,6 @@ open class GroupChannelListCell: UITableViewCell {
                         self.profileImage.kf.setImage(with: url)
                     }
                     
-//                    currentProfileURL = url
-//                    DispatchQueue.main.async {
-//                        self.profileImage.loadProfileImage(from: url) { [weak self] image in
-//                            guard let self = self, self.taskIdentifier == taskID else { return }
-//                            self.profileImage.image = UIImage(named: "icon_profile2")
-//                            self.profileImage.image = image
-//                            
-//                        }
-//                    }
                 }
             }
         }

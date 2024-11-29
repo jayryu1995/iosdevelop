@@ -80,7 +80,7 @@ extension KakaoZipCodeVC: WKScriptMessageHandler, WKNavigationDelegate {
         }
         if let navController = self.presentingViewController as? UINavigationController,
            let presentingVC = navController.topViewController as? BusinessSignUpVC {
-            presentingVC.address = address
+            //presentingVC.address = address
             self.dismiss(animated: true, completion: nil)
         } else {
             print("Failed to pass address")

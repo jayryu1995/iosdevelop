@@ -216,6 +216,13 @@
 "signup_manager_pwd_check_hint" = "Nhập lại mật khẩu";
 "signup_agreement" = "Đồng ý thu thập và sử dụng thông tin cá nhân";
 "signup_submit" = "Đăng ký";
+"signup_next" = "Next";
+"signup_info" = "Dành cho doanh nghiệp\nVui lòng nhập thông tin công ty.";
+"signup_info_highlight" = "Dành cho doanh nghiệp";
+"signup2_info" = "Dành cho HR\nVui lòng nhập thông tin người phụ trách nhân sự.";
+"signup2_info_highlight" = "Dành cho HR";
+"signup3_info" = "Vui lòng đồng ý\nThu thập và sử dụng thông tin cá nhân.";
+"signup3_info_highlight" = "Thu thập và sử dụng thông tin cá nhân";
 "signup_check_id_message" = "Nhập tên đăng nhập.";
 "signup_check_id_message2" = "Tên đăng nhập đã tồn tại.";
 "signup_check_id_message3" = "Tên đăng nhập khả dụng.";

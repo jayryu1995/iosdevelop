@@ -36,5 +36,15 @@ extension UIView {
         }
         return nil
     }
-
+    func findFirstResponder() -> UIResponder? {
+            if self.isFirstResponder {
+                return self
+            }
+            for subview in self.subviews {
+                if let responder = subview.findFirstResponder() {
+                    return responder
+                }
+            }
+            return nil
+        }
 }

@@ -177,4 +177,82 @@ extension UIViewController {
             return "en" // 영어로 기본 설정
         }
     }
+    
+    
+    //기업 회원가입 
+    
+    func makeButton(title: String) -> UIButton {
+        let button = UIButton()
+        button.setTitle(title, for: .normal)
+        button.setTitleColor(UIColor(hex: "#4E505B"), for: .normal)
+        button.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 14)
+        button.layer.borderColor = UIColor(hex: "#B5B8C2").cgColor
+        button.layer.cornerRadius = 4
+        button.layer.borderWidth = 1
+        button.contentEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 5)
+        return button
+    }
+
+    func makeLabel(text: String) -> UILabel {
+        let lbl = UILabel()
+        lbl.text = text.localized
+        lbl.font = UIFont(name: "Pretendard-Regular", size: 14)
+        lbl.textColor = UIColor(hex: "#4E505B")
+        return lbl
+    }
+
+    func makeTextField(placeholder: String) -> UITextField {
+        let tf = UITextField()
+        tf.placeholder = placeholder.localized
+        tf.textColor = UIColor(hex: "#B5B8C2")
+        tf.font = UIFont(name: "Pretendard-Regular", size: 14)
+        return tf
+    }
+    
+    func makeContainerView(withLabel label: UILabel, textField: UITextField, button: UIButton?) -> UIView {
+        let containerView = UIView()
+        containerView.backgroundColor = .white
+        containerView.layer.borderColor = UIColor(hex: "#D3D4DA").cgColor
+        containerView.layer.borderWidth = 1
+        containerView.layer.cornerRadius = 4
+        containerView.addSubview(label)
+
+        label.setContentHuggingPriority(.required, for: .horizontal)
+        label.setContentCompressionResistancePriority(.required, for: .horizontal)
+        label.snp.makeConstraints {
+            $0.leading.equalToSuperview().offset(10)
+            $0.top.equalToSuperview().offset(10)
+            $0.bottom.equalToSuperview().offset(-10)
+        }
+
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 10
+        stackView.alignment = .center
+        stackView.distribution = .fill
+
+        stackView.addArrangedSubview(textField)
+        if let button = button {
+            stackView.addArrangedSubview(button)
+        }
+
+        containerView.addSubview(stackView)
+
+        stackView.snp.makeConstraints {
+            $0.top.equalToSuperview().offset(10)
+            $0.bottom.equalToSuperview().offset(-10)
+            $0.leading.equalTo(label.snp.trailing).offset(10)
+            $0.trailing.equalToSuperview().offset(-10)
+        }
+
+        if let button = button {
+            button.snp.makeConstraints {
+                $0.width.equalTo(60)
+            }
+            button.setContentHuggingPriority(.required, for: .horizontal)
+            button.setContentCompressionResistancePriority(.required, for: .horizontal)
+        }
+
+        return containerView
+    }
 }

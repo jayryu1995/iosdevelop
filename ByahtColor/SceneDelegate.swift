@@ -9,7 +9,7 @@ import AppTrackingTransparency
 import FirebaseAnalytics
 import FBSDKCoreKit
 import KakaoSDKAuth
-import TikTokOpenSDKCore
+
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -36,11 +36,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if AuthApi.isKakaoTalkLoginUrl(url) {
             _ = AuthController.handleOpenUrl(url: url)
         }
-        
-        // 틱톡
-        if (TikTokURLHandler.handleOpenURL(URLContexts.first?.url)) {
-            return
-        }
+       
     }
 
 
@@ -69,7 +65,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         if #available(iOS 15.0, *) {
             let appearance = UINavigationBarAppearance()
             appearance.configureWithOpaqueBackground()
-            appearance.backgroundColor = .white
+            appearance.backgroundColor = .clear
             appearance.titleTextAttributes = [
                 .foregroundColor: UIColor.black,
                 .font: UIFont(name: "Pretendard-SemiBold", size: 16) ?? UIFont.systemFont(ofSize: 16)

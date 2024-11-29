@@ -42,13 +42,29 @@ public class MessageInputView: UIView {
     private lazy var textView: UITextView = {
         let textView = UITextView()
         textView.font = UIFont(name: "Pretendard-Regular", size: 14)
-        textView.text = "messageInputView_placeholder".localized
         textView.textColor = UIColor(hex: "#B5B8C2")
         textView.backgroundColor = UIColor(hex: "#F4F5F8")
         textView.delegate = self
         textView.isScrollEnabled = false
+
+        // Placeholder 텍스트와 LineHeight 적용
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = 1.09 // 원하는 LineHeight 설정
+        paragraphStyle.alignment = .left // 텍스트 정렬 (선택 사항)
+
+        let attributedString = NSAttributedString(
+            string: "messageInputView_placeholder".localized,
+            attributes: [
+                .font: UIFont(name: "Pretendard-Regular", size: 14)!,
+                .foregroundColor: UIColor(hex: "#B5B8C2"),
+                .paragraphStyle: paragraphStyle
+            ]
+        )
+        textView.attributedText = attributedString
+
         return textView
     }()
+
 
     private lazy var sendUserMessageButton: UIButton = {
         let sendUserMessageButton: UIButton = UIButton()
@@ -80,9 +96,9 @@ public class MessageInputView: UIView {
         addSubview(textFieldContainerView)
         textFieldContainerView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(20)
-            make.centerY.equalToSuperview()
-            make.height.equalTo(40).priority(.high)
-            textFieldContainerViewHeightConstraint = make.height.equalTo(40).constraint
+            make.top.bottom.equalToSuperview().inset(5)
+            make.height.equalTo(44).priority(.high)
+            textFieldContainerViewHeightConstraint = make.height.equalTo(44).constraint
         }
 
         addSubview(textView)
@@ -92,7 +108,7 @@ public class MessageInputView: UIView {
             make.top.equalTo(textFieldContainerView.snp.top)
             make.bottom.equalTo(textFieldContainerView.snp.bottom)
 
-            textViewHeightConstraint = make.height.equalTo(40).constraint
+            textViewHeightConstraint = make.height.equalTo(44).constraint
         }
 
         addSubview(sendUserMessageButton)
@@ -122,9 +138,11 @@ public class MessageInputView: UIView {
     }
 
     private func updateTextViewHeight() {
+        //let size = CGSize(width: textView.frame.width, height: textFieldContainerView.frame.height)
         let size = CGSize(width: textView.frame.width, height: .infinity)
         let estimatedSize = textView.sizeThatFits(size)
-        let maxHeight: CGFloat = 40 * 4  // 최대 높이 (4줄)
+        
+        let maxHeight: CGFloat = 44 * 4  // 최대 높이 (4줄)
 
         textView.isScrollEnabled = estimatedSize.height > maxHeight
         textViewHeightConstraint?.update(offset: min(estimatedSize.height, maxHeight))
@@ -164,9 +182,17 @@ extension MessageInputView: UITextViewDelegate {
             sendUserMessageButton.isEnabled = false
             sendUserMessageButton.tintColor = UIColor(hex: "#B5B8C2")
         }
-        updateTextViewHeight()
+
+        
         delegate?.messageInputView(self, didStartTyping: textView)
-        let newSize = textView.sizeThatFits(CGSize(width: textView.frame.width, height: CGFloat.greatestFiniteMagnitude))
-        delegate?.messageInputView(self, didChangeHeight: newSize.height + 16)
+            
+            // Calculate new size
+            let newSize = textView.sizeThatFits(CGSize(width: textView.frame.width, height: CGFloat.greatestFiniteMagnitude))
+            
+            // Pass only the height
+            delegate?.messageInputView(self, didChangeHeight: newSize.height + 10)
+        updateTextViewHeight()
+        
+        
     }
 }

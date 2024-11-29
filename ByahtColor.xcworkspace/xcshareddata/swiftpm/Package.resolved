@@ -1,5 +1,5 @@
 {
-  "originHash" : "4925edfc34791426371483b9f6ab160d4f7ca739c710d23dbf2034d9a85eb716",
+  "originHash" : "0a9a0565c23645eacdcd0d177a036429567ab510b257a7f2538ea8bb318bf8d2",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -17,15 +17,6 @@
       "state" : {
         "revision" : "ab4309c1950550add307046ad1e08024c7514603",
         "version" : "2.23.0"
-      }
-    },
-    {
-      "identity" : "tiktok-opensdk-ios",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/tiktok/tiktok-opensdk-ios",
-      "state" : {
-        "branch" : "main",
-        "revision" : "cb0cdc785b653c3be116fd1302ec280fbcfac695"
       }
     }
   ],

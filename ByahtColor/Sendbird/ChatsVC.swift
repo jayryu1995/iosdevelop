@@ -98,7 +98,7 @@ class ChatsVC: UIViewController {
         messageInputView.snp.makeConstraints { make in
             make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading)
             make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing)
-            messageInputHeightConstraint = make.height.equalTo(50).constraint
+            messageInputHeightConstraint = make.height.equalTo(44).constraint
             messageInputBottomConstraint = make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).constraint
         }
         messageListUseCase.loadInitialMessages()
@@ -106,8 +106,8 @@ class ChatsVC: UIViewController {
         view.addSubview(tableView)
         tableView.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
-            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading)
-            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing)
+            make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading).offset(10)
+            make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing).inset(10)
             make.bottom.equalTo(messageInputView.snp.top)
         }
 
@@ -276,7 +276,7 @@ extension ChatsVC: GroupChannelMessageListUseCaseDelegate {
 extension ChatsVC: MessageInputViewDelegate {
     func messageInputView(_ messageInputView: MessageInputView, didChangeHeight newHeight: CGFloat) {
             messageInputHeightConstraint?.update(offset: newHeight)
-
+        print(newHeight)
             UIView.animate(withDuration: 0.3) {
                 self.view.layoutIfNeeded()
             }
@@ -285,6 +285,7 @@ extension ChatsVC: MessageInputViewDelegate {
         }
 
     func messageInputView(_ messageInputView: MessageInputView, didTouchUserMessageButton sender: UIButton, message: String) {
+        messageInputHeightConstraint?.update(offset: 44)
         targetMessageForScrolling = userMessageUseCase.sendMessage(message) { [weak self] result in
             switch result {
             case .success(let sendedMessage):

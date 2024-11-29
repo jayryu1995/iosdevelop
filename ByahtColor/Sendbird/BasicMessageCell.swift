@@ -115,7 +115,7 @@ open class BasicMessageCell: UITableViewCell {
             }
 
             messageBox.snp.remakeConstraints {
-                $0.trailing.equalToSuperview().offset(-20)
+                $0.trailing.equalToSuperview()
                 $0.top.equalTo(dateLabel.snp.bottom).offset(16)
                 $0.bottom.equalToSuperview()
                 $0.width.lessThanOrEqualTo(maxWidth)
@@ -152,7 +152,7 @@ open class BasicMessageCell: UITableViewCell {
             profileImageView.snp.remakeConstraints {
                 $0.top.equalTo(dateLabel.snp.bottom).offset(16)
                 $0.width.height.equalTo(32)
-                $0.leading.equalToSuperview().offset(20)
+                $0.leading.equalToSuperview()
             }
 
             messageBox.snp.remakeConstraints {
@@ -204,7 +204,7 @@ open class BasicMessageCell: UITableViewCell {
     open func configure(with message: BaseMessage) {
         sender = message.sender?.nickname ?? ""
         messageBox.text = message.message
-        timeLabel.text = Date.sbu_from(message.createdAt).sbu_toString(format: .hhmma, localizedFormat: false)
+        timeLabel.text = Date.sbu_from(message.createdAt).sbu_toString(format: .hhmma)
         
         if message.sender?.nickname != User.shared.name {
             if let id = message.sender?.userId{

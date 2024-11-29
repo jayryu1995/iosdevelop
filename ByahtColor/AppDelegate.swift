@@ -19,7 +19,6 @@ import GoogleSignIn
 import Kingfisher
 import KakaoSDKAuth
 import KakaoSDKCommon
-import TikTokOpenSDKCore
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -55,14 +54,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FirebaseApp.configure()
         
         Messaging.messaging().delegate = self
-        Messaging.messaging().subscribe(toTopic: "all") { _ in
-            log(vc: "AppDelegate", message: "Subscribed to all")
-        }
         
         UNUserNotificationCenter.current().delegate = self
         requestNotificationAuthorization()
         registerForPushNotifications()
-
 
         KakaoSDK.initSDK(appKey: "c874edf53a20306b31bf73e4c7aaf9cc")
         
@@ -80,10 +75,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             return true
         }
 
-        if (TikTokURLHandler.handleOpenURL(url)) {
-            return true
-        }
-        
         // 처리되지 않은 URL의 경우 false 반환
         return false
     }
@@ -91,9 +82,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication,
                      continue userActivity: NSUserActivity,
                      restorationHandler: @escaping ([UIUserActivityRestoring]?) -> Void) -> Bool {
-        if (TikTokURLHandler.handleOpenURL(userActivity.webpageURL)) {
-            return true
-        }
+      
         return false
     }
     
@@ -197,7 +186,6 @@ extension AppDelegate: MessagingDelegate, UNUserNotificationCenterDelegate {
             }
         }
           
-        
         if let title = userInfo["title"] as? String, let status = userInfo["status"] as? String {
             print("Title: \(title), Status: \(status)")
             Messaging.messaging().appDidReceiveMessage(userInfo)
@@ -238,15 +226,12 @@ extension AppDelegate: MessagingDelegate, UNUserNotificationCenterDelegate {
                 NotificationCenter.default.post(name: Notification.Name("ProfileUpdateNotification"), object: nil)
             }
         }
-        
-        
+     
         if let title = userInfo["title"] as? String, let status = userInfo["status"] as? String {
             Messaging.messaging().appDidReceiveMessage(userInfo)
 
             print("Title: \(title), Status: \(status)")
         }
-        
-        
         
         print("foreground 알림 발생")
         completionHandler([.banner, .sound, .badge])

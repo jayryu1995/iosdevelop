@@ -187,6 +187,13 @@
 "signup_manager_pwd_check_hint" = "パスワードを再入力してください。";
 "signup_agreement" = "個人情報収集及び利用同意";
 "signup_submit" = "登録申し込み";
+"signup_info" = "企業情報を\n入力してください。";
+"signup_info_highlight" = "企業情報";
+"signup2_info" = "人事担当者の情報を\n入力してください。";
+"signup2_info_highlight" = "人事担当者の情報";
+"signup3_info" = "アプリの利用に必要な\n個人情報の収集および利用に同意。";
+"signup3_info_highlight" = "個人情報の収集および利用に同意。";
+"signup_next" = "Next";
 "signup_check_id_message" = "IDを入力してください。";
 "signup_check_id_message2" = "既に存在するIDです。";
 "signup_check_id_message3" = "使用可能なIDです。";

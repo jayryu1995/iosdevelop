@@ -183,10 +183,16 @@
 
 // AgreementVC
 "agree" = "동의하기";
-"agree_1" = "개인정보 처리방침";
-"agree_2" = "서비스 이용약관";
+"agree_1" = "개인정보 처리방침(필수)";
+"agree_2" = "서비스 이용약관(필수)";
 
 //BusinessJoinVC
+"signup_info" = "기업 정보를 \n입력해 주세요.";
+"signup_info_highlight" = "기업 정보";
+"signup2_info" = "담당자 정보를\n입력해 주세요.";
+"signup2_info_highlight" = "담당자 정보";
+"signup3_info" = "앱 사용에 필요한 \n개인정보 수집 및 이용 동의";
+"signup3_info_highlight" = "개인정보 수집 및 이용 동의";
 "signup_business" = "기업 회원가입";
 "signup_business_info" = "기업정보";
 "signup_business_name" = "회사명";
@@ -203,7 +209,7 @@
 "signup_manager_info" = "계정 정보";
 "signup_manager_name" = "가입자명";
 "signup_manager_name_hint" = "본명을 입력해주세요.";
-"signup_manager_phone" = "전화번호";
+"signup_manager_phone" = "휴대전화번호";
 "signup_manager_phone_hint" = "숫자입력 ( - 하이픈 제외)";
 "signup_manager_email" = "이메일";
 "signup_manager_email_hint" = "이메일@직접입력";
@@ -216,6 +222,7 @@
 "signup_manager_pwd_check_hint" = "비밀번호를 다시 입력해주세요.";
 "signup_agreement" = "개인정보 수집 및 이용 동의";
 "signup_submit" = "가입 신청하기";
+"signup_next" = "다음";
 "signup_check_id_message" = "아이디를 입력해주세요.";
 "signup_check_id_message2" = "이미 존재하는 아이디입니다.";
 "signup_check_id_message3" = "사용 가능한 아이디입니다.";

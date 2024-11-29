@@ -16,6 +16,7 @@ class TabBarViewController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .clear
+        
         self.tabBar.superview?.backgroundColor = .white
         self.navigationItem.hidesBackButton = true
         self.tabBar.layer.borderWidth = 1
@@ -116,6 +117,7 @@ class TabBarViewController: UITabBarController {
         }
 
     }
+ 
 
     private func setupTapbar() {
         // iOS 15 이상에서 UITabBarAppearance를 사용하여 탭 바 스타일 설정

@@ -217,6 +217,13 @@
 "signup_manager_pwd_check_hint" = "Please re-enter the password.";
 "signup_agreement" = "Agreement to Collect and Use Personal Information";
 "signup_submit" = "Submit Application";
+"signup_next" = "Next";
+"signup_info" = "Please enter\nthe company information.";
+"signup_info_highlight" = "company information";
+"signup2_info" = "Please enter \nthe HR representative's information.";
+"signup2_info_highlight" = "HR representative's information";
+"signup3_info" = "Agreement to the Collection and Use of Information and Personal Data\nRequired for App Usage.";
+"signup3_info_highlight" = "Use of Information and Personal Data";
 "signup_check_id_message" = "Please enter an ID.";
 "signup_check_id_message2" = "This ID already exists.";
 "signup_check_id_message3" = "This ID is available.";

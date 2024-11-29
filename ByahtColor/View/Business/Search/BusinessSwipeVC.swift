@@ -237,11 +237,18 @@ extension BusinessSwipeVC: UIPageViewControllerDataSource, UIPageViewControllerD
         }
 
         let nextIndex = index + 1
-        
         if nextIndex >= profileList.count, lastFlag == false {
             loadMoreDataIfNeeded()
             return nil
         }
+        
+//        if nextIndex == 3 {
+//            let alert = UIAlertController(title: "권한 없음", message: "이 페이지에 접근할 권한이 없습니다.", preferredStyle: .alert)
+//            alert.addAction(UIAlertAction(title: "확인", style: .default))
+//            self.present(alert, animated: true)
+//            return nil
+//        }
+        
         
         return viewControllerAt(index: nextIndex)
     }

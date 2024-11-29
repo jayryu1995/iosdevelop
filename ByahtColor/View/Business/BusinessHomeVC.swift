@@ -67,6 +67,10 @@ class BusinessHomeVC: UIViewController, UIScrollViewDelegate {
             self.log(message: "Subscribed to business")
         }
         
+        Messaging.messaging().subscribe(toTopic: "admin") { _ in
+            self.log(message: "Subscribed to admin")
+        }
+        
         setupHomeData()
         
         if User.shared.intro == nil || User.shared.intro?.isEmpty == true {

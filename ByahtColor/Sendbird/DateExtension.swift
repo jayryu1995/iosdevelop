@@ -52,6 +52,7 @@ extension Date {
     ///   - localizedFormat: If `true`, it sets localized date format.
     /// - Since: 2.1.13
     public func sbu_toString(formatString: String, localizedFormat: Bool = true) -> String {
+        
         let formatter = DateFormatter()
 
             let languageCode = Locale.preferredLanguages.first?.prefix(2)
@@ -68,7 +69,15 @@ extension Date {
 
         return formatter.string(from: self)
     }
+    
+    public func sbu_toString(format :SBUDateFormat) -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = format.rawValue
+        return formatter.string(from: self)
+    }
 
+
+    
     static func lastUpdatedTime(baseTimestamp: Int64) -> String? {
         let baseDate = Date.sbu_from(baseTimestamp)
         let currDate = Date()

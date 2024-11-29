@@ -53,6 +53,10 @@ class InfluenceHomeVC: UIViewController, UIScrollViewDelegate {
 
         
         // 알림 구독
+        Messaging.messaging().subscribe(toTopic: "all") { _ in
+            self.log(message: "Subscribed to all")
+        }
+        
         // 개인
         if let assetId = User.shared.id {
             Messaging.messaging().subscribe(toTopic: assetId) { _ in

@@ -13,7 +13,7 @@ import Combine
 import AuthenticationServices
 import KakaoSDKAuth
 import KakaoSDKUser
-import TikTokOpenAuthSDK
+
 
 class UserLoginVC: UIViewController {
     lazy private var appleButton: UIImageView = {
@@ -42,15 +42,7 @@ class UserLoginVC: UIViewController {
         imageView.isUserInteractionEnabled = true  // 제스처 인식을 위해 필요
         return imageView
     }()
-    
-    lazy private var tiktokButton: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "tiktok")
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        imageView.isUserInteractionEnabled = true  // 제스처 인식을 위해 필요
-        return imageView
-    }()
+
     
     lazy private var templetView: UIImageView = {
         let image = UIImageView(image: UIImage(named: "image_login"))
@@ -60,8 +52,8 @@ class UserLoginVC: UIViewController {
 
     private let viewModel = MemberViewModel()
     private let kakaoVM = KakaoAuthVM()
-    private let tiktokVM = TiktokVM()
-    private var cancellables = Set<AnyCancellable>()
+    
+    lazy private var cancellables = Set<AnyCancellable>()
     private var activityIndicator: UIActivityIndicatorView!
     private let backgroundImage = UIImage(named: "logo")
     private let imageView = UIImageView()
@@ -93,7 +85,7 @@ class UserLoginVC: UIViewController {
                 let name = fb["name"] as? String
                 let email = fb["email"] as? String
                 let friends = fb["friends"] as? String
-                print("friends count : \(friends)")
+                
                 if let idString = fb["id"] as? String {
                     // 변환에 성공한 경우, id를 Int로 사용할 수 있습니다.
                     User.shared.updateUserData(id: idString, email: email, name: name)
@@ -188,13 +180,10 @@ class UserLoginVC: UIViewController {
         let kakaoTapGesture = UITapGestureRecognizer(target: self, action: #selector(kakaoLogin))
         kakaoButton.addGestureRecognizer(kakaoTapGesture)
         
-        let tiktokTapGesture = UITapGestureRecognizer(target: self, action: #selector(tiktokLogin))
-        tiktokButton.addGestureRecognizer(tiktokTapGesture)
         
         contentView.addSubview(kakaoButton)
         contentView.addSubview(facebookButton)
         contentView.addSubview(appleButton)
-        contentView.addSubview(tiktokButton)
 
     }
 
@@ -212,7 +201,7 @@ class UserLoginVC: UIViewController {
         }
 
         // SNS 버튼들을 균등하게 배치하기 위한 StackView 설정
-        let snsButtonStack = UIStackView(arrangedSubviews: [facebookButton, appleButton, kakaoButton, tiktokButton])
+        let snsButtonStack = UIStackView(arrangedSubviews: [facebookButton, appleButton, kakaoButton])
         snsButtonStack.axis = .horizontal
         snsButtonStack.distribution = .equalSpacing
         snsButtonStack.alignment = .center
@@ -227,7 +216,7 @@ class UserLoginVC: UIViewController {
         }
 
         // 각 버튼의 크기를 동일하게 설정
-        [facebookButton, appleButton, kakaoButton, tiktokButton].forEach { button in
+        [facebookButton, appleButton, kakaoButton].forEach { button in
             button.snp.makeConstraints {
                 $0.width.height.equalTo(52)
             }
@@ -310,18 +299,12 @@ extension UserLoginVC: ASAuthorizationControllerDelegate, ASAuthorizationControl
 
     @objc private func kakaoLogin() {
         // 카카오톡 실행 가능 여부 확인
-        print("tapped")
         kakaoVM.handleKakaoLogin(){ id in
             if let id = id {
+                print(id)
                 self.getNickname()
             }
         }
-    }
-    
-    @objc private func tiktokLogin() {
-        // 카카오톡 실행 가능 여부 확인
-        print("tapped")
-        tiktokVM.handleTiktokLogin()
     }
     
     @objc private func facebookLogin(_ sender: Any) {

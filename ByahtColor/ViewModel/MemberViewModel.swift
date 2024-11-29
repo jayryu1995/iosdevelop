@@ -151,17 +151,36 @@ class MemberViewModel: ObservableObject {
 
     func updateMemberBusiness(memberBusinessDto: MemberBusinessDto, completion: @escaping (Result<String, Error>) -> Void) {
         let url = "\(Bundle.main.TEST_URL)/member/update"
-        AF.request(url, method: .post, parameters: memberBusinessDto, encoder: JSONParameterEncoder.default, headers: headers)
-            .validate(statusCode: 200..<300)
-            .responseString { response in
-                switch response.result {
-                case .success(let responseString):
-                    completion(.success(responseString))
-                case .failure(let error):
-                    completion(.failure(error))
-                }
+        let pdfFileUrl = URL(string: memberBusinessDto.business.licenseFile!)
+        let headers: HTTPHeaders = [
+            "Content-Type": "multipart/form-data",
+            "Accept": "application/json"
+        ]
+        
+        AF.upload(multipartFormData: { multipartFormData in
+            // JSON 데이터를 business_data 파트로 추가
+            if let jsonData = try? JSONEncoder().encode(memberBusinessDto) {
+                multipartFormData.append(jsonData, withName: "business_data", mimeType: "application/json")
             }
+            
+            // 파일을 file 파트로 추가 (선택적)
+            if let pdfFileUrl = pdfFileUrl {
+                multipartFormData.append(pdfFileUrl, withName: "file", fileName: "license.pdf", mimeType: "application/octet-stream")
+            }
+        }, to: url, headers: headers)
+        .validate(statusCode: 200..<300)
+        .responseString { response in
+            switch response.result {
+            case .success(let responseString):
+                completion(.success(responseString))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
     }
+
+
+
 
     func updateMemberInfluence(memberInfluenceDto: MemberInfluenceDto, completion: @escaping (Result<String, Error>) -> Void) {
         let url = "\(Bundle.main.TEST_URL)/influence/signup"
