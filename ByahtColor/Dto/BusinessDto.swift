@@ -7,17 +7,17 @@
 
 import Foundation
 struct BusinessDto: Codable {
-    let license: String?
-    let memberId: String?
-    let password: String?
-    let businessName: String?
-    let address1: String?
-    let address2: String?
-    let licenseFile: String?
-    let managerName: String?
-    let tel: String?
-    let email: String?
-    let imagePath: String?
-    let intro: String?
-    let auth: String?
+    var license: String?
+    var memberId: String?
+    var password: String?
+    var businessName: String?
+    var address1: String?
+    var address2: String?
+    var licenseFile: String?
+    var managerName: String?
+    var tel: String?
+    var email: String?
+    var imagePath: String?
+    var intro: String?
+    var auth: String?
 }

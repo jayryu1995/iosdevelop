@@ -38,17 +38,17 @@ class FindAccountVC: UIViewController {
     lazy private var separatorLine = UIView()
     lazy private var layer1 = CALayer()
     lazy private var layer2 = CALayer()
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: animated)
-    }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.setNavigationBarHidden(false, animated: animated)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
-
+    
+    override func viewWillDisappear(_ animated: Bool){
+        super.viewDidAppear(animated)
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
 

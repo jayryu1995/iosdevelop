@@ -219,7 +219,7 @@ open class BasicMessageCell: UITableViewCell {
                 profileImageView.image = UIImage(named: "icon_profile2") // 기본 이미지 설정
             }
         }
-        // setNeedsUpdateConstraints()
+         setNeedsUpdateConstraints()
     }
 
     open func checked(check: Bool) {

@@ -276,10 +276,17 @@ class CollabDetailTableViewCell: UITableViewCell, UIScrollViewDelegate {
         for resource in imageList {
             print(resource)
             let imageView = UIImageView()
+
             let url = URL(string: resource)
-            imageView.kf.setImage(with: url)
+            let options: KingfisherOptionsInfo = [
+                .forceRefresh,
+                .diskCacheExpiration(.expired) // 디스크 캐싱을 비활성화
+            ]
+
+            imageView.kf.setImage(with: url, options: options)
             imageView.contentMode = .scaleAspectFill
             imageView.clipsToBounds = true
+
             imageScrollView.addSubview(imageView)
 
             imageView.snp.makeConstraints { make in

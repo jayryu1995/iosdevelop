@@ -431,7 +431,7 @@ class UserDiscountWriteVC: UIViewController, UIScrollViewDelegate, UINavigationC
 
     // 업로드 버튼 액션
     @objc private func uploadButtonTapped() {
-        self.activityIndicator
+        
         if let errorMessage = validateInputs() {
             // 검사를 통과하지 못한 경우, 경고 메시지 표시
             showAlert(message: errorMessage)

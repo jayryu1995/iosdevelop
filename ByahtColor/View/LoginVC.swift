@@ -13,7 +13,7 @@ import Alamofire
 import Combine
 import AuthenticationServices
 
-class LoginVC: UIViewController {
+class LoginVC: UIViewController , BusinessLoginVCDelegate {
 
     private var pageViewController: UIPageViewController!
     lazy private var pages = [UIViewController]()
@@ -67,7 +67,7 @@ class LoginVC: UIViewController {
         updateButtonBottomLayerFrame()
 
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.navigationController?.navigationBar.isHidden = true
@@ -193,9 +193,15 @@ class LoginVC: UIViewController {
         let page1 = UserLoginVC()
         let page2 = BusinessLoginVC()
 
+        // Delegate 설정
+        if let businessLoginVC = page2 as? BusinessLoginVC {
+            businessLoginVC.delegate = self
+        }
+
         pages.append(page1)
         pages.append(page2)
     }
+
 
     private func setupSeparatorLine() {
         separatorLine.backgroundColor = UIColor(hex: "#F4F5F8")
@@ -279,7 +285,11 @@ class LoginVC: UIViewController {
             }
         }
     }
-
+    
+    func didTapFindIdButton() {
+        let findAccountVC = FindAccountVC()
+        navigationController?.pushViewController(findAccountVC, animated: true)
+    }
 }
 
 extension LoginVC: UIPageViewControllerDataSource, UIPageViewControllerDelegate,
@@ -349,4 +359,8 @@ extension LoginVC: UIPageViewControllerDataSource, UIPageViewControllerDelegate,
         // 로그인 실패(유저의 취소도 포함)
         print("login failed - \(error.localizedDescription)")
     }
+}
+
+protocol BusinessLoginVCDelegate: AnyObject {
+    func didTapFindIdButton()
 }

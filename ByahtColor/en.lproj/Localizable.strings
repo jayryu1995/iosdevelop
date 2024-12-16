@@ -170,9 +170,8 @@
 "find_account_password" = "Find Password";
 
 //FindIdVC
-"findid_label" = "You can find your ID after identity verification.";
-"findid_name" = "Enter Name";
-"tel_certification" = "Mobile Phone Verification";
+"findid_name" = "Please Enter Name";
+"findid_email" = "Please Enter E-mail";
 
 //FindPasswordVC
 "findpassword_id" = "Enter ID";

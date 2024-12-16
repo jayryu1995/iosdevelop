@@ -30,7 +30,7 @@ extension UIViewController {
     }
 
     @objc private func goBack() {
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popViewController(animated: false)
     }
 
     // 키보드 숨기기 기능
@@ -254,5 +254,11 @@ extension UIViewController {
         }
 
         return containerView
+    }
+    
+    func showAlert(title: String, message: String) {
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+        self.present(alertController, animated: true, completion: nil)
     }
 }

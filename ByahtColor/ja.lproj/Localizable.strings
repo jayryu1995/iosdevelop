@@ -148,9 +148,8 @@
 
 "find_account_id" = "ID検索";
 "find_account_password" = "パスワード検索";
-"findid_label" = "本人確認後、IDを検索できます。";
-"findid_name" = "名前を入力";
-"tel_certification" = "携帯電話本人認証";
+"findid_name" = "Nhập họ và tên";
+"findid_email" = "メールアドレスを入力してください。";
 "findpassword_id" = "IDを入力";
 "findpassword_name" = "名前を入力";
 "login_join" = "会員登録";

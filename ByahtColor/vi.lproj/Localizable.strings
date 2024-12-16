@@ -174,9 +174,8 @@
 "find_account_password" = "Tìm mật khẩu";
 
 //FindIdVC
-"findid_label" = "Xác minh danh tính tìm tên đăng nhập.";
 "findid_name" = "Nhập họ và tên";
-"tel_certification" = "Xác minh số điện thoại";
+"findid_email" = "Nhập địa chỉ email";
 
 //FindPasswordVC
 "findpassword_id" = "Nhập tên đăng nhập";

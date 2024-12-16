@@ -68,7 +68,6 @@ class BusinessLoginVC: UIViewController {
         button.setTitleColor(UIColor(hex: "#B5B8C2"), for: .normal)
         button.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 14)
         button.clipsToBounds = true
-        button.isHidden = true
         return button
     }()
 
@@ -118,7 +117,7 @@ class BusinessLoginVC: UIViewController {
     private let contentView = UIView()
     private lazy var viewModel = MemberViewModel()
     private lazy var mcnViewModel = MemberViewModel()
-    
+    weak var delegate: BusinessLoginVCDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -236,9 +235,14 @@ class BusinessLoginVC: UIViewController {
     }
 
     @objc private func buttonTapped() {
-        let vc = FindAccountVC()
-        self.navigationController?.pushViewController(vc, animated: true)
+        if delegate == nil {
+            print("Delegate is nil!")
+        } else {
+            print("Delegate exists")
+            delegate?.didTapFindIdButton()
+        }
     }
+
 
     @objc private func switchTapped() {
         print(switchButton.isOn)

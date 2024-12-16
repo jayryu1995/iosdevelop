@@ -53,7 +53,8 @@ class KakaoAuthVM: ObservableObject {
             } else if let user = user {
                 if let id = user.id {
                     let stringId = String(id)
-                    print(stringId) // "123"
+                    User.shared.id = stringId
+                    print("stringId : \(stringId)") // "123"
                     completion(stringId)
                 } else {
                     completion(nil)

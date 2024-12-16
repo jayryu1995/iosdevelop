@@ -13,7 +13,39 @@ import FBSDKCoreKit
 class BusinessLogoutVC: UIViewController {
 
     private let bottomView = UIView()
+    private lazy var infoLabel: UILabel = {
+        let label = UILabel()
+        label.text = "business_profile_label".localized
+        label.font = UIFont(name: "Pretendard-Medium", size: 16)
+        label.numberOfLines = 0
+        label.textAlignment = .center
+        label.textColor = UIColor(hex: "#4E505B")
+        return label
+    }()
 
+    private lazy var logoutButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("business_profile_logout".localized, for: .normal)
+        button.setImage(UIImage(named: "logout_icon"), for: .normal)
+        button.addTarget(self, action: #selector(facebookLogout), for: .touchUpInside)
+        button.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 14)
+        button.setTitleColor(UIColor(hex: "#535358"), for: .normal)
+        button.backgroundColor = UIColor(hex: "#F7F7F7")
+        button.layer.cornerRadius = 4
+        return button
+    }()
+
+    private lazy var deleteButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("business_profile_secession".localized, for: .normal)
+        button.setImage(UIImage(named: "secession_icon"), for: .normal)
+        button.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 14)
+        button.addTarget(self, action: #selector(deleteTapped), for: .touchUpInside)
+        button.setTitleColor(UIColor.red, for: .normal) // 텍스트 색상을 빨강으로 설정
+        button.backgroundColor = UIColor(hex: "#F7F7F7")
+        button.layer.cornerRadius = 4
+        return button
+    }()
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -30,60 +62,37 @@ class BusinessLogoutVC: UIViewController {
     private func setupBottomView() {
         view.addSubview(bottomView)
         bottomView.isUserInteractionEnabled = true
-        let label = UILabel()
-        label.text = "business_profile_label".localized
-        label.font = UIFont(name: "Pretendard-Medium", size: 16)
-        label.numberOfLines = 0
-        label.textAlignment = .center
-        label.textColor = UIColor(hex: "#4E505B")
-
-        let logoutButton = UIButton()
-        logoutButton.setTitle("business_profile_logout".localized, for: .normal)
-        logoutButton.setImage(UIImage(named: "logout_icon"), for: .normal)
-        logoutButton.addTarget(self, action: #selector(facebookLogout), for: .touchUpInside)
-        logoutButton.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 14)
-        logoutButton.setTitleColor(UIColor(hex: "#535358"), for: .normal)
-        logoutButton.backgroundColor = UIColor(hex: "#F7F7F7")
-        logoutButton.layer.cornerRadius = 4
-
-        let deleteButton = UIButton()
-        deleteButton.setTitle("business_profile_secession".localized, for: .normal)
-        deleteButton.setImage(UIImage(named: "secession_icon"), for: .normal)
-        deleteButton.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 14)
-        deleteButton.addTarget(self, action: #selector(deleteTapped), for: .touchUpInside)
-        deleteButton.setTitleColor(UIColor.red, for: .normal) // 텍스트 색상을 빨강으로 설정
-        deleteButton.backgroundColor = UIColor(hex: "#F7F7F7")
-        deleteButton.layer.cornerRadius = 4
-
-        bottomView.addSubview(label)
+        
+        bottomView.addSubview(infoLabel)
         bottomView.addSubview(logoutButton)
         bottomView.addSubview(deleteButton)
+    }
 
-        label.snp.makeConstraints {
+    private func setupConstraints() {
+        
+        bottomView.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).multipliedBy(3)
+            $0.leading.trailing.equalToSuperview()
+        }
+        
+        infoLabel.snp.makeConstraints {
             $0.top.equalToSuperview().offset(32)
             $0.centerX.equalToSuperview()
         }
 
         logoutButton.snp.makeConstraints {
-            $0.top.equalTo(label.snp.bottom).offset(32)
+            $0.top.equalTo(infoLabel.snp.bottom).offset(32)
             $0.trailing.equalTo(view.snp.centerX).offset(-22)
             $0.width.equalTo(106)
             $0.height.equalTo(44)
         }
 
         deleteButton.snp.makeConstraints {
-            $0.top.equalTo(label.snp.bottom).offset(32)
+            $0.top.equalTo(infoLabel.snp.bottom).offset(32)
             $0.leading.equalTo(view.snp.centerX).offset(22)
             $0.width.equalTo(106)
             $0.height.equalTo(44)
             $0.bottom.equalToSuperview()
-        }
-    }
-
-    private func setupConstraints() {
-        bottomView.snp.makeConstraints {
-            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).multipliedBy(3)
-            $0.leading.trailing.equalToSuperview()
         }
     }
 

@@ -119,15 +119,29 @@ open class GroupChannelListCell: UITableViewCell {
         channel.members.forEach { it in
             if it.nickname != User.shared.name {
                 self.nameLabel.text = it.nickname
-                
                 self.name = it.nickname
                 self.profileImage.isUserInteractionEnabled = true
-                print("it.profileURL : \(it.profileURL)")
+                
                 if let path = it.profileURL, !path.isEmpty {
                     let url = URL(string: path)
-                    DispatchQueue.main.async{
-                        self.profileImage.kf.setImage(with: url)
+                    DispatchQueue.main.async {
+                        self.profileImage.kf.setImage(
+                            with: url,
+                            placeholder: UIImage(named: "icon_profile2"), // 기본 이미지를 설정하지 않음
+                            options: nil,
+                            completionHandler: { result in
+                                switch result {
+                                case .success(_):
+                                    // 성공적으로 이미지를 로드했을 경우
+                                    break
+                                case .failure(_):
+                                    // 이미지를 가져오지 못한 경우 이미지 제거
+                                    break
+                                }
+                            }
+                        )
                     }
+
                     
                 }
             }
@@ -146,14 +160,34 @@ open class GroupChannelListCell: UITableViewCell {
         let currentDate = Date()
 
         let difference = currentDate.timeIntervalSince(messageDate)
-
+        
         let minutesDifference = Int(difference / 60)
         let hoursDifference = Int(difference / 3600)
         let daysDifference = Int(difference / (3600 * 24))
 
+        let dateFormatter = DateFormatter()
+        let calendar = Calendar.current
+
+        let messageYear = calendar.component(.year, from: messageDate)
+        let currentYear = calendar.component(.year, from: currentDate)
+
         if daysDifference > 0 {
             if daysDifference > 7 {
-                return ""
+                // 로케일에 따라 날짜 포맷 설정
+                let isAsianLanguage: Bool = {
+                    let preferredLanguage = Locale.preferredLanguages.first ?? "en"
+                    let asianLanguages = ["ko", "zh", "ja"]
+                    return asianLanguages.contains(String(preferredLanguage.prefix(2))) // Substring을 String으로 변환
+                }()
+
+                print("isAsianLocale :  \(isAsianLanguage)")
+                if messageYear == currentYear {
+                    dateFormatter.setLocalizedDateFormatFromTemplate(isAsianLanguage ? "MMdd" : "ddMM")
+                } else {
+                    dateFormatter.setLocalizedDateFormatFromTemplate(isAsianLanguage ? "yyyyMMdd" : "ddMMyyyy")
+                }
+//                dateFormatter.locale = Locale.current
+                return dateFormatter.string(from: messageDate)
             } else {
                 return "\(daysDifference)일 전"
             }
@@ -163,6 +197,9 @@ open class GroupChannelListCell: UITableViewCell {
             return "\(minutesDifference)분 전"
         }
     }
+
+
+
 }
 
 extension UITableView {

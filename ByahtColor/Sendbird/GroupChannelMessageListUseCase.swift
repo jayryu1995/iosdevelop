@@ -91,6 +91,8 @@ open class GroupChannelMessageListUseCase: NSObject {
         }
     }
 
+    
+    
     open func loadNextMessages() {
         guard isLoading == false,
               let messageCollection = messageCollection,

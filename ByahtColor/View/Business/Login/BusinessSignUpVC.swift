@@ -130,7 +130,6 @@ class BusinessSignUpVC: UIViewController, UIScrollViewDelegate,UIDocumentPickerD
                 $0.leading.trailing.equalToSuperview()
             }
         }
-
     }
 
 

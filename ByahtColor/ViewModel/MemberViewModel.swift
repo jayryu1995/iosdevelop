@@ -152,6 +152,7 @@ class MemberViewModel: ObservableObject {
     func updateMemberBusiness(memberBusinessDto: MemberBusinessDto, completion: @escaping (Result<String, Error>) -> Void) {
         let url = "\(Bundle.main.TEST_URL)/member/update"
         let pdfFileUrl = URL(string: memberBusinessDto.business.licenseFile!)
+        let fileName = "\(memberBusinessDto.business.memberId ?? "").pdf"
         let headers: HTTPHeaders = [
             "Content-Type": "multipart/form-data",
             "Accept": "application/json"
@@ -165,7 +166,7 @@ class MemberViewModel: ObservableObject {
             
             // 파일을 file 파트로 추가 (선택적)
             if let pdfFileUrl = pdfFileUrl {
-                multipartFormData.append(pdfFileUrl, withName: "file", fileName: "license.pdf", mimeType: "application/octet-stream")
+                multipartFormData.append(pdfFileUrl, withName: "file", fileName: fileName, mimeType: "application/octet-stream")
             }
         }, to: url, headers: headers)
         .validate(statusCode: 200..<300)

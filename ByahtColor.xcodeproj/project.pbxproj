@@ -257,6 +257,10 @@
 		1FEC33B32CEB46FA000901EC /* KakaoAuthVM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEC33B22CEB46FA000901EC /* KakaoAuthVM.swift */; };
 		1FEC33BF2CF59656000901EC /* BusinessSignUpVC2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEC33BE2CF59656000901EC /* BusinessSignUpVC2.swift */; };
 		1FEC33C12CF5967A000901EC /* BusinessSignUpVC3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEC33C02CF5967A000901EC /* BusinessSignUpVC3.swift */; };
+		1FEC33C42D004C45000901EC /* FindIdSuccessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEC33C32D004C45000901EC /* FindIdSuccessVC.swift */; };
+		1FEC33C62D0145F3000901EC /* FindIdFailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEC33C52D0145F3000901EC /* FindIdFailVC.swift */; };
+		1FEC33C82D01918E000901EC /* FindPasswordSuccessVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEC33C72D01918E000901EC /* FindPasswordSuccessVC.swift */; };
+		1FEC33CA2D0AE688000901EC /* FindPassword2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FEC33C92D0AE688000901EC /* FindPassword2.swift */; };
 		1FFD63A82BB51566005BDFFE /* ApplicationStateVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFD63A72BB51566005BDFFE /* ApplicationStateVC.swift */; };
 		1FFD63AC2BB531AD005BDFFE /* CollabTableViewCell2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFD63AB2BB531AD005BDFFE /* CollabTableViewCell2.swift */; };
 		1FFD63AE2BB65855005BDFFE /* ReviewWriteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1FFD63AD2BB65855005BDFFE /* ReviewWriteVC.swift */; };
@@ -519,6 +523,10 @@
 		1FEC33B22CEB46FA000901EC /* KakaoAuthVM.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KakaoAuthVM.swift; sourceTree = "<group>"; };
 		1FEC33BE2CF59656000901EC /* BusinessSignUpVC2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessSignUpVC2.swift; sourceTree = "<group>"; };
 		1FEC33C02CF5967A000901EC /* BusinessSignUpVC3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessSignUpVC3.swift; sourceTree = "<group>"; };
+		1FEC33C32D004C45000901EC /* FindIdSuccessVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdSuccessVC.swift; sourceTree = "<group>"; };
+		1FEC33C52D0145F3000901EC /* FindIdFailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindIdFailVC.swift; sourceTree = "<group>"; };
+		1FEC33C72D01918E000901EC /* FindPasswordSuccessVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPasswordSuccessVC.swift; sourceTree = "<group>"; };
+		1FEC33C92D0AE688000901EC /* FindPassword2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindPassword2.swift; sourceTree = "<group>"; };
 		1FF2F4742B723C4400479515 /* ByahtColorRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ByahtColorRelease.entitlements; sourceTree = "<group>"; };
 		1FF2F4792B731A2300479515 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		1FF2F47A2B731A2300479515 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/LaunchScreen.strings; sourceTree = "<group>"; };
@@ -663,20 +671,13 @@
 		1F301EE52C17DA8600E3E478 /* Business */ = {
 			isa = PBXGroup;
 			children = (
+				1FEC33C22CFF0F70000901EC /* Login */,
 				1F7EB9DA2C8ED1A5002B8D05 /* Onboarding */,
 				1FAF525D2C75BD9900139B07 /* Profile */,
 				1FAF525C2C75BD6300139B07 /* Search */,
 				1FAF525B2C75BD5B00139B07 /* Mypage */,
 				1FAF52572C75BB5900139B07 /* Proposal */,
 				1FAF63872C3E6FEC00D0FFEE /* Cell */,
-				1F4C66E12C19658600A960AF /* BusinessLoginVC.swift */,
-				1F4C66E52C199D2A00A960AF /* BusinessSignUpVC.swift */,
-				1FEC33BE2CF59656000901EC /* BusinessSignUpVC2.swift */,
-				1FEC33C02CF5967A000901EC /* BusinessSignUpVC3.swift */,
-				1F5963FA2C2FC79A00FD8419 /* BusinessHomeVC.swift */,
-				1F5963FE2C2FFF8400FD8419 /* BusinessLogoutVC.swift */,
-				1F69859F2CB8D3F800A2A6EE /* BusinessAccountVC.swift */,
-				1FAF63812C37FA0F00D0FFEE /* AgreementVC.swift */,
 			);
 			path = Business;
 			sourceTree = "<group>";
@@ -1044,9 +1045,6 @@
 			isa = PBXGroup;
 			children = (
 				1F5963F22C2ECC0A00FD8419 /* BusinessMypageVC.swift */,
-				1F4C66F12C229A5200A960AF /* FindAccountVC.swift */,
-				1F4C66F32C229E7500A960AF /* FindIdVC.swift */,
-				1F4C66F52C22A42E00A960AF /* FindPasswordVC.swift */,
 			);
 			path = Mypage;
 			sourceTree = "<group>";
@@ -1118,6 +1116,28 @@
 				1FEC33B22CEB46FA000901EC /* KakaoAuthVM.swift */,
 			);
 			path = Kakao;
+			sourceTree = "<group>";
+		};
+		1FEC33C22CFF0F70000901EC /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				1F4C66E52C199D2A00A960AF /* BusinessSignUpVC.swift */,
+				1FEC33C32D004C45000901EC /* FindIdSuccessVC.swift */,
+				1F4C66F32C229E7500A960AF /* FindIdVC.swift */,
+				1FEC33C92D0AE688000901EC /* FindPassword2.swift */,
+				1F4C66F52C22A42E00A960AF /* FindPasswordVC.swift */,
+				1F4C66F12C229A5200A960AF /* FindAccountVC.swift */,
+				1FEC33BE2CF59656000901EC /* BusinessSignUpVC2.swift */,
+				1FEC33C02CF5967A000901EC /* BusinessSignUpVC3.swift */,
+				1F5963FA2C2FC79A00FD8419 /* BusinessHomeVC.swift */,
+				1F5963FE2C2FFF8400FD8419 /* BusinessLogoutVC.swift */,
+				1F69859F2CB8D3F800A2A6EE /* BusinessAccountVC.swift */,
+				1FAF63812C37FA0F00D0FFEE /* AgreementVC.swift */,
+				1F4C66E12C19658600A960AF /* BusinessLoginVC.swift */,
+				1FEC33C52D0145F3000901EC /* FindIdFailVC.swift */,
+				1FEC33C72D01918E000901EC /* FindPasswordSuccessVC.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		3EDE195AE919882DDC6042E3 /* Frameworks */ = {
@@ -1339,6 +1359,7 @@
 				1FAF639A2C3F751700D0FFEE /* InfluenceProfileCell.swift in Sources */,
 				1F5963FF2C2FFF8400FD8419 /* BusinessLogoutVC.swift in Sources */,
 				1FAF639E2C3F8A3200D0FFEE /* TargetCell.swift in Sources */,
+				1FEC33C42D004C45000901EC /* FindIdSuccessVC.swift in Sources */,
 				1F83E9F42CDE0E9300117238 /* ImageLoadManager.swift in Sources */,
 				1FAF52542C759DE100139B07 /* ProposalSwipePageVC.swift in Sources */,
 				1F4C66FA2C22BE4900A960AF /* InfluenceHomeVC.swift in Sources */,
@@ -1381,6 +1402,7 @@
 				1F591BD42B57D89D00CD29B9 /* UILabelExtension.swift in Sources */,
 				1F9E181A2A61341C0000BA2D /* StringExtension.swift in Sources */,
 				1F778ED22BF5FDB600C63FD8 /* DiscountDto.swift in Sources */,
+				1FEC33C82D01918E000901EC /* FindPasswordSuccessVC.swift in Sources */,
 				1F4C66E22C19658600A960AF /* BusinessLoginVC.swift in Sources */,
 				1FA41D452C258500003FE382 /* UIResponderExtension.swift in Sources */,
 				1FFD90512A39BD58005CE509 /* UploaderClass.swift in Sources */,
@@ -1418,6 +1440,7 @@
 				1FD750E62B86E8570062F882 /* CustomErrorVC.swift in Sources */,
 				1F415C7B2A7A387600FBA354 /* UIImageExtension.swift in Sources */,
 				1F773E762C4F5FD9008CF7F8 /* ChatsListVC.swift in Sources */,
+				1FEC33C62D0145F3000901EC /* FindIdFailVC.swift in Sources */,
 				1FEC33B32CEB46FA000901EC /* KakaoAuthVM.swift in Sources */,
 				1FAF63972C3F720D00D0FFEE /* NotificationExtension.swift in Sources */,
 				1F515E8E2B56819C001A9364 /* BoardDto.swift in Sources */,
@@ -1519,6 +1542,7 @@
 				1F773EA92C5CB850008CF7F8 /* InfluenceFilterVC.swift in Sources */,
 				1F5964052C34FDCE00FD8419 /* BusinessViewModel.swift in Sources */,
 				1F1A0E9E2C7356A00032215E /* ProposalAlertVC.swift in Sources */,
+				1FEC33CA2D0AE688000901EC /* FindPassword2.swift in Sources */,
 				1F4B2ECA2BA42278005C06DA /* DatePickerVC.swift in Sources */,
 				1F59640B2C3668D700FD8419 /* BusinessDetailDto.swift in Sources */,
 				1F5964032C34078400FD8419 /* InfluenceHomeDto.swift in Sources */,
@@ -1719,7 +1743,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ByahtColor/ByahtColor.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2024.11.28;
+				CURRENT_PROJECT_VERSION = 2024.12.16;
 				DEVELOPMENT_TEAM = CS98CK3779;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1743,7 +1767,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.2.0;
+				MARKETING_VERSION = 3.2.1;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.byaht.ByahtColor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1765,7 +1789,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ByahtColor/ByahtColorRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2024.11.28;
+				CURRENT_PROJECT_VERSION = 2024.12.16;
 				DEVELOPMENT_TEAM = CS98CK3779;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1789,7 +1813,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.2.0;
+				MARKETING_VERSION = 3.2.1;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.byaht.ByahtColor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
