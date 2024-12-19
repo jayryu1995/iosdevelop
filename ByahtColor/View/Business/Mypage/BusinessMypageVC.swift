@@ -12,47 +12,65 @@ import SnapKit
 import Foundation
 
 class BusinessMypageVC: UIViewController {
-
+    
+    private lazy var profileLabel = {
+        let label = UILabel()
+        label.text = "Profile"
+        label.font = UIFont(name: "Pretendard-SemiBold", size: 14)
+        return label
+    }()
+    
     private let profileImage: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "icon_profile2")
         image.contentMode = .scaleAspectFit
-        image.layer.cornerRadius = 40
+        image.layer.cornerRadius = 8
         image.clipsToBounds = true
         return image
-    }()
-    private let name: UILabel = {
-        let label = UILabel()
-        label.font = UIFont(name: "Pretendard-SemiBold", size: 16)
-        return label
-    }()
-    private let companyLabel: UILabel = {
-        let label = UILabel()
-        label.text = "My Company"
-        label.font = UIFont(name: "Pretendard-SemiBold", size: 16)
-        return label
-    }()
-    private let accountLabel: UILabel = {
-        let label = UILabel()
-        label.text = "Account"
-        label.font = UIFont(name: "Pretendard-SemiBold", size: 16)
-        return label
-    }()
-    private let layer: UIView = {
-        let view = UIView()
-        view.layer.backgroundColor = UIColor(hex: "#D9D9D9").cgColor
-        return view
     }()
     private let profileButton: UIButton = {
         let button = UIButton()
         button.setBackgroundColor(UIColor(hex: "#009BF2"), for: .normal)
-        button.layer.cornerRadius = 4
+        button.layer.cornerRadius = 8
         button.clipsToBounds = true
         return button
     }()
-
+    private let name: UILabel = {
+        let label = UILabel()
+        label.font = UIFont(name: "Pretendard-SemiBold", size: 16)
+        label.textColor = .white
+        return label
+    }()
     
-    private let accountButton: UIButton = {
+    private let myWorkLabel: UILabel = {
+        let label = UILabel()
+        label.text = "My Work"
+        label.font = UIFont(name: "Pretendard-SemiBold", size: 14)
+        return label
+    }()
+    private let myWorkButton: UIButton = {
+        let button = UIButton()
+        button.setBackgroundColor(UIColor(hex: "#F4F5F8"), for: .normal)
+        button.layer.cornerRadius = 4
+
+        return button
+    }()
+    private let accountLabel: UILabel = {
+        let label = UILabel()
+        label.text = "My Account"
+        label.font = UIFont(name: "Pretendard-SemiBold", size: 14)
+        return label
+    }()
+    
+    private let businessInfoButton: UIButton = {
+        let button = UIButton()
+        button.setBackgroundColor(UIColor(hex: "#F4F5F8"), for: .normal)
+        button.layer.cornerRadius = 4
+
+        return button
+    }()
+
+    private let passwordButton: UIButton = {
         let button = UIButton()
         button.setBackgroundColor(UIColor(hex: "#F4F5F8"), for: .normal)
         button.layer.cornerRadius = 4
@@ -70,15 +88,13 @@ class BusinessMypageVC: UIViewController {
     private let introLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Pretendard-Regular", size: 14)
+        label.textColor = UIColor(hex: "#F4F5F8")
+        label.numberOfLines = 2
         return label
     }()
 
     private let viewModel = BusinessViewModel()
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        profileImage.layer.cornerRadius = profileImage.frame.size.width / 2
-    }
+    
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -111,7 +127,7 @@ class BusinessMypageVC: UIViewController {
                             self?.profileImage.image = UIImage(named: "sample_business_image")
                         }
                         
-                        self?.name.text = data.business_name ?? "회사명"
+                        self?.name.text = data.business_name ?? "signup_business_name".localized
                         self?.introLabel.text = data.intro ?? "intro"
                     case .failure(let error):
                         print("통신 에러 : \(error)")
@@ -123,26 +139,31 @@ class BusinessMypageVC: UIViewController {
     }
 
     private func setupUI() {
-        view.addSubview(name)
-        view.addSubview(introLabel)
-        view.addSubview(profileImage)
-        view.addSubview(companyLabel)
-        view.addSubview(accountLabel)
-        view.addSubview(layer)
+        view.addSubview(profileLabel)
         view.addSubview(profileButton)
         
+        view.addSubview(myWorkLabel)
+        view.addSubview(myWorkButton)
+        
         view.addSubview(accountLabel)
-        view.addSubview(accountButton)
+        view.addSubview(businessInfoButton)
+        view.addSubview(passwordButton)
         view.addSubview(errorButton)
+        
+        setupMyWorkButton()
         setupProfileButton()
-        setupAccountButton()
+        setupPasswordButton()
+        setupBusinessInfoButton()
         setupErrorButton()
     }
 
 
     private func setupProfileButton() {
+        profileButton.addSubview(name)
+        profileButton.addSubview(introLabel)
         profileButton.addTarget(self, action: #selector(profileButtonTapped), for: .touchUpInside)
 
+        // 그라데이션 레이어 설정
         let layer0 = CAGradientLayer()
         layer0.colors = [
             UIColor(red: 0, green: 0, blue: 0, alpha: 1).cgColor,
@@ -151,49 +172,64 @@ class BusinessMypageVC: UIViewController {
         layer0.locations = [0, 1]
         layer0.startPoint = CGPoint(x: 0.25, y: 0.5)
         layer0.endPoint = CGPoint(x: 0.75, y: 0.5)
-        layer0.transform = CATransform3DMakeAffineTransform(CGAffineTransform(a: 1.25, b: 0, c: 0, d: 1.25, tx: 0, ty: -0.13))
-        layer0.bounds = view.bounds.insetBy(dx: -0.5*view.bounds.size.width, dy: -0.5*view.bounds.size.height)
+        layer0.bounds = view.bounds.insetBy(dx: -0.5 * view.bounds.size.width, dy: -0.5 * view.bounds.size.height)
         layer0.position = view.center
-        profileButton.layer.addSublayer(layer0)
-        
+        profileButton.layer.insertSublayer(layer0, at: 0)
+
+        // 프로필 이미지
+        profileImage.contentMode = .scaleAspectFill
+        profileImage.clipsToBounds = true
+        profileImage.snp.makeConstraints {
+            $0.width.height.equalTo(70) // 이미지 크기 설정
+        }
+
+        // 텍스트 스택뷰
         let stackView = UIStackView()
         stackView.axis = .vertical
         stackView.distribution = .fillProportionally
-        
-        let label = UILabel()
-        label.text = "business_mypage_profile_label".localized
-        label.font = UIFont(name: "Pretendard-Regular", size: 12)
-        label.textColor = .white
+        stackView.alignment = .leading
+        stackView.spacing = 4
 
-        let label2 = UILabel()
-        label2.text = "business_mypage_profile_label2".localized
-        label2.font = UIFont(name: "Pretendard-SemiBold", size: 14)
-        label2.textColor = .white
-        stackView.addArrangedSubview(label)
-        stackView.addArrangedSubview(label2)
+        stackView.addArrangedSubview(name)
+        stackView.addArrangedSubview(introLabel)
 
+        // 아이콘 이미지
         let icon = UIImageView(image: UIImage(named: "arrow_right")?.withRenderingMode(.alwaysTemplate))
         icon.tintColor = .white
         icon.contentMode = .scaleAspectFit
 
-        profileButton.addSubview(stackView)
+        // 프로필 이미지와 텍스트 스택뷰를 담는 컨테이너
+        let containerView = UIStackView()
+        containerView.axis = .horizontal
+        containerView.spacing = 12
+        containerView.alignment = .center
+        containerView.addArrangedSubview(profileImage)
+        containerView.addArrangedSubview(stackView)
+
+        // 컨테이너와 아이콘 배치
+        profileButton.addSubview(containerView)
         profileButton.addSubview(icon)
-        stackView.snp.makeConstraints {
+
+        containerView.snp.makeConstraints {
             $0.top.bottom.equalToSuperview().inset(12)
             $0.leading.equalToSuperview().offset(20)
         }
 
         icon.snp.makeConstraints {
-            $0.centerY.equalTo(stackView.snp.centerY)
+            $0.centerY.equalTo(containerView.snp.centerY)
             $0.trailing.equalToSuperview().inset(20)
             $0.width.height.equalTo(24)
         }
+        
+        introLabel.snp.makeConstraints{
+            $0.leading.equalTo(name.snp.leading)
+            $0.trailing.equalTo(icon.snp.leading).offset(-10)
+        }
     }
 
-
-    private func setupAccountButton() {
+    private func setupMyWorkButton() {
         let label = UILabel()
-        label.text = "influence_mypage_account_label".localized
+        label.text = "check_event".localized
         label.font = UIFont(name: "Pretendard-Medium", size: 14)
         label.textColor = .black
 
@@ -201,9 +237,59 @@ class BusinessMypageVC: UIViewController {
         icon.tintColor = UIColor(hex: "#4E505B")
         icon.contentMode = .scaleAspectFit
 
-        accountButton.addSubview(label)
-        accountButton.addSubview(icon)
-        accountButton.addTarget(self, action: #selector(logoutButtonTapped), for: .touchUpInside)
+        myWorkButton.addSubview(label)
+        myWorkButton.addSubview(icon)
+        //myWorkButton.addTarget(self, action: #selector(), for: .touchUpInside)
+        label.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview().offset(20)
+        }
+
+        icon.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalToSuperview().inset(20)
+            $0.width.height.equalTo(24)
+        }
+    }
+
+    private func setupBusinessInfoButton() {
+        let label = UILabel()
+        label.text = "modify_businessinfo".localized
+        label.font = UIFont(name: "Pretendard-Medium", size: 14)
+        label.textColor = .black
+
+        let icon = UIImageView(image: UIImage(named: "arrow_right")?.withRenderingMode(.alwaysTemplate))
+        icon.tintColor = UIColor(hex: "#4E505B")
+        icon.contentMode = .scaleAspectFit
+
+        businessInfoButton.addSubview(label)
+        businessInfoButton.addSubview(icon)
+        businessInfoButton.addTarget(self, action: #selector(businessInfoButtonTapped), for: .touchUpInside)
+        label.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.leading.equalToSuperview().offset(20)
+        }
+
+        icon.snp.makeConstraints {
+            $0.centerY.equalToSuperview()
+            $0.trailing.equalToSuperview().inset(20)
+            $0.width.height.equalTo(24)
+        }
+    }
+    
+    private func setupPasswordButton() {
+        let label = UILabel()
+        label.text = "change_password".localized
+        label.font = UIFont(name: "Pretendard-Medium", size: 14)
+        label.textColor = .black
+
+        let icon = UIImageView(image: UIImage(named: "arrow_right")?.withRenderingMode(.alwaysTemplate))
+        icon.tintColor = UIColor(hex: "#4E505B")
+        icon.contentMode = .scaleAspectFit
+
+        passwordButton.addSubview(label)
+        passwordButton.addSubview(icon)
+        passwordButton.addTarget(self, action: #selector(passwordButtonTapped), for: .touchUpInside)
         label.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.equalToSuperview().offset(20)
@@ -242,54 +328,50 @@ class BusinessMypageVC: UIViewController {
     }
     
     private func setupContstraints() {
-        profileImage.snp.makeConstraints {
+        myWorkLabel.isHidden = true
+        myWorkButton.isHidden = true
+        
+        profileLabel.snp.makeConstraints{
             $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(11)
             $0.leading.equalToSuperview().offset(20)
-            $0.width.height.equalTo(80)
+        }
+        
+        profileButton.snp.makeConstraints {
+            $0.top.equalTo(profileLabel.snp.bottom).offset(16)
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.width.height.equalTo(100)
         }
 
-        name.snp.makeConstraints {
-            $0.bottom.equalTo(profileImage.snp.centerY)
-            $0.leading.equalTo(profileImage.snp.trailing).offset(15)
-            $0.trailing.equalToSuperview()
-        }
-
-        introLabel.snp.makeConstraints {
-            $0.top.equalTo(profileImage.snp.centerY).offset(8)
-            $0.leading.equalTo(profileImage.snp.trailing).offset(15)
-            $0.trailing.equalToSuperview()
-        }
-
-        layer.snp.makeConstraints {
-            $0.top.equalTo(profileImage.snp.bottom).offset(24)
-            $0.leading.trailing.equalToSuperview()
-            $0.height.equalTo(1)
-        }
-
-        companyLabel.snp.makeConstraints {
-            $0.top.equalTo(layer.snp.bottom).offset(40)
+        myWorkLabel.snp.makeConstraints {
+            $0.top.equalTo(profileButton.snp.bottom).offset(40)
             $0.leading.equalToSuperview().offset(20)
         }
-
-        profileButton.snp.makeConstraints {
-            $0.top.equalTo(companyLabel.snp.bottom).offset(16)
+        
+        myWorkButton.snp.makeConstraints {
+            $0.top.equalTo(myWorkLabel.snp.bottom).offset(16)
             $0.leading.trailing.equalToSuperview().inset(20)
             $0.height.equalTo(60)
         }
-
+        
         accountLabel.snp.makeConstraints {
             $0.top.equalTo(profileButton.snp.bottom).offset(40)
             $0.leading.trailing.equalToSuperview().inset(20)
         }
 
-        accountButton.snp.makeConstraints {
+        businessInfoButton.snp.makeConstraints {
             $0.top.equalTo(accountLabel.snp.bottom).offset(16)
             $0.leading.trailing.equalToSuperview().inset(20)
             $0.height.equalTo(60)
         }
         
+        passwordButton.snp.makeConstraints {
+            $0.top.equalTo(businessInfoButton.snp.bottom).offset(16)
+            $0.leading.trailing.equalToSuperview().inset(20)
+            $0.height.equalTo(60)
+        }
+        
         errorButton.snp.makeConstraints{
-            $0.top.equalTo(accountButton.snp.bottom).offset(8)
+            $0.top.equalTo(passwordButton.snp.bottom).offset(8)
             $0.leading.trailing.equalToSuperview().inset(20)
             $0.height.equalTo(60)
         }
@@ -300,8 +382,13 @@ class BusinessMypageVC: UIViewController {
         self.navigationController?.pushViewController(vc, animated: false)
     }
 
-    @objc private func logoutButtonTapped() {
-        let vc = BusinessLogoutVC()
+    @objc private func businessInfoButtonTapped() {
+        let vc = BusinessInfoVC()
+        self.navigationController?.pushViewController(vc, animated: false)
+    }
+    
+    @objc private func passwordButtonTapped() {
+        let vc = BusinessPasswordChangeVC()
         self.navigationController?.pushViewController(vc, animated: false)
     }
     

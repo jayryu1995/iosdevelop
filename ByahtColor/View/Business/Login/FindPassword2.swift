@@ -10,10 +10,10 @@ import UIKit
 import SnapKit
 
 class FindPassword2: UIViewController {
-    lazy private var button: UIButton = {
+    lazy private var button = {
         let button = UIButton()
         button.backgroundColor = .black
-        button.setTitle("비밀번호 변경".localized, for: .normal)
+        button.setTitle("change_password".localized, for: .normal)
         button.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 16)
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 4
@@ -22,18 +22,18 @@ class FindPassword2: UIViewController {
     }()
     
     // 라벨 3개 추가
-    private let label1: UILabel = {
+    private let label1 = {
         let label = UILabel()
-        label.text = "이메일 인증 코드 확인"
+        label.text = "email_code_check".localized
         label.font = UIFont(name: "Pretendard-Regular", size: 16)
         label.textColor = .black
         label.textAlignment = .left
         return label
     }()
     
-    private let label2: UILabel = {
+    private let label2 = {
         let label = UILabel()
-        label.text = "아래 이메일로 보낸 코드를 입력해 주세요.."
+        label.text = "email_code_check_info".localized
         label.font = UIFont(name: "Pretendard-Regular", size: 16)
         label.textColor = UIColor(hex: "#4E505B")
         label.textAlignment = .left
@@ -41,7 +41,7 @@ class FindPassword2: UIViewController {
     }()
     
     
-    lazy private var label3: UILabel = {
+    lazy private var label3 = {
         let label = UILabel()
         label.font = UIFont(name: "Pretendard-Bold", size: 24)
         label.textColor = .black
@@ -51,7 +51,7 @@ class FindPassword2: UIViewController {
     
     lazy private var tf_verifyCode = {
         let tf = UITextField()
-        tf.placeholder = "인증 코드 입력".localized
+        tf.placeholder = "email_code_insert".localized
         tf.layer.cornerRadius = 4
         tf.layer.borderColor = UIColor(hex: "#D3D4DA").cgColor
         tf.layer.borderWidth = 1
@@ -62,9 +62,9 @@ class FindPassword2: UIViewController {
         return tf
     }()
     
-    lazy private var label4: UILabel = {
+    lazy private var label4 = {
         let label = UILabel()
-        label.text = "이메일이 변경되었을 시 bkim@byaht.com으로 문의".localized
+        label.text = "email_change_info".localized
         label.font = UIFont(name: "Pretendard-Regular", size: 14)
         label.textColor = .black
         label.textAlignment = .center
@@ -176,9 +176,9 @@ class FindPassword2: UIViewController {
                     
                     // 성공 처리
                     if statusCode == 400{
-                        self.showAlert(title: "인증실패", message: "만료된 인증번호입니다.")
+                        self.showAlert(title: "email_authentication_failed".localized, message: "email_expired_code".localized)
                     }else if statusCode == 404{
-                        self.showAlert(title: "인증실패", message: "잘못된 인증번호입니다.")
+                        self.showAlert(title: "email_authentication_failed".localized, message: "email_invalid_code".localized)
                     }else {
                         let vc = FindPasswordSuccessVC()
                         self.navigationController?.pushViewController(vc, animated: false)

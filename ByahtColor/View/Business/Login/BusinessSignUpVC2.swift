@@ -110,7 +110,7 @@ class BusinessSignUpVC2: UIViewController, UIScrollViewDelegate,UIDocumentPicker
         setupContentView()
         setupConstraints()
         setupGesture()
-        setupKeyboardNotifications()
+        //setupKeyboardNotifications()
         validateForm()
     }
 
@@ -212,25 +212,25 @@ class BusinessSignUpVC2: UIViewController, UIScrollViewDelegate,UIDocumentPicker
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    private func setupKeyboardNotifications() {
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(keyboardWillHide(_:)),
-                                               name: UIResponder.keyboardWillHideNotification,
-                                               object: nil)
-        NotificationCenter.default.addObserver(self,
-                                               selector: #selector(keyboardWillShow(_:)),
-                                               name: UIResponder.keyboardWillShowNotification,
-                                               object: nil)
-    }
+//    private func setupKeyboardNotifications() {
+//        NotificationCenter.default.addObserver(self,
+//                                               selector: #selector(keyboardWillHide(_:)),
+//                                               name: UIResponder.keyboardWillHideNotification,
+//                                               object: nil)
+//        NotificationCenter.default.addObserver(self,
+//                                               selector: #selector(keyboardWillShow(_:)),
+//                                               name: UIResponder.keyboardWillShowNotification,
+//                                               object: nil)
+//    }
 
-    //키보드 올라갔다는 알림을 받으면 실행되는 메서드
-    @objc func keyboardWillShow(_ sender:Notification){
-            self.view.frame.origin.y = -150
-    }
-    //키보드 내려갔다는 알림을 받으면 실행되는 메서드
-    @objc func keyboardWillHide(_ sender:Notification){
-            self.view.frame.origin.y = 0
-    }
+//    //키보드 올라갔다는 알림을 받으면 실행되는 메서드
+//    @objc func keyboardWillShow(_ sender:Notification){
+//            self.view.frame.origin.y = -150
+//    }
+//    //키보드 내려갔다는 알림을 받으면 실행되는 메서드
+//    @objc func keyboardWillHide(_ sender:Notification){
+//            self.view.frame.origin.y = 0
+//    }
  
     
 }

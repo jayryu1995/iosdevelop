@@ -6,6 +6,41 @@
   
 */
 
+"back" = "戻る";
+"change" = "変更";
+"error_input" = "入力エラー";
+"error_input_message" = "すべての項目を入力してください。";
+"change_account" = "アカウントステータス変更";
+"change_success" = "変更完了";
+"change_success_message" = "パスワードが変更されました。";
+"change_fail_message" = "現在のパスワードを正しく入力してください。";
+"current_password" = "現在のパスワード";
+"current_password_insert" = "現在のパスワードを入力してください";
+"new_password" = "新しいパスワード";
+"new_password_check" = "新しいパスワードを確認";
+"change_info_message" = "変更が必要な場合はByahtまでお問い合わせください。";
+"modify_businessinfo" = "会社情報を編集";
+"check_event" = "投稿した通知を確認";
+"rewrite_password" = "パスワードを再入力してください。";
+"signup_check_password_message3" = "パスワードの形式が正しくありません。";
+"inquiry" = "お問い合わせ: bkim@byaht.com";
+"no_information_message" = "該当情報が見つかりませんでした。";
+"check_id" = "IDを確認";
+"login_id_submessage" = "以下のIDでログインしてください。";
+"login" = "ログイン";
+"find" = "検索";
+"change_password" = "パスワードを変更";
+"email_code_check" = "メール認証コード確認";
+"email_code_check_info" = "以下のメールに送信されたコードを入力してください。";
+"email_code_insert" = "認証コードを入力";
+"email_change_info" = "メールアドレスが変更された場合はbkim@byaht.comまでお問い合わせください。";
+"email_authentication_failed" = "認証失敗";
+"email_expired_code" = "有効期限が切れた認証コードです。";
+"email_invalid_code" = "無効な認証コードです。";
+"invalid_account" = "アカウントの検索に失敗しました";
+"invalid_account_message" = "一致するアカウントが見つかりません。再試行してください。";
+
+
 "server_error_title" = "サーバーメンテナンス中";
 "server_error_message" = "現在サーバーメンテナンス中です。しばらくしてから再度お試しください";
 

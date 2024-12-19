@@ -198,7 +198,7 @@ class BusinessSignUpVC: UIViewController, UIScrollViewDelegate,UIDocumentPickerD
     
     @objc private func submitButtonTapped() {
         let vc = BusinessSignUpVC2()
-        vc.businessObject = Business(license: tf_license.text, business_name: tf_name.text, licenseFile: selectedFileUrl)
+        vc.businessObject = Business(license: tf_num.text, business_name: tf_name.text, licenseFile: selectedFileUrl)
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }

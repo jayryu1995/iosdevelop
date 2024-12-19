@@ -13,7 +13,7 @@ class FindIdVC: UIViewController {
     lazy private var button: UIButton = {
         let button = UIButton()
         button.backgroundColor = .black
-        button.setTitle("찾기".localized, for: .normal)
+        button.setTitle("find".localized, for: .normal)
         button.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 16)
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 4

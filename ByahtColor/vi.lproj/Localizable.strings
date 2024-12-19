@@ -9,6 +9,41 @@
 "server_error_title" = "Dịch vụ bảo trì";
 "server_error_message" = "Hiện tại dịch vụ đang bảo trì, vui lòng thử lại sau.";
 
+"back" = "Quay lại";
+"change" = "Đổi";
+"error_input" = "Lỗi nhập liệu";
+"error_input_message" = "Vui lòng nhập đầy đủ tất cả các trường.";
+"change_account" = "Thay đổi trạng thái tài khoản";
+"change_success" = "Hoàn tất thay đổi";
+"change_success_message" = "Mật khẩu của bạn đã được thay đổi.";
+"change_fail_message" = "Vui lòng nhập đúng mật khẩu hiện tại.";
+"current_password" = "Mật khẩu hiện tại";
+"current_password_insert" = "Nhập mật khẩu hiện tại";
+"new_password" = "Mật khẩu mới";
+"new_password_check" = "Xác nhận mật khẩu mới";
+"change_info_message" = "Nếu cần thay đổi, vui lòng liên hệ với BYAHT.";
+"modify_businessinfo" = "Sửa thông tin công ty";
+"check_event" = "Kiểm tra thông báo đã đăng";
+"rewrite_password" = "Vui lòng nhập lại mật khẩu.";
+"signup_check_password_message3" = "Định dạng mật khẩu không hợp lệ.";
+"inquiry" = "Liên hệ: bkim@byaht.com";
+"no_information_message" = "Không có thông tin nào được tìm thấy.";
+"check_id" = "Xác nhận ID";
+"login_id_submessage" = "Vui lòng đăng nhập bằng ID dưới đây.";
+"login" = "Đăng nhập";
+"find" = "Tìm";
+"change_password" = "Thay đổi mật khẩu";
+"email_code_check" = "Xác nhận mã xác minh email";
+"email_code_check_info" = "Vui lòng nhập mã đã được gửi đến email bên dưới.";
+"email_code_insert" = "Nhập mã xác nhận";
+"email_change_info" = "Nếu email đã được thay đổi, vui lòng liên hệ bkim@byaht.com";
+"email_authentication_failed" = "Xác thực thất bại";
+"email_expired_code" = "Mã xác thực đã hết hạn.";
+"email_invalid_code" = "Mã xác thực không hợp lệ.";
+"invalid_account" = "Không thể tìm thấy tài khoản";
+"invalid_account_message" = "Không tìm thấy tài khoản phù hợp. Vui lòng thử lại.";
+
+
 // McnMyPageVC
 "mcn_mypage_profile_label" = "Quản lý hồ sơ influencer trực thuộc";
 "mcn_mypage_account_label" = "Thông tin của tôi";

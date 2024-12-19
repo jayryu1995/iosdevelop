@@ -13,7 +13,7 @@ class FindIdSuccessVC: UIViewController {
     lazy private var button: UIButton = {
         let button = UIButton()
         button.backgroundColor = .black
-        button.setTitle("로그인".localized, for: .normal)
+        button.setTitle("login".localized, for: .normal)
         button.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 16)
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 4
@@ -24,7 +24,7 @@ class FindIdSuccessVC: UIViewController {
     // 라벨 3개 추가
     private let label1: UILabel = {
         let label = UILabel()
-        label.text = "아이디 확인"
+        label.text = "check_id".localized
         label.font = UIFont(name: "Pretendard-Regular", size: 16)
         label.textColor = .black
         label.textAlignment = .left
@@ -33,7 +33,7 @@ class FindIdSuccessVC: UIViewController {
     
     private let label2: UILabel = {
         let label = UILabel()
-        label.text = "아래 아이디로 로그인해 주세요."
+        label.text = "login_id_submessage".localized
         label.font = UIFont(name: "Pretendard-Regular", size: 16)
         label.textColor = UIColor(hex: "#4E505B")
         label.textAlignment = .left
@@ -108,8 +108,16 @@ class FindIdSuccessVC: UIViewController {
     }
     
     @objc private func submitButtonTapped() {
-        // 버튼 동작 구현
-        
+        // NavigationController의 뷰 컨트롤러 스택에서 LoginVC를 찾음
+        if let loginVC = navigationController?.viewControllers.first(where: { $0 is LoginVC }) {
+            // LoginVC로 이동
+            navigationController?.popToViewController(loginVC, animated: true)
+        } else {
+            // LoginVC가 스택에 없을 경우 새로 푸시 (필요한 경우)
+            let loginVC = LoginVC() // LoginVC의 인스턴스를 생성 (스토리보드 사용 시 적절히 초기화)
+            navigationController?.pushViewController(loginVC, animated: true)
+        }
     }
+
 }
 

@@ -116,6 +116,7 @@ class LoginVC: UIViewController , BusinessLoginVCDelegate {
 
     private func businessGet() {
         if let id = UserDefaults.standard.string(forKey: "businessId") {
+            print(id)
             User.shared.id = id
             User.shared.auth = UserDefaults.standard.integer(forKey: "auth")
             User.shared.name = UserDefaults.standard.string(forKey: "name")

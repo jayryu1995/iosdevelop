@@ -26,7 +26,7 @@ extension Bundle {
     var TEST_URL: String {
         guard let file = self.path(forResource: "InfoAppID", ofType: "plist") else { return ""}
         guard let resource = NSDictionary(contentsOfFile: file) else { return "" }
-        guard let key = resource["SERVER_URL"] as? String else { fatalError("APP ID를 가져오지 못 했습니다..")}
+        guard let key = resource["SERVER_URL2"] as? String else { fatalError("APP ID를 가져오지 못 했습니다..")}
         //guard let key = resource["TEST_URL"] as? String else { fatalError("APP ID를 가져오지 못 했습니다..")}
 
         return key

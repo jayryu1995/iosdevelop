@@ -13,7 +13,7 @@ class FindIdFailVC: UIViewController {
     lazy private var button: UIButton = {
         let button = UIButton()
         button.backgroundColor = .black
-        button.setTitle("뒤로가기".localized, for: .normal)
+        button.setTitle("back".localized, for: .normal)
         button.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 16)
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 4
@@ -24,7 +24,7 @@ class FindIdFailVC: UIViewController {
     // 라벨 3개 추가
     private let label1: UILabel = {
         let label = UILabel()
-        label.text = "아이디 확인"
+        label.text = "check_id".localized
         label.font = UIFont(name: "Pretendard-Regular", size: 16)
         label.textColor = .black
         label.textAlignment = .left
@@ -33,7 +33,7 @@ class FindIdFailVC: UIViewController {
     
     private let label2: UILabel = {
         let label = UILabel()
-        label.text = "조회된 정보가 없습니다."
+        label.text = "no_information_message".localized
         label.font = UIFont(name: "Pretendard-Bold", size: 24)
         label.textColor = UIColor(hex: "#4E505B")
         label.textAlignment = .left
@@ -42,7 +42,7 @@ class FindIdFailVC: UIViewController {
     
     var label3: UILabel = {
         let label = UILabel()
-        label.text = "문의처 : bkim@byaht.com"
+        label.text = "inquiry".localized
         label.font = UIFont(name: "Pretendard-Regular", size: 16)
         label.textColor = .black
         label.textAlignment = .left

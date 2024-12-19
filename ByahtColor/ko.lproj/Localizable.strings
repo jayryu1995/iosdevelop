@@ -6,6 +6,41 @@
   
 */
 
+
+"back" = "뒤로가기";
+"change" = "변경하기";
+"error_input" = "입력 오류";
+"error_input_message" = "모든 필드를 입력해 주세요.";
+"change_account" = "계정상태변경";
+"change_success" = "변경 완료";
+"change_success_message" = "비밀번호가 변경되었습니다.";
+"change_fail_message" = "현재 사용중인 비밀번호를 올바르게 입력해주세요.";
+"current_password" = "현재 비밀번호";
+"current_password_insert" = "현재 비밀번호 입력";
+"new_password" = "새 비밀번호";
+"new_password_check" = "새 비밀번호";
+"change_info_message" = "변경이 필요하신 경우 바이엇으로 문의주세요";
+"modify_businessinfo" = "회사정보 수정";
+"check_event" = "올린 공고 확인하기";
+"rewrite_password" = "비밀번호를 다시 입력해주세요.";
+"signup_check_password_message3" = "비밀번호 형식에 맞지 않습니다.";
+"inquiry" = "문의 : bkim@byaht.com";
+"no_information_message" = "조회된 정보가 없습니다.";
+"check_id" = "아이디 확인";
+"login_id_submessage" = "아래 아이디로 로그인해 주세요.";
+"login" = "로그인";
+"find" = "찾기";
+"change_password" = "비밀번호 변경";
+"email_code_check" = "이메일 인증 코드 확인";
+"email_code_check_info" = "아래 이메일로 보낸 코드를 입력해 주세요.";
+"email_code_insert" = "인증 코드 입력";
+"email_change_info" = "이메일이 변경되었을 시 bkim@byaht.com으로 문의";
+"email_authentication_failed" = "인증실패";
+"email_expired_code" = "만료된 인증번호입니다.";
+"email_invalid_code" = "잘못된 인증번호입니다.";
+"invalid_account" = "계정 조회 실패";
+"invalid_account_message" = "일치하는 계정이 없습니다. 다시 시도해주세요.";
+
 "server_error_title" = "서버 점검 중";
 "server_error_message" = "현재 서버 점검 중입니다. 잠시 후 다시 시도해주세요.";
 
@@ -216,7 +251,7 @@
 "signup_manager_id_hint" = "영소문자, 숫자 조합 8-20자 사이";
 "signup_manager_id_check" = "중복확인";
 "signup_manager_pwd" = "비밀번호";
-"signup_manager_pwd_hint" = "영소문자, 숫자 조합 8-20자 사이";
+"signup_manager_pwd_hint" = "영대소문자, 숫자, 특수문자 조합 8-20자 사이";
 "signup_manager_pwd_check" = "비밀번호 확인";
 "signup_manager_pwd_check_hint" = "비밀번호를 다시 입력해주세요.";
 "signup_agreement" = "개인정보 수집 및 이용 동의";

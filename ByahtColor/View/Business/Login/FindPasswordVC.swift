@@ -13,7 +13,7 @@ class FindPasswordVC: UIViewController {
     lazy private var button = {
         let button = UIButton()
         button.backgroundColor = .black
-        button.setTitle("찾기".localized, for: .normal)
+        button.setTitle("find".localized, for: .normal)
         button.titleLabel?.font = UIFont(name: "Pretendard-Medium", size: 16)
         button.setTitleColor(.white, for: .normal)
         button.layer.cornerRadius = 4
@@ -22,8 +22,8 @@ class FindPasswordVC: UIViewController {
     }()
     
     // Label
-    lazy private var lbl_id = makeLabel(text: "아이디")
-    lazy private var lbl_name = makeLabel(text: "담당자명")
+    lazy private var lbl_id = makeLabel(text: "signup_manager_id")
+    lazy private var lbl_name = makeLabel(text: "signup_manager_name")
     
     // TextField
     lazy private var tf_id = makeTextField(placeholder: "")
@@ -57,7 +57,7 @@ class FindPasswordVC: UIViewController {
         }
         // 스피너 초기화 및 설정
         activityIndicator = UIActivityIndicatorView(style: .large)
-        activityIndicator.center = self.view.center
+        
         
         view.addSubview(businessView)
         view.addSubview(button)
@@ -93,11 +93,22 @@ class FindPasswordVC: UIViewController {
             $0.height.equalTo(52)
             $0.leading.trailing.equalToSuperview().inset(20)
         }
+        
+        // activityIndicator 위치 설정
+        activityIndicator.snp.makeConstraints {
+            $0.center.equalToSuperview() // 화면 중앙
+            $0.edges.equalToSuperview()
+        }
     }
     
     @objc private func submitButtonTapped() {
-        self.activityIndicator.startAnimating()
-        button.isEnabled = false
+        
+        DispatchQueue.main.async {
+            self.view.endEditing(true)
+            self.activityIndicator.startAnimating()
+            self.button.isEnabled = false
+        }
+        
         viewModel.getFindEmail(id: tf_id.text ?? "", name: tf_name.text ?? ""){ response in
             self.activityIndicator.stopAnimating()
             self.button.isEnabled = true
@@ -106,12 +117,12 @@ class FindPasswordVC: UIViewController {
                 case .success(let result):
                     // 인증 성공 시 페이지 이동
                     let vc = FindPassword2()
-                    vc.business = result                    
+                    vc.business = result
                     self.navigationController?.pushViewController(vc, animated: true)
                     
                 case .failure(let error):
                     // 인증 실패 시 실패 메시지 표시
-                    self.showAlert(title: "계정 조회 실패", message: "일치하는 계정이 없습니다. 다시 시도해주세요.")
+                    self.showAlert(title: "invalid_account".localized, message: "invalid_account_message".localized)
                     self.button.isEnabled = true
                 }
             }
@@ -156,7 +167,8 @@ extension FindPasswordVC: UITextFieldDelegate {
         let isAllFieldsFilled = !(tf_id.text?.isEmpty ?? true) &&
         !(tf_name.text?.isEmpty ?? true)
         // 버튼 활성화/비활성화
-        button.isEnabled = isAllFieldsFilled
+        //button.isEnabled = isAllFieldsFilled
+        button.isEnabled = true
         button.backgroundColor = isAllFieldsFilled ? .black : .lightGray
     }
     
