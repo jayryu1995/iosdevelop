@@ -15,16 +15,13 @@ class InfluenceProfileVC: UIViewController {
     private let viewModel = InfluenceViewModel()
     private var cancellables = Set<AnyCancellable>()
 
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-
-        guard let id = User.shared.id else { return }
-        viewModel.getProfile(id: id)
-    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         self.navigationItem.title = "Profile"
+        
+        guard let id = User.shared.id else { return }
+        viewModel.getProfile(id: id)
         setupTableView()
         setupBinding()
         setupNavigationBar()
@@ -63,7 +60,7 @@ class InfluenceProfileVC: UIViewController {
     }
 
     @objc private func buttonTapped() {
-        let vc = InfluenceProfileWriteVC()
+        let vc = InfluenceProfileWriteVC(viewModel: viewModel)
         vc.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(vc, animated: false)
     }

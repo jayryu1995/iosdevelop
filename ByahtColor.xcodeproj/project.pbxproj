@@ -105,7 +105,6 @@
 		1F5963F92C2FC6A800FD8419 /* BusinessSwipeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5963F82C2FC6A800FD8419 /* BusinessSwipeVC.swift */; };
 		1F5963FB2C2FC79A00FD8419 /* BusinessHomeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5963FA2C2FC79A00FD8419 /* BusinessHomeVC.swift */; };
 		1F5963FD2C2FDDA300FD8419 /* BusinessProfileWriteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5963FC2C2FDDA300FD8419 /* BusinessProfileWriteVC.swift */; };
-		1F5963FF2C2FFF8400FD8419 /* BusinessLogoutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5963FE2C2FFF8400FD8419 /* BusinessLogoutVC.swift */; };
 		1F5964012C32E33A00FD8419 /* InfluenceMyPageDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5964002C32E33A00FD8419 /* InfluenceMyPageDto.swift */; };
 		1F5964032C34078400FD8419 /* InfluenceHomeDto.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5964022C34078400FD8419 /* InfluenceHomeDto.swift */; };
 		1F5964052C34FDCE00FD8419 /* BusinessViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F5964042C34FDCE00FD8419 /* BusinessViewModel.swift */; };
@@ -369,7 +368,6 @@
 		1F5963F82C2FC6A800FD8419 /* BusinessSwipeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessSwipeVC.swift; sourceTree = "<group>"; };
 		1F5963FA2C2FC79A00FD8419 /* BusinessHomeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessHomeVC.swift; sourceTree = "<group>"; };
 		1F5963FC2C2FDDA300FD8419 /* BusinessProfileWriteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessProfileWriteVC.swift; sourceTree = "<group>"; };
-		1F5963FE2C2FFF8400FD8419 /* BusinessLogoutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessLogoutVC.swift; sourceTree = "<group>"; };
 		1F5964002C32E33A00FD8419 /* InfluenceMyPageDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfluenceMyPageDto.swift; sourceTree = "<group>"; };
 		1F5964022C34078400FD8419 /* InfluenceHomeDto.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfluenceHomeDto.swift; sourceTree = "<group>"; };
 		1F5964042C34FDCE00FD8419 /* BusinessViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessViewModel.swift; sourceTree = "<group>"; };
@@ -1142,7 +1140,6 @@
 				1FEC33BE2CF59656000901EC /* BusinessSignUpVC2.swift */,
 				1FEC33C02CF5967A000901EC /* BusinessSignUpVC3.swift */,
 				1F5963FA2C2FC79A00FD8419 /* BusinessHomeVC.swift */,
-				1F5963FE2C2FFF8400FD8419 /* BusinessLogoutVC.swift */,
 				1F69859F2CB8D3F800A2A6EE /* BusinessAccountVC.swift */,
 				1FAF63812C37FA0F00D0FFEE /* AgreementVC.swift */,
 				1F4C66E12C19658600A960AF /* BusinessLoginVC.swift */,
@@ -1369,7 +1366,6 @@
 				1F4C66EE2C21709C00A960AF /* MemberBusinessDto.swift in Sources */,
 				1FBF5BD52BE33D3B0030F903 /* CollabModifyVC.swift in Sources */,
 				1FAF639A2C3F751700D0FFEE /* InfluenceProfileCell.swift in Sources */,
-				1F5963FF2C2FFF8400FD8419 /* BusinessLogoutVC.swift in Sources */,
 				1FAF639E2C3F8A3200D0FFEE /* TargetCell.swift in Sources */,
 				1FEC33C42D004C45000901EC /* FindIdSuccessVC.swift in Sources */,
 				1F83E9F42CDE0E9300117238 /* ImageLoadManager.swift in Sources */,
@@ -1783,7 +1779,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.2.2;
+				MARKETING_VERSION = 3.2.3;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.byaht.ByahtColor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1829,7 +1825,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.2.2;
+				MARKETING_VERSION = 3.2.3;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.byaht.ByahtColor;
 				PRODUCT_NAME = "$(TARGET_NAME)";

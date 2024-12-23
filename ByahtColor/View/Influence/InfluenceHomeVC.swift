@@ -38,7 +38,7 @@ class InfluenceHomeVC: UIViewController, UIScrollViewDelegate {
 
     @objc private func handleAccountUpdatedInHome(notification: NSNotification) {
         // 프로필 작성 뷰로 전환
-        let profileWriteVC = InfluenceProfileWriteVC()
+        let profileWriteVC = InfluenceProfileWriteVC(viewModel: viewModel)
         profileWriteVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(profileWriteVC, animated: false)
     }
@@ -97,7 +97,7 @@ class InfluenceHomeVC: UIViewController, UIScrollViewDelegate {
     private func setupAlertView() {
         let alertVC = RegistAlertVC()
         alertVC.onConfirm = {
-            let vc = InfluenceProfileWriteVC()
+            let vc = InfluenceProfileWriteVC(viewModel: self.viewModel)
             vc.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(vc, animated: false)
         }

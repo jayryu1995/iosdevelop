@@ -68,7 +68,7 @@ extension UIImageView {
 
         if let cachedImage = ImageCacheManager.shared.image(for: url) {
             DispatchQueue.main.async {
-                print("캐싱이미지 사용")
+                
                 completion(cachedImage)
             }
             return

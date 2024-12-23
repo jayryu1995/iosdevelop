@@ -46,7 +46,7 @@ open class GroupChannelMessageListUseCase: NSObject {
 
     open func loadInitialMessages() {
         messageCollection = createMessageCollection()
-
+        
         messageCollection?.startCollection(initPolicy: .cacheAndReplaceByApi, cacheResultHandler: { [weak self] messages, error in
             // Messages will be retrieved from the local cache.
             // They might be too outdated compared to the startingPoint.
@@ -117,8 +117,8 @@ open class GroupChannelMessageListUseCase: NSObject {
     open func createMessageCollection() -> MessageCollection? {
         // You can use a SBDMessageListParams instance for the SBDMessageCollection.
         let params = MessageListParams()
-        params.previousResultSize = 20
-        params.nextResultSize = 20
+        params.previousResultSize = 100
+        params.nextResultSize = 0
         params.replyType = .all
         params.includeThreadInfo = true
         params.includeParentMessageInfo = true

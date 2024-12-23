@@ -21,19 +21,32 @@ class FindPasswordVC: UIViewController {
         return button
     }()
     
-    // Label
-    lazy private var lbl_id = makeLabel(text: "signup_manager_id")
-    lazy private var lbl_name = makeLabel(text: "signup_manager_name")
-    
     // TextField
-    lazy private var tf_id = makeTextField(placeholder: "")
-    lazy private var tf_name = makeTextField(placeholder: "")
-    
-    lazy private var businessView = UIStackView()
-    lazy private var business: [(UILabel, UITextField, UIButton?)] = {
-        return [ (lbl_id, tf_id, nil), (lbl_name, tf_name, nil) ]
+    lazy private var tf_id: UITextField = {
+        let tf = UITextField()
+        tf.font = UIFont(name: "Pretendard-Medium", size: 16)
+        tf.layer.borderWidth = 1
+        tf.layer.borderColor = UIColor(hex: "#E5E6EA").cgColor
+        tf.layer.cornerRadius = 4
+        tf.leftPadding()
+        tf.placeholder = "signup_manager_id".localized
+        tf.delegate = self
+        return tf
     }()
-    
+
+    lazy private var tf_name: UITextField = {
+        let tf = UITextField()
+        tf.font = UIFont(name: "Pretendard-Medium", size: 16)
+        tf.layer.borderWidth = 1
+        tf.layer.borderColor = UIColor(hex: "#E5E6EA").cgColor
+        tf.layer.cornerRadius = 4
+        tf.leftPadding()
+        tf.placeholder = "signup_manager_name".localized
+        tf.delegate = self
+        return tf
+
+    }()
+
     // ViewModel
     lazy private var viewModel = BusinessViewModel()
     
@@ -46,50 +59,39 @@ class FindPasswordVC: UIViewController {
         self.navigationItem.title = "login_find_account".localized
         setupBackButton()
         setupUI()
-        setupContentView()
         setupConstraints()
         updateSubmitButtonState()
     }
     
     private func setupUI() {
-        [tf_id,tf_name].forEach {
-            $0.delegate = self
-        }
         // 스피너 초기화 및 설정
         activityIndicator = UIActivityIndicatorView(style: .large)
         
         
-        view.addSubview(businessView)
+        view.addSubview(tf_id)
+        view.addSubview(tf_name)
         view.addSubview(button)
         view.addSubview(activityIndicator)
         button.addTarget(self, action: #selector(submitButtonTapped), for: .touchUpInside)
     }
     
     
-    private func setupContentView() {
-        businessView.axis = .vertical
-        businessView.spacing = 8
-        // 기업
-        for (label, textField, button) in business {
-            let containerView = makeContainerView(withLabel: label, textField: textField, button: button)
-            textField.delegate = self
-            businessView.addArrangedSubview(containerView)
-            containerView.snp.makeConstraints {
-                $0.height.equalTo(48)
-                $0.leading.trailing.equalToSuperview()
-            }
-        }
-    }
-    
     private func setupConstraints() {
         
-        businessView.snp.makeConstraints{
+        tf_id.snp.makeConstraints {
             $0.top.equalToSuperview().offset(24)
+            $0.height.equalTo(48)
+            $0.leading.trailing.equalToSuperview().inset(20)
+        }
+
+        tf_name.snp.makeConstraints {
+            $0.top.equalTo(tf_id.snp.bottom).offset(8)
+            $0.height.equalTo(48)
             $0.leading.trailing.equalToSuperview().inset(20)
         }
         
         button.snp.makeConstraints {
-            $0.top.equalTo(businessView.snp.bottom).offset(24)
+            $0.top.equalTo(tf_name.snp.bottom).offset(24)
             $0.height.equalTo(52)
             $0.leading.trailing.equalToSuperview().inset(20)
         }

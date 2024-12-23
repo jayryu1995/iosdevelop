@@ -136,7 +136,7 @@ class LoginVC: UIViewController , BusinessLoginVCDelegate {
         logoImage.snp.makeConstraints { make in
             make.width.equalTo(55)
             make.height.equalTo(20)
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             make.leading.equalTo(view.safeAreaLayoutGuide).offset(20)
         }
 

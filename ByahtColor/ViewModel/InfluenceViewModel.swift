@@ -166,6 +166,12 @@ class InfluenceViewModel: ObservableObject {
                 }
             }
     }
+    
+    func updateProfile(data: InfluenceProfileDto) {
+        // 데이터를 업데이트하고 profileData를 변경
+        profileData = data
+    }
+    
 
     // 본인 프로필 작성페이지 조회
     func getProfileWrite(id: String, completion: @escaping (Result<InfluenceProfileDto, Error>) -> Void) {

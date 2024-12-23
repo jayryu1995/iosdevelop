@@ -141,12 +141,13 @@ class BusinessAccountVC : UIViewController {
 
         // SceneDelegate에 접근하여 rootViewController를 변경합니다.
         if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-            // LoginViewController 인스턴스 생성. 스토리보드를 사용하는 경우 스토리보드 ID로 인스턴스화해야 합니다.
-            let loginViewController = LoginVC() // 또는 스토리보드에서 생성
+            sceneDelegate.window?.rootViewController = nil // 기존 컨트롤러 해제
+            let loginViewController = InitialViewController()
             let navigationController = UINavigationController(rootViewController: loginViewController)
             sceneDelegate.window?.rootViewController = navigationController
             sceneDelegate.window?.makeKeyAndVisible()
         }
+
     }
 
     @objc private func deleteTapped() {

@@ -157,11 +157,13 @@ class ChatsVC: UIViewController {
     }
 
     private func scrollToBottom(animated: Bool) {
-        let numberOfSections = tableView.numberOfSections
-        let numberOfRows = tableView.numberOfRows(inSection: numberOfSections - 1)
-        if numberOfRows > 0 {
-            let indexPath = IndexPath(row: numberOfRows - 1, section: numberOfSections - 1)
-            tableView.scrollToRow(at: indexPath, at: .bottom, animated: animated)
+        DispatchQueue.main.async {
+            let contentHeight = self.tableView.contentSize.height
+            let tableHeight = self.tableView.bounds.height
+            let bottomInset = self.tableView.adjustedContentInset.bottom
+            let yOffset = max(contentHeight - tableHeight + bottomInset, 0)
+            
+            self.tableView.setContentOffset(CGPoint(x: 0, y: yOffset), animated: false)
         }
     }
 
@@ -245,20 +247,43 @@ extension ChatsVC: GroupChannelMessageListUseCaseDelegate {
     }
 
     func groupChannelMessageListUseCase(_ useCase: GroupChannelMessageListUseCase, didUpdateMessages messages: [BaseMessage]) {
+        
         tableView.reloadData()
         scrollToFocusMessage()
+        
     }
 
     private func scrollToFocusMessage() {
-        guard let focusMessage = targetMessageForScrolling,
-              focusMessage.messageId == messageListUseCase.messages.last?.messageId else { return }
-        self.targetMessageForScrolling = nil
+        guard messageListUseCase.messages.count > 0 else {
+            print("메시지가 없습니다. 스크롤 실행하지 않음")
+            return
+        }
 
         let focusMessageIndexPath = IndexPath(row: messageListUseCase.messages.count - 1, section: 0)
-
-        tableView.scrollToRow(at: focusMessageIndexPath, at: .bottom, animated: false)
+        DispatchQueue.main.async {
+            self.tableView.scrollToRow(at: focusMessageIndexPath, at: .bottom, animated: false)
+        }
+        
     }
 
+    // 새로운 메시지인지 확인하는 함수
+    private func isNewMessages(_ messages: [BaseMessage]) -> Bool {
+        // 기존 메시지의 마지막 메시지 ID 가져오기
+        guard let lastExistingMessageId = messageListUseCase.messages.last?.messageId else {
+            // 기존 메시지가 없으면 새 메시지로 간주
+            return true
+        }
+        
+        if messageListUseCase.messages.last?.messageId != targetMessageForScrolling?.messageId {
+            return true
+        }else{
+            return false
+        }
+        
+    }
+
+
+    
     func groupChannelMessageListUseCase(_ useCase: GroupChannelMessageListUseCase, didUpdateChannel channel: GroupChannel) {
         title = name
     }

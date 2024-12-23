@@ -106,6 +106,12 @@ class InfluenceProfileCell: UITableViewCell {
         NotificationCenter.default.removeObserver(self, name: .AVPlayerItemDidPlayToEndTime, object: nil)
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        player?.pause()
+        replayButton.isHidden = true // 재사용 전 상태 초기화
+    }
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
 
@@ -115,12 +121,11 @@ class InfluenceProfileCell: UITableViewCell {
         NotificationCenter.default.addObserver(self, selector: #selector(playerDidFinishPlaying(_:)), name: .AVPlayerItemDidPlayToEndTime, object: nil)
     }
 
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
         
     }
-
-    
 
     private func setupUI() {
         contentView.addSubview(image)
@@ -370,8 +375,5 @@ class InfluenceProfileCell: UITableViewCell {
         }
     }
 
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        player?.pause()
-    }
+    
 }

@@ -121,7 +121,7 @@ class InfluenceProfileWriteVC: UIViewController {
     private var selectedCategory: [String] = []
     private var selectedGender: [String] = []
     private var selectedNation: [String] = []
-    private let viewModel = InfluenceViewModel()
+    private let viewModel : InfluenceViewModel
     private var genderView = UIView()
     private var categoryView = UIView()
     private var ageView = UIView()
@@ -134,7 +134,16 @@ class InfluenceProfileWriteVC: UIViewController {
     private var floatingPanel: FloatingPanelController!
     private var codeView = UIView()
     private var getImagePath : String?
-
+    private var name : String?
+    init(viewModel: InfluenceViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 
@@ -142,6 +151,7 @@ class InfluenceProfileWriteVC: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(handleNotification), name: Notification.Name("ProfileUpdateNotification"), object: nil)
+       
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -151,12 +161,14 @@ class InfluenceProfileWriteVC: UIViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: false)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: nil)
-        NotificationCenter.default.removeObserver(self, name: Notification.Name("ProfileUpdateNotification"), object: nil)
+        
     }
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
 
         setupProfile()
         setupGesture()
@@ -189,6 +201,7 @@ class InfluenceProfileWriteVC: UIViewController {
                         self?.selectedCategory = data.category?.components(separatedBy: ",") ?? []
                         self?.selectedNation = data.nation?.components(separatedBy: ",") ?? []
                         self?.et_code.text = data.code
+                        self?.name = data.name
                         
                         if let path = data.video {
                             print(path)
@@ -200,6 +213,7 @@ class InfluenceProfileWriteVC: UIViewController {
                                     
                                     if let imageUrlString = data.imagePath {
                                         // 메인 스레드에서 UI 업데이트
+                                        print(imageUrlString)
                                         self?.loadImage(from: imageUrlString)
                                         
                                     } else {
@@ -233,29 +247,21 @@ class InfluenceProfileWriteVC: UIViewController {
             return
         }
 
-        URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
-            // 네트워크 에러 확인
+        var request = URLRequest(url: url)
+        request.cachePolicy = .reloadIgnoringLocalCacheData // 캐시 무시
+        request.setValue(UUID().uuidString, forHTTPHeaderField: "Cache-Control") // 캐시 방지
+
+        URLSession.shared.dataTask(with: request) { [weak self] data, response, error in
             if let error = error {
                 print("Failed to load image with error: \(error.localizedDescription)")
                 return
             }
 
-            // HTTP 응답 상태 코드 확인
-            if let httpResponse = response as? HTTPURLResponse {
-                print("HTTP Status Code: \(httpResponse.statusCode)")
-                if httpResponse.statusCode != 200 {
-                    print("Failed to load image: Invalid response code \(httpResponse.statusCode)")
-                    return
-                }
-            }
-
-            // 데이터 확인 및 이미지 변환
             guard let data = data, let downloadedImage = UIImage(data: data) else {
                 print("Failed to load image: Data is nil or not convertible to UIImage.")
                 return
             }
 
-            // 이미지 성공적으로 로드 -> UI 업데이트는 메인 스레드에서 처리
             DispatchQueue.main.async {
                 self?.selectedImages.append(downloadedImage)
                 print("selectedImages : ", self?.selectedImages.count ?? 0)
@@ -264,6 +270,7 @@ class InfluenceProfileWriteVC: UIViewController {
 
         }.resume()
     }
+
 
     
     private func setupUI() {
@@ -1044,7 +1051,16 @@ class InfluenceProfileWriteVC: UIViewController {
             let gender = selectedGender.joined(separator: ",")
             let age = selectedAge.joined(separator: ",")
             let nation = selectedNation.joined(separator: ",")
-            let dto = InfluenceProfileDto(memberId: id, snsList: snsArray, payList: payArray, experienceList: experienceArray, age: age, category: category, gender: gender, intro: et_intro.text ?? "", name: nil, imagePath: nil, nation: nation, code: et_code.text ?? nil, video: nil)
+            var dto = InfluenceProfileDto(memberId: id, snsList: snsArray, payList: payArray, experienceList: experienceArray, age: age, category: category, gender: gender, intro: et_intro.text ?? "", name: name, imagePath: nil, nation: nation, code: et_code.text ?? nil, video: nil)
+            
+            if let getImagePath = getImagePath {
+                if getImagePath.contains("m3u8") {
+                    dto.video = getImagePath
+                } else {
+                    dto.imagePath = getImagePath
+                }
+            }
+
 
             if !update {
                 videoURL = nil
@@ -1055,6 +1071,8 @@ class InfluenceProfileWriteVC: UIViewController {
                     switch result {
                     case .success(let responseString):
                         UserDefaults.standard.set(1, forKey: "home")
+                        
+                        self?.viewModel.updateProfile(data: dto)
                         print("완료 : \(responseString)")
                         if let url = self?.getImagePath{
                             ImageCache.default.removeImage(forKey: url) {
@@ -1072,12 +1090,7 @@ class InfluenceProfileWriteVC: UIViewController {
         }
     }
 
-    @objc private func handleNotification(_ notification: Notification) {
-        print("notification 실행")
-        // 알림 수신 시 실행할 코드
-        
-        self.navigationController?.popViewController(animated: true)
-    }
+   
     
     private func validateForm() -> Bool {
         // 각 필드의 유효성 검사
@@ -1186,6 +1199,13 @@ class InfluenceProfileWriteVC: UIViewController {
         }
     }
 
+    @objc private func handleNotification(_ notification: Notification) {
+        print("notification 실행")
+        // 알림 수신 시 실행할 코드
+        
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     @objc private func genderButtonTapped(_ sender: UIButton) {
         let selector = sender.tag.toString()
 

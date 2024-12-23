@@ -179,10 +179,9 @@ extension AppDelegate: MessagingDelegate, UNUserNotificationCenterDelegate {
         
         // firebase 주제 알림메시지 - springboot 전송
         if let data = userInfo["status"] as? String {
-            print(data)
             if data == "COMPLETE"{
                 print("알림 실행")
-                NotificationCenter.default.post(name: Notification.Name("ProfileUpdateNotification"), object: nil)
+                return UIBackgroundFetchResult.noData
             }
         }
           
@@ -206,7 +205,14 @@ extension AppDelegate: MessagingDelegate, UNUserNotificationCenterDelegate {
     
     // foreground 상에서 알림이 보이게끔 해준다.
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        
+        
+        print("foreground 알림 발생")
+        
+        
+        
         let userInfo = notification.request.content.userInfo
+        print("userinfo : \(userInfo)")
         if let aps = userInfo["aps"] as? NSDictionary,
            let alertMsg = aps["alert"] as? String,
            let payload = userInfo["sendbird"] as? NSDictionary,
@@ -216,14 +222,22 @@ extension AppDelegate: MessagingDelegate, UNUserNotificationCenterDelegate {
             // 알림 메시지와 카운트가 nil이 아닐 때만 실행
             UIApplication.shared.applicationIconBadgeNumber = count
             NotificationCenter.default.post(name: NSNotification.Name("SendbirdPushNotificationReceived"), object: nil)
+            completionHandler([.banner, .sound, .badge])
         }
         
         // firebase 주제 알림메시지 - springboot 전송
-        if let data = userInfo["status"] as? String {
-            print(data)
-            if data == "COMPLETE"{
+        if let aps = userInfo["aps"] as? [String: Any],
+           let alert = aps["alert"] as? [String: Any],
+           let body = alert["body"] as? String {
+            print("Body: \(body)")
+            
+            if body == "COMPLETE" {
                 print("알림 실행")
-                NotificationCenter.default.post(name: Notification.Name("ProfileUpdateNotification"), object: nil)
+                DispatchQueue.main.async {
+                    NotificationCenter.default.post(name: Notification.Name("ProfileUpdateNotification"), object: nil)
+                }
+                completionHandler([]) // 알림 표시하지 않음
+                return
             }
         }
      
@@ -231,10 +245,11 @@ extension AppDelegate: MessagingDelegate, UNUserNotificationCenterDelegate {
             Messaging.messaging().appDidReceiveMessage(userInfo)
 
             print("Title: \(title), Status: \(status)")
+            completionHandler([.banner, .sound, .badge])
         }
         
-        print("foreground 알림 발생")
-        completionHandler([.banner, .sound, .badge])
+        
+        
     }
 
     func userNotificationCenter(_ center: UNUserNotificationCenter,

@@ -134,7 +134,7 @@ class InfluenceMyPageVC: UIViewController {
         view.addSubview(errorButton)
 
         setupProfileButton()
-        setupeventButton()
+        setupEventButton()
         setupAccountButton()
         setupErrorButton()
     }
@@ -188,7 +188,7 @@ class InfluenceMyPageVC: UIViewController {
         }
     }
 
-    private func setupeventButton() {
+    private func setupEventButton() {
         eventButton.addTarget(self, action: #selector(eventButtonTapped), for: .touchUpInside)
 
         let stackView = UIStackView()

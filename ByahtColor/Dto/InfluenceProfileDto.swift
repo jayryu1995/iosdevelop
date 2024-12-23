@@ -17,9 +17,9 @@ struct InfluenceProfileDto: Codable {
     let gender: String?
     let intro: String?
     let name: String?
-    let imagePath: String?
+    var imagePath: String?
     let nation: String?
     let code: String?
-    let video: String?
+    var video: String?
     var mcnId: String? = nil
 }

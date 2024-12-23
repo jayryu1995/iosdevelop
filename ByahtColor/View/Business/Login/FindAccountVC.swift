@@ -51,19 +51,39 @@ class FindAccountVC: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-
+        
         updateButtonBottomLayerFrame()
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
+        
         updateButtonBottomLayerFrame()
 
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let navigationController = self.navigationController {
+            print("Navigation Controller is present.")
+            print("Navigation Bar is hidden: \(navigationController.isNavigationBarHidden)")
+            print("Navigation Stack Count: \(navigationController.viewControllers.count)")
+            
+            // 네비게이션 스택의 모든 뷰 컨트롤러를 확인
+            print("Navigation Stack ViewControllers:")
+            for (index, viewController) in navigationController.viewControllers.enumerated() {
+                print("Index \(index): \(viewController)")
+            }
+            
+            if let topViewController = navigationController.topViewController {
+                print("Top ViewController: \(topViewController)")
+            }
+        } else {
+            print("No Navigation Controller is present.")
+        }
+
+        
         view.backgroundColor = .white
         self.navigationItem.title = "login_find_account".localized
         setupBackButton()

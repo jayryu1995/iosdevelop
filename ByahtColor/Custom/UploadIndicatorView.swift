@@ -34,16 +34,21 @@ class UploadIndicatorView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
         setupView()
         startAnimatingDots()
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        
+        
         setupView()
         startAnimatingDots()
     }
+   
 
+    
     private func setupView() {
         // View의 배경 색을 흰색으로 설정
         backgroundColor = .white

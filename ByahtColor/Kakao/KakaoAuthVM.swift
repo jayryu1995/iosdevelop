@@ -51,10 +51,17 @@ class KakaoAuthVM: ObservableObject {
                 print("Failed to fetch user info: \(error)")
                 completion(nil) // 에러 발생 시 nil 반환
             } else if let user = user {
+                
                 if let id = user.id {
                     let stringId = String(id)
-                    User.shared.id = stringId
-                    print("stringId : \(stringId)") // "123"
+                    let name = user.kakaoAccount?.name
+                    let user_email = user.kakaoAccount?.email
+                    
+                    UserDefaults.standard.set(name, forKey: "name")
+                    UserDefaults.standard.set(stringId, forKey: "userID")
+                    UserDefaults.standard.set(user_email, forKey: "email")
+                    User.shared.updateUserData(id: stringId, email: user_email, name: name)
+                    
                     completion(stringId)
                 } else {
                     completion(nil)
