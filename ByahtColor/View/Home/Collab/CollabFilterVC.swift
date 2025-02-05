@@ -245,5 +245,5 @@ class CollabFilterVC: UIViewController {
 }
 
 protocol CollabFilterVCDelegate: AnyObject {
-    func didTapButton(_ snapVC: CollabFilterVC, WithArray array: [String], WithArray2 array2: [String])
+    func didTapButton(_ collabVC: CollabFilterVC, WithArray array: [String], WithArray2 array2: [String])
 }

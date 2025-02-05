@@ -37,7 +37,7 @@ open class GroupChannelFileMessageUseCase {
         fileMessageParams.fileSize = UInt(mediaFile.data.count)
         fileMessageParams.mimeType = mediaFile.mimeType
         fileMessageParams.thumbnailSizes = [.make(maxWidth: 320.0, maxHeight: 320.0)]
-
+    
         let fileMessage = channel.sendFileMessage(params: fileMessageParams) { [weak self] message, error in
             if let error = error {
                 completion(.failure(error))
@@ -58,6 +58,7 @@ open class GroupChannelFileMessageUseCase {
         return fileMessage
     }
 
+    
     open func resendMessage(_ message: FileMessage, completion: @escaping (Result<BaseMessage, SBError>) -> Void) {
         guard let binaryData = cachedDatasForResending[message.requestId] else { return }
 

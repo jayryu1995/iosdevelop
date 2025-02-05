@@ -184,36 +184,54 @@ extension ChatsVC: UITableViewDataSource, BasicMessageCellDelegate {
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let message = messageListUseCase.messages[indexPath.row]
+        
+        if let fileMessage = message as? FileMessage {
+            let cell: BasicFileCell = tableView.dequeueReusableCell(for: indexPath)
+            cell.configure(with: fileMessage)
+            return cell
+        } else {
+            let cell: BasicMessageCell = tableView.dequeueReusableCell(for: indexPath)
+            cell.selectionStyle = .none
+            cell.delegate = self
+            if indexPath.row != 0 {
+                let firstMessage = messageListUseCase.messages[indexPath.row - 1]
+                
+                if Date.sbu_from(message.createdAt).sbu_toString(format: .yyyyMMdd) != Date.sbu_from(firstMessage.createdAt).sbu_toString(format: .yyyyMMdd ) {
+                    cell.addHeader(date: Date.sbu_from(message.createdAt).sbu_toString(format: .yyyyMMdd, localizedFormat: true))
+                }
 
-        let cell: BasicMessageCell = tableView.dequeueReusableCell(for: indexPath)
-        cell.selectionStyle = .none
-        cell.delegate = self
-
-        if indexPath.row != 0 {
-            let firstMessage = messageListUseCase.messages[indexPath.row - 1]
-
-            if Date.sbu_from(message.createdAt).sbu_toString(format: .yyyyMMdd) != Date.sbu_from(firstMessage.createdAt).sbu_toString(format: .yyyyMMdd ) {
+            } else if indexPath.row ==  0 {
                 cell.addHeader(date: Date.sbu_from(message.createdAt).sbu_toString(format: .yyyyMMdd, localizedFormat: true))
             }
 
-        } else if indexPath.row ==  0 {
-            cell.addHeader(date: Date.sbu_from(message.createdAt).sbu_toString(format: .yyyyMMdd, localizedFormat: true))
-        }
+            if let fileMessage = message as? FileMessage {
+                cell.configure(with: fileMessage)
+            } else {
+                cell.configure(with: message)
+            }
+            
+            let currentTime = Date.sbu_from(message.createdAt).sbu_toString(format: .yyyyMMddhhmm)
+            
+            if indexPath.row < messageListUseCase.messages.count - 1 {
+                let nextMessage = messageListUseCase.messages[indexPath.row + 1]
+                let nextTime = Date.sbu_from(nextMessage.createdAt).sbu_toString(format: .yyyyMMddhhmm)
+                if nextTime == currentTime {
+                    cell.hideTime()
+                }
+                
+                
+            }
 
-        if let fileMessage = message as? FileMessage {
-            cell.configure(with: fileMessage)
-        } else {
-            cell.configure(with: message)
+            
+            let unreadCount = channel.getUnreadMemberCount(message)
+            if unreadCount == 0 {
+                cell.checked(check: true)
+            } else {
+                cell.checked(check: false)
+            }
+            return cell
         }
-
-        let unreadCount = channel.getUnreadMemberCount(message)
-        if unreadCount == 0 {
-            cell.checked(check: true)
-        } else {
-            cell.checked(check: false)
-        }
-
-        return cell
+        
     }
 
 }
@@ -319,6 +337,15 @@ extension ChatsVC: MessageInputViewDelegate {
                 self?.presentAlert(error: error)
             }
         }
+//        targetMessageForScrolling = fileMessageUseCase.sendFile() { [weak self] result in
+//            switch result {
+//            case .success(let sendedMessage):
+//                self?.targetMessageForScrolling = sendedMessage
+//            case .failure(let error):
+//                self?.presentAlert(error: error)
+//            }
+//        }
+        print("input on")
     }
 
     func messageInputView(_ messageInputView: MessageInputView, didTouchSendFileMessageButton sender: UIButton) {

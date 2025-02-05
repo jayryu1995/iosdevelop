@@ -257,7 +257,7 @@ class LoginVC: UIViewController , BusinessLoginVCDelegate {
 
                         case .failure(let error):
                             print("error : \(error)")
-                            self?.signUpInfluence()
+                            //self?.signUpInfluence()
                         }
                     }
                 }
@@ -269,7 +269,7 @@ class LoginVC: UIViewController , BusinessLoginVCDelegate {
     private func signUpInfluence() {
         if let id = User.shared.id {
             let member = Member(id: id, auth: 0, regi_date: nil)
-            let influence = Influence(no: nil, id: nil, name: User.shared.name ?? "", intro: nil, age: nil, category: nil, gender: nil, video: nil, evaluation: nil, mcnId: nil)
+            let influence = Influence(no: nil, id: nil, name: nil, intro: nil, age: nil, category: nil, gender: nil, video: nil, evaluation: nil, mcnId: nil)
             let dto = MemberInfluenceDto(member: member, influence: influence)
             viewModel.updateMemberInfluence(memberInfluenceDto: dto) { [weak self] result in
                 DispatchQueue.main.async {
@@ -319,47 +319,6 @@ extension LoginVC: UIPageViewControllerDataSource, UIPageViewControllerDelegate,
         return self.view.window!
     }
 
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-        // 로그인 성공
-        switch authorization.credential {
-        case let appleIDCredential as ASAuthorizationAppleIDCredential:
-            // You can create an account in your system.
-            let userIdentifier = appleIDCredential.user
-            let fullName = appleIDCredential.fullName
-            let email = appleIDCredential.email
-
-            if  let authorizationCode = appleIDCredential.authorizationCode,
-                let identityToken = appleIDCredential.identityToken,
-                let authCodeString = String(data: authorizationCode, encoding: .utf8),
-                let identifyTokenString = String(data: identityToken, encoding: .utf8) {
-
-            }
-
-            let id = userIdentifier 
-            let name = "\(fullName?.givenName ?? "") \(fullName?.familyName ?? "")"
-            let user_email = email ?? ""
-
-            UserDefaults.standard.set(name, forKey: "name")
-            UserDefaults.standard.set(id, forKey: "userID")
-            UserDefaults.standard.set(user_email, forKey: "email")
-            User.shared.updateUserData(id: id, email: user_email, name: name)
-
-            self.checkedUser()
-
-        case let passwordCredential as ASPasswordCredential:
-            // Sign in using an existing iCloud Keychain credential.
-            let username = passwordCredential.user
-            let password = passwordCredential.password
-
-        default:
-            break
-        }
-    }
-
-    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-        // 로그인 실패(유저의 취소도 포함)
-        print("login failed - \(error.localizedDescription)")
-    }
 }
 
 protocol BusinessLoginVCDelegate: AnyObject {

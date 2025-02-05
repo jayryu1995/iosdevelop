@@ -6,7 +6,7 @@
 //
 import Foundation
 
-struct Talk: Identifiable, Decodable {
+struct Community: Identifiable, Decodable {
     let no: Int?
     let id: String?
     let nickname: String?

@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct SnapInsertDto: Codable {
+struct CollabInsertDto: Codable {
     let no: String?
     let userId: String?
     let nickname: String?

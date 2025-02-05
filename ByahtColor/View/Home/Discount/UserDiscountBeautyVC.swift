@@ -184,8 +184,8 @@ extension UserDiscountBeautyVC: UITableViewDataSource, UITableViewDelegate,
     func didTapCell(_ cell: UserDiscountTableViewCell, withNo no: Int) {
         let detailVC = UserDiscountDetailVC()
 
-        if let selectedSnap = viewModel.result.first(where: { $0.no == no }) {
-            detailVC.discount = selectedSnap
+        if let selectedCollab = viewModel.result.first(where: { $0.no == no }) {
+            detailVC.discount = selectedCollab
             detailVC.hidesBottomBarWhenPushed = true
             self.navigationController?.navigationBar.isHidden = false
             self.navigationController?.pushViewController(detailVC, animated: true)
@@ -214,12 +214,12 @@ extension UserDiscountBeautyVC: UITableViewDataSource, UITableViewDelegate,
         let secondImageIndex = firstImageIndex + 1
 
         // 셀에 할당할 이미지 배열 초기화
-        var snapsForCell = [DiscountDto]()
+        var collabsForCell = [DiscountDto]()
         do {
             // 첫 번째 Snap 추가
             if firstImageIndex < viewModel.result.count {
                 let firstData = viewModel.result[firstImageIndex]
-                snapsForCell.append(firstData)
+                collabsForCell.append(firstData)
 
             }
         }
@@ -228,12 +228,12 @@ extension UserDiscountBeautyVC: UITableViewDataSource, UITableViewDelegate,
             // 두 번째 Snap 추가
             if secondImageIndex < viewModel.result.count {
                 let secondData = viewModel.result[secondImageIndex]
-                snapsForCell.append(secondData)
+                collabsForCell.append(secondData)
             }
         }
 
         // 셀의 이미지 뷰 설정 함수 호출
-        cell.setupImageViews(list: snapsForCell)
+        cell.setupImageViews(list: collabsForCell)
 
         return cell
     }

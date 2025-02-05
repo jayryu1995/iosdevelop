@@ -8,7 +8,7 @@
 import Foundation
 
 // WriteBoardVC
-struct BoardDto: Encodable {
+struct CommunityDto: Encodable {
     let id: String?
     let nickname: String?
     let regi_date: Date?
@@ -19,19 +19,19 @@ struct BoardDto: Encodable {
     let filePath: String?
 }
 
-struct BoardRequestDTO: Encodable {
+struct CommunityRequestDTO: Encodable {
     let user_id: String?
 }
 
-struct BoardLikeDto: Encodable {
+struct CommunityLikeDto: Encodable {
     let user_id: String?
-    let board_id: Int?
+    let community_id: Int?
 }
 
-struct BoardCommentVO: Decodable {
+struct CommunityCommentVO: Decodable {
     let no: Int?
     let writer_id: String?
-    let board_no: Int?
+    let community_no: Int?
     let nickname: String?
     let content: String?
     let regi_date: String?
@@ -41,7 +41,7 @@ struct BoardCommentVO: Decodable {
     let imageUrl: String?
 }
 
-struct ReceiveBoard: Decodable {
+struct ReceiveCommunity: Decodable {
     let no: Int?
     let id: String?
     let nickname: String?

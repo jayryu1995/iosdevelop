@@ -691,7 +691,7 @@ class CollabWriteVC: UIViewController, UIScrollViewDelegate, UINavigationControl
         let title = tv_title.text ?? ""
         let link = tv_link.text ?? ""
 
-        let dto = SnapInsertDto(no: nil, userId: user_id, nickname: nickname, content: self.tv_content.text, link: link, title: title, nation: nation, info: tv_info.text, startDate: start_date, endDate: end_date, style: style, facebook: facebookValue, tiktok: tiktokValue, instagram: instagramValue, shopee: shopeeValue, naver: naverValue, youtube: youtubeValue, people: people,collabCode: collab_code)
+        let dto = CollabInsertDto(no: nil, userId: user_id, nickname: nickname, content: self.tv_content.text, link: link, title: title, nation: nation, info: tv_info.text, startDate: start_date, endDate: end_date, style: style, facebook: facebookValue, tiktok: tiktokValue, instagram: instagramValue, shopee: shopeeValue, naver: naverValue, youtube: youtubeValue, people: people,collabCode: collab_code)
         
         viewModel.insertCollab(dto : dto, images: selectedImages){ response in
             switch response {

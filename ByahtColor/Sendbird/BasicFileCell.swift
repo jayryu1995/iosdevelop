@@ -8,17 +8,11 @@
 import Foundation
 import UIKit
 import SendbirdChatSDK
+import SnapKit
 
 open class BasicFileCell: UITableViewCell {
 
-    public lazy var profileLabel: UILabel = {
-        let profileLabel: UILabel = UILabel()
-        profileLabel.textColor = .secondaryLabel
-        profileLabel.font = .systemFont(ofSize: 14)
-        profileLabel.numberOfLines = 0
-        return profileLabel
-    }()
-
+    
     public lazy var profileImageView: UIImageView = {
         let profileImageView = UIImageView(image: UIImage(named: "icon_profile2"))
         profileImageView.contentMode = .scaleAspectFill
@@ -30,8 +24,8 @@ open class BasicFileCell: UITableViewCell {
     public lazy var messageLabel: UILabel = {
         let messageLabel: UILabel = UILabel()
         messageLabel.textColor = .label
-        messageLabel.font = .systemFont(ofSize: 17)
-        messageLabel.numberOfLines = 0
+        messageLabel.font = UIFont(name: "Pretendard-Regular", size: 14)
+        messageLabel.numberOfLines = 2
         return messageLabel
     }()
 
@@ -44,13 +38,42 @@ open class BasicFileCell: UITableViewCell {
         return previewImageView
     }()
 
-    public lazy var previewPlaceholderImageView: UIImageView = {
-        let previewPlaceholderImageView = UIImageView()
-        previewPlaceholderImageView.image = UIImage(named: "sample_image")
-        previewPlaceholderImageView.isHidden = true
-        return previewPlaceholderImageView
+    private lazy var messageBox: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor(hex: "#F4F5F8")
+        view.clipsToBounds = true
+        view.layer.cornerRadius = 16
+        return view
+    }()
+    
+    private lazy var timeLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont(name: "Pretendard-Regular", size: 10)
+        label.textColor = UIColor(hex: "#B5B8C2")
+        return label
     }()
 
+    private lazy var dateLabel: UILabel = {
+        let label = UILabel()
+        label.font = UIFont(name: "Pretendard-Regular", size: 12)
+        label.textColor = UIColor(hex: "#B5B8C2")
+        label.textAlignment = .center
+        label.isHidden = true
+        return label
+    }()
+
+    private lazy var icon: UIImageView = {
+        let image = UIImageView(image: UIImage(named: "icon_chat_check1"))
+        image.contentMode = .scaleAspectFit
+        return image
+    }()
+    
+    private lazy var viewModel = BusinessViewModel()
+
+    private var sender = ""
+    private var id = ""
+    private let maxWidth = UIScreen.main.bounds.width * 0.6
+    
     public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         commonInit()
@@ -63,65 +86,113 @@ open class BasicFileCell: UITableViewCell {
 
     private func commonInit() {
         contentView.addSubview(profileImageView)
-        contentView.addSubview(profileLabel)
-        contentView.addSubview(messageLabel)
-        contentView.addSubview(previewImageView)
-        contentView.addSubview(previewPlaceholderImageView)
+        contentView.addSubview(messageBox)
+        contentView.addSubview(timeLabel)
+        contentView.addSubview(dateLabel)
+        contentView.addSubview(icon)
+        messageBox.addSubview(previewImageView)
+        messageBox.addSubview(messageLabel)
+        
+        dateLabel.snp.makeConstraints {
+            if dateLabel.isHidden {
+                $0.top.equalToSuperview()
+            } else {
+                $0.top.equalToSuperview().offset(16)
+            }
+            $0.leading.trailing.equalToSuperview()
+        }
+        
+        profileImageView.snp.makeConstraints { make in
+            make.top.equalTo(dateLabel).offset(10)
+            make.leading.equalToSuperview()
+            make.width.height.equalTo(32)
+        }
 
-        profileImageView.translatesAutoresizingMaskIntoConstraints = false
-        profileLabel.translatesAutoresizingMaskIntoConstraints = false
-        messageLabel.translatesAutoresizingMaskIntoConstraints = false
-        previewImageView.translatesAutoresizingMaskIntoConstraints = false
-        previewPlaceholderImageView.translatesAutoresizingMaskIntoConstraints = false
+        messageBox.snp.makeConstraints { make in
+            make.top.equalTo(dateLabel).offset(10)
+            make.leading.equalTo(profileImageView.snp.trailing).offset(10)
+            make.width.lessThanOrEqualTo(maxWidth)
+            make.bottom.equalTo(contentView).offset(-10)
+        }
 
-        NSLayoutConstraint.activate([
-            profileImageView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            profileImageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
-            profileImageView.widthAnchor.constraint(equalToConstant: 32),
-            profileImageView.heightAnchor.constraint(equalToConstant: 32)
-        ])
+        previewImageView.snp.makeConstraints { make in
+            make.top.bottom.equalTo(messageBox).inset(10)
+            make.leading.equalTo(messageBox).offset(10)
+            make.width.height.equalTo(55)
+        }
 
-        NSLayoutConstraint.activate([
-            profileLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 10),
-            profileLabel.leadingAnchor.constraint(equalTo: profileImageView.trailingAnchor, constant: 10),
-            profileLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20)
-        ])
+        messageLabel.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.leading.equalTo(previewImageView.snp.trailing).offset(10)
+            make.trailing.equalTo(messageBox).offset(-10)
+        }
+        
+        // 메시지 길이에 따라 유동적으로 크기 조정
+        messageLabel.setContentHuggingPriority(.required, for: .horizontal)
+        messageLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
 
-        NSLayoutConstraint.activate([
-            messageLabel.topAnchor.constraint(equalTo: profileLabel.bottomAnchor),
-            messageLabel.leadingAnchor.constraint(equalTo: profileLabel.leadingAnchor),
-            messageLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20)
-        ])
-
-        NSLayoutConstraint.activate([
-            previewImageView.topAnchor.constraint(equalTo: messageLabel.bottomAnchor),
-            previewImageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -10),
-            previewImageView.leadingAnchor.constraint(equalTo: messageLabel.leadingAnchor),
-            previewImageView.widthAnchor.constraint(equalToConstant: 240),
-            previewImageView.heightAnchor.constraint(equalToConstant: 160)
-        ])
-
-        NSLayoutConstraint.activate([
-            previewPlaceholderImageView.centerXAnchor.constraint(equalTo: previewImageView.centerXAnchor),
-            previewPlaceholderImageView.centerYAnchor.constraint(equalTo: previewImageView.centerYAnchor),
-            previewPlaceholderImageView.widthAnchor.constraint(equalToConstant: 50),
-            previewPlaceholderImageView.heightAnchor.constraint(equalToConstant: 50)
-        ])
     }
+
 
     public override func prepareForReuse() {
         super.prepareForReuse()
 
-        profileLabel.text = nil
+        profileImageView.isHidden = false
         messageLabel.text = nil
-        previewPlaceholderImageView.isHidden = true
+        timeLabel.text = nil
+        dateLabel.isHidden = true
+        dateLabel.text = nil
+        icon.image = nil
     }
 
+    private func remakeConstraint(){
+        // profileImageView constraints
+        profileImageView.isHidden = true
+        messageLabel.textAlignment = .right
+        messageLabel.textColor = .white
+        messageBox.backgroundColor = UIColor(hex: "#009BF2")
+        messageBox.snp.remakeConstraints { make in
+            make.top.equalTo(contentView).offset(10)
+            make.trailing.equalToSuperview().offset(-10)
+            make.leading.greaterThanOrEqualToSuperview().offset(100) // 최소 너비 제한
+            make.bottom.equalTo(contentView).offset(-10)
+        }
+        
+        previewImageView.snp.remakeConstraints { make in
+            make.top.bottom.equalTo(messageBox).inset(10)
+            make.leading.equalTo(messageBox).offset(10)
+            make.width.height.equalTo(55)
+        }
+        
+        messageLabel.snp.remakeConstraints { make in
+            make.top.equalTo(messageBox).offset(10)
+            make.bottom.equalTo(messageBox).offset(-10)
+            make.trailing.equalTo(messageBox).offset(-10)
+            make.leading.equalTo(previewImageView.snp.trailing).offset(10)
+        }
+        
+    }
+    
     open func configure(with message: FileMessage) {
         if let sender = message.sender {
-            profileLabel.text = "\(sender.nickname)"
-            // profileImageView.setProfileImageView(for: sender)
+            
+            print("User.shared.nickname : \(User.shared.nickname)")
+            print("sender.nickname : \(sender.nickname)")
+            if sender.nickname == User.shared.nickname ?? "" {
+                remakeConstraint()
+            }
         }
+        
+        
+        messageLabel.text = "ㅁㅇㅎㅁㅇㄹㅁㅇㄹㅁㅇ러야러야ㅓ랴어랴어ㅑ러야러ㅑㅇ"
+        
+        if let imageURL = imageURL(for: message) {
+            previewImageView.kf.setImage(with: imageURL)
+        }else{
+            previewImageView.removeFromSuperview()
+        }
+        
+        
 
     }
 

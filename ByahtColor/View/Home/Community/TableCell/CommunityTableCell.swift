@@ -1,5 +1,5 @@
 //
-//  TalkTC.swift
+//  CommunityTC.swift
 //  ByahtColor
 //
 //  Created by jaem on 6/11/24.
@@ -9,7 +9,7 @@ import Foundation
 import SnapKit
 import UIKit
 import Kingfisher
-class TalkTableCell: UITableViewCell, UIScrollViewDelegate {
+class CommunityTableCell: UITableViewCell, UIScrollViewDelegate {
     private let nicknameLabel = {
         let label = UILabel()
         label.font = UIFont(name: "Pretendard-SemiBold", size: 12)
@@ -178,19 +178,19 @@ class TalkTableCell: UITableViewCell, UIScrollViewDelegate {
     }
 
     // 데이터 입력
-    func configure(with talk: Talk) {
-        titleLabel.text = talk.title ?? ""
-        contentLabel.text = talk.content ?? ""
-        nicknameLabel.text = talk.nickname ?? ""
-        likeLabel.text = "\(talk.like_count ?? 0)"
-        commentLabel.text = "\(talk.comment_count ?? 0)"
+    func configure(with community: Community) {
+        titleLabel.text = community.title ?? ""
+        contentLabel.text = community.content ?? ""
+        nicknameLabel.text = community.nickname ?? ""
+        likeLabel.text = "\(community.like_count ?? 0)"
+        commentLabel.text = "\(community.comment_count ?? 0)"
         
 
-        let date = CustomFunction().formatDate(talk.regi_date ?? "")
+        let date = CustomFunction().formatDate(community.regi_date ?? "")
         dateLabel.text = "| \(date) |"
 
         removeImage()
-        updateNotification(notification: talk.notification)
+        updateNotification(notification: community.notification)
     }
 
     func setImage(imagePath: String) {

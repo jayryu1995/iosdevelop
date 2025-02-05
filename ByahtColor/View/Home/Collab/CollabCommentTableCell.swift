@@ -181,7 +181,7 @@ class CollabCommentTableCell: UITableViewCell, UIScrollViewDelegate {
     }
 
     private func updateLikeRequest(no: Int?) {
-        let url = "\(Bundle.main.TEST_URL)/snap/comment/like"
+        let url = "\(Bundle.main.TEST_URL)/collab/comment/like"
 
         // 요청에 필요한 파라미터 설정
         let parameters: [String: Any] = ["comment_id": no ?? 0, "user_id": User.shared.id ?? ""]
@@ -200,7 +200,7 @@ class CollabCommentTableCell: UITableViewCell, UIScrollViewDelegate {
     }
 
     private func updateUnLikeRequest(no: Int?) {
-        let url = "\(Bundle.main.TEST_URL)/snap/comment/like"
+        let url = "\(Bundle.main.TEST_URL)/collab/comment/like"
 
         // 요청에 필요한 파라미터 설정
         let parameters: [String: Any] = ["comment_id": no ?? 0, "user_id": User.shared.id ?? ""]

@@ -10,8 +10,8 @@ import SnapKit
 import Alamofire
 import Kingfisher
 
-class TalkCommentTableCell: UITableViewCell, UIScrollViewDelegate {
-    weak var delegate: TalkCommentTableCellDelegate?
+class CommunityCommentTableCell: UITableViewCell, UIScrollViewDelegate {
+    weak var delegate: CommunityCommentTableCellDelegate?
     private let nicknameLabel: UILabel = {
         let label = UILabel()
         label.font = UIFont(name: "Pretendard-Medium", size: 14)
@@ -89,7 +89,7 @@ class TalkCommentTableCell: UITableViewCell, UIScrollViewDelegate {
     private var likeFlag = false
     private var likeCount = 0
     private let containerView = UIView()
-    private var commentDto: BoardCommentVO?
+    private var commentDto: CommunityCommentVO?
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -215,7 +215,7 @@ class TalkCommentTableCell: UITableViewCell, UIScrollViewDelegate {
     }
 
     // 데이터 입력
-    func setData(comment: BoardCommentVO) {
+    func setData(comment: CommunityCommentVO) {
         self.commentDto = comment
         self.contentLabel.text = comment.content ?? ""
         self.nicknameLabel.text = comment.nickname ?? ""
@@ -282,7 +282,7 @@ class TalkCommentTableCell: UITableViewCell, UIScrollViewDelegate {
 
     // 좋아요 요청
     private func updateLikeRequest(no: Int?) {
-        let url = "\(Bundle.main.TEST_URL)/board/comment/like"
+        let url = "\(Bundle.main.TEST_URL)/community/comment/like"
         let parameters: [String: Any] = ["comment_id": no ?? 0, "user_id": User.shared.id ?? ""]
         AF.request(url, method: .post, parameters: parameters)
             .response { [weak self] response in
@@ -298,38 +298,38 @@ class TalkCommentTableCell: UITableViewCell, UIScrollViewDelegate {
 
     // 좋아요 제거
     private func updateUnLikeRequest(no: Int?) {
-        let url = "\(Bundle.main.TEST_URL)/board/comment/like"
+        let url = "\(Bundle.main.TEST_URL)/community/comment/like"
         let parameters: [String: Any] = ["comment_id": no ?? 0, "user_id": User.shared.id ?? ""]
         AF.request(url, method: .delete, parameters: parameters)
             .response { [weak self] response in
                 switch response.result {
                 case .success:
-                    log(vc: "BoardCommentTC", message: "updateLikeRequest request successful")
+                    log(vc: "CommunityCommentTC", message: "updateLikeRequest request successful")
 
                 case .failure(let error):
-                    log(vc: "BoardCommentTC", message: "updateLikeRequest request fail : \(error)")
+                    log(vc: "CommunityCommentTC", message: "updateLikeRequest request fail : \(error)")
                 }
             }
     }
 
     // 삭제
     @objc private func deleteButtonTapped() {
-        let url = "\(Bundle.main.TEST_URL)/board/comment/delete" // 실제 요청할 서버의 URL로 변경해주세요.
-        let board_no = commentDto?.board_no ?? 0
+        let url = "\(Bundle.main.TEST_URL)/community/comment/delete" // 실제 요청할 서버의 URL로 변경해주세요.
+        let community_no = commentDto?.community_no ?? 0
         let comment_no = commentDto?.no ?? 0
         let parameters: [String: Any] = [
-            "board_no": board_no.toString(),
+            "community_no": community_no.toString(),
             "comment_no": comment_no.toString()
         ]
         AF.request(url, method: .post, parameters: parameters).response { response in
             switch response.result {
             case .success:
-                log(vc: "BoardCommentTC", message: "deleteButtonTapped Success")
+                log(vc: "CommunityCommentTC", message: "deleteButtonTapped Success")
                 DispatchQueue.main.async {
                     self.delegate?.didRequestDelete(self)
                 }
             case .failure(let error):
-                log(vc: "BoardCommentTC", message: "deleteButtonTapped error : \(error)")
+                log(vc: "CommunityCommentTC", message: "deleteButtonTapped error : \(error)")
             }
         }
     }
@@ -340,6 +340,6 @@ class TalkCommentTableCell: UITableViewCell, UIScrollViewDelegate {
     }
 
 }
-protocol TalkCommentTableCellDelegate: AnyObject {
-    func didRequestDelete(_ cell: TalkCommentTableCell)
+protocol CommunityCommentTableCellDelegate: AnyObject {
+    func didRequestDelete(_ cell: CommunityCommentTableCell)
 }

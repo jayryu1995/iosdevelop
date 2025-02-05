@@ -1,5 +1,5 @@
 //
-//  TalkViewModel.swift
+//  CommunityViewModel.swift
 //  ByahtColor
 //
 //  Created by jaem on 6/11/24.
@@ -9,19 +9,19 @@ import Alamofire
 import Combine
 import Foundation
 
-class TalkViewModel: ObservableObject {
-    @Published var results: [Talk] = []
+class CommunityViewModel: ObservableObject {
+    @Published var results: [Community] = []
     @Published var isLoading: Bool = false
     private var cancellables = Set<AnyCancellable>()
 
-    func fetchTalk(nation: String) {
+    func fetchCommunity(nation: String) {
         isLoading = true
-        let url = "\(Bundle.main.TEST_URL)/board/sel"
+        let url = "\(Bundle.main.TEST_URL)/community/sel"
         let parameters: [String: Any] = [ "user_id": User.shared.id ?? "",
                                           "nation": nation]
 
         AF.request(url, method: .get, parameters: parameters)
-            .responseDecodable(of: [Talk].self) { response in
+            .responseDecodable(of: [Community].self) { response in
                 switch response.result {
                 case .success(let data):
                     do {

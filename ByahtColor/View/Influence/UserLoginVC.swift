@@ -104,6 +104,10 @@ class UserLoginVC: UIViewController {
                 DispatchQueue.main.async {
                     switch result {
                     case .success(let data):
+                        User.shared.name = data.name
+                        UserDefaults.standard.set(data.name, forKey: "name")
+                        UserDefaults.standard.set(id, forKey: "userID")
+                        UserDefaults.standard.set(User.shared.email, forKey: "email")
                         
                         let vc = TabBarViewController()
                         self?.navigationController?.pushViewController(vc, animated: true)
@@ -126,6 +130,12 @@ class UserLoginVC: UIViewController {
                 DispatchQueue.main.async {
                     switch result {
                     case .success(let responseString):
+                        
+                        UserDefaults.standard.set(User.shared.name, forKey: "name")
+                        UserDefaults.standard.set(User.shared.id, forKey: "userID")
+                        UserDefaults.standard.set(User.shared.email, forKey: "email")
+                        
+                        
                         let vc = TabBarViewController()
                         self?.navigationController?.pushViewController(vc, animated: true)
 
@@ -264,9 +274,7 @@ extension UserLoginVC: ASAuthorizationControllerDelegate, ASAuthorizationControl
             if name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                 name = "user\(generateRandomNumber(digits: 8))"
             }
-            UserDefaults.standard.set(name, forKey: "name")
-            UserDefaults.standard.set(id, forKey: "userID")
-            UserDefaults.standard.set(user_email, forKey: "email")
+            
             User.shared.updateUserData(id: id, email: user_email, name: name)
 
             self.getNickname()
@@ -331,14 +339,6 @@ extension UserLoginVC: ASAuthorizationControllerDelegate, ASAuthorizationControl
                 let email = Profile.current?.email
                 var name = Profile.current?.name
 
-                // getting id token string
-                let tokenString = AuthenticationToken.current?.tokenString
-                if name?.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty == true {
-                    name = "user\(self.generateRandomNumber(digits: 8))"
-                }
-                UserDefaults.standard.set(name, forKey: "name")
-                UserDefaults.standard.set(userID, forKey: "userID")
-                UserDefaults.standard.set(email, forKey: "email")
                 User.shared.updateUserData(id: userID, email: email, name: name)
 
                 self.getNickname()

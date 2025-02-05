@@ -1,5 +1,5 @@
 //
-//  boardDetailVC.swift
+//  CommunityReadVC.swift
 //  ByahtColor
 //
 //  Created by jaem on 2024/01/16.
@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import Alamofire
 
-class TalkReadVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDelegate {
+class CommunityReadVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDelegate {
     private var activityIndicator: UIActivityIndicatorView!
     let submitButton: UIButton = {
         let button = UIButton()
@@ -20,7 +20,7 @@ class TalkReadVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDeleg
 
     private let bottomView = UIView()
     private let commentView = UITextView()
-    private var commentList: [BoardCommentVO] = []
+    private var commentList: [CommunityCommentVO] = []
     private let tableView = UITableView()
     private let containerView = UIView()
     private let optionButton = UIButton()
@@ -28,7 +28,7 @@ class TalkReadVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDeleg
     private let optionButton2 = UIButton()
     private var notification = false
     // 이전 뷰에서 전달받는 변수
-    var board: Talk?
+    var community: Community?
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
@@ -41,7 +41,7 @@ class TalkReadVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDeleg
         navigationController?.interactivePopGestureRecognizer?.delegate = self
         self.view.backgroundColor = .white
 
-        if board?.id == User.shared.id || User.shared.auth == 4 {
+        if community?.id == User.shared.id || User.shared.auth == 4 {
             let moreButtonItem = UIBarButtonItem(image: UIImage(named: "icon_more")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(moreButtonTapped))
             moreButtonItem.tintColor = .black // 원하는 색상으로 설정
             navigationItem.rightBarButtonItem = moreButtonItem
@@ -54,7 +54,7 @@ class TalkReadVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDeleg
         setView()
         setupBackButton()
         self.navigationItem.title = ""
-        notification = board?.notification ?? false
+        notification = community?.notification ?? false
 
         // 스피너 초기화 및 설정
         activityIndicator = UIActivityIndicatorView(style: .large)
@@ -74,8 +74,8 @@ class TalkReadVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDeleg
     private func setTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(TalkCommentTableCell.self, forCellReuseIdentifier: "TalkCommentTableCell")
-        tableView.register(TalkReadTableCell.self, forCellReuseIdentifier: "TalkReadTableCell")
+        tableView.register(CommunityCommentTableCell.self, forCellReuseIdentifier: "CommunityCommentTableCell")
+        tableView.register(CommunityReadTableCell.self, forCellReuseIdentifier: "CommunityReadTableCell")
         tableView.separatorStyle = .none
         tableView.backgroundColor = .white
         view.addSubview(tableView)
@@ -211,14 +211,16 @@ class TalkReadVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDeleg
     }
 
     private func loadData() {
-        let url = "\(Bundle.main.TEST_URL)/board/comment/all"
+        let url = "\(Bundle.main.TEST_URL)/community/comment/all"
+        print("community_no : \(community?.no ?? 0)")
+        print("user_id : \(User.shared.id ?? "")")
         let parameters: [String: Any] = [
-            "board_no": board?.no ?? 0,
+            "community_no": community?.no ?? 0,
             "user_id": User.shared.id ?? ""
         ]
-
-        AF.request(url, method: .post, parameters: parameters)
-            .responseDecodable(of: [BoardCommentVO].self) { response in
+        
+        AF.request(url, method: .post, parameters: parameters,encoding: URLEncoding.default)
+            .responseDecodable(of: [CommunityCommentVO].self) { response in
                 switch response.result {
                 case .success(let commentResponse):
                     self.commentList = commentResponse
@@ -227,10 +229,10 @@ class TalkReadVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDeleg
                         self.tableView.reloadData()
                         self.view.layoutIfNeeded()
                     }
-
+                    
                 case .failure(let error):
                     self.log(message: "loadData Error: \(error)")
-
+                    
                 }
             }
     }
@@ -238,9 +240,9 @@ class TalkReadVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDeleg
     @objc private func submitButtonTapped() {
         if let nickname = User.shared.name {
             self.activityIndicator.startAnimating()
-            let url = "\(Bundle.main.TEST_URL)/board/comment/update"
+            let url = "\(Bundle.main.TEST_URL)/community/comment/update"
             let parameters: [String: Any] = [
-                "board_no": board?.no ?? 0,
+                "community_no": community?.no ?? 0,
                 "nickname": nickname,
                 "writer_id": User.shared.id as Any,
                 "content": commentView.text as Any,
@@ -335,8 +337,8 @@ class TalkReadVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDeleg
     // 삭제
     @objc private func deleteButtonTapped() {
 
-        guard let no = board?.no else { return }
-        let url = "\(Bundle.main.TEST_URL)/board/del/\(no)" // 실제 요청할 서버의 URL로 변경해주세요.
+        guard let no = community?.no else { return }
+        let url = "\(Bundle.main.TEST_URL)/community/del/\(no)" // 실제 요청할 서버의 URL로 변경해주세요.
 
         AF.request(url, method: .delete).response { response in
             switch response.result {
@@ -351,8 +353,8 @@ class TalkReadVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDeleg
 
     // 상단고정
     @objc private func notificationButtonTapped() {
-        guard let no = board?.no else { return }
-        let url = "\(Bundle.main.TEST_URL)/board/update/notification/\(no)" // 실제 요청할 서버의 URL로 변경해주세요.
+        guard let no = community?.no else { return }
+        let url = "\(Bundle.main.TEST_URL)/community/update/notification/\(no)" // 실제 요청할 서버의 URL로 변경해주세요.
         AF.request(url, method: .put).response { response in
             switch response.result {
             case .success:
@@ -375,8 +377,8 @@ class TalkReadVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDeleg
 
     // 수정
     @objc private func modifyButtonTapped() {
-        let vc = TalkModifyVC()
-        vc.board = board
+        let vc = CommunityModifyVC()
+        vc.community = community
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
@@ -390,9 +392,9 @@ class TalkReadVC: UIViewController, UITextViewDelegate, UIGestureRecognizerDeleg
 
 }
 
-extension TalkReadVC: UITableViewDataSource, UITableViewDelegate, TalkCommentTableCellDelegate {
+extension CommunityReadVC: UITableViewDataSource, UITableViewDelegate, CommunityCommentTableCellDelegate {
 
-    func didRequestDelete(_ cell: TalkCommentTableCell) {
+    func didRequestDelete(_ cell: CommunityCommentTableCell) {
         guard let indexPath = tableView.indexPath(for: cell) else { return }
         // 데이터 모델에서 해당 코멘트 제거
         commentList.remove(at: indexPath.row)
@@ -420,12 +422,12 @@ extension TalkReadVC: UITableViewDataSource, UITableViewDelegate, TalkCommentTab
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         switch indexPath.section {
         case 0:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "TalkReadTableCell", for: indexPath) as! TalkReadTableCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CommunityReadTableCell", for: indexPath) as! CommunityReadTableCell
             cell.selectionStyle = .none
-            cell.configure(with: board!)
+            cell.configure(with: community!)
             return cell
         case 1:
-            let cell = tableView.dequeueReusableCell(withIdentifier: "TalkCommentTableCell", for: indexPath) as! TalkCommentTableCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "CommunityCommentTableCell", for: indexPath) as! CommunityCommentTableCell
             let index = indexPath.row
             cell.delegate = self
             cell.selectionStyle = .none

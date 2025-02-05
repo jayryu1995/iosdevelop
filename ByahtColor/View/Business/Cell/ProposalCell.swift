@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import SnapKit
+import Kingfisher
 
 class ProposalCell: UITableViewCell {
     weak var delegate: ProposalCellDelegate?
@@ -58,6 +59,7 @@ class ProposalCell: UITableViewCell {
             }
             
             let imageView = GradientImageView(frame: .zero)
+            imageView.image = UIImage(named: "sample_image")
             if row == 0 {
                 imageView.tag = index + row
             }else{
@@ -74,16 +76,18 @@ class ProposalCell: UITableViewCell {
 
             
             if let resource = item.video {
+                
                 let str = resource.split(separator: ".").last ?? ""
                 if str == "jpg" {
-                    imageView.loadImage(from: resource)
-                } else {
-                    if let image = item.imagePath{
-                        imageView.loadImage(from: image)
+                    print(resource)
+                    if let url = URL(string:resource){
+                        imageView.kf.setImage(with: url)
+                    }
+                } else if let image = item.imagePath{
+                    if let url = URL(string:image){
+                        imageView.kf.setImage(with: url)
                     }
                 }
-            } else {
-                imageView.image = UIImage(named: "sample_image")
             }
 
             let label = UILabel()
@@ -94,7 +98,7 @@ class ProposalCell: UITableViewCell {
             let iconView = UIStackView()
             iconView.axis = .horizontal
             iconView.distribution = .equalSpacing
-            iconView.spacing = 8
+            iconView.spacing = 4
 
             item.snsList?.forEach { it in
                 var icon: UIImageView?
@@ -111,6 +115,10 @@ class ProposalCell: UITableViewCell {
                     icon.contentMode = .scaleAspectFit
                     icon.isUserInteractionEnabled = true
                     iconView.addArrangedSubview(icon)
+                    icon.snp.makeConstraints{
+                        $0.width.height.equalTo(20)
+                    }
+                    
                 }
             }
 
@@ -121,7 +129,7 @@ class ProposalCell: UITableViewCell {
                 make.width.equalToSuperview()
                 make.height.equalTo(cellHeight)
             }
-
+            
             iconView.snp.makeConstraints {
                 $0.leading.equalToSuperview().inset(16)
                 $0.bottom.equalToSuperview().offset(-16)

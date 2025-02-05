@@ -38,10 +38,10 @@ class CollabCommentVC: UIViewController, UITextViewDelegate {
     }
 
     private func loadData() {
-        let url = "\(Bundle.main.TEST_URL)/snap/comment/all"
+        let url = "\(Bundle.main.TEST_URL)/collab/comment/all"
         print("contentNo : \(contentNo)")
         let parameters: [String: Any] = [
-            "snap_no": contentNo,
+            "collab_no": contentNo,
             "user_id": User.shared.id ?? ""
         ]
 
@@ -171,9 +171,9 @@ class CollabCommentVC: UIViewController, UITextViewDelegate {
     @objc private func submitButtonTapped() {
         print("제출되었습니다")
 
-        let url = "\(Bundle.main.TEST_URL)/snap/comment/update"
+        let url = "\(Bundle.main.TEST_URL)/collab/comment/update"
         let parameters: [String: Any] = [
-            "snap_no": contentNo,
+            "collab_no": contentNo,
             "nickname": User.shared.nickname as Any,
             "writer_id": User.shared.id as Any,
             "content": commentView.text as Any,

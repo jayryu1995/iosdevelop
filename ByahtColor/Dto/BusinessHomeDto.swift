@@ -9,5 +9,5 @@ import Foundation
 
 struct BusinessHomeDto: Codable {
     let influenceProfileDtos: [InfluenceProfileDto]?
-    let snapDtoList: [CollabDto]?
+    let collabDtoList: [CollabDto]?
 }

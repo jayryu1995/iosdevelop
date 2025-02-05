@@ -9,9 +9,9 @@ import Alamofire
 import SnapKit
 import Combine
 
-class TalkVC: UIViewController {
+class CommunityVC: UIViewController {
 
-    private var viewModel = TalkViewModel()
+    private var viewModel = CommunityViewModel()
     private var cancellables = Set<AnyCancellable>()
     private var loadingIndicator: UIActivityIndicatorView?
     private let tableView = UITableView()
@@ -36,7 +36,7 @@ class TalkVC: UIViewController {
         self.navigationController?.setNavigationBarHidden(true, animated: animated)
         let nation = getLanguageNumber()
         
-        viewModel.fetchTalk(nation: nation)
+        viewModel.fetchCommunity(nation: nation)
     }
 
     override func viewWillDisappear(_ animated: Bool) {
@@ -50,7 +50,7 @@ class TalkVC: UIViewController {
         setupBindings()
         
         let nation = getLanguageNumber()
-        viewModel.fetchTalk(nation: nation)
+        viewModel.fetchCommunity(nation: nation)
     }
 
     
@@ -111,14 +111,14 @@ class TalkVC: UIViewController {
     }
 
     @objc private func buttonAction() {
-        let vc = TalkWriteVC()
+        let vc = CommunityWriteVC()
         navigationController?.pushViewController(vc, animated: true)
     }
 
     private func setupTableView() {
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(TalkTableCell.self, forCellReuseIdentifier: "TalkTableCell")
+        tableView.register(CommunityTableCell.self, forCellReuseIdentifier: "CommunityTableCell")
         tableView.separatorStyle = .none
         tableView.backgroundColor = .white
         view.addSubview(tableView)
@@ -161,7 +161,7 @@ class TalkVC: UIViewController {
     }
 }
 
-extension TalkVC: UITableViewDataSource, UITableViewDelegate {
+extension CommunityVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.results.count
     }
@@ -171,13 +171,13 @@ extension TalkVC: UITableViewDataSource, UITableViewDelegate {
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "TalkTableCell", for: indexPath) as! TalkTableCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "CommunityTableCell", for: indexPath) as! CommunityTableCell
         cell.selectionStyle = .none
 
         let index = indexPath.row
-        let talk = viewModel.results[index]
-        cell.configure(with: talk)
-        if let path = talk.imageList?.first {
+        let community = viewModel.results[index]
+        cell.configure(with: community)
+        if let path = community.imageList?.first {
             print(path)
             cell.setImage(imagePath: path)
         }
@@ -189,9 +189,9 @@ extension TalkVC: UITableViewDataSource, UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
 
         let selectedData = viewModel.results[indexPath.row]
-        let detailVC = TalkReadVC()
+        let detailVC = CommunityReadVC()
 
-        detailVC.board = selectedData
+        detailVC.community = selectedData
         self.navigationController?.pushViewController(detailVC, animated: true)
     }
 }

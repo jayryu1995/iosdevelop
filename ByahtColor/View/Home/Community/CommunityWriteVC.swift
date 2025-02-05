@@ -9,7 +9,7 @@ import SnapKit
 import Alamofire
 import UIKit
 
-class TalkWriteVC: UIViewController, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class CommunityWriteVC: UIViewController, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     private var activityIndicator: UIActivityIndicatorView!
     private let topView = UIView()
     private let backButton = UIImageView()
@@ -219,7 +219,7 @@ class TalkWriteVC: UIViewController, UITextViewDelegate, UIImagePickerController
 
     @objc private func uploadButtonTapped() {
         self.activityIndicator.startAnimating()
-        let url = "\(Bundle.main.TEST_URL)/board/insert"
+        let url = "\(Bundle.main.TEST_URL)/community/insert"
         let headers: HTTPHeaders = ["Content-type": "multipart/form-data"]
         let user_id = User.shared.id ?? ""
         let name = User.shared.name ?? ""

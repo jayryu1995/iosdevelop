@@ -13,7 +13,7 @@ class CollabTableViewCell: UITableViewCell {
     weak var delegate: CollabTableViewCellDelegate?
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let formatter = ISO8601DateFormatter()
-    var snapList: [CollabDto] = []
+    var collabList: [CollabDto] = []
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -36,7 +36,7 @@ class CollabTableViewCell: UITableViewCell {
     }
 
     func setupImageViews(list: [CollabDto]) {
-        snapList = list
+        collabList = list
         let stackView = UIStackView()
         stackView.axis = .horizontal
         stackView.distribution = .fillEqually

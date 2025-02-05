@@ -63,6 +63,8 @@ class BusinessHomeVC: UIViewController, UIScrollViewDelegate {
         view.backgroundColor = .white
         self.navigationController?.navigationBar.isHidden = true
         
+        
+        
         Messaging.messaging().subscribe(toTopic: "business") { _ in
             self.log(message: "Subscribed to business")
         }
@@ -107,7 +109,7 @@ class BusinessHomeVC: UIViewController, UIScrollViewDelegate {
                     switch result {
                     case .success(let data):
 
-                        self?.collabList = data.snapDtoList ?? []
+                        self?.collabList = data.collabDtoList ?? []
                         self?.influenceList = data.influenceProfileDtos ?? []
                         self?.setupUI()
                         self?.setupConstraints()
@@ -151,7 +153,7 @@ class BusinessHomeVC: UIViewController, UIScrollViewDelegate {
         button.setTitleColor(UIColor(hex: "#009BF2"), for: .normal)
         button.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 14)
         button.backgroundColor = .white
-        button.addTarget(self, action: #selector(snapButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(collabButtonTapped), for: .touchUpInside)
 
         let horizontalScrollView = UIScrollView()
         horizontalScrollView.showsHorizontalScrollIndicator = false
@@ -233,7 +235,7 @@ class BusinessHomeVC: UIViewController, UIScrollViewDelegate {
 
     }
 
-    @objc private func snapButtonTapped() {
+    @objc private func collabButtonTapped() {
 
         if User.shared.id == "byaht" || User.shared.id == "admin" {
             let vc = AdminCollabVC()
@@ -405,4 +407,7 @@ class BusinessHomeVC: UIViewController, UIScrollViewDelegate {
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
+    
+    
+    
 }

@@ -47,7 +47,7 @@ class TabBarViewController: UITabBarController {
             homeVC.tabBarItem.selectedImage = UIImage(named: "icon_home")?.withRenderingMode(.alwaysOriginal)
             homeVC.tabBarItem.image = UIImage(named: "icon_home")
             
-            let communityVC = TalkVC()
+            let communityVC = CommunityVC()
             communityVC.title = "Community"
             communityVC.tabBarItem.image = UIImage(named: "icon_community")
             communityVC.tabBarItem.selectedImage = UIImage(named: "icon_community")?.withRenderingMode(.alwaysOriginal)
@@ -103,7 +103,7 @@ class TabBarViewController: UITabBarController {
             let navigationTab5 = UINavigationController(rootViewController: myPageVC)
 
             if User.shared.id == "byaht" || User.shared.id == "admin"{
-                let communityVC = TalkVC()
+                let communityVC = CommunityVC()
                 communityVC.title = "Community"
                 communityVC.tabBarItem.image = UIImage(named: "icon_community")
                 communityVC.tabBarItem.selectedImage = UIImage(named: "icon_community")?.withRenderingMode(.alwaysOriginal)

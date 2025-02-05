@@ -9,15 +9,23 @@ import Foundation
 import Alamofire
 import Combine
 
+enum SocialLoginType: String {
+    case google = "GOOGLE"
+    case facebook = "FACEBOOK"
+    case kakao = "KAKAO"
+    }
+
+
 class MemberViewModel: ObservableObject {
 
     var message: Bool?
     var error: String?
 
     let headers: HTTPHeaders = [
-        .contentType("application/json")
+        "Accept": "application/json"
     ]
 
+    
     // 서버 상태 체크
     func checkServerState(completion: @escaping (Result<Bool, Error>) -> Void) {
         let url = "\(Bundle.main.TEST_URL)/"
@@ -90,6 +98,23 @@ class MemberViewModel: ObservableObject {
             }
         }
     }
+    
+    //    func checkMemberId(id: String, completion: @escaping (Result<Bool, Error>) -> Void) {
+    //        let url = "\(Bundle.main.TEST_URL)/member/check/\(id)"
+    //        AF.request(url).validate().responseJSON { response in
+    //            switch response.result {
+    //            case .success(let value):
+    //                if let exists = value as? Bool {
+    //                    print(exists)
+    //                    completion(.success(exists))
+    //                } else {
+    //                    completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid response"])))
+    //                }
+    //            case .failure(let error):
+    //                completion(.failure(error))
+    //            }
+    //        }
+    //    }
 
     // 로그인 데이터
     func getLoginData(member_id: String, completion: @escaping (Result<InfluenceDataDto, Error>) -> Void) {

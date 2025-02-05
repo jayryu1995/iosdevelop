@@ -15,7 +15,7 @@ protocol CollabDetailTableViewCellDelegate: AnyObject {
 }
 class CollabDetailTableViewCell: UITableViewCell, UIScrollViewDelegate {
     weak var delegate: CollabDetailTableViewCellDelegate?
-    var snapId: String?
+    var collabId: String?
     var postNo: Int?
     var likeFlag = false
     var like_count: Int?
@@ -310,34 +310,34 @@ class CollabDetailTableViewCell: UITableViewCell, UIScrollViewDelegate {
         }
     }
 
-    func setText(snap: CollabDto) {
-        snapId = snap.id ?? ""
+    func setText(collab: CollabDto) {
+        collabId = collab.id ?? ""
 
-        nicknameLabel.text = snap.nickname
+        nicknameLabel.text = collab.nickname
         
-        if let resource = snap.profileImage{
+        if let resource = collab.profileImage{
             print("prfileImage: \(resource)")
             let url = URL(string: resource)
             profileIcon.kf.setImage(with: url)
         }
         
-        titleLabel.text = snap.title
-        contentLabel.text = snap.content
-        infoLabel.text = snap.info
-        linkUrl = snap.link ?? ""
+        titleLabel.text = collab.title
+        contentLabel.text = collab.content
+        infoLabel.text = collab.info
+        linkUrl = collab.link ?? ""
         
         if !linkUrl.contains("https") && !linkUrl.contains("http"){
             linkLabel.isHidden = true
         }
         
-        if snap.application_state ?? 0 < 2 {
+        if collab.application_state ?? 0 < 2 {
             codeLabel.isHidden = true
             codeButton.isHidden = true
         } else {
-            codeButton.setTitle(snap.coupon_code, for: .normal)
+            codeButton.setTitle(collab.coupon_code, for: .normal)
         }
-        like_count = snap.like_count ?? 0
-        likeFlag = snap.isLiked ?? false
+        like_count = collab.like_count ?? 0
+        likeFlag = collab.isLiked ?? false
 
         if likeFlag {
             button1.setImage(UIImage(named: "like_icon2"), for: .normal)
@@ -348,7 +348,7 @@ class CollabDetailTableViewCell: UITableViewCell, UIScrollViewDelegate {
             button1.setTitle("\(like_count)", for: .normal)
         }
 
-        self.setPostNo(snap.no ?? 0)
+        self.setPostNo(collab.no ?? 0)
 
     }
 
@@ -370,7 +370,7 @@ class CollabDetailTableViewCell: UITableViewCell, UIScrollViewDelegate {
 
         let user_id = User.shared.id ?? ""
 
-        let likeDto = LikeDto(user_id: user_id, snap_id: postNo)
+        let likeDto = LikeDto(user_id: user_id, collab_id: postNo)
 
         if likeFlag {
             // 좋아요를 취소하는 경우
@@ -398,7 +398,7 @@ class CollabDetailTableViewCell: UITableViewCell, UIScrollViewDelegate {
     }
 
     private func sendLikeRequest(likeRequestDto: LikeDto) {
-        let url = "\(Bundle.main.TEST_URL)/snap/like"
+        let url = "\(Bundle.main.TEST_URL)/collab/like"
         AF.request(url, method: .post, parameters: likeRequestDto, encoder: JSONParameterEncoder.default)
             .response { [weak self] response in
                 switch response.result {
@@ -413,7 +413,7 @@ class CollabDetailTableViewCell: UITableViewCell, UIScrollViewDelegate {
     }
 
     private func sendUnlikeRequest(likeRequestDto: LikeDto) {
-        let url = "\(Bundle.main.TEST_URL)/snap/like"
+        let url = "\(Bundle.main.TEST_URL)/collab/like"
         AF.request(url, method: .delete, parameters: likeRequestDto, encoder: JSONParameterEncoder.default)
             .response { [weak self] response in
                 switch response.result {

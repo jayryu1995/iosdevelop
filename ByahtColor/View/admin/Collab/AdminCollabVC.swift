@@ -159,8 +159,8 @@ class AdminCollabVC: UIViewController, CollabFilterVCDelegate {
         }
         var url = ""
         switch category {
-        case 0: url = "\(Bundle.main.TEST_URL)/snap/select/new"
-        default: url = "\(Bundle.main.TEST_URL)/snap/select"
+        case 0: url = "\(Bundle.main.TEST_URL)/collab/select/new"
+        default: url = "\(Bundle.main.TEST_URL)/collab/select"
         }
 
         // 데이터 다시 로드
@@ -292,7 +292,7 @@ class AdminCollabVC: UIViewController, CollabFilterVCDelegate {
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
-    func didTapButton(_ snapVC: CollabFilterVC, WithArray array: [String], WithArray2 array2: [String]) {
+    func didTapButton(_ collabVC: CollabFilterVC, WithArray array: [String], WithArray2 array2: [String]) {
         // 필터 적용 로직
         filter = array
         filter2 = array2
@@ -307,8 +307,8 @@ extension AdminCollabVC: UITableViewDataSource, UITableViewDelegate, FloatingPan
         // no 값을 사용하여 해당 페이지를 전환
         let detailVC = AdminCollabReadVC()
 
-        if let selectedSnap = viewModel.collabList.first(where: { $0.no == no }) {
-            detailVC.snapList.append(selectedSnap)
+        if let selected = viewModel.collabList.first(where: { $0.no == no }) {
+            detailVC.collabList.append(selected)
             detailVC.hidesBottomBarWhenPushed = true
             self.navigationController?.navigationBar.isHidden = false
             self.navigationController?.pushViewController(detailVC, animated: true)
@@ -368,12 +368,12 @@ extension AdminCollabVC: UITableViewDataSource, UITableViewDelegate, FloatingPan
         let secondImageIndex = firstImageIndex + 1
 
         // 셀에 할당할 이미지 배열 초기화
-        var snapsForCell = [CollabDto]()
+        var collabsForCell = [CollabDto]()
         do {
             // 첫 번째 Snap 추가
             if firstImageIndex < viewModel.collabList.count {
                 let firstData = viewModel.collabList[firstImageIndex]
-                snapsForCell.append(firstData)
+                collabsForCell.append(firstData)
             }
         } catch let error as NSError {
             // 예외 처리 코드
@@ -384,14 +384,14 @@ extension AdminCollabVC: UITableViewDataSource, UITableViewDelegate, FloatingPan
             // 두 번째 Snap 추가
             if secondImageIndex < viewModel.collabList.count {
                 let secondData = viewModel.collabList[secondImageIndex]
-                snapsForCell.append(secondData)
+                collabsForCell.append(secondData)
             }
         } catch let error as NSError {
             print("An exception occurred: \(error.localizedDescription)")
         }
 
         // 셀의 이미지 뷰 설정 함수 호출
-        cell.setupImageViews(list: snapsForCell)
+        cell.setupImageViews(list: collabsForCell)
 
         return cell
     }

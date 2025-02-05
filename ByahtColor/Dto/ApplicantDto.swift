@@ -6,7 +6,7 @@
 //
 
 // ApplicantDto
-struct ApplicantDto: Decodable {
+struct ApplicantDto: Codable {
     let no: Int?
     let userId: String?
     let name: String?

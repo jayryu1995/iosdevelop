@@ -1,5 +1,5 @@
 //
-//  TalkModifyVC.swift
+//  CommunityModifyVC.swift
 //  ByahtColor
 //
 //  Created by jaem on 2024/01/16.
@@ -10,7 +10,7 @@ import Alamofire
 import UIKit
 import Kingfisher
 
-class TalkModifyVC: UIViewController, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class CommunityModifyVC: UIViewController, UITextViewDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     private var activityIndicator: UIActivityIndicatorView!
     private let topView = UIView()
     private let backButton = UIImageView()
@@ -26,7 +26,7 @@ class TalkModifyVC: UIViewController, UITextViewDelegate, UIImagePickerControlle
     lazy private var contentView = UIView()
     lazy private var imageContainerView = UIView()
     lazy private var imageScrollView = UIScrollView()
-    var board : Talk?
+    var community : Community?
     
     
     override func viewWillAppear(_ animated: Bool) {
@@ -58,7 +58,7 @@ class TalkModifyVC: UIViewController, UITextViewDelegate, UIImagePickerControlle
 
     private func loadImagesIntoSelectedImages() {
         // Optional binding으로 이미지 리스트가 있는지 확인
-        guard let imageList = board?.imageList else { return }
+        guard let imageList = community?.imageList else { return }
         
         // 이미지 리스트를 순회하며 URL을 생성하고, 이미지를 로드
         for imageUrl in imageList {
@@ -157,7 +157,7 @@ class TalkModifyVC: UIViewController, UITextViewDelegate, UIImagePickerControlle
     }
 
     private func setTextView() {
-        contentTextView.text = board?.content ?? "talk_write_content".localized
+        contentTextView.text = community?.content ?? "talk_write_content".localized
         contentTextView.textColor = .lightGray
         contentTextView.isUserInteractionEnabled = true
         contentTextView.font = UIFont(name: "Pretendard-Regular", size: 14)
@@ -223,7 +223,7 @@ class TalkModifyVC: UIViewController, UITextViewDelegate, UIImagePickerControlle
 
     private func setTitleView() {
         
-        titleTextView.text = board?.title ?? "talk_write_title".localized
+        titleTextView.text = community?.title ?? "talk_write_title".localized
         titleTextView.font = UIFont(name: "Pretendard-SemiBold", size: 20)
         titleTextView.isUserInteractionEnabled = true
         titleTextView.textColor = .lightGray
@@ -255,11 +255,11 @@ class TalkModifyVC: UIViewController, UITextViewDelegate, UIImagePickerControlle
 
     @objc private func uploadButtonTapped() {
         self.activityIndicator.startAnimating()
-        let url = "\(Bundle.main.TEST_URL)/board/update"
+        let url = "\(Bundle.main.TEST_URL)/community/update"
         let headers: HTTPHeaders = ["Content-type": "multipart/form-data"]
         let user_id = User.shared.id ?? ""
         let name = User.shared.name ?? ""
-        let no = board?.no?.toString() ?? ""
+        let no = community?.no?.toString() ?? ""
         
         
         
@@ -278,7 +278,7 @@ class TalkModifyVC: UIViewController, UITextViewDelegate, UIImagePickerControlle
                     multipartFormData.append(imageData, withName: "images", fileName: "image\(index).jpg", mimeType: "image/jpg")
                 }
             }
-        }, to: url, method: .post, headers: headers).responseString { response in
+        }, to: url, method: .patch, headers: headers).responseString { response in
             switch response.result {
             case .success(let stringValue):
                 self.activityIndicator.stopAnimating()

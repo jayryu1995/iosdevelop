@@ -134,7 +134,7 @@ class RequestCollabVC: UIViewController, UIScrollViewDelegate, UINavigationContr
         button.layer.cornerRadius = 4
         return button
     }()
-
+    private lazy var viewModel = CollabViewModel()
     private var snsButtons = [UIButton]()
     private var selectedSns: String = ""
     private var activityIndicator: UIActivityIndicatorView!
@@ -419,45 +419,42 @@ class RequestCollabVC: UIViewController, UIScrollViewDelegate, UINavigationContr
         self.activityIndicator.startAnimating()
         view.isUserInteractionEnabled = false
 
-        let url = "\(Bundle.main.TEST_URL)/collab/application/insert"
-        let headers: HTTPHeaders = ["Content-type": "multipart/form-data"]
-        let user_id = User.shared.id ?? ""
-        let name: String = nameField.text!
-        let sns: String = selectedSns
-        let email: String = emailField.text!
-        let link: String = linkField.text!
-        let bank: String = bankButton.titleLabel?.text ?? ""
-        let account: String = "0"
-        let tel: String = telField.text!
-        let address: String = addressField.text!
-        let collab_no: String = "\(collab_no)"
-
-        // MultipartFormData를 사용하여 요청 생성
-        AF.upload(multipartFormData: { multipartFormData in
-            // 텍스트 데이터 추가
-            multipartFormData.append(Data(user_id.utf8), withName: "user_id")
-            multipartFormData.append(Data(collab_no.utf8), withName: "collab_no")
-            multipartFormData.append(Data(name.utf8), withName: "name")
-            multipartFormData.append(Data(sns.utf8), withName: "sns")
-            multipartFormData.append(Data(email.utf8), withName: "email")
-            multipartFormData.append(Data(link.utf8), withName: "link")
-            multipartFormData.append(Data(bank.utf8), withName: "bank")
-            multipartFormData.append(Data(account.utf8), withName: "account")
-            multipartFormData.append(Data(address.utf8), withName: "address")
-            multipartFormData.append(Data(tel.utf8), withName: "tel")
-
-        }, to: url, method: .post, headers: headers).responseString { response in
-            switch response.result {
+        let dto = ApplicantDto(
+            no: nil,
+            userId: User.shared.id ?? "",
+            name: nameField.text ?? "",
+            collabNo: collab_no, // collabNo는 String으로 변환
+            link: linkField.text ?? "",
+            sns: selectedSns,
+            tel: telField.text ?? "",
+            email: emailField.text ?? "",
+            account: 0, // Default 값
+            address: addressField.text ?? "",
+            bank: bankButton.titleLabel?.text ?? "",
+            state: 0,
+            regi_date: nil
+        )
+        
+        
+        
+        viewModel.insertApplication(dto: dto) { response in
+            // 사용자 인터페이스 상호작용 비활성화 해제
+            self.view.isUserInteractionEnabled = true
+            
+            switch response {
             case .success(let stringValue):
-                self.view.isUserInteractionEnabled = true
+                // 성공 처리
+                self.log(message: "Upload successful: \(stringValue)")
                 self.delegate?.didCompleteDataTransfer(data: true)
                 self.navigationController?.popViewController(animated: true)
-
+                
             case .failure(let error):
-                self.view.isUserInteractionEnabled = true
-                self.log(message: "Upload failed with error: \(error)")
+                // 실패 처리
+                self.log(message: "Upload failed with error: \(error.localizedDescription)")
+                self.showAlert(title: "Error", message: "Failed to upload data. Please try again.")
             }
         }
+
     }
 
     @objc private func uploadButtonTapped() {

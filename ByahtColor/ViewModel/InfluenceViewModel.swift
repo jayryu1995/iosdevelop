@@ -10,6 +10,7 @@ import Alamofire
 import Combine
 import UIKit
 
+
 class InfluenceViewModel: ObservableObject {
     @Published var accountData: InfluenceMyPageDto?
     @Published var profileData: InfluenceProfileDto?

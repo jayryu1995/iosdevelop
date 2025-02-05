@@ -9,5 +9,5 @@ import UIKit
 
 struct LikeDto: Encodable {
     let user_id: String?
-    let snap_id: Int?
+    let collab_id: Int?
 }

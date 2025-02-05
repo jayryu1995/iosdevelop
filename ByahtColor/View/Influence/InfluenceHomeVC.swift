@@ -120,7 +120,7 @@ class InfluenceHomeVC: UIViewController, UIScrollViewDelegate {
                 DispatchQueue.main.async {
                     switch result {
                     case .success(let data):
-                        self?.collabList = data.snapDtoList ?? []
+                        self?.collabList = data.collabDtoList ?? []
                         self?.businessList = data.businessDtos ?? []
 
                         self?.setupUI()
@@ -168,7 +168,7 @@ class InfluenceHomeVC: UIViewController, UIScrollViewDelegate {
         button.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 14)
         button.backgroundColor = .white
         button.tag = 0
-        button.addTarget(self, action: #selector(snapButtonTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(collabButtonTapped), for: .touchUpInside)
 
         let horizontalScrollView = UIScrollView()
         horizontalScrollView.showsHorizontalScrollIndicator = false
@@ -254,7 +254,7 @@ class InfluenceHomeVC: UIViewController, UIScrollViewDelegate {
 
     }
 
-    @objc private func snapButtonTapped() {
+    @objc private func collabButtonTapped() {
         let vc = CollabVC()
         self.navigationController?.pushViewController(vc, animated: true)
     }

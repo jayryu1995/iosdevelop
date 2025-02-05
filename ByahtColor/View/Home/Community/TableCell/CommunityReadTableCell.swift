@@ -1,5 +1,5 @@
 //
-//  BoardCell.swift
+//  CommunityCell.swift
 //  ByahtColor
 //
 //  Created by jaem on 4/19/24.
@@ -10,7 +10,7 @@ import SnapKit
 import Alamofire
 import Kingfisher
 
-class TalkReadTableCell: UITableViewCell, UIScrollViewDelegate {
+class CommunityReadTableCell: UITableViewCell, UIScrollViewDelegate {
     private let profileImageView: UIImageView = {
         let image = UIImageView()
         image.image = UIImage(named: "icon_profile2")
@@ -201,36 +201,36 @@ class TalkReadTableCell: UITableViewCell, UIScrollViewDelegate {
     }
 
     // 데이터 입력
-    func configure(with board: Talk) {
+    func configure(with community: Community) {
 
-        if let resource = board.profileImage{
+        if let resource = community.profileImage{
             let url = URL(string: resource)
             profileImageView.kf.setImage(with: url)
             profileImageView.layer.cornerRadius = profileImageView.frame.size.width / 2
         }
-        nicknameLabel.text = board.nickname
-        dateLabel.text = CustomFunction().formatDate(board.regi_date ?? "")
-        titleLabel.text = board.title
-        contentLabel.text = board.content
-        commentLabel.text = board.comment_count?.toString()
-        if let count = board.like_count{
+        nicknameLabel.text = community.nickname
+        dateLabel.text = CustomFunction().formatDate(community.regi_date ?? "")
+        titleLabel.text = community.title
+        contentLabel.text = community.content
+        commentLabel.text = community.comment_count?.toString()
+        if let count = community.like_count{
             likeCounter = count
-            likeLabel.text = board.like_count?.toString()
+            likeLabel.text = community.like_count?.toString()
         }
         
         
-        if board.imageList?.isEmpty == false {
-            setImage(imageList: board.imageList!)
+        if community.imageList?.isEmpty == false {
+            setImage(imageList: community.imageList!)
         } else { modifyContraint() }
 
-        let isLiked = board.isLiked ?? false
+        let isLiked = community.isLiked ?? false
         if isLiked {
             likeButton.setImage(UIImage(named: "like_icon2"), for: .normal)
             likeButton.isSelected = true
         } else {
             likeButton.setImage(UIImage(named: "like_icon"), for: .normal)
         }
-        likeButton.tag = board.no ?? 0
+        likeButton.tag = community.no ?? 0
         likeButton.addTarget(self, action: #selector(button1Tapped), for: .touchUpInside)
 
     }
@@ -290,7 +290,7 @@ class TalkReadTableCell: UITableViewCell, UIScrollViewDelegate {
     // 좋아요 눌렸을 때 호출될 메서드
     @objc private func button1Tapped(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
-        let likeRequestDto = BoardLikeDto(user_id: User.shared.id ?? "", board_id: sender.tag)
+        let likeRequestDto = CommunityLikeDto(user_id: User.shared.id ?? "", community_id: sender.tag)
         // 상태에 따른 이미지 변경
         if sender.isSelected {
             sender.setImage(UIImage(named: "like_icon2"), for: .normal)
@@ -305,30 +305,30 @@ class TalkReadTableCell: UITableViewCell, UIScrollViewDelegate {
         }
     }
 
-    private func sendUnlikeRequest(likeRequestDto: BoardLikeDto) {
-        let url = "\(Bundle.main.TEST_URL)/board/like"
+    private func sendUnlikeRequest(likeRequestDto: CommunityLikeDto) {
+        let url = "\(Bundle.main.TEST_URL)/community/like"
         AF.request(url, method: .delete, parameters: likeRequestDto, encoder: JSONParameterEncoder.default)
             .response { response in
                 switch response.result {
                 case .success(let data):
-                    log(vc: "TalkReadTC", message: "sendUnlikeRequest request successful")
+                    log(vc: "CommunityReadTC", message: "sendUnlikeRequest request successful")
 
                 case .failure(let error):
-                    log(vc: "TalkReadTC", message: "sendUnlikeRequest Error : \(error)")
+                    log(vc: "CommunityReadTC", message: "sendUnlikeRequest Error : \(error)")
                 }
             }
     }
 
-    private func sendLikeRequest(likeRequestDto: BoardLikeDto) {
-        let url = "\(Bundle.main.TEST_URL)/board/like"
+    private func sendLikeRequest(likeRequestDto: CommunityLikeDto) {
+        let url = "\(Bundle.main.TEST_URL)/community/like"
         AF.request(url, method: .post, parameters: likeRequestDto, encoder: JSONParameterEncoder.default)
             .response { response in
                 switch response.result {
                 case .success(let data):
-                    log(vc: "TalkReadTC", message: "sendLikeRequest request successful")
+                    log(vc: "CommunityReadTC", message: "sendLikeRequest request successful")
 
                 case .failure(let error):
-                    log(vc: "TalkReadTC", message: "sendLikeRequest Error : \(error)")
+                    log(vc: "CommunityReadTC", message: "sendLikeRequest Error : \(error)")
                 }
             }
     }

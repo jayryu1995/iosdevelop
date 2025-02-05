@@ -122,7 +122,9 @@ open class GroupChannelMessageListUseCase: NSObject {
         params.replyType = .all
         params.includeThreadInfo = true
         params.includeParentMessageInfo = true
-
+        
+        
+        
         let collection = SendbirdChat.createMessageCollection(
             channel: channel,
             startingPoint: timestampStorage.lastTimestamp(for: channel) ?? .max,
@@ -155,7 +157,7 @@ open class GroupChannelMessageListUseCase: NSObject {
 
     private func appendPreviousMessages(_ newMessages: [BaseMessage]) {
         guard newMessages.isEmpty == false else { return }
-
+        
         messages.insert(contentsOf: newMessages, at: 0)
     }
 

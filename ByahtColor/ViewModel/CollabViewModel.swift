@@ -15,6 +15,7 @@ class CollabViewModel: ObservableObject {
     @Published var isLoading: Bool = false
     var cancellables = Set<AnyCancellable>()
 
+    
     func loadData(url: String, userId: String, styles: [String], sns: [String], nation: String?) {
         isLoading = true
         
@@ -40,9 +41,9 @@ class CollabViewModel: ObservableObject {
     }
     
     // Collab insert
-    func insertCollab(dto : SnapInsertDto, images : [UIImage]?, completion: @escaping (Result<String, Error>) -> Void) {
+    func insertCollab(dto : CollabInsertDto, images : [UIImage]?, completion: @escaping (Result<String, Error>) -> Void) {
     
-        let url = "\(Bundle.main.TEST_URL)/snap/update"
+        let url = "\(Bundle.main.TEST_URL)/collab/update"
         let headers: HTTPHeaders = ["Content-type": "multipart/form-data"]
 
         guard let jsonData = try? JSONEncoder().encode(dto) else {
@@ -74,9 +75,9 @@ class CollabViewModel: ObservableObject {
     }
     
     // Collab 수정
-    func updateCollab(dto : SnapInsertDto, images : [UIImage]?, completion: @escaping (Result<String, Error>) -> Void) {
+    func updateCollab(dto : CollabInsertDto, images : [UIImage]?, completion: @escaping (Result<String, Error>) -> Void) {
     
-        let url = "\(Bundle.main.TEST_URL)/snap/update"
+        let url = "\(Bundle.main.TEST_URL)/collab/update"
         let headers: HTTPHeaders = ["Content-type": "multipart/form-data"]
 
         guard let jsonData = try? JSONEncoder().encode(dto) else {
@@ -107,5 +108,61 @@ class CollabViewModel: ObservableObject {
 
         }
     }
+    
+    func insertApplication(dto : ApplicantDto, completion: @escaping (Result<String, Error>) -> Void){
+        let url = "\(Bundle.main.TEST_URL)/collab/application/insert"
+        let headers: HTTPHeaders = ["Content-type": "multipart/form-data"]
+        // JSON 인코딩
+        guard let jsonData = try? JSONEncoder().encode(dto) else {
+            let encodingError = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Failed to encode JSON"])
+            completion(.failure(encodingError))
+            return
+        }
+        
+        // JSON 데이터를 딕셔너리로 변환
+        guard let jsonObject = try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers) as? [String: Any] else {
+            let jsonConversionError = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Failed to convert JSON to Dictionary"])
+            completion(.failure(jsonConversionError))
+            return
+        }
+        
+        // 요청 보내기
+        AF.request(url, method: .post, parameters: jsonObject, encoding: JSONEncoding.default, headers: ["Content-Type": "application/json"]).responseString { response in
+            switch response.result {
+            case .success(let responseString):
+                completion(.success(responseString))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
    
+    
+    func insertReview(dto : ReviewDto, completion: @escaping (Result<String, Error>) -> Void){
+        let url = "\(Bundle.main.TEST_URL)/collab/application/insert"
+        let headers: HTTPHeaders = ["Content-type": "multipart/form-data"]
+        // JSON 인코딩
+        guard let jsonData = try? JSONEncoder().encode(dto) else {
+            let encodingError = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Failed to encode JSON"])
+            completion(.failure(encodingError))
+            return
+        }
+        
+        // JSON 데이터를 딕셔너리로 변환
+        guard let jsonObject = try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers) as? [String: Any] else {
+            let jsonConversionError = NSError(domain: "", code: 0, userInfo: [NSLocalizedDescriptionKey: "Failed to convert JSON to Dictionary"])
+            completion(.failure(jsonConversionError))
+            return
+        }
+        
+        // 요청 보내기
+        AF.request(url, method: .post, parameters: jsonObject, encoding: JSONEncoding.default, headers: ["Content-Type": "application/json"]).responseString { response in
+            switch response.result {
+            case .success(let responseString):
+                completion(.success(responseString))
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
 }

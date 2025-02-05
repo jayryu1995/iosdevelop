@@ -213,17 +213,17 @@ extension McnProfileVC : UITableViewDataSource {
         let firstImageIndex = indexPath.row * 2
         let secondImageIndex = firstImageIndex + 1
 
-        var snapsForCell = [InfluenceProfileDto]()
+        var collabsForCell = [InfluenceProfileDto]()
 
         if firstImageIndex < influenceList.count {
-            snapsForCell.append(influenceList[firstImageIndex])
+            collabsForCell.append(influenceList[firstImageIndex])
         }
 
         if secondImageIndex < influenceList.count {
-            snapsForCell.append(influenceList[secondImageIndex])
+            collabsForCell.append(influenceList[secondImageIndex])
         }
 
-        cell.setupImageViews(list: snapsForCell, row: indexPath.row)
+        cell.setupImageViews(list: collabsForCell, row: indexPath.row)
 
         return cell
     }

@@ -108,7 +108,7 @@ class ApplicationStateVC: UIViewController {
     private var selectedMiniTabIndex: Int = 1
     private var stackView = UIStackView()
     private var tableView = UITableView()
-    private var snapList: [CollabDto] = []
+    private var collabList: [CollabDto] = []
     private var selectedTab = 0
 
     override func viewWillAppear(_ animated: Bool) {
@@ -137,7 +137,7 @@ class ApplicationStateVC: UIViewController {
     }
 
     private func clearAndReloadTableView() {
-        snapList.removeAll()
+        collabList.removeAll()
         // 기존 테이블 뷰를 제거
         tableView.removeFromSuperview()
 
@@ -295,34 +295,34 @@ extension ApplicationStateVC: CollabTableViewCell2Delegate, UITableViewDelegate,
     func didTapButtonInCell(_ cell: CollabTableViewCell2, withNo no: Int) {
         let vc = ReviewWriteVC()
         vc.collab_no = no
-        if let selectedSnap = snapList.first(where: { $0.no == no }) {
-            let collab = selectedSnap
+        if let selected = collabList.first(where: { $0.no == no }) {
+            let collab = selected
             if collab.tiktok == true {
                 vc.tags.append("TikTok")
             }
-
+            
             if collab.instagram == true {
                 vc.tags.append("Instagram")
             }
-
+            
             if collab.facebook == true {
                 vc.tags.append("Facebook")
             }
-
+            
             if collab.shopee == true {
                 vc.tags.append("Shopee")
             }
             vc.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(vc, animated: true)
         }
-
+        
     }
 
     func didTapCell(_ cell: CollabTableViewCell2, withNo no: Int) {
         // no 값을 사용하여 해당 페이지를 전환
         let detailVC = CollabDetailVC()
-        if let selectedSnap = snapList.first(where: { $0.no == no }) {
-            detailVC.collab = selectedSnap
+        if let selectedCollab = collabList.first(where: { $0.no == no }) {
+            detailVC.collab = selectedCollab
             detailVC.hidesBottomBarWhenPushed = true
             self.navigationController?.navigationBar.isHidden = false
             self.navigationController?.pushViewController(detailVC, animated: true)
@@ -330,7 +330,7 @@ extension ApplicationStateVC: CollabTableViewCell2Delegate, UITableViewDelegate,
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let contentCount = snapList.count / 2
+        let contentCount = collabList.count / 2
         return contentCount+1
     }
 
@@ -351,12 +351,12 @@ extension ApplicationStateVC: CollabTableViewCell2Delegate, UITableViewDelegate,
         let secondImageIndex = firstImageIndex + 1
 
         // 셀에 할당할 이미지 배열 초기화
-        var snapsForCell = [CollabDto]()
+        var collabsForCell = [CollabDto]()
         do {
             // 첫 번째 Snap 추가
-            if firstImageIndex < snapList.count {
-                let firstData = snapList[firstImageIndex]
-                snapsForCell.append(firstData)
+            if firstImageIndex < collabList.count {
+                let firstData = collabList[firstImageIndex]
+                collabsForCell.append(firstData)
 
             }
         } catch let error as NSError {
@@ -366,16 +366,16 @@ extension ApplicationStateVC: CollabTableViewCell2Delegate, UITableViewDelegate,
 
         do {
             // 두 번째 Snap 추가
-            if secondImageIndex < snapList.count {
-                let secondData = snapList[secondImageIndex]
-                snapsForCell.append(secondData)
+            if secondImageIndex < collabList.count {
+                let secondData = collabList[secondImageIndex]
+                collabsForCell.append(secondData)
             }
         } catch let error as NSError {
             print("An exception occurred: \(error.localizedDescription)")
         }
 
         // 셀의 이미지 뷰 설정 함수 호출
-        cell.setupImageViews(list: snapsForCell)
+        cell.setupImageViews(list: collabsForCell)
 
         return cell
     }
@@ -394,7 +394,7 @@ extension ApplicationStateVC: CollabTableViewCell2Delegate, UITableViewDelegate,
         } else {
             state = tab
         }
-        let url = "\(Bundle.main.TEST_URL)/mypage/snap/select"
+        let url = "\(Bundle.main.TEST_URL)/mypage/collab/select"
         // 요청에 필요한 파라미터 설정
         let parameters = CollabRequestDTO(user_id: User.shared.id ?? "", styles: nil, sns: nil, nation: nil)
         AF.request(url, method: .post, parameters: parameters, encoder: JSONParameterEncoder.default).responseDecodable(of: [CollabDto].self) { response in
@@ -402,9 +402,9 @@ extension ApplicationStateVC: CollabTableViewCell2Delegate, UITableViewDelegate,
                 switch response.result {
                 case .success(let collabList):
                     let filteredList = collabList.filter { $0.application_state == state }
-                    self.snapList = filteredList
+                    self.collabList = filteredList
 
-                    if self.snapList.isEmpty {
+                    if self.collabList.isEmpty {
                         // 데이터가 비어있을 경우
                         self.showEmptyDataView(show: true)
                     } else {
@@ -413,7 +413,7 @@ extension ApplicationStateVC: CollabTableViewCell2Delegate, UITableViewDelegate,
                         self.tableView.reloadData()
                     }
                 case .failure(let error):
-                    print("Error snapList: \(error)")
+                    print("Error collabList: \(error)")
                     self.showEmptyDataView(show: true)
                 }
             }

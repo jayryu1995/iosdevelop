@@ -35,7 +35,7 @@ class AdminCollabReadVC: UIViewController {
     private var notification = false
     // 최초 스크롤 플래그
     var initialScrollDone = false
-    var snapList: [CollabDto] = []
+    var collabList: [CollabDto] = []
     var isCollab = false
     var collab: CollabDto?
 
@@ -47,7 +47,7 @@ class AdminCollabReadVC: UIViewController {
 
         setupBackButton()
         self.navigationItem.title = "Collab"
-        collab = snapList.first
+        collab = collabList.first
         if collab?.id == User.shared.id || User.shared.auth == 2 {
             let moreButtonItem = UIBarButtonItem(image: UIImage(named: "icon_more")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(moreButtonTapped))
                 moreButtonItem.tintColor = .black // 원하는 색상으로 설정
@@ -102,7 +102,7 @@ class AdminCollabReadVC: UIViewController {
 
     @objc private func buttonTapped() {
         let vc = AdminApplicantVC()
-        vc.collabNo = snapList.first?.no ?? 0
+        vc.collabNo = collabList.first?.no ?? 0
         self.navigationController?.pushViewController(vc, animated: false)
     }
 
@@ -197,7 +197,7 @@ class AdminCollabReadVC: UIViewController {
     // 삭제
     @objc private func deleteButtonTapped() {
         guard let no = collab?.no else { return }
-        let url = "\(Bundle.main.TEST_URL)/snap/del/\(no)"
+        let url = "\(Bundle.main.TEST_URL)/collab/del/\(no)"
 
         AF.request(url, method: .delete).response { response in
             switch response.result {
@@ -222,7 +222,7 @@ class AdminCollabReadVC: UIViewController {
     // 상단고정
     @objc private func notificationButtonTapped() {
         guard let no = collab?.no else { return }
-        let url = "\(Bundle.main.TEST_URL)/snap/update/notification/\(no)" // 실제 요청할 서버의 URL로 변경해주세요.
+        let url = "\(Bundle.main.TEST_URL)/collab/update/notification/\(no)" // 실제 요청할 서버의 URL로 변경해주세요.
         AF.request(url, method: .put).response { response in
             switch response.result {
             case .success:
@@ -285,15 +285,15 @@ extension AdminCollabReadVC: UITableViewDelegate, UITableViewDataSource {
 
     // 테이블 뷰 데이터 소스 메서드: 섹션당 행의 개수 반환
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return snapList.count
+        return collabList.count
     }
 
     // 테이블 뷰 데이터 소스 메서드: 각 행에 셀 설정
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DetailCell", for: indexPath) as! CollabDetailTableViewCell
-        let snap = snapList[indexPath.row]
-        cell.setImages(snap.imageList!)
-        cell.setText(snap: snap)
+        let collab = collabList[indexPath.row]
+        cell.setImages(collab.imageList!)
+        cell.setText(collab: collab)
 
         return cell
     }

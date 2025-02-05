@@ -28,6 +28,7 @@ public class MessageInputView: UIView {
         let sendFileMessageButton: UIButton = UIButton()
         sendFileMessageButton.setImage(UIImage(named: "icon_plus"), for: .normal)
         sendFileMessageButton.addTarget(self, action: #selector(didTouchSendFileMessageButton), for: .touchUpInside)
+    
         return sendFileMessageButton
     }()
 
@@ -83,13 +84,13 @@ public class MessageInputView: UIView {
 
     public override init(frame: CGRect) {
         super.init(frame: frame)
-//
-//        addSubview(sendFileMessageButton)
-//        sendFileMessageButton.snp.makeConstraints { make in
-//            make.leading.equalToSuperview().offset(10)
-//            make.centerY.equalToSuperview()
-//            make.width.height.equalTo(34)
-//        }
+
+        addSubview(sendFileMessageButton)
+        sendFileMessageButton.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(10)
+            make.centerY.equalToSuperview()
+            make.width.height.equalTo(34)
+        }
 
         textView.delegate = self
 

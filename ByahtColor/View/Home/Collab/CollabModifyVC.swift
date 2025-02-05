@@ -756,7 +756,7 @@ class CollabModifyVC: UIViewController, UIScrollViewDelegate, UINavigationContro
         let link = tv_link.text ?? ""
         let nation = selectedNation
         
-        let dto = SnapInsertDto(no: no, userId: nil, nickname: nil, content: self.tv_content.text, link: link, title: title, nation: nation, info: tv_info.text, startDate: startDateString, endDate: endDateString, style: style, facebook: facebookValue, tiktok: tiktokValue, instagram: instagramValue, shopee: shopeeValue, naver: naverValue, youtube: youtubeValue, people: nil, collabCode: nil)
+        let dto = CollabInsertDto(no: no, userId: nil, nickname: nil, content: self.tv_content.text, link: link, title: title, nation: nation, info: tv_info.text, startDate: startDateString, endDate: endDateString, style: style, facebook: facebookValue, tiktok: tiktokValue, instagram: instagramValue, shopee: shopeeValue, naver: naverValue, youtube: youtubeValue, people: nil, collabCode: nil)
         
         viewModel.updateCollab(dto : dto, images: selectedImages){ response in
             switch response {

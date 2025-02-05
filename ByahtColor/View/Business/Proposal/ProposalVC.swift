@@ -233,17 +233,17 @@ extension ProposalVC: UITableViewDelegate, UITableViewDataSource,ProposalCellDel
         let firstImageIndex = indexPath.row * 2
         let secondImageIndex = firstImageIndex + 1
 
-        var snapsForCell = [InfluenceProfileDto]()
+        var collabsForCell = [InfluenceProfileDto]()
 
         if firstImageIndex < viewModel.proposalList.count {
-            snapsForCell.append(viewModel.proposalList[firstImageIndex])
+            collabsForCell.append(viewModel.proposalList[firstImageIndex])
         }
 
         if secondImageIndex < viewModel.proposalList.count {
-            snapsForCell.append(viewModel.proposalList[secondImageIndex])
+            collabsForCell.append(viewModel.proposalList[secondImageIndex])
         }
 
-        cell.setupImageViews(list: snapsForCell, row: indexPath.row)
+        cell.setupImageViews(list: collabsForCell, row: indexPath.row)
 
         return cell
     }

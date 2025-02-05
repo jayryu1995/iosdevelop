@@ -263,8 +263,6 @@ class BusinessViewModel: ObservableObject {
         }
     }
     
-    
-    
     // businessonboarding 계정 intro 등록
     func updateIntro(intro: String, completion: @escaping (Result<String, Error>) -> Void) {
         // 서버 URL 설정

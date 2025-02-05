@@ -65,7 +65,7 @@ class ProposalSwipeVC: UIViewController {
                 // Handle error.
                 return
             }
-            var timestampStorage = TimestampStorage()
+            let timestampStorage = TimestampStorage()
 
             let vc = ChatsVC(channel: channel!, timestampStorage: timestampStorage)
             vc.hidesBottomBarWhenPushed = true
