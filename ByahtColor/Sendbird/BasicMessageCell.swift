@@ -304,9 +304,7 @@ open class BasicMessageCell: UITableViewCell {
                 self.id = id
             }
             if let urlString = message.sender?.profileURL {
-                //let url = URL(string: urlString)
-                let url =
-                URL(string: "https://glowb-input.s3.ap-southeast-1.amazonaws.com/img/profile/influence/000004.3e9d93f92b8d4926a4f171ea43d27779.1501.jpg")
+                let url = URL(string: urlString)
                 DispatchQueue.main.async {
                     
                     self.profileImageView.kf.setImage(

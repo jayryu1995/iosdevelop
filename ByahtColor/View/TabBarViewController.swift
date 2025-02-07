@@ -64,10 +64,10 @@ class TabBarViewController: UITabBarController {
             let navigationTab = UINavigationController(rootViewController: homeVC)
             let navigationTab2 = UINavigationController(rootViewController: profileVC)
             let navigationTab3 = UINavigationController(rootViewController: chatVC)
-            let navigationTab4 = UINavigationController(rootViewController: communityVC)
+            //let navigationTab4 = UINavigationController(rootViewController: communityVC)
             let navigationTab5 = UINavigationController(rootViewController: myPageVC)
 
-            setViewControllers([navigationTab, navigationTab2, navigationTab3, navigationTab4, navigationTab5], animated: false)
+            setViewControllers([navigationTab, navigationTab2, navigationTab3, /*navigationTab4,*/ navigationTab5], animated: false)
         } else if User.shared.auth ?? 0 < 5 {
             let homeVC = BusinessHomeVC()
             let searchVC = BusinessSwipeVC()

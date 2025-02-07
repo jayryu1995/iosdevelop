@@ -4,7 +4,7 @@
 //
 //  Created by jaem on 6/19/24.
 //
-
+import FloatingPanel
 import UIKit
 import SnapKit
 import SkeletonView
@@ -125,10 +125,12 @@ class InfluenceHomeVC: UIViewController, UIScrollViewDelegate {
 
                         self?.setupUI()
                         self?.setupConstraints()
+                        self?.showFloatingPanel()
                     case .failure(let error):
                         print("통신 에러 : \(error)")
                         self?.setupUI()
                         self?.setupConstraints()
+                        self?.showFloatingPanel()
                     }
                 }
             }
@@ -150,6 +152,7 @@ class InfluenceHomeVC: UIViewController, UIScrollViewDelegate {
     private func setupTopView() {
         contentView.addSubview(topView)
         topView.isUserInteractionEnabled = true
+        
         let label1 = UILabel()
         label1.text = "influencehome_label1".localized
         label1.font = UIFont(name: "Pretendard-Regular", size: 14)
@@ -226,7 +229,8 @@ class InfluenceHomeVC: UIViewController, UIScrollViewDelegate {
             $0.top.equalTo(button.snp.bottom).offset(16)
             $0.leading.trailing.equalToSuperview()
             $0.centerX.equalToSuperview()
-            $0.height.equalTo(286)
+            // 캠페인페이지 사용시 주석 제거
+            //$0.height.equalTo(286)
             $0.bottom.equalToSuperview()
         }
 
@@ -238,7 +242,8 @@ class InfluenceHomeVC: UIViewController, UIScrollViewDelegate {
         label1.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.leading.equalToSuperview()
-            $0.height.equalTo(20)
+            // 캠페인페이지 사용시 height = 20
+            $0.height.equalTo(0)
         }
 
         label2.snp.makeConstraints {
@@ -378,10 +383,12 @@ class InfluenceHomeVC: UIViewController, UIScrollViewDelegate {
         topView.snp.makeConstraints {
             $0.top.equalToSuperview()
             $0.leading.trailing.equalToSuperview()
+            $0.height.equalTo(0) //////////////나중에 지워야함/////////////////
         }
 
         bottomView.snp.makeConstraints {
-            $0.top.equalTo(topView.snp.bottom).offset(40)
+            // 캠페인 사용 시 offset 40
+            $0.top.equalTo(topView.snp.bottom).offset(0)
             $0.leading.trailing.equalToSuperview()
             $0.bottom.equalToSuperview().offset(-20)
         }
@@ -408,4 +415,53 @@ class InfluenceHomeVC: UIViewController, UIScrollViewDelegate {
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
+}
+extension InfluenceHomeVC : FloatingPanelControllerDelegate {
+    
+    private func showFloatingPanel() {
+        self.navigationController?.navigationBar.isHidden = true
+        self.tabBarController?.tabBar.isHidden = true
+        let fpc = FloatingPanelController()
+        fpc.delegate = self
+        
+        let contentVC = NotiView() // 패널에 표시할 컨텐츠 뷰 컨트롤러
+        fpc.set(contentViewController: contentVC)
+        // 뷰 컨트롤러로부터 필요한 높이를 가져와서 상태 결정
+        let screenHeight = UIScreen.main.bounds.height
+        let requiredHeight = contentVC.requiredHeight()
+        fpc.layout = NotiFloatingPanel(requiredHeight: requiredHeight, screenHeight: screenHeight)
+        
+        fpc.move(to: fpc.layout.initialState, animated: true)
+        fpc.isRemovalInteractionEnabled = true
+        fpc.backdropView.dismissalTapGestureRecognizer.isEnabled = true
+        fpc.surfaceView.appearance.cornerRadius = 20
+        fpc.addPanel(toParent: self)
+        
+    }
+    
+    func floatingPanelWillBeginAttracting(_ fpc: FloatingPanelController, to state: FloatingPanelState) {
+        if state == .hidden {
+            self.tabBarController?.tabBar.isHidden = false
+        }
+    }
+    
+    func floatingPanelDidRemove(_ fpc: FloatingPanelController) {
+        // 패널이 제거된 후에 필요한 작업 수행
+        self.tabBarController?.tabBar.isHidden = false
+    }
+        
+    func floatingPanelDidMove(_ fpc: FloatingPanelController) {
+        let panelHalfPosition = calculateHalfPosition() // Implement this function based on your UI
+        let currentY = fpc.surfaceLocation.y
+        if currentY > panelHalfPosition - 120 {
+            self.tabBarController?.tabBar.isHidden = false
+            fpc.move(to: .hidden, animated: true)
+        }
+    }
+
+    // Example helper method to determine the 'half' position
+    func calculateHalfPosition() -> CGFloat {
+        // This value should be dynamically calculated or set based on your UI needs
+        return UIScreen.main.bounds.height * 0.5  // Example calculation
+    }
 }

@@ -6,6 +6,12 @@
   
 */
 
+// NotiView
+
+"noti_label1_text" = "📣 GlowB BIG Update 📣";
+"noti_label2_text" = "GlowB is back with a new service.\nBased on the feedback you've sent us, we're preparing to launch an even easier and more convenient AI portfolio service.🪄\n\nThanks to all of you who supported our small service, we're now able to offer you an even better experience! Please look forward to it.\n\nThank you ☺️,\nGlowB Team.";
+
+//
 "back" = "Back";
 "change" = "Change";
 "error_input" = "Input Error";

@@ -28,7 +28,7 @@ public class MessageInputView: UIView {
         let sendFileMessageButton: UIButton = UIButton()
         sendFileMessageButton.setImage(UIImage(named: "icon_plus"), for: .normal)
         sendFileMessageButton.addTarget(self, action: #selector(didTouchSendFileMessageButton), for: .touchUpInside)
-    
+        sendFileMessageButton.isHidden = true
         return sendFileMessageButton
     }()
 

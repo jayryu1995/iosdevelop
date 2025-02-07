@@ -312,7 +312,7 @@ extension CollabVC: UITableViewDataSource, UITableViewDelegate, FloatingPanelCon
 
     func floatingPanelDidRemove(_ vc: FloatingPanelController) {
         self.navigationController?.navigationBar.isHidden = false
-        }
+    }
 
     func floatingPanel(_ fpc: FloatingPanelController, didTapBackdrop backdropView: UIView) {
         // 패널 제거

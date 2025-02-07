@@ -50,20 +50,18 @@ class InitialViewController: UIViewController {
     }
 
     private func setupSearchData(){
-        let vc = LoginVC()
-        navigationController?.pushViewController(vc, animated: true)
-//        viewModel.getSearchProfile(sns: nil, category: nil, nation: nil) { [weak self] result in
-//            DispatchQueue.main.async {
-//                switch result {
-//                case .success(let data):
-//                    print(data.count)
-//                    let vc = LoginVC()
-//                    self?.navigationController?.pushViewController(vc, animated: true)
-//                case .failure(let error):
-//                    print("통신 에러 : \(error)")
-//                }
-//            }
-//        }
+        viewModel.getSearchProfile(sns: nil, category: nil, nation: nil) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let data):
+                    print(data.count)
+                    let vc = LoginVC()
+                    self?.navigationController?.pushViewController(vc, animated: true)
+                case .failure(let error):
+                    print("통신 에러 : \(error)")
+                }
+            }
+        }
     }
     
     // 앱 스토어 연결 //

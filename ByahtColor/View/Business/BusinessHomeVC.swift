@@ -13,6 +13,7 @@ import SkeletonView
 import SendbirdChatSDK
 import Kingfisher
 import FirebaseMessaging
+import FloatingPanel
 
 class BusinessHomeVC: UIViewController, UIScrollViewDelegate {
 
@@ -63,8 +64,6 @@ class BusinessHomeVC: UIViewController, UIScrollViewDelegate {
         view.backgroundColor = .white
         self.navigationController?.navigationBar.isHidden = true
         
-        
-        
         Messaging.messaging().subscribe(toTopic: "business") { _ in
             self.log(message: "Subscribed to business")
         }
@@ -80,6 +79,8 @@ class BusinessHomeVC: UIViewController, UIScrollViewDelegate {
         }else if UserDefaults.standard.integer(forKey: "home") == 0  && User.shared.id != "admin"{
             setupAlertView()
         }
+        
+        
         
     }
 
@@ -113,11 +114,12 @@ class BusinessHomeVC: UIViewController, UIScrollViewDelegate {
                         self?.influenceList = data.influenceProfileDtos ?? []
                         self?.setupUI()
                         self?.setupConstraints()
-
+                        self?.showFloatingPanel()
                     case .failure(let error):
                         print("통신 에러 : \(error)")
                         self?.setupUI()
                         self?.setupConstraints()
+                        self?.showFloatingPanel()
                     }
                 }
             }
@@ -260,7 +262,7 @@ class BusinessHomeVC: UIViewController, UIScrollViewDelegate {
         contentView.addSubview(topView)
         contentView.isUserInteractionEnabled = true
         topView.isUserInteractionEnabled = true
-
+    
         let label = UILabel()
         label.text = "businesshome_label".localized
         label.font = UIFont(name: "Pretendard-SemiBold", size: 16)
@@ -384,6 +386,7 @@ class BusinessHomeVC: UIViewController, UIScrollViewDelegate {
             $0.leading.trailing.equalToSuperview()
         }
 
+        bottomView.isHidden = true
         bottomView.snp.makeConstraints {
             $0.top.equalTo(topView.snp.bottom).offset(40)
             $0.leading.trailing.equalToSuperview()
@@ -407,7 +410,54 @@ class BusinessHomeVC: UIViewController, UIScrollViewDelegate {
         self.navigationController?.pushViewController(vc, animated: true)
     }
 
+}
+
+extension BusinessHomeVC : FloatingPanelControllerDelegate {
     
+    private func showFloatingPanel() {
+        self.navigationController?.navigationBar.isHidden = true
+        self.tabBarController?.tabBar.isHidden = true
+        let fpc = FloatingPanelController()
+        fpc.delegate = self
+        
+        let contentVC = NotiView() // 패널에 표시할 컨텐츠 뷰 컨트롤러
+        fpc.set(contentViewController: contentVC)
+        let screenHeight = UIScreen.main.bounds.height
+        let requiredHeight = contentVC.requiredHeight()
+        fpc.layout = NotiFloatingPanel(requiredHeight: requiredHeight, screenHeight: screenHeight)
+        
+        fpc.move(to: fpc.layout.initialState, animated: true)
+        fpc.isRemovalInteractionEnabled = true
+        fpc.backdropView.dismissalTapGestureRecognizer.isEnabled = true
+        fpc.surfaceView.appearance.cornerRadius = 20
+        fpc.addPanel(toParent: self)
+        
+    }
     
+    func floatingPanelWillBeginAttracting(_ fpc: FloatingPanelController, to state: FloatingPanelState) {
+        if state == .hidden {
+            self.tabBarController?.tabBar.isHidden = false
+        }
+    }
     
+    func floatingPanelDidRemove(_ fpc: FloatingPanelController) {
+        // 패널이 제거된 후에 필요한 작업 수행
+        self.tabBarController?.tabBar.isHidden = false
+    }
+        
+    func floatingPanelDidMove(_ fpc: FloatingPanelController) {
+        let panelHalfPosition = calculateHalfPosition() // Implement this function based on your UI
+        let currentY = fpc.surfaceLocation.y
+        if currentY > panelHalfPosition - 120 {
+            self.tabBarController?.tabBar.isHidden = false
+            fpc.move(to: .hidden, animated: true)
+        }
+    }
+
+    // Example helper method to determine the 'half' position
+    func calculateHalfPosition() -> CGFloat {
+        // This value should be dynamically calculated or set based on your UI needs
+        return UIScreen.main.bounds.height * 0.5  // Example calculation
+    }
+
 }

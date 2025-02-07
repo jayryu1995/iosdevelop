@@ -76,10 +76,11 @@ class LoginVC: UIViewController , BusinessLoginVCDelegate {
         viewModel.checkServerState { result in
             switch result {
             case .success(let data):
+                print("checkServerState :\(data)")
                 // Handle successful response
                 if data == false {
                     self.log(message: "State : Not Enable Server. Response data: \(data)")
-                    self.showServerDownAlert()
+                    
                 } else {
                     self.setupAutoLogin()
                     self.log(message: "State : Enable Server. Response data: \(data)")
@@ -87,6 +88,7 @@ class LoginVC: UIViewController , BusinessLoginVCDelegate {
 
             case .failure(let error):
                 // Handle error
+                self.showServerDownAlert()
                 self.log(message: "[Error] Upload Failed. Response data: \(error)")
             }
         }
@@ -97,6 +99,7 @@ class LoginVC: UIViewController , BusinessLoginVCDelegate {
         setupButtonBorderLayers()
         setupConstraints()
         setupSeparatorLine()
+        
         // 초기 선택된 버튼의 레이어를 표시
         updateButtonSelection(selectedIndex: 0)
     }
