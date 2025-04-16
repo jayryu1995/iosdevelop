@@ -92,7 +92,7 @@ class LoginVC: UIViewController , BusinessLoginVCDelegate {
                 self.log(message: "[Error] Upload Failed. Response data: \(error)")
             }
         }
-
+        
         setupPages()
         setupButtons()
         setupPageViewController()

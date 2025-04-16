@@ -15,6 +15,8 @@ open class BasicMessageCell: UITableViewCell {
         imageView.layer.cornerRadius = 16
         imageView.clipsToBounds = true
         imageView.isUserInteractionEnabled = true
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageViewTapped))
+        imageView.addGestureRecognizer(tapGesture)
         return imageView
     }()
     private lazy var messageLabel: UILabel = {
@@ -167,6 +169,7 @@ open class BasicMessageCell: UITableViewCell {
             } else {
                 // previewImageView가 숨겨지는 경우
                 previewImageView.isHidden = true
+                
                 previewImageView.snp.remakeConstraints { make in
                     make.width.height.equalTo(0) // 크기를 0으로 설정
                 }
@@ -257,7 +260,7 @@ open class BasicMessageCell: UITableViewCell {
     }
 
     // 이미지가 탭되었을 때 호출되는 메서드
-    @objc private func imageTapped(_ Sender: UIButton) {
+    @objc private func imageViewTapped(_ Sender: UIButton) {
         if let auth = User.shared.auth{
             if auth < 1 {
                 print("인플루언서 계정")

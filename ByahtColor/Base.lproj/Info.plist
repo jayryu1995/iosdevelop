@@ -48,6 +48,10 @@
     <string>295913122812550</string>
     <key>FacebookClientToken</key>
     <string>6ba4435b6590d19235e16f0a597f370a</string>
+    
+    <key>GIDClientID</key>
+    <string>260279207418-08p6phg0bm8ivmci49oh556kqicrpjrc.apps.googleusercontent.com</string>
+    
     <key>FacebookDisplayName</key>
     <string>GlowB</string>
 

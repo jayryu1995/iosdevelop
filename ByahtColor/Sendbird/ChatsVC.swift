@@ -173,9 +173,12 @@ class ChatsVC: UIViewController {
 
 extension ChatsVC: UITableViewDataSource, BasicMessageCellDelegate {
     func didTapCell(_ cell: BasicMessageCell, withProfile profile: InfluenceProfileDto) {
-        let vc = BusinessReportVC()
-        vc.profile = profile
-        self.navigationController?.pushViewController(vc, animated: false)
+        
+        let portfolioVC = PortfolioVC()
+        
+        portfolioVC.id = "113946131317224674659"
+        self.navigationController?.pushViewController(portfolioVC, animated: true)
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

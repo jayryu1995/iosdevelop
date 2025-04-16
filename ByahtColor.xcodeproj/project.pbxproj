@@ -30,6 +30,7 @@
 		1F0A77FF2B67D54100DBB97D /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0A77FD2B67D54100DBB97D /* LoginVC.swift */; };
 		1F0A78012B67F38300DBB97D /* ProfileAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0A78002B67F38300DBB97D /* ProfileAlertVC.swift */; };
 		1F1A0E9E2C7356A00032215E /* ProposalAlertVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1A0E9D2C7356A00032215E /* ProposalAlertVC.swift */; };
+		1F1FA3892D5DFA0600439BE1 /* NotiCollabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F1FA3882D5DFA0600439BE1 /* NotiCollabView.swift */; };
 		1F301EDF2C10695E00E3E478 /* CollabViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F301EDE2C10695E00E3E478 /* CollabViewModel.swift */; };
 		1F415BF32A6FC84600FBA354 /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1F415BE32A6FC84600FBA354 /* Roboto-Medium.ttf */; };
 		1F415BF42A6FC84600FBA354 /* Roboto-Condensed.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 1F415BE42A6FC84600FBA354 /* Roboto-Condensed.ttf */; };
@@ -51,6 +52,10 @@
 		1F415C792A7910EA00FBA354 /* CAGradientLayerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F415C782A7910EA00FBA354 /* CAGradientLayerExtension.swift */; };
 		1F415C7B2A7A387600FBA354 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F415C7A2A7A387600FBA354 /* UIImageExtension.swift */; };
 		1F415C7D2A7A3A3700FBA354 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F415C7C2A7A3A3700FBA354 /* UIColorExtension.swift */; };
+		1F43E4A12DA7C3A200FFAD6C /* PortfolioVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F43E4A02DA7C3A200FFAD6C /* PortfolioVC.swift */; };
+		1F43E4A32DACE3F300FFAD6C /* PrivatePolicyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F43E4A22DACE3F300FFAD6C /* PrivatePolicyVC.swift */; };
+		1F43E4A52DACE85700FFAD6C /* LogoutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F43E4A42DACE85700FFAD6C /* LogoutVC.swift */; };
+		1F43E4A72DAE018C00FFAD6C /* SearchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F43E4A62DAE018C00FFAD6C /* SearchVC.swift */; };
 		1F48F7332A1C7DC800E855CE /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F48F7322A1C7DC800E855CE /* AppDelegate.swift */; };
 		1F48F7352A1C7DC800E855CE /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F48F7342A1C7DC800E855CE /* SceneDelegate.swift */; };
 		1F48F73A2A1C7DC800E855CE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 1F48F7382A1C7DC800E855CE /* Main.storyboard */; };
@@ -307,6 +312,7 @@
 		1F0A77FD2B67D54100DBB97D /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		1F0A78002B67F38300DBB97D /* ProfileAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileAlertVC.swift; sourceTree = "<group>"; };
 		1F1A0E9D2C7356A00032215E /* ProposalAlertVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProposalAlertVC.swift; sourceTree = "<group>"; };
+		1F1FA3882D5DFA0600439BE1 /* NotiCollabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotiCollabView.swift; sourceTree = "<group>"; };
 		1F301EDE2C10695E00E3E478 /* CollabViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollabViewModel.swift; sourceTree = "<group>"; };
 		1F415BE32A6FC84600FBA354 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Medium.ttf"; sourceTree = "<group>"; };
 		1F415BE42A6FC84600FBA354 /* Roboto-Condensed.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Condensed.ttf"; sourceTree = "<group>"; };
@@ -328,6 +334,10 @@
 		1F415C782A7910EA00FBA354 /* CAGradientLayerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CAGradientLayerExtension.swift; sourceTree = "<group>"; };
 		1F415C7A2A7A387600FBA354 /* UIImageExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		1F415C7C2A7A3A3700FBA354 /* UIColorExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		1F43E4A02DA7C3A200FFAD6C /* PortfolioVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioVC.swift; sourceTree = "<group>"; };
+		1F43E4A22DACE3F300FFAD6C /* PrivatePolicyVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivatePolicyVC.swift; sourceTree = "<group>"; };
+		1F43E4A42DACE85700FFAD6C /* LogoutVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutVC.swift; sourceTree = "<group>"; };
+		1F43E4A62DAE018C00FFAD6C /* SearchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchVC.swift; sourceTree = "<group>"; };
 		1F48F72F2A1C7DC800E855CE /* ByahtColor.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ByahtColor.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1F48F7322A1C7DC800E855CE /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		1F48F7342A1C7DC800E855CE /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -701,6 +711,17 @@
 			path = Business;
 			sourceTree = "<group>";
 		};
+		1F43E49F2DA7C2F800FFAD6C /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				1F43E4A02DA7C3A200FFAD6C /* PortfolioVC.swift */,
+				1F43E4A22DACE3F300FFAD6C /* PrivatePolicyVC.swift */,
+				1F43E4A42DACE85700FFAD6C /* LogoutVC.swift */,
+				1F43E4A62DAE018C00FFAD6C /* SearchVC.swift */,
+			);
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		1F48F7262A1C7DC800E855CE = {
 			isa = PBXGroup;
 			children = (
@@ -786,6 +807,7 @@
 			isa = PBXGroup;
 			children = (
 				1F0923D32D545219006E506D /* NotiView.swift */,
+				1F1FA3882D5DFA0600439BE1 /* NotiCollabView.swift */,
 				1F778EC52BF20B5600C63FD8 /* Discount */,
 				1F9110732B50F9B7009DE075 /* Community */,
 				1F515E912B57CD58001A9364 /* Collab */,
@@ -907,6 +929,7 @@
 		1F8AFD8A2B71DD63005A6491 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1F43E49F2DA7C2F800FFAD6C /* New Group */,
 				1F0A77FC2B67D54000DBB97D /* InitalViewController.swift */,
 				1F08AFA92B352C4D0062FAF4 /* TabBarViewController.swift */,
 				1F0A77FD2B67D54100DBB97D /* LoginVC.swift */,
@@ -1456,6 +1479,7 @@
 				1F773EA32C5A0C54008CF7F8 /* ThirdOnboardingVC.swift in Sources */,
 				1F4C66F82C22BA8300A960AF /* AlamoResponse.swift in Sources */,
 				1FA41D492C295CA5003FE382 /* AddSnsVC.swift in Sources */,
+				1F43E4A32DACE3F300FFAD6C /* PrivatePolicyVC.swift in Sources */,
 				1F778ECC2BF2196400C63FD8 /* UserDiscountFashionVC.swift in Sources */,
 				1F5964012C32E33A00FD8419 /* InfluenceMyPageDto.swift in Sources */,
 				1F9E17EA2A57C7AE0000BA2D /* ScreenExtension.swift in Sources */,
@@ -1513,6 +1537,7 @@
 				1F7EB9FD2CA54C7B002B8D05 /* McnInfluenceDto.swift in Sources */,
 				1FA41D532C2ABA00003FE382 /* Sns.swift in Sources */,
 				1F773E942C4F8E3B008CF7F8 /* DateExtension.swift in Sources */,
+				1F43E4A12DA7C3A200FFAD6C /* PortfolioVC.swift in Sources */,
 				1F773EA12C58F16C008CF7F8 /* SecondOnboardingVC.swift in Sources */,
 				1F9110772B50F9F1009DE075 /* CommunityVC.swift in Sources */,
 				1F4C66E02C19655400A960AF /* UserLoginVC.swift in Sources */,
@@ -1546,6 +1571,7 @@
 				1F8AFD742B6BA3C7005A6491 /* CollabCommentVC.swift in Sources */,
 				1F4C66F22C229A5200A960AF /* FindAccountVC.swift in Sources */,
 				1FFD63B72BBCFFBD005BDFFE /* AdminApplicantTableCell.swift in Sources */,
+				1F43E4A72DAE018C00FFAD6C /* SearchVC.swift in Sources */,
 				1F9DF12D2C60C55C00F11474 /* PushNotificationUseCase.swift in Sources */,
 				1F7EB9EB2CA2A567002B8D05 /* McnProfileVC.swift in Sources */,
 				1F7EBA052CAA972E002B8D05 /* McnChannelList.swift in Sources */,
@@ -1553,6 +1579,7 @@
 				1F4C66F42C229E7500A960AF /* FindIdVC.swift in Sources */,
 				1F0923D82D549122006E506D /* CustomFloatingPanelBehavior.swift in Sources */,
 				1FBF5BD32BD25F590030F903 /* IntExtension.swift in Sources */,
+				1F43E4A52DACE85700FFAD6C /* LogoutVC.swift in Sources */,
 				1F4BB42C2A4172D5007B8DB1 /* Logging.swift in Sources */,
 				1FAF52722C80559F00139B07 /* ProposalAlert2VC.swift in Sources */,
 				1F7EB9F32CA3E12B002B8D05 /* McnInfluenceCell.swift in Sources */,
@@ -1577,6 +1604,7 @@
 				1FEC33CA2D0AE688000901EC /* FindPassword2.swift in Sources */,
 				1F4B2ECA2BA42278005C06DA /* DatePickerVC.swift in Sources */,
 				1F59640B2C3668D700FD8419 /* BusinessDetailDto.swift in Sources */,
+				1F1FA3892D5DFA0600439BE1 /* NotiCollabView.swift in Sources */,
 				1F5964032C34078400FD8419 /* InfluenceHomeDto.swift in Sources */,
 				1F084BAA2BBF97C200B9A3F1 /* AdminApplicantAlertVC.swift in Sources */,
 				1F4C66E42C197E4000A960AF /* UITextFiledExtension.swift in Sources */,
@@ -1775,7 +1803,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ByahtColor/ByahtColor.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2025.02.06;
+				CURRENT_PROJECT_VERSION = 2025.02.17;
 				DEVELOPMENT_TEAM = CS98CK3779;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1799,7 +1827,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.2.5;
+				MARKETING_VERSION = 3.2.8;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.byaht.ByahtColor;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1821,7 +1849,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_ENTITLEMENTS = ByahtColor/ByahtColorRelease.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 2025.02.06;
+				CURRENT_PROJECT_VERSION = 2025.02.17;
 				DEVELOPMENT_TEAM = CS98CK3779;
 				"EXCLUDED_ARCHS[sdk=iphonesimulator*]" = arm64;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1845,7 +1873,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 3.2.5;
+				MARKETING_VERSION = 3.2.8;
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.byaht.ByahtColor;
 				PRODUCT_NAME = "$(TARGET_NAME)";

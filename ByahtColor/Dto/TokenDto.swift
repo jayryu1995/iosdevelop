@@ -8,7 +8,7 @@
 import Foundation
 
 
-struct TokenDto : Decodable{
+struct TokenDto : Codable{
     let accessToken : String
     let refreshToken : String
 }

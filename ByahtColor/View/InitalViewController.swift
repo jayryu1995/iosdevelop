@@ -27,16 +27,13 @@ class InitialViewController: UIViewController {
 
             // 버전 확인
             appVersionCheck.fetchLatestAppStoreVersion { appStoreVersion in
-
                 DispatchQueue.main.async {
                     if let version = appStoreVersion {
                         if appVersionCheck.shouldUpdate(nowVersion: appVersion, latestVersion: version) {
-
                             self.presentUpdateAlertVC()
                         } else {
-
-                            self.setupSearchData()
-                            
+                            let vc = LoginVC()
+                            self.navigationController?.pushViewController(vc, animated: true)
                         }
                     } else {
                         self.log(message: "update_str2".localized)
@@ -47,21 +44,6 @@ class InitialViewController: UIViewController {
             self.log(message: "[Error] Can not find current version. ")
         }
         
-    }
-
-    private func setupSearchData(){
-        viewModel.getSearchProfile(sns: nil, category: nil, nation: nil) { [weak self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let data):
-                    print(data.count)
-                    let vc = LoginVC()
-                    self?.navigationController?.pushViewController(vc, animated: true)
-                case .failure(let error):
-                    print("통신 에러 : \(error)")
-                }
-            }
-        }
     }
     
     // 앱 스토어 연결 //

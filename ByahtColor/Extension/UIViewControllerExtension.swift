@@ -165,7 +165,7 @@ extension UIViewController {
     
     func getLanguage() -> String {
         let currentLanguage = Locale.current.languageCode
-        
+            print("Locale.current.languageCode: \(Locale.current.languageCode)")
         switch currentLanguage {
         case "ko": // 한국어
             return "ko"
@@ -178,8 +178,17 @@ extension UIViewController {
         }
     }
     
+    func numTransToNation(num : String) -> String {
+        if num == "0" {
+            return "ko"
+        }else if num == "4"{
+            return "vi"
+        }else{
+            return "en"
+        }
+    }
     
-    //기업 회원가입 
+    //기업 회원가입
     
     func makeButton(title: String) -> UIButton {
         let button = UIButton()

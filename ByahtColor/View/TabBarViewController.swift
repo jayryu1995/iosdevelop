@@ -28,24 +28,21 @@ class TabBarViewController: UITabBarController {
 
         if User.shared.auth ?? 0 < 2 {
             
-            let homeVC = InfluenceHomeVC()
-            var profileVC : UIViewController = InfluenceProfileVC()
+            //let homeVC = InfluenceHomeVC()
+            
+            var profileVC = PortfolioVC()
+            profileVC.id = User.shared.id ?? ""
+            _ = profileVC.view
             var myPageVC : UIViewController = InfluenceMyPageVC()
             
-            // MCN 권한일 경우
-            if User.shared.auth == 1 {
-                profileVC = McnProfileVC()
-                myPageVC = McnMyPageVC()
-                chatVC = McnChannelListVC()
-            }
             
             chatVC.title = "Chats"
             chatVC.tabBarItem.image = UIImage(named: "icon_chat")
             chatVC.tabBarItem.selectedImage = UIImage(named: "icon_chat2")?.withRenderingMode(.alwaysOriginal)
             
-            homeVC.title = "Home"
-            homeVC.tabBarItem.selectedImage = UIImage(named: "icon_home")?.withRenderingMode(.alwaysOriginal)
-            homeVC.tabBarItem.image = UIImage(named: "icon_home")
+//            homeVC.title = "Home"
+//            homeVC.tabBarItem.selectedImage = UIImage(named: "icon_home")?.withRenderingMode(.alwaysOriginal)
+//            homeVC.tabBarItem.image = UIImage(named: "icon_home")
             
             let communityVC = CommunityVC()
             communityVC.title = "Community"
@@ -56,21 +53,21 @@ class TabBarViewController: UITabBarController {
             myPageVC.tabBarItem.image = UIImage(named: "icon_mypage")
             myPageVC.tabBarItem.selectedImage = UIImage(named: "icon_mypage")?.withRenderingMode(.alwaysOriginal)
 
-            profileVC.title = "Profile"
+            profileVC.title = "Portfolio"
             profileVC.tabBarItem.image = UIImage(named: "icon_profile")
             profileVC.tabBarItem.selectedImage = UIImage(named: "icon_profile")?.withRenderingMode(.alwaysOriginal)
 
             // navigationController의 root view 설정
-            let navigationTab = UINavigationController(rootViewController: homeVC)
+            let navigationTab = UINavigationController(rootViewController: chatVC)
             let navigationTab2 = UINavigationController(rootViewController: profileVC)
-            let navigationTab3 = UINavigationController(rootViewController: chatVC)
+            let navigationTab3 = UINavigationController(rootViewController: myPageVC)
             //let navigationTab4 = UINavigationController(rootViewController: communityVC)
-            let navigationTab5 = UINavigationController(rootViewController: myPageVC)
+            
 
-            setViewControllers([navigationTab, navigationTab2, navigationTab3, /*navigationTab4,*/ navigationTab5], animated: false)
+            setViewControllers([navigationTab, navigationTab2, navigationTab3], animated: false)
         } else if User.shared.auth ?? 0 < 5 {
             let homeVC = BusinessHomeVC()
-            let searchVC = BusinessSwipeVC()
+            let searchVC = SearchVC()
             let myPageVC = BusinessMypageVC()
             let proposalVC = ProposalVC()
 
@@ -96,11 +93,11 @@ class TabBarViewController: UITabBarController {
             proposalVC.tabBarItem.selectedImage = UIImage(named: "icon_proposal")?.withRenderingMode(.alwaysOriginal)
 
             // navigationController의 root view 설정
-            let navigationTab = UINavigationController(rootViewController: homeVC)
-            let navigationTab2 = UINavigationController(rootViewController: searchVC)
-            let navigationTab3 = UINavigationController(rootViewController: chatVC)
-            var navigationTab4 = UINavigationController(rootViewController: proposalVC)
-            let navigationTab5 = UINavigationController(rootViewController: myPageVC)
+            //let navigationTab = UINavigationController(rootViewController: homeVC)
+            let searchTab = UINavigationController(rootViewController: searchVC)
+            let chatTab = UINavigationController(rootViewController: chatVC)
+           // var navigationTab4 = UINavigationController(rootViewController: proposalVC)
+            let myPageTab = UINavigationController(rootViewController: myPageVC)
 
             if User.shared.id == "byaht" || User.shared.id == "admin"{
                 let communityVC = CommunityVC()
@@ -108,9 +105,9 @@ class TabBarViewController: UITabBarController {
                 communityVC.tabBarItem.image = UIImage(named: "icon_community")
                 communityVC.tabBarItem.selectedImage = UIImage(named: "icon_community")?.withRenderingMode(.alwaysOriginal)
                 let navigationTab6 = UINavigationController(rootViewController: communityVC)
-                setViewControllers([navigationTab, navigationTab2, navigationTab3, navigationTab4, navigationTab6, navigationTab5], animated: false)
+                setViewControllers([chatTab,searchTab,myPageTab], animated: false)
             }else{
-                setViewControllers([navigationTab, navigationTab2, navigationTab3, navigationTab4, navigationTab5], animated: false)
+                setViewControllers([chatTab,searchTab,myPageTab], animated: false)
             }
             
 
@@ -185,7 +182,7 @@ class TabBarViewController: UITabBarController {
         SendbirdUser.shared.unReadMessages { result in
             switch result {
             case .success(let count):
-                print("count : \(count)")
+            
                 DispatchQueue.main.async {
                     if count > 0 {
                         self.chatVC.tabBarItem.image = UIImage(named: "icon_chat3")?.withRenderingMode(.alwaysOriginal)

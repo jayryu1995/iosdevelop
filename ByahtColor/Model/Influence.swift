@@ -18,4 +18,5 @@ struct Influence: Codable {
     let video: String?
     let evaluation: Int?
     var mcnId : String? = nil
+    var email : String? = ""
 }

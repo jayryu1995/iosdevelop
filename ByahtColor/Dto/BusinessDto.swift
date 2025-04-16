@@ -20,4 +20,6 @@ struct BusinessDto: Codable {
     var imagePath: String?
     var intro: String?
     var auth: String?
+    var accessToken : String?
+    var refreshToken : String?
 }

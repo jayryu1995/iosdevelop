@@ -114,18 +114,28 @@ class InfluenceHomeVC: UIViewController, UIScrollViewDelegate {
     }
 
     private func setupHomeData() {
+        let nation = getLanguage()
         if let id = User.shared.id {
-            let nation = User.shared.nation ?? nil
             viewModel.getHomeData(nation: nation ) { [weak self] result in
                 DispatchQueue.main.async {
                     switch result {
                     case .success(let data):
                         self?.collabList = data.collabDtoList ?? []
                         self?.businessList = data.businessDtos ?? []
-
+                        
                         self?.setupUI()
                         self?.setupConstraints()
-                        self?.showFloatingPanel()
+                        
+                        
+                        
+                        let lang = self?.numTransToNation(num: self?.collabList.first?.nation ?? "")
+                        if self?.collabList.first?.notification == true && lang == nation{
+                            print("count : \(data.collabDtoList?.count ?? 0)")
+                            print("실행")
+                            self?.showFloatingCollab()
+                        }else{
+                            self?.showFloatingPanel()
+                        }
                     case .failure(let error):
                         print("통신 에러 : \(error)")
                         self?.setupUI()
@@ -137,6 +147,7 @@ class InfluenceHomeVC: UIViewController, UIScrollViewDelegate {
         }
     }
 
+    
     // UI 컴포넌트를 구성하는 메소드
     private func setupUI() {
         view.addSubview(logoImage)
@@ -417,6 +428,29 @@ class InfluenceHomeVC: UIViewController, UIScrollViewDelegate {
 
 }
 extension InfluenceHomeVC : FloatingPanelControllerDelegate {
+    
+    private func showFloatingCollab() {
+        self.navigationController?.navigationBar.isHidden = true
+        self.tabBarController?.tabBar.isHidden = true
+        let fpc = FloatingPanelController()
+        fpc.delegate = self
+        if let collab = collabList.first {
+            let contentVC = NotiCollabView(titleText: collab.title ?? "",
+                                           imageUrl: collab.imageList?.first ?? "",
+                                           collab: collab) // 패널에 표시할 컨텐츠 뷰 컨트롤러
+            fpc.set(contentViewController: contentVC)
+            let screenHeight = UIScreen.main.bounds.height
+            let requiredHeight = contentVC.requiredHeight()
+            fpc.layout = NotiFloatingPanel(requiredHeight: requiredHeight, screenHeight: screenHeight)
+            
+            fpc.move(to: fpc.layout.initialState, animated: true)
+            fpc.isRemovalInteractionEnabled = true
+            fpc.backdropView.dismissalTapGestureRecognizer.isEnabled = true
+            fpc.surfaceView.appearance.cornerRadius = 20
+            fpc.addPanel(toParent: self)
+        }
+        
+    }
     
     private func showFloatingPanel() {
         self.navigationController?.navigationBar.isHidden = true

@@ -28,7 +28,7 @@ class MemberViewModel: ObservableObject {
     
     // 서버 상태 체크
     func checkServerState(completion: @escaping (Result<Bool, Error>) -> Void) {
-        let url = "\(Bundle.main.TEST_URL)/"
+        let url = "\(Bundle.main.TEST_URL)/ai/admin/"
         AF.request(url).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
@@ -99,23 +99,31 @@ class MemberViewModel: ObservableObject {
         }
     }
     
-    //    func checkMemberId(id: String, completion: @escaping (Result<Bool, Error>) -> Void) {
-    //        let url = "\(Bundle.main.TEST_URL)/member/check/\(id)"
-    //        AF.request(url).validate().responseJSON { response in
-    //            switch response.result {
-    //            case .success(let value):
-    //                if let exists = value as? Bool {
-    //                    print(exists)
-    //                    completion(.success(exists))
-    //                } else {
-    //                    completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid response"])))
-    //                }
-    //            case .failure(let error):
-    //                completion(.failure(error))
-    //            }
-    //        }
-    //    }
+    // 유저 토큰 발급
+    func getToken(member_id: String, completion: @escaping (Result<TokenDto, Error>) -> Void) {
+        let url = "\(Bundle.main.TEST_URL)/influence/token"
+        let headers: HTTPHeaders = [
+            "Content-Type": "text/plain"
+        ]
 
+        var request = URLRequest(url: URL(string: url)!)
+        request.method = .post
+        request.headers = headers
+        request.httpBody = member_id.data(using: .utf8) // 👈 문자열을 직접 body에
+
+        AF.request(request)
+            .validate()
+            .responseDecodable(of: TokenDto.self) { response in
+                switch response.result {
+                case .success(let token):
+                    completion(.success(token))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            }
+    }
+    
+    
     // 로그인 데이터
     func getLoginData(member_id: String, completion: @escaping (Result<InfluenceDataDto, Error>) -> Void) {
         let url = "\(Bundle.main.TEST_URL)/member/data/\(member_id)"
@@ -128,7 +136,6 @@ class MemberViewModel: ObservableObject {
                         User.shared.id = data.memberId
                         User.shared.name = data.name
                         User.shared.auth = data.auth
-                        User.shared.nation = data.nation
                     }
                     print("success: \(data)")
                     completion(.success(data))
@@ -137,7 +144,6 @@ class MemberViewModel: ObservableObject {
                     completion(.failure(error))
                 }
             }
-
     }
 
     // 인플루언서 로그인 및 권한조회

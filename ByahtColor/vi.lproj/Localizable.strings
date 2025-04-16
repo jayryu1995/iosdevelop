@@ -5,6 +5,12 @@
   Created by jaem on 2023/07/14.
   
 */
+
+"privacy_policy" = "privacy_policy";
+// NotiCollabView
+"noti_collab_label_text" = "신청하러가기 ⬇️⬇️";
+
+// NotiView
 "noti_label1_text" = "📣 G EVENT 📣";
 "noti_label2_text" = "Glow.B chuẩn bị ra mắt dịch vụ mới\n여러분이 보내주신 의견을 토대로, 더 쉽고 간편한\n Dựa trên những ý kiến mà các bạn đã gửi, chúng tôi đang chuẩn bị ra mắt dịch vụ AI Portfolio **dễ dàng và tiện lợi hơn** đấy! 🪄\n\nDù chỉ là một ứng dụng nhỏ, nhưng nhờ sự ủng hộ của các bạn, chúng tôi đã có thể nâng tầm và mang đến một dịch vụ tốt hơn! Rất mong các bạn sẽ tiếp tục đón chờ và ủng hộ.\n\nXin cảm ơn☺️\nGlow.B team.";
 

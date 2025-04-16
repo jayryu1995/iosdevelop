@@ -209,14 +209,15 @@ class BusinessLoginVC: UIViewController {
                     
                     User.shared.id = business.memberId
                     User.shared.auth = business.auth?.toInt()
-                    print(business.auth?.toInt())
+                    
                     User.shared.name = business.businessName ?? nil
                     User.shared.intro = business.intro ?? nil
                     
                     UserDefaults.standard.setValue(business.memberId, forKey: "businessId")
                     UserDefaults.standard.setValue(business.auth, forKey: "auth")
                     UserDefaults.standard.setValue(business.businessName, forKey: "name")
-                    UserDefaults.standard.setValue(business.intro, forKey: "intro")
+                    UserDefaults.standard.setValue(business.accessToken, forKey: "accessToken")
+                    UserDefaults.standard.setValue(business.refreshToken, forKey: "refreshToken")
                     
                     let vc = TabBarViewController()
                     self?.navigationController?.pushViewController(vc, animated: false)

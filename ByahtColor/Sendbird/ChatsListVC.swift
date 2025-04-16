@@ -19,6 +19,16 @@ class ChatsListVC: UIViewController {
         return tableView
     }()
 
+    private lazy var emptyLabel: UILabel = {
+        let label = UILabel()
+        label.text = "현재 진행중인 채팅이 없습니다."
+        label.textColor = .gray
+        label.textAlignment = .center
+        label.font = UIFont(name: "Pretendard-Bold", size: 14)
+        label.numberOfLines = 0
+        return label
+    }()
+    
     private lazy var useCase: GroupChannelListUseCase = {
         let useCase = GroupChannelListUseCase()
         useCase.delegate = self
@@ -31,7 +41,7 @@ class ChatsListVC: UIViewController {
         super.viewDidLoad()
 
         title = "Chats"
-
+        
         setupUI()
         setupConstraints()
         useCase.reloadChannels()
@@ -46,6 +56,10 @@ class ChatsListVC: UIViewController {
         tableView.snp.makeConstraints {
             $0.edges.equalToSuperview()
         }
+    }
+    
+    private func updateEmptyState() {
+        tableView.backgroundView = useCase.channels.isEmpty ? emptyLabel : nil
     }
 }
 
@@ -130,6 +144,7 @@ extension ChatsListVC: GroupChannelListUseCaseDelegate {
    func groupChannelListUseCase(_ groupChannelListUseCase: GroupChannelListUseCase, didUpdateChannels: [GroupChannel]) {
        DispatchQueue.main.async { [weak self] in
            self?.tableView.reloadData()
+           self?.updateEmptyState()
        }
    }
 

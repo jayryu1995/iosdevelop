@@ -151,6 +151,8 @@ class InfluenceViewModel: ObservableObject {
             }
     }
 
+    
+    
     // 본인 프로필 조회
     func getProfile(id: String) {
         let url = "\(Bundle.main.TEST_URL)/influence/profile/\(id)"
