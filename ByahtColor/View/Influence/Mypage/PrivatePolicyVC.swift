@@ -51,7 +51,6 @@ class PrivatePolicyVC : UIViewController {
     
     override func viewDidLoad(){
         setupBackButton()
-        
         view.addSubview(scrollView)
         scrollView.addSubview(contentView)
         contentView.addSubview(label)
