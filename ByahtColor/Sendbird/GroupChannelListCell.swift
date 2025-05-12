@@ -63,6 +63,7 @@ open class GroupChannelListCell: UITableViewCell {
         DispatchQueue.main.async {
             self.profileImage.image = UIImage(named: "icon_profile2")
         }
+        name = ""
         taskIdentifier = nil // 기존 taskIdentifier 초기화
     }
 
@@ -116,8 +117,9 @@ open class GroupChannelListCell: UITableViewCell {
         
         let taskID = UUID()
         self.taskIdentifier = taskID
+        
         channel.members.forEach { it in
-            if it.nickname != User.shared.name {
+            if it.nickname != User.shared.nickname {
                 self.nameLabel.text = it.nickname
                 self.name = it.nickname
                 self.profileImage.isUserInteractionEnabled = true
@@ -148,55 +150,13 @@ open class GroupChannelListCell: UITableViewCell {
         }
 
         self.contentLabel.text = channel.lastMessage?.message
-        let timeDifference = self.calculateTimeDifference(from: channel.lastMessage?.createdAt ?? 0)
+        let timeDifference = calculateTimeDifference(from: channel.lastMessage?.createdAt ?? 0)
         self.timeLabel.text = timeDifference
         self.notificationView.isHidden = channel.unreadMessageCount == 0
     }
 
     
-    // 시간 차이 계산 메서드 추가
-    func calculateTimeDifference(from milliseconds: Int64) -> String {
-        let messageDate = Date(timeIntervalSince1970: TimeInterval(milliseconds) / 1000)
-        let currentDate = Date()
-
-        let difference = currentDate.timeIntervalSince(messageDate)
-        
-        let minutesDifference = Int(difference / 60)
-        let hoursDifference = Int(difference / 3600)
-        let daysDifference = Int(difference / (3600 * 24))
-
-        let dateFormatter = DateFormatter()
-        let calendar = Calendar.current
-
-        let messageYear = calendar.component(.year, from: messageDate)
-        let currentYear = calendar.component(.year, from: currentDate)
-
-        if daysDifference > 0 {
-            if daysDifference > 7 {
-                // 로케일에 따라 날짜 포맷 설정
-                let isAsianLanguage: Bool = {
-                    let preferredLanguage = Locale.preferredLanguages.first ?? "en"
-                    let asianLanguages = ["ko", "zh", "ja"]
-                    return asianLanguages.contains(String(preferredLanguage.prefix(2))) // Substring을 String으로 변환
-                }()
-
-                print("isAsianLocale :  \(isAsianLanguage)")
-                if messageYear == currentYear {
-                    dateFormatter.setLocalizedDateFormatFromTemplate(isAsianLanguage ? "MMdd" : "ddMM")
-                } else {
-                    dateFormatter.setLocalizedDateFormatFromTemplate(isAsianLanguage ? "yyyyMMdd" : "ddMMyyyy")
-                }
-//                dateFormatter.locale = Locale.current
-                return dateFormatter.string(from: messageDate)
-            } else {
-                return "\(daysDifference)일 전"
-            }
-        } else if hoursDifference > 0 {
-            return "\(hoursDifference)시간 전"
-        } else {
-            return "\(minutesDifference)분 전"
-        }
-    }
+    
 
 
 

@@ -98,8 +98,7 @@ class ChatsVC: UIViewController {
         messageInputView.snp.makeConstraints { make in
             make.leading.equalTo(view.safeAreaLayoutGuide.snp.leading)
             make.trailing.equalTo(view.safeAreaLayoutGuide.snp.trailing)
-            messageInputHeightConstraint = make.height.equalTo(44).constraint
-            messageInputBottomConstraint = make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).constraint
+            messageInputBottomConstraint = make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-32).constraint
         }
         messageListUseCase.loadInitialMessages()
 
@@ -172,11 +171,10 @@ class ChatsVC: UIViewController {
 // MARK: - UITableViewDataSource
 
 extension ChatsVC: UITableViewDataSource, BasicMessageCellDelegate {
-    func didTapCell(_ cell: BasicMessageCell, withProfile profile: InfluenceProfileDto) {
+    func didTapCell(_ cell: BasicMessageCell, withProfile memberId: String) {
         
         let portfolioVC = PortfolioVC()
-        
-        portfolioVC.id = "113946131317224674659"
+        portfolioVC.id = memberId
         self.navigationController?.pushViewController(portfolioVC, animated: true)
         
     }
@@ -185,6 +183,7 @@ extension ChatsVC: UITableViewDataSource, BasicMessageCellDelegate {
         messageListUseCase.messages.count
     }
 
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let message = messageListUseCase.messages[indexPath.row]
         
@@ -214,17 +213,28 @@ extension ChatsVC: UITableViewDataSource, BasicMessageCellDelegate {
             }
             
             let currentTime = Date.sbu_from(message.createdAt).sbu_toString(format: .yyyyMMddhhmm)
-            
+            let currentSender = message.sender
             if indexPath.row < messageListUseCase.messages.count - 1 {
                 let nextMessage = messageListUseCase.messages[indexPath.row + 1]
                 let nextTime = Date.sbu_from(nextMessage.createdAt).sbu_toString(format: .yyyyMMddhhmm)
-                if nextTime == currentTime {
+                let nextSender = messageListUseCase.messages[indexPath.row + 1].sender
+                if nextTime == currentTime && currentSender == nextSender {
                     cell.hideTime()
                 }
-                
-                
             }
-
+            
+            if indexPath.row > 0 {
+                let previousMessage = messageListUseCase.messages[indexPath.row - 1]
+                let previousSender = previousMessage.sender
+                let previousTime = Date.sbu_from(previousMessage.createdAt).sbu_toString(format: .yyyyMMddhhmm)
+                if previousSender == currentSender && currentTime == previousTime {
+                    cell.updateTopSpacing(isContinuous: true)
+                } else {
+                    cell.updateTopSpacing(isContinuous: false)
+                }
+            } else {
+                cell.updateTopSpacing(isContinuous: false)
+            }
             
             let unreadCount = channel.getUnreadMemberCount(message)
             if unreadCount == 0 {
@@ -264,7 +274,8 @@ extension ChatsVC: UITableViewDelegate {
 extension ChatsVC: GroupChannelMessageListUseCaseDelegate {
 
     func groupChannelMessageListUseCase(_ useCase: GroupChannelMessageListUseCase, didReceiveError error: SBError) {
-        presentAlert(error: error)
+        showToast(message: "상대방이 대화방을 나가셨습니다.")
+        //presentAlert(error: error)
     }
 
     func groupChannelMessageListUseCase(_ useCase: GroupChannelMessageListUseCase, didUpdateMessages messages: [BaseMessage]) {
@@ -321,14 +332,12 @@ extension ChatsVC: GroupChannelMessageListUseCaseDelegate {
 
 extension ChatsVC: MessageInputViewDelegate {
     func messageInputView(_ messageInputView: MessageInputView, didChangeHeight newHeight: CGFloat) {
-            messageInputHeightConstraint?.update(offset: newHeight)
-        print(newHeight)
-            UIView.animate(withDuration: 0.3) {
-                self.view.layoutIfNeeded()
-            }
-
-            scrollToBottom(animated: true)
+        messageInputHeightConstraint?.update(offset: newHeight + 24) // textView 높이 + 24 인셋
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
         }
+        scrollToBottom(animated: true)
+    }
 
     func messageInputView(_ messageInputView: MessageInputView, didTouchUserMessageButton sender: UIButton, message: String) {
         messageInputHeightConstraint?.update(offset: 44)
@@ -340,14 +349,7 @@ extension ChatsVC: MessageInputViewDelegate {
                 self?.presentAlert(error: error)
             }
         }
-//        targetMessageForScrolling = fileMessageUseCase.sendFile() { [weak self] result in
-//            switch result {
-//            case .success(let sendedMessage):
-//                self?.targetMessageForScrolling = sendedMessage
-//            case .failure(let error):
-//                self?.presentAlert(error: error)
-//            }
-//        }
+
         print("input on")
     }
 
@@ -363,7 +365,7 @@ extension ChatsVC: KeyboardObserverDelegate {
 
     func keyboardObserver(_ keyboardObserver: KeyboardObserver, willShowKeyboardWith keyboardInfo: KeyboardInfo) {
         let keyboardHeight = keyboardInfo.height - view.safeAreaInsets.bottom
-        messageInputBottomConstraint?.update(offset: -keyboardHeight)
+        messageInputBottomConstraint?.update(offset: -keyboardHeight-32)
         keyboardInfo.animate { [weak self] in
             self?.view.layoutIfNeeded()
             self?.scrollToBottom(animated: false)
@@ -371,7 +373,7 @@ extension ChatsVC: KeyboardObserverDelegate {
     }
 
     func keyboardObserver(_ keyboardObserver: KeyboardObserver, willHideKeyboardWith keyboardInfo: KeyboardInfo) {
-        messageInputBottomConstraint?.update(offset: 0)
+        messageInputBottomConstraint?.update(offset: -32)
 
         keyboardInfo.animate { [weak self] in
             self?.view.layoutIfNeeded()

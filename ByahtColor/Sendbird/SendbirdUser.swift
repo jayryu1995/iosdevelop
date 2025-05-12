@@ -26,7 +26,9 @@ public class SendbirdUser {
 
     public func login(userId: String,
                       completion: @escaping (Result<SendbirdChatSDK.User, SBError>) -> Void) {
-        SendbirdChat.connect(userId: userId) { [weak self] user, error in
+        let normalizedId = userId.trimmingCharacters(in: .whitespacesAndNewlines)
+                                 .lowercased()
+        SendbirdChat.connect(userId: normalizedId) { [weak self] user, error in
             if let error = error {
                 completion(.failure(error))
                 return
@@ -40,9 +42,27 @@ public class SendbirdUser {
     }
 
     public func logout(completion: @escaping () -> Void) {
-        SendbirdChat.disconnect { [weak self] in
-            self?.isAutoLogin = false
-            completion()
+        // 1) 보관된 APNs 푸시 토큰(Data) 가져오기
+        if let token = SendbirdChat.getPendingPushToken() {
+            // 2) 새로운 시그니처로 unregister 호출
+            SendbirdChat.unregisterPushToken(token) { error in
+                if let error = error {
+                    print("푸시 토큰 해제 실패:", error)
+                } else {
+                    print("푸시 토큰 해제 성공")
+                }
+                // 3) Sendbird 연결 해제
+                SendbirdChat.disconnect { [weak self] in
+                    self?.isAutoLogin = false
+                    completion()
+                }
+            }
+        } else {
+            // 토큰이 없는 경우 바로 disconnect
+            SendbirdChat.disconnect { [weak self] in
+                self?.isAutoLogin = false
+                completion()
+            }
         }
     }
 

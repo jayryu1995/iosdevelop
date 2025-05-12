@@ -175,24 +175,16 @@ open class BasicFileCell: UITableViewCell {
     
     open func configure(with message: FileMessage) {
         if let sender = message.sender {
-            
-            print("User.shared.nickname : \(User.shared.nickname)")
-            print("sender.nickname : \(sender.nickname)")
             if sender.nickname == User.shared.nickname ?? "" {
                 remakeConstraint()
             }
         }
-        
-        
-        messageLabel.text = "ㅁㅇㅎㅁㅇㄹㅁㅇㄹㅁㅇ러야러야ㅓ랴어랴어ㅑ러야러ㅑㅇ"
         
         if let imageURL = imageURL(for: message) {
             previewImageView.kf.setImage(with: imageURL)
         }else{
             previewImageView.removeFromSuperview()
         }
-        
-        
 
     }
 

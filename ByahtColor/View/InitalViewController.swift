@@ -9,6 +9,7 @@ import UIKit
 import Alamofire
 import FBSDKLoginKit
 import FBSDKCoreKit
+import FirebaseMessaging
 
 class InitialViewController: UIViewController {
     private let viewControllerName = String(describing: type(of: InitialViewController.self))
@@ -20,11 +21,12 @@ class InitialViewController: UIViewController {
         super.viewDidLoad()
 
         self.navigationController?.setNavigationBarHidden(true, animated: false)
-
+        // 알림 구독
+        Messaging.messaging().subscribe(toTopic: "all") { _ in
+            self.log(message: "Subscribed to all")
+        }
         if let appVersion = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
-
             let appVersionCheck = AppVersionCheck()
-
             // 버전 확인
             appVersionCheck.fetchLatestAppStoreVersion { appStoreVersion in
                 DispatchQueue.main.async {
@@ -43,7 +45,6 @@ class InitialViewController: UIViewController {
         } else {
             self.log(message: "[Error] Can not find current version. ")
         }
-        
     }
     
     // 앱 스토어 연결 //

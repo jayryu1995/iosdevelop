@@ -25,15 +25,16 @@ class UserLoginVC: UIViewController {
         imageView.isUserInteractionEnabled = true  // 제스처 인식을 위해 필요
         return imageView
     }()
-//    lazy private var appleButton: UIImageView = {
-//        let imageView = UIImageView()
-//        imageView.image = UIImage(named: "google")
-//        imageView.contentMode = .scaleAspectFill
-//        imageView.clipsToBounds = true
-//        imageView.isUserInteractionEnabled = true  // 제스처 인식을 위해 필요
-//        return imageView
-//    }()
-
+    
+    lazy private var appleButton: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "apple")
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.isUserInteractionEnabled = true  // 제스처 인식을 위해 필요
+        return imageView
+    }()
+    
     lazy private var facebookButton: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "facebook")
@@ -42,7 +43,7 @@ class UserLoginVC: UIViewController {
         imageView.isUserInteractionEnabled = true  // 제스처 인식을 위해 필요
         return imageView
     }()
-
+    
     lazy private var kakaoButton: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "kakaotalk")
@@ -51,14 +52,14 @@ class UserLoginVC: UIViewController {
         imageView.isUserInteractionEnabled = true  // 제스처 인식을 위해 필요
         return imageView
     }()
-
+    
     
     lazy private var templetView: UIImageView = {
         let image = UIImageView(image: UIImage(named: "image_login"))
         image.contentMode = .scaleAspectFit
         return image
     }()
-
+    
     private let viewModel = MemberViewModel()
     private let kakaoVM = KakaoAuthVM()
     
@@ -72,73 +73,61 @@ class UserLoginVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // 스피너 초기화 및 설정
         activityIndicator = UIActivityIndicatorView(style: .large)
         activityIndicator.center = self.view.center
         view.addSubview(activityIndicator)
-
+        
         view.backgroundColor = .white
-
+        
         configureUIComponents()
         setupLayoutConstraints()
-
+        
     }
-
-    private func checkedUser() {
-        if let id = User.shared.id {
-            viewModel.getLoginData(member_id: id) { [weak self] result in
-                DispatchQueue.main.async {
-                    switch result {
-                    case .success(let data):
-                        User.shared.name = data.name
-                        UserDefaults.standard.set(data.name, forKey: "name")
-                        UserDefaults.standard.set(id, forKey: "userID")
-                        UserDefaults.standard.set(User.shared.email, forKey: "email")
-                        
-                        self?.requestGenerateToken(id: id)
-                    case .failure(let error):
-                        print(error)
-                        self?.signUpInfluence()
-                    }
+    
+    private func requestLogin(id: String){
+        viewModel.login(id: id) { success in
+            DispatchQueue.main.async {
+                if success {
+                    self.checkUser()
+                } else {
+                    print("❌ Error:", self.viewModel.error ?? "Unknown")
+                    self.signUpInfluence()
                 }
             }
         }
     }
-
     
-    private func requestGenerateToken(id: String){
-        viewModel.getToken(member_id: id){ [weak self] result in
-            switch result {
-            case .success(let data):
-                
-                UserDefaults.standard.set(data.accessToken, forKey: "accessToken")
-                UserDefaults.standard.set(data.refreshToken, forKey: "refreshToken")
-                
+    private func checkUser(){
+        if let token = UserDefaults.standard.string(forKey: "accessToken"),
+           let auth = decodeJWT(token: token) {
+            if auth != -1 {
                 let vc = TabBarViewController()
-                self?.navigationController?.pushViewController(vc, animated: true)
-
-            case .failure(let error):
-                print(error)
+                self.navigationController?.pushViewController(vc, animated: false)
             }
+        }else {
+            print("❌ 존재하지않는 계정입니다.")
         }
     }
     
     private func signUpInfluence() {
         if let id = User.shared.id {
             let member = Member(id: id, auth: 0, regi_date: nil)
-            let influence = Influence(no: nil, id: nil, name: User.shared.name ?? "", intro: nil, age: nil, category: nil, gender: nil, video: nil, evaluation: nil, email: User.shared.email)
+            let influence = Influence(no: nil, id: nil, name: User.shared.nickname ?? "", intro: nil, age: nil, category: nil, gender: nil, video: nil, evaluation: nil, email: User.shared.email)
             let dto = MemberInfluenceDto(member: member, influence: influence)
             viewModel.updateMemberInfluence(memberInfluenceDto: dto) { [weak self] result in
                 DispatchQueue.main.async {
                     switch result {
                     case .success(let responseString):
                         
-                        UserDefaults.standard.set(User.shared.name, forKey: "name")
+                        UserDefaults.standard.set(User.shared.nickname, forKey: "nickname")
                         UserDefaults.standard.set(User.shared.id, forKey: "userID")
                         UserDefaults.standard.set(User.shared.email, forKey: "email")
+                        if let id = User.shared.id{
+                            self?.requestLogin(id: id)
+                        }
                         
-                        self?.requestGenerateToken(id: id)
                         
                     case .failure(let error):
                         print("에러가 발생했습니다")
@@ -149,10 +138,6 @@ class UserLoginVC: UIViewController {
         }
     }
 
-    // 닉네임이 존재하는지 확인
-    private func getNickname() {
-        checkedUser()
-    }
 
     // UI 컴포넌트를 구성하는 메소드
     private func configureUIComponents() {
@@ -188,8 +173,8 @@ class UserLoginVC: UIViewController {
         googleButton.addGestureRecognizer(googleTapGesture)
         
         // Apple 이미지에 탭 제스처 추가
-//        let appleTapGesture = UITapGestureRecognizer(target: self, action: #selector(appleLogin))
-//        appleButton.addGestureRecognizer(appleTapGesture)
+        let appleTapGesture = UITapGestureRecognizer(target: self, action: #selector(appleLogin))
+        appleButton.addGestureRecognizer(appleTapGesture)
         
         // kakao 이미지에 탭 제스처 추가
         let kakaoTapGesture = UITapGestureRecognizer(target: self, action: #selector(kakaoLogin))
@@ -199,6 +184,7 @@ class UserLoginVC: UIViewController {
         contentView.addSubview(kakaoButton)
         contentView.addSubview(facebookButton)
         contentView.addSubview(googleButton)
+        contentView.addSubview(appleButton)
 
     }
 
@@ -216,7 +202,7 @@ class UserLoginVC: UIViewController {
         }
 
         // SNS 버튼들을 균등하게 배치하기 위한 StackView 설정
-        let snsButtonStack = UIStackView(arrangedSubviews: [facebookButton, googleButton, kakaoButton])
+        let snsButtonStack = UIStackView(arrangedSubviews: [facebookButton, googleButton, kakaoButton,appleButton])
         snsButtonStack.axis = .horizontal
         snsButtonStack.distribution = .equalSpacing
         snsButtonStack.alignment = .center
@@ -231,7 +217,7 @@ class UserLoginVC: UIViewController {
         }
 
         // 각 버튼의 크기를 동일하게 설정
-        [facebookButton, googleButton, kakaoButton].forEach { button in
+        [facebookButton, googleButton, kakaoButton, appleButton].forEach { button in
             button.snp.makeConstraints {
                 $0.width.height.equalTo(52)
             }
@@ -252,63 +238,64 @@ class UserLoginVC: UIViewController {
 
 }
 
-extension UserLoginVC {
-//    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
-//        return self.view.window!
-//    }
-//
-//    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-//        // 로그인 성공
-//        switch authorization.credential {
-//        case let appleIDCredential as ASAuthorizationAppleIDCredential:
-//            // You can create an account in your system.
-//            let userIdentifier = appleIDCredential.user
-//            let fullName = appleIDCredential.fullName
-//            let email = appleIDCredential.email
-//
-//            if  let authorizationCode = appleIDCredential.authorizationCode,
-//                let identityToken = appleIDCredential.identityToken,
-//                let authCodeString = String(data: authorizationCode, encoding: .utf8),
-//                let identifyTokenString = String(data: identityToken, encoding: .utf8) {
-//            }
-//
-//            let id = userIdentifier
-//            var name = "\(fullName?.givenName ?? "") \(fullName?.familyName ?? "")"
-//            let user_email = email ?? ""
-//
-//            if name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-//                name = "user\(generateRandomNumber(digits: 8))"
-//            }
-//            
-//            User.shared.updateUserData(id: id, email: user_email, name: name)
-//
-//            self.getNickname()
-//
-//        case let passwordCredential as ASPasswordCredential:
-//            // Sign in using an existing iCloud Keychain credential.
-//            let username = passwordCredential.user
-//            let password = passwordCredential.password
-//
-//        default:
-//            break
-//        }
-//    }
-//
-//    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
-//        // 로그인 실패(유저의 취소도 포함)
-//        print("login failed - \(error.localizedDescription)")
-//    }
-//
-//    @objc private func appleLogin() {
-//        let appleIDProvider = ASAuthorizationAppleIDProvider()
-//        let request = appleIDProvider.createRequest()
-//        request.requestedScopes = [.fullName, .email] // 유저로 부터 알 수 있는 정보들(name, email)
-//
-//        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
-//        authorizationController.delegate = self
-//        authorizationController.presentationContextProvider = self
-//        authorizationController.performRequests()
-//    }
+extension UserLoginVC : ASAuthorizationControllerDelegate,ASAuthorizationControllerPresentationContextProviding {
+    func presentationAnchor(for controller: ASAuthorizationController) -> ASPresentationAnchor {
+        return self.view.window!
+    }
+
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
+        // 로그인 성공
+        switch authorization.credential {
+        case let appleIDCredential as ASAuthorizationAppleIDCredential:
+            // You can create an account in your system.
+            let userIdentifier = appleIDCredential.user
+            let fullName = appleIDCredential.fullName
+            let email = appleIDCredential.email
+
+            if  let authorizationCode = appleIDCredential.authorizationCode,
+                let identityToken = appleIDCredential.identityToken,
+                let authCodeString = String(data: authorizationCode, encoding: .utf8),
+                let identifyTokenString = String(data: identityToken, encoding: .utf8) {
+            }
+
+            let id = userIdentifier
+            var name = "\(fullName?.givenName ?? "") \(fullName?.familyName ?? "")"
+            let user_email = email ?? ""
+            print("user_email :\(user_email)")
+            if name.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                name = "user\(generateRandomNumber(digits: 8))"
+            }
+            
+            User.shared.updateUserData(id: id ,
+                                       email: user_email,
+                                       nickname: name)
+            self.requestLogin(id: User.shared.id ?? "")
+
+        case let passwordCredential as ASPasswordCredential:
+            // Sign in using an existing iCloud Keychain credential.
+            let username = passwordCredential.user
+            let password = passwordCredential.password
+
+        default:
+            break
+        }
+    }
+
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        // 로그인 실패(유저의 취소도 포함)
+        print("login failed - \(error.localizedDescription)")
+    }
+
+    @objc private func appleLogin() {
+        let appleIDProvider = ASAuthorizationAppleIDProvider()
+        let request = appleIDProvider.createRequest()
+        request.requestedScopes = [.fullName, .email] // 유저로 부터 알 수 있는 정보들(name, email)
+
+        let authorizationController = ASAuthorizationController(authorizationRequests: [request])
+        authorizationController.delegate = self
+        authorizationController.presentationContextProvider = self
+        authorizationController.performRequests()
+    }
 
     @objc private func googleLogin() {
         GIDSignIn.sharedInstance.signIn(withPresenting: self) { signInResult, error in
@@ -337,8 +324,8 @@ extension UserLoginVC {
                     // User 데이터 업데이트
                     User.shared.updateUserData(id: user.userID ?? "unknown_id",
                                                email: emailAddress,
-                                               name: fullName)
-                    self.getNickname()
+                                               nickname: fullName)
+                    self.requestLogin(id: User.shared.id ?? "")
                 } else {
                     print("⚠️ 이름 정보를 가져올 수 없습니다.")
                 }
@@ -353,7 +340,7 @@ extension UserLoginVC {
         kakaoVM.handleKakaoLogin(){ id in
             if let id = id {
                 print(id)
-                self.getNickname()
+                self.requestLogin(id: id)
             }
         }
     }
@@ -385,9 +372,9 @@ extension UserLoginVC {
                     print("email: " + email)
                 }
                 
-                User.shared.updateUserData(id: userID, email: email, name: name)
+                User.shared.updateUserData(id: userID, email: email, nickname: name)
 
-                self.getNickname()
+                self.requestLogin(id: User.shared.id ?? "")
             }
         }
     }

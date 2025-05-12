@@ -68,6 +68,7 @@ class BusinessLoginVC: UIViewController {
         button.setTitleColor(UIColor(hex: "#B5B8C2"), for: .normal)
         button.titleLabel?.font = UIFont(name: "Pretendard-Regular", size: 14)
         button.clipsToBounds = true
+        button.isHidden = true
         return button
     }()
 
@@ -96,6 +97,7 @@ class BusinessLoginVC: UIViewController {
         label.font = UIFont(name: "Pretendard-Regular", size: 14)
         label.textColor = .black
         label.textAlignment = .center
+        label.isHidden = true
         return label
     }()
     
@@ -104,12 +106,14 @@ class BusinessLoginVC: UIViewController {
         imageView.image = UIImage(named: "icon_question")
         imageView.contentMode = .scaleAspectFit
         imageView.isUserInteractionEnabled = true
+        imageView.isHidden = true
         return imageView
     }()
     
     private lazy var switchButton = {
         let mySwitch = UISwitch()
         mySwitch.onTintColor = UIColor(hex: "#009BF2")
+        mySwitch.isHidden = true
         return mySwitch
     }()
     
@@ -166,38 +170,21 @@ class BusinessLoginVC: UIViewController {
             return
         }
 
-        if switchButton.isOn == true {
-            print("실행")
-            mcnLogin(id: username, password: password)
-        }else{
-            businessLogin(id: username, password: password)
-        }
+        businessLogin(id: username, password: password)
         
     }
     
-    private func mcnLogin(id:String,password:String){
-        mcnViewModel.loginMcn(userid: id, password: password ) { [weak self] result in
-            DispatchQueue.main.async {
-                switch result {
-                case .success(let user):
-                    
-                    User.shared.id = user.memberId
-                    User.shared.auth = user.auth
-                    User.shared.name = user.name
-                    
-                    UserDefaults.standard.setValue(user.memberId, forKey: "businessId")
-                    UserDefaults.standard.setValue(user.auth, forKey: "auth")
-                    UserDefaults.standard.setValue(user.name, forKey: "name")
-                    
-                    
-                    let vc = TabBarViewController()
-                    self?.navigationController?.pushViewController(vc, animated: false)
-                case .failure(let error):
-                    print("Error: \(error.localizedDescription)")
-                    self?.errorLabel.text = "login_str4".localized
-                    self?.errorLabel.isHidden = false
-                }
+    private func checkedUser() {
+        if let token = UserDefaults.standard.string(forKey: "accessToken"),
+           let auth = decodeJWT(token: token) {
+            if auth > 2  {
+                let vc = TabBarViewController()
+                self.navigationController?.pushViewController(vc, animated: false)
+            } else if auth == 2 {
+                self.showAlert(title: "승인중", message: "기업 승인을 검토중입니다.")
             }
+        }else {
+            print("❌ 존재하지않는 계정입니다.")
         }
     }
 
@@ -207,20 +194,11 @@ class BusinessLoginVC: UIViewController {
                 switch result {
                 case .success(let business):
                     
-                    User.shared.id = business.memberId
-                    User.shared.auth = business.auth?.toInt()
-                    
-                    User.shared.name = business.businessName ?? nil
-                    User.shared.intro = business.intro ?? nil
-                    
-                    UserDefaults.standard.setValue(business.memberId, forKey: "businessId")
-                    UserDefaults.standard.setValue(business.auth, forKey: "auth")
-                    UserDefaults.standard.setValue(business.businessName, forKey: "name")
                     UserDefaults.standard.setValue(business.accessToken, forKey: "accessToken")
                     UserDefaults.standard.setValue(business.refreshToken, forKey: "refreshToken")
+                    User.shared.nickname = business.businessName
+                    self?.checkedUser()
                     
-                    let vc = TabBarViewController()
-                    self?.navigationController?.pushViewController(vc, animated: false)
                 case .failure(let error):
                     print("Error: \(error.localizedDescription)")
                     self?.errorLabel.text = "login_str4".localized

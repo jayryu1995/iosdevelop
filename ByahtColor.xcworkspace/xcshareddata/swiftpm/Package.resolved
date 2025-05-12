@@ -1,5 +1,5 @@
 {
-  "originHash" : "0a9a0565c23645eacdcd0d177a036429567ab510b257a7f2538ea8bb318bf8d2",
+  "originHash" : "34d14f46cf52a3b98a13fce6cfc618e5c1aeaa677395ea1ecf3968de254f2984",
   "pins" : [
     {
       "identity" : "alamofire",
@@ -11,12 +11,39 @@
       }
     },
     {
+      "identity" : "cocoalumberjack",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/CocoaLumberjack/CocoaLumberjack.git",
+      "state" : {
+        "revision" : "4b8714a7fb84d42393314ce897127b3939885ec3",
+        "version" : "3.8.5"
+      }
+    },
+    {
       "identity" : "kakao-ios-sdk",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/kakao/kakao-ios-sdk",
       "state" : {
         "revision" : "ab4309c1950550add307046ad1e08024c7514603",
         "version" : "2.23.0"
+      }
+    },
+    {
+      "identity" : "svgkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SVGKit/SVGKit",
+      "state" : {
+        "revision" : "58152b9f7c85eab239160b36ffdfd364aa43d666",
+        "version" : "3.0.0"
+      }
+    },
+    {
+      "identity" : "swift-log",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/apple/swift-log",
+      "state" : {
+        "revision" : "3d8596ed08bd13520157f0355e35caed215ffbfa",
+        "version" : "1.6.3"
       }
     }
   ],

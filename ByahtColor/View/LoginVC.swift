@@ -73,26 +73,26 @@ class LoginVC: UIViewController , BusinessLoginVCDelegate {
         self.navigationController?.navigationBar.isHidden = true
         view.backgroundColor = .white
 
-        viewModel.checkServerState { result in
-            switch result {
-            case .success(let data):
-                print("checkServerState :\(data)")
-                // Handle successful response
-                if data == false {
-                    self.log(message: "State : Not Enable Server. Response data: \(data)")
-                    
-                } else {
-                    self.setupAutoLogin()
-                    self.log(message: "State : Enable Server. Response data: \(data)")
-                }
-
-            case .failure(let error):
-                // Handle error
-                self.showServerDownAlert()
-                self.log(message: "[Error] Upload Failed. Response data: \(error)")
-            }
-        }
-        
+//        viewModel.checkServerState { result in
+//            switch result {
+//            case .success(let data):
+//                print("checkServerState :\(data)")
+//                // Handle successful response
+//                if data == false {
+//                    self.log(message: "State : Not Enable Server. Response data: \(data)")
+//                    self.setupAutoLogin()
+//                } else {
+//                    self.setupAutoLogin()
+//                    self.log(message: "State : Enable Server. Response data: \(data)")
+//                }
+//
+//            case .failure(let error):
+//                // Handle error
+//                self.showServerDownAlert()
+//                self.log(message: "[Error] Upload Failed. Response data: \(error)")
+//            }
+//        }
+        self.setupAutoLogin()
         setupPages()
         setupButtons()
         setupPageViewController()
@@ -122,7 +122,7 @@ class LoginVC: UIViewController , BusinessLoginVCDelegate {
             print(id)
             User.shared.id = id
             User.shared.auth = UserDefaults.standard.integer(forKey: "auth")
-            User.shared.name = UserDefaults.standard.string(forKey: "name")
+            User.shared.nickname = UserDefaults.standard.string(forKey: "nickname")
             User.shared.intro = UserDefaults.standard.string(forKey: "intro")
             
             let vc = TabBarViewController()
@@ -245,50 +245,15 @@ class LoginVC: UIViewController , BusinessLoginVCDelegate {
     }
 
     private func checkedUser() {
-
-        if let id = UserDefaults.standard.string(forKey: "userID") {
-            let name = UserDefaults.standard.string(forKey: "name") ?? ""
-            let email = UserDefaults.standard.string(forKey: "email") ?? ""
-            User.shared.updateUserData(id: id, email: email, name: name)
-            if let id = User.shared.id {
-                viewModel.getLoginData(member_id: id) { [weak self] result in
-                    DispatchQueue.main.async {
-                        switch result {
-                        case .success(let data):
-                            let vc = TabBarViewController()
-                            self?.navigationController?.pushViewController(vc, animated: true)
-
-                        case .failure(let error):
-                            print("error : \(error)")
-                            //self?.signUpInfluence()
-                        }
-                    }
-                }
-            }
-        }
-
-    }
-
-    private func signUpInfluence() {
-        if let id = User.shared.id {
-            let member = Member(id: id, auth: 0, regi_date: nil)
-            let influence = Influence(no: nil, id: nil, name: nil, intro: nil, age: nil, category: nil, gender: nil, video: nil, evaluation: nil, mcnId: nil)
-            let dto = MemberInfluenceDto(member: member, influence: influence)
-            viewModel.updateMemberInfluence(memberInfluenceDto: dto) { [weak self] result in
-                DispatchQueue.main.async {
-                    switch result {
-                    case .success(let responseString):
-                        let vc = TabBarViewController()
-                        self?.navigationController?.pushViewController(vc, animated: true)
-
-                    case .failure(let error):
-                        print("에러가 발생했습니다")
-                        print( "Error: \(error.localizedDescription)")
-                    }
-                }
+        if let token = UserDefaults.standard.string(forKey: "accessToken"),
+           let auth = decodeJWT(token: token) {
+            if auth != -1 {
+                let vc = TabBarViewController()
+                self.navigationController?.pushViewController(vc, animated: false)
             }
         }
     }
+
     
     func didTapFindIdButton() {
         let findAccountVC = FindAccountVC()

@@ -2,17 +2,12 @@
 //  UIViewControllerExtension.swift
 //  ByahtColor
 //
-//  Created by jaem on 2023/07/21.
+//  Created by jaem on 4/29/25.
 //
-
 import UIKit
-
+import SnapKit
+import Foundation
 extension UIViewController {
-
-    // POP 제스쳐
-    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        return true // or false
-      }
 
     // 뒤로가기 버튼
     func setupBackButton() {
@@ -44,22 +39,6 @@ extension UIViewController {
     @objc func dismissKeyboard() {
         view.endEditing(true)
     }
-
-    // 상태바 컬러 변경
-    func changeStatusBarBgColor(bgColor: UIColor?) {
-            if #available(iOS 13.0, *) {
-                let window = UIApplication.shared.windows.first
-                let statusBarManager = window?.windowScene?.statusBarManager
-
-                let statusBarView = UIView(frame: statusBarManager?.statusBarFrame ?? .zero)
-                statusBarView.backgroundColor = bgColor
-
-                window?.addSubview(statusBarView)
-            } else {
-                let statusBarView = UIApplication.shared.value(forKey: "statusBar") as? UIView
-                statusBarView?.backgroundColor = bgColor
-            }
-        }
 
     func log(message: String) {
         let vcName = String(describing: type(of: self))
@@ -100,72 +79,10 @@ extension UIViewController {
         }.resume()
     }
 
-    // 샌드버드
-
-    public static func loadFromNib() -> Self {
-        func instantiateFromNib<T: UIViewController>() -> T {
-            return T.init(nibName: String(describing: T.self), bundle: Bundle(for: T.self))
-        }
-
-        return instantiateFromNib()
-    }
-
-    public func presentAlert(title: String, message: String?, closeHandler: (() -> Void)? = nil) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        alert.addAction(UIAlertAction(title: "Close", style: .cancel, handler: { _ in closeHandler?() }))
-        present(alert, animated: true)
-    }
-
-    public func presentTextFieldAlert(title: String, message: String?, defaultTextFieldMessage: String, didConfirm: @escaping (String) -> Void) {
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-
-        alert.addTextField { textField in
-            textField.text = defaultTextFieldMessage
-        }
-
-        alert.addAction(UIAlertAction(title: "Cancel", style: .cancel))
-
-        alert.addAction(UIAlertAction(title: "Confirm", style: .default) { [weak alert] _ in
-            guard let textFieldText = alert?.textFields?.first?.text else { return }
-
-            didConfirm(textFieldText)
-        })
-
-        present(alert, animated: true)
-    }
-
-    public func presentAlert(error: Error) {
-        presentAlert(title: "Error", message: error.localizedDescription)
-    }
-
-    func getLanguageNumber() -> String {
-        let currentLanguage = Locale.current.languageCode
-        print(currentLanguage)
-        switch currentLanguage {
-        case "ko": // 한국어
-            return "0"
-        case "ja": // 일본어
-            return "1"
-        case "th": // 태국어
-            return "2"
-        case "tl": // 필리핀어 (타갈로그어)
-            return "3"
-        case "vi": // 베트남어
-            return "4"
-        case "en-SG": // 싱가포르 영어
-            return "5"
-        case "en": // 영어
-            return "6"
-        case "ar": // 영어
-            return "6"
-        default: // 그 외 다른 언어의 경우
-            return "6" // 영어로 기본 설정
-        }
-    }
-    
+   
     func getLanguage() -> String {
         let currentLanguage = Locale.current.languageCode
-            print("Locale.current.languageCode: \(Locale.current.languageCode)")
+            
         switch currentLanguage {
         case "ko": // 한국어
             return "ko"
@@ -178,15 +95,6 @@ extension UIViewController {
         }
     }
     
-    func numTransToNation(num : String) -> String {
-        if num == "0" {
-            return "ko"
-        }else if num == "4"{
-            return "vi"
-        }else{
-            return "en"
-        }
-    }
     
     //기업 회원가입
     
@@ -270,4 +178,92 @@ extension UIViewController {
         alertController.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
         self.present(alertController, animated: true, completion: nil)
     }
+    
+    /// 아래와 같은 모양·그림자의 토스트를 띄웁니다.
+    func showToast(
+            message: String,
+            icon: UIImage? = nil,
+            duration: TimeInterval = 2.0
+        ) {
+            // 1) 컨테이너 뷰
+            let toast = UIView()
+            view.addSubview(toast)
+            toast.snp.makeConstraints {
+                $0.width.equalTo(350)
+                $0.height.equalTo(56)
+                $0.centerX.equalToSuperview()
+                $0.bottom.equalTo(view.safeAreaLayoutGuide).offset(-40)
+            }
+
+            // 2) 그림자 뷰
+            let shadows = UIView()
+            shadows.clipsToBounds = false
+            toast.addSubview(shadows)
+            shadows.snp.makeConstraints { $0.edges.equalToSuperview() }
+
+            let shadowLayer = CALayer()
+            shadowLayer.shadowPath = UIBezierPath(
+                roundedRect: shadows.bounds,
+                cornerRadius: 16
+            ).cgPath
+            shadowLayer.shadowColor   = UIColor(white: 0, alpha: 0.15).cgColor
+            shadowLayer.shadowOpacity = 1
+            shadowLayer.shadowRadius  = 18
+            shadowLayer.shadowOffset  = CGSize(width: 0, height: 5)
+            shadows.layer.addSublayer(shadowLayer)
+
+            // 3) 배경 쉐이프 뷰
+            let shapes = UIView()
+            shapes.clipsToBounds      = true
+            shapes.layer.cornerRadius = 16
+            shapes.backgroundColor    = UIColor(red: 0.067, green: 0.067, blue: 0.067, alpha: 1)
+            toast.addSubview(shapes)
+            shapes.snp.makeConstraints { $0.edges.equalToSuperview() }
+
+            // 4) 아이콘 (있다면)
+            var iconView: UIImageView?
+            if let iconImage = icon {
+                let iv = UIImageView(image: iconImage)
+                iv.contentMode = .scaleAspectFit
+                shapes.addSubview(iv)
+                iv.snp.makeConstraints {
+                    $0.leading.equalToSuperview().offset(16)
+                    $0.centerY.equalToSuperview()
+                    $0.width.height.equalTo(24)
+                }
+                iconView = iv
+            }
+
+            // 5) 메시지 레이블
+            let label = UILabel()
+            label.text          = message
+            label.textColor     = .white
+            label.font          = .systemFont(ofSize: 14)
+            label.textAlignment = .left
+            label.numberOfLines = 0
+            shapes.addSubview(label)
+            label.snp.makeConstraints { make in
+                if let iv = iconView {
+                    make.leading.equalTo(iv.snp.trailing).offset(8)
+                } else {
+                    make.leading.equalToSuperview().offset(16)
+                }
+                make.trailing.equalToSuperview().inset(16)
+                make.centerY.equalToSuperview()
+            }
+
+            // 6) 레이아웃 확정 후 페이드 인·아웃
+            toast.layoutIfNeeded()
+            toast.alpha = 0
+            UIView.animate(withDuration: 0.2) { toast.alpha = 1 }
+            DispatchQueue.main.asyncAfter(deadline: .now() + duration) {
+                UIView.animate(withDuration: 0.3, animations: {
+                    toast.alpha = 0
+                }) { _ in
+                    toast.removeFromSuperview()
+                }
+            }
+        }
+    
+    
 }

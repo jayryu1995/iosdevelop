@@ -9,6 +9,9 @@ import Foundation
 
 
 struct TokenDto : Codable{
+    let memberId: String
     let accessToken : String
     let refreshToken : String
+    var isFirstLogin : Bool = false
+    
 }

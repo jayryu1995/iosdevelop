@@ -204,52 +204,58 @@ extension AppDelegate: MessagingDelegate, UNUserNotificationCenterDelegate {
     }
     
     // foreground 상에서 알림이 보이게끔 해준다.
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        
-        
+    func userNotificationCenter(_ center: UNUserNotificationCenter,
+                                willPresent notification: UNNotification,
+                                withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+
         print("foreground 알림 발생")
-        
-        
-        
+
         let userInfo = notification.request.content.userInfo
         print("userinfo : \(userInfo)")
-        if let aps = userInfo["aps"] as? NSDictionary,
-           let alertMsg = aps["alert"] as? String,
-           let payload = userInfo["sendbird"] as? NSDictionary,
-           let count = payload["unread_message_count"] as? Int {
-           
-            print(payload)
-            // 알림 메시지와 카운트가 nil이 아닐 때만 실행
-            UIApplication.shared.applicationIconBadgeNumber = count
-            NotificationCenter.default.post(name: NSNotification.Name("SendbirdPushNotificationReceived"), object: nil)
-            completionHandler([.banner, .sound, .badge])
-        }
-        
-        // firebase 주제 알림메시지 - springboot 전송
-        if let aps = userInfo["aps"] as? [String: Any],
-           let alert = aps["alert"] as? [String: Any],
-           let body = alert["body"] as? String {
-            print("Body: \(body)")
-            
-            if body == "COMPLETE" {
-                print("알림 실행")
-                DispatchQueue.main.async {
-                    NotificationCenter.default.post(name: Notification.Name("ProfileUpdateNotification"), object: nil)
-                }
-                completionHandler([]) // 알림 표시하지 않음
-                return
-            }
-        }
-     
-        if let title = userInfo["title"] as? String, let status = userInfo["status"] as? String {
-            Messaging.messaging().appDidReceiveMessage(userInfo)
 
-            print("Title: \(title), Status: \(status)")
-            completionHandler([.banner, .sound, .badge])
+        // 기본값: 알림 표시 안 함
+        var presentationOptions: UNNotificationPresentationOptions = []
+
+        // case 1: sendbird 알림 처리
+        if let aps = userInfo["aps"] as? [String: Any],
+           let alert = aps["alert"] as? [String: Any], // alert는 딕셔너리
+           let payload = userInfo["sendbird"] as? [String: Any],
+           let count = payload["unread_message_count"] as? Int {
+
+            // 배지 업데이트
+            UIApplication.shared.applicationIconBadgeNumber = count
+            print("Unread message count: \(count)")
+
+            // 알림 수신 이벤트 전달
+            NotificationCenter.default.post(name: NSNotification.Name("SendbirdPushNotificationReceived"), object: nil)
+
+            // 푸시 표시 옵션 설정
+            presentationOptions = [.banner, .sound, .badge]
         }
-        
-        
-        
+
+        // case 2: springboot에서 온 firebase 주제 알림
+        else if let aps = userInfo["aps"] as? [String: Any],
+                let alert = aps["alert"] as? [String: Any],
+                let body = alert["body"] as? String {
+            
+            print("Body: \(body)")
+            print("알림 실행")
+            NotificationCenter.default.post(name: .didReceiveNewNotification, object: nil)
+            
+            presentationOptions = [.banner, .sound]
+        }
+
+        // case 3: 기타 커스텀 데이터 처리
+        else if let title = userInfo["title"] as? String,
+                let status = userInfo["status"] as? String {
+            
+            Messaging.messaging().appDidReceiveMessage(userInfo)
+            print("Title: \(title), Status: \(status)")
+            presentationOptions = [.banner, .sound, .badge]
+        }
+
+        // completionHandler는 맨 마지막에 한 번만!
+        completionHandler(presentationOptions)
     }
 
     func userNotificationCenter(_ center: UNUserNotificationCenter,
@@ -258,7 +264,5 @@ extension AppDelegate: MessagingDelegate, UNUserNotificationCenterDelegate {
 
         print(userInfo)
       }
-    
-
     
 }

@@ -22,10 +22,10 @@ class User: Encodable {
     
     private init() {} // private 생성자로 외부에서 인스턴스 생성을 방지합니다.
 
-    func updateUserData(id: String?, email: String?, name: String?) {
+    func updateUserData(id: String?, email: String?, nickname: String?) {
         self.id = id
         self.email = email
-        self.name = name
+        self.nickname = nickname
     }
 
     func updateNickName(nickname: String?) {

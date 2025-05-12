@@ -129,9 +129,16 @@ class InfluenceMyPageVC: UIViewController {
 
     
     @objc private func errorButtonTapped() {
-        let urlString = "https://forms.gle/iE8czGec28MGPwvo7"
-        if let url = URL(string: urlString) {
-            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        if getLanguage() == "ko"{
+            let urlString = "https://docs.google.com/forms/d/e/1FAIpQLSeC5FpP1ih5SdTyx5ePlmfseKBRHSk34tH0sHSFXNLOfuM0jg/viewform?usp=dialog"
+            if let url = URL(string: urlString) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }else{
+            let urlString = "https://docs.google.com/forms/d/e/1FAIpQLSere-Vx71lq7lUFrMcJXYW2vv9JXf8sANJvZHUT2QJhsGocFA/viewform?usp=dialog"
+            if let url = URL(string: urlString) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
         }
     }
 }

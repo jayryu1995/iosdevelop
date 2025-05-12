@@ -108,7 +108,7 @@ class ProfileAlertVC: UIViewController {
     }
 
     @objc private func confirmButtonTapped() {
-        UserDefaults.standard.removeObject(forKey: "name")
+        UserDefaults.standard.removeObject(forKey: "nickname")
         UserDefaults.standard.removeObject(forKey: "userID")
         UserDefaults.standard.removeObject(forKey: "email")
         UserDefaults.standard.removeObject(forKey: "businessId")
@@ -116,14 +116,11 @@ class ProfileAlertVC: UIViewController {
         let loginManager = LoginManager()
         loginManager.logOut()
 
-        // SceneDelegate에 접근하여 rootViewController를 변경합니다.
-        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-            // LoginViewController 인스턴스 생성. 스토리보드를 사용하는 경우 스토리보드 ID로 인스턴스화해야 합니다.
-            let loginViewController = LoginVC() // 또는 스토리보드에서 생성
-            let navigationController = UINavigationController(rootViewController: loginViewController)
-            sceneDelegate.window?.rootViewController = navigationController
-            sceneDelegate.window?.makeKeyAndVisible()
+        SendbirdUser.shared.logout {
+            print("sendbird 로그아웃 완료")
         }
+        
+        
         deleteUser(userId: User.shared.id ?? "")
     }
 
@@ -139,19 +136,20 @@ class ProfileAlertVC: UIViewController {
                 switch result {
                 case .success(let data):
                     self?.log(message: "탈퇴 성공")
+                    // SceneDelegate에 접근하여 rootViewController를 변경합니다.
+                    if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
+                        // LoginViewController 인스턴스 생성. 스토리보드를 사용하는 경우 스토리보드 ID로 인스턴스화해야 합니다.
+                        let loginViewController = LoginVC() // 또는 스토리보드에서 생성
+                        let navigationController = UINavigationController(rootViewController: loginViewController)
+                        sceneDelegate.window?.rootViewController = navigationController
+                        sceneDelegate.window?.makeKeyAndVisible()
+                    }
 
                 case .failure(let error):
                     self?.log(message: "통신 실패")
                 }
             }
         }
-        // SceneDelegate에 접근하여 rootViewController를 변경합니다.
-        if let sceneDelegate = UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate {
-            // LoginViewController 인스턴스 생성. 스토리보드를 사용하는 경우 스토리보드 ID로 인스턴스화해야 합니다.
-            let loginViewController = LoginVC() // 또는 스토리보드에서 생성
-            let navigationController = UINavigationController(rootViewController: loginViewController)
-            sceneDelegate.window?.rootViewController = navigationController
-            sceneDelegate.window?.makeKeyAndVisible()
-        }
+        
     }
 }

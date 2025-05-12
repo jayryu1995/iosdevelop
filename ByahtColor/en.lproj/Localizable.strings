@@ -6,7 +6,16 @@
   
 */
 
-"privacy_policy" = "privacy_policy";
+"privacy_policy" = "Privacy Policy";
+
+// PrivatePolicyVC
+"policy_label" = "Change Account Status";
+
+// SearchVC
+"business_search_label" = "Special EVENT for your registered company";
+"business_search_label2" = "Wondering if there are more influencers for your needs? We'll send you the perfect portfolio!";
+
+"business_search_button" = "Register";
 
 // NotiCollabView
 "noti_collab_label_text" = "신청하러가기 ⬇️⬇️";

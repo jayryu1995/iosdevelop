@@ -85,37 +85,30 @@ public class MessageInputView: UIView {
     public override init(frame: CGRect) {
         super.init(frame: frame)
 
-        addSubview(sendFileMessageButton)
-        sendFileMessageButton.snp.makeConstraints { make in
-            make.leading.equalToSuperview().offset(10)
-            make.centerY.equalToSuperview()
-            make.width.height.equalTo(34)
-        }
-
-        textView.delegate = self
-
+        // textFieldContainerView 먼저 추가
         addSubview(textFieldContainerView)
         textFieldContainerView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(20)
-            make.top.bottom.equalToSuperview().inset(5)
-            make.height.equalTo(44).priority(.high)
-            textFieldContainerViewHeightConstraint = make.height.equalTo(44).constraint
+            make.trailing.equalToSuperview().offset(-20)
+            make.top.equalToSuperview().inset(5)
+            make.bottom.equalToSuperview().inset(5)
         }
 
-        addSubview(textView)
+        // sendFileMessageButton (플러스 버튼)은 따로 넣어도 되고 별도 처리할 수도 있음 (지금은 무시)
+
+        // textView를 textFieldContainerView 안에 추가
+        textFieldContainerView.addSubview(textView)
         textView.snp.makeConstraints { make in
-            make.leading.equalTo(textFieldContainerView.snp.leading).offset(12)
-            make.trailing.equalTo(textFieldContainerView.snp.trailing).offset(-12)
-            make.top.equalTo(textFieldContainerView.snp.top)
-            make.bottom.equalTo(textFieldContainerView.snp.bottom)
-
-            textViewHeightConstraint = make.height.equalTo(44).constraint
+            make.leading.equalToSuperview().offset(12)
+            make.top.equalToSuperview().offset(12)
+            make.bottom.equalToSuperview().inset(12)
+            make.trailing.equalToSuperview().offset(-50) // 버튼 공간 남기기 (대략)
         }
 
-        addSubview(sendUserMessageButton)
+        // sendUserMessageButton도 textFieldContainerView 안에 추가
+        textFieldContainerView.addSubview(sendUserMessageButton)
         sendUserMessageButton.snp.makeConstraints { make in
-            make.leading.equalTo(textFieldContainerView.snp.trailing).offset(10)
-            make.trailing.equalToSuperview().offset(-10)
+            make.trailing.equalToSuperview().offset(-12)
             make.centerY.equalToSuperview()
             make.width.height.equalTo(25)
         }
@@ -139,15 +132,20 @@ public class MessageInputView: UIView {
     }
 
     private func updateTextViewHeight() {
-        //let size = CGSize(width: textView.frame.width, height: textFieldContainerView.frame.height)
         let size = CGSize(width: textView.frame.width, height: .infinity)
         let estimatedSize = textView.sizeThatFits(size)
-        
-        let maxHeight: CGFloat = 44 * 4  // 최대 높이 (4줄)
 
-        textView.isScrollEnabled = estimatedSize.height > maxHeight
-        textViewHeightConstraint?.update(offset: min(estimatedSize.height, maxHeight))
-        textFieldContainerViewHeightConstraint?.update(offset: min(estimatedSize.height, maxHeight))
+        let maxTextViewHeight: CGFloat = 48 * 4 - 24  // 텍스트뷰 최대 높이 (전체 4줄 기준, 인셋 제외)
+
+        let finalTextViewHeight = min(estimatedSize.height, maxTextViewHeight)
+
+        textView.isScrollEnabled = estimatedSize.height > maxTextViewHeight
+
+        textViewHeightConstraint?.update(offset: finalTextViewHeight)
+
+        // textView 높이에 +24 (top 12 + bottom 12) 더해서 container 높이 업데이트
+        textFieldContainerViewHeightConstraint?.update(offset: finalTextViewHeight + 24)
+
         layoutIfNeeded()
     }
 }

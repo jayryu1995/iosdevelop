@@ -81,14 +81,15 @@ class BusinessInfoVC: UIViewController {
         return label
     }()
     
-    lazy private var lbl_manager_name = makeLabel(text: "signup_manager_name")
-    lazy private var lbl_manager_phone = makeLabel(text: "signup_manager_phone")
-    lazy private var lbl_manager_email = makeLabel(text: "signup_manager_email")
 
+    lazy private var lbl_manager_email = makeLabel(text: "signup_manager_email")
+    //    lazy private var lbl_manager_name = makeLabel(text: "signup_manager_name")
+    //    lazy private var lbl_manager_phone = makeLabel(text: "signup_manager_phone")
+    
     // TextField
-    lazy private var tf_manager_name = makeTextField(placeholder: "signup_manager_name_hint")
-    lazy private var tf_manager_phone = makeTextField(placeholder: "signup_manager_phone_hint")
     lazy private var tf_manager_email = makeTextField(placeholder: "signup_manager_email_hint")
+    //    lazy private var tf_manager_name = makeTextField(placeholder: "signup_manager_name_hint")
+    //    lazy private var tf_manager_phone = makeTextField(placeholder: "signup_manager_phone_hint")
 
     // Button
     lazy private var submitButton = {
@@ -102,8 +103,6 @@ class BusinessInfoVC: UIViewController {
     }()
     lazy private var managers: [(UILabel, UITextField)] = {
         return [
-            (lbl_manager_name, tf_manager_name),
-            (lbl_manager_phone, tf_manager_phone),
             (lbl_manager_email, tf_manager_email)
         ]
     }()
@@ -118,6 +117,8 @@ class BusinessInfoVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.hideKeyboard()
         view.backgroundColor = .white
         self.navigationItem.title = "회사정보 수정".localized
         setupProfile()
@@ -138,9 +139,9 @@ class BusinessInfoVC: UIViewController {
                         self?.businessNameLabel2.text = data.businessName
                         self?.licenseNumLabel2.text = data.license
                         self?.licenseLabel2.text = "\(data.memberId ?? "").pdf"
-                        self?.tf_manager_name.text = data.managerName
+                        //self?.tf_manager_name.text = data.managerName
                         self?.tf_manager_email.text = data.email
-                        self?.tf_manager_phone.text = data.tel
+                        //self?.tf_manager_phone.text = data.tel
                         
                     case .failure(let error):
                         print("통신 에러 : \(error)")
@@ -154,7 +155,7 @@ class BusinessInfoVC: UIViewController {
     private func setupUI() {
         // 스피너 초기화 및 설정
         activityIndicator = UIActivityIndicatorView(style: .large)
-        [tf_manager_name, tf_manager_phone, tf_manager_email].forEach {
+        [tf_manager_email].forEach {
             $0.delegate = self
         }
         // 기업정보
@@ -191,7 +192,7 @@ class BusinessInfoVC: UIViewController {
         // 담당자 정보
         managerView.axis = .vertical
         managerView.spacing = 8
-        tf_manager_phone.keyboardType = .asciiCapableNumberPad
+        //tf_manager_phone.keyboardType = .asciiCapableNumberPad
         
         for (label, textField) in managers {
             let containerView = makeContainerView(withLabel: label, textField: textField, button: nil)
@@ -319,8 +320,8 @@ extension BusinessInfoVC: UITextFieldDelegate {
         // 필수 입력 항목 검사
         guard let businessName = businessNameLabel2.text, !businessName.isEmpty,
               let license = licenseNumLabel2.text, !license.isEmpty,
-              let managerName = tf_manager_name.text, !managerName.isEmpty,
-              let tel = tf_manager_phone.text, !tel.isEmpty,
+//              let managerName = tf_manager_name.text, !managerName.isEmpty,
+//              let tel = tf_manager_phone.text, !tel.isEmpty,
               let email = tf_manager_email.text, !email.isEmpty else {
             self.showAlert(title: "error_input".localized, message: "error_input_message".localized)
             return
@@ -330,8 +331,8 @@ extension BusinessInfoVC: UITextFieldDelegate {
         let dto = BusinessMyPageDto(memberId: User.shared.id ?? "",
                                     businessName: businessName,
                                     license: license,
-                                    managerName: managerName,
-                                    tel: tel,
+                                    managerName: nil,
+                                    tel: nil,
                                     email: email)
         
         // 통신 호출

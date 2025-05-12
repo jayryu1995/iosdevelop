@@ -10,7 +10,7 @@ import SendbirdChatSDK
 import SnapKit
 class ChatsListVC: UIViewController {
 
-    private lazy var tableView: UITableView = {
+    private lazy var tableView = {
         let tableView: UITableView = UITableView(frame: .zero, style: .plain)
         tableView.dataSource = self
         tableView.delegate = self
@@ -18,23 +18,25 @@ class ChatsListVC: UIViewController {
         tableView.separatorStyle = .none
         return tableView
     }()
-
-    private lazy var emptyLabel: UILabel = {
-        let label = UILabel()
-        label.text = "현재 진행중인 채팅이 없습니다."
-        label.textColor = .gray
-        label.textAlignment = .center
-        label.font = UIFont(name: "Pretendard-Bold", size: 14)
-        label.numberOfLines = 0
-        return label
+    private let emptyImage = {
+        let view = UIImageView(image:UIImage(named: "icon_box"))
+        return view
     }()
-    
+    private let backgroundView = UIView()
+    private let emptyLabel: UILabel = {
+        let lbl = UILabel()
+        lbl.text = "현재 진행중인 채팅이 없습니다."
+        lbl.textColor = .gray
+        lbl.textAlignment = .center
+        lbl.font = UIFont(name: "Pretendard-SemiBold", size: 16)
+        lbl.numberOfLines = 0
+        return lbl
+    }()
     private lazy var useCase: GroupChannelListUseCase = {
         let useCase = GroupChannelListUseCase()
         useCase.delegate = self
         return useCase
     }()
-
     private lazy var timestampStorage = TimestampStorage()
 
     override func viewDidLoad() {
@@ -49,7 +51,7 @@ class ChatsListVC: UIViewController {
 
     private func setupUI() {
         view.addSubview(tableView)
-
+        
     }
 
     private func setupConstraints() {
@@ -59,7 +61,20 @@ class ChatsListVC: UIViewController {
     }
     
     private func updateEmptyState() {
-        tableView.backgroundView = useCase.channels.isEmpty ? emptyLabel : nil
+        backgroundView.addSubview(emptyImage)
+        backgroundView.addSubview(emptyLabel)
+        tableView.backgroundView = useCase.channels.isEmpty ? backgroundView : nil
+        
+        emptyImage.snp.makeConstraints{
+            $0.center.equalToSuperview()
+            $0.width.height.equalTo(88)
+        }
+        
+        emptyLabel.snp.makeConstraints{
+            $0.top.equalTo(emptyImage.snp.bottom).offset(16)
+            $0.leading.trailing.equalToSuperview().inset(20)
+        }
+        
     }
 }
 
@@ -137,7 +152,7 @@ extension ChatsListVC: GroupChannelListUseCaseDelegate {
 
    func groupChannelListUseCase(_ groupChannelListUseCase: GroupChannelListUseCase, didReceiveError error: SBError) {
         DispatchQueue.main.async { [weak self] in
-            // self?.presentAlert(error: error)
+            self?.presentAlert(error: error)
         }
    }
 

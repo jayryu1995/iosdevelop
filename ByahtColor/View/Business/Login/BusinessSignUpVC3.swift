@@ -355,7 +355,7 @@ class BusinessSignUpVC3: UIViewController, UIScrollViewDelegate,UIDocumentPicker
                 case .success(let responseString):
                     self?.activityIndicator.stopAnimating()
                     User.shared.id = member.id
-                    User.shared.name = business.business_name
+                    User.shared.nickname = business.business_name
                     if let navigationController = self?.navigationController {
                         for viewController in navigationController.viewControllers {
                             if let userLoginVC = viewController as? LoginVC {

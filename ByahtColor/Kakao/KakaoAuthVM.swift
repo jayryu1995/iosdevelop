@@ -28,6 +28,7 @@ class KakaoAuthVM: ObservableObject {
                     _ = oauthToken
                     // 사용자 ID 가져오기
                     self.getId(completion: completion)
+                    
                 }
             }
         } else { // 카카오톡 미설치 상태 -> 웹으로 이동해 로그인
@@ -57,10 +58,10 @@ class KakaoAuthVM: ObservableObject {
                     let name = user.kakaoAccount?.name
                     let user_email = user.kakaoAccount?.email
                     
-                    UserDefaults.standard.set(name, forKey: "name")
+                    UserDefaults.standard.set(name, forKey: "nickname")
                     UserDefaults.standard.set(stringId, forKey: "userID")
                     UserDefaults.standard.set(user_email, forKey: "email")
-                    User.shared.updateUserData(id: stringId, email: user_email, name: name)
+                    User.shared.updateUserData(id: stringId, email: user_email, nickname: name)
                     
                     completion(stringId)
                 } else {

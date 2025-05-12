@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>TEST_URL2</key>
-	<string>http://localhost:8080</string>
+	<string>http://192.168.0.6:8080</string>
 	<key>TEST_URL</key>
 	<string>http://ec2-54-255-211-240.ap-southeast-1.compute.amazonaws.com:8080</string>
 	<key>SendbirdAppID</key>
@@ -13,6 +13,6 @@
 	<key>SERVER_URL2</key>
 	<string>http://ec2-13-229-104-17.ap-southeast-1.compute.amazonaws.com:8081</string>
 	<key>SERVER_URL</key>
-	<string>http://ec2-13-229-104-17.ap-southeast-1.compute.amazonaws.com:8080</string>
+	<string>https://api.glowb.io</string>
 </dict>
 </plist>

@@ -4,7 +4,7 @@ import SendbirdChatSDK
 import SnapKit
 
 protocol BasicMessageCellDelegate: AnyObject {
-    func didTapCell(_ cell: BasicMessageCell, withProfile profile: InfluenceProfileDto)
+    func didTapCell(_ cell: BasicMessageCell, withProfile memberId: String)
 }
 
 open class BasicMessageCell: UITableViewCell {
@@ -80,6 +80,8 @@ open class BasicMessageCell: UITableViewCell {
     private var imageUrl = ""
     private var sender = ""
     private var id = ""
+    private var messageBoxTopConstraint: Constraint?
+    
     
     public override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -132,7 +134,7 @@ open class BasicMessageCell: UITableViewCell {
         super.updateConstraints()
 
         
-        let me = User.shared.name
+        let me = User.shared.id
 
         if sender == me {
             profileImageView.isHidden = true
@@ -161,10 +163,10 @@ open class BasicMessageCell: UITableViewCell {
                 
                 // StackView 자체 제약 조건 설정
                 messageBox.snp.remakeConstraints { make in
-                    make.top.equalTo(dateLabel.snp.bottom).offset(8)
+                    messageBoxTopConstraint = make.top.equalTo(dateLabel.snp.bottom).offset(8).constraint // 기본 8
                     make.trailing.equalToSuperview().offset(-10)
                     make.bottom.lessThanOrEqualToSuperview()
-                    make.width.lessThanOrEqualTo(maxWidth) // 최대 너비 제한
+                    make.width.lessThanOrEqualTo(maxWidth)
                 }
             } else {
                 // previewImageView가 숨겨지는 경우
@@ -176,10 +178,10 @@ open class BasicMessageCell: UITableViewCell {
                 
                 // StackView 자체 제약 조건 설정
                 messageBox.snp.remakeConstraints { make in
-                    make.top.equalTo(dateLabel.snp.bottom).offset(8)
+                    messageBoxTopConstraint = make.top.equalTo(dateLabel.snp.bottom).offset(8).constraint // 기본 8
                     make.trailing.equalToSuperview().offset(-10)
                     make.bottom.lessThanOrEqualToSuperview().offset(-8)
-                    make.width.lessThanOrEqualTo(maxWidth) // 최대 너비 제한
+                    make.width.lessThanOrEqualTo(maxWidth)
                 }
             }
 
@@ -209,18 +211,19 @@ open class BasicMessageCell: UITableViewCell {
             }
 
             profileImageView.snp.remakeConstraints {
-                $0.top.equalTo(dateLabel.snp.bottom).offset(8)
+                $0.top.equalTo(dateLabel.snp.bottom).offset(8) // 그냥 일반 제약만 설정
                 $0.width.height.equalTo(32)
-                $0.leading.equalToSuperview()
+                $0.leading.equalToSuperview().offset(10)
             }
             
             if imageUrl != "" {
                 messageBox.snp.remakeConstraints {
-                    $0.leading.equalTo(profileImageView.snp.trailing).offset(10)
-                    $0.top.equalTo(profileImageView.snp.top)
+                    $0.leading.equalTo(profileImageView.snp.trailing).offset(4)
+                    messageBoxTopConstraint = $0.top.equalTo(profileImageView.snp.top).constraint
                     $0.bottom.equalToSuperview()
                     $0.width.lessThanOrEqualTo(maxWidth)
                 }
+                
                 // previewImageView가 표시되는 경우
                 previewImageView.isHidden = false
                 previewImageView.snp.remakeConstraints { make in
@@ -232,8 +235,8 @@ open class BasicMessageCell: UITableViewCell {
                 }
             } else {
                 messageBox.snp.remakeConstraints {
-                    $0.leading.equalTo(profileImageView.snp.trailing).offset(10)
-                    $0.top.equalTo(profileImageView.snp.top)
+                    $0.leading.equalTo(profileImageView.snp.trailing).offset(4)
+                    messageBoxTopConstraint = $0.top.equalTo(profileImageView.snp.top).constraint
                     $0.bottom.equalToSuperview().offset(-8)
                     $0.width.lessThanOrEqualTo(maxWidth)
                 }
@@ -261,24 +264,12 @@ open class BasicMessageCell: UITableViewCell {
 
     // 이미지가 탭되었을 때 호출되는 메서드
     @objc private func imageViewTapped(_ Sender: UIButton) {
+        
         if let auth = User.shared.auth{
-            if auth < 1 {
-                print("인플루언서 계정")
-            }else{
+            print(auth)
+            if auth > 2{
                 print("기업 계정")
-                
-                viewModel.findInfluenceById(id:id) { [weak self] result in
-                    switch result {
-                    case .success(let profile):
-                        if let strongSelf = self {
-                            strongSelf.delegate?.didTapCell(strongSelf, withProfile: profile)
-                        }
-                    case .failure(let error):
-                        print(error)
-                    }
-                }
-
-                
+                delegate?.didTapCell(self, withProfile: id)
             }
         }
         
@@ -286,7 +277,7 @@ open class BasicMessageCell: UITableViewCell {
     
     
     open func configure(with message: BaseMessage) {
-        sender = message.sender?.nickname ?? ""
+        sender = message.sender?.id ?? ""
         messageLabel.text = message.message
         timeLabel.text = Date.sbu_from(message.createdAt).sbu_toString(format: .hhmma)
         
@@ -302,10 +293,11 @@ open class BasicMessageCell: UITableViewCell {
             }
         }
         
-        if message.sender?.nickname != User.shared.name {
+        if sender != User.shared.id {
             if let id = message.sender?.userId{
                 self.id = id
             }
+            
             if let urlString = message.sender?.profileURL {
                 let url = URL(string: urlString)
                 DispatchQueue.main.async {
@@ -344,8 +336,16 @@ open class BasicMessageCell: UITableViewCell {
     open func hideTime(){
         timeLabel.isHidden = true
         icon.isHidden = true
-        
         setNeedsUpdateConstraints()
     }
-
+    
+   open func updateTopSpacing(isContinuous: Bool) {
+        if isContinuous {
+            print("updateTopSpacing")
+            messageBoxTopConstraint?.update(offset: 8) // 연속된 메시지: 4pt
+        }else{
+            messageBoxTopConstraint?.update(offset: -8) // 연속된 메시지: 4pt
+        }
+        setNeedsUpdateConstraints()
+    }
 }

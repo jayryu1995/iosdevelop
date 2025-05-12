@@ -130,11 +130,12 @@ class BusinessAccountVC : UIViewController {
     
     
     @objc private func facebookLogout(_ sender: Any) {
-        UserDefaults.standard.removeObject(forKey: "name")
+        UserDefaults.standard.removeObject(forKey: "nickname")
         UserDefaults.standard.removeObject(forKey: "userID")
         UserDefaults.standard.removeObject(forKey: "email")
         UserDefaults.standard.removeObject(forKey: "businessId")
-        
+        UserDefaults.standard.removeObject(forKey: "refreshToken")
+        UserDefaults.standard.removeObject(forKey: "accessToken")
         SendbirdUser.shared.logout {
             print("sendbird 로그아웃 완료")
         }

@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import FBSDKLoginKit
 import Combine
-
+import Kingfisher
 class InfluenceMyPageWriteVC: UIViewController {
     private let navigationView = UIView()
     private let scrollView = UIScrollView()
@@ -186,7 +186,10 @@ class InfluenceMyPageWriteVC: UIViewController {
                 self?.addressTextField.text = data.address ?? ""
                 let url = "\(Bundle.main.TEST_URL)/img\( data.imagePath ?? "" )"
                 print(url)
-                self?.profileImage.loadImage2(from: url)
+                if let imageUrl = URL(string: url){
+                    self?.profileImage.kf.setImage(with: imageUrl)
+                }
+                
             }
             .store(in: &cancellables)
 
@@ -453,7 +456,7 @@ class InfluenceMyPageWriteVC: UIViewController {
                         print("통신 성공")
                         // data변경 알림
                         NotificationCenter.default.post(name: .dataChanged, object: nil)
-                        User.shared.name = "\(dto.name ?? "")"
+                        User.shared.nickname = "\(dto.name ?? "")"
                         if let id = User.shared.id {
                             let url = "\(Bundle.main.TEST_URL)/img/profile/\(id).jpg"
                             ImageCacheManager.shared.removeImage(for: url)
@@ -471,15 +474,8 @@ class InfluenceMyPageWriteVC: UIViewController {
     }
 
     private func updateChatProfile() {
-        var imagePath: String?
-        if User.shared.auth ?? 0 < 2 {
-            imagePath = "\(Bundle.main.TEST_URL)/img/profile/\(User.shared.id ?? "").jpg"
-        } else {
-            imagePath = "\(Bundle.main.TEST_URL)/business/profile/\(User.shared.id ?? "").jpg"
-        }
-
-        if let name = User.shared.name {
-            SendbirdUser.shared.updateUserInfo(nickname: name, profileImage: imagePath) { result in
+        if let name = User.shared.nickname {
+            SendbirdUser.shared.updateUserInfo(nickname: name,profileImage: nil) { result in
                 switch result {
                 case .success(let user):
                     print("업데이트 성공")
@@ -526,7 +522,7 @@ class InfluenceMyPageWriteVC: UIViewController {
     }
 
     @objc func facebookLogout(_ sender: Any) {
-        UserDefaults.standard.removeObject(forKey: "name")
+        UserDefaults.standard.removeObject(forKey: "nickname")
         UserDefaults.standard.removeObject(forKey: "userID")
         UserDefaults.standard.removeObject(forKey: "email")
         UserDefaults.standard.removeObject(forKey: "businessId")

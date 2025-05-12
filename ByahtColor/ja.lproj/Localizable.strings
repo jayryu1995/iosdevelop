@@ -7,6 +7,17 @@
 */
 
 "privacy_policy" = "privacy_policy";
+
+// PrivatePolicyVC
+"policy_label" = "アカウントステータス変更";
+
+// SearchVC
+"business_search_label" = "SỰ KIỆN dành cho doanh nghiệp đã đăng ký";
+"business_search_label2" = "Bạn muốn tìm thêm influencer phù hợp? Hãy liên hệ với chúng tôi để nhận portfolio phù hợp nhất nhé!";
+"business_search_label3" = "Vui lòng nhập email của người phụ trách.";
+"business_search_label4" = "Nhận thông tin về creator nhanh chóng qua email đã đăng ký! 🥳";
+"business_search_button" = "Đăng ký";
+
 // NotiCollabView
 "noti_collab_label_text" = "신청하러가기 ⬇️⬇️";
 

@@ -17,18 +17,27 @@ enum SocialLoginType: String {
 
 
 class MemberViewModel: ObservableObject {
-
+    
+    var tokenDto: TokenDto?
     var message: Bool?
     var error: String?
 
-    let headers: HTTPHeaders = [
-        "Accept": "application/json"
-    ]
-
+    // 토큰 발급
+    func login(id: String,completion: @escaping (Bool) -> Void) {
+        AuthManager.shared.requestToken(id: id){ result in
+            switch result {
+            case true:
+                completion(true)
+            case false:
+                completion(false)
+            }
+        }
+    }
     
     // 서버 상태 체크
     func checkServerState(completion: @escaping (Result<Bool, Error>) -> Void) {
         let url = "\(Bundle.main.TEST_URL)/ai/admin/"
+        print("url : \(url)")
         AF.request(url).validate().responseJSON { response in
             switch response.result {
             case .success(let value):
@@ -63,24 +72,6 @@ class MemberViewModel: ObservableObject {
             }
     }
 
-    // 기업 자동로그인
-    func loginAutoBusiness(userid: String, completion: @escaping (Result<BusinessDataDto, Error>) -> Void) {
-        let url = "\(Bundle.main.TEST_URL)/member/data/\(userid)"
-        AF.request(url).validate().response { response in
-            switch response.result {
-            case .success(let value):
-                if let exists = value as? BusinessDataDto {
-                    print(exists)
-                    completion(.success(exists))
-                } else {
-                    completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid response"])))
-                }
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
-    }
-
     // 중복확인
     func checkMemberId(id: String, completion: @escaping (Result<Bool, Error>) -> Void) {
         let url = "\(Bundle.main.TEST_URL)/member/check/\(id)"
@@ -99,72 +90,6 @@ class MemberViewModel: ObservableObject {
         }
     }
     
-    // 유저 토큰 발급
-    func getToken(member_id: String, completion: @escaping (Result<TokenDto, Error>) -> Void) {
-        let url = "\(Bundle.main.TEST_URL)/influence/token"
-        let headers: HTTPHeaders = [
-            "Content-Type": "text/plain"
-        ]
-
-        var request = URLRequest(url: URL(string: url)!)
-        request.method = .post
-        request.headers = headers
-        request.httpBody = member_id.data(using: .utf8) // 👈 문자열을 직접 body에
-
-        AF.request(request)
-            .validate()
-            .responseDecodable(of: TokenDto.self) { response in
-                switch response.result {
-                case .success(let token):
-                    completion(.success(token))
-                case .failure(let error):
-                    completion(.failure(error))
-                }
-            }
-    }
-    
-    
-    // 로그인 데이터
-    func getLoginData(member_id: String, completion: @escaping (Result<InfluenceDataDto, Error>) -> Void) {
-        let url = "\(Bundle.main.TEST_URL)/member/data/\(member_id)"
-        AF.request(url, method: .get)
-            .validate(statusCode: 200..<300)
-            .responseDecodable(of: InfluenceDataDto.self) { response in
-                switch response.result {
-                case .success(let data):
-                    DispatchQueue.main.async {
-                        User.shared.id = data.memberId
-                        User.shared.name = data.name
-                        User.shared.auth = data.auth
-                    }
-                    print("success: \(data)")
-                    completion(.success(data))
-                case .failure(let error):
-                    print("Error: \(error)")
-                    completion(.failure(error))
-                }
-            }
-    }
-
-    // 인플루언서 로그인 및 권한조회
-    func login(id: String, completion: @escaping (Result<Int, Error>) -> Void) {
-        let url = "\(Bundle.main.TEST_URL)/member/login/\(id)"
-        AF.request(url).validate().responseJSON { response in
-            switch response.result {
-            case .success(let value):
-                if let exists = value as? Int {
-                    print(exists)
-                    completion(.success(exists))
-                } else {
-                    completion(.failure(NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid response"])))
-                }
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
-
-    }
-
     // 회원 탈퇴
     func secession(id: String, completion: @escaping (Result<String, Error>) -> Void) {
         let url = "\(Bundle.main.TEST_URL)/member/delete/\(id)"
@@ -212,10 +137,11 @@ class MemberViewModel: ObservableObject {
     }
 
 
-
-
     func updateMemberInfluence(memberInfluenceDto: MemberInfluenceDto, completion: @escaping (Result<String, Error>) -> Void) {
         let url = "\(Bundle.main.TEST_URL)/influence/signup"
+        let headers: HTTPHeaders = [
+            "Accept": "application/json"
+        ]
         AF.request(url, method: .post, parameters: memberInfluenceDto, encoder: JSONParameterEncoder.default, headers: headers)
             .validate(statusCode: 200..<300)
             .responseString { response in
@@ -228,22 +154,4 @@ class MemberViewModel: ObservableObject {
             }
     }
     
-    // MCN 로그인
-    func loginMcn(userid: String, password: String, completion: @escaping (Result<McnDto, Error>) -> Void) {
-        let url = "\(Bundle.main.TEST_URL)/mcn/login"
-        let parameters: [String: Any] = [
-            "id": userid,
-            "password": password
-        ]
-        AF.request(url, method: .post, parameters: parameters)
-            .validate()
-            .responseDecodable(of: McnDto.self) { response in
-                switch response.result {
-                case .success(let business):
-                    completion(.success(business))
-                case .failure(let error):
-                    completion(.failure(error))
-                }
-            }
-    }
 }
